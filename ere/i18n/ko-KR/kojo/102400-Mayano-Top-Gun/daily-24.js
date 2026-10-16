@@ -398,7 +398,7 @@ module.exports = {
             await maya.say_and_wait('으으, 아까워~ 조금만 더 하면 됐는데……!');
             era.printButton('「미안……」', 1);
             await era.input();
-            await maya.say_and_wait(['앗, 신경 쓰지 마, ', callname, '！！']);
+            await maya.say_and_wait(['앗, 신경 쓰지 마, ', callname, '!!']);
             await maya.say_and_wait(
               '마야를 위해 애써 줬잖아. 그것만으로도 기뻐!',
             );
@@ -462,7 +462,7 @@ module.exports = {
             '그, 그런데 고민돼~! 이번 달 용돈이 좀 빠듯해!',
           );
           await maya.say_and_wait(
-            '이건 포인트가 되는 디자인에 최신 액세서리를 매치한 테크니컬 코디야!',
+            '이건 포인트가 되는 디자인에 최신 액세서리를 매치한 센스 있는 코디야!',
           );
           await maya.say_and_wait(
             '이건 귀여우면서도 움직이기 편해서 가게 언니가 실용성 만점이랬어!',
@@ -472,7 +472,7 @@ module.exports = {
             callname,
             '! 어느 쪽이 마야한테 어울릴까~?',
           ]);
-          era.printButton('「최신 기술이 들어간 코디!」', 1);
+          era.printButton('「최신 유행을 살린 코디!」', 1);
           era.printButton('「움직이기 편한 실용적인 코디!」', 2);
           if ((await era.input()) === 1) {
             await maya.say_and_wait(
@@ -639,7 +639,7 @@ module.exports = {
               maya.get_colored_name(),
               '하고 양식집에 갔다. 우아한 분위기에 ',
               maya.sex,
-              '의 가슴은 아기 사슴처럼 두근거렸다.',
+              '의 가슴은 설렘으로 두근거렸다.',
             ]);
           },
         );

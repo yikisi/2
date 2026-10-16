@@ -46,7 +46,7 @@ es_rape:
           - fontWeight: bold
             content: %CHARA%
           - 「으읏—— 아파……! 주인은 지지 않아!! 그치만 아파……」
-      - 모순된 말 속에서 %SEX%은(는) 눈물을 글썽이며 %YOU%에게 밀려 넘어진다
+      - 모순된 말 속에서 %SEX%는 눈물을 글썽이며 %YOU%에게 밀려 넘어진다
       - 상대가 벗어나기 전에, 가능한 한 꽉 붙잡아 두자
   - if: era.get('love:44') >= 50
     lines:
@@ -91,7 +91,7 @@ es_rape_play_first:
     content:
       - fontWeight: bold
         content: %CHARA%
-      - 「흠흠~ 지금은 연기만 하고 있을 뿐이라도, %CALLNAME%은 결국 스위피 님께 이길 수 없으니까~!」
+      - 「흠흠~ 지금은 연기만 하고 있을 뿐이라도, %CALLNAME%은(는) 결국 스위피 님께 이길 수 없으니까~!」
 
 
 # 以降の強姦

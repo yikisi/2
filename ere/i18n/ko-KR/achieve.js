@@ -37,9 +37,9 @@ module.exports = class extends require('#/i18n/zh-CN/achieve') {
   wins_one = '전사 트레이너';
   wins_six = '우마군단';
   wins_thr = '끊임없는 원정';
-  wins_hnt = '엄청난...「변태」';
+  wins_hnt = '엄청난…… 「변태」';
 
-  blnc_cel = '중립의 달인';
+  blnc_cel = '공평함의 달인';
   blnc_rac = '균형의 달인';
   yandere = '가시돋친 장미';
 

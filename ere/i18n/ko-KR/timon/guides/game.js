@@ -14,7 +14,7 @@ module.exports = {
   async game_start(minoru, you, new_save) {
     await era.printAndWait([
       you.get_colored_name(),
-      '은(는) 앞으로 일할 학원으로 향했다. 정문 앞에서는 온몸을 녹색 계열로 차려입은',
+      '은(는) 앞으로 일할 학원으로 향했다. 정문 앞에서는 온몸을 녹색 계열로 차려입은 ',
       minoru.sex_code === 1 ? '탄탄한 체격의 인간 남성' : '아름다운 인간 여성',
       '이 조용히 기다리고 있었다.',
     ]);
@@ -30,7 +30,7 @@ module.exports = {
       await era.printAndWait([
         '그',
         minoru.phy_sex_title,
-        '은(는)',
+        '은',
         you.get_colored_name(),
         '과(와) 눈이 마주친 순간 잠시 당황했지만, 곧 정신을 차렸다.',
       ]);
@@ -38,7 +38,7 @@ module.exports = {
       await era.printAndWait([
         '그',
         minoru.phy_sex_title,
-        '은(는)',
+        '은',
         you.get_colored_name(),
         '과(와) 눈이 마주치자마자 환하게 웃었다.',
       ]);
@@ -48,7 +48,7 @@ module.exports = {
     await minoru.say_as_unknown_and_wait([
       '안녕하세요. 신임 트레이너',
       you.adult_sex_title,
-      '。',
+      '.',
     ]);
     await minoru.say_as_unknown_and_wait('이사장 비서 하야카와 타즈나입니다.');
     await minoru.say_and_wait('트레센 학원에 오신 것을 환영합니다.');
@@ -61,7 +61,7 @@ module.exports = {
 
       await era.printAndWait([
         minoru.sex,
-        '은(는) 눈을 가늘게 뜨며 말을 이었다.',
+        '는 눈을 가늘게 뜨며 말을 이었다.',
       ]);
       era.println();
 
@@ -71,7 +71,7 @@ module.exports = {
     await minoru.say_and_wait([
       '트레이너로서 우선 전속',
       minoru.uma_sex_title,
-      '을(를) 찾아야 합니다.',
+      '를 찾아야 합니다.',
     ]);
     await minoru.say_and_wait(
       '마침 트레센에도 장래가 촉망되는 신입생들이 많이 들어왔습니다.',
@@ -239,7 +239,7 @@ module.exports = {
     await era.printAndWait([
       '거기까지 말한 ',
       minoru.get_colored_name(),
-      '의 목소리에 잠깐 씁쓸함이 묻어났다. 하지만 곧 평정을 되찾고, 조금 무리한 미소를 지었다.',
+      '의 목소리에 잠깐 씁쓸함이 묻어났다. 하지만 곧 평정을 되찾고, 조금 억지스러운 미소를 지었다.',
     ]);
   },
   /**

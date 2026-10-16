@@ -39,7 +39,7 @@ module.exports = {
       await teio.say_and_wait(['영차, 영차…… 어라? ', t_call_m, '이잖아~!']);
       await maya.say_and_wait(['아, ', call_3, '! 안녕!']);
       await teio.say_and_wait(
-        '딱 마침 찾고 있었어! 나 오늘 좀 늦게 돌아갈 것 같다고 말해주려고!',
+        '마침 찾고 있었어! 나 오늘 좀 늦게 돌아갈 것 같다고 말해주려고!',
       );
       await maya.say_and_wait([
         '와☆ 외박이라니, 뭔가 진전이 있나 보네~! ',
@@ -69,7 +69,7 @@ module.exports = {
       era.printButton('「쉬는 것도 중요해」', 2);
       const ret = await era.input();
       if (ret === 1) {
-        await maya.say_and_wait(['헤헤, 역시 ', callname, '！']);
+        await maya.say_and_wait(['헤헤, 역시 ', callname, '!']);
         await teio.say_and_wait(
           '그럼 같이 병주 연습하자! 그래야 나도 투지가 솟을 것 같으니까!',
         );
@@ -205,7 +205,7 @@ module.exports = {
       await maya.say_and_wait('괜찮아…… 아파도 안 아프다고 하는 게 어른이야.');
       await maya.say_and_wait('그러니까 마야는 아프다는 말 안 해!');
       await maya.say_and_wait('어린애 같고 멋없잖아…… 마야는 그런 거 싫어~~!');
-      era.printButton('「그럼 『어른』답게 행동하자」', 1);
+      era.printButton('「그럼 『어른』답게 행동하자.」', 1);
       era.printButton('「멋없지 않아!」', 2);
       const ret = await era.input();
       if (ret === 1) {
@@ -219,7 +219,7 @@ module.exports = {
         era.println();
       } else if (fail_again) {
         await maya.say_and_wait([callname, '……하지만……']);
-        era.printButton('「무리해서 더 다치는 게 멋없는 거야」', 1);
+        era.printButton('「무리해서 더 다치는 게 멋없는 거야.」', 1);
         await era.input();
         await maya.say_and_wait('아! 그러네!');
         await maya.say_and_wait(
@@ -236,7 +236,7 @@ module.exports = {
           callname,
           '하고 제대로 트레이닝하고 싶어……!',
         ]);
-        era.printButton('「푹 쉬고 다시 힘내자」', 1);
+        era.printButton('「푹 쉬고 다시 힘내자.」', 1);
         await era.input();
         await maya.say_and_wait('……응!');
         await era.printAndWait(
@@ -257,18 +257,18 @@ module.exports = {
      */
     const f = async (maya, you, callname) => {
       await era.printAndWait([
-        '레이스 전 대기실을 가보니…… ',
+        '레이스 전 대기실에 가 보니…… ',
         maya.get_colored_name(),
         '이 머릿속으로 레이스 시뮬레이션을 하는 듯했다.',
       ]);
       await maya.say_and_wait(
         '그러고 나서 앞에 있는 사람이 오면 『슈웅!』 하고 돌파해서……',
       );
-      era.printButton('（……엄청난 집중력이네）', 1);
+      era.printButton('（……엄청난 집중력이네.）', 1);
       await era.input();
-      await maya.say_and_wait(['……엣!? ', callname, '！？']);
+      await maya.say_and_wait(['……엣!? ', callname, '!?']);
       await maya.say_and_wait('아와와, 깜짝이야! 전혀 몰랐어! 어라 어라!?');
-      era.printButton('「방금 엄청 집중하고 있었어」', 1);
+      era.printButton('「방금 엄청 집중하고 있었어.」', 1);
       await era.input();
       await maya.say_and_wait('헤헤, 응! 아까부터 심장이 계속 쿵쾅거려.');
       await maya.say_and_wait(['그치만…… 이제 곧 ', callname, ' 차례야!']);
@@ -291,8 +291,8 @@ module.exports = {
       await maya.say_and_wait(
         '헤헤! 즐거웠어?? 마야가 달리는 모습에 두근거렸어??',
       );
-      era.printButton('「당연하지」', 1);
-      era.printButton('「아직 부족해」', 2);
+      era.printButton('「당연하지.」', 1);
+      era.printButton('「아직 부족해.」', 2);
       if ((await era.input()) === 1) {
         await maya.say_and_wait('와☆ 다행이다, 다행이야!');
         await maya.say_and_wait(
@@ -345,7 +345,7 @@ module.exports = {
       await maya.say_and_wait(
         '다들 얼마나 강한지 알았고, 코스 잡는 법도 배웠으니까♪ 괜찮아, 괜찮아!',
       );
-      era.printButton('「기대할게」', 1);
+      era.printButton('「기대할게.」', 1);
       era.printButton('「……연습하자!」', 2);
       if ((await era.input()) === 1) {
         await maya.say_and_wait(
@@ -358,16 +358,16 @@ module.exports = {
         await maya.say_and_wait([
           '다음엔 꼭 이겨서 ',
           callname,
-          '이 내 말을 듣게 만들 거야! 꼭!',
+          '이(가) 내 말을 듣게 만들 거야! 꼭!',
         ]);
       } else {
         await maya.say_and_wait([
           '으음~ ',
           callname,
-          '이 그렇게까지 말한다면 열심히 할게……',
+          '이(가) 그렇게까지 말한다면 열심히 할게……',
         ]);
-        await maya.say_and_wait([callname, '은 걱정이 너무 많다니까??']);
-        era.printButton('「네가 1등 하는 걸 보고 싶으니까」', 1);
+        await maya.say_and_wait([callname, '은(는) 걱정이 너무 많다니까??']);
+        era.printButton('「네가 1착 하는 걸 보고 싶으니까.」', 1);
         await era.input();
         await maya.say_and_wait('……에? 그러니까, 나를 위해서야?');
         await maya.say_and_wait('야☆ 나 엄청 사랑받고 있네!');
@@ -386,7 +386,7 @@ module.exports = {
      */
     const f = async (maya, you, callname) => {
       await maya.say_and_wait('아~ 졌다~ 이길 줄 알았는데.');
-      era.printButton('「다른 애들도 대단했으니까」', 1);
+      era.printButton('「다른 애들도 대단했으니까.」', 1);
       await era.input();
       await maya.say_and_wait('……다른 애들?');
       await maya.say_and_wait(
@@ -405,7 +405,7 @@ module.exports = {
       if ((await era.input()) === 1) {
         await maya.say_and_wait('휴…… 살았다……');
         await maya.say_and_wait(
-          '……그러니까 말이야, 다음 레이스에선 1등 할 거야.',
+          '……그러니까 말이야, 다음 레이스에선 1착 할 거야.',
         );
         await maya.say_and_wait('그러니까…… 응원해 줘야 해!');
         await maya.say_and_wait(
@@ -448,7 +448,7 @@ module.exports = {
       await maya.say_and_wait(
         '맞다! 이대로 『슈웅──!』 하고 트레이닝하러 가자!',
       );
-      era.printButton('「일단 진정하자」', 1);
+      era.printButton('「일단 진정하자.」', 1);
       era.printButton('「트레이닝하자!」', 2);
       if ((await era.input()) === 1) {
         await maya.say_and_wait('에────────!?');
@@ -495,15 +495,15 @@ module.exports = {
      */
     const f = async (maya, you, callname) => {
       await era.printAndWait(
-        '이것은 데뷔전을 위해, 계속해서 트레이닝을 진행하던 어느 날에 일어난 일이다──',
+        '데뷔전을 준비하며 트레이닝을 이어 가던 어느 날이었다──',
       );
       await maya.say_and_wait([callname, '☆나 더트 코스 세 바퀴 다 돌았어!']);
       era.printButton('「수고했어!」', 1);
       await era.input();
       await maya.say_and_wait('헤헤~♪ 마야는 아직 지치지 않았다구~!');
-      await maya.say_and_wait('저기저기, 다음은 뭐 트레이닝할 거야?');
+      await maya.say_and_wait('저기저기, 다음엔 무슨 트레이닝을 할 거야?');
       await maya.say_and_wait(
-        '평소 트레이닝 메뉴로 봐서는, 이번에는 좀 가벼운 트레이닝인가?',
+        '평소 트레이닝 내용을 보면, 이번에는 좀 가벼운 트레이닝인가?',
       );
       await era.printAndWait([
         '──',
@@ -526,7 +526,7 @@ module.exports = {
         '두근거리고, 알고 싶은 것투성이에, 경기장의 모두가 반짝반짝거리고……',
       );
       await maya.say_and_wait(
-        '만약 트윙클 시리즈에 나갈 수 있다면, 먼저 나를 더 빨리 달리게 하고 싶어!',
+        '만약 트윙클 시리즈에 나갈 수 있다면, 우선 더 빨리 달리고 싶어!',
       );
       await maya.say_and_wait('헤헤, 그·리·고~');
       await maya.say_and_wait([
@@ -541,13 +541,13 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 기본 방침을 바꾸지 않는 선에서, ',
         maya.sex,
-        '에게 여러 가지 다양한 트레이닝을 시도해 보았다──',
+        '에게 여러 가지 트레이닝을 시도해 보았다──',
       ]);
       await maya.say_and_wait('……레이스 연구. 연구……인가……!');
       await maya.say_and_wait(
-        '아하하♪ 왠지 어른의 계단을 향해, 대시하며 올라가는 기분이야☆',
+        '아하하♪ 왠지 어른이 되는 계단을 한달음에 올라가는 기분이야☆',
       );
-      era.printButton('「이것도 일종의 트레이닝이야」', 1);
+      era.printButton('「이것도 일종의 트레이닝이야.」', 1);
       await era.input();
       await maya.say_and_wait(
         '네에 네에, 알고 있다구☆ 게다가 이런 건 마야가 전공이지!',
@@ -565,7 +565,7 @@ module.exports = {
         '. 이 비디오는 이제 안 봐도 돼!',
       ]);
       await maya.say_and_wait(
-        '제삼 코너를 돌고 나면 1번 아이가 『슈웅──!』 하고 일찍 치고 나가겠지?',
+        '제3코너를 돌고 나면 1번 아이가 『슈웅──!』 하고 일찍 치고 나가겠지?',
       );
       era.printButton('「그래?」', 1);
       await era.input();
@@ -576,7 +576,7 @@ module.exports = {
         maya.sex,
         '가 재촉하는 바람에, ',
         you.get_colored_name(),
-        '은(는) 비디오를 빨리 감기 하며 확인했다……',
+        '은(는) 비디오를 빨리 돌려 보며 확인했다……',
       ]);
       await maya.say_and_wait('봐봐~☆ 마야가 말한 대로지~!');
       await maya.say_and_wait('헤헤, 그럼 다음 거 보자! 다음 거!!');
@@ -587,7 +587,7 @@ module.exports = {
         '이(가) 준비한 모든 레이스 비디오를 다 보았다……',
       ]);
       await maya.say_and_wait(['어라? ', callname, '. 설마 벌써 끝이야?']);
-      era.printButton('「……다른 트레이닝을 하러 가자」', 1);
+      era.printButton('「……다른 트레이닝을 하러 가자.」', 1);
       await era.input();
       await maya.say_and_wait(
         '아! 그렇구나~! 계속 트레이닝하는 것도 마야는 대환영이야☆',
@@ -609,7 +609,7 @@ module.exports = {
         maya.uma_sex_title,
         '도 있다. 모처럼 측정하는 거라면──',
       ]);
-      era.printButton('「한번 300미터를 목표로 해보자」', 1);
+      era.printButton('「한번 300미터를 목표로 해 보자.」', 1);
       await era.input();
       await maya.say_and_wait('라져! 그럼 마야, 출발한다!');
       await maya.say_and_wait('하아……');
@@ -718,7 +718,7 @@ module.exports = {
         maya.get_colored_name(),
         '은 전혀 만족하지 못한 기색이었다.',
       ]);
-      era.printButton('「레이스에 더 많이 나가자」', 1);
+      era.printButton('「레이스에 더 많이 나가자.」', 1);
       await era.input();
       await maya.say_and_wait('으음…………');
       await maya.say_and_wait('……응, 그렇게 하자.');
@@ -748,16 +748,16 @@ module.exports = {
       await maya.say_and_wait('……아.');
       era.printButton('「왜 그래?」', 1);
       await era.input();
-      await maya.say_and_wait(['우와앗!? ', callname, '！？']);
+      await maya.say_and_wait(['우와앗!? ', callname, '!?']);
       await maya.say_and_wait('아무것도 아냐, 진짜 아무 일도 없다구……');
       await maya.say_and_wait('……하아.');
       await era.printAndWait(
         '──입으로는 아무 일 없다고 하면서도, 깊은 한숨을 내쉬었다.',
       );
-      era.printButton('「기분 전환하러 가자」', 1);
+      era.printButton('「기분 전환하러 가자.」', 1);
       await era.input();
       await maya.say_and_wait('기분 전환…… 그건 데이트하자는 거야?');
-      era.printButton('「그래」', 1);
+      era.printButton('「그래.」', 1);
       await era.input();
       await maya.say_and_wait('진짜!?');
       await maya.say_and_wait([
@@ -781,7 +781,7 @@ module.exports = {
       await era.printAndWait('──역시 그곳뿐인가.');
       await era.printAndWait('(와아아아아아아────!!)');
       await maya.say_and_wait('여기는……');
-      era.printButton('「네가 가장 반짝일 수 있는 곳이야」', 1);
+      era.printButton('「네가 가장 반짝일 수 있는 곳이야.」', 1);
       await era.input();
       await maya.say_and_wait('…………');
       await maya.say_and_wait(['……', callname, '은(는) 지금도 그렇게 생각해?']);
@@ -812,7 +812,7 @@ module.exports = {
         '나도 이런 말 하면 안 된다는 거 잘 알아. 하지만……',
       );
       await maya.say_and_wait('…………역시 그냥 지루하다고 느껴져.');
-      era.printButton('「그렇구나」', 1);
+      era.printButton('「그렇구나.」', 1);
       await era.input();
       await maya.say_and_wait('…………응.');
       await maya.say_and_wait('………………');
@@ -843,9 +843,9 @@ module.exports = {
       await era.input();
       await maya.say_and_wait('……재미있게?');
       await maya.say_and_wait('정말…… 그게 가능할까? 나는 벌써──');
-      era.printButton('「네가 반짝일 수 있도록, 내가 힘낼게」', 1);
+      era.printButton('「네가 반짝일 수 있도록, 내가 힘낼게.」', 1);
       await era.input();
-      await maya.say_and_wait(['……', callname, '。']);
+      await maya.say_and_wait(['……', callname, '.']);
       await era.printAndWait([
         maya.get_colored_name(),
         '에게는 분명 ',
@@ -908,7 +908,7 @@ module.exports = {
       await maya.say_and_wait('레이스 말고 다른 거…… 그래도 돼?');
       era.printButton('「괜찮아, 이건 『새해』 포부니까」', 1);
       await era.input();
-      await maya.say_and_wait('！');
+      await maya.say_and_wait('!');
       await maya.say_and_wait('그, 그럼! 마야, 데이트를 많이 하고 싶어!');
       await maya.say_and_wait([
         '어른들에 관한 걸 ',
@@ -981,7 +981,7 @@ module.exports = {
           ]);
           break;
         case 2:
-          await maya.say_and_wait('하하, 또 그런 표정 짓는다.');
+          await maya.say_and_wait('설날 음식 데이트……? 설날 음식으로…… 데이트……?');
           await maya.say_and_wait([
             '뭐 어때, 괜찮아! ',
             callname,
@@ -995,37 +995,37 @@ module.exports = {
             '일식집 여주인',
             '어머나 어머나, 아주 귀여운 손님이 오셨네. 어서 오렴, 후훗.',
           );
-          await maya.say_and_wait('후후, 좋아! 올해 첫 트레이닝을 하러 가자☆');
+          await maya.say_and_wait('으, 으앗!?');
           await era.printAndWait([
             '그리하여 이날, ',
             you.get_colored_name(),
-            '은(는) ',
+            '은(는) 긴장한 ',
             maya.get_colored_name(),
-            '과 함께 새해 첫 트레이닝을 진행했다.',
+            '과 함께 설날 음식을 먹으며 데이트를 즐겼다.',
           ]);
           break;
         case 3:
           await maya.say_and_wait([
-            '후후후…… ',
+            '아, ',
             callname,
-            ', 미숙해, 아직 멀었어!',
+            '도 센스 있네♪ 새해 분위기가 물씬 나☆',
           ]);
           await maya.say_and_wait('나 착륙할게♪');
           await maya.say_and_wait([
             '그래서 그래서? ',
             callname,
-            '이 될 거라구~☆',
+            '은(는) 무슨 소원을 빌 거야?',
           ]);
-          era.printButton('「뭐가 다른데?」', 1);
+          era.printButton('「비밀이야」', 1);
           await era.input();
           await maya.say_and_wait('에이, 치사해 치사해. 가르쳐 줘!');
           await era.printAndWait([
             you.get_colored_name(),
-            '은(는) 도서관에서 ',
+            '은(는) 진심으로 기도했다. ',
             maya.get_colored_name(),
-            '이 사전을 뚫어져라 쳐다보는 것을 발견했다.',
+            '이 앞으로 ',
             maya.sex,
-            '의 진짜 꿈을 이룰 수 있게 해달라고.',
+            '의 진짜 꿈을 이룰 수 있게 해 달라고.',
           ]);
       }
       return [ret];
@@ -1090,7 +1090,7 @@ module.exports = {
       ]);
       await era.printAndWait('(똑똑)');
       await maya.say_and_wait('응? 누구지……');
-      await teio.say_and_wait(['안녕! ', t_call_m, '！']);
+      await teio.say_and_wait(['안녕! ', t_call_m, '!']);
       await maya.say_and_wait([
         '아! ',
         call_3,
@@ -1120,7 +1120,7 @@ module.exports = {
         maya.sex,
         '라고 말씀하시더라고. 근데 혼자 보긴 좀 심심하잖아?',
       ]);
-      era.printButton('（……나리타 브라이언）', 1);
+      era.printButton('(……나리타 브라이언)', 1);
       await era.input();
       await era.printAndWait([
         brian.get_colored_name(),
@@ -1142,7 +1142,7 @@ module.exports = {
         maya.get_colored_name(),
         '보다 한 세대 위여서 공식 레이스에서 맞붙을 가능성은 아직 낮다. 하지만 앞으로 클래식에 도전한다면──',
       ]);
-      era.printButton('「미리 봐 두는 게 좋을지도 모르겠어」', 1);
+      era.printButton('「미리 봐 두는 게 좋을지도 모르겠어.」', 1);
       await era.input();
       await teio.say_and_wait([
         '오, 좋은데~! ',
@@ -1257,7 +1257,7 @@ module.exports = {
         maya.sex,
         '는 그만큼 강하다.',
       ]);
-      await maya.say_and_wait(['………………', callname, '。']);
+      await maya.say_and_wait(['………………', callname, '.']);
       era.printButton('「왜 그래?」', 1);
       await era.input();
       await maya.say_and_wait('아무것도 아냐, 그냥 불러봤어!');
@@ -1289,7 +1289,7 @@ module.exports = {
         call_3,
         '한테는 다음 주에 돌려주기로 했으니까, 지금 그렇게 급하게 안 봐도 되지 않을까?',
       ]);
-      era.printButton('「그렇긴 하네」', 1);
+      era.printButton('「그렇긴 하네.」', 1);
       await era.input();
       await maya.say_and_wait('으으으……!!');
       await era.printAndWait([
@@ -1304,7 +1304,7 @@ module.exports = {
         maya.sex,
         '만큼 강한 상대가 있다면……',
       ]);
-      await era.printAndWait('（──팟）');
+      await era.printAndWait('(──팟)');
       await maya.say_and_wait([
         '싫어──! 싫어 싫어 싫어 싫어──!! ',
         callname,
@@ -1316,7 +1316,7 @@ module.exports = {
       await maya.say_and_wait([
         '지금 ',
         callname,
-        ' 이(가)슴 뛰고 있지? 그치?',
+        '도 가슴 뛰고 있지? 그치?',
       ]);
       await maya.say_and_wait([
         '그런 건 싫어! 너는 마야의 ',
@@ -1343,7 +1343,7 @@ module.exports = {
         call_16,
         '을(를) 앞지를 수 있어!',
       ]);
-      era.printButton('（……『추월』.）', 1);
+      era.printButton('(……『추월』.)', 1);
       await era.input();
       await era.printAndWait('……맞아, 비록 지금 당장 직접 맞붙을 순 없어도.');
       await era.printAndWait([
@@ -1386,7 +1386,7 @@ module.exports = {
     return f;
   })(),
   ws_47_29: (() => {
-    const title = '여름 합숙（클래식 시즌）';
+    const title = '여름 합숙(클래식 시즌)';
     /**
      * @param {CharaTalk} maya マヤノトップガン
      * @param {CharaTalk} you プレイヤー
@@ -1553,7 +1553,7 @@ module.exports = {
       await sunday.say_and_wait(['아, ', s_call_m, '☆']);
       await maya.say_and_wait(['와, ', call_55, '! 헬로 헬로☆']);
       await sunday.say_and_wait([
-        '헬로 헬로＆마블러스☆ 아하하, ',
+        '헬로 헬로&마블러스☆ 아하하, ',
         s_call_m,
         '★',
       ]);
@@ -1561,7 +1561,7 @@ module.exports = {
         maya.sex,
         '는 ',
         sunday.get_colored_name(),
-        '。',
+        '.',
       ]);
       await sunday.say_and_wait([
         '오늘 밤에 같이 축제 구경 가자☆ ',
@@ -1599,7 +1599,7 @@ module.exports = {
         '은(는) 축제 가서 재밌게 놀아!',
       ]);
       await maya.say_and_wait([
-        '고작 실험의 검산일 뿐인데 그렇게 기뻐하다니, ',
+        '그럼, ',
         callname,
         '. 가자♪',
       ]);
@@ -1634,9 +1634,9 @@ module.exports = {
         callname,
         ', 다음에는 무슨 트레이닝을 해?',
       ]);
-      await era.printAndWait('（슈웅……）');
+      await era.printAndWait('(슈웅……)');
       await maya.say_and_wait('응? 방금 그건──');
-      await era.printAndWait('（콰앙…… 팡……）');
+      await era.printAndWait('(콰앙…… 팡……)');
       await maya.say_and_wait([
         '와아! 불꽃놀이다! ',
         callname,
@@ -1655,8 +1655,8 @@ module.exports = {
         callname,
         '의 마음을 꽉 사로잡은 다음에!',
       ]);
-      era.printButton('「이미 내 마음은 네가 잡고 있어」（파워+20）', 1);
-      era.printButton('「그럼 정말 열심히 노력해야겠네」（근성+20）', 2);
+      era.printButton('「이미 내 마음은 네가 잡고 있어」 (파워+20)', 1);
+      era.printButton('「그럼 정말 열심히 노력해야겠네」 (근성+20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await maya.say_and_wait('에잇, 정말? 하지만……');
@@ -1695,14 +1695,14 @@ module.exports = {
           callname,
           '하고 또 맞이하면 바다에서 어른다운 상을 받아야겠어……',
         ]);
-        await era.printAndWait('（슈웅…… 콰앙────!!）');
+        await era.printAndWait('(슈웅…… 콰앙────!!)');
         await maya.say_and_wait(
           '어, 어어~!? 왜 하필 이 타이밍에 터지는 거야~!?',
         );
         await maya.say_and_wait(
           '불꽃놀이 이 바보바보──! 분위기 좀 파악하라구!',
         );
-        await era.printAndWait('（콰앙────!!）');
+        await era.printAndWait('(콰앙────!!)');
         await maya.say_and_wait('으으~ 방금 분위기 좋았는데~! 정말이지~!!');
         await era.printAndWait([
           maya.get_colored_name(),
@@ -1732,7 +1732,7 @@ module.exports = {
         '자, 트레센 학원에 도착했습니다.',
       );
       await maya.say_and_wait('쿨…… 쿨……');
-      era.printButton('「마야, 도착했어」', 1);
+      era.printButton('「마야, 도착했어.」', 1);
       await era.input();
       await maya.say_and_wait(['에……? ', callname, '…… 후우.']);
       await maya.say_and_wait('후아…… 괜찮아. 알고 있어……');
@@ -1806,7 +1806,7 @@ module.exports = {
         '레이더 반응 포착! 타깃, 록 온! 앞으로 3, 2, 1……!',
       );
       await maya.say_and_wait([callname, ', 방금 봤어~? 마야의 활약~☆']);
-      era.printButton('「정말 잘 달려줬어」', 1);
+      era.printButton('「정말 잘 달려 줬어.」', 1);
       await era.input();
       await maya.say_and_wait(
         '헤헤헤~☆ 그치 그치! 마야는 역시 주목받는 스타니까♪',
@@ -1832,7 +1832,7 @@ module.exports = {
       ]);
       await maya.say_and_wait('응?');
       await etsuko.say_and_wait(
-        '아, 실례했습니다. 제 질문 방식이 조금 어려웠나요.',
+        '아, 실례했습니다. 제 질문 방식이 조금 어려웠나요?',
       );
       await etsuko.say_and_wait([
         maya.get_colored_name(),
@@ -1873,7 +1873,7 @@ module.exports = {
       await etsuko.say_and_wait([
         '그렇다면 단도직입적으로 묻겠습니다. ',
         maya.get_colored_name(),
-        '씨도 올해 『',
+        ' 씨도 올해 『',
         arim_kin,
         '』에 출주하실 건가요?',
       ]);
@@ -1907,7 +1907,7 @@ module.exports = {
         '도 이미 출주를 선언했을 것이다.',
       ]);
       await maya.say_and_wait('응응, 나갈게!');
-      era.printButton('（대답이 너무 가볍잖아!）', 1);
+      era.printButton('(대답이 너무 가볍잖아!)', 1);
       await era.input();
       await etsuko.say_and_wait([
         '후훗. 슈퍼스타와 뉴스타, 과연 누가 더 눈부실까요. 올해의 ',
@@ -1956,7 +1956,7 @@ module.exports = {
      * @param {PrintedSpan} arim_kin 有馬記念（色付き名前）
      */
     const f = async (maya, amazon, brian, callname, b_call_a, arim_kin) => {
-      await maya.say_and_wait(['왔어, 드디어 왔어, 『', arim_kin, '』～！！']);
+      await maya.say_and_wait(['왔어, 드디어 왔어, 『', arim_kin, '』~!!']);
       await maya.say_and_wait([
         '흐흥, ',
         callname,
@@ -1964,13 +1964,13 @@ module.exports = {
       ]);
       await maya.say_and_wait('응! 저 두 사람은 혹시……');
       await amazon.say_and_wait(
-        '하! 올해도 너랑 붙다니…… 목 씻고 기다리고 있었나?',
+        '하! 올해도 너랑 붙다니…… 이번에도 각오는 돼 있겠지?',
       );
       await brian.say_and_wait('……');
       await brian.say_and_wait([
         '훗…… 무슨 말인지 도통 모르겠군, ',
         b_call_a,
-        '。',
+        '.',
       ]);
       await amazon.say_and_wait(
         '뭐!? 방금 그건 작년에 네가 한 『각오해 둬』에 대한 답이다──',
@@ -2007,7 +2007,7 @@ module.exports = {
         callname,
         '! 잠깐 멍하니 있었어!',
       ]);
-      era.printButton('「이렇게 보니 박력이 넘치네」', 1);
+      era.printButton('「이렇게 보니 박력이 넘치네.」', 1);
       await era.input();
       await maya.say_and_wait('아, 싫어, 싫어! 그런 말 하지 마! 마야는 안 져!');
       await maya.say_and_wait(
@@ -2044,9 +2044,9 @@ module.exports = {
       await you.say_as_passer_by_and_wait('해설', [
         '──대단합니다! 정말 대단해요! 올해 『',
         arim_kin,
-        '』의 챔피언에게 박수를 보내주십시오!!',
+        '』의 챔피언에게 박수를 보내 주십시오!!',
       ]);
-      await era.printAndWait('（와아아아────────!!）');
+      await era.printAndWait('(와아아아────────!!)');
       await you.say_as_passer_by_and_wait('관중A', [
         '그나저나 ',
         maya.get_colored_name(),
@@ -2092,7 +2092,7 @@ module.exports = {
         maya.get_colored_name(),
         ' 선수!?',
       ]);
-      await era.printAndWait('（웅성웅성……）');
+      await era.printAndWait('(웅성웅성……)');
       await maya.say_and_wait([
         '저기, ',
         call_16,
@@ -2114,7 +2114,7 @@ module.exports = {
       ]);
       await maya.say_and_wait('싫어! 금방 끝나니까 잠깐만 기다려 줘!');
       await maya.say_and_wait(
-        '저기저기, 우리 한 번 더 붙자! 마야가 또 이겨줄 테니까!',
+        '저기저기, 우리 한 번 더 붙자! 마야가 또 이겨 줄 테니까!',
       );
       await maya.say_and_wait([
         '부탁이야, 부탁해! ',
@@ -2127,8 +2127,8 @@ module.exports = {
         brian.get_colored_name(),
         ' 선수도──',
       ]);
-      await brian.say_and_wait(['……『', hans_dai, '』。']);
-      await maya.say_and_wait('！');
+      await brian.say_and_wait(['……『', hans_dai, '』.']);
+      await maya.say_and_wait('!');
       await brian.say_and_wait('네 질문에 대답했다. 사회자, 다음으로 넘기지.');
       await you.say_as_passer_by_and_wait(
         '스태프',
@@ -2144,7 +2144,7 @@ module.exports = {
         maya.sex,
         '가 하룻강아지 범 무서운 줄 모르는 건지, 아니면──',
       ]);
-      era.printButton('「' + maya.sex + ' 쪽은 배짱이 있으니까」', 1);
+      era.printButton('「' + maya.sex + ' 쪽은 배짱이 있으니까.」', 1);
       await era.input();
       await amazon.say_and_wait([
         '하하. 너는 ',
@@ -2159,16 +2159,16 @@ module.exports = {
         hans_dai,
         '』에 나가고 싶어!',
       ]);
-      era.printButton('「그럴 줄 알았어」', 1);
+      era.printButton('「그럴 줄 알았어.」', 1);
       await era.input();
       await maya.say_and_wait('어, 어떻게 알았어? 텔레파시!? 운명의 붉은 실!?');
-      era.printButton('「네가 두근거리고 있으니까」', 1);
+      era.printButton('「네가 두근거리고 있으니까.」', 1);
       await era.input();
-      await maya.say_and_wait('！');
+      await maya.say_and_wait('!');
       await maya.say_and_wait([
         '에헤헤. 그런 것까지 알아주다니 역시 ',
         callname,
-        '。',
+        '.',
       ]);
       await maya.say_and_wait([
         '좋아, 『',
@@ -2211,9 +2211,9 @@ module.exports = {
       await you.say_as_passer_by_and_wait('해설', [
         '──대단합니다! 정말 대단해요! 올해 『',
         arim_kin,
-        '』의 챔피언에게 박수를 보내주십시오!!',
+        '』의 챔피언에게 박수를 보내 주십시오!!',
       ]);
-      await era.printAndWait('（와아아아────────!!）');
+      await era.printAndWait('(와아아아────────!!)');
       await you.say_as_passer_by_and_wait('관중A', [
         '솔직히 ',
         maya.get_colored_name(),
@@ -2262,7 +2262,7 @@ module.exports = {
         maya.get_colored_name(),
         ' 선수!?',
       ]);
-      await era.printAndWait('（웅성웅성……）');
+      await era.printAndWait('(웅성웅성……)');
       await maya.say_and_wait([
         '저기, ',
         call_16,
@@ -2302,8 +2302,8 @@ module.exports = {
         '기자B',
         '이, 이봐요…… 다음이라니 그건 좀 무리죠, 실력 차이가 이렇게 명백한데──',
       );
-      await brian.say_and_wait(['……『', hans_dai, '』。']);
-      await maya.say_and_wait('！');
+      await brian.say_and_wait(['……『', hans_dai, '』.']);
+      await maya.say_and_wait('!');
       await brian.say_and_wait('네 질문에 대답했다. 사회자, 다음으로 넘기지.');
       await you.say_as_passer_by_and_wait(
         '스태프',
@@ -2319,14 +2319,14 @@ module.exports = {
         maya.sex,
         '가 하룻강아지 범 무서운 줄 모르는 건지, 아니면──',
       ]);
-      era.printButton('「' + maya.sex + '는 담력이 세니까」', 1);
+      era.printButton('「' + maya.sex + '는 담력이 세니까.」', 1);
       await era.input();
       await amazon.say_and_wait([
         '하하. 너, ',
         maya.sex,
         '를 아주 높게 평가하고 있구나.',
       ]);
-      await amazon.say_and_wait('좋아. 너희 두 사람을 기억해두지.');
+      await amazon.say_and_wait('좋아. 너희 두 사람을 기억해 두지.');
       era.drawLine();
       await maya.say_and_wait([callname, ' ────！！']);
       await maya.say_and_wait([
@@ -2334,25 +2334,25 @@ module.exports = {
         hans_dai,
         '』에 나가고 싶어!',
       ]);
-      era.printButton('「그럴 줄 알았어」', 1);
+      era.printButton('「그럴 줄 알았어.」', 1);
       await era.input();
       await maya.say_and_wait(
         '어라, 어떻게 알았어? 텔레파시!? 아니면 우리 사이에 운명의 붉은 실이라도 있는 거야!?',
       );
-      era.printButton('「네가 너무 신나 보였거든」', 1);
+      era.printButton('「네가 너무 신나 보였거든.」', 1);
       await era.input();
-      await maya.say_and_wait('！');
+      await maya.say_and_wait('!');
       await maya.say_and_wait([
         '헤헤. 그런 것까지 알아주다니, 역시 우리 ',
         callname,
-        '。',
+        '.',
       ]);
       await maya.say_and_wait([
         '좋아, 『',
         hans_dai,
         '』에서 ',
         call_16,
-        '을(를) 완전히 이겨버릴 거야☆',
+        '을(를) 완전히 이겨 버릴 거야☆',
       ]);
       await maya.say_and_wait(
         '난기류에 뛰어들 거라면 정면으로 돌파해야지! 그게 바로 마야의 비행 방식이라구!',
@@ -2384,7 +2384,7 @@ module.exports = {
         ', 그렇게 심각한 표정 짓지 마~♪',
       ]);
       await maya.say_and_wait('모처럼 신사 데이트잖아! 웃어, 웃어☆');
-      era.printButton('「참 태평하구나」', 1);
+      era.printButton('「참 태평하구나.」', 1);
       await era.input();
       await maya.say_and_wait('아하하, 즐거우니까!');
       await maya.say_and_wait('흐흥. 마야는 말이야, 올해 목표를 벌써 정했어♪');
@@ -2397,7 +2397,7 @@ module.exports = {
       ]);
       await maya.say_and_wait('많이 생각해 봤지만 마야한테는──');
       await maya.say_and_wait('──지금 가장 하고 싶은 일이야!');
-      era.printButton('「너라면 할 수 있어」', 1);
+      era.printButton('「너라면 할 수 있어.」', 1);
       await era.input();
       await maya.say_and_wait('에헤헤…… 마야도 그렇게 생각해♪');
       await era.printAndWait([
@@ -2409,20 +2409,20 @@ module.exports = {
       ]);
       era.println();
       era.printButton(
-        '（' + maya.sex + '가 계속 건강하고 활기차기를）（체력 +300）',
+        '(' + maya.sex + '가 계속 건강하고 활기차기를) (체력 +300)',
         1,
       );
       era.printButton(
-        '（' + maya.sex + '가 많은 것을 배우고 성장하기를）（전 능력치 +10）',
+        '(' + maya.sex + '가 많은 것을 배우고 성장하기를) (전 능력치 +10)',
         2,
       );
       era.printButton(
-        '（' + maya.sex + '가 멋진 어른이 되기를）（스킬 포인트 +70）',
+        '(' + maya.sex + '가 멋진 어른이 되기를) (스킬 포인트 +70)',
         3,
       );
       const ret = await era.input();
       await maya.say_and_wait(['응? ', callname, ', 방금 뭐라고 했어?']);
-      era.printButton('「방금 기도했어」', 1);
+      era.printButton('「방금 기도했어.」', 1);
       await era.input();
       switch (ret) {
         case 1:
@@ -2447,7 +2447,7 @@ module.exports = {
           await era.input();
           await maya.say_and_wait('헤헤, 그러니까……');
           await maya.say_and_wait(
-            '『내가 마야노 탑건을 위해 뭘 할 수 있을까』 하는 표정. 그리고 『마야노 탑건을 소중히 해줘야지』 하는 표정!',
+            '『내가 마야노 탑건을 위해 뭘 할 수 있을까』 하는 표정. 그리고 『마야노 탑건을 소중히 해 줘야지』 하는 표정!',
           );
           await maya.say_and_wait(
             '그런 표정을 보면 마야는 기운이 불끈불끈 솟아나♪',
@@ -2528,7 +2528,7 @@ module.exports = {
         '거기 두 분! 데이트하고 돌아가는 길에, 두 분의 사랑을 시험해 보지 않겠어요?',
       );
       await maya.say_and_wait('꺄☆ 할래 할래♪');
-      era.printButton('「바로 결정해 버렸네」', 1);
+      era.printButton('「바로 결정해 버렸네.」', 1);
       await era.input();
       await maya.say_and_wait('재미있을 것 같잖아! 그, 리, 고……');
       await maya.say_and_wait(
@@ -2570,14 +2570,14 @@ module.exports = {
           await era.printAndWait(
             '앞으로의 레이스나 트레이닝 일정을 조정한 뒤에 가는 게──',
           );
-          era.printButton('「이게 다 너를 위해서야」', 1);
+          era.printButton('「이게 다 너를 위해서야.」', 1);
           await era.input();
           await maya.say_and_wait('마야를 위해서?');
-          era.printButton('「너의 목표를 이뤄주고 싶으니까」', 1);
+          era.printButton('「너의 목표를 이뤄 주고 싶으니까.」', 1);
           await era.input();
           await maya.say_and_wait('아──');
           await maya.say_and_wait(
-            '흐흥. 마야는 말이야, 이미 올해의 목표를 정해뒀어♪',
+            '흐흥. 마야는 말이야, 이미 올해의 목표를 정해 뒀어♪',
           );
           await maya.say_and_wait([
             '꼭 앞지를 거야. ',
@@ -2586,7 +2586,7 @@ module.exports = {
             call_16,
             '을(를)!',
           ]);
-          await maya.say_and_wait(['……고마워. ', callname, '。']);
+          await maya.say_and_wait(['……고마워. ', callname, '.']);
           await maya.say_and_wait(
             '좋아, 결정했어! 그럼, 마야의 목표를 달성한 뒤에 같이 가자!',
           );
@@ -2664,7 +2664,7 @@ module.exports = {
             '──상점가 직원이 가리킨 곳에는 당근이 가득 든 커다란 바구니가 놓여 있었다.',
           );
           await maya.say_and_wait('……마야 혼자서 다 먹을 수 있을까.');
-          era.printButton('「나도 도와줄게」', 1);
+          era.printButton('「나도 도와줄게.」', 1);
           await era.input();
           await maya.say_and_wait([
             '엣! 정말!? 그럼 ',
@@ -2686,7 +2686,7 @@ module.exports = {
           await era.input();
           await maya.say_and_wait('아싸!');
           await maya.say_and_wait(
-            '그럼 내일부터 마야가 쌤 방으로 가서 당근 요리 잔뜩 해줄게♪',
+            '그럼 내일부터 마야가 쌤 방으로 가서 당근 요리 잔뜩 해 줄게♪',
           );
           era.printButton('「어라!?」', 1);
           await era.input();
@@ -2722,7 +2722,7 @@ module.exports = {
             '(이)랑 온천 여행 가려던 계획이……',
           ]);
           await maya.say_and_wait('게다가 고작 당근 한 개라니……');
-          era.printButton('「네 머리 색이랑 똑같은, 아주 활기찬 색이네」', 1);
+          era.printButton('「네 머리 색이랑 똑같은, 아주 활기찬 색이네.」', 1);
           await era.input();
           await maya.say_and_wait('……！');
           await maya.say_and_wait([
@@ -2805,7 +2805,7 @@ module.exports = {
       ]);
       await maya.say_and_wait([callname, '! 트랙 3바퀴는 재미없어!']);
       await maya.say_and_wait('마야는 이제 30바퀴는 달려야 해!');
-      era.printButton('「그건 다리에 너무 부담이 가」', 1);
+      era.printButton('「그건 다리에 너무 부담이 가.」', 1);
       await era.input();
       await maya.say_and_wait(
         '에에──!? 그럼그럼, 얼른 다음에 할 트레이닝 좀 생각해 봐.',
@@ -2813,7 +2813,7 @@ module.exports = {
       await maya.say_and_wait([
         '나는 알고 있거든, ',
         callname,
-        '은(는) 분명 나를 즐겁게 해줄 거란 걸!',
+        '은(는) 분명 나를 즐겁게 해 줄 거란 걸!',
       ]);
       await maya.say_and_wait(
         '아, 어제 준 과제 리스트는 벌써 전부 마스터했어! 그러니까 거기 없는 걸로 부탁해☆',
@@ -2832,17 +2832,17 @@ module.exports = {
       ]);
       await maya.say_and_wait(['좋은 아침! ', callname, '! 오늘도 힘내자!']);
       await maya.say_and_wait(['어라, ', callname, '. 안색이 새하얘……']);
-      await maya.say_and_wait(['앗, ', callname, '！？']);
-      await era.printAndWait('（……털썩）');
+      await maya.say_and_wait(['앗, ', callname, '!?']);
+      await era.printAndWait('(……털썩)');
       await amazon.say_and_wait('……이런, 위험할 뻔했군.');
       await amazon.say_and_wait('하마터면 쓰러질 뻔했어.');
-      era.printButton('「네가 잡아준 거야……?」', 1);
+      era.printButton('「네가 잡아 준 거야……?」', 1);
       await era.input();
       await amazon.say_and_wait('하하, 고마워할 거 없어. 별거 아니니까.');
       await amazon.say_and_wait(
         '그런데 다크서클이 심하군…… 잠을 제대로 못 잤구나.',
       );
-      await amazon.say_and_wait(['내가 말하건데, ', a_call_m, '！']);
+      await amazon.say_and_wait(['있잖아, ', a_call_m, '!']);
       await maya.say_and_wait('아, 아와와……');
       await amazon.say_and_wait([a_call_m, '! 겁먹지 말고 대답해!']);
       await maya.say_and_wait('네, 넵!!');
@@ -2851,7 +2851,7 @@ module.exports = {
         callname_12,
         ', 너는 여기서 쉬어.',
       ]);
-      await amazon.say_and_wait('이 녀석은 내가 봐주지.');
+      await amazon.say_and_wait('이 녀석은 내가 봐 주지.');
       era.printButton('「에엣!?」', 1);
       await era.input();
       await amazon.say_and_wait([
@@ -2866,11 +2866,11 @@ module.exports = {
           '』에서의 선전 포고…… 솔직히 인상 깊었거든.',
         ]);
       }
-      await amazon.say_and_wait('그러니 나도 좀 돕게 해줘.');
+      await amazon.say_and_wait('그러니 나도 좀 돕게 해 줘.');
       await amazon.say_and_wait(
         '이렇게 장래가 유망한 아이를 혼자 독차지하게 둘 수야 없지.',
       );
-      await maya.say_and_wait(['에에──!? ', call_12, '……！？']);
+      await maya.say_and_wait(['에에──!? ', call_12, '……!?']);
       await maya.say_and_wait([
         '아와와와……!? 죄, 죄송해요. 제 마음엔 오로지 ',
         callname,
@@ -2882,14 +2882,14 @@ module.exports = {
       await amazon.say_and_wait([
         '어때, ',
         callname_12,
-        '。',
+        '.',
         maya.sex,
         '를 잠시 나한테 맡길래?',
       ]);
       await era.printAndWait([
         '──「여걸」 ',
         amazon.get_colored_name(),
-        '。',
+        '.',
         maya.sex,
         '는 작년에도 올해에도 「',
         arim_kin,
@@ -2917,9 +2917,9 @@ module.exports = {
         '. 넌 쉬지 말고 계속 달려야 해. 내가 꼬리를 잡지 못하도록 말이야.',
       ]);
       await maya.say_and_wait(
-        '어라, 이거 그냥 『꼬리잡기 놀이』잖아? 나 유치원 때 해본 적 있는데……',
+        '어라, 이거 그냥 『꼬리잡기 놀이』잖아? 나 유치원 때 해 본 적 있는데……',
       );
-      await maya.say_and_wait('이게 정말 훈련이 맞아? ……그냥 노는 거 같은데?');
+      await maya.say_and_wait('이게 정말 훈련이 맞아? …… 그냥 노는 거 같은데?');
       await amazon.say_and_wait('오호, 여유만만하군. 그럼 시작한다.');
       await maya.say_and_wait('으, 으으……');
       await amazon.say_and_wait(
@@ -2944,7 +2944,7 @@ module.exports = {
       await amazon.say_and_wait([
         '그래, 그거면 돼! 고마워! ……그런데 말이야, ',
         a_call_m,
-        '。',
+        '.',
       ]);
       await amazon.say_and_wait(
         '간단히 말해서, 너의 약점은 바로 관찰력 부족이야.',
@@ -2956,7 +2956,7 @@ module.exports = {
       await maya.say_and_wait([
         '하지만 ',
         call_12,
-        '이(가) 바로 술래 숫자랑 규칙을 바꿔버렸잖아! 너무 비겁해──',
+        '이(가) 바로 술래 숫자랑 규칙을 바꿔 버렸잖아! 너무 비겁해──',
       ]);
       await amazon.say_and_wait(
         '정말이지, 그래서 관찰력…… 아니, 네가 관찰하려고 들지 않는다는 거야.',
@@ -2966,14 +2966,14 @@ module.exports = {
         '내가 보기에 넌 아주 훌륭한 재능과 트레이너를 가졌어.',
       );
       await amazon.say_and_wait(
-        '넌 정말로 뭐든 해낼 수 있겠지. 그래서 네 주변 어른들도 너에게 많은 걸 해주고 있고.',
+        '넌 정말로 뭐든 해낼 수 있겠지. 그래서 네 주변 어른들도 너에게 많은 걸 해 주고 있고.',
       );
       await amazon.say_and_wait('다만 말이야, 넌 타인에게 너무 의지하고 있어.');
       await amazon.say_and_wait(
         '지금도 그래. 넌 일단 이해했다고 생각하면…… 아니, 이해했다고 착각하면……',
       );
       await amazon.say_and_wait(
-        '『자신이 모르는 것을 이해하려 들지 않아』…… 너 스스로 그런 습관을 들여버린 거야.',
+        '『자신이 모르는 것을 이해하려 들지 않아』…… 너 스스로 그런 습관을 들여 버린 거야.',
       );
       await amazon.say_and_wait(
         '난 지금 『꼬리잡기 놀이』를 하는 게 아냐. 이건 레이스를 위한 훈련이야.',
@@ -3023,7 +3023,7 @@ module.exports = {
     return f;
   })(),
   ws_95_6: (() => {
-    const title = '발렌타인';
+    const title = '밸런타인';
     /**
      * @param {CharaTalk} maya マヤノトップガン
      * @param {CharaTalk} yukino ユキノビジン
@@ -3077,7 +3077,7 @@ module.exports = {
         '에게 끌려갔다……',
       ]);
       await maya.say_and_wait('자, 여기! 이건 내가 주는 초콜릿이야.');
-      await maya.say_and_wait('헤헤, 얼른 열어봐, 얼른☆');
+      await maya.say_and_wait('헤헤, 얼른 열어 봐, 얼른☆');
       await era.printAndWait([
         maya.sex,
         '의 기대에 찬 시선 아래, ',
@@ -3092,7 +3092,7 @@ module.exports = {
       await maya.say_and_wait(
         '별 모양이 붙은 건 백화점에서 샀고, 하트 모양은 역 안에 있는 전문점에서 샀어!',
       );
-      era.printButton('「정말 많이도 샀네」', 1);
+      era.printButton('「정말 많이도 샀네.」', 1);
       await era.input();
       await maya.say_and_wait(
         '헤헤, 오늘을 위해서 나 혼자 여러 가게를 돌아다녔거든!',
@@ -3113,13 +3113,13 @@ module.exports = {
       await era.printAndWait(
         '초콜릿이 종이컵 밖으로 삐져나온 것도 있지만, 모두 정성껏 만들어져 있다──',
       );
-      era.printButton('「맛있어 보이네」', 1);
+      era.printButton('「맛있어 보이네.」', 1);
       await era.input();
       await maya.say_and_wait('와아…………!');
       await maya.say_and_wait([
         '헤헤…… ',
         callname,
-        '. 다 먹고 나서도 꼭 그렇게 말해줘야 해☆',
+        '. 다 먹고 나서도 꼭 그렇게 말해 줘야 해☆',
       ]);
       await maya.say_and_wait([
         '히히, 이건 특별한 ',
@@ -3147,14 +3147,14 @@ module.exports = {
      */
     const f = async (maya, brian, you, callname, call_16, hans_dai) => {
       await era.printAndWait(['그리고 「', hans_dai, '」 당일.']);
-      await maya.say_and_wait(['…………가자, ', callname, '。']);
+      await maya.say_and_wait(['…………가자, ', callname, '.']);
       await maya.say_and_wait('준비 완료! 엔진도 연료 가득!');
-      era.printButton('「레이스 힘내」', 1);
+      era.printButton('「레이스 힘내.」', 1);
       await era.input();
       await maya.say_and_wait('응!');
       era.drawLine();
       await brian.say_and_wait('…………');
-      await maya.say_and_wait(['응! ', call_16, '。']);
+      await maya.say_and_wait(['응! ', call_16, '.']);
       await brian.say_and_wait('……왔군.');
       await maya.say_and_wait('응, 왔어.');
       await maya.say_and_wait('에헤헤, 마야는 약속을 잘 지키는 착한 아이야.');
@@ -3208,7 +3208,7 @@ module.exports = {
       tenn_spr,
     ) => {
       await maya.say_and_wait('하아…… 하아……!');
-      await era.printAndWait('（와아아아아아아아────!!）');
+      await era.printAndWait('(와아아아아아아아────!!)');
       await maya.say_and_wait('히히, 내가 이겼어! 승리 잡았다~☆');
       await maya.say_and_wait('후후, 이걸로──');
       await brian.say_and_wait('……');
@@ -3236,7 +3236,7 @@ module.exports = {
         call_12,
         '은(는) 알고 있지?',
       ]);
-      await amazon.say_and_wait('！');
+      await amazon.say_and_wait('!');
       await amazon.say_and_wait('정말 못 말리겠네. 아직도 만족 못 한 거야?');
       await maya.say_and_wait('응. 왜냐면……');
       await maya.say_and_wait([
@@ -3283,13 +3283,13 @@ module.exports = {
         tenn_spr,
         '」. 그것은 유구한 역사를 지닌, 장거리 최고봉을 가리는 레이스였다.',
       ]);
-      await maya.say_and_wait(['……', callname, '。']);
-      era.printButton(`「그래, 『텐노상(봄)』에 나가자」`, 1);
+      await maya.say_and_wait(['……', callname, '.']);
+      era.printButton(`「그래, 『텐노상(봄)』에 나가자.」`, 1);
       await era.input();
-      await maya.say_and_wait('I copy！');
+      await maya.say_and_wait('I copy!');
       await amazon.say_and_wait('허…… 이 둘은 정말 대단하네.');
       await amazon.say_and_wait(
-        '좋아, 도와주기로 한 거 끝까지 도와주지! 나도 끼워줘!',
+        '좋아, 도와주기로 한 거 끝까지 도와주지! 나도 끼워 줘!',
       );
       await amazon.say_and_wait([
         call_12,
@@ -3331,7 +3331,7 @@ module.exports = {
     ) => {
       await maya.say_and_wait('하아…… 하아……!');
       await maya.say_and_wait('으으…… 분명 조금만 더 가면 됐는데……!!');
-      await era.printAndWait('（와아아아아아아아────!!）');
+      await era.printAndWait('(와아아아아아아아────!!)');
       await brian.say_and_wait('흥……');
       await brian.say_and_wait('……겨우 이 정도인가?');
       await maya.say_and_wait('정말~~! 저 표정은 뭐야~!');
@@ -3339,7 +3339,7 @@ module.exports = {
       await maya.say_and_wait('으으…… 하지만──');
       era.drawLine();
       await maya.say_and_wait('……다녀왔어!!');
-      era.printButton('「어서 와」', 1);
+      era.printButton('「어서 와.」', 1);
       await era.input();
       await amazon.say_and_wait('오, 벌써 돌아온 거야?');
       await maya.say_and_wait(['에엣!? 왜 ', call_12, '이(가) 여기 있어!?']);
@@ -3348,7 +3348,7 @@ module.exports = {
       await maya.say_and_wait(
         '마야를 좀 더 단련시켜 줘! 오늘부터라도 상관없어!',
       );
-      await amazon.say_and_wait('뭐!? 내 사정도 좀 봐달라고──');
+      await amazon.say_and_wait('뭐!? 내 사정도 좀 봐 달라고──');
       await maya.say_and_wait(
         '싫어! 마야는 강해지고 싶단 말이야! 더 강해질 수 있다는 걸 안단 말이야!',
       );
@@ -3369,7 +3369,7 @@ module.exports = {
       await amazon.say_and_wait('하아…… 이 고집불통 녀석들은 대체 뭐야.');
       await amazon.say_and_wait('……뭐, 대결이란 건 이런 뜨거움이 있어야지.');
       await amazon.say_and_wait(
-        '좋아, 도와주기로 한 거 끝까지 도와주지! 나도 끼워줘!',
+        '좋아, 도와주기로 한 거 끝까지 도와주지! 나도 끼워 줘!',
       );
       await amazon.say_and_wait([
         a_call_m,
@@ -3378,13 +3378,13 @@ module.exports = {
       await maya.say_and_wait('응! 고마워!');
       await amazon.say_and_wait('대답 좋네! 그 기세 꺾이지 말고 유지해!');
       await amazon.say_and_wait(
-        '언제라도 전력을 다하라고! 미래를 생각하느라 제대로 주먹도 못 휘두르는 녀석은, 처음부터 기권하는 놈이랑 다를 바 없으니까!',
+        '언제라도 전력을 다하라고! 뒷일을 걱정하느라 제대로 주먹도 못 휘두르는 녀석은, 처음부터 기권하는 놈이랑 다를 바 없으니까!',
       );
       await maya.say_and_wait('네!');
       await amazon.say_and_wait([
         '훗! 그럼 다음 작전 회의를 시작해 볼까. 그러니까, ',
         a_call_m,
-        '。',
+        '.',
       ]);
       await amazon.say_and_wait([
         '다음번에 ',
@@ -3393,7 +3393,7 @@ module.exports = {
         tenn_spr,
         '』이야.',
       ]);
-      await maya.say_and_wait(['『', tenn_spr, '』……！']);
+      await maya.say_and_wait(['『', tenn_spr, '』……!']);
       await era.printAndWait([
         '──「',
         tenn_spr,
@@ -3410,10 +3410,10 @@ module.exports = {
         tenn_spr,
         '』으로 가기 위한 과정이었을 뿐이겠지.',
       ]);
-      await maya.say_and_wait(['……알겠어. 그럼, ', callname, '。']);
-      era.printButton(`「그래, 『텐노상(봄)』에 나가자」`, 1);
+      await maya.say_and_wait(['……알겠어. 그럼, ', callname, '.']);
+      era.printButton(`「그래, 『텐노상(봄)』에 나가자.」`, 1);
       await era.input();
-      await maya.say_and_wait('I copy！');
+      await maya.say_and_wait('I copy!');
       await era.printAndWait([
         '그리하여 다음 목표는 「',
         tenn_spr,
@@ -3451,7 +3451,7 @@ module.exports = {
         '를 응원해 주는 팬들을 초대하는 축제다.',
       ]);
       await era.printAndWait(
-        '봄 감사제의 볼거리는 운동 대항전 등의 기획이다──',
+        '봄 감사제의 볼거리는 운동 대항전 같은 행사다──',
       );
       await maya.say_and_wait(
         '아하하, 신나는 분위기네~☆ 있지, 있지, 다음 종목은 더트 2000미터야~!',
@@ -3537,7 +3537,7 @@ module.exports = {
     rank,
   ) {
     if (rank === 1) {
-      await maya.say_and_wait([callname, '────! 마야가 1등이야──☆']);
+      await maya.say_and_wait([callname, '────! 마야가 1착이야──☆']);
       era.printButton('「대단해!」', 1);
       await era.input();
       await maya.say_and_wait('에헤헤…… 더 칭찬해 줘☆');
@@ -3597,9 +3597,9 @@ module.exports = {
         callname,
         '한테 어른이 된 마야를 보여 주고 싶은걸.',
       ]);
-      era.printButton('「이미 충분히 성장한 게 느껴져」', 1);
+      era.printButton('「이미 충분히 성장한 게 느껴져.」', 1);
       await era.input();
-      await maya.say_and_wait(['……', callname, '。']);
+      await maya.say_and_wait(['……', callname, '.']);
       await maya.say_and_wait('으으…… 한 번 더 할래~! 다음에는 꼭 이길 거야!');
       await amazon.say_and_wait('한 번뿐이라고 했잖아! ……정말이지!');
       await era.printAndWait([
@@ -3648,7 +3648,7 @@ module.exports = {
       arim_kin,
     ) => {
       await era.printAndWait(['그리고 「', tenn_spr, '」 당일──']);
-      await teio.say_and_wait(['안녕~♪ ', t_call_m, '！']);
+      await teio.say_and_wait(['안녕~♪ ', t_call_m, '!']);
       await maya.say_and_wait(['와, ', call_3, '! 응원하러 와 줬어?']);
       await teio.say_and_wait([
         '응, ',
@@ -3660,7 +3660,7 @@ module.exports = {
       await you.say_as_passer_by_and_wait('신문', [
         '『',
         tenn_spr,
-        '은 양강 대결인가!?』『',
+        '은 양강 대결인가!?』 『',
         brian.get_colored_name(),
         '하고 ',
         maya.get_colored_name(),
@@ -3671,13 +3671,13 @@ module.exports = {
         hans_dai,
         '의 격전을 거쳐 맞이하는 ',
         tenn_spr,
-        '!』『빛나는 것은 거성 ',
+        '!』 『빛나는 것은 거성 ',
         brian.get_colored_name(),
         '인가, 신성 ',
         maya.get_colored_name(),
         '인가!』',
       ]);
-      await maya.say_and_wait('……！');
+      await maya.say_and_wait('……!');
       await teio.say_and_wait('에헤헤, 어때? 긴장돼?');
       await maya.say_and_wait('………………후후후.');
       await maya.say_and_wait(
@@ -3686,7 +3686,7 @@ module.exports = {
       await teio.say_and_wait(['와~! ', t_call_m, ', 어른스러워~! 멋져~!']);
       await maya.say_and_wait('아하하! 푸딩 주면 용서해 줄게☆');
       await maya.say_and_wait(['에헤헤. 그럼 ', callname, ', 마야 먼저 갈게!']);
-      era.printButton('「오늘은 절대 지지 마」', 1);
+      era.printButton('「오늘은 절대 지지 마.」', 1);
       await era.input();
       await maya.say_and_wait('응, 안 져!');
       await maya.say_and_wait('이번에야말로 브라이언한테 완벽하게 이길 거야!');
@@ -3702,7 +3702,7 @@ module.exports = {
       await teio.say_and_wait([
         '어라, ',
         t_call_a,
-        '？ ',
+        '? ',
         t_call_m,
         '은(는) 벌써 갔어.',
       ]);
@@ -3772,7 +3772,7 @@ module.exports = {
       await maya.say_and_wait(['이걸로…… ', call_16, '한테……!']);
       await brian.say_and_wait('──어째서지.');
       await brian.say_and_wait('흥……! 아직 이 정도라니……!');
-      await maya.say_and_wait('……정말, 마야는 보고 있지도 않은 것 같아.');
+      await maya.say_and_wait('……정말, 마야를 보고 있지도 않은 것 같아.');
       era.drawLine();
       await maya.say_and_wait([call_16, ', 어디를 보고 있는 거야……']);
       era.printButton('「……어?」', 1);
@@ -3784,7 +3784,7 @@ module.exports = {
         call_16,
         '하고 달리게 해 줘.',
       ]);
-      era.printButton('「이번에는 이겼잖아」', 1);
+      era.printButton('「이번에는 이겼잖아.」', 1);
       await era.input();
       await maya.say_and_wait('응, 한 번 더 달려야 해…… 왜인지는 모르겠지만.');
       await maya.say_and_wait(
@@ -3793,7 +3793,7 @@ module.exports = {
       await amazon.say_and_wait([
         '음! ',
         a_call_m,
-        '……이번 레이스에서 그렇게 느낀 건가.',
+        '…… 이번 레이스에서 그렇게 느낀 건가.',
       ]);
       await maya.say_and_wait('……으, 응.');
       await amazon.say_and_wait('그래. 그렇다면 더더욱 내버려 둘 수 없겠군.');
@@ -3806,7 +3806,7 @@ module.exports = {
         '을 『마지막 레이스』로 삼아 선수 생활을 끝낼 생각이야.',
       ]);
       await amazon.say_and_wait('흥…… 너무 이른 퇴장이야……!');
-      await maya.say_and_wait([call_12, '！？']);
+      await maya.say_and_wait([call_12, '!?']);
       await maya.say_and_wait('……왜? 이상하잖아.');
       await maya.say_and_wait([
         '마지막일 리 없어…… ',
@@ -3825,7 +3825,7 @@ module.exports = {
         '한테도 마야의 힘으로 두근거림을 느끼게 해 주고 싶어!',
       ]);
       era.printButton(
-        '「' + brian.sex + ' 쪽을 두근거리게 하고 싶은 거구나」',
+        '「' + brian.sex + ' 쪽을 두근거리게 하고 싶은 거구나.」',
         1,
       );
       await era.input();
@@ -3852,7 +3852,7 @@ module.exports = {
         arim_kin,
         '』까지 마야를 완벽하게 단련시켜 줘.',
       ]);
-      era.printButton('「알았어」', 1);
+      era.printButton('「알았어.」', 1);
       await era.input();
       await maya.say_and_wait('……고마워. 에헤헤, 기대돼.');
       await era.printAndWait([
@@ -3898,10 +3898,10 @@ module.exports = {
       arim_kin,
     ) => {
       await maya.say_and_wait('하아…… 하아……! ……으으!');
-      await maya.say_and_wait([call_16, '……역시…… 빨라……!!']);
+      await maya.say_and_wait([call_16, '…… 역시…… 빨라……!!']);
       await brian.say_and_wait('──어째서지.');
       await brian.say_and_wait('어째서…… 아직도 닿지 않지……!');
-      await maya.say_and_wait('……정말, 마야는 보고 있지도 않은 것 같아.');
+      await maya.say_and_wait('……정말, 마야를 보고 있지도 않은 것 같아.');
       era.drawLine();
       await maya.say_and_wait([call_16, ', 어디를 보고 있는 거야……']);
       era.printButton('「……어?」', 1);
@@ -3922,7 +3922,7 @@ module.exports = {
       await amazon.say_and_wait([
         '음! ',
         a_call_m,
-        '……이번 레이스에서 그렇게 느낀 건가.',
+        '…… 이번 레이스에서 그렇게 느낀 건가.',
       ]);
       await maya.say_and_wait('……으, 응.');
       await amazon.say_and_wait('그래. 그렇다면 더더욱 내버려 둘 수 없겠군.');
@@ -3935,7 +3935,7 @@ module.exports = {
         '을 『마지막 레이스』로 삼아 선수 생활을 끝낼 생각이야.',
       ]);
       await amazon.say_and_wait('흥…… 너무 이른 퇴장이야……!');
-      await maya.say_and_wait([call_12, '！？']);
+      await maya.say_and_wait([call_12, '!?']);
       await maya.say_and_wait('……왜? 이상하잖아.');
       await maya.say_and_wait([
         '마지막일 리 없어…… ',
@@ -3979,7 +3979,7 @@ module.exports = {
         arim_kin,
         '』까지 마야를 완벽하게 단련시켜 줘.',
       ]);
-      era.printButton('「알았어」', 1);
+      era.printButton('「알았어.」', 1);
       await era.input();
       await maya.say_and_wait('……고마워. 에헤헤, 기대돼.');
       await era.printAndWait([
@@ -4043,14 +4043,14 @@ module.exports = {
       await brian.print_and_wait([
         '하지만 나는 ',
         brian.elder_sibling_sex_title,
-        '의 등을 필사적으로 쫓았다. 기쁨에 떠는 짐승처럼.',
+        '의 뒷모습을 필사적으로 쫓았다. 기쁨에 떠는 짐승처럼.',
       ]);
       await brian.print_and_wait(
         '다리를 움직이고, 허파에 공기를 들이마신다. 그리고 다시 다리를 움직인다──',
       );
       await brian.print_and_wait('이것이 바로 나의 호흡.');
       await brian.print_and_wait(
-        '──얼마 지나지 않아, 내가 쫓아야 할 등은 사라졌다.',
+        '──얼마 지나지 않아, 내가 쫓아야 할 뒷모습은 사라졌다.',
       );
       await brian.print_and_wait('나는 혼자가 되었다.');
       await brian.print_and_wait(
@@ -4060,7 +4060,7 @@ module.exports = {
         '그리고 한 가지를 깨달았다. 나의 호흡은 나를 굶주리게 만든다는 것을.',
       );
       await brian.print_and_wait(
-        '전력을 다해 숨을 쉴수록 목은 더욱 타오르고, 결코 만족할 수 없다는 것을 깨달았다.',
+        '전력을 다해 숨을 쉴수록 목은 더욱 타들어 가고, 결코 만족할 수 없다는 것을 깨달았다.',
       );
       await brian.print_and_wait('하지만 호흡을 멈출 수는 없다.');
       await brian.print_and_wait(
@@ -4093,16 +4093,16 @@ module.exports = {
       ]);
       await teio.say_and_wait(['어라, ', t_call_m, '? 듣고 있어?']);
       await maya.say_and_wait('……알았어.');
-      await amazon.say_and_wait(['……', a_call_m, '？']);
+      await amazon.say_and_wait(['……', a_call_m, '?']);
       await maya.say_and_wait(
         '그치만, 이건 사실이 아니지…… 어떻게 이런 일이 있을 수 있어……',
       );
       await maya.say_and_wait('왜냐하면, 그럴 리가 없잖아……!');
-      await amazon.say_and_wait([a_call_m, '！？']);
+      await amazon.say_and_wait([a_call_m, '!?']);
       await maya.say_and_wait('하아…… 하아…… 하아……');
       era.printButton(`「……마야」`, 1);
       await era.input();
-      await maya.say_and_wait([callname, '。']);
+      await maya.say_and_wait([callname, '.']);
       era.printButton('「뭔가 알아낸 거야?」', 1);
       await era.input();
       await maya.say_and_wait('……');
@@ -4114,7 +4114,7 @@ module.exports = {
       await maya.say_and_wait([
         '난 아직 ',
         maya.sex,
-        '와 어깨를 나란히 해보지도 못했는데……!',
+        '와 어깨를 나란히 해 보지도 못했는데……!',
       ]);
       era.printButton(`「브라이언 말이야?」`, 1);
       await era.input();
@@ -4131,7 +4131,7 @@ module.exports = {
         '는 계속해서 발버둥 치고 있는 거야. 언젠가 그 말을 할 수 있을 거라 믿으면서.',
       ]);
       await maya.say_and_wait(
-        '──설령 몸이 반짝이고 싶은 마음을 따라가지 못하더라도, 억지로 버텨가면서 말이야.',
+        '──설령 몸이 반짝이고 싶은 마음을 따라가지 못하더라도, 억지로 버텨 가면서 말이야.',
       );
       await maya.say_and_wait([
         '……',
@@ -4141,7 +4141,7 @@ module.exports = {
       await maya.say_and_wait([
         '만약 그 사람이 정말로 『',
         arim_kin,
-        '』를 마지막 은퇴 레이스로 생각하고 있다면!',
+        '』를 은퇴 레이스로 생각하고 있다면!',
       ]);
       await maya.say_and_wait([
         '나는 그날 『마야노 탑건』으로서 출주해서, ',
@@ -4168,7 +4168,7 @@ module.exports = {
       await maya.say_and_wait(['그리고 『', arim_kin, '』에서──']);
       await maya.say_and_wait(['──', maya.sex, '를 앞지를 수 있다면……']);
       await maya.say_and_wait([
-        '그때는 ',
+        '그때 ',
         callname,
         '은(는) 마야만 보고 『누구보다 반짝이고 있어』라고 칭찬해 줘.',
       ]);
@@ -4218,7 +4218,7 @@ module.exports = {
         '를 갈망하고 있어. 너를 해방해 줄 무언가를.',
       ]);
       await brian.say_and_wait('……눈치채고 있었나.');
-      await amazon.say_and_wait('몇 년이나 네 등을 쫓아왔으니까.');
+      await amazon.say_and_wait('몇 년이나 네 뒷모습을 쫓아왔으니까.');
       await amazon.say_and_wait('네가 원하는 게 뭔지는 결국 모르겠더군.');
       await amazon.say_and_wait(
         '하지만 적어도 네가 무언가를 참고 있다는 건 보였어.',
@@ -4269,7 +4269,7 @@ module.exports = {
      * @param {string} callname マヤノトップガンのプレイヤーへの呼び方
      */
     const f = async (maya, amazon, brian, callname) => {
-      await era.printAndWait('（와아아아아아────!!）');
+      await era.printAndWait('(와아아아아아────!!)');
       await brian.say_and_wait('……');
       await amazon.say_and_wait('어때?');
       await brian.say_and_wait('……별로.');
@@ -4279,7 +4279,7 @@ module.exports = {
       era.drawLine();
       await maya.say_and_wait(['하아…… 하아…… 후우. ', callname, ', 어때?']);
       await maya.say_and_wait(
-        '마야, 확실히 성장했어? 내가 낼 수 있는 최고의 속도로.',
+        '마야, 확실히 성장했어? 내가 낼 수 있는 가장 빠른 속도로.',
       );
       era.printButton('「확실히 성장했어!」', 1);
       await era.input();
@@ -4309,12 +4309,12 @@ module.exports = {
         ', 어서 와♪ 마야와의 휴양지에 온 걸 환영해~☆',
       ]);
       await maya.say_and_wait('올해도 둘이서 화끈한 여름을 보내자☆');
-      era.printButton('「모두와 함께 뜨거운 여름을 보내는 거지」', 1);
+      era.printButton('「모두와 함께 뜨거운 여름을 보내는 거지.」', 1);
       await era.input();
       await maya.say_and_wait('에잉──! 또 그런 소릴 하고~! ');
       await maya.say_and_wait('그래도 올해는 왠지──');
       await maya.say_and_wait(
-        '정말로 지금까지 중에 가장 뜨거운 여름이 될 것 같아. 히히☆',
+        '정말로 지금까지 보낸 여름 중 가장 뜨거운 여름이 될 것 같아. 히히☆',
       );
     };
     f.title = title;
@@ -4348,13 +4348,13 @@ module.exports = {
       await maya.say_and_wait(
         '헤헤. 차 안에서 푹 잤어. 그러니까 추가 트레이닝도 힘낼 수 있…… 을 것 같아……',
       );
-      era.printButton('「아직 졸려 보이는데」', 1);
+      era.printButton('「아직 졸려 보이는데.」', 1);
       await era.input();
       await maya.say_and_wait('우으…… 그렇지 않아………… 응?');
       await brian.say_and_wait('후우…… 후우………… 아직이야……!');
       await brian.say_and_wait('나…… 아직 더 할 수 있어……!');
-      await maya.say_and_wait(['……！ ', callname, ', 방금 그건──']);
-      era.printButton(`「브라이언이야」`, 1);
+      await maya.say_and_wait(['……! ', callname, ', 방금 그건──']);
+      era.printButton(`「브라이언이야.」`, 1);
       await era.input();
       await maya.say_and_wait('응…… 그렇네……');
       await maya.say_and_wait([
@@ -4410,7 +4410,7 @@ module.exports = {
         maya.get_colored_name(),
         '은……',
       ]);
-      await maya.say_and_wait(['……다녀올게! ', callname, '！']);
+      await maya.say_and_wait(['……다녀올게! ', callname, '!']);
       await maya.say_and_wait([
         '이 레이스에서 이기고 힘을 기를 거야! 반드시…… 『',
         arim_kin,
@@ -4420,19 +4420,19 @@ module.exports = {
       await era.input();
       await maya.say_and_wait('응!');
       await teio.say_and_wait('아, 아아…… 미안!');
-      await maya.say_and_wait(['와, ', call_3, '！？']);
+      await maya.say_and_wait(['와, ', call_3, '!?']);
       await teio.say_and_wait('정답! 맞아!');
       await teio.say_and_wait([
         t_call_m,
         '한테 전할 말이 있어! 부탁한 사람은 ',
         t_call_a,
-        '！',
+        '!',
       ]);
       await teio.say_and_wait([
         { color: amazon.color, content: '『' },
         a_call_m,
         { color: amazon.color, content: '! 봄부터 너는 나의──』' },
-        '……이하 생략~',
+        '…… 이하 생략~',
       ]);
       era.printButton('「그래도 되는 거야!?」', 1);
       await era.input();
@@ -4448,7 +4448,7 @@ module.exports = {
         maya.sex,
         '는 그렇게 말했어! 나도 그 마음 알아. 나도 너랑 달리고 싶으니까!',
       ]);
-      await teio.say_and_wait(['그러니까 지지 마! 이기는 건 ', t_call_m, '！']);
+      await teio.say_and_wait(['그러니까 지지 마! 이기는 건 ', t_call_m, '!']);
       await teio.say_and_wait('정점에 서서 모두가 뒤쫓게 해 줘!');
       await maya.say_and_wait('아하하, 도망치면서 다들 따라오게 하라는 거야?');
       await teio.say_and_wait([
@@ -4456,8 +4456,8 @@ module.exports = {
         t_call_m,
         '은(는) 쫓아가기만 할 줄 알아?',
       ]);
-      await maya.say_and_wait(['흐흥~ 그렇지 않아☆ 그치, ', callname, '！']);
-      era.printButton(`「마야는 뭐든 할 수 있어」`, 1);
+      await maya.say_and_wait(['흐흥~ 그렇지 않아☆ 그치, ', callname, '!']);
+      era.printButton(`「마야는 뭐든 할 수 있어.」`, 1);
       await era.input();
       await maya.say_and_wait('에헤헤! 맞아☆');
       await maya.say_and_wait(
@@ -4491,8 +4491,8 @@ module.exports = {
       l_call_b,
       arim_kin,
     ) => {
-      await era.printAndWait('（와아아아아아아아────!!）');
-      await maya.say_and_wait([callname, '! 마야가 1등 했어! 1등!']);
+      await era.printAndWait('(와아아아아아아아────!!)');
+      await maya.say_and_wait([callname, '! 마야가 1착 했어! 1착!']);
       era.printButton('「정말 노력했구나!」', 1);
       await era.input();
       await maya.say_and_wait(
@@ -4506,7 +4506,7 @@ module.exports = {
         arim_kin,
         '』이구나!',
       ]);
-      await era.printAndWait('（와아아아아아아아────!!）');
+      await era.printAndWait('(와아아아아아아아────!!)');
       await maya.say_and_wait(
         '모두들 분명 마야가 훨씬 더 빛날 수 있을 거라 생각할 거야♪',
       );
@@ -4543,7 +4543,7 @@ module.exports = {
       await maya.say_and_wait(
         '그 사람은 이제── 곧 가라앉으려고 하는데 말이야.',
       );
-      era.printButton('「……석양은 붉은 빛을 내뿜으니까」', 1);
+      era.printButton('「……석양은 붉은빛을 내뿜으니까.」', 1);
       await era.input();
       await maya.say_and_wait('……어라?');
       await era.printAndWait(
@@ -4552,7 +4552,7 @@ module.exports = {
       await era.printAndWait(
         '석양이 지기 직전, 그 찰나의 눈부신 광채는 사람들의 마음을 사로잡는 법이다.',
       );
-      era.printButton('「저 빛에 지지 마」', 1);
+      era.printButton('「저 빛에 지지 마.」', 1);
       await era.input();
       await maya.say_and_wait('……네.');
       await maya.say_and_wait(
@@ -4586,35 +4586,35 @@ module.exports = {
       await maya.say_and_wait(
         '이것 봐, 여기 눈사람도 있고 저기엔 크리스마스트리도 있어♪',
       );
-      era.printButton('「정말 즐거워 보이네」', 1);
+      era.printButton('「정말 즐거워 보이네.」', 1);
       await era.input();
       await maya.say_and_wait('응♪ 오늘은 특별한 데이트 날이니까!');
       await maya.say_and_wait('오늘은…… 연인들의 크리스마스이브☆');
-      era.printButton('「아직 밤은 아니거든」', 1);
+      era.printButton('「아직 밤은 아니거든.」', 1);
       await era.input();
       await era.printAndWait('게다가 오늘은──');
       await maya.say_and_wait('히히, 알고 있다구~');
       await maya.say_and_wait(
         '오늘은 『크리스마스 당일』도 아니고, 아직 밤도 아니지만…… 그치만 말이야.',
       );
-      await maya.say_and_wait('그래서 내가 『예약』해두려고 한 거야!');
+      await maya.say_and_wait('그래서 내가 『예약』해 두려고 한 거야!');
       era.printButton('「예약?」', 1);
       await era.input();
       await maya.say_and_wait(
-        '맞아! 원래는 크리스마스 이브에 데이트하고 싶었지만…… 그날은 이미 중요한 일정이 있잖아?',
+        '맞아! 원래는 크리스마스이브에 데이트하고 싶었지만…… 그날은 이미 중요한 일정이 있잖아?',
       );
-      await maya.say_and_wait(['그러니까…… ', callname, '！']);
-      await maya.say_and_wait(['마야 사진 찍어줘☆ ', callname, ' 휴대폰으로!']);
+      await maya.say_and_wait(['그러니까…… ', callname, '!']);
+      await maya.say_and_wait(['마야 사진 찍어 줘☆ ', callname, ' 휴대폰으로!']);
       era.printButton('「내 걸로?」', 1);
       await era.input();
       await maya.say_and_wait('응! 준비됐어? 셔터 찬스 놓치면 안 돼!');
-      await maya.say_and_wait('3、2、1……');
-      await era.printAndWait('（찰칵）');
+      await maya.say_and_wait('3, 2, 1……');
+      await era.printAndWait('(찰칵)');
       await maya.say_and_wait(
         '아하하, 나 귀엽게 찍혔어~? 이 사진 소중히 간직해야 해.',
       );
       await maya.say_and_wait(
-        '크리스마스 이브 밤에는 내가 그 포즈 그대로 쌤의 선물이 되어줄 거니까!',
+        '크리스마스이브 밤에는 내가 그 포즈 그대로 쌤의 선물이 되어 줄 거니까!',
       );
       await era.printAndWait([
         maya.sex,
@@ -4630,7 +4630,7 @@ module.exports = {
       await maya.say_and_wait([
         '헤헤☆ 나는 ',
         arim_kin,
-        '에서 무조건 1등 할 거야!',
+        '에서 무조건 1착 할 거야!',
       ]);
       await maya.say_and_wait([
         '올해 『크리스마스』에는 가장 빛나는 나를 ',
@@ -4640,13 +4640,13 @@ module.exports = {
       await maya.say_and_wait([
         '그러니까 ',
         callname,
-        '은 크리스마스이브를 나한테 줘!',
+        '은(는) 크리스마스이브를 나한테 줘!',
       ]);
-      await maya.say_and_wait(['──내 『', arim_kin, '』에 맡겨달라구!!']);
+      await maya.say_and_wait(['──내 『', arim_kin, '』에 맡겨 달라구!!']);
       await era.printAndWait([
         '──',
         maya.sex,
-        '의 선언을 보며, ',
+        '의 선언을 들으며, ',
         you.get_colored_name(),
         '은(는) 올해의 「',
         arim_kin,
@@ -4662,7 +4662,7 @@ module.exports = {
         arim_kin,
         '』 레이스 끝난 뒤의 위닝 라이브를 기대하라구.',
       ]);
-      await maya.say_and_wait('내가 꼭 센터가 되어서, 쌤에게만 『쪽』 해줄게☆');
+      await maya.say_and_wait('내가 꼭 센터가 되어서, 쌤에게만 『쪽』 해 줄게☆');
       era.printButton('「뭐!?」', 1);
       await era.input();
       await maya.say_and_wait(
@@ -4682,7 +4682,7 @@ module.exports = {
       await maya.say_and_wait([
         '아니면…… ',
         callname,
-        '은 내가 무대에서 내려온 다음에 『쪽』 해주는 게 좋아~?',
+        '은(는) 내가 무대에서 내려온 다음에 『쪽』 해 주는 게 좋아~?',
       ]);
       await maya.say_and_wait('……그것도 괜찮을 것 같네. 헤헤☆');
       await era.printAndWait([
@@ -4695,7 +4695,7 @@ module.exports = {
       await era.printAndWait(['하지만 올해의 「', arim_kin, '」에서──']);
       await era.printAndWait([
         maya.get_colored_name(),
-        '는 반드시 1착을 거머쥐고…… 센터에 서게 될 것이다.',
+        '은 반드시 1착을 거머쥐고…… 센터에 서게 될 것이다.',
       ]);
     };
     f.title = title;
@@ -4718,7 +4718,7 @@ module.exports = {
         callname,
         '. 작년보다 마야, 성장했어?',
       ]);
-      era.printButton('「많이 성장했어」', 1);
+      era.printButton('「많이 성장했어.」', 1);
       await era.input();
       await maya.say_and_wait('후후…… 그렇구나. 그렇구나, 그렇구나☆');
       await maya.say_and_wait('하지만 변하지 않은 것도 있어.');
@@ -4736,14 +4736,14 @@ module.exports = {
       await brian.say_and_wait(['……', b_call_m, '인가.']);
       await maya.say_and_wait('어☆ 마야 이름을 기억해 줬어!? 와! 기뻐!!');
       await brian.say_and_wait(
-        '흥…… 이렇게 여러 번 달렸으니 외우려 하지 않아도 남는다.',
+        '흥…… 이렇게 여러 번 달렸으니 외우려 하지 않아도 기억에 남는다.',
       );
       await maya.say_and_wait(
         '에헤헤, 그렇구나. 그럼 오늘은 마야랑 달리는 데 집중해 줘.',
       );
       await maya.say_and_wait('답답함도 아픔도 잊을 만큼 두근거리게 해 줄게!');
       await maya.say_and_wait('마야만 봐 줘!');
-      await brian.say_and_wait('……！');
+      await brian.say_and_wait('……!');
       await maya.say_and_wait('에헤헤. 마야는 이해력이 좋거든!');
       await maya.say_and_wait([
         '하지만 모르는 것도 있어. 왜냐면 ',
@@ -4779,13 +4779,13 @@ module.exports = {
       await maya.say_and_wait('…………이겼다.');
       await maya.say_and_wait(['……내가 이겼어. ', call_16, '을(를) 이겼어.']);
       await maya.say_and_wait([callname, '! 나…… 나……!']);
-      era.printButton(`「마야, 너 정말 대단했어」`, 1);
+      era.printButton(`「마야, 너 정말 대단했어.」`, 1);
       await era.input();
       await maya.say_and_wait('응…… 응……!');
       await maya.say_and_wait('마야 대단하지? 반짝반짝 빛나지?');
-      era.printButton('「너는 언제나 가장 빛나고 있었어」', 1);
+      era.printButton('「너는 언제나 가장 빛나고 있었어.」', 1);
       await era.input();
-      await maya.say_and_wait(['와아앙~~~~!! ', callname, '～！！']);
+      await maya.say_and_wait(['와아앙~~~~!! ', callname, '~!!']);
       era.drawLine();
       await brian.say_and_wait(
         '……하…… 하하, 내가 아직도 숨을 헐떡이고 있다니.',
@@ -4794,13 +4794,13 @@ module.exports = {
         '완패다. 전력을 다했는데…… 졌어. 하지만…… 기분이 나쁘진 않군.',
       );
       await brian.say_and_wait('훗, 이게 바로──');
-      await luna.say_and_wait(['──', call_16, '！']);
+      await luna.say_and_wait(['──', call_16, '!']);
       await luna.say_and_wait('……정말로 괜찮은 건가?');
       await brian.say_and_wait('……그래, 맞다. 아직 그게 남았었지.');
       await brian.say_and_wait('──나의 『은퇴식』 말이다.');
-      await luna.say_and_wait('미동도 없군…… 정말 마음이 변하지 않은 건가?');
+      await luna.say_and_wait('흔들림도 없군…… 정말 마음이 변하지 않은 건가?');
       await luna.say_and_wait(
-        '……기자들이 이미 모여 있다. 너의 은퇴식이니, 적어도 성대하게 치러주마.',
+        '……기자들이 이미 모여 있다. 너의 은퇴식이니, 적어도 성대하게 치러 주마.',
       );
       await brian.say_and_wait('……고맙군.');
       await you.say_as_passer_by_and_wait('스태프', [
@@ -4815,7 +4815,7 @@ module.exports = {
       await you.say_as_passer_by_and_wait('관중A', [
         '거짓말이지!? ',
         brian.get_colored_name(),
-        '! 우리에게 전설을 더 보여달라고!!',
+        '! 우리에게 전설을 더 보여 달라고!!',
       ]);
       await you.say_as_passer_by_and_wait('관중B', '제발, 은퇴하지 마세요!');
       await brian.say_and_wait(
@@ -4823,9 +4823,9 @@ module.exports = {
       );
       await brian.say_and_wait('──바로 저 아이에게서 말이다.');
       await you.say_as_passer_by_and_wait('사회자', [
-        '고작 실험의 검산일 뿐인데 그렇게 기뻐하다니, ',
+        '그럼, ',
         brian.get_colored_name(),
-        '씨의 은퇴식을 거행하겠습니다──',
+        ' 씨의 은퇴식을 거행하겠습니다──',
       ]);
       await maya.say_and_wait('잠깐만──!');
       await maya.say_and_wait([
@@ -4866,7 +4866,7 @@ module.exports = {
       await you.say_as_passer_by_and_wait('관중D', [
         '맞아, 맞아! ',
         brian.get_colored_name(),
-        ', 은퇴하지 마! 1등이랑 달려!',
+        ', 은퇴하지 마! 우승자랑 달려!',
       ]);
       await you.say_as_passer_by_and_wait('관중E', [
         '도전을 받고 도망치다니, ',
@@ -4885,13 +4885,13 @@ module.exports = {
         '──',
       ]);
       await maya.say_and_wait(
-        '──마야랑 한 번 더 달리고 싶지? 마음이 더 두근거리고 싶지?',
+        '──마야랑 한 번 더 달리고 싶지? 더 두근거리는 기분을 느끼고 싶지?',
       );
-      await brian.say_and_wait('……！');
+      await brian.say_and_wait('……!');
       await maya.say_and_wait([
         '헤헤. 그러니까 마야가 ',
         call_16,
-        '의 소원을 들어줄게!',
+        '의 소원을 들어 줄게!',
       ]);
       await maya.say_and_wait(
         '반짝반짝 빛나는 사람이랑 계속 대결해야, 마야도 훨씬 더 눈부신 어른이 될 수 있으니까!',
@@ -4902,13 +4902,13 @@ module.exports = {
       await brian.say_and_wait('……못 당하겠군. 참으로 앞날이 걱정되는 아이야.');
       await maya.say_and_wait('나, 금방 어른이 될 거야☆');
       await brian.say_and_wait('그런 뜻이 아니야……');
-      await luna.say_and_wait(['후훗…… 그냥 항복해라, ', l_call_b, '。']);
+      await luna.say_and_wait(['후훗…… 그냥 항복해라, ', l_call_b, '.']);
       await luna.say_and_wait('여기 있는 누구도 네 은퇴를 바라지 않는다.');
       await luna.say_and_wait('──너 자신조차도 말이다.');
       await luna.say_and_wait('지금이라도 다른 행사로 바꾸는 건 가능하다만.');
-      await maya.say_and_wait('좋아, 그럼! 나의 도전 선언식으로 바꿔줘!');
+      await maya.say_and_wait('좋아, 그럼! 나의 도전 선언식으로 바꿔 줘!');
       await brian.say_and_wait(
-        '어이!? 그렇게 바꾸면 행사의 주인공이 네가 되어버리잖아──',
+        '어이!? 그렇게 바꾸면 행사의 주인공이 네가 되어 버리잖아──',
       );
       await maya.say_and_wait('흥, 상관없잖아! 그쵸, 회장님!');
       await luna.say_and_wait(
@@ -4953,13 +4953,13 @@ module.exports = {
         t_call_m,
         '이(가) 도무지 믿질 않아서……',
       ]);
-      era.printButton('「이미 통금 시간도 지났으니 그만 돌아가렴」', 1);
+      era.printButton('「이미 통금 시간도 지났으니 그만 돌아가렴.」', 1);
       await era.input();
       await teio.say_and_wait(
         '그, 그그그그치!? 궁금한 곳은 다 둘러봤고, 난 이제 충분해!',
       );
       await maya.say_and_wait(
-        '에에~!? 딱 한 군데만 더 가보자~! 마야는 트레이닝실에 가보고 싶어!',
+        '에에~!? 딱 한 군데만 더 가 보자~! 마야는 트레이닝실에 가 보고 싶어!',
       );
       await maya.say_and_wait([
         '아주 옛날, 승부복이 도착하기 전날 사고로 죽은 ',
@@ -4979,7 +4979,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '은(는) 막무가내인 마야노 탑건을 이기지 못하고, 세 사람이 함께 트레이닝실로 향했다.',
+        '은(는) 막무가내인 마야노 탑건을 이기지 못했다. 결국 세 사람은 함께 트레이닝실로 향했다.',
       ]);
       await maya.say_and_wait('이봐요~ 유령님~! 어디 있나요~?');
       await teio.say_and_wait([
@@ -4990,8 +4990,8 @@ module.exports = {
         '한 번도 입지 못한 승부복을 찾아 여기를 떠도는 유령이라……',
       );
 
-      era.printButton('「그 유령도 분명 아쉬웠겠지」 (파워 +20)', 1);
-      era.printButton('「마야노 탑건 일행 뒤에……」 (근성+20)', 2);
+      era.printButton('「그 유령도 분명 아쉬웠겠지.」 (파워 +20)', 1);
+      era.printButton('「마야노 탑건 일행 뒤에……」 (근성 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await era.printAndWait([
@@ -5007,7 +5007,7 @@ module.exports = {
           maya.sex,
           '였다면, 분명 외롭고 분해서라도 여기로 달려왔을 거야!',
         ]);
-        era.printButton('「' + maya.sex + '의 아쉬움을 달래 주고 싶네」', 1);
+        era.printButton('「' + maya.sex + '의 아쉬움을 달래 주고 싶네.」', 1);
         await era.input();
         await maya.say_and_wait('응……');
         await maya.say_and_wait('맞다! 마야가 유령 몫까지 대신 달릴래!');
@@ -5017,12 +5017,12 @@ module.exports = {
         await era.printAndWait('(덜컹덜컹)');
         await teio.say_and_wait('히익!? 창문이 갑자기 소리를 냈어!!');
         era.printButton(
-          '「' + maya.sex + '에게 고맙다고 인사하는 걸지도 몰라」',
+          '「' + maya.sex + '에게 고맙다고 인사하는 걸지도 몰라.」',
           1,
         );
         await era.input();
         await teio.say_and_wait(
-          '으으으~! 싫어, 이제 그만 돌아갈래~! 혹시라도 씌여버리면 어떡해~!!',
+          '으으으~! 싫어, 이제 그만 돌아갈래~! 혹시라도 씌어 버리면 어떡해~!!',
         );
         await maya.say_and_wait('에? 유령이랑 친구가 되면 재밌을 것 같은데♪');
         await maya.say_and_wait('그치, 유령님☆');
@@ -5044,7 +5044,7 @@ module.exports = {
         ]);
         await maya.say_and_wait([
           call_3,
-          '、',
+          ', ',
           maya.sex,
           ', 유령을 무서워하는구나……',
         ]);
@@ -5062,9 +5062,9 @@ module.exports = {
           maya.get_colored_name(),
           '의 뒤를 따랐다──',
         ]);
-        await maya.say_and_wait(['다행이다! 찾았어, ', call_3, '！！']);
+        await maya.say_and_wait(['다행이다! 찾았어, ', call_3, '!!']);
         await teio.say_and_wait('……………………');
-        era.printButton('「미안, 방금 겁줘서」', 1);
+        era.printButton('「미안, 방금 겁줘서.」', 1);
         await era.input();
         await era.printAndWait([
           '왜인지 침묵을 지키는 ',
@@ -5089,7 +5089,7 @@ module.exports = {
         await maya.say_and_wait([
           '……그럼 어제 우리 곁에 있었던 ',
           call_3,
-          ' 는──',
+          '는──',
         ]);
         await you.say_as_passer_by_and_wait('2명', '에~~~~~!?');
       }
@@ -5122,18 +5122,18 @@ module.exports = {
         '한테서 엄청난 소문을 들었어~!',
       ]);
       await sunday.used_to_say_and_wait(
-        '별이 빛나는 밤, 옥상에서 가슴이 두근거리는 두 사람은 행복해질 수 있대',
+        '별이 빛나는 밤, 옥상에서 가슴이 두근거리는 두 사람은 행복해질 수 있대.',
       );
       await maya.say_and_wait('꺄☆ 너무 낭만적이고 멋지다!');
       await maya.say_and_wait('그치? 그치? 분명 재밌을 거야, 같이 가자!');
-      era.printButton('「정말 못 말리겠구나」', 1);
+      era.printButton('「정말 못 말리겠구나.」', 1);
       await era.input();
       await maya.say_and_wait(['신난다! 이제 ', callname, '(이)랑…… 헤헤!']);
       await maya.say_and_wait(
         '아, 맞다! 가는 도중에 누군가에게 들키면 실패야!',
       );
-      await maya.say_and_wait('You copy？');
-      era.printButton('「I copy！」', 1);
+      await maya.say_and_wait('You copy?');
+      era.printButton('「I copy!」', 1);
       await era.input();
       await maya.say_and_wait('좋아! 그럼, 스텔스 모드 가동…… 이륙☆');
       await maya.say_and_wait(
@@ -5143,13 +5143,13 @@ module.exports = {
         '헤헤! 이대로라면 『슈우웅~!』 하고 옥상까지 갈 수 있겠어……',
       );
       await era.printAndWait('(타다닥…… 타다닥……!)');
-      await maya.say_and_wait(['……！！ ', callname, ', 방금 저건……']);
-      era.printButton('「발소리야」', 1);
+      await maya.say_and_wait(['……!! ', callname, ', 방금 저건……']);
+      era.printButton('「발소리야.」', 1);
       await era.input();
       await maya.say_and_wait(
         '게다가…… 이쪽으로 오고 있지 않아!? 어, 어떡하지!',
       );
-      era.printButton('「숨어서 상대가 가기를 기다리자」 (지능 +20)', 1);
+      era.printButton('「숨어서 상대가 가기를 기다리자.」 (지능 +20)', 1);
       era.printButton('「옥상으로 대시하자!」 (스피드 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
@@ -5175,20 +5175,20 @@ module.exports = {
           maya.get_colored_name(),
           '도 교실에 뭐 두고 왔어??',
         ]);
-        await maya.say_and_wait(['머, 뭐야? ', call_55, '！？']);
-        era.printButton('「들켜버렸네」', 1);
+        await maya.say_and_wait(['머, 뭐야? ', call_55, '!?']);
+        era.printButton('「들켜 버렸네.」', 1);
         await era.input();
         await maya.say_and_wait(
           '아────!! 맞다! 너무 긴장해서 깜빡 잊어버렸어~~!',
         );
         await sunday.say_and_wait(
-          '그렇구나! 그 마법을 써보려고 했던 거야?? 하지만 하지만……',
+          '그렇구나! 그 마법을 써 보려고 했던 거야?? 하지만 하지만……',
         );
         await sunday.say_and_wait(
           '마음이 두근거렸다면 이미 아름다운 거잖아☆ 그치★',
         );
         await maya.say_and_wait(
-          '으음………… 아마 확실히 그럴지도. 마법 같은 건 안 써도……',
+          '으음………… 정말 그럴지도. 마법 같은 건 안 써도……',
         );
         era.printButton('「무슨 소리니?」', 1);
         await era.input();
@@ -5218,7 +5218,7 @@ module.exports = {
           '의 손을 꽉 잡았다──',
         ]);
         await maya.say_and_wait([callname, ', 힘내 힘내! 조금만 더──!']);
-        await maya.say_and_wait(['도착!! 해냈어, ', callname, '！']);
+        await maya.say_and_wait(['도착!! 해냈어, ', callname, '!']);
         era.printButton('「다, 다행이다……」', 1);
         await era.input();
         await maya.say_and_wait('마지막은 여기서 별을 구경하고……');
@@ -5304,14 +5304,14 @@ module.exports = {
         callname,
         '♪',
       ]);
-      await flower.say_and_wait('그다음에 백설탕을 넣고 잘 저어주면……');
+      await flower.say_and_wait('그다음에 백설탕을 넣고 잘 저어 주면……');
       await maya.say_and_wait('으응~♪');
       await era.printAndWait([
         maya.get_colored_name(),
         '은 익숙하지 않은 요리에 고전하고 있었으나, 무척 즐거워 보였다.',
       ]);
-      era.printButton(`「힘내, 마야!」 (스태미나+20)`, 1);
-      era.printButton('「나도 한번 만들어 볼까」 (지능 +20)', 2);
+      era.printButton(`「힘내, 마야!」 (스태미나 +20)`, 1);
+      era.printButton('「나도 한번 만들어 볼까?」 (지능 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await era.printAndWait([
@@ -5346,7 +5346,7 @@ module.exports = {
         await maya.say_and_wait('이렇게 된 이상……', true);
         await maya.say_and_wait([
           call_51,
-          '、',
+          ', ',
           call_28,
           '! 마야, 이제 혼자서 케이크 만들래!',
         ]);
@@ -5374,7 +5374,7 @@ module.exports = {
           '이(가) 좋아하는 음식들을 참고했거든!',
         ]);
         await maya.say_and_wait(
-          '마야의 사랑도 듬뿍 담았는데…… 안 먹어줄 거야?',
+          '마야의 사랑도 듬뿍 담았는데…… 안 먹어 줄 거야?',
         );
         await era.printAndWait([
           you.get_colored_name(),
@@ -5403,34 +5403,34 @@ module.exports = {
           maya.couple_title,
           '이 요리하는 모습을 보고 ',
           you.get_colored_name(),
-          ' 자신도 한번 요리를 해보고 싶어졌다. ',
+          ' 자신도 한번 요리를 해 보고 싶어졌다. ',
           you.get_colored_name(),
           '이(가) 그렇게 말하자──',
         ]);
         await flower.say_and_wait(
-          '앗, 관심 있으시면 같이 만들어 보실래요? 제가 순서를 알려드릴게요……!',
+          '앗, 관심 있으시면 같이 만들어 보실래요? 제가 순서를 알려 드릴게요……!',
         );
         await maya.say_and_wait([
           '잠깐잠깐! ',
           callname,
           '은(는) 마야가 요리하는 걸 지켜보는 담당이야~!',
         ]);
-        era.printButton('「나도 너에게 고마운 마음을 전하고 싶어서 그래」', 1);
+        era.printButton('「나도 너에게 고마운 마음을 전하고 싶어서 그래.」', 1);
         await era.input();
-        await maya.say_and_wait([callname, '……！']);
+        await maya.say_and_wait([callname, '……!']);
         await maya.say_and_wait('라져☆ 그렇다면 대환영이야♪');
         await hishi.say_and_wait(
           '다 같이 사이좋게 요리하기~ 그러면 과자가 더 맛있어지는 법이지♪',
         );
         await era.printAndWait(
-          '우여곡절 끝에 케이크가 완성되었으나, 겉이 조금 타버리고 말았다……',
+          '우여곡절 끝에 케이크가 완성되었으나, 겉이 조금 타 버리고 말았다……',
         );
         await maya.say_and_wait([
           '와아~! ',
           callname,
           '이(가) 나한테 케이크를 줬어~♪',
         ]);
-        await maya.say_and_wait('먹어볼래 먹어볼래…… 냠!');
+        await maya.say_and_wait('먹어 볼래 먹어 볼래…… 냠!');
         await maya.say_and_wait(
           '조, 조금 쓰긴 하지만, 이게 바로 어른의 맛이라는 거겠지♪',
         );
@@ -5445,9 +5445,9 @@ module.exports = {
         await maya.say_and_wait([
           '그러니까 ',
           callname,
-          '도 마야가 만든 케이크 먹어봐.',
+          '도 마야가 만든 케이크 먹어 봐.',
         ]);
-        await maya.say_and_wait('아~ 해봐♪');
+        await maya.say_and_wait('아~ 해 봐♪');
         await maya.say_and_wait('헤헤~! 마야의 고마운 마음이 전해졌어?');
         era.printButton('「당연하지!」', 1);
         await era.input();
@@ -5492,8 +5492,8 @@ module.exports = {
         '(이)랑 같이 게임도 하고~',
       ]);
       await maya.say_and_wait('즐거운 일을 잔뜩 할 거야!');
-      await maya.say_and_wait([callname, '도 봐주면 안 돼? 응? 응?']);
-      era.printButton('「알았어」', 1);
+      await maya.say_and_wait([callname, '도 봐 주면 안 돼? 응? 응?']);
+      era.printButton('「알았어.」', 1);
       await era.input();
       await era.printAndWait([
         maya.get_colored_name(),
@@ -5509,7 +5509,7 @@ module.exports = {
         '의 방송 채널을 켰다──',
       ]);
       await maya.say_and_wait('모두의 마음속에 착륙☆ 마야 채널 시작할게~♪');
-      await maya.say_and_wait(['오늘의 게스트는 내 친구, ', call_55, '！']);
+      await maya.say_and_wait(['오늘의 게스트는 내 친구, ', call_55, '!']);
       await sunday.say_and_wait('헬로☆ 다들 마블러스한 하루 보내고 있어?');
       await you.say_as_passer_by_and_wait('시청자A', '마야, 기다리고 있었어!!');
       await you.say_as_passer_by_and_wait(
@@ -5525,7 +5525,7 @@ module.exports = {
       await maya.say_and_wait([
         '다음은 게임 센터! ',
         call_3,
-        '의 점수를 넘어버릴 거야!',
+        '의 점수를 넘어 버릴 거야!',
       ]);
       await sunday.say_and_wait('예이☆ 엄청난 최고 점수, 마블러스★');
       await era.printAndWait(
@@ -5546,7 +5546,7 @@ module.exports = {
         maya.get_colored_name(),
         '이 던진 질문에, ',
         you.get_colored_name(),
-        '은(는) 정신을 차려보니 이미 댓글을 보내고 있었다.',
+        '은(는) 정신을 차려 보니 이미 댓글을 보내고 있었다.',
       ]);
       era.printButton('「나도 아주 즐거웠어!」 (스태미나 & 파워 +10)', 1);
       era.printButton('「계속 응원할게. 레이스 힘내!」 (근성 +20)', 2);
@@ -5577,10 +5577,10 @@ module.exports = {
         await maya.say_and_wait([
           '레이스에서도 성숙한 ',
           maya.phy_sex_title,
-          '의 여러 가지 모습을 보여줄게!',
+          '의 여러 가지 모습을 보여 줄게!',
         ]);
         await maya.say_and_wait(
-          '그·러·니·까☆ 레이스도 방송도 전부 응원해줘야 해♪',
+          '그·러·니·까☆ 레이스도 방송도 전부 응원해 줘야 해♪',
         );
         await era.printAndWait([
           you.get_colored_name(),
@@ -5599,7 +5599,7 @@ module.exports = {
       }
       era.drawLine();
       await maya.say_and_wait(['와~! ', callname, ', 어제 방송 봤어?']);
-      era.printButton('「댓글도 달았는걸」', 1);
+      era.printButton('「댓글도 달았는걸.」', 1);
       await era.input();
       await maya.say_and_wait('에엣~!? 설마 이 사람이야~!?');
       await era.printAndWait([
@@ -5609,7 +5609,7 @@ module.exports = {
         '이(가) 남긴 것이었다.',
       ]);
       await maya.say_and_wait('있지, 마야가 맞혔지?');
-      era.printButton('「대단해! 그걸 알아봤네」', 1);
+      era.printButton('「대단해! 그걸 알아봤네.」', 1);
       await era.input();
       await maya.say_and_wait([
         '이 댓글, ',
@@ -5617,7 +5617,7 @@ module.exports = {
         '이(가) 옆에 있을 때랑 똑같이 마음이 편안하고 따뜻해지는 느낌이었거든!',
       ]);
       await maya.say_and_wait(
-        '그나저나 우리 계속 같이 있는데, 그냥 직접 말해줘도 됐을 텐데~♪',
+        '그나저나 우리 계속 같이 있는데, 그냥 직접 말해 줘도 됐을 텐데~♪',
       );
       await era.printAndWait([
         '말은 그렇게 하면서도, ',
@@ -5658,14 +5658,14 @@ module.exports = {
       await era.printAndWait('열정적인 댓글들이 가득 보였다.');
       await maya.say_and_wait('그치? 마야의 인기는 수직 상승 중☆');
       await maya.say_and_wait(
-        '그래서 말인데! 마야는 다음 방송에서 평소랑 다른 모습을 보여주고 싶어!',
+        '그래서 말인데! 마야는 다음 방송에서 평소랑 다른 모습을 보여 주고 싶어!',
       );
       await maya.say_and_wait([
         '……근데 뭘 하면 좋을까~? ',
         callname,
         ', 뭐 좋은 아이디어 없어?',
       ]);
-      era.printButton('「연습하는 모습을 보여주는 건 어때?」', 1);
+      era.printButton('「연습하는 모습을 보여 주는 건 어때?」', 1);
       await era.input();
       await maya.say_and_wait([
         '바로 그거야! 역시 ',
@@ -5678,7 +5678,7 @@ module.exports = {
       await maya.say_and_wait([
         '그·러·니·까☆ 아이디어를 낸 ',
         callname,
-        '이(가) 촬영해줄 수 있을까~?',
+        '이(가) 촬영해 줄 수 있을까~?',
       ]);
       await maya.say_and_wait(
         '방송 인기가 많아지면 레이스에서의 활약도 주목받을 수 있을 테니까~',
@@ -5699,16 +5699,16 @@ module.exports = {
         await you.say_as_passer_by_and_wait('시청자E', '여긴 어디야~?');
         await maya.say_and_wait('헤헤♪ 다들 댓글 고마워!');
         await maya.say_and_wait(
-          '오늘은 말이야, 라이브 연습하는 모습을 보여줄게!',
+          '오늘은 말이야, 라이브 연습하는 모습을 보여 줄게!',
         );
         await maya.say_and_wait([
           '촬영을 맡아 줄 사람은 이분! 마야의 든든한 파트너, ',
           callname,
-          '！',
+          '!',
         ]);
         await maya.say_and_wait([
           you.sex,
-          ', 트레이닝도 도와주고 마야를 칭찬해 주기도 해♪',
+          '는 트레이닝도 도와주고 마야를 칭찬해 주기도 해♪',
         ]);
         await you.say_as_passer_by_and_wait('시청자F', '라이브 기대된다~');
         await you.say_as_passer_by_and_wait(
@@ -5728,9 +5728,9 @@ module.exports = {
         );
         await maya.say_and_wait('역시 꽤…… 괜찮지?♪');
         await maya.say_and_wait(
-          '마야가 레이스에서 우승하면, 위닝 라이브에서 진짜 마야를 보여줄게☆',
+          '마야가 레이스에서 우승하면, 위닝 라이브에서 진짜 마야를 보여 줄게☆',
         );
-        await maya.say_and_wait('그러니까 다들 응원해줘야 해!');
+        await maya.say_and_wait('그러니까 다들 응원해 줘야 해!');
       } else {
         await maya.say_and_wait('응! 바로 운동장으로 이륙☆');
         era.drawLine();
@@ -5739,15 +5739,15 @@ module.exports = {
         await you.say_as_passer_by_and_wait('시청자D', '착륙 확인☆');
         await you.say_as_passer_by_and_wait('시청자E', '설마 체육복!?');
         await maya.say_and_wait('헤헤~♪ 다들 댓글 고마워!');
-        await maya.say_and_wait('오늘은 말이야, 마야의 훈련 모습을 보여줄게!');
+        await maya.say_and_wait('오늘은 말이야, 마야의 훈련 모습을 보여 줄게!');
         await maya.say_and_wait([
           '촬영을 맡아 줄 사람은 이분! 마야의 든든한 파트너, ',
           callname,
-          '！',
+          '!',
         ]);
         await maya.say_and_wait([
           you.sex,
-          ', 트레이닝도 도와주고 마야를 칭찬해 주기도 해♪',
+          '는 트레이닝도 도와주고 마야를 칭찬해 주기도 해♪',
         ]);
         await you.say_as_passer_by_and_wait('시청자F', '트레이닝 힘내~');
         await you.say_as_passer_by_and_wait('시청자G', '나도 마야 편이야!');
@@ -5762,7 +5762,7 @@ module.exports = {
         await you.say_as_passer_by_and_wait('시청자J', '진심으로 멋져!');
         await maya.say_and_wait('역시 꽤…… 괜찮지?♪');
         await maya.say_and_wait(
-          '이왕 이렇게 된 거, 오늘은 마야의 멋진 모습을 실컷 보여줄게!',
+          '이왕 이렇게 된 거, 오늘은 마야의 멋진 모습을 실컷 보여 줄게!',
         );
         await maya.say_and_wait('다들 눈 감으면 안 돼♪');
         await era.printAndWait([
@@ -5820,7 +5820,7 @@ module.exports = {
       await maya.say_and_wait(
         '다들 칭찬해 주는 건 기쁘지만, 이제 충분하다고 생각해!',
       );
-      era.printButton('「그렇게 즐겁게 방송했으면서」', 1);
+      era.printButton('「그렇게 즐겁게 방송했으면서.」', 1);
       await era.input();
       await maya.say_and_wait('지, 진짜라니까! 이제 방송 얘기는 그만해!');
       await maya.say_and_wait(
@@ -5852,7 +5852,7 @@ module.exports = {
         maya.get_colored_name(),
         '은 그걸 보고 풀이 죽은 건지도 모른다.',
       ]);
-      era.printButton(`「마야랑 얘기를 좀 해봐야겠어……」`, 1);
+      era.printButton(`「마야랑 얘기를 좀 해 봐야겠어……」`, 1);
       await era.input();
       await era.printAndWait([
         maya.sex,
@@ -5860,18 +5860,18 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 하나씩 찾아보기로 했다.',
       ]);
-      await maya.say_and_wait(['와앗, ', callname, '！？']);
+      await maya.say_and_wait(['와앗, ', callname, '!?']);
       era.printButton('「겨우 찾았네……!」', 1);
       await era.input();
       await maya.say_and_wait('설마…… 계속 마야를 찾아다닌 거야?');
-      era.printButton('「네가 방송을 그만둔 이유를 알았거든」', 1);
+      era.printButton('「네가 방송을 그만둔 이유를 알았거든.」', 1);
       await era.input();
       await maya.say_and_wait(
         '그, 그 얘기는 이제 안 해도 된다니까. 이유는 아까 말한 대로……',
       );
-      era.printButton('「나를 배려해 줘서 고마워」（스피드&스태미나+10）', 1);
-      era.printButton('「비난 댓글은 전혀 신경 쓰지 않아」（파워+20）', 2);
-      era.printButton('「방송을 포기하는 건 너무 아까워」（지능+20）', 3);
+      era.printButton('「나를 배려해 줘서 고마워.」 (스피드 & 스태미나 +10)', 1);
+      era.printButton('「비난 댓글은 전혀 신경 쓰지 않아.」 (파워 +20)', 2);
+      era.printButton('「방송을 포기하는 건 너무 아까워.」 (지능 +20)', 3);
       const ret = await era.input();
       switch (ret) {
         case 1:
@@ -5951,7 +5951,7 @@ module.exports = {
           break;
         case 2:
           await era.printAndWait([
-            '그러니 예전처럼 계속 방송을 해줬으면 좋겠다고 ',
+            '그러니 예전처럼 계속 방송을 해 줬으면 좋겠다고 ',
             you.get_colored_name(),
             '이(가) ',
             maya.sex,
@@ -5973,20 +5973,20 @@ module.exports = {
           );
           await maya.say_and_wait([
             callname,
-            '이(가) 바보! 차라리 마야를 더 혼내란 말이야~~~~~!!',
+            '은(는) 바보! 차라리 마야를 더 혼내란 말이야~~~~~!!',
           ]);
           await maya.say_and_wait('……으윽.');
-          era.printButton('「미안해」', 1);
+          era.printButton('「미안해.」', 1);
           await era.input();
           await maya.say_and_wait('으으~ 바로 그 점이 문제라구……');
           await maya.say_and_wait([
             callname,
-            '의 그런 다정한 점을 좋아하지만, 그런 다정한 건 마야한테만 해 줘!',
+            '의 그런 다정한 점을 좋아하지만, 그렇게 다정하게 대하는 건 마야한테만 해 줘!',
           ]);
           await maya.say_and_wait(
             '『방해된다』느니 『꺼지라』느니 하는 댓글에는 마음껏 화내도 된단 말이야!',
           );
-          era.printButton('「내가 방해가 되는지는 레이스로 증명하면 돼」', 1);
+          era.printButton('「내가 방해가 되는지는 레이스로 증명하면 돼.」', 1);
           await era.input();
           await maya.say_and_wait([callname, '……']);
           await maya.say_and_wait('……못 말려! 정말 어쩔 수 없다니까!');
@@ -6021,7 +6021,7 @@ module.exports = {
             '한테 못된 말을 하는 게 싫단 말이야……',
           ]);
           era.printButton(
-            '「지금 네 마음을 전한다면 분명 다들 이해해 줄 거야」',
+            '「지금 네 마음을 전한다면 분명 다들 이해해 줄 거야.」',
             1,
           );
           await era.input();
@@ -6050,7 +6050,7 @@ module.exports = {
             maya.sex,
             '는 어떻게 말을 꺼내야 할지 망설이는 모양이다.',
           ]);
-          era.printButton(`（마야, 힘내……!）`, 1);
+          era.printButton(`(마야, 힘내……!)`, 1);
           await era.input();
           await maya.say_and_wait(
             '……마야는 방송하는 동안 정말 즐거웠어. 여러분이 봐 주시는 것도 정말 기뻤고.',
@@ -6080,7 +6080,7 @@ module.exports = {
             '쉬는 시간에 달리기 연습을 하다가 깨달았어! 마야가 가장 빛날 수 있는 곳은 경기장이라는 걸.',
           );
           await maya.say_and_wait(
-            '조금 외롭겠지만…… 마야는 여러분께 더 멋진 모습을 보여드리고 싶어!',
+            '조금 외롭겠지만…… 마야는 여러분께 더 멋진 모습을 보여 드리고 싶어!',
           );
           await you.say_as_passer_by_and_wait('시청자 G', '정말 작별이야?');
           await you.say_as_passer_by_and_wait('시청자 H', '너무 아쉬워……');
@@ -6122,9 +6122,9 @@ module.exports = {
       await maya.say_and_wait([
         '헤헤! 오늘도 정말 즐거웠어! ',
         callname,
-        '과의…… 데, 이트♪',
+        '과(와)의…… 데, 이트♪',
       ]);
-      era.printButton('「즐거웠다니 다행이야」', 1);
+      era.printButton('「즐거웠다니 다행이야.」', 1);
       await era.input();
       await maya.say_and_wait(
         '맞다! 마야 방으로 와~! 드라마에 나오는 것처럼 같이 차라도 마시면서──',
@@ -6150,7 +6150,7 @@ module.exports = {
         '의 소중한 사람이라고~? 그거 정말이니?',
       ]);
       era.printButton('「그게……」 (스피드 +20)', 1);
-      era.printButton('「……실은 다른 소중한 사람이 있어」 (근성 +20)', 2);
+      era.printButton('「……실은 다른 소중한 사람이 있어.」 (근성 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await maya.say_and_wait([
@@ -6166,12 +6166,12 @@ module.exports = {
           '이(가) 저렇게 활기찬 것도, 다 그 때문일까?',
         ]);
         await maya.say_and_wait('헤헤! 우린 미래를 약속한 사이니까~♪');
-        era.printButton('「계약이라고 해야겠지」', 1);
+        era.printButton('「계약이라고 해야겠지.」', 1);
         await era.input();
         await maya.say_and_wait([
           '흥~! ',
           callname,
-          '도 참, 이럴 때는 『응』이라고…… 해줘야지?',
+          '도 참, 이럴 때는 『응』이라고…… 해 줘야지?',
         ]);
         await fuji.say_and_wait([
           '하하하, 그렇구나. ',
@@ -6181,7 +6181,7 @@ module.exports = {
         await fuji.say_and_wait(['앞으로도 ', f_call_m, '을(를) 잘 부탁할게.']);
         await fuji.say_and_wait('……농담이야. 이러니까 진짜 아버지 같지? 후후.');
         await fuji.say_and_wait([
-          '그럼 난 이만 가볼게. 곧 저녁 시간이니 ',
+          '그럼 난 이만 가 볼게. 곧 저녁 시간이니 ',
           f_call_m,
           '도 같이 가자.',
         ]);
@@ -6209,7 +6209,7 @@ module.exports = {
           '그렇군. 사람 마음을 가지고 노는 데 능숙하구나~?',
         );
         await maya.say_and_wait('거, 거짓말…… 나랑은 그냥 장난이었던 거야……!?');
-        era.printButton('「농담이야」', 1);
+        era.printButton('「농담이야.」', 1);
         await era.input();
         await maya.say_and_wait('……어? 농담?');
         await fuji.say_and_wait('하하하하! 그래. 놀리는 건 여기까지 하자구.');
@@ -6217,9 +6217,9 @@ module.exports = {
         await maya.say_and_wait(
           '흥! 너무해, 진짜 너무해! 마야 방금 진심으로 슬펐다구~!',
         );
-        era.printButton('「미안 미안」', 1);
+        era.printButton('「미안, 미안.」', 1);
         await era.input();
-        await maya.say_and_wait('흥──! 아무리 사과해도 마야는 안 풀어질 거야!');
+        await maya.say_and_wait('흥──! 아무리 사과해도 마야는 화 안 풀 거야!');
         await fuji.say_and_wait([
           '어머어머, ',
           maya.sex,
@@ -6232,7 +6232,7 @@ module.exports = {
         ]);
         await maya.say_and_wait('……알아. 가고 싶은데 표를 못 구해서……');
         await fuji.say_and_wait(
-          '나한테 마침 방에 남는 표가 두 장 있거든. 어때? 둘이서 화해의 차라도 한잔하러 가는 건.',
+          '마침 내 방에 남는 표가 두 장 있거든. 둘이서 화해의 차라도 한잔하러 가는 건 어때?',
         );
         await maya.say_and_wait([
           '와아~~!! 갈래 갈래! 마야는 ',
@@ -6247,7 +6247,7 @@ module.exports = {
         era.printButton('「고마워……」', 1);
         await era.input();
         await fuji.say_and_wait(
-          '별말씀을, 오히려 내가 고맙지. 사실 계속 감사를 표하고 싶었거든.',
+          '별말씀을, 오히려 내가 고맙지. 사실 계속 고맙다고 말하고 싶었거든.',
         );
         await fuji.say_and_wait([
           f_call_m,
@@ -6299,7 +6299,7 @@ module.exports = {
       await maya.say_and_wait([
         '그래? ',
         call_52,
-        '는 대단해~! 마야는 지면 삐져버리는데☆',
+        '는 대단해~! 마야는 지면 삐져 버리는데☆',
       ]);
       await urara.say_and_wait('난 언제나 즐거워! 달리는 게 제일 좋으니까!');
       await urara.say_and_wait([
@@ -6314,7 +6314,7 @@ module.exports = {
         u_call_m,
         '처럼 될 수 있다면, 이길 수 있을지도 몰라!',
       ]);
-      era.printButton('「함께 연습해볼래?」', 1);
+      era.printButton('「함께 연습해 볼래?」', 1);
       await era.input();
       await maya.say_and_wait('좋은 생각이야☆');
       await maya.say_and_wait([
@@ -6340,7 +6340,7 @@ module.exports = {
       era.printButton('「상대를 앞지르는 요령을 익힌다!」 (파워 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
-        await maya.say_and_wait(['정답☆ ', callname, '는 역시 대단해♪']);
+        await maya.say_and_wait(['정답☆ ', callname, '은(는) 역시 대단해♪']);
         await maya.say_and_wait(['……흠흠! 저기, ', call_52, ' 학생!']);
         await maya.say_and_wait(
           '딱 잘라 말해서☆ 지난번 레이스 때, 너 중간에 힘 다 빠졌었지!?',
@@ -6372,22 +6372,22 @@ module.exports = {
           '음~ 앞질러 나가는 게 너무 어려워~ 다른 사람이랑 부딪칠 것 같으면 막 당황하게 돼!',
         );
         await maya.say_and_wait('오호, 그렇구나~!');
-        await maya.say_and_wait('그럼 다음 레이스에선 앞만 보고 달려봐!');
+        await maya.say_and_wait('그럼 다음 레이스에선 앞만 보고 달려 봐!');
         await maya.say_and_wait(
           '앞만 뚫어지게 보고 있으면, 언젠가 앞에 아무도 없을 때가 올 거야──',
         );
         await maya.say_and_wait('그때가 되면 그냥 쭉 앞으로 돌진☆');
-        await urara.say_and_wait('알았어! 그렇게 해볼게♪');
+        await urara.say_and_wait('알았어! 그렇게 해 볼게♪');
       }
       era.drawLine({ content: '다음 날' });
-      await urara.say_and_wait('내 말 좀 들어봐! 나 한 명 앞질렀어!');
+      await urara.say_and_wait('내 말 좀 들어 봐! 나 한 명 앞질렀어!');
       await maya.say_and_wait('와, 대단해~! 한 명을 앞지르다니──');
       await maya.say_and_wait('한 명!?');
       await urara.say_and_wait(
-        '헤헤~! 그렇게 한 명씩 다 앞질러서, 마지막엔 꼭 1등 할 거야~♪',
+        '헤헤~! 그렇게 한 명씩 다 앞질러서, 마지막엔 꼭 1착 할 거야~♪',
       );
       await maya.say_and_wait(
-        '계속 앞지르다 보면 언젠가 꼭 1등이 되겠지! 반드시 1등을 따내는 거야~!!',
+        '계속 앞지르다 보면 언젠가 꼭 1착 하겠지! 반드시 1착을 따내는 거야~!!',
       );
       await urara.say_and_wait('오오~!!');
       await era.printAndWait([
@@ -6440,7 +6440,7 @@ module.exports = {
       ]);
       await maya.say_and_wait('……맞다! 마야한테 좋은 생각이 났어~!');
       await era.printAndWait(['서류를 정리한 뒤 밖을 걷고 있자──']);
-      await city.say_and_wait(['어, ', c_call_m, '。']);
+      await city.say_and_wait(['어, ', c_call_m, '.']);
       await yukino.say_and_wait('안녕하세요~!');
       await maya.say_and_wait([call_29, '하고 ', call_40, '~! 마침 잘 왔어☆']);
       await maya.say_and_wait([
@@ -6481,16 +6481,16 @@ module.exports = {
         '……뭐, 괜찮긴 한데. 내 개인적인 생각이니까 참고만 해 둬.',
       );
       await city.say_and_wait(
-        ' 내가 독자 모델을 할 때 신경 쓰는 건 두 가지야.',
+        '내가 독자 모델을 할 때 신경 쓰는 건 두 가지야.',
       );
       await city.say_and_wait('첫 번째는 『컨디션』.');
       await city.say_and_wait(
-        '언제나 최고의 상태를 유지해서, 자신의 가장 멋진 모습을 보여주는 것.',
+        '언제나 최고의 상태를 유지해서, 자신의 가장 멋진 모습을 보여 주는 것.',
       );
       await maya.say_and_wait('가장 멋진 모습…… 멋지다!! 그다음엔, 그다음엔!?');
       await city.say_and_wait('두 번째는 『스피드』.');
       await city.say_and_wait(
-        '최신 유행을 빠르게 파악해서, 트렌드의 최첨단을 걷는 것.',
+        '최신 유행을 빠르게 파악해서, 유행을 앞서가는 것.',
       );
       await yukino.say_and_wait('정, 정말 참고가 되네요~!');
       await maya.say_and_wait([
@@ -6499,8 +6499,8 @@ module.exports = {
       ]);
       await maya.say_and_wait('마야도 익히면 어른에 한 걸음 가까워질지도♪');
       era.println();
-      era.printButton('「컨디션 유지는 확실히 중요해」（스태미나+20）', 1);
-      era.printButton('「스피드는 중요하지」 (스피드+20)', 2);
+      era.printButton('「컨디션 유지는 확실히 중요해.」 (스태미나 +20)', 1);
+      era.printButton('「스피드는 중요하지.」 (스피드 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await maya.say_and_wait('그치 그치~♪ 컨디션이지~!');
@@ -6523,7 +6523,7 @@ module.exports = {
         await yukino.say_and_wait([
           '머, 멋지다……! 저도 빨리 ',
           call_40,
-          ' 처럼 되고 싶어요~',
+          '처럼 되고 싶어요~',
         ]);
         await era.printAndWait([
           '최상의 컨디션을 유지하기 위해 훈련을 거듭한 ',
@@ -6566,7 +6566,7 @@ module.exports = {
     return f;
   })(),
   os_maya_reading: (() => {
-    const title = '공부는 마야에게 맡겨줘☆';
+    const title = '공부는 마야에게 맡겨 줘☆';
     /**
      * @param {CharaTalk} maya マヤノトップガン
      * @param {CharaTalk} you プレイヤー
@@ -6579,7 +6579,7 @@ module.exports = {
         '은 아직 오지 않았다……',
       ]);
       await maya.say_and_wait('헬로 헬로~! 많이 기다렸어~!?');
-      era.printButton('「아니, 방금 왔어」', 1);
+      era.printButton('「아니, 방금 왔어.」', 1);
       await era.input();
       await maya.say_and_wait('와와☆ 방금 그거 꼭 데이트 같았어!? 꺄~~~!');
       await maya.say_and_wait([
@@ -6589,38 +6589,38 @@ module.exports = {
       ]);
       era.drawLine();
       await you.say_as_passer_by_and_wait(
-        '경주 ' + maya.uma_sex_title + 'A',
+        '경주 ' + maya.uma_sex_title + ' A',
         '하아, 내일부터 시험인가~',
       );
       await you.say_as_passer_by_and_wait(
-        '경주 ' + maya.uma_sex_title + 'B',
-        '정말 우울해~ 그냥 확 쉬어버릴까?',
+        '경주 ' + maya.uma_sex_title + ' B',
+        '정말 우울해~ 그냥 확 쉬어 버릴까?',
       );
       await maya.say_and_wait(
         '그 맘 알아 그 맘 알아! 마야도 시험 진짜 싫어~!!',
       );
       await maya.say_and_wait(
-        '금방 다 풀어버리는데, 잘 수도 없고 놀 수도 없잖아! 정말이지, 그림이라도 그릴 수밖에 없다니까~!!',
+        '금방 다 풀어 버리는데, 잘 수도 없고 놀 수도 없잖아! 정말이지, 그림이라도 그릴 수밖에 없다니까~!!',
       );
-      await you.say_as_passer_by_and_wait('경주 ' + maya.uma_sex_title + 'A', [
+      await you.say_as_passer_by_and_wait('경주 ' + maya.uma_sex_title + ' A', [
         maya.get_colored_name(),
         ', 넌 정말~!',
       ]);
       await you.say_as_passer_by_and_wait(
-        '경주 ' + maya.uma_sex_title + 'B',
+        '경주 ' + maya.uma_sex_title + ' B',
         '부러워~ 다음 시험도 전부 『알겠는』 거지?',
       );
       await maya.say_and_wait('뭐, 그렇지~');
-      await you.say_as_passer_by_and_wait('경주 ' + maya.uma_sex_title + 'A', [
+      await you.say_as_passer_by_and_wait('경주 ' + maya.uma_sex_title + ' A', [
         '있지, ',
         maya.get_colored_name(),
         '! 어디가 시험에 나올 것 같은지 좀 가르쳐 줘!',
       ]);
       await you.say_as_passer_by_and_wait(
-        '경주 ' + maya.uma_sex_title + 'B',
+        '경주 ' + maya.uma_sex_title + ' B',
         '부탁할게~! 친구 좋다는 게 뭐야! 응?',
       );
-      await maya.say_and_wait('라져☆ 이 마야노 탑건님만 믿으라고♪');
+      await maya.say_and_wait('라져☆ 이 마야노 탑건 님만 믿으라고♪');
       era.drawLine();
       await maya.say_and_wait([
         '그렇게 해서 ',
@@ -6645,8 +6645,8 @@ module.exports = {
         maya.sex,
         '한테 부담이 되지는 않을까 조금 걱정되었다……',
       ]);
-      era.printButton('「너도 답례를 요구해보는 건 어때?」（파워&근성+10）', 1);
-      era.printButton('「하기 싫을 때는 거절해야 해」（지능+20）', 2);
+      era.printButton('「너도 답례를 요구해 보는 건 어때?」 (파워 & 근성 +10)', 1);
+      era.printButton('「하기 싫을 때는 거절해야 해.」 (지능 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await era.printAndWait([
@@ -6655,21 +6655,21 @@ module.exports = {
           '은(는) 그렇게 제안했다──',
         ]);
         await maya.say_and_wait('아!! 마야는 완전히 잊고 있었어!');
-        await maya.say_and_wait('답례 말이지~♪ 뭘 해달라고 할까~?');
+        await maya.say_and_wait('답례 말이지~♪ 뭘 해 달라고 할까~?');
         await maya.say_and_wait([
           '……맞다! ',
           maya.couple_title,
-          '들한테 마야랑 놀아달라고 해야지!',
+          '들한테 마야랑 놀아 달라고 해야지!',
         ]);
         await maya.say_and_wait(
-          '시험 기간에는 다들 공부하느라 아무도 안 놀아준단 말이야~',
+          '시험 기간에는 다들 공부하느라 아무도 안 놀아 준단 말이야~',
         );
         era.printButton(
           '「' +
             maya.sex +
             '들을 네가 가르쳐 준 덕분에 ' +
             maya.sex +
-            '들도 시간이 남겠네」',
+            '들도 시간이 남겠네.」',
           1,
         );
         await era.input();
@@ -6680,15 +6680,15 @@ module.exports = {
         ]);
         era.drawLine();
         await you.say_as_passer_by_and_wait(
-          '경주 ' + maya.uma_sex_title + 'A',
+          '경주 ' + maya.uma_sex_title + ' A',
           '너한테 줄 답례?',
         );
-        await maya.say_and_wait('응! 마야랑 같이 놀아줬으면 좋겠어♪');
+        await maya.say_and_wait('응! 마야랑 같이 놀아 줬으면 좋겠어♪');
         await maya.say_and_wait(
-          '요즘 다들 시험 시험 거리면서 나랑 안 놀아줬잖아~',
+          '요즘 다들 시험, 시험 하면서 나랑 안 놀아 줬잖아~',
         );
         await you.say_as_passer_by_and_wait(
-          '경주 ' + maya.uma_sex_title + 'B',
+          '경주 ' + maya.uma_sex_title + ' B',
           [
             '네가 말하는 건 『',
             maya.get_colored_name(),
@@ -6696,14 +6696,14 @@ module.exports = {
           ],
         );
         await you.say_as_passer_by_and_wait(
-          '경주 ' + maya.uma_sex_title + 'A',
+          '경주 ' + maya.uma_sex_title + ' A',
           '좋지. 나도 마침 기분 전환이 필요했어!',
         );
         await you.say_as_passer_by_and_wait(
-          '경주 ' + maya.uma_sex_title + 'B',
+          '경주 ' + maya.uma_sex_title + ' B',
           ['나도! 얼마든지 와라, ', maya.get_colored_name(), ' 신병 훈련소♪'],
         );
-        await maya.say_and_wait('야호~~~~~! 실컷 놀아보자!!');
+        await maya.say_and_wait('야호~~~~~! 실컷 놀아 보자!!');
         await era.printAndWait([
           '며칠 후, 통금 시간 직전까지 실컷 놀다 온 ',
           maya.get_colored_name(),
@@ -6716,10 +6716,10 @@ module.exports = {
           '은(는) 걱정도 많다니까~♪',
         ]);
         await maya.say_and_wait(
-          '마야는 의지 받는 게 기쁘고, 친구들도 문제를 이해해서 다들 좋아했는걸!',
+          '마야는 친구들이 의지해 주는 게 기쁘고, 친구들도 문제를 이해해서 다들 좋아했는걸!',
         );
         await maya.say_and_wait('그치? 좋은 일뿐이라니까♪');
-        era.printButton('「그럼 나도 기쁘게 해 줬으면 좋겠는데」', 1);
+        era.printButton('「그럼 나도 기쁘게 해 줬으면 좋겠는데.」', 1);
         await era.input();
         await maya.say_and_wait('그럼 그럼, 당연하지! 뭐든지 말만 해♪');
         await era.printAndWait([
@@ -6727,17 +6727,17 @@ module.exports = {
           you.get_colored_name(),
           '은(는) ',
           maya.get_colored_name(),
-          '에게 강도 높은 트레이닝 스케줄을 짜주었다.',
+          '에게 강도 높은 트레이닝 스케줄을 짜 주었다.',
         ]);
         await maya.say_and_wait('와~! 이건 마야한테 하나도 안 즐겁잖아──────!');
         era.drawLine();
         await maya.say_and_wait(['으으~! ', callname, '은(는) 심술쟁이……']);
         await you.say_as_passer_by_and_wait(
-          '경주 ' + maya.uma_sex_title + 'A',
-          ['아하하, 고생이 많네, ', maya.get_colored_name(), '！'],
+          '경주 ' + maya.uma_sex_title + ' A',
+          ['아하하, 고생이 많네, ', maya.get_colored_name(), '!'],
         );
         await you.say_as_passer_by_and_wait(
-          '경주 ' + maya.uma_sex_title + 'B',
+          '경주 ' + maya.uma_sex_title + ' B',
           [
             '저 트레이너님도 보통이 아니네~! ',
             maya.get_colored_name(),
@@ -6750,7 +6750,7 @@ module.exports = {
           '이(가) 얼마나 대단한데♪',
         ]);
         await you.say_as_passer_by_and_wait(
-          '경주 ' + maya.uma_sex_title + 'A',
+          '경주 ' + maya.uma_sex_title + ' A',
           '……너 말이야, 지금 짜증 난 거야, 아니면 즐거운 거야?',
         );
         await maya.say_and_wait('소, 소녀의 마음은 복잡한 거라구~!');
@@ -6785,7 +6785,7 @@ module.exports = {
         you.get_colored_name(),
         '에게 「디자인은 도착할 때까지 비밀!」이라고 말했기에, ',
         you.get_colored_name(),
-        '은(는) 이것을 처음 보게 되었다.',
+        '은(는) 이제야 처음 보게 되었다.',
       ]);
       await maya.say_and_wait('짠짜잔──☆');
       await maya.say_and_wait([
@@ -6795,11 +6795,11 @@ module.exports = {
       ]);
       era.printButton('「좀 더 하늘하늘할 줄 알았는데……」', 1);
       await era.input();
-      await maya.say_and_wait('응, 그 점에 대해서 마야도 오랫동안 고민했어~');
+      await maya.say_and_wait('응, 그 부분은 마야도 오랫동안 고민했어~');
       await maya.say_and_wait(
         '하지만 이런 느낌도 섹시하고 나한테 잘 어울린다고 생각해! 어때?',
       );
-      era.printButton('「멋지고 좋은 것 같아」', 1);
+      era.printButton('「멋지고 좋은 것 같아.」', 1);
       await era.input();
       await maya.say_and_wait('야호~!!');
       await maya.say_and_wait(
@@ -6810,7 +6810,7 @@ module.exports = {
       await era.input();
       await maya.say_and_wait('응! 하늘을 날아다니는 파일럿이셔☆');
       await maya.say_and_wait(
-        '마야도 예전에 아빠가 운전하는 소형 제트기를 타본 적 있거든~♪',
+        '마야도 예전에 아빠가 조종하는 소형 제트기를 타 본 적 있거든~♪',
       );
       await maya.say_and_wait(
         '하늘은 정말 넓고, 우리가 사는 마을은 멀고 작게 보였어!',
@@ -6823,24 +6823,24 @@ module.exports = {
       );
       await maya.say_and_wait('그래서 내 승부복도 이렇게 디자인한 거야☆');
       await maya.say_and_wait(
-        '이렇게 입고 코스를 달리면, 마치 자유롭고 즐거운 하늘을 나는 것 같은 기분이 들거든~!',
+        '이렇게 입고 코스를 달리면, 마치 하늘을 자유롭고 즐겁게 나는 것 같은 기분이 들거든~!',
       );
       era.println();
-      era.printButton('「많은 레이스를 향해 이륙하자!」（스피드+20）', 1);
-      era.printButton('「드디어 너의 원점을 알게 됐어」（스태미나+20）', 2);
+      era.printButton('「많은 레이스를 향해 이륙하자!」 (스피드 +20)', 1);
+      era.printButton('「드디어 너의 원점을 알게 됐어.」 (스태미나 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await maya.say_and_wait('응응! 그럴게~!');
         await maya.say_and_wait(
-          '마야의 비행으로 모든 관객에게 아름다운 풍경을 보여줄 거야♪',
+          '마야의 비행으로 모든 관객에게 아름다운 풍경을 보여 줄 거야♪',
         );
         await maya.say_and_wait([
           callname,
           '도 늦어서 비행기 놓치지 않게 조심해!',
         ]);
-        era.printButton('「기대하고 있을게」', 1);
+        era.printButton('「기대하고 있을게.」', 1);
         await era.input();
-        await maya.say_and_wait(['고마워, ', callname, '！']);
+        await maya.say_and_wait(['고마워, ', callname, '!']);
         await maya.say_and_wait(
           '나 앞으로 훨씬 더 빨라질 테니까, 계속 마야만 지켜봐 줘야 해♪',
         );
@@ -6860,20 +6860,20 @@ module.exports = {
         await maya.say_and_wait('정말? 정말로?');
         await maya.say_and_wait([
           callname,
-          '이 점점 마야를 더 잘 알게 되는 것 같네~♪',
+          '이(가) 점점 마야를 더 잘 알게 되는 것 같네~♪',
         ]);
         await maya.say_and_wait(
           '나중에는 우리 아빠 엄마보다 나를 더 잘 알게 될지도…… 꺄아~☆',
         );
-        era.printButton('「그러고 보니 부모님께는 승부복 보여드렸어?」', 1);
+        era.printButton('「그러고 보니 부모님께는 승부복 보여 드렸어?」', 1);
         await era.input();
         await maya.say_and_wait('어? 아니, 아직!');
         await maya.say_and_wait([
           '오래전부터 가장 먼저 ',
           callname,
-          '한테 보여주기로 결정했었거든♪',
+          '한테 보여 주기로 마음먹었거든♪',
         ]);
-        await maya.say_and_wait('……맞다! 아빠랑 엄마한테 사진 보내줘야지!');
+        await maya.say_and_wait('……맞다! 아빠랑 엄마한테 사진 보내 줘야지!');
         await maya.say_and_wait([callname, '도 같이 찍자! 응?']);
         era.printButton('「내가 같이 찍어도 돼?」', 1);
         await era.input();
@@ -6881,7 +6881,7 @@ module.exports = {
         await maya.say_and_wait([
           '아빠랑 엄마도 ',
           callname,
-          '을 보고 싶어 하셨는걸~!',
+          '을(를) 보고 싶어 하셨는걸~!',
         ]);
         await maya.say_and_wait('자, 조금 더 가까이~! 하나, 둘…… 이륙☆');
         await maya.say_and_wait('헤헤, 잘 찍혔다♪ 전송!');
@@ -6899,7 +6899,7 @@ module.exports = {
           you.get_colored_name(),
           '은(는) 앞으로도 계속 ',
           maya.sex,
-          '의 힘이 되어주겠다고 다시 한번 다짐했다.',
+          '의 힘이 되어 주겠다고 다시 한번 다짐했다.',
         ]);
       }
       return [ret];

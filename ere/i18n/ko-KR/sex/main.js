@@ -15,8 +15,8 @@ module.exports = class extends require('#/i18n/zh-CN/sex/main') {
     '의 앞에 있다',
   ];
   hd_turn_template = '제 %TURN%턴';
-  rape_notification = '성폭행이 발생했다!';
-  raped_notification = '역방향 성폭행이 발생했다!';
+  rape_notification = '강간 발생!';
+  raped_notification = '역강간 발생!';
   get_lover_relation = (relation, love) => ['🤝 ', relation, ' ・ ❤️ ', love];
 
   n_select_lover = '상대';
@@ -243,7 +243,7 @@ module.exports = class extends require('#/i18n/zh-CN/sex/main') {
   orgasm_event_start = '이번 조교에서:';
   get_lose_virginity = (virgin, unsatisfied_desc) =>
     unsatisfied_desc
-      ? [virgin, '을(를) 잃고,', unsatisfied_desc]
+      ? [virgin, '을(를) 잃고, ', unsatisfied_desc]
       : [virgin, '을(를) 잃었다'];
 
   lust_down_plus = '성욕이 크게 해소되었다!';

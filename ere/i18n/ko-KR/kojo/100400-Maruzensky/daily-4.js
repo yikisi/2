@@ -28,7 +28,7 @@ module.exports = {
       } else {
         buffer.push(() => {
           maru.say('머리가 어질어질…… 이런 모습은 후배들에게 보일 수 없겠네.');
-          era.print([maru.get_colored_name(), '은(는) 무척 졸려 보였다.']);
+          era.print([maru.get_colored_name(), '는 무척 졸려 보였다.']);
         });
       }
     } else {
@@ -47,7 +47,7 @@ module.exports = {
           you.get_colored_name(),
           '이(가) 제시간에 코스에 도착했을 때, ',
           maru.get_colored_name(),
-          '은(는) 이미 몇 바퀴나 달린 뒤였다.',
+          '는 이미 몇 바퀴나 달린 뒤였다.',
         ]);
       });
       if (era.get('love:4') >= 75) {
@@ -61,7 +61,7 @@ module.exports = {
           );
           era.print([
             maru.get_colored_name(),
-            '은(는) ',
+            '는 ',
             you.get_colored_name(),
             '의 이불을 걷어 내고 빨리 준비하라고 재촉했다.',
           ]);
@@ -74,7 +74,7 @@ module.exports = {
           maru.say('아직은 약하지만 곧 모습을 드러내지 않을까?');
           era.print([
             maru.get_colored_name(),
-            '은(는) 생각에 잠긴 듯 ',
+            '는 생각에 잠긴 듯 ',
             you.get_colored_name(),
             '을(를) 살폈다.',
           ]);
@@ -101,7 +101,7 @@ module.exports = {
             '전력으로 달리면 묘한 느낌이 들어. 둥실둥실, 잔디 위에 떠 있는 것처럼.',
           );
           maru.say(`……아, ${callname}, 좋은 아침.`);
-          era.print(`잔디 위를 달리던 ${maru.name}은(는) 생각에 잠겨 있었다.`);
+          era.print(`잔디 위를 달리던 ${maru.name}는 생각에 잠겨 있었다.`);
         });
       }
     }
@@ -120,7 +120,7 @@ module.exports = {
         maru.say(`이런~. ${callname}의 부탁이라면……`);
         era.print([
           maru.get_colored_name(),
-          '은(는) 복잡한 표정으로 ',
+          '는 복잡한 표정으로 ',
           you.get_colored_name(),
           '을(를) 바라보았다.',
         ]);
@@ -130,7 +130,7 @@ module.exports = {
         () => {
           era.print([
             maru.get_colored_name(),
-            '은(는) 달릴 때 몸에 부딪치는 바람을 즐기고 있었다.',
+            '는 달릴 때 몸에 부딪치는 바람을 즐기고 있었다.',
           ]);
           maru.say(
             `${callname}에게 고민이 있으면 ${
@@ -139,7 +139,7 @@ module.exports = {
           );
           era.print([
             maru.get_colored_name(),
-            '은(는) 여유롭게 웃으며 ',
+            '는 여유롭게 웃으며 ',
             you.get_colored_name(),
             '을(를) 바라보았다.',
           ]);
@@ -165,7 +165,7 @@ module.exports = {
           );
           era.print([
             maru.get_colored_name(),
-            '은(는) 온몸으로 ',
+            '는 온몸으로 ',
             you.get_colored_name(),
             '의 팔에 기대었다. 어느새 꼬리도 ',
             you.get_colored_name(),
@@ -181,7 +181,7 @@ module.exports = {
             maru.say(`${callname}은(는) 어느 계절의 바람을 좋아해?`);
             era.print([
               maru.get_colored_name(),
-              '은(는) 미소를 지으며 ',
+              '는 미소를 지으며 ',
               you.get_colored_name(),
               '을(를) 바라보았다.',
             ]);
@@ -194,7 +194,7 @@ module.exports = {
             era.print([
               '스트레칭을 하기 전, ',
               maru.get_colored_name(),
-              '와(과) 잡담을 나누던 ',
+              '와 잡담을 나누던 ',
               maru.sex,
               '가 ',
               you.get_colored_name(),
@@ -259,7 +259,7 @@ module.exports = {
    */
   select_good_end(maru, you, callname) {
     maru.say(
-      `괴로움도, 외로움도, ${callname}와(과) 함께라면 대수롭지 않은 것 같아.`,
+      `괴로움도, 외로움도, ${callname}과(와) 함께라면 대수롭지 않은 것 같아.`,
     );
     maru.say(
       `우마무스메로 살아가며 ${callname}을(를) 만난 건 평생의 행운일지도 모르겠네.`,
@@ -298,7 +298,7 @@ module.exports = {
         maru.say(
           `트레센에서의 그 밤, 잔디 위를 달리던 ${maru.uma_sex_title}들.`,
         );
-        maru.say(`응원해 주는 후배들과 곁에 있는 ${callname}。`);
+        maru.say(`응원해 주는 후배들과 곁에 있는 ${callname}.`);
         maru.say('진심으로 행복하다고 생각했어.');
         break;
       case 20:
@@ -344,7 +344,7 @@ module.exports = {
         ),
       () =>
         maru.say_and_wait(
-          '뒤에서 이끌려 가기보다 이렇게 한 번에 결승선까지 달려가는 느낌, 참을 수 없이 좋네♪',
+          '다른 선수를 뒤따라 달리기보다 이렇게 한 번에 결승선까지 달려가는 느낌, 참을 수 없이 좋네♪',
         ),
     );
     if (era.get('love:4') >= 75) {
@@ -735,14 +735,14 @@ module.exports = {
       async () => {
         await maru.say_and_wait(`다음에는 저쪽 게임을 해 보자.`);
         await era.printAndWait(
-          `${maru.name}은(는) 새로운 것을 만난 아이처럼 눈을 반짝였다.`,
+          `${maru.name}는 새로운 것을 만난 아이처럼 눈을 반짝였다.`,
         );
       },
       async () => {
         await maru.say_and_wait(`이렇게 열심인 트레이너라니, 귀엽네.`, true);
         await era.printAndWait([
           maru.get_colored_name(),
-          '은(는) 웃으며 인형 뽑기를 조작하는 ',
+          '는 웃으며 인형 뽑기를 조작하는 ',
           you.get_colored_name(),
           '의 긴장한 얼굴을 바라보았다.',
         ]);
@@ -758,7 +758,7 @@ module.exports = {
   async o_s_drawing(maru, you, callname) {
     await maru.say_and_wait(`${callname}도 운을 시험해 볼래?`);
     await era.printAndWait(
-      `${maru.name}은(는) 상점가 근처의 추첨기를 가리켰다.`,
+      `${maru.name}는 상점가 근처의 추첨기를 가리켰다.`,
     );
     const buffer = [];
     buffer.push(
@@ -766,14 +766,14 @@ module.exports = {
         await maru.say_and_wait(`괜찮아. 다음 기회도 있잖아.`);
         await era.printAndWait([
           maru.get_colored_name(),
-          '은(는) 휴지를 뽑은 ',
+          '는 휴지를 뽑은 ',
           you.get_colored_name(),
           '을(를) 위로했다.',
         ]);
       },
       async () => {
         await maru.say_and_wait(`저녁은 당근으로 하자.`);
-        await era.printAndWait(`${maru.name}은(는) 뽑은 당근을 보며 말했다.`);
+        await era.printAndWait(`${maru.name}는 뽑은 당근을 보며 말했다.`);
       },
       async () => {
         await maru.say_and_wait(
@@ -790,18 +790,18 @@ module.exports = {
         await era.printAndWait([
           '그날 밤, ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           maru.get_colored_name(),
-          '은(는) 이 행운의 선물을 함께 맛보았다.',
+          '는 이 행운의 선물을 함께 맛보았다.',
         ]);
       },
       async () => {
         await era.printAndWait(`딸랑딸랑`);
-        await maru.say_and_wait('！', true);
+        await maru.say_and_wait('!', true);
         await era.printAndWait(`추첨함 옆의 점원「축하합니다」`);
         await era.printAndWait([
           maru.get_colored_name(),
-          '은(는) 온천 여행권을 뽑은 ',
+          '는 온천 여행권을 뽑은 ',
           you.get_colored_name(),
           '을(를) 바라보았다.',
         ]);
@@ -822,7 +822,7 @@ module.exports = {
     await maru.say_and_wait(`${callname}, 이 최신 유행곡 한번 들어 봐.`);
     await era.printAndWait([
       maru.get_colored_name(),
-      '은(는) 제법 옛날 노래를 고른 모양이었다. ',
+      '는 제법 옛날 노래를 고른 모양이었다. ',
       you.get_colored_name(),
       '은(는) 추억에 잠겼다.',
     ]);
@@ -840,7 +840,7 @@ module.exports = {
           `요즘 개봉한 로맨틱 코미디가 평이 좋다더라. ${callname}, 같이 볼래?`,
         );
         await era.printAndWait(
-          `${maru.name}은(는) 영화 추천 목록의 고전 명작 열 편 상영 안내를 가리키고 있었다.`,
+          `${maru.name}는 영화 추천 목록의 고전 명작 열 편 상영 안내를 가리키고 있었다.`,
         );
       },
       async () => {
@@ -872,7 +872,7 @@ module.exports = {
             `${callname}은(는) 대체 따뜻한 걸까, 건조한 걸까?`,
           );
           await era.printAndWait(
-            `졸음이 쏟아지는 영화를 보던 중, ${maru.name}이(가) 갑자기 혼잣말을 시작했다.`,
+            `졸음이 쏟아지는 영화를 보던 중, ${maru.name}가 갑자기 혼잣말을 시작했다.`,
           );
         },
         async () => {
@@ -880,7 +880,7 @@ module.exports = {
             `은행잎이 떨어지기 시작하는 가을보다 나는 촉촉한 여름이 더 좋아.`,
           );
           await era.printAndWait(
-            `${maru.name}은(는) 추천 영화를 보며 중얼거렸다.`,
+            `${maru.name}는 추천 영화를 보며 중얼거렸다.`,
           );
         },
       );
@@ -1050,7 +1050,7 @@ module.exports = {
           you.get_colored_name(),
           '에게 ',
           maru.get_colored_name(),
-          '은(는) 어떤 존재일까?',
+          '는 어떤 존재일까?',
         ]);
       },
       () =>

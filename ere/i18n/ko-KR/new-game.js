@@ -211,7 +211,7 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_ei_0_desc =
     '어느 관객 「가끔 레이스가 좀 이상해져. 선수들의 안색이나 옷이 젖은 정도 같은 게…… 그래도 볼만하긴 해」';
   set_ei_1_desc =
-    '어느 관객 「눈이 뒤집힌 채 비틀거리며 달리고, 코스까지 젖어 있잖아—— 아리마 기념인데 좀 예의를 갖춰!」; 도구 장착 시 기초 능력 -25%';
+    '어느 관객 「눈이 뒤집힌 채 비틀거리며 달리고, 코스까지 젖어 있잖아—— 아리마 기념인데 좀 예의를 갖춰!」; 아이템 장착 시 기초 능력 -25%';
 
   set_mejiro_style = '메지로 시티의 방식';
   set_ms_0 = '자유';
@@ -242,15 +242,15 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   bt_cus_default = '기본값';
   bt_cus_set = '직접 설정';
 
-  cus_body_header = '먼제 신체 세부사항입니다!';
+  cus_body_header = '먼저 신체의 세부 사항을 정해 주세요!';
   bt_cus_confirm = '완료!';
 
   cus_birthday_header =
-    '다음은 키와 생일입니다!\nPS：개발자는 여러분이 2월 29일에 태어나지 않았다고 가정하고 있습니다.';
+    '다음은 키와 생일입니다!\nPS:개발자는 여러분이 2월 29일에 태어나지 않았다고 가정하고 있습니다.';
   cus_birthday_month = '태어난 달';
   cus_bm_prev = '이전달';
   cus_bm_next = '다음달';
-  cus_birthday_date = '태어난 일수';
+  cus_birthday_date = '태어난 날';
   cus_bd_prev_5 = '5일 전';
   cus_bd_prev = '전날';
   cus_bd_next = '다음날';
@@ -369,5 +369,5 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   bt_random_talents = '특성 랜덤';
   bt_random_all = '전부 무작위로!';
   bt_re_make = '다시 고를래!';
-  bt_exit = '더 이상 안할래...';
+  bt_exit = '더 이상 안 할래……';
 };

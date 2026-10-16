@@ -59,7 +59,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/feature') {
   th_white = '흰색';
 
   n_front_hair = '앞머리';
-  fh_thic_bangs = '두꺼운 앞머리';
+  fh_thic_bangs = '숱이 많은 앞머리';
   fh_even_bangs = '일자 앞머리';
   fh_side_part = '옆가르마';
   fh_exha_ports = '인테이크';
@@ -80,8 +80,8 @@ module.exports = class extends require('#/i18n/zh-CN/chara/feature') {
 
   n_skin_color = '피부색';
   skin_0 = '흰색';
-  skin_1 = '건강한 색';
-  skin_2 = '혈색이 좋음';
+  skin_1 = '건강해 보이는';
+  skin_2 = '혈색이 좋은';
   skin_3 = '구릿빛';
 
   n_armpit_hair = '겨드랑이털';
@@ -112,19 +112,19 @@ module.exports = class extends require('#/i18n/zh-CN/chara/feature') {
   breast_F = '풍성한';
   breast_G = '거대한';
 
-  penis_1 = '불쌍함';
-  penis_2 = '빈약함';
-  penis_3 = '건장함';
-  penis_4 = '흉악함';
-  penis_5 = '두려움';
+  penis_1 = '불쌍한';
+  penis_2 = '빈약한';
+  penis_3 = '건장한';
+  penis_4 = '흉악한';
+  penis_5 = '두려운';
 
   n_chara = '성격';
-  'chara_-3' = '소심';
+  'chara_-3' = '소심한';
   'chara_-2' = '겁쟁이';
-  'chara_-1' = '성실';
-  chara_0 = '평범';
-  chara_1 = '자존심';
-  chara_2 = '고집';
+  'chara_-1' = '성실한';
+  chara_0 = '평범한';
+  chara_1 = '자존심센';
+  chara_2 = '고집센';
   chara_3 = '열혈';
 
   'chara_-3_desc' = '트레이닝과 조교 효과가 약간 상승';

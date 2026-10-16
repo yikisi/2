@@ -6,7 +6,7 @@ welcome:
   lines:
     - random: true
       lines:
-        - "%YOU%가 눈을 떴을 때 차갑고 닫힌 공간에 있었다."
+        - "%YOU%이(가) 눈을 떴을 때 차갑고 닫힌 공간에 있었다."
         - "주위를 둘러보자 익숙한 미소가 보였다."
         - color: %COLOR%
           content:
@@ -20,7 +20,7 @@ welcome:
             - "「너를 위해 특별히 준비했어. 놀랐어?」"
     - random: true
       lines:
-        - "어두운 작은 방에서 잠이 덜 깬 %YOU%는 머리를 짚고 일어났다."
+        - "어두운 작은 방에서 잠이 덜 깬 %YOU%은(는) 머리를 짚고 일어났다."
         - "아무도 없는 공간. %YOU% 외에는 인기척이 없는 듯했다."
         - "침대에서 내려 걸으려는 순간 익숙한 목소리가 들렸다."
         - color: %COLOR%
@@ -28,7 +28,7 @@ welcome:
             - fontWeight: bold
               content: %CHARA%
             - "「%CALLNAME%~ 다녀왔어~」"
-        - "모퉁이에서 얼굴을 내민 %CHARA%가 미소 지으며 %YOU%를 봤다."
+        - "모퉁이에서 얼굴을 내민 %CHARA%가 미소 지으며 %YOU%을(를) 봤다."
 
 flatter:
   - if: (t = era.get('relation:64:0')) < 0
@@ -45,13 +45,13 @@ flatter:
           - fontWeight: bold
             content: %CHARA%
           - "「그런 %CALLNAME%에게는 작은 벌이 필요할지도 모르겠네.」"
-      - "%YOU%가 뭐라도 더 말하기 전에 %CHARA%가 입술의 움직임을 막았다."
-      - "주저 없이 %YOU%를 그 침대로 데려가 조용히 옆에 앉았다."
+      - "%YOU%이(가) 뭐라도 더 말하기 전에 %CHARA%가 입술의 움직임을 막았다."
+      - "주저 없이 %YOU%을(를) 그 침대로 데려가 조용히 옆에 앉았다."
       - "너무 조용해서 더는 말을 꺼낼 수 없었다."
   - if: t >= 0 && (t = (t < era.get('love:64') * (era.get('flag:极端行为限制') || 1)))
     lines:
       - "말로 %CHARA%와 화해하려 했지만 입술에 목소리가 막혔다."
-      - "%YOU%가 숨을 따라가지 못하자 %CHARA%는 만족스럽게 입술을 뗐다. 긴 은빛 실이 늘어졌다."
+      - "%YOU%이(가) 숨을 따라가지 못하자 %CHARA%는 만족스럽게 입술을 뗐다. 긴 은빛 실이 늘어졌다."
       - color: %COLOR%
         content:
           - fontWeight: bold
@@ -61,13 +61,13 @@ flatter:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「%CALLNAME%는 그런 말 하면 안 되니까.」"
-      - "힘이 풀린 %YOU%는 다시 작은 침대에 쓰러져 자신을 내려다보는 %CHARA%를 올려다봤다."
+          - "「%CALLNAME%은(는) 그런 말 하면 안 되니까.」"
+      - "힘이 풀린 %YOU%은(는) 다시 작은 침대에 쓰러져 자신을 내려다보는 %CHARA%를 올려다봤다."
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「%CALLNAME%가 그런 말 하는 건 싫어.」"
+          - "「%CALLNAME%이(가) 그런 말 하는 건 싫어.」"
       - color: %COLOR%
         content:
           - fontWeight: bold
@@ -85,13 +85,13 @@ flatter:
           - 「%CALLNAME%～」
   - if: '!t'
     lines:
-      - "햇빛이 들지 않는 방에서 %YOU%는 여전히 말로 상황을 돌파하려 했다."
+      - "햇빛이 들지 않는 방에서 %YOU%은(는) 여전히 말로 상황을 돌파하려 했다."
       - "하지만 이번에는 %CHARA%가 %YOU% 곁에 앉은 채 조용히 듣고 있었다."
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「……%CALLNAME%가 말하지 않아도 알아.」"
+          - "「……%CALLNAME%이(가) 말하지 않아도 알아.」"
       - color: %COLOR%
         content:
           - fontWeight: bold
@@ -101,7 +101,7 @@ flatter:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「사실 %CALLNAME%는 아무 잘못도 없어.」"
+          - "「사실 %CALLNAME%은(는) 아무 잘못도 없어.」"
       - "고개를 숙이고 천천히 %YOU% 곁으로 다가와 어깨에 기댔다."
       - "불안하게 손을 뻗어 늘어진 %YOU%의 손을 살며시 감쌌다."
       - color: %COLOR%
@@ -121,7 +121,7 @@ battle_escape:
   - "%CHARA%는 %YOU% 앞에 조용히 쓰러져 움직이지 않았다."
   - "이제 눈앞의 자물쇠만 열면 돌아갈 수 있다."
   - "(……이래도 되나. %CHARA%를 여기 두고 가도……)"
-  - "스스로에게 묻자 가슴이 아파진 %YOU%는 결국 돌아서기로 했다."
+  - "스스로에게 묻자 가슴이 아파진 %YOU%은(는) 결국 돌아서기로 했다."
   - "함께 도망치기로 한 파트너라면 함께 돌아가야 한다."
   - "남은 힘을 짜내 일어나 기절한 %CHARA%를 안아 들고 이미 찾아 둔 열쇠를 집었다."
   - "함께 돌아가자."
@@ -132,13 +132,13 @@ battle_fail:
       - fontWeight: bold
         content: %CHARA%
       - "「그러면 안 되지, %CALLNAME%.」"
-  - "몰래 움직이는 손을 가볍게 붙잡고 도리어 %YOU%를 벽 쪽으로 넘어뜨렸다."
+  - "몰래 움직이는 손을 가볍게 붙잡고 도리어 %YOU%을(를) 벽 쪽으로 넘어뜨렸다."
   - "%CHARA%는 위에서 %YOU%의 표정을 보며 묘하게 웃었다."
   - color: %COLOR%
     content:
       - fontWeight: bold
         content: %CHARA%
-      - "「파머가 좋아하는 %CALLNAME%는 이런 짓 안 하지?」"
+      - "「파머가 좋아하는 %CALLNAME%은(는) 이런 짓 안 하지?」"
   - color: %COLOR%
     content:
       - fontWeight: bold
@@ -159,12 +159,12 @@ battle_prison:
       - fontWeight: bold
         content: %CHARA%
       - "「사과하면 못 본 걸로 해 줄게~」"
-  - "가볍게 던진 몇 마디. 하지만 %YOU%는 아무 말 못 하고 멍하니 %CHARA%에게 이끌려 침대로 갔다."
+  - "가볍게 던진 몇 마디. 하지만 %YOU%은(는) 아무 말 못 하고 멍하니 %CHARA%에게 이끌려 침대로 갔다."
   - color: %COLOR%
     content:
       - fontWeight: bold
         content: %CHARA%
-      - "「%CALLNAME%는 여기서 파머를 기다리면 돼.」"
+      - "「%CALLNAME%은(는) 여기서 파머를 기다리면 돼.」"
   - color: %COLOR%
     content:
       - fontWeight: bold
@@ -174,7 +174,7 @@ battle_prison:
 find_escape:
   sync: true
   lines:
-    - "%YOU%가 애쓴 끝에 자물쇠가 드디어 느슨해졌다. 조금만 더 하면 된다고 생각한 순간……"
+    - "%YOU%이(가) 애쓴 끝에 자물쇠가 드디어 느슨해졌다. 조금만 더 하면 된다고 생각한 순간……"
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -195,7 +195,7 @@ find_escape:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - "「%CALLNAME%가 자물쇠를 열면 파머는 곤란하거든.」"
+        - "「%CALLNAME%이(가) 자물쇠를 열면 파머는 곤란하거든.」"
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -257,7 +257,7 @@ back_basement:
 
 start_fixing:
   - "쉬고 있던 %YOU%의 귀에 입구 쪽에서 금속이 바닥에 떨어지는 소리가 들렸다."
-  - "뭔가 눈치채고 보러 가려던 %YOU%는 마침 %CHARA%와 마주쳤다."
+  - "뭔가 눈치채고 보러 가려던 %YOU%은(는) 마침 %CHARA%와 마주쳤다."
   - "큰 문은 원래대로 멀쩡했고 함정과 자물쇠는 오히려 전보다 더 잘 갖춰져 있었다."
   - color: %COLOR%
     content:
@@ -269,7 +269,7 @@ start_fixing:
       - fontWeight: bold
         content: %CHARA%
       - "「아, 파머 보러 왔구나?」"
-  - "다 알면서 묻는 듯 %CHARA%는 반쯤 억지로 %YOU%를 방 안으로 밀어 넣었다."
+  - "다 알면서 묻는 듯 %CHARA%는 반쯤 억지로 %YOU%을(를) 방 안으로 밀어 넣었다."
   - "%YOU%에게 조용히 하라는 손짓을 하고 웃었다."
   - color: %COLOR%
     content:
@@ -297,7 +297,7 @@ ask_release_agree:
     content:
       - fontWeight: bold
         content: %CHARA%
-      - "「미안해. %CALLNAME%를 줄곧 여기 둬서.」"
+      - "「미안해. %CALLNAME%을(를) 줄곧 여기 둬서.」"
   - "%YOU% 앞에 가만히 서서 고개를 숙인 채 흔들렸다. 다음 순간 쓰러질 듯했다."
   - color: %COLOR%
     content:
@@ -352,14 +352,14 @@ ask_release_reject:
     content:
       - fontWeight: bold
         content: %CHARA%
-      - "「%CALLNAME%가 여기에 없으면.」"
+      - "「%CALLNAME%이(가) 여기에 없으면.」"
   - color: %COLOR%
     content:
       - fontWeight: bold
         content: %CHARA%
       - "「파머는 너무 외롭거든.」"
   - "몸을 일으켜 %YOU%의 귓가에 다가가 귓불에 천천히 혀를 댔다."
-  - "%YOU%가 떠는 걸 느끼고 %CHARA%는 달콤하게 웃었다."
+  - "%YOU%이(가) 떠는 걸 느끼고 %CHARA%는 달콤하게 웃었다."
   - color: %COLOR%
     content:
       - fontWeight: bold
@@ -372,7 +372,7 @@ ask_release_reject:
       - 「%CALLNAME%……」
 
 ask_time:
-  - "%YOU%가 시험 삼아 %CHARA%에게 시간을 묻자 무덤덤한 미소만 돌아왔다."
+  - "%YOU%이(가) 시험 삼아 %CHARA%에게 시간을 묻자 무덤덤한 미소만 돌아왔다."
   - color: %COLOR%
     content:
       - fontWeight: bold

@@ -13,7 +13,7 @@ module.exports = {
     if (era.get('status:3:腿伤') > 0) {
       await teio.say_and_wait('앗! 으으……');
       await era.printAndWait(
-        `평소에는 활기차고 어딘가 어리광 섞여 있던 목소리가 고통에 찬 날카로운 비명으로 일그러져, ${you.name}의 귓속과 가슴을 꿰뚫었다. ${you.name}은(는) 한달음에 달려가 조심스럽게 ${teio.sex}를 달래며 몸 상태를 살피고 다친 곳을 살살 주물렀다.`,
+        `평소에는 활기차고 어딘가 어리광이 섞여 있던 목소리가 고통에 찬 날카로운 비명으로 일그러져, ${you.name}의 귓속과 가슴을 꿰뚫었다. ${you.name}은(는) 한달음에 달려가 조심스럽게 ${teio.sex}를 달래며 몸 상태를 살피고 다친 곳을 살살 주물렀다.`,
       );
     } else {
       await teio.say_and_wait('아야아——');
@@ -30,7 +30,7 @@ module.exports = {
     await teio.say_and_wait('테이오 전설은…… 여기서 잠깐 쉬어 가야겠네……');
     await era.printAndWait([
       teio.get_colored_name(),
-      '은(는) 책상에 엎드린 채 공부할 의욕을 잃었다.',
+      '는 책상에 엎드린 채 공부할 의욕을 잃었다.',
     ]);
     await you.say_and_wait(
       '거짓말은 못 하겠네. 안 되는 건 안 되는 거야.',
@@ -48,7 +48,7 @@ module.exports = {
         `${you.name}은(는) 들뜬 마음으로 관중석을 내려가 의기양양하게 돌아온 테이오를 맞이했다.`,
       );
       await era.printAndWait(
-        `${teio.sex} 역시 신이 나서 얼굴을 붉힌 채 ${you.name}에게 달려와, ${you.name}와(과) 하이파이브를 했다. 두 사람은 승리의 기쁨을 마음껏 만끽했다.`,
+        `${teio.sex} 역시 신이 나서 얼굴을 붉힌 채 ${you.name}에게 달려와, ${you.name}과(와) 하이파이브를 했다. 두 사람은 승리의 기쁨을 만끽했다.`,
       );
     };
     f.title = title;
@@ -103,11 +103,11 @@ module.exports = {
         );
         await teio.say_and_wait(`……`);
         era.printButton(
-          '「괜찮아. 가슴을 펴. 다시 힘내자. 성공은 아직 우리를 기다리고 있어」',
+          '「괜찮아. 가슴을 펴. 다시 힘내자. 성공은 아직 우리를 기다리고 있어.」',
           1,
         );
         era.printButton(
-          '「이번에는…… 제대로 되짚어 보자. 테이오, 다음에는 이러면 안 돼」',
+          '「이번에는…… 제대로 되짚어 보자. 테이오, 다음에는 이러면 안 돼.」',
           2,
         );
         await era.input();
@@ -150,7 +150,7 @@ module.exports = {
       );
       era.println();
       await era.printAndWait(
-        `${you.name}은(는) ${teio.name}의 첫 정식 레이스를 보며 지금까지의 트레이닝과 대조해, ${teio.sex}의 주법을 마음속으로 확인하고 임시 계획을 세웠다. 피부 아래로 드러나는 종아리 힘줄은 튼튼하고 힘찼으며, 몇 차례 가속할 때의 보폭은 유연했다. 힘을 쓸 순간을 포착하는 감각은 타고난 듯했다——선행에 천재적인 재능을 지닌 ${teio.uma_sex_title}。`,
+        `${you.name}은(는) ${teio.name}의 첫 정식 레이스를 보며 지금까지의 트레이닝과 대조해, ${teio.sex}의 주법을 마음속으로 확인하고 임시 계획을 세웠다. 피부 아래로 드러나는 종아리 힘줄은 튼튼하고 힘찼으며, 몇 차례 가속할 때의 보폭은 유연했다. 힘을 쓸 순간을 포착하는 감각은 타고난 듯했다——선행에 천재적인 재능을 지닌 ${teio.uma_sex_title}.`,
       );
       await teio.say_and_wait('트레이너! 어땠어?');
       await era.printAndWait(
@@ -173,7 +173,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name}은(는) 생각에 몰두해 있다가 귓가에 닿은 부드러운 목소리에 정신을 차렸다. 살짝 상기된 얼굴로 고개를 갸웃하며 ${you.name}을(를) 바라보는 ${teio.uma_sex_title}를 보니, ${you.name}은(는) 한동안 무슨 말을 해야 할지 알 수 없었다.`,
       );
-      era.printButton('「……괜찮아. 네 몸은 정말 대단하네」', 1);
+      era.printButton('「……괜찮아. 네 몸은 정말 대단하네.」', 1);
       await era.input();
       await teio.say_and_wait(
         '응? 으응…… 그럼 다행이네. 자, 트레이너. 약속이야. 끝까지 나랑 함께 달려 줘!',
@@ -218,14 +218,14 @@ module.exports = {
       );
       era.println();
 
-      era.printButton('「밥부터 먹자. 먹고 나서 놀자」', 1);
+      era.printButton('「밥부터 먹자. 먹고 나서 놀자.」', 1);
       await era.input();
 
       await era.printAndWait(
         `${you.name}이(가) 큰 냄비에 담긴 스튜를 식탁으로 옮기자, ${teio.sex}는 밥이라는 말에 미끄러지듯 다가와 의자에 앉더니 ${you.name}의 식기까지 챙겨 주었다.`,
       );
       await era.printAndWait(
-        `두 사람은 즐겁게 새해 저녁 식사를 즐겼다. 따뜻하고 정겨운 분위기에 ${you.name}은(는) ${teio.sex}와 함께 있는 이곳이 작은 가정 같다는 생각이 들었다.`,
+        `두 사람은 즐겁게 새해 저녁 식사를 했다. 따뜻하고 정겨운 분위기에 ${you.name}은(는) ${teio.sex}와 함께 있는 이곳이 작은 가정 같다는 생각이 들었다.`,
       );
       era.println();
 
@@ -241,9 +241,9 @@ module.exports = {
 
       era.print(`${you.name}——`);
       era.printButton('「그 기세야! 계속 그렇게 나아가자!」(근성+20)', 1);
-      era.printButton('「그래, 함께 힘내서 승리를 향해 가자」(스태미나+20)', 2);
+      era.printButton('「그래, 함께 힘내서 승리를 향해 가자.」(스태미나+20)', 2);
       era.printButton(
-        '「음…… 그 목표라면 조금 조정이 필요하겠네」(스킬 포인트+20)',
+        '「음…… 그 목표라면 조금 조정이 필요하겠네.」(스킬 포인트+20)',
         3,
       );
       return [await era.input()];
@@ -261,7 +261,7 @@ module.exports = {
       await era.printAndWait('훌륭하다.');
       await era.printAndWait(`${you.name}은(는) 마음속으로 갈채를 보냈다.`);
       await era.printAndWait(
-        `일기당천의 질주, 순간적인 가속, 균형 잡힌 자세——과연 천재 ${teio.uma_sex_title}답다.`,
+        `다른 주자들을 멀찌감치 따돌리는 질주, 순간적인 가속, 균형 잡힌 자세——과연 천재 ${teio.uma_sex_title}답다.`,
       );
       await era.printAndWait(
         '데뷔한 지 얼마 되지도 않았는데 이런 달리기를 보이다니. 잠재력이 충분하고 앞날이 밝다.',
@@ -274,7 +274,7 @@ module.exports = {
       await teio.say_and_wait('트레이너.');
       era.println();
 
-      era.printButton('「이야, 잘했어」', 1);
+      era.printButton('「이야, 잘했어.」', 1);
       await era.input();
 
       await era.printAndWait(
@@ -295,7 +295,7 @@ module.exports = {
         '내 첫 번째 목표——이제부터 무패로 클래식 삼관을 달성할 거야!',
       );
       await era.printAndWait(
-        `${teio.teen_sex_title}의 뜨거운 선언에 ${you.name}은(는) 입꼬리가 올라갔다. 하룻강아지 범 무서운 줄 모른다고 해야 할까, 아니면 승부의 세계를 아직 잘 모른다고 해야 할까. 하지만 젊은 사람이 큰 뜻을 품는 게 뭐가 나쁘겠는가.`,
+        `${teio.teen_sex_title}의 뜨거운 선언에 ${you.name}의 입꼬리가 올라갔다. 하룻강아지 범 무서운 줄 모른다고 해야 할까, 아니면 승부의 세계를 아직 잘 모른다고 해야 할까. 하지만 젊은 사람이 큰 뜻을 품는 게 뭐가 나쁘겠는가.`,
       );
       era.println();
 
@@ -307,7 +307,7 @@ module.exports = {
       );
 
       await era.printAndWait(
-        `${teio.teen_sex_title}은(는) 눈을 깜빡였다. 투지는 조금도 꺼지지 않았다.`,
+        `${teio.teen_sex_title}는 눈을 깜빡였다. 투지는 조금도 꺼지지 않았다.`,
       );
       await teio.say_and_wait('이 꿈, 반드시 이루고 말겠어!');
       era.printButton(`그럼 함께 힘내 보자.`, 1);
@@ -327,7 +327,7 @@ module.exports = {
         '또다시 구름 한 점 없이 맑은 날——트레센 쪽 하늘은 정말 날씨가 좋다.',
       );
       await era.printAndWait(
-        `${you.name}은 학원 안뜰을 걸으며 초봄의 날씨를 만끽한다.`,
+        `${you.name}은(는) 학원 안뜰을 걸으며 초봄의 날씨를 만끽한다.`,
       );
       await era.printAndWait(
         `하지만 오늘은 그때처럼 ${you.name} 혼자 산책하는 게 아니다.`,
@@ -348,7 +348,7 @@ module.exports = {
         `게다가 ${teio.sex}의 그 차림은 알록달록한 비치웨어 같은 아동복이라 ${you.name}의 죄책감을 더욱 키운다.`,
       );
       await era.printAndWait(
-        `이렇게 사랑스러운 ${teio.uma_sex_title}가 ${you.name}와(과) 담당 계약을 맺은 상대라니……`,
+        `이렇게 사랑스러운 ${teio.uma_sex_title}가 ${you.name}과(와) 담당 계약을 맺은 상대라니……`,
       );
       era.println();
 
@@ -358,7 +358,7 @@ module.exports = {
       era.printButton('「왜?」', 1);
       await era.input();
       await era.printAndWait(
-        `기운찬 ${teio.teen_sex_title}의 목소리가 들리자, ${you.name}은 머릿속을 비우고 마음을 가라앉혀, 최대한 평소 같은 표정으로 대답하려 한다.`,
+        `기운찬 ${teio.teen_sex_title}의 목소리가 들리자, ${you.name}은(는) 머릿속을 비우고 마음을 가라앉혀, 최대한 평소 같은 표정으로 대답하려 한다.`,
       );
       await era.printAndWait('그리고 시선은 똑바로 앞길에 둔다.');
       era.println();
@@ -366,7 +366,7 @@ module.exports = {
       await teio.say_and_wait('너…… 내 사복, 어떻게 생각해?');
       era.println();
 
-      era.print(`${you.name}은 곧바로——`);
+      era.print(`${you.name}은(는) 곧바로——`);
       era.printButton('「음…… 꽤 어린애 같네」(체력+150)', 1);
       era.printButton('「귀여워……」(스피드+20)', 2);
       era.printButton('「멋져, 테이오!」(파워+20)', 3);
@@ -377,10 +377,10 @@ module.exports = {
           era.println();
 
           await era.printAndWait(
-            `${teio.sex}은 입술을 삐죽 내밀며 조금 토라진 듯했지만, 오히려 그 모습이 귀여웠다.`,
+            `${teio.sex}는 입술을 삐죽 내밀며 조금 토라진 듯했지만, 오히려 그 모습이 귀여웠다.`,
           );
           await era.printAndWait(
-            `${you.name}과 ${teio.sex}은 말없이 한동안 걸었다.`,
+            `${you.name}과(와) ${teio.sex}는 말없이 한동안 걸었다.`,
           );
           break;
         case 2:
@@ -393,10 +393,10 @@ module.exports = {
           break;
         case 3:
           await teio.say_and_wait(
-            `당연하지!${you.name}는 역시 테이오 님의 멋짐을 알아보는구나!`,
+            `당연하지!${you.name}은(는) 역시 테이오 님의 멋짐을 알아보는구나!`,
           );
           await era.printAndWait(
-            `${teio.sex}은 기뻐 보인다.${you.name}도 저절로 웃으며, ${teio.sex}과 함께 한동안 걸었다.`,
+            `${teio.sex}는 기뻐 보인다.${you.name}도 저절로 웃으며, ${teio.sex}와 함께 한동안 걸었다.`,
           );
       }
       return [ret];
@@ -443,7 +443,7 @@ module.exports = {
       await era.printAndWait(
         `이 정도 수준의 레이스——경기장에서 겨루는 ${teio.uma_sex_title} ${teio.teen_sex_title}들이 땀과 청춘을 쏟아내며 달리는 모습은 가슴을 울린다. 그리고 ${you.name}의 담당은 그중에서도 단연 가장 눈부셨다.`,
       );
-      await era.printAndWait('첫걸음부터 출발이 좋다.');
+      await era.printAndWait('첫걸음부터 순조롭다.');
       await era.printAndWait(
         `${teio.sex}에게 특제 벌꿀 드링크를 사 줘야겠다고 ${you.name}은(는) 생각했다. 빠른 걸음으로 판매대로 갔다가 다시 경기장으로 돌아와 자신의 ${teio.uma_sex_title}가 달리는 모습을 지켜보았다.`,
       );
@@ -465,11 +465,11 @@ module.exports = {
         `하지만 ${you.name}의 시선은…… ${teio.sex}의 성적이 아니라 ${teio.sex}의 다리에 머물러 있었다.`,
       );
       await era.printAndWait(
-        '정확히는 부츠에 감싸인 발목부터 무릎까지의 부분이었다.',
+        '정확히는 부츠에 감싸인 발목부터 무릎까지였다.',
       );
       await era.printAndWait('이상하다.');
       await era.printAndWait(
-        '출발할 때부터 보였다. 이후의 스퍼트와 가속에서도 움직임에 분명 미세한 어긋남이 있었다.',
+        '출발할 때부터 보였다. 이후의 스퍼트와 가속에서도 움직임에 분명 미세하게 어긋나는 부분이 있었다.',
       );
       await era.printAndWait(
         '어떤 식으로 힘을 쓰든 뼈로 몸을 지탱하는 것이 기본이다. 무릎 연골이나 정강이뼈 부근에 문제가 있는 게 틀림없다.',
@@ -477,7 +477,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `레이스가 끝나자 ${you.name}은(는) 담당을 맞이해 짧게 축하한 뒤 이 이야기를 꺼내며, ${teio.sex}가 지금껏 의지하고 자신 있어 하던 주법 때문일지도 모른다고 조심스럽게 전했다.`,
+        `레이스가 끝나자 ${you.name}은(는) 담당을 맞이해 짧게 축하한 뒤 이 이야기를 꺼내며, ${teio.sex}가 지금껏 의지하며 자신감을 갖고 있던 주법 때문일지도 모른다고 조심스럽게 전했다.`,
       );
       await era.printAndWait(`${teio.sex}의 대답은 빠르고 간결했다.`);
       era.println();
@@ -498,7 +498,7 @@ module.exports = {
         '우리의 꿈…… 아직 이루지 못했잖아! 난 내 방식으로 계속 달리고 싶어. 도와주겠다고 약속했지?',
       );
       await era.printAndWait(
-        `${teio.teen_sex_title}은(는) 고개를 들어, 맑고 깨끗하면서도 집념을 품은 눈으로 ${you.name}을(를) 똑바로 바라보았다. ${you.name}은(는) 입을 열었지만 아무 말도 나오지 않았다.`,
+        `${teio.teen_sex_title}는 고개를 들어, 맑고 깨끗하면서도 집념을 품은 눈으로 ${you.name}을(를) 똑바로 바라보았다. ${you.name}은(는) 입을 열었지만 아무 말도 나오지 않았다.`,
       );
       await era.printAndWait(
         `${teio.sex} 마음대로 하게 둬도…… 별일 없겠지. 머릿속의 목소리가 물러섰다. 게다가 ${you.name}에게도 ${teio.sex}가 계속 달리며 성적을 내 주는 것이 필요하지 않은가.`,
@@ -528,7 +528,7 @@ module.exports = {
       );
       await you.say_and_wait('너 고양이야?', true);
       await era.printAndWait(
-        `${you.name}은(는) 속으로 태클을 걸었다. 허벅지 위의 ${teio.teen_sex_title}은(는) 정말로 여기를 자기 보금자리라고 생각하는 모양이다.`,
+        `${you.name}은(는) 속으로 태클을 걸었다. 허벅지 위의 ${teio.teen_sex_title}는 정말로 여기를 자기 보금자리라고 생각하는 모양이다.`,
       );
       era.println();
 
@@ -580,16 +580,16 @@ module.exports = {
      * @param {CharaTalk} you プレイヤー
      */
     const f = async (teio, you) => {
-      await era.printAndWait('잠깐의 끝이 다가오고 있다.');
+      await era.printAndWait('잠시 마침표를 찍을 때가 다가오고 있다.');
       await era.printAndWait(
-        `${you.name}은(는) 관중석에 서서 지난 한 해의 일들을 떠올렸다. ${teio.teen_sex_title}이(가) 여기까지 올 수 있었던 데에는 ${you.name}의 도움이 빠질 수 없었다. ${you.name} 역시 ${teio.sex}의 끈기와 집념에 이끌려 스스로 ${teio.sex}를 돕고 싶어졌다.`,
+        `${you.name}은(는) 관중석에 서서 지난 한 해의 일들을 떠올렸다. ${teio.teen_sex_title}가 여기까지 올 수 있었던 데에는 ${you.name}의 도움이 컸다. ${you.name} 역시 ${teio.sex}의 끈기와 집념에 이끌려 스스로 ${teio.sex}를 돕고 싶어졌다.`,
       );
       await era.printAndWait('성공은 눈앞에 있었다.');
       await era.printAndWait(
-        `이 레이스에서 이기면 ${teio.name}은(는) 최종 목표에 한 걸음 더 가까워진다. ${teio.sex}의 지금 달리기를 보면——${you.name}은(는) 트레이너로서 섣불리 샴페인을 터뜨려서는 안 되지만——거의 확실했다.`,
+        `이 레이스에서 이기면 ${teio.name}는 최종 목표에 한 걸음 더 가까워진다. ${teio.sex}의 지금 달리기를 보면——${you.name}은(는) 트레이너로서 섣불리 샴페인을 터뜨려서는 안 되지만——거의 확실했다.`,
       );
       await era.printAndWait(
-        `머릿속에는 벌써 ${you.name}와(과) ${teio.sex}가 전설이 되어 명예의 전당에 이름을 올리는 환상마저 떠올랐다……`,
+        `머릿속에는 벌써 ${you.name}과(와) ${teio.sex}가 전설이 되어 명예의 전당에 이름을 올리는 환상마저 떠올랐다……`,
       );
       await era.printAndWait('잠깐.');
       era.println();
@@ -597,7 +597,7 @@ module.exports = {
       era.println();
       await era.printAndWait('이상하다!');
       await era.printAndWait(
-        `${you.name}은(는) 난간을 붙잡고 몸을 벌떡 내밀어 경기장에 있는 ${you.name}의 ${teio.uma_sex_title}를 찾았다. 저기 있다, 선두——${teio.sex}의 움직임이?!`,
+        `${you.name}은(는) 난간을 붙잡고 몸을 벌떡 일으켜 내밀고 경기장에 있는 ${you.name}의 ${teio.uma_sex_title}를 찾았다. 저기 있다, 선두——${teio.sex}의 움직임이?!`,
       );
       await era.printAndWait(
         `${you.name}의 눈에, 도저히 정상이라 할 수 없는 자세로 바깥쪽으로 밀려나는 테이오가 보였다——`,
@@ -661,7 +661,7 @@ module.exports = {
         `그런데 ${you.name}의 옆에서 갑자기 거센 바람이 일었다.`,
       );
       await era.printAndWait(
-        `${you.name}이(가) 안쪽으로 감싸고 있던 ${teio.actual_name_with_title}이(가) 순간적으로 힘을 발휘해 내달린 것이다.`,
+        `${you.name}이(가) 안쪽으로 감싸고 있던 ${teio.actual_name_with_title}이 순간적으로 힘을 발휘해 내달린 것이다.`,
       );
       await era.printAndWait(
         '운전자는 등을 젖히고 브레이크를 끝까지 밟으며 절망 속에 눈을 감았다.',
@@ -678,21 +678,21 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `아이「응…… 고마워, ${teio.uma_sex_title} ${teio.elder_sibling_sex_title}？」`,
+        `아이「응…… 고마워, ${teio.uma_sex_title} ${teio.elder_sibling_sex_title}?」`,
       );
       era.println();
 
       await era.printAndWait(
-        `${teio.uma_sex_title} ${teio.elder_sibling_sex_title}？！`,
+        `${teio.uma_sex_title} ${teio.elder_sibling_sex_title}?!`,
       );
       era.println();
 
       await era.printAndWait(
-        `${teio.name}은(는) 그제야 바람에 모자가 날아가고 격한 움직임에 꼬리까지 드러났다는 사실을 깨달았다. ${you.name}은(는) 황급히 ${teio.sex}에게 다시 변장을 시켰지만 이미 늦었다.`,
+        `${teio.name}는 그제야 바람에 모자가 날아가고 격한 움직임에 꼬리까지 드러났다는 사실을 깨달았다. ${you.name}은(는) 황급히 ${teio.sex}에게 다시 변장을 시켰지만 이미 늦었다.`,
       );
       era.println();
 
-      await era.printAndWait(`행인 A「${teio.name}이다!」`);
+      await era.printAndWait(`행인 A「${teio.name}다!」`);
       era.println();
 
       await era.printAndWait('행인 B「와아, 전설의 테이오 님이다!」');
@@ -704,7 +704,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `사람들의 목소리가 물결처럼 높아졌고 소식을 듣고 몰려오는 이들도 많았다. 두 사람은 조금 당황했다. 하지만 ${you.name}이(가) 테이오를 보니 ${teio.teen_sex_title}은(는) 얼굴이 붉어졌을 뿐, 딱히 싫어하는 기색은 없었다——명성은 사람을, 혹은 ${teio.uma_sex_title}를 기쁘게 하는 것일까.`,
+        `사람들의 목소리가 물결처럼 높아졌고 소식을 듣고 몰려오는 이들도 많았다. 두 사람은 조금 당황했다. 하지만 ${you.name}이(가) 테이오를 보니 ${teio.teen_sex_title}는 얼굴이 붉어졌을 뿐, 딱히 싫어하는 기색은 없었다——명성은 사람을, 혹은 ${teio.uma_sex_title}를 기쁘게 하는 것일까.`,
       );
       await era.printAndWait(
         `그러다 ${you.name}은(는) ${teio.sex}의 귀가 방향을 바꾸는 것을 알아차렸다. 뒤이어 ${you.name}에게도 목소리가 들렸다.`,
@@ -717,7 +717,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `${teio.uma_sex_title}B「${teio.sex}의 트레이너가 대단하대. 지금 옆에 있는 사람이 그 사람이지?」`,
+        `${teio.uma_sex_title} B「${teio.sex}의 트레이너가 대단하대. 지금 옆에 있는 사람이 그 사람이지?」`,
       );
       era.println();
 
@@ -727,7 +727,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `${teio.uma_sex_title}D「${you.sex}의 얼굴도 분위기도 좋다. 정말……」`,
+        `${teio.uma_sex_title} D「${you.sex}의 얼굴도 분위기도 좋다. 정말……」`,
       );
       era.println();
 
@@ -755,11 +755,11 @@ module.exports = {
 
       era.print(`${you.name}은(는) 쓴웃음을 지으며 대답했다——`);
       era.printButton(
-        '「무적의 테이오 님을 모시는 것이 소인의 사명입니다」(지능+30)',
+        '「무적의 테이오 님을 모시는 것이 소인의 사명입니다.」 (지능+30)',
         1,
       );
       era.printButton(
-        `「온 힘을 다하겠습니다, 테이오 ${teio.adult_sex_title}」(무작위 능력치 3종+15)`,
+        `「온 힘을 다하겠습니다, 테이오 ${teio.adult_sex_title}.」 (무작위 능력치 3종+15)`,
         2,
       );
       return [await era.input()];
@@ -786,18 +786,18 @@ module.exports = {
       era.println();
 
       await you.say_and_wait(
-        `테이오, 네 다리 구조는 ${teio.uma_sex_title} 중에서도 특별해. 그 구조 덕분에 독특한 주법이 가능한 거지만, 사실 「테이오 스텝」은 네 몸을 미리 갉아먹고 있는 셈이야.`,
+        `테이오, 네 다리 구조는 ${teio.uma_sex_title} 중에서도 특별해. 그 구조 덕분에 독특한 주법이 가능한 거지만, 사실 「테이오 스텝」은 네 몸을 조금씩 갉아먹고 있는 셈이야.`,
       );
       await you.say_and_wait(
         '지난번의 속도 저하도, 그전 레이스 뒤에 입은 부상도 전조일 뿐이야. 너에게 가장 소중한 두 다리가…… 완전히 망가질 수도 있어.',
       );
       era.printButton(
-        '「의사도 나도 같은 생각이야…… 당분간 레이스장을 떠나 쉬었으면 해」',
+        '「의사도 나도 같은 생각이야…… 당분간 레이스장을 떠나 쉬었으면 해.」',
         1,
       );
       await era.input();
       await you.say_and_wait(
-        '그동안 내가 온 힘을 다해 치료를 도울게. 학원 측에도 이미 이야기해 뒀어. 네 평생을 위해서야.',
+        '그동안 내가 온 힘을 다해 치료를 도울게. 학원 측에도 이미 이야기해 뒀어. 네 앞날을 위해서야.',
       );
 
       await era.printAndWait(
@@ -811,7 +811,7 @@ module.exports = {
       );
       era.println();
       await era.printAndWait(
-        `눈 깜짝할 사이에 ${teio.teen_sex_title}은(는) 고개를 들었다. ${you.name}의 눈에 눈물이 눈가에 고여 ${teio.sex}의 본래 사파이어 같던 눈동자를 더욱 투명하게 만드는 모습이 보였다.`,
+        `눈 깜짝할 사이에 ${teio.teen_sex_title}는 고개를 들었다. ${you.name}은(는) 눈가에 고인 눈물이 ${teio.sex}의 사파이어 같은 눈동자를 더욱 투명하게 만드는 모습을 보았다.`,
       );
       era.println();
       await teio.say_and_wait(
@@ -829,7 +829,7 @@ module.exports = {
       await teio.say_and_wait('평생 한 번뿐인 부탁이야…… 제발.');
       era.println();
       await era.printAndWait(`${you.name}은(는) 결심했다——`);
-      era.printButton(`「트레이너로서 요구할게. 다음 레이스는 포기해」`, 1);
+      era.printButton(`「트레이너로서 요구할게. 다음 레이스는 포기해.」`, 1);
       era.print(
         '【선택 시 토카이 테이오는 텐노상(봄) 출전을 강제로 포기합니다】',
         {
@@ -838,7 +838,7 @@ module.exports = {
         },
       );
       era.printButton(
-        `「넌 내 담당 우마무스메야. 네 꿈을 돕겠다고 줄곧 말해 왔지」`,
+        `「넌 내 담당 우마무스메야. 네 꿈을 돕겠다고 줄곧 말해 왔지.」`,
         2,
       );
       era.print(
@@ -857,11 +857,11 @@ module.exports = {
       }
       if (ret === 1) {
         await era.printAndWait(
-          `${teio.teen_sex_title}은(는) 눈물을 머금었지만 결국 ${you.name}의 뜻에 따를 수밖에 없었다. ${teio.sex}는 말없이 떠났고, 석양이 ${teio.sex}의 뒤로 긴 그림자를 드리웠다.`,
+          `${teio.teen_sex_title}는 눈물을 머금었지만 결국 ${you.name}의 뜻에 따를 수밖에 없었다. ${teio.sex}는 말없이 떠났고, 석양이 ${teio.sex}의 뒤로 긴 그림자를 드리웠다.`,
         );
       } else {
         await era.printAndWait(
-          `${teio.teen_sex_title}은(는) 울면서도 웃으며 ${you.name}의 손을 잡았다. 맞닿은 곳에 체온이 따뜻하게 전해졌다. ${you.name}은(는) 미간을 찌푸렸다. 자신의 선택이 옳은지 알 수 없었다.`,
+          `${teio.teen_sex_title}는 울면서도 웃으며 ${you.name}의 손을 잡았다. 맞잡은 손에서 따뜻한 체온이 전해졌다. ${you.name}은(는) 미간을 찌푸렸다. 자신의 선택이 옳은지 알 수 없었다.`,
         );
         await era.printAndWait(
           `하지만 트레이너란 ${teio.uma_sex_title}의 꿈을 이루어 주는 직업이 아닌가…… 그렇지 않은가.`,
@@ -892,7 +892,7 @@ module.exports = {
       );
       era.println();
 
-      era.printButton('「요즘 성적이 정말 훌륭하다고 했어」', 1);
+      era.printButton('「요즘 성적이 정말 훌륭하다고 했어.」', 1);
       await era.input();
 
       await teio.say_and_wait('으음~ 흐응? 정말 그것뿐이야?');
@@ -904,7 +904,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `자그마한 ${teio.uma_sex_title}는 ${you.name}을(를) 곁눈질하며 입을 다물고 웃다가, 갑자기 표정이 가라앉았다.`,
+        `자그마한 ${teio.uma_sex_title}는 ${you.name}을(를) 곁눈질하며 소리 없이 웃다가, 갑자기 표정이 가라앉았다.`,
       );
       era.println();
 
@@ -918,11 +918,11 @@ module.exports = {
         '내가 지금까지 거둔 성적도, 지금의 영광도, 앞으로의 목표도 전부 너와 나눌 거야. 그러니까 함께 계속 나아가자.',
       );
       await era.printAndWait(
-        `${teio.teen_sex_title}은(는) 한 마디 한 마디 ${you.name}에게 진심을 털어놓았다.`,
+        `${teio.teen_sex_title}는 한마디 한마디 ${you.name}에게 진심을 털어놓았다.`,
       );
       era.println();
 
-      era.printButton('「물론이지」', 1);
+      era.printButton('「물론이지.」', 1);
       await era.input();
 
       await era.printAndWait(`두 사람은 나란히 목표한 곳을 향해 걸어갔다——`);
@@ -956,8 +956,8 @@ module.exports = {
 
       await teio.say_and_wait('같이 가자, 트레이너!');
       await era.printAndWait(`${you.name}은(는) 결정했다——`);
-      era.printButton('고개를 끄덕인다(스태미나+15)', 1);
-      era.printButton('「아니, 규칙은 지키자」(근성+15)', 2);
+      era.printButton('고개를 끄덕인다 (스태미나+15)', 1);
+      era.printButton('「아니, 규칙은 지키자.」 (근성+15)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await era.printAndWait(
@@ -968,7 +968,7 @@ module.exports = {
         );
       } else {
         await era.printAndWait(
-          `자그마한 ${teio.uma_sex_title}는 조금 아쉬워했지만 ${you.name}의 곁으로 돌아와 ${you.name}와(과) 나란히 원래 길을 걸었다.`,
+          `자그마한 ${teio.uma_sex_title}는 조금 아쉬워했지만 ${you.name}의 곁으로 돌아와 ${you.name}과(와) 나란히 원래 길을 걸었다.`,
         );
       }
       return [ret];
@@ -984,7 +984,7 @@ module.exports = {
      */
     const f = async (teio, you) => {
       await era.printAndWait(
-        `왁스를 칠한 단단한 나무 바닥에 사람의 모습이 비쳤다. 그 위에서 한 ${teio.uma_sex_title}가 도복을 입고 다리를 들어 올리며 힘을 쓰는 연습을 하고 있었다.`,
+        `왁스를 칠한 단단한 나무 바닥에 사람의 모습이 비쳤다. 그 위에서 한 ${teio.uma_sex_title}가 도복을 입고 다리를 들어 올리며 힘을 싣는 연습을 하고 있었다.`,
       );
       era.println();
 
@@ -992,7 +992,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `${you.name}은(는) 직접 적절한 비율로 만든 식염수의 뚜껑을 열어 ${teio.sex}에게 건넸다. ${teio.sex}는 그것을 받아 조금씩 일정한 속도로 끝까지 마셨다.`,
+        `${you.name}은(는) 직접 적절한 비율로 만든 식염수가 담긴 병의 뚜껑을 열어 ${teio.sex}에게 건넸다. ${teio.sex}는 그것을 받아 조금씩 일정한 속도로 끝까지 마셨다.`,
       );
       era.println();
 
@@ -1016,13 +1016,13 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 활짝 웃는 담당을 보고 이렇게 답했다——',
       ]);
-      era.printButton('감각에 맡긴다(파워&근성+20, 스킬 포인트+15)', 1);
+      era.printButton('감각에 맡긴다 (파워&근성+20, 스킬 포인트+15)', 1);
       era.printButton(
-        '수련이 우선이다(스피드+30, 스킬 포인트+15, 체력+200)',
+        '수련이 우선이다 (스피드+30, 스킬 포인트+15, 체력+200)',
         2,
       );
       era.printButton(
-        `냉정하게 분석한다(스피드+15, 스태미나+20, 지능+30, 스킬 포인트+30)`,
+        `냉정하게 분석한다 (스피드+15, 스태미나+20, 지능+30, 스킬 포인트+30)`,
         3,
       );
       const ret = await era.input();
@@ -1035,7 +1035,7 @@ module.exports = {
           break;
         case 3:
           await you.say_and_wait(
-            '이 훈련으로 몸의 협응력을 조절할 수 있을 것 같아. 무게중심을 옮겨서 결승선 직전에 순간 가속을 만들어 내는 거야. 해 볼래?',
+            '이 훈련으로 몸의 협응력을 기를 수 있을 것 같아. 무게중심을 옮겨서 결승선 직전에 순간 가속을 만들어 내는 거야. 해 볼래?',
           );
       }
       return [ret];
@@ -1142,7 +1142,7 @@ module.exports = {
       await you.say_and_wait('옥상인가. 조금 오랜만이네.', true);
       await era.printAndWait(`${you.name}은(는) 도시락을 들고 밖으로 나왔다.`);
       await era.printAndWait(
-        `문은 이미 활짝 열려 있었고, ${you.name}의 눈앞에는 ${you.name}의 담당, ${teio.name}이(가) 있었다.`,
+        `문은 이미 활짝 열려 있었고, ${you.name}의 눈앞에는 ${you.name}의 담당, ${teio.name}가 있었다.`,
       );
       era.println();
 
@@ -1161,7 +1161,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `산들바람이 불었다. ${you.name}이(가) 고개를 들자 ${teio.uma_sex_title}는 발끝을 틀고 두 팔을 살짝 들어 한 바퀴 돈 뒤, ${you.name}와(과) 눈을 맞추며 말했다.`,
+        `산들바람이 불었다. ${you.name}이(가) 고개를 들자 ${teio.uma_sex_title}는 발끝을 틀고 두 팔을 살짝 들어 한 바퀴 돈 뒤, ${you.name}과(와) 눈을 맞추며 말했다.`,
       );
       era.println();
 
@@ -1172,7 +1172,7 @@ module.exports = {
 
       era.print(`${you.name}은(는) 대답했다——`);
       era.printButton(
-        '「나는 언제까지나 네 조력자가 되어줄게.」 (스피드&스태미나&지능 +20, 체력 +200, 애정도 +1)',
+        '「나는 언제까지나 네 조력자가 되어 줄게.」 (스피드&스태미나&지능 +20, 체력 +200, 애정도 +1)',
         1,
       );
       era.printButton(
@@ -1182,7 +1182,7 @@ module.exports = {
       const ret = await era.input();
       if (ret === 1) {
         await era.printAndWait(
-          `${teio.teen_sex_title}은(는) 몸을 살짝 숙여 ${you.name}에게 눈부시게 웃어 보였다.`,
+          `${teio.teen_sex_title}는 몸을 살짝 숙여 ${you.name}에게 눈부시게 웃어 보였다.`,
         );
       } else {
         await teio.say_and_wait('또 약속한 거야. 꼭 기억해~');
@@ -1200,7 +1200,7 @@ module.exports = {
      */
     const f = async (teio, you) => {
       await era.printAndWait(
-        `학원 중앙에는 분수가 있고, 그 위에는 삼여신상이 자리하고 있다. 매일 수많은 ${teio.uma_sex_title}와 사람들이 이곳에서 조용히 기도하며 소원을 빈다.`,
+        `학원 중앙에는 분수가 있고, 그 위에는 세 여신상이 자리하고 있다. 매일 수많은 ${teio.uma_sex_title}와 사람들이 이곳에서 조용히 기도하며 소원을 빈다.`,
       );
       await era.printAndWait(
         `${you.name}은(는) 담당을 조금 닮은 얼굴을 바라보며 주머니 속 지갑을 만지작거렸다. 소원을 빌어 볼까……`,
@@ -1233,10 +1233,10 @@ module.exports = {
       );
       era.println();
 
-      era.printButton('「앞으로도 잘 부탁해」(호감도+10, 모든 능력치+5)', 1);
+      era.printButton('「앞으로도 잘 부탁해.」 (호감도+10, 모든 능력치+5)', 1);
       if (era.get('love:3') > 90) {
         era.printButton(
-          '「생각할게, 아니, 늘 네 곁에 있을게」(애정도+1, 의욕 상승, 무작위 능력치 2종+10)',
+          '「생각할게, 아니, 늘 네 곁에 있을게.」 (애정도+1, 의욕 상승, 무작위 능력치 2종+10)',
           2,
         );
       }
@@ -1256,7 +1256,7 @@ module.exports = {
           `귀까지 붉어진 자그마한 ${teio.uma_sex_title}는 ${you.name}의 손을 놓았다.`,
         );
         await era.printAndWait(
-          `잠시 후 ${teio.name}이(가) 떠나고 나서, ${you.name}은(는) 이곳으로 돌아왔다. 입가에 미소를 짓고 지갑의 동전을 모두 연못에 쏟아 넣은 뒤 두 손을 모아, 처음으로 진심 어린 소원을 빌었다.`,
+          `잠시 후 ${teio.name}가 떠나고 나서, ${you.name}은(는) 이곳으로 돌아왔다. 입가에 미소를 짓고 지갑의 동전을 모두 연못에 쏟아 넣은 뒤 두 손을 모아, 처음으로 진심 어린 소원을 빌었다.`,
         );
       }
       return [ret];
@@ -1283,21 +1283,21 @@ module.exports = {
         `카트를 밀면서——속도는 ${teio.sex}와 비교도 되지 않았다——목록과 진열대의 물건들을 대조했다. 그것뿐이라면 나름 여유로웠을 것이다.`,
       );
       await era.printAndWait(
-        `하지만 ${you.name}은(는) 눈 깜짝할 사이에 어디선가 온 물건들로 가득 차는 카트와, 끊임없이 귓가를 스쳐 지나는 바람 소리에 절로 한숨이 나왔다.`,
+        `하지만 ${you.name}은(는) 눈 깜짝할 사이에 어디선가 온 물건들로 가득 차는 카트를 보고, 끊임없이 귓가를 스쳐 지나는 바람 소리를 들으며 절로 한숨을 내쉬었다.`,
       );
       era.println();
       await teio.say_and_wait(
         '트레이너, 빨리빨리! 아직 살 거 많단 말이야. 나 혼자선 다 못 들어, 도움이 필요해! 빨리 안 오면 다 팔린다고!',
       );
       await era.printAndWait(
-        `${you.name}은(는) 하늘을 보며 길게 탄식하며 운명을 받아들이기로 했다. 그리고 소리가 들리는 곳을 향해 전력으로 다리를 움직였다——`,
+        `${you.name}은(는) 하늘을 보며 길게 탄식한 뒤 운명을 받아들이기로 했다. 그리고 소리가 들리는 곳을 향해 전력으로 다리를 움직였다——`,
       );
       era.printButton(
         '필사적으로 테이오의 리듬에 맞춘다 (스피드&파워&근성 +20, 체력 +200, 호감도 +10)',
         1,
       );
       era.printButton(
-        '미리 짜둔 동선에 따라 목표 지점에 도착해 대기한다 (스태미나 +20, 지능 +30, 호감도 +5)',
+        '미리 짜 둔 동선에 따라 목표 지점에 도착해 대기한다 (스태미나 +20, 지능 +30, 호감도 +5)',
         2,
       );
       return [await era.input()];

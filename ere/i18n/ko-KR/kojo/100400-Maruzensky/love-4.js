@@ -52,7 +52,7 @@ module.exports = {
       maru.get_colored_name(),
       '에게 연애에 관해 물었다.',
     ]);
-    await maru.say_and_wait(['……그런 거였구나. 고마워, ', m_call_m, '。']);
+    await maru.say_and_wait(['……그런 거였구나. 고마워, ', m_call_m, '.']);
     era.println();
     await maru.print_and_wait([
       maru.get_colored_name(),
@@ -284,7 +284,7 @@ module.exports = {
     await era.printAndWait([
       '아침 여섯 시. 성급한 태양이 땅을 비추고 있지만, 아침 수영장에는 인기척이 전혀 없었다. 이곳에 있는 건 ',
       you.get_colored_name(),
-      '와(과) 친구 이상 연인 미만인 ',
+      '과(와) 친구 이상 연인 미만인 ',
       maru.get_colored_name(),
       '뿐이었다.',
     ]);
@@ -530,14 +530,14 @@ module.exports = {
       m_call_t,
       '을(를) 근처 바에 불러서 축하했지.',
     ]);
-    await maru.say_and_wait(['한껏 들떠서 네 이야기를 했더니,']);
+    await maru.say_and_wait(['한껏 들떠서 네 이야기를 했더니, ']);
     await maru.say_and_wait([
       '「잘 맞는 트레이너를 만난 모양이네.」 잔을 흔들며 ',
       maru.sex,
       '는 취기 어린 목소리로 맞장구쳤어.',
     ]);
     await maru.say_and_wait(
-      '「레이스의 영광보다 바람을 즐기는 게 더 좋아.」 말은 그렇게 했지만,',
+      '「레이스의 영광보다 바람을 즐기는 게 더 좋아.」 말은 그렇게 했지만, ',
     );
     await maru.say_and_wait(
       '마음속으로는 네가 내 등을 따라잡을 수 있을지 조용히 기대했어.',
@@ -568,10 +568,10 @@ module.exports = {
     await maru.say_and_wait('그 뒤로 우리는 목표를 하나씩 이루어 나갔어.');
     await maru.say_and_wait('어느새 너는 지금 내 옆방에서 살고 있네.');
     await maru.say_and_wait('매일 아침 깨우는 것도 내 일과가 되었지.');
-    await maru.say_and_wait('응, 응, 대답만 하고는 다시 뒤척이며 자려고 하면,');
+    await maru.say_and_wait('응, 응, 대답만 하고는 다시 뒤척이며 자려고 하면, ');
     await maru.say_and_wait('「이제 일어날 시간이야.」');
     await maru.say_and_wait('항의는 무시하고 너와 이불을 억지로 떼어 놓지.');
-    await maru.say_and_wait('네가 하품하면서 오늘의 계획을 시작할 때면,');
+    await maru.say_and_wait('네가 하품하면서 오늘의 계획을 시작할 때면, ');
     await maru.say_and_wait('산들바람이 내 마음을 어루만지는 것 같아.');
     await maru.say_and_wait('매일매일 날씨가 맑아.');
     await maru.say_and_wait('트레이닝할 때도 마찬가지야.');
@@ -640,7 +640,7 @@ module.exports = {
   async '89-2'(maru, you, callname, y_call_m) {
     await era.printAndWait([
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       maru.get_colored_name(),
       '의 동거 생활도 어느덧 꽤 오래되었다.',
     ]);
@@ -747,7 +747,7 @@ module.exports = {
     await era.printAndWait([
       '시간은 ',
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       maru.get_colored_name(),
       '의 기대 속에서 빠르게 흘러, 어느새 일요일이 되었다.',
     ]);
@@ -887,7 +887,7 @@ module.exports = {
       await era.printAndWait(
         '모래사장에 미련이라도 남은 듯 좀처럼 떠나지 않았다.',
       );
-      await maru.say_and_wait(['바람이 멎었네, ', callname, '。']);
+      await maru.say_and_wait(['바람이 멎었네, ', callname, '.']);
       await era.printAndWait([
         maru.get_colored_name(),
         '는 오랫동안 바다를 바라보았다.',
@@ -925,7 +925,7 @@ module.exports = {
   async 99(maru, you, callname, y_call_m) {
     await era.printAndWait([
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       maru.get_colored_name(),
       '는 수많은 어려움을 겪은 끝에 마침내 서로의 마음을 확인했다.',
     ]);
@@ -941,7 +941,7 @@ module.exports = {
       you.get_colored_name(),
       '은(는) 도무지 잠들 수 없어 머리맡에 있던 ',
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       maru.sex,
       '의 사진첩을 집어 들었다.',
     ]);
@@ -954,7 +954,7 @@ module.exports = {
       maru.sex,
       '는 사진으로 ',
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       maru.sex,
       '의 추억을 남기는 쪽을 더 좋아했다. ',
       you.get_colored_name(),
@@ -993,7 +993,7 @@ module.exports = {
       you.get_colored_name(),
       '은(는) 사진첩을 팔락팔락 넘기다가, 마침내 ',
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       maru.sex,
       '가 여름 합숙 때 찍은 사진에서 멈췄다.',
     ]);
@@ -1009,7 +1009,7 @@ module.exports = {
       maru.sex,
       '에게 팔을 잡혀 억지로 함께 찍었던 사진을 보았다. 당황한 ',
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       maru.sex,
       '의 미소가 선명하게 대비되었다.',
     ]);
@@ -1018,7 +1018,7 @@ module.exports = {
     await era.printAndWait([
       '겨울옷을 입은 ',
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       maru.sex,
       '가 이곳에서 그리 멀지 않은 산에서 찍은 사진이었다.',
     ]);

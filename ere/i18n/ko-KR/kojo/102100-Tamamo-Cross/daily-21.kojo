@@ -305,7 +305,7 @@ o_s_restaurant:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「내는 그냥 이 콩나물밥 소자에 단무지나 묵을란다…… 뭐? %CALLNAME%가 안 된다꼬?」"
+          - "「내는 그냥 이 콩나물밥 소자에 단무지나 묵을란다…… 뭐? %CALLNAME%이(가) 안 된다꼬?」"
   - random: true
     lines:
       - color: %COLOR%
@@ -392,7 +392,7 @@ s_a_dating:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「하, 내 진짜 배를 잘못 탔구마……」"
+          - "「하, 내 진짜 잘못 걸려들었구마……」"
 
 s_r_lunch:
   - random: true
@@ -537,8 +537,8 @@ out_church:
         content: %CHARA%
       - "「감사합니더, 진짜 감사합니더—!」"
   -
-  - "정말 이런 우연이 있을까? %YOU% 는 기뻐서 소리치는 %CHARA%를 보며 생각에 잠겼다."
+  - "정말 이런 우연이 있을까? %YOU%은(는) 기뻐서 소리치는 %CHARA%를 보며 생각에 잠겼다."
   - if: d.dice > 0
-    content: "당첨된 덕분인지, %CHARA%의 기운과 정신이 부쩍 솟아난 것 같다! 잘됐네 잘됐어……"
+    content: "당첨된 덕분인지, %CHARA%의 기운이 부쩍 돌아온 것 같다! 잘됐네 잘됐어……"
   - if: d.dice === 0
     content: "당첨은 됐지만, 역시 %CHARA%의 상태와는 별개인 모양이다……"

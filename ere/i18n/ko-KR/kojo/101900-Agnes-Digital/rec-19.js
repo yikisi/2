@@ -27,7 +27,7 @@ module.exports = {
         '들을 주시하고 있었다. 그런데 문득 시야 한구석에, 관중석 그늘에 숨어 있는 분홍색 그림자가 들어왔다.',
       ]);
       era.println();
-      await you.say_and_wait(`음…… ${digital.uma_sex_title}？`);
+      await you.say_and_wait(`음…… ${digital.uma_sex_title}?`);
 
       await era.printAndWait(
         `
@@ -234,7 +234,7 @@ module.exports = {
       await era.printAndWait(
         `그럼 이 ${digital.uma_sex_title}는 어떤가? ${
           digital.name
-        }이라는 이름의 ${digital.uma_sex_title}는 잔디와 더트를 동시에 달릴 수 없다는 사실로 고민하고 있다. 하지만 다른 ${digital.uma_sex_title}들과 달리 ${
+        }이라는 이름의 ${digital.uma_sex_title}는 잔디와 더트를 동시에 달릴 수 없다는 사실 때문에 고민하고 있다. 하지만 다른 ${digital.uma_sex_title}들과 달리 ${
           digital.sex
         }에게는 그 재능이 있다.`,
       );
@@ -287,7 +287,7 @@ module.exports = {
         `${digital.sex}는 이해한 모양이다. 도전할 마음이 생긴 걸까?`,
       );
       await digital.say_and_wait(
-        `${digital.uma_sex_title}짱들을 정성껏 모신 보상이 드디어 결실을 맺었어요!`,
+        `${digital.uma_sex_title}짱들을 정성껏 모신 보람이 드디어 있네요!`,
       );
       await digital.say_and_wait('우히야아아아아!');
       await digital.say_and_wait('결정했어요! 디지땅, 올라운더 왕이 되겠어요!');

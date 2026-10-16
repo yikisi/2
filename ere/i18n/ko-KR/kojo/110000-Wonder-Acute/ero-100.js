@@ -32,7 +32,7 @@ module.exports = {
       await you.print_and_wait(
         '다시 입을 맞추고, 다시 끌어안는다. 상대의 입술에 자신의 흔적을 남기고 싶다.',
       );
-      await acute.say_and_wait(['……저기, 알고 있니, ', callname, '。']);
+      await acute.say_and_wait(['……저기, 알고 있니, ', callname, '.']);
       await you.print_and_wait([
         '잠깐 떨어진 뒤, ',
         y_call_a,
@@ -283,7 +283,7 @@ module.exports = {
       await you.print_and_wait(
         '거대한 짐승에게 노려진 먹잇감처럼, 발버둥 칠수록 상대는 더욱 달아오른다.',
       );
-      await acute.say_and_wait(['하아❤️~ 부드럽게 해 줄게, ', callname, '。']);
+      await acute.say_and_wait(['하아❤️~ 부드럽게 해 줄게, ', callname, '.']);
       await you.print_and_wait([
         '뜨거운 숨결과 함께 ',
         y_call_a,
@@ -1025,7 +1025,7 @@ module.exports = {
       ]);
       await you.print_and_wait([
         acute.sex,
-        '은(는) 스스로 위치를 고쳐, 끝을 삼키고, 상하로 핥는다——',
+        '는 스스로 위치를 고쳐, 끝을 삼키고, 상하로 핥는다——',
       ]);
       await acute.say_and_wait([
         '다른 ❤️……',
@@ -1250,7 +1250,7 @@ module.exports = {
     await you.print_and_wait([
       '얼굴은 음란해 보이지 않는데 ',
       acute.child_sex_title,
-      '이(가) 내지 말아야 할 상스러운 소리를, 몇 번이고 흘린다.',
+      '가 내지 말아야 할 상스러운 소리를, 몇 번이고 흘린다.',
     ]);
   },
   /**
@@ -1423,7 +1423,7 @@ module.exports = {
       await acute.print_and_wait([
         '나의 뒤에 엎드려 ',
         callname,
-        '가 탐욕스럽게 입술과 혀를 움직인다——',
+        '이(가) 탐욕스럽게 입술과 혀를 움직인다——',
       ]);
     }
   },
@@ -1942,7 +1942,7 @@ module.exports = {
       await you.print_and_wait(
         '넣는다, 넣는다, 넣는다…… 아래를 멈추지 않고 흔든다.',
       );
-      await you.print_and_wait(['더 정액을, ', y_call_a, '의 몸에 더 정액을,']);
+      await you.print_and_wait(['더 정액을, ', y_call_a, '의 몸에 더 정액을, ']);
       await acute.say_and_wait('구❤️…… 거기❤️ 대단해❤️~');
       await you.print_and_wait([
         y_call_a,
@@ -1981,7 +1981,7 @@ module.exports = {
       await acute.say_and_wait([
         '응? 무엇을 하고 있냐고요? 응…… 이 자세가 ',
         callname,
-        '를 흥분시킨다고 들어서~',
+        '을(를) 흥분시킨다고 들어서~',
       ]);
       await you.print_and_wait([
         '말하면서 ',
@@ -2189,7 +2189,7 @@ module.exports = {
         await acute.say_and_wait([
           '하지만……',
           callname,
-          '를 봐줄 수 있다면, 어떤 고통도 분명 넘을 수 있어요❤️~',
+          '을(를) 봐줄 수 있다면, 어떤 고통도 분명 넘을 수 있어요❤️~',
         ]);
         await you.print_and_wait([
           '자신의 얼굴을 받치고, 눈앞의 ',
@@ -2216,7 +2216,7 @@ module.exports = {
         y_call_a,
         '의 엉덩이를 들어 올리지 않아도 ',
         acute.sex,
-        '은(는) 스스로 상하로 움직일 것이다.',
+        '는 스스로 상하로 움직일 것이다.',
       ]);
       await acute.say_and_wait(['❤️~']);
       await you.print_and_wait([
@@ -2391,7 +2391,7 @@ module.exports = {
         await acute.say_and_wait([
           '처음 피가……',
           callname,
-          '에게, 자국을 남겨졌습니다',
+          '에게, 자국을 남겨졌습니다.',
         ]);
         await you.print_and_wait([
           y_call_a,
@@ -2527,7 +2527,7 @@ module.exports = {
         await acute.say_and_wait([
           '처녀를 ',
           callname,
-          '에게 빼앗겼네요~ 잘했습니다',
+          '에게 빼앗겼네요~ 잘했습니다.',
         ]);
         await you.print_and_wait([
           '무언가 큰 업적을 세운 것처럼 ',
@@ -3028,7 +3028,7 @@ module.exports = {
       await you.print_and_wait([
         '얼굴의 통증에',
         acute.sex,
-        '은(는) 조금 놀란 듯하다. 하지만 곧',
+        '는 조금 놀란 듯하다. 하지만 곧',
         y_call_a,
         '은(는) 놀라움에서 벗어나 무언가를 깨달은 듯 온화하게 미소 짓는다.',
       ]);

@@ -17,7 +17,7 @@ module.exports = {
         treve.get_colored_name(),
         '는 기숙사에서 ',
         you.get_colored_name(),
-        '와(과) 프랑스에서 함께 들었던 노래를 떠올렸다.',
+        '과(와) 프랑스에서 함께 들었던 노래를 떠올렸다.',
       ]);
       era.setColor(treve.color);
       era.setAlign('center');
@@ -126,7 +126,7 @@ module.exports = {
       await era.printAndWait('치마는 길지 않아 허벅지 중간까지 내려온다.');
       await era.printAndWait([
         treve.get_colored_name(),
-        '의 다리가 가늘다. 다리에는 하얀 무릎까지 오는 양말—— 반투명하다',
+        '의 다리가 가늘다. 다리에는 하얀 무릎까지 오는 양말—— 반투명하다.',
       ]);
       await era.printAndWait(
         '양말과 치마 사이로 드러난 다리도 유난히 매혹적이다.',
@@ -150,7 +150,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         treve.get_colored_name(),
         '의 코끝은 한 치도 채 되지 않는 거리다.',
       ]);
@@ -165,7 +165,7 @@ module.exports = {
         );
       }
       await era.printAndWait(
-        `하지만 지금 ${treve.sex}이(가) 앞으로 숙이면, 보이는 모습이 달라진다.`,
+        `하지만 지금 ${treve.sex}가 앞으로 숙이면, 보이는 모습이 달라진다.`,
       );
       await era.printAndWait(
         '원피스에 감싸인 반구와, 목의 칼라로 이어지는 두 개의 리본이, 금방이라도 끊어질 듯 팽팽하게 당겨져 있다.',
@@ -174,7 +174,7 @@ module.exports = {
         await era.printAndWait([
           '남자와 여자, 단 둘이서라도 ',
           treve.sex,
-          '은(는) ',
+          '는 ',
           you.get_colored_name(),
           '이(가) 선을 넘는 것을 두려워하지 않는다.',
         ]);
@@ -302,7 +302,7 @@ module.exports = {
           '의 신발을 벗기고 침대로 올라가게 한 뒤, 다리를 적당히 벌리고 무릎을 꿇게 했다.',
         ]);
         await era.printAndWait([
-          `${treve.teen_sex_title}은(는) 부드럽게 앉았고, 파란 옷자락이 작은 원을 그리며 퍼져 나갔다.`,
+          `${treve.teen_sex_title}는 부드럽게 앉았고, 파란 옷자락이 작은 원을 그리며 퍼져 나갔다.`,
         ]);
         await era.printAndWait([
           you.get_colored_name(),
@@ -316,7 +316,7 @@ module.exports = {
           treve.get_colored_name(),
           '은(는) 저항하지 않고',
           you.get_colored_name(),
-          '의 뜻대로 눕혀진다',
+          '의 뜻대로 눕혀진다.',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
@@ -337,7 +337,7 @@ module.exports = {
           '은(는) 유륜에서 끊이지 않는 쾌감을 느끼며 자세를 유지한다.',
         ]);
         await era.printAndWait([
-          `${treve.sex}은(는) 이 때 깨달았다. 자신은 이미 손을 들고 뒤의`,
+          `${treve.sex}는 이 때 깨달았다. 자신은 이미 손을 들고 뒤의`,
           you.get_colored_name(),
           '의 머리를 감싸 안고 있었다. 마치 항복하는 듯한 자세다.',
         ]);
@@ -387,7 +387,7 @@ module.exports = {
         ]);
         await era.printAndWait([
           you.get_colored_name(),
-          `은(는) 뒤에서 ${treve.sex}을(를) 껴안고, 양손을 교차시켜 흰 토끼 한 쌍을 꽉 쥐었다.`,
+          `은(는) 뒤에서 ${treve.sex}를 껴안고, 양손을 교차시켜 흰 토끼 한 쌍을 꽉 쥐었다.`,
         ]);
         era.printButton('「생기가 넘치네.」', 1);
         era.printButton(
@@ -670,7 +670,7 @@ module.exports = {
         '비린내가 입안으로 퍼져나가, 치아 사이사이까지 파고든다.',
       );
       await era.printAndWait([
-        '들이켤 때마다,',
+        '들이켤 때마다, ',
         treve.get_colored_name(),
         '은(는) 수치심으로 가득 차게 된다.',
       ]);
@@ -688,7 +688,7 @@ module.exports = {
         true,
       );
       await era.printAndWait([
-        '힘을 주어 밀어 넣을 때마다,',
+        '힘을 주어 밀어 넣을 때마다, ',
         you.get_colored_name(),
         '은(는) 귀두를 그녀의 구강 가장 깊은 곳까지 밀어 넣었다.',
       ]);
@@ -786,7 +786,7 @@ module.exports = {
       await treve.print_and_wait(
         `${callname}을(를) 기쁘게 할 가슴은 탄력도 일급품이에요. ${
           you.sex
-        }이(가) 한 번 주무르면 손에 착 달라붙는, 이상적인 가슴이죠.`,
+        }가 한 번 주무르면 손에 착 달라붙는, 이상적인 가슴이죠.`,
       );
       await treve.print_and_wait(
         `저는 ${callname} 말고 다른 사람에게는 닿고 싶지 않아요.`,
@@ -856,7 +856,7 @@ module.exports = {
         `목, 겨드랑이, 배, 옆구리. 파크는 정말로 온몸이 약점이네.`,
       );
       await treve.print_and_wait(
-        `${you.sex}이(가) 손가락을 아주 조금 움직일 때마다, 수십 배의 힘으로 들어 올려지는 기분이 들어요.`,
+        `${you.sex}가 손가락을 아주 조금 움직일 때마다, 수십 배의 힘으로 들어 올려지는 기분이 들어요.`,
       );
       await treve.print_and_wait(
         `아니에요, 제 몸이 물고기처럼 튀어 오르고 있어요. ${callname}은(는) 한 번 쓸어낼 때마다 정신없이 튀어 올라요.`,
@@ -1205,7 +1205,7 @@ module.exports = {
         '아양 떠는 달콤한 말이 흘러나와요. 어쩔 수 없잖아요? 암컷이 이길 수 없는 육봉이니까요.',
       );
       await treve.print_and_wait(
-        `꼬박 2주 동안 머리는 ${callname}으로 타버렸어요.`,
+        `꼬박 2주 동안 머리는 ${callname}(으)로 타버렸어요.`,
       );
       await treve.print_and_wait(
         `${callname}의 반쯤 발기한 남근을 머금고, 혀로 천천히 귀두를 반 바퀴 돌려요.`,
@@ -1351,7 +1351,7 @@ module.exports = {
         '전부 저에게 맡기고 한 방울도 놓치지 말고 전부……',
       );
       await treve.print_and_wait(
-        `다리를 조여 ${you.sex}이(가) 육봉을 빼지 못하게 해요.`,
+        `다리를 조여 ${you.sex}가 육봉을 빼지 못하게 해요.`,
       );
       await treve.print_and_wait('인간 정도의 힘으로 저항해도 소용없어요?');
       await treve.print_and_wait(`${callname}, 사정, 완료.`);
@@ -1398,7 +1398,7 @@ module.exports = {
       );
       await treve.print_and_wait('굶주림과 갈증은 채워졌어요. 하지만……');
       await treve.print_and_wait(
-        `저는 ${callname}을(를) 다시 침대로 밀어 눕혀요. 왜냐하면: ${you.sex}이(가) 아침 발기를 하고 있었으니까요.`,
+        `저는 ${callname}을(를) 다시 침대로 밀어 눕혀요. 왜냐하면: ${you.sex}가 아침 발기를 하고 있었으니까요.`,
       );
       await treve.print_and_wait(
         `저는 ${you.sex}의 마른 입에 탐욕스러운 키스를 겹쳐요.`,
@@ -1448,7 +1448,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         treve.get_colored_name(),
-        '은(는) 갑작스러운 자극에 목소리를 내고,',
+        '은(는) 갑작스러운 자극에 목소리를 내고, ',
         you.get_colored_name(),
         '은(는) 동시에 두 개의 유두를 잡아당긴다.',
       ]);
@@ -1460,13 +1460,13 @@ module.exports = {
       await era.printAndWait([
         '틈새를 ',
         you.get_colored_name(),
-        '이(가) 쓰다듬자,',
+        '이(가) 쓰다듬자, ',
         treve.get_colored_name(),
         '의 몸이 떨린다.',
       ]);
       await treve.say_and_wait('만져줘요……');
       await era.printAndWait([
-        '바랐던 대로,',
+        '바랐던 대로, ',
         you.get_colored_name(),
         '의 손가락이 음핵에 닿는다.',
       ]);
@@ -1488,12 +1488,12 @@ module.exports = {
       await era.printAndWait('좋아하는 곳인데.');
       await era.printAndWait([
         you.get_colored_name(),
-        '은(는) 계속해서 몰아붙이고,',
+        '은(는) 계속해서 몰아붙이고, ',
         treve.get_colored_name(),
         '의 머리가 흐릿해져 아무것도 생각할 수 없게 될 때까지.',
       ]);
       await era.printAndWait([
-        '그리고 제정신으로 돌아왔을 때,',
+        '그리고 제정신으로 돌아왔을 때, ',
         treve.get_colored_name(),
         '은(는) 스스로 허벅지를 벌리고 있었다.',
       ]);
@@ -1502,13 +1502,13 @@ module.exports = {
         '은(는) 만족스러운 듯 속옷을 벗긴다.',
       ]);
       await era.printAndWait([
-        '이 다음을 기대하고 있는지,',
+        '이 다음을 기대하고 있는지, ',
         treve.get_colored_name(),
         '의 자궁은 계속 술렁이고 있다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '이(가) 바지를 벗고 이미 발기한 그것을 보여주자,',
+        '이(가) 바지를 벗고 이미 발기한 그것을 보여주자, ',
         treve.get_colored_name(),
         '은(는) 작게 절정한다.',
       ]);
@@ -1521,7 +1521,7 @@ module.exports = {
       }
       await era.printAndWait([
         you.get_colored_name(),
-        '은(는) 자신의 성기를 잡고,',
+        '은(는) 자신의 성기를 잡고, ',
         treve.get_colored_name(),
         '의 질구에 가까이 대며 천천히 삽입한다.',
       ]);
@@ -1530,13 +1530,13 @@ module.exports = {
       );
       await treve.say_and_wait('아아아아! 안 돼요!!');
       await era.printAndWait([
-        '뿌리 근처까지 집어삼킨 것을 확인하고,',
+        '뿌리 근처까지 집어삼킨 것을 확인하고, ',
         you.get_colored_name(),
         '은(는) 움직이기 시작한다.',
       ]);
       await treve.say_and_wait('앗! 앗! 격렬해요……');
       await era.printAndWait([
-        '허리에 부딪힐 때마다 퍽 하는 소리가 나며 질벽을 쓸리고,',
+        '허리에 부딪힐 때마다 퍽 하는 소리가 나며 질벽을 쓸리고, ',
         treve.get_colored_name(),
         '은(는) 쾌감 속에서 신음할 수밖에 없다.',
       ]);
@@ -1544,7 +1544,7 @@ module.exports = {
         `육봉의 움직임에 맞춰, ${treve.sex}의 몸이 위아래로 움직인다.`,
       );
       await era.printAndWait([
-        '표정 관리는 이미 무너졌지만,',
+        '표정 관리는 이미 무너졌지만, ',
         treve.get_colored_name(),
         '은(는) 이제 신경 쓰지 않는다.',
       ]);
@@ -1561,19 +1561,19 @@ module.exports = {
         '의 자궁은 귀두와 입맞춤하며 정액을 부어받는다.',
       ]);
       await era.printAndWait([
-        '마침내 전부 쏟아내자,',
+        '마침내 전부 쏟아내자, ',
         you.get_colored_name(),
         '은(는) 육봉을 뽑는다. 동시에 백탁이 역류한다.',
       ]);
       await era.printAndWait([
         treve.get_colored_name(),
-        '이(가) 자신의 배를 보고 있을 때,',
+        '이(가) 자신의 배를 보고 있을 때, ',
         you.get_colored_name(),
         '이(가) 다시 그녀의 위로 압박해 온다.',
       ]);
       await era.printAndWait('입술이 겹쳐지고 혀가 얽힌다.');
       await era.printAndWait([
-        '뜨거운 키스를 잠시 계속한 뒤,',
+        '뜨거운 키스를 잠시 계속한 뒤, ',
         you.get_colored_name(),
         '은(는) 다시 기운을 차린 그것을 밀어 넣는다.',
       ]);
@@ -1604,7 +1604,7 @@ module.exports = {
       await era.printAndWait([
         '그런 ',
         treve.get_colored_name(),
-        '을(를) 보고,',
+        '을(를) 보고, ',
         you.get_colored_name(),
         '은(는) 만족스러운 미소를 지은다.',
       ]);
@@ -1612,9 +1612,9 @@ module.exports = {
         treve.get_colored_name(),
         '은(는) 양발로 ',
         you.get_colored_name(),
-        '의 등을 안고,',
+        '의 등을 안고, ',
         you.get_colored_name(),
-        '을 놓아주지 않는다.',
+        '을(를) 놓아주지 않는다.',
       ]);
       await treve.say_and_wait('응! 내보내줘요, 전부 줘요.');
       await era.printAndWait([
@@ -1648,7 +1648,7 @@ module.exports = {
       await era.printAndWait('요도에 남은 것까지 다 빨아먹는다.');
       await era.printAndWait([
         you.get_colored_name(),
-        '의 육봉은 다시 깨끗하게 발기하고,',
+        '의 육봉은 다시 깨끗하게 발기하고, ',
         treve.get_colored_name(),
         '에게 자신의 비소로 옮겨진다.',
       ]);
@@ -1658,14 +1658,14 @@ module.exports = {
       await era.printAndWait('질 안의 주름 하나하나가 쓸린다.');
       await era.printAndWait([
         you.get_colored_name(),
-        '의 너무 격렬한 움직임에,',
+        '의 너무 격렬한 움직임에, ',
         treve.get_colored_name(),
         '은(는) 팔의 지탱이 무너지고, 엉덩이를 내민 형태가 된다.',
       ]);
       era.printButton('「파크의 그곳은 기분 좋아. 꽉 조여서 최고야.」', 1);
       await era.input();
       await era.printAndWait([
-        '허리를 부딪칠 때마다,',
+        '허리를 부딪칠 때마다, ',
         treve.get_colored_name(),
         '의 몸이 떨린다.',
       ]);
@@ -1687,14 +1687,14 @@ module.exports = {
       ]);
       era.drawLine();
       await era.printAndWait([
-        '잠시 쉬고,',
+        '잠시 쉬고, ',
         you.get_colored_name(),
         '에게 깜짝 선물이라고 말하는 ',
         treve.get_colored_name(),
         '은(는) 가볍게 달려 옆의 탈의실로 들어간다.',
       ]);
       await era.printAndWait([
-        '잠시 후,',
+        '잠시 후, ',
         treve.get_colored_name(),
         '의 작은 머리가 탈의실 문틈 사이로 튀어나온다.',
       ]);
@@ -1704,17 +1704,17 @@ module.exports = {
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '은(는) 손을 뻗어,',
+        '은(는) 손을 뻗어, ',
         treve.get_colored_name(),
         '의 입을 가리는 작은 손을 잡고 끌어당겨 뒤로 비튼다.',
       ]);
       await era.printAndWait([
-        '작은 손이 입에서 떨어진 순간,',
+        '작은 손이 입에서 떨어진 순간, ',
         treve.get_colored_name(),
         '의 혀를 내밀고 뜨거운 숨을 내뱉는 작은 입이 드러난다.',
       ]);
       await era.printAndWait([
-        '소리를 참지 못할 것을 두려워하는지,',
+        '소리를 참지 못할 것을 두려워하는지, ',
         treve.get_colored_name(),
         '은(는) 급히 아랫입술을 깨문다.',
       ]);
@@ -1726,13 +1726,13 @@ module.exports = {
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '이(가) 그녀를 놓아주자,',
+        '이(가) 그녀를 놓아주자, ',
         treve.get_colored_name(),
         '은(는) 암캐처럼 양손을 바닥에 짚고, 목에는 눈에 띄게 검은 가죽 목줄이가 있다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '은(는) 사슬을 강하게 당겨,',
+        '은(는) 사슬을 강하게 당겨, ',
         treve.get_colored_name(),
         '의 상반신 전체를 억지로 뒤로 젖히게 한다.',
       ]);
@@ -1756,14 +1756,14 @@ module.exports = {
         treve.get_colored_name(),
         '은(는) ',
         you.get_colored_name(),
-        '의 명령으로 작은 얼굴을 바닥에 대고,',
+        '의 명령으로 작은 얼굴을 바닥에 대고, ',
         you.get_colored_name(),
         '에게 엉덩이를 높게 치켜들고 두 손가락으로 붉게 부어오른 양 음순을 벌려 아까 안으로 사정당한 그곳을 ',
         you.get_colored_name(),
         '에게 보여준다.',
       ]);
       await era.printAndWait([
-        '정액이 조금씩 바닥으로 흘러내리고,',
+        '정액이 조금씩 바닥으로 흘러내리고, ',
         you.get_colored_name(),
         '은(는) 충분히 만족한다.',
       ]);
@@ -1773,7 +1773,7 @@ module.exports = {
         '제 오나홀 보지에 당신의 고귀한 정액을 부어주세요❤️~',
       );
       await era.printAndWait([
-        '부리로 쪼는 듯한 키스와 함께,',
+        '부리로 쪼는 듯한 키스와 함께, ',
         you.get_colored_name(),
         '의 육봉은 다시 애마를 침범하기 시작한다.',
       ]);

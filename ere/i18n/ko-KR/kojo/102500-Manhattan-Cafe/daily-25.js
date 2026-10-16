@@ -76,7 +76,7 @@ module.exports = {
     await coffee.say_and_wait([
       '그렇군요…… ',
       callname,
-      '은 보기보다 대단하시네요……',
+      '은(는) 보기보다 대단하시네요……',
     ]);
     await era.printAndWait('이거 칭찬 들은 거 맞나……');
   },
@@ -113,7 +113,7 @@ module.exports = {
       await era.printAndWait([
         '……잠든 ',
         coffee.get_colored_name(),
-        '의 얼굴을 자세히 관찰해 보았다. 인형처럼 하얗고 정교한 얼굴이 완전히 긴장을 풀고, 가느다란 숨소리를 내고 있다.',
+        '의 얼굴을 자세히 관찰해 보았다. 인형처럼 하얗고 정교한 얼굴에는 긴장한 기색이 전혀 없고, 가느다란 숨소리만 들린다.',
       ]);
     } else {
       const buffer = [];
@@ -201,7 +201,7 @@ module.exports = {
       await coffee.say_and_wait([
         '이건…… 저에게 주시는 건가요? 선물…… 감사해요, ',
         callname,
-        '。',
+        '.',
       ]);
     } else {
       await coffee.say_and_wait(
@@ -406,7 +406,7 @@ module.exports = {
       await coffee.say_and_wait([
         '친구가 한 일이에요…… 돌려놓는 게 좋을까요, ',
         callname,
-        '？',
+        '?',
       ]);
       await era.printAndWait(
         '점원을 곤란하게 하지 않도록 결국 인형은 가져가기로 했다.',
@@ -526,7 +526,7 @@ module.exports = {
         await era.printAndWait([
           '그 주인공은 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           coffee.get_colored_name(),
           '였다. 지금보다 몇 살은 더 들어 보였고, 장소는 낯선 방이었다.',
         ]);
@@ -534,7 +534,7 @@ module.exports = {
         await era.printAndWait([
           '눈앞의 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           coffee.get_colored_name(),
           '는 실오라기 하나 걸치지 않은 채 방 안에서 격렬하게 몸을 섞고 있었다.',
         ]);
@@ -565,7 +565,7 @@ module.exports = {
         await era.printAndWait([
           '신사 안의 ',
           you.get_colored_name(),
-          '와(과) 얼굴이 새빨개진 ',
+          '과(와) 얼굴이 새빨개진 ',
           coffee.get_colored_name(),
           '는 눈을 마주쳤다가 천천히 피했고, 둘 다 말이 없었다.',
         ]);
@@ -583,7 +583,7 @@ module.exports = {
         await era.printAndWait([
           '그 주인공은 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           coffee.get_colored_name(),
           '였다. 나이는 지금과 크게 다르지 않았고, 트레이너 제복과 트레센 교복 차림 그대로 익숙한 트레이너실 안에 있었다.',
         ]);
@@ -591,7 +591,7 @@ module.exports = {
         await era.printAndWait([
           '눈앞의 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           coffee.get_colored_name(),
           '는 트레이너실 소파에 바짝 붙어 앉아 있었다. ',
           you.get_colored_name(),
@@ -613,7 +613,7 @@ module.exports = {
         await era.printAndWait([
           '신사 안의 ',
           you.get_colored_name(),
-          '와(과) 얼굴이 새빨개진 ',
+          '과(와) 얼굴이 새빨개진 ',
           coffee.get_colored_name(),
           '는 눈을 마주친 채 말이 없었다.',
         ]);
@@ -634,7 +634,7 @@ module.exports = {
         await era.printAndWait([
           '그 주인공은 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           coffee.get_colored_name(),
           '였다. 나이는 지금과 크게 다르지 않았고, 트레이너 제복과 트레센 교복 차림 그대로 익숙한 트레이너실 안에 있었다.',
         ]);
@@ -796,7 +796,7 @@ module.exports = {
       era.print([
         '갑자기 누군가 옷자락을 잡아당긴 것 같아 돌아보니 ',
         coffee.get_colored_name(),
-        '가 조금 떨어진 휴게용 의자에서 잠들어 있었다. 쉬는 것을 방해하기가 안쓰러워 ',
+        '가 조금 떨어진 휴게용 의자에서 잠들어 있었다. 잠을 깨우기 미안해 ',
         you.get_colored_name(),
         '은(는) 겉옷을 덮어 주고 ',
         coffee.sex,
@@ -892,7 +892,7 @@ module.exports = {
       await era.printAndWait('——딸랑딸랑.');
       await coffee.say_and_wait('……어서 오세요.');
       await era.printAndWait(
-        '평소에는 없는, 차분한 분위기의 카페만이 문을 연다.',
+        '평소에는 없는, 차분한 분위기의 카페가 문을 연다.',
       );
       await coffee.say_and_wait([
         callname,

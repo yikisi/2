@@ -18,7 +18,7 @@ module.exports = {
       await era.printAndWait([
         '오늘은 ',
         gs.get_colored_name(),
-        '와(과)의 훈련이 어떻게든 끝났다.',
+        '과의 훈련이 어떻게든 끝났다.',
       ]);
       era.println();
 
@@ -27,19 +27,19 @@ module.exports = {
 
       await era.printAndWait([
         gs.get_colored_name(),
-        '은(는) 기지개를 켜고 가볍게 뛰어갔다. 그러더니 다시 돌아왔다.',
+        '은 기지개를 켜고 가볍게 뛰어갔다. 그러더니 다시 돌아왔다.',
       ]);
       era.println();
 
       await gs.say_and_wait('좋아, 추가 트레이닝이다! 지금 나, 완전 신나거든!');
       await gs.say_and_wait([
         callname,
-        ', 추가 트레이닝이 뭔지도 모르냐? 진구처럼 소식이 어둡네～',
+        ', 추가 트레이닝이 뭔지도 모르냐? 진구처럼 소식이 어둡네~',
       ]);
       await gs.say_and_wait(
         '추가 트레이닝은 추가 트레이닝의 줄임말이다—— 온 우주 천만 골쉽 팬들 사이에서 대유행 중이지!',
       );
-      await gs.say_and_wait('후～ 나도 좀 피곤하네. 이 다음에는 뭐 할까?');
+      await gs.say_and_wait('내 트레이너라면 이런 것도 좀 더 깊이 연구해야지.');
 
       era.printButton('「그럼 우리도 유행에 뒤처질 수 없지.」', 1);
       era.printButton('「아니, 지금 유행은 CD (Cool Down)야!」', 2);
@@ -94,11 +94,11 @@ module.exports = {
      */
     const f = async (gs, you) => {
       await era.printAndWait(
-        `레이스 전에 ${you.name}에게 남긴 불안과는 달리 ${gs.name}은(는) 힘차고 멋진 레이스를 보여 주었다!`,
+        `레이스 전에 ${you.name}을(를) 불안하게 했던 것과는 달리 ${gs.name}은 힘차고 멋진 레이스를 보여 주었다!`,
       );
       era.println();
       await era.printAndWait(
-        '앞으로의 레이스도 기대된다. 이제 나아갈 방향을 바라볼 때다.',
+        '앞으로의 레이스도 기대된다. 이제 앞으로의 목표를 정할 때다.',
       );
       era.println();
 
@@ -106,7 +106,7 @@ module.exports = {
       await era.input();
 
       await era.printAndWait(
-        `${gs.name}은(는) 곧바로 두 팔을 높이 들고 뜻 모를 콩 주문을 외치며, 오늘의 자신이 있는 건 콩 단백질 덕분이라고 주장했다.`,
+        `${gs.name}은 곧바로 두 팔을 높이 들고 뜻 모를 콩 주문을 외치며, 오늘의 자신이 있는 건 콩 단백질 덕분이라고 주장했다.`,
       );
       era.println();
       await gs.say_and_wait(
@@ -139,18 +139,18 @@ module.exports = {
       );
       era.println();
       await era.printAndWait(
-        `땀으로 흠뻑 젖은 ${gs.name}이(가) 다가와 ${you.name}에게 자기 땀 냄새를 맡게 했다……`,
+        `땀으로 흠뻑 젖은 ${gs.name}이 다가와 ${you.name}에게 자기 땀 냄새를 맡게 했다……`,
       );
       era.println();
       await gs.say_and_wait(
-        '어때? 육지를 정복한 데 이어 바다까지 손에 넣었다구～',
+        '어때? 육지를 정복한 데 이어 바다까지 손에 넣었다구~',
       );
       era.printButton('「확실히 좋은 냄새네……」(연모+2)', 1);
       era.printButton('「하지만 이건 육상 레이스잖아……」(호감+10)', 2);
       ret.push(await era.input());
       await era.printAndWait([
         gs.get_colored_name(),
-        '은(는) ',
+        '은 ',
         you.get_colored_name(),
         '을(를) 선수 통로의 벽으로 밀더니 자신도 ',
         you.get_colored_name(),
@@ -178,7 +178,7 @@ module.exports = {
       await era.input();
 
       await era.printAndWait(
-        `그런 대화를 나누며 ${you.name}와(과) ${gs.name}은(는) 천천히 대기실로 돌아갔다——`,
+        `그런 대화를 나누며 ${you.name}과(와) ${gs.name}은 천천히 대기실로 돌아갔다——`,
       );
       return ret;
     };
@@ -216,10 +216,10 @@ module.exports = {
       );
       await gs.say_and_wait('지구에 감사, 우주에 감사, 눈앞의 너한테도 감사.');
       await gs.say_and_wait(
-        '그럼 한 곡 갑니다. 『근하신년～추운 겨울을 넘어 봄으로 가자～』',
+        '그럼 한 곡 갑니다. 『근하신년~추운 겨울을 넘어 봄으로 가자~』',
       );
       await era.printAndWait(
-        `${gs.name}은(는) 엔카풍의 정체불명 노래를 부르기 시작했다. ${gs.sex}의 여유로운 노랫소리가 트레이너실에 오래도록 울려 퍼졌다.`,
+        `${gs.name}은 엔카풍의 정체불명 노래를 부르기 시작했다. ${gs.sex}의 여유로운 노랫소리가 트레이너실에 오래도록 울려 퍼졌다.`,
       );
       await era.printAndWait(
         `반주 없는 아카펠라인데도 ${you.name}에게는 노래에 가득 담긴 진심이 전해졌다.`,
@@ -238,7 +238,7 @@ module.exports = {
 
       await gs.say_and_wait('응? 왜? 나한테 전할 말이라도 있냐?');
       await era.printAndWait(
-        `${gs.name}은(는) 기대에 찬 표정을 지었다. 허리의 꼬리도 빗자루처럼 힘차게 좌우로 흔들렸다.`,
+        `${gs.name}은 기대에 찬 표정을 지었다. 꼬리도 빗자루처럼 힘차게 좌우로 흔들렸다.`,
       );
       era.println();
 
@@ -341,7 +341,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `클래식 3관의 첫 경기인 사츠키상은 코앞이다. 푸딩 생각은 하지 않는 편이 좋겠지만…… ${gs.name}은(는) 제멋대로 뛰쳐나가 그 「에덴」을 찾으러 갔다.`,
+        `클래식 3관의 첫 경기인 사츠키상은 코앞이다. 푸딩 생각은 하지 않는 편이 좋겠지만…… ${gs.name}은 제멋대로 뛰쳐나가 그 「에덴」을 찾으러 갔다.`,
       );
       era.println();
 
@@ -375,7 +375,7 @@ module.exports = {
       await era.input();
 
       await era.printAndWait(
-        `${you.name}은(는) ${creek.name}에게 사과한 뒤 머리가 어질어질한 ${gs.name}을(를) 훈련실로 끌고 돌아갔다.`,
+        `${you.name}은(는) ${creek.name}에게 사과한 뒤 머리가 어질어질한 ${gs.name}을 훈련실로 끌고 돌아갔다.`,
       );
     };
     f.title = title;
@@ -406,7 +406,7 @@ module.exports = {
       await era.input();
 
       await era.printAndWait(
-        `하지만 ${you.name}의 목소리가 닿기도 전에 ${gs.name}은(는) 이미 멀리 달려가 버렸다.`,
+        `하지만 ${you.name}의 목소리가 닿기도 전에 ${gs.name}은 이미 멀리 달려가 버렸다.`,
       );
     };
     f.title = title;
@@ -423,7 +423,7 @@ module.exports = {
         `여름 합숙은 ${gs.uma_sex_title}에게 배움과 놀이가 공존하는 시간이다. 여름 방학이 되면 대부분의 트레센 학생이 바다로 향해 햇볕과 모래사장, 그리고 약간의 지옥 훈련을 즐긴다.`,
       );
       await era.printAndWait(
-        `당연히 이런 시기가 되면 ${you.name}의 유별난 애마 ${gs.name}은(는) 특히 신이 난다.`,
+        `당연히 이런 시기가 되면 ${you.name}의 유별난 애마 ${gs.name}은 특히 신이 난다.`,
       );
       era.println();
 
@@ -434,20 +434,20 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `${you.name}은(는) 버스에서 죽은 돼지처럼 자는 ${gs.name}을(를) 보며, 이 녀석의 의욕은 ${gs.sex} 본인처럼 왔다 싶으면 사라지는구나 하고 생각했다.`,
+        `${you.name}은(는) 버스에서 세상모르고 곯아떨어진 ${gs.name}을 보며, 이 녀석의 의욕은 ${gs.sex} 본인처럼 왔다 싶으면 사라지는구나 하고 생각했다.`,
       );
       era.println();
 
-      era.printButton('「일어나!!! 해가 엉덩이를 태우겠다!!!」', 1);
+      era.printButton('「일어나!!! 해가 중천이야!!!」', 1);
       await era.input();
 
       await gs.say_and_wait(
-        '우와～ 깜짝이야! 지금 버스에서 바다 합숙을 기다리는 꿈을 꾸고 있었는데! 어떻게 책임질 거냐!',
+        '우와~ 깜짝이야! 지금 버스에서 바다 합숙을 기다리는 꿈을 꾸고 있었는데! 어떻게 책임질 거냐!',
       );
       era.println();
 
       await era.printAndWait(
-        `${you.name}은(는) 못마땅한 얼굴로 창밖을 엄지로 가리켜 이미 도착했음을 알렸다. 이를 알아챈 ${gs.name}은(는) 곧바로 기분이 좋아져 폴짝 뛰며 버스에서 내렸다.`,
+        `${you.name}은(는) 못마땅한 얼굴로 창밖을 엄지로 가리켜 이미 도착했음을 알렸다. 이를 알아챈 ${gs.name}은 곧바로 기분이 좋아져 폴짝 뛰며 버스에서 내렸다.`,
       );
       era.println();
 
@@ -460,27 +460,27 @@ module.exports = {
       era.println();
 
       await gs.say_and_wait(
-        '자자, 지나가는 분들 놓치지 마세요～ 맛있는 야키소바 파격 할인입니다～!!',
+        '자자, 지나가는 분들 놓치지 마세요~ 맛있는 야키소바 파격 할인입니다~!!',
       );
-      await gs.say_and_wait('달고 시고 쓰고 맵고～ 인생이랑 똑같다구요～!!');
+      await gs.say_and_wait('달고 시고 쓰고 맵고~ 인생이랑 똑같다구요~!!');
       era.println();
 
       era.printButton('「왜 여기서 야키소바를 팔고 있어……!!」', 1);
       await era.input();
 
       await era.printAndWait(
-        `${you.name}은(는) 화가 나서 노점 앞으로 가, 농땡이 치는 녀석을 따져 물으려 했다.`,
+        `${you.name}은(는) 화가 나서 노점 앞으로 가, 농땡이 치는 녀석에게 따져 물으려 했다.`,
       );
       era.println();
 
-      await gs.say_and_wait('아～ 트레이너잖아～ 엄청 매운맛으로 하면 되지?');
+      await gs.say_and_wait('아~ 트레이너잖아~ 엄청 매운맛으로 하면 되지?');
       era.println();
 
       era.printButton('「훈련하라고 부르러 왔어.」', 1);
       await era.input();
 
       await gs.say_and_wait(
-        '아니～ 주인아저씨 대신 가게 보는 것뿐이라구～ 허리가 아프시대. 한여름 땡볕 아래서 하루 종일 고생하게 둘 순 없잖아?',
+        '아니~ 주인아저씨 대신 가게 보는 것뿐이라구~ 허리가 아프시대. 한여름 땡볕 아래서 하루 종일 고생하게 둘 순 없잖아?',
       );
       await gs.say_and_wait(
         '그러니까 오늘은 이 면을 전부 팔아 버릴 거야! 안 그러면 아저씨 허리가 안 낫는다구!',
@@ -488,7 +488,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `${you.name}은(는) ${gs.sex}의 한번 정하면 말을 안 듣는 성격상 설득이 불가능함을 깨닫고, 어쩔 수 없이 새콤달콤한 야키소바 한 접시를 주문했다. 옆 비치 의자에서 먹으며 ${gs.name}이(가) 또 사라지지 않도록 감시했다.`,
+        `${you.name}은(는) ${gs.sex}의 한번 정하면 말을 안 듣는 성격상 설득이 불가능함을 깨닫고, 어쩔 수 없이 새콤달콤한 야키소바 한 접시를 주문했다. 옆 비치 의자에서 먹으며 ${gs.name}이 또 사라지지 않도록 감시했다.`,
       );
     };
     f.title = title;
@@ -503,15 +503,15 @@ module.exports = {
      */
     const f = async (gs, flash, you) => {
       await era.printAndWait(
-        `레이스 전에 ${you.name}에게 남긴 불안과는 달리 ${gs.name}은(는) 힘차고 멋진 레이스를 보여 주었다!`,
+        `레이스 전에 ${you.name}에게 남긴 불안과는 달리 ${gs.name}은 힘차고 멋진 레이스를 보여 주었다!`,
       );
       era.println();
       await era.printAndWait('앞으로의 레이스가 점점 더 기대된다!');
       era.println();
-      await gs.say_and_wait('아～ 다 뛰었다, 다 뛰었어～');
+      await gs.say_and_wait('아~ 다 뛰었다, 다 뛰었어~');
       era.println();
       await era.printAndWait(
-        `${gs.name}은(는) 힘이 빠진 자세로 길게 숨을 내쉬었다.`,
+        `${gs.name}은 힘이 빠진 자세로 길게 숨을 내쉬었다.`,
       );
       era.println();
       await gs.say_and_wait(
@@ -523,7 +523,7 @@ module.exports = {
       await era.input();
 
       await era.printAndWait(
-        `하지만 ${gs.name}은(는) 거침없이 나아가며 ${you.name}의 말을 듣지 않고 점점 멀어졌다——`,
+        `하지만 ${gs.name}은 거침없이 나아가며 ${you.name}의 말을 듣지 않고 점점 멀어졌다——`,
       );
       era.println();
       await flash.say_and_wait(`——그건 정말 유감이군요, ${gs.name} 씨.`);
@@ -543,7 +543,7 @@ module.exports = {
       await era.input();
 
       await flash.say_and_wait(
-        '저는 『그분』의 부탁으로 전언을 전하러 왔습니다.',
+        '저는 『그분』의 부탁으로 말씀을 전하러 왔습니다.',
       );
       await flash.say_and_wait(
         '하지만 한창 달릴 때 물러나실 생각이라면, 그럴 필요도 없겠군요.',
@@ -569,7 +569,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `${you.name}은(는) ${flash.name}이(가) 작게 「그게 뭔데요」라고 중얼거리는 걸 들었지만, 못 들은 척했다.`,
+        `${you.name}은(는) ${flash.name}가 작게 「그게 뭔데요」라고 중얼거리는 걸 들었지만, 못 들은 척했다.`,
       );
       era.println();
 
@@ -577,7 +577,7 @@ module.exports = {
       await gs.say_and_wait('플래시, 알려 줘!');
       era.println();
 
-      await era.printAndWait(`${flash.name}은(는) 살짝 웃으며 고개를 저었다.`);
+      await era.printAndWait(`${flash.name}는 살짝 웃으며 고개를 저었다.`);
       era.println();
 
       await flash.say_and_wait(
@@ -672,7 +672,7 @@ module.exports = {
      */
     const f = async (gs, flash, you) => {
       await era.printAndWait(
-        `레이스 전에 ${you.name}에게 남긴 불안과는 달리 ${gs.name}은(는) 힘차고 멋진 레이스를 보여 주었다!`,
+        `레이스 전 ${you.name}의 걱정과는 달리 ${gs.name}은 힘차고 멋진 레이스를 보여 주었다!`,
       );
       era.println();
       await gs.say_and_wait('좋아! 결실을 거둘 때다!');
@@ -682,7 +682,7 @@ module.exports = {
       await era.input();
 
       await era.printAndWait(
-        `${flash.name}이(가) 옆에서 다가와 ${gs.name}에게 박수를 보냈다.`,
+        `${flash.name}가 옆에서 다가와 ${gs.name}에게 박수를 보냈다.`,
       );
       era.println();
       await flash.say_and_wait(`역시 대단하시군요, ${gs.name} 씨.`);
@@ -700,7 +700,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `${flash.name}은(는) 주머니에서 아직 온기가 남은 편지를 꺼내 ${
+        `${flash.name}는 주머니에서 아직 온기가 남은 편지를 꺼내 ${
           gs.name
         }에게 건네고 떠났다. 두 사람만 남았다.`,
       );
@@ -745,7 +745,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `예상과는 달리 ${gs.name}은(는) 평소 교복 대신 검은색의 멋진 옷을 입고 있었다.`,
+        `예상과는 달리 ${gs.name}은 평소 교복 대신 검은색의 멋진 옷을 입고 있었다.`,
       );
       era.println();
 
@@ -764,7 +764,7 @@ module.exports = {
       era.println();
 
       await gs.say_and_wait(
-        '그럼～ 내일은 멋지게 차려입고 신사에서 새해를 맞자!',
+        '그럼~ 내일은 멋지게 차려입고 신사에서 새해를 맞자!',
       );
       era.println();
 
@@ -777,7 +777,7 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `${gs.name}와(과) 보내는 두 번째 새해도 도무지 마음을 놓을 수 없다.`,
+        `${gs.name}과 보내는 두 번째 새해도 도무지 마음을 놓을 수 없다.`,
       );
     };
     f.title = title;
@@ -851,7 +851,7 @@ module.exports = {
      */
     const f = async (gs, flash, you) => {
       await era.printAndWait(
-        `레이스 전에 ${you.name}에게 남긴 불안과는 달리 ${gs.name}은(는) 힘차고 멋진 레이스를 보여 주었다!`,
+        `레이스 전 ${you.name}의 걱정과는 달리 ${gs.name}은 힘차고 멋진 레이스를 보여 주었다!`,
       );
       era.println();
       await gs.say_and_wait('호! 호! 호! 호! 오늘도 제가 잘 달렸나요?');
@@ -862,7 +862,7 @@ module.exports = {
       );
       era.println();
       await era.printAndWait(
-        `오늘의 ${gs.name}은(는) 스타일을 바꿔, 애니메이션과 만화에 나오는 아가씨 캐릭터의 전형을 전부 모아 놓은 듯했다.`,
+        `오늘의 ${gs.name}은 스타일을 바꿔, 애니메이션과 만화에 나오는 아가씨 캐릭터의 전형을 전부 모아 놓은 듯했다.`,
       );
       era.println();
 
@@ -882,7 +882,7 @@ module.exports = {
       await era.printAndWait(
         `전에 ${
           flash.name
-        }이(가) 준 편지에는 에덴으로 가기 위한 네 가지 단서를 모으라고 적혀 있었다. 이 『Shu』가 첫 번째겠지.`,
+        }가 준 편지에는 에덴으로 가기 위한 네 가지 단서를 모으라고 적혀 있었다. 이 『Shu』가 첫 번째겠지.`,
       );
       era.println();
       await gs.say_and_wait(
@@ -915,13 +915,13 @@ module.exports = {
       bad_result,
     ) => {
       await era.printAndWait(
-        `레이스 전에 ${you.name}에게 남긴 불안과는 달리 ${gs.name}은(는) 힘차고 멋진 레이스를 보여 주었다!`,
+        `레이스 전 ${you.name}의 걱정과는 달리 ${gs.name}은 힘차고 멋진 레이스를 보여 주었다!`,
       );
       era.println();
       await gs.say_and_wait(`하하하! ${jordan.name}! 이겼다, 제삼부 끝!`);
       era.println();
       await era.printAndWait(
-        `레이스가 끝난 뒤 ${gs.name}은(는) 의기양양하게 적이자 친구인 갸루 ${jordan.name}에게 승리를 자랑했다.`,
+        `레이스가 끝난 뒤 ${gs.name}은 의기양양하게 적이자 친구인 갸루 ${jordan.name}에게 승리를 자랑했다.`,
       );
       era.println();
       await jordan.say_and_wait('으으—— 두고 보자!');
@@ -939,7 +939,7 @@ module.exports = {
       await gs.say_and_wait('전혀 모르겠네——!');
       era.println();
       await era.printAndWait(
-        `${flash.name}뿐만 아니라 ${jordan.name}까지 가담하고 있다…… 뒤에서 실을 당기는 인물은 대체 누구일까?`,
+        `${flash.name}뿐만 아니라 ${jordan.name}까지 가담하고 있다…… 배후에서 조종하는 인물은 대체 누구일까?`,
       );
       if (win_takz_kin_c) {
         await era.printAndWait(
@@ -954,11 +954,11 @@ module.exports = {
         await gs.say_and_wait('고맙다!');
         era.println();
 
-        era.printButton('「응원 고마워요～」', 1);
+        era.printButton('「응원 고마워요~」', 1);
         await era.input();
 
         await era.printAndWait(
-          `${gs.name}은(는) 돌아서서 ${you.name}에게 물었다.`,
+          `${gs.name}은 돌아서서 ${you.name}에게 물었다.`,
         );
         era.println();
         await gs.say_and_wait(`${callname}, 연속 우승이 뭐냐?`);
@@ -982,9 +982,9 @@ module.exports = {
         const ret = await era.input();
         if (ret === 2 && !bad_result) {
           await gs.say_and_wait(
-            '아～ 하하～ 역시 골쉽은 칭찬받으면 잘하는 타입이란 말이지～',
+            '아~ 하하~ 역시 골쉽은 칭찬받으면 잘하는 타입이란 말이지~',
           );
-          await gs.say_and_wait('앞으로도 많이 예뻐해 줘～');
+          await gs.say_and_wait('앞으로도 많이 예뻐해 줘~');
         }
         return [ret];
       }
@@ -1005,7 +1005,7 @@ module.exports = {
 
       await era.printAndWait('두 사람은 모래사장을 걷고 있었다……');
       await era.printAndWait(
-        `${gs.name}은(는) 땡볕 아래서도 상쾌해 보였고, ${you.name}만 땀으로 흠뻑 젖어 있었다.`,
+        `${gs.name}은 땡볕 아래서도 상쾌해 보였고, ${you.name}만 땀으로 흠뻑 젖어 있었다.`,
       );
       era.println();
 
@@ -1027,7 +1027,7 @@ module.exports = {
       await era.input();
 
       await era.printAndWait(
-        `${you.name}은(는) ${gs.name}을(를) 모래사장에 남겨 두고 빠른 걸음으로 노점에 가서 빙수를 사 왔다. 돌아오는 길에——`,
+        `${you.name}은(는) ${gs.name}을 모래사장에 남겨 두고 빠른 걸음으로 노점에 가서 빙수를 사 왔다. 돌아오는 길에——`,
       );
 
       era.drawLine();
@@ -1040,7 +1040,7 @@ module.exports = {
       era.println();
 
       await gs.print_and_wait(
-        `${gs.name}은(는) 원래 자리에 서 있었지만, 꽃 같은 미모는 어김없이 벌과 나비를 불러들였다. 불순한 녀석들이 여럿 ${gs.sex}를 둘러싸고 끈질기게 말을 걸었다. 이런 상황에서도 ${gs.name}은(는) 어떻게든 말을 돌리려 애쓰고 있었고, 평소의 기세는 조금도 보이지 않았다……`,
+        `${gs.name}은 원래 자리에 서 있었지만, 꽃 같은 미모는 어김없이 벌과 나비를 불러들였다. 불순한 녀석들이 여럿 ${gs.sex}를 둘러싸고 끈질기게 말을 걸었다. 이런 상황에서도 ${gs.name}은 어떻게든 말을 돌리려 애쓰고 있었고, 평소의 기세는 조금도 보이지 않았다……`,
       );
       era.println();
 
@@ -1050,7 +1050,7 @@ module.exports = {
       era.println();
 
       await gs.print_and_wait(
-        `${gs.name}은(는) 겉으로는 제멋대로지만 실제로는 누구보다 「사회성」이라는 걸 잘 알고 있다.`,
+        `${gs.name}은 겉으로는 제멋대로지만 실제로는 누구보다 「사회성」이라는 걸 잘 알고 있다.`,
       );
       era.println();
 
@@ -1065,33 +1065,33 @@ module.exports = {
       );
       era.println();
 
-      await gs.say_and_wait('자기야～ 와 줬구나～');
+      await gs.say_and_wait('자기야~ 와 줬구나~');
       era.println();
 
       if (era.get('love:7') >= 75) {
         await gs.print_and_wait(
-          `${gs.name}은(는) 기회다 싶었는지 불량배들을 헤치고 두 팔을 흔들며 ${you.actual_name}에게 달려와 끌어안고 뜨겁게 입을 맞췄다. ${you.actual_name}을(를) 포함한 모두가 크게 놀랐지만 ${you.actual_name}은(는) 곧바로 응했다. 두 사람의 혀가 입안에서 얽히며 서로를 찾고 열기를 나눴다…… 불량배들은 작업이 실패했다는 걸 알고 욕을 내뱉으며 떠났다.`,
+          `${gs.name}은 기회다 싶었는지 불량배들을 헤치고 두 팔을 흔들며 ${you.actual_name}에게 달려와 끌어안고 뜨겁게 입을 맞췄다. ${you.actual_name}을(를) 포함한 모두가 크게 놀랐지만 ${you.actual_name}은(는) 곧바로 응했다. 두 사람의 혀가 입안에서 얽히며 서로를 찾고 열기를 나눴다…… 불량배들은 작업이 실패했다는 걸 알고 욕을 내뱉으며 떠났다.`,
         );
       } else {
         await gs.print_and_wait(
-          `${gs.name}은(는) 기회다 싶었는지 불량배들을 헤치고 두 팔을 흔들며 ${you.actual_name}에게 달려와 끌어안았다. 그리고 ${you.actual_name}의 뺨에 가볍게 입을 맞췄다. 그 입맞춤은 얼굴에 립스틱의 서늘함을 남기고, ${you.actual_name}의 뛰는 가슴에 격정의 흔적을 새겼다.`,
+          `${gs.name}은 기회다 싶었는지 불량배들을 헤치고 두 팔을 흔들며 ${you.actual_name}에게 달려와 끌어안았다. 그리고 ${you.actual_name}의 뺨에 가볍게 입을 맞췄다. 그 입맞춤은 얼굴에 립스틱의 서늘함을 남기고, ${you.actual_name}의 뛰는 가슴에 격정의 흔적을 새겼다.`,
         );
       }
 
       era.drawLine();
       await era.printAndWait(
-        `한바탕 소동이 끝나고 ${you.name}와(과) 골드 쉽은 파라솔 아래에서 빙수의 시원함을 즐겼다.`,
+        `한바탕 소동이 끝나고 ${you.name}과(와) 골드 쉽은 파라솔 아래에서 빙수의 시원함을 즐겼다.`,
       );
       era.println();
 
-      await gs.say_and_wait('휴, 위험했다～ 골쉽, 납치당할 뻔했네～');
+      await gs.say_and_wait('휴, 위험했다~ 골쉽, 납치당할 뻔했네~');
       await gs.say_and_wait(`고마워, ${callname}❤️`);
       await gs.say_and_wait(
         `그런데…… 나를 『${gs.sex_code - 1 ? '여자' : '남자'}』로 생각하고 있던 거냐?`,
       );
 
       await era.printAndWait(
-        `${gs.name}은(는) 능청스러운 얼굴로 ${you.name}의 어깨에 기대었다. ${you.name}이(가) 아무리 설명해도 들으려 하지 않았다…… 이 이야기는 ${gs.sex}에게 십 년은 놀림거리가 될 것 같다……`,
+        `${gs.name}은 능청스러운 얼굴로 ${you.name}의 어깨에 기대었다. ${you.name}이(가) 아무리 설명해도 들으려 하지 않았다…… 이 이야기는 ${gs.sex}에게 십 년은 놀림거리가 될 것 같다……`,
       );
     };
     f.title = title;
@@ -1106,7 +1106,7 @@ module.exports = {
      */
     const f = async (gs, jordan, you) => {
       await era.printAndWait(
-        `레이스 전에 ${you.name}에게 남긴 불안과는 달리 ${gs.name}은(는) 힘차고 멋진 레이스를 보여 주었다!`,
+        `레이스 전 ${you.name}의 걱정과는 달리 ${gs.name}은 힘차고 멋진 레이스를 보여 주었다!`,
       );
       era.println();
       await gs.say_and_wait(
@@ -1117,7 +1117,7 @@ module.exports = {
       );
       await jordan.say_and_wait('젠장, 또 네 녀석한테 지다니……!! 으……!!');
       await jordan.say_and_wait(
-        '오늘은 말도 발을 헛디딜 때가 있다는 거야. 다음엔 반드시 되갚아 주겠어!',
+        '말도 발을 헛디딜 때가 있잖아. 오늘은 그랬을 뿐이야. 다음엔 반드시 되갚아 주겠어!',
       );
       await gs.say_and_wait('좋아! 결승선에서 마카롱 먹으면서 기다릴게!');
       await jordan.say_and_wait('흥!');
@@ -1154,7 +1154,7 @@ module.exports = {
      */
     const f = async (gs, festa, you) => {
       await era.printAndWait(
-        `${you.name}와(과) 골드 쉽을 에덴으로 이끄는 수수께끼의 인물……`,
+        `${you.name}과(와) 골드 쉽을 에덴으로 이끄는 수수께끼의 인물……`,
       );
       era.println();
 
@@ -1201,7 +1201,7 @@ module.exports = {
       await festa.say_and_wait('……！');
       era.println();
 
-      era.printButton('「그래, 이참에 장난이나 쳐 볼까～?」', 1);
+      era.printButton('「그래, 이참에 장난이나 쳐 볼까~?」', 1);
       await era.input();
 
       await festa.say_and_wait('……으음!');
@@ -1254,7 +1254,7 @@ module.exports = {
       await flash.say_and_wait('부디 받아 주세요.');
       era.println();
       await era.printAndWait(
-        `${flash.name}이(가) 꺼낸 쪽지. 이것이 에덴으로 향하는 마지막 단서다!`,
+        `${flash.name}가 꺼낸 쪽지. 이것이 에덴으로 향하는 마지막 단서다!`,
       );
       era.println();
       await gs.say_and_wait('이건……!!');
@@ -1264,7 +1264,7 @@ module.exports = {
       await gs.say_and_wait('고마워!');
       era.println();
       await era.printAndWait(
-        `${flash.name}、${jordan.name}. 골쉽의 평생 숙적들이 인파 속으로 멀어져 갔다……`,
+        `${flash.name}, ${jordan.name}. 골쉽의 평생 숙적들이 인파 속으로 멀어져 갔다……`,
       );
       era.println();
       await gs.say_and_wait(`${callname}, 이게……!`);
@@ -1288,7 +1288,7 @@ module.exports = {
      */
     const f = async (gs, taste, you, callname) => {
       await era.printAndWait(
-        `늦겨울 찬 바람이 뼛속까지 스미고, 정오가 되자 진실이 길을 드러낸다…… ${you.name}와(과) 골드 쉽은 단서가 적힌 쪽지 네 장을 들고 마지막 목적지로 향했다.`,
+        `늦겨울 찬 바람이 뼛속까지 스미고, 정오가 되자 진실이 길을 드러낸다…… ${you.name}과(와) 골드 쉽은 단서가 적힌 쪽지 네 장을 들고 마지막 목적지로 향했다.`,
       );
       era.println();
       await gs.say_and_wait(
@@ -1354,7 +1354,7 @@ module.exports = {
       await taste.say_and_wait('설명! 이른바 『에덴 계획』이란……!');
       era.println();
       await era.printAndWait(
-        `원래 「에덴 계획」은 열정적이지만 자주 다른 곳에 정신이 팔리는 ${gs.name}이(가) 트윙클 시리즈에 집중해서 도전할 수 있도록 세운 계획이었다.`,
+        `원래 「에덴 계획」은 열정적이지만 자주 다른 곳에 정신이 팔리는 ${gs.name}이 트윙클 시리즈에 집중해서 도전할 수 있도록 세운 계획이었다.`,
       );
       era.println();
       await era.printAndWait(
@@ -1387,12 +1387,12 @@ module.exports = {
       await era.input();
 
       await era.printAndWait(
-        `그렇게 세 해의 여정은 웃음과 장난, 영문 모를 일들 속에서 한 단락을 맺었다.`,
+        `그렇게 세 해의 여정은 웃음과 장난, 영문 모를 일들 속에서 일단락되었다.`,
       );
 
       era.drawLine();
       await era.printAndWait(
-        `밤이 되어 ${you.name}와(과) ${gs.name}은(는) 바닷가 모래 위에 누워 짭짤한 바닷바람이 얼굴을 스치는 감촉을 즐겼다.`,
+        `밤이 되어 ${you.name}과(와) ${gs.name}은 바닷가 모래 위에 누워 짭짤한 바닷바람이 얼굴을 스치는 감촉을 즐겼다.`,
       );
       era.println();
 
@@ -1486,7 +1486,7 @@ module.exports = {
       );
       await era.printAndWait([
         gs.get_colored_name(),
-        '은(는) 의기양양하게 ',
+        '은 의기양양하게 ',
         you.get_colored_name(),
         '에게 엄지를 치켜세웠다.',
       ]);
@@ -1498,7 +1498,7 @@ module.exports = {
         gs.sex,
         '는 골쉽호의 손잡이를 가볍게 두드리며 자랑스럽게 ',
         you.get_colored_name(),
-        '에게 애차의 전모를 보여 주었다.',
+        '에게 애차를 구석구석 보여 주었다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
@@ -1565,7 +1565,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         gs.get_colored_name(),
-        '이(가) 열의에 넘쳐 당장이라도 ',
+        '이 열의에 넘쳐 당장이라도 ',
         you.get_colored_name(),
         '을(를) 골쉽호에 묶고 달려갈 듯한 모습을 보니, ',
         you.get_colored_name(),
@@ -1587,7 +1587,7 @@ module.exports = {
      */
     const f = async (gs, you) => {
       await era.printAndWait(`어느 날, ${you.name}이(가) 안뜰을 걷고 있는데——`);
-      await era.printAndWait(`승부복을 입은 ${gs.name}이(가) 있었다.`);
+      await era.printAndWait(`승부복을 입은 ${gs.name}이 있었다.`);
       era.println();
 
       await gs.say_and_wait(
@@ -1622,7 +1622,7 @@ module.exports = {
         era.println();
 
         await era.printAndWait(
-          `${gs.name}은(는) 요염한 눈길을 남기고 신이 나서 떠났다.`,
+          `${gs.name}은 요염한 눈길을 남기고 신이 나서 떠났다.`,
         );
       } else {
         await gs.say_and_wait(
@@ -1630,7 +1630,7 @@ module.exports = {
         );
         era.println();
 
-        await era.printAndWait(`${gs.name}은(는) 기운차게 떠났다.`);
+        await era.printAndWait(`${gs.name}은 기운차게 떠났다.`);
       }
       return [ret];
     };
@@ -1646,7 +1646,7 @@ module.exports = {
      */
     const f = async (gs, you, callname) => {
       await era.printAndWait(
-        `어느 날, ${you.name}와(과) ${gs.name}은(는) 교문 근처에서 우연히 마주쳤다——`,
+        `어느 날, ${you.name}과(와) ${gs.name}은 교문 근처에서 우연히 마주쳤다——`,
       );
       era.println();
 
@@ -1669,7 +1669,7 @@ module.exports = {
       );
       era.println();
 
-      await gs.say_and_wait('휴～ 나도 좀 지쳤네. 이다음엔 뭐 할까?');
+      await gs.say_and_wait('휴~ 나도 좀 지쳤네. 이다음엔 뭐 할까?');
       era.printButton('「내가 음료수 사올게.」（스태미나+20）', 1);
       era.printButton('「연장전이야! 내가 이길 때까지 하자!」（파워+20）', 2);
       const ret = await era.input();
@@ -1679,7 +1679,7 @@ module.exports = {
         );
       } else {
         await era.printAndWait(
-          `${you.name}와(과) ${gs.name}의 기묘한 게임은 아직 계속된다……`,
+          `${you.name}과(와) ${gs.name}의 기묘한 게임은 아직 계속된다……`,
         );
       }
       return [ret];
@@ -1774,7 +1774,7 @@ module.exports = {
         await era.input();
 
         await era.printAndWait(
-          `${you.name}와(과) 골드 쉽은 나중에 반성하며, 그날 그렇게 진한 죽을 삼킬 수 있었던 건 극심한 추위라는 특수한 상황 덕분이었다고 결론 내렸다.`,
+          `${you.name}과(와) 골드 쉽은 나중에 반성하며, 그날 그렇게 진한 죽을 삼킬 수 있었던 건 극심한 추위라는 특수한 상황 덕분이었다고 결론 내렸다.`,
         );
       } else {
         await gs.say_and_wait('그때 그 장소…… 맞아! 제방 옆이었어!');
@@ -1822,7 +1822,7 @@ module.exports = {
     const f = async (gs, festa, you, call_49, success) => {
       const ret = [];
       await era.printAndWait(
-        `${you.name}와(과) ${gs.name}은(는) 옥상에서 잠깐의 휴식을 즐기고 있었다…… 원래라면 조용히 흘러갈 시간이었지만, ${you.name}은(는) ${festa.name}을(를) 보았다.`,
+        `${you.name}과(와) ${gs.name}은 옥상에서 잠깐의 휴식을 즐기고 있었다…… 원래라면 조용히 흘러갈 시간이었지만, ${you.name}은(는) ${festa.name}을(를) 보았다.`,
       );
       era.println();
 
@@ -1855,7 +1855,7 @@ module.exports = {
       ret.push(await era.input());
       if (ret[0] === 3) {
         await era.printAndWait(
-          `${you.name}와(과) 골드 쉽은 갑작스러운 행위의 유혹에 굳어 버렸다. 하지만 나카야마 페스타의 눈에 타오르는 욕망은 더는 기다릴 수 없다고 말하고 있었다……`,
+          `${you.name}과(와) 골드 쉽은 갑작스러운 행위의 유혹에 굳어 버렸다. 하지만 나카야마 페스타의 눈에 타오르는 욕망은 더는 기다릴 수 없다고 말하고 있었다……`,
         );
         era.println();
         await festa.say_and_wait(
@@ -1895,12 +1895,12 @@ module.exports = {
           await era.printAndWait('하지만 점심시간은 어느새 끝나 있었다!');
         } else if (success) {
           await era.printAndWait(
-            `${gs.name}은(는) 가진 것을 전부 쏟아부어 어떻게든 절체절명의 위기를 살아 넘겼다……`,
+            `${gs.name}은 가진 것을 전부 쏟아부어 어떻게든 절체절명의 위기를 살아 넘겼다……`,
           );
           await era.printAndWait('하지만 점심시간은 어느새 끝나 있었다!');
         } else {
           await era.printAndWait(
-            `${gs.name}은(는) 가진 것을 전부 쏟아부었지만 ${festa.name}에게는 이길 수 없었다……`,
+            `${gs.name}은 가진 것을 전부 쏟아부었지만 ${festa.name}에게는 이길 수 없었다……`,
           );
           await era.printAndWait('게다가 점심시간은 어느새 끝나 있었다!');
         }
@@ -1921,7 +1921,7 @@ module.exports = {
       await era.printAndWait([
         '끝없이 이어진 듯한 거리는 구경꾼들로 가득했다. ',
         you.get_colored_name(),
-        '은(는) 들것에 눌린 채 절망에 가득 찬 눈을 부릅뜨고 ',
+        '은(는) 들것에 붙들린 채 절망에 가득 찬 눈을 부릅뜨고 ',
         gs.sex,
         '가 경찰차에 오르는 모습을 지켜보았다.',
       ]);
@@ -1954,7 +1954,7 @@ module.exports = {
       await era.printAndWait([
         '마치 ',
         gs.get_colored_name(),
-        '이(가) ',
+        '이 ',
         you.get_colored_name(),
         '을(를) 위해 이성을 잃고, ',
         you.get_colored_name(),

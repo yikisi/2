@@ -70,7 +70,7 @@ select:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「음……! 맞아!! 그 %MOHOSHOJO%, 그 뒤에……!!!」"
-            - "아무래도 %CHARA%은(는) 어젯밤 책을 읽느라 늦게까지 깨어 있었나 보다"
+            - "아무래도 %CHARA%는 어젯밤 책을 읽느라 늦게까지 깨어 있었나 보다."
         # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後、魔法の夢（シニア級7月第1週ターン開始イベント）より前
         - if: t > 47 + 42 && t < 95 + 25
           lines:
@@ -84,7 +84,7 @@ select:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「음……! 아냐, 아냐! %CALLNAME%, 이 마법 좀 봐 봐!!」"
-            - "아무래도 %CHARA%은(는) 어젯밤 무언가를 연구하느라 늦게까지 깨어 있었나 보다"
+            - "아무래도 %CHARA%는 어젯밤 무언가를 연구하느라 늦게까지 깨어 있었나 보다."
         # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
         - if: t >= 95 + 25
           lines:
@@ -98,7 +98,7 @@ select:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「음……! 싫어, 싫어! 오늘은 트레이닝 같은 거 안 할 거야~!!」"
-            - "%CHARA%이(가) 어젯밤 무슨 일을 했든……아무튼 늦게까지 깨어 있었나 보다"
+            - "%CHARA%가 어젯밤 무슨 일을 했든……아무튼 늦게까지 깨어 있었나 보다."
     - if: "!era.get('status:44:生日') && !t && !era.get('status:44:熬夜')"
       lines:
         # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
@@ -272,7 +272,7 @@ office_study:
           - fontWeight: bold
             content: %CHARA%
           - "「잡일? 진작 끝냈어.」"
-      - "뜻밖의 대답이 돌아왔다"
+      - "뜻밖의 대답이 돌아왔다."
   # 魔法の夢（シニア級7月第1週ターン開始イベント）より前
   - if: "!t && era.get('cflag:44:育成回合计时') < 95+25"
     lines:
@@ -283,7 +283,7 @@ office_study:
               - fontWeight: bold
                 content: %CHARA%
               - "「싫어, 싫어! 이런 책 읽기 싫다구!!」"
-          - "결국 %YOU%이(가) 이쪽에서 읽어 주고, %CHARA%은(는) 저쪽에서 가만히 듣는……그런 상황이 되었다"
+          - "결국 %YOU%이(가) 읽어 주고, %CHARA%는 옆에서 가만히 듣는……그런 상황이 되었다."
       # ジュニア級4月以降
       - if: era.get('cflag:44:育成回合计时') >= 12
         random: true
@@ -298,7 +298,7 @@ office_study:
               - fontWeight: bold
                 content: %CHARA%
               - "「있잖아! %CALLNAME%! 왜 주인이 할 잡일을 네가 대신 끝내 주지 않는 거야~~!」"
-          - "가르쳐 주는 정도는 할 수 있다……%CHARA%이(가) 그저 귀찮아하는 교과 숙제를 함께 해치웠다"
+          - "가르쳐 주는 정도는 할 수 있다……%CHARA%가 그저 귀찮아하는 학교 숙제를 함께 해치웠다."
       # ジュニア級4月以降
       - if: era.get('cflag:44:育成回合计时') >= 12
         random: true
@@ -313,7 +313,7 @@ office_study:
               - fontWeight: bold
                 content: %CHARA%
               - "「『영어만 남았잖아』……? 할 줄 아는데 왜 또 해야 해!」"
-          - "아무튼 %YOU%의 격려 덕분에 %CHARA%은(는) 십 분도 안 돼 영어 숙제를 끝냈다"
+          - "아무튼 %YOU%의 격려 덕분에 %CHARA%는 십 분도 안 돼 영어 숙제를 끝냈다."
   # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
   - if: "!t && era.get('cflag:44:育成回合计时') >= 95+25"
     lines:
@@ -342,7 +342,7 @@ office_study:
               - fontWeight: bold
                 content: %CHARA%
               - "「있잖아! %CALLNAME%! 아무튼 전부 너한테 맡길게!!!」"
-          - "도망가지 말아 줬으면 한다……"
+          - "도망가지나 말았으면 좋겠다……"
 
 
 office_prepare:
@@ -361,7 +361,7 @@ office_prepare:
               - fontWeight: bold
                 content: %CHARA%
               - "「……더 알려 줄 건 없어? ……그리고 주인의 지팡이랑 모자를 속여서 빼앗을 생각은 하지 마!!」"
-          - "결국 레이스 때만큼은 벗자는 제안은 받아들이지 않았다"
+          - "결국 레이스 때만큼은 벗자는 제안은 받아들이지 않았다."
       - random: true
         lines:
           - color: %COLOR%
@@ -374,7 +374,7 @@ office_prepare:
               - fontWeight: bold
                 content: %CHARA%
               - "「……왜 갑자기 말이 없어? ……계속해.」"
-          - "아무튼 %CHARA%이(가) 들어 주기만 하면 된다"
+          - "아무튼 %CHARA%가 들어 주기만 하면 된다."
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より前
   - if: "!t && era.get('cflag:44:育成回合计时') <= 47 + 42"
     lines:
@@ -408,7 +408,7 @@ office_prepare:
               - fontWeight: bold
                 content: %CHARA%
               - "「흐음. 알았어, 알았어.」"
-          - "%CHARA%은(는) 말없이 %YOU%을(를) 따라 하며 레이스 준비를 한다"
+          - "%CHARA%는 말없이 %YOU%을(를) 따라 하며 레이스 준비를 한다."
       # ジュニア級4月以降
       - if: era.get('cflag:44:育成回合计时') >= 12
         random: true
@@ -439,7 +439,7 @@ office_prepare:
               - fontWeight: bold
                 content: %CHARA%
               - "「……『마법의 신발은 어디에 쓰는데』? 아무튼 엄청 쓸모 있거든!」"
-          - "마법 물건을 늘려 가는 모양이다……"
+          - "마법 도구를 하나씩 늘려 가는 모양이다……"
       - random: true
         lines:
           - color: %COLOR%
@@ -452,7 +452,7 @@ office_prepare:
               - fontWeight: bold
                 content: %CHARA%
               - "「이렇게——그리고 이렇게, 마지막으로 이렇게 하는 거야!」"
-          - "말만 들었을 때는 미덥지 않았지만, 실제로 해 보니 %CHARA%의 준비 방법은 의외로 효과가 있다"
+          - "말만 들었을 때는 미덥지 않았지만, 실제로 해 보니 %CHARA%의 준비 방법은 의외로 효과가 있다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -467,7 +467,7 @@ office_prepare:
               - fontWeight: bold
                 content: %CHARA%
               - "「싫어, 싫다구——!! 주인 귀에 딱지 앉겠어——!!!」"
-          - "아무튼 %YOU%이(가) 새로운 표현을 짜내느라 머리를 싸매는 동안, %CHARA%은(는) 스스로 레이스 준비를 시작했다"
+          - "아무튼 %YOU%이(가) 다른 말로 설득하려고 머리를 싸매는 동안, %CHARA%는 스스로 레이스 준비를 시작했다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -524,7 +524,7 @@ talk:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「거기! 멍하니 있지 마, %CALLNAME%! 이 방법이 맞는지 빨리 주인을 도와줘!」"
+              - "「거기! 멍하니 있지 마, %CALLNAME%! 이 방법이 맞는지 빨리 같이 확인해 줘!」"
       - random: true
         lines:
           - color: %COLOR%
@@ -669,7 +669,7 @@ talk:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「마법의 단서를 모으는 일은 게으름 피우면 안 돼!」"
+              - "「마법의 단서를 모을 때는 게으름 피우면 안 돼!」"
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -709,7 +709,7 @@ talk:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「이 마법약을 쓰면 %CALLNAME%은(는) 일할 때도 의욕이 충분히 넘칠 거야~♪」"
+              - "「이 마법약을 쓰면 %CALLNAME%은(는) 일할 때도 의욕이 넘칠 거야~♪」"
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -742,7 +742,7 @@ talk:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「오늘은 꼭 그 디저트 가게의 신작 파르페를 먼저 차지할 거야!!」"
+              - "「오늘은 꼭 그 디저트 가게의 새로 나온 파르페를 먼저 차지할 거야!!」"
 
 
 office_gift:
@@ -758,7 +758,7 @@ office_gift:
           - fontWeight: bold
             content: %CHARA%
           - "「다음에도 이러면 %CALLNAME% 같은 건 모른 척할 거야!」"
-      - "그래도 %CHARA%의 기분은 풀린 모양이다"
+      - "그래도 %CHARA%의 기분은 풀린 모양이다."
   # 大魔法使いの約束の期間
   - if: (t = (era.get('cflag:44:育成用变量')?.agreement > 0)) && era.get('relation:44:0') >= 0
     lines:
@@ -772,7 +772,7 @@ office_gift:
           - fontWeight: bold
             content: %CHARA%
           - "「『연습에 도움이 돼』……? 그럼 빨리 줘야지?!」"
-      - "아무튼 %CHARA%은(는) %YOU%의 선물을 받아 주었다"
+      - "아무튼 %CHARA%는 %YOU%의 선물을 받아 주었다."
   # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
   - if: "!t && era.get('relation:44:0') >= 0 && era.get('cflag:44:育成回合计时') >= 95 + 25"
     lines:
@@ -788,7 +788,7 @@ office_gift:
               - fontWeight: bold
                 content: %CHARA%
               - "「으으~! 왜 그렇게 못마땅한 표정이야! 선물하는 거 아냐!?」"
-          - "%CHARA%이(가) 살찌지 않겠다고 약속하고 나서야 %YOU%은(는) 안심하고 디저트를 건넸다"
+          - "%CHARA%가 살찌지 않겠다고 약속하고 나서야 %YOU%은(는) 안심하고 디저트를 건넸다."
       - random: true
         lines:
           - color: %COLOR%
@@ -801,7 +801,7 @@ office_gift:
               - fontWeight: bold
                 content: %CHARA%
               - "「올해 안에 그랜마보다 책을 더 많이 모을 거라구~!」"
-          - "%CHARA%은(는) 기뻐하며 %YOU%이(가) 준 이야기책을 받았다"
+          - "%CHARA%는 기뻐하며 %YOU%이(가) 준 이야기책을 받았다."
   # 魔法の夢（シニア級7月第1週ターン開始イベント）より前
   - if: "!t && era.get('relation:44:0') >= 0 && era.get('cflag:44:育成回合计时') < 95 + 25"
     lines:
@@ -817,7 +817,7 @@ office_gift:
               - fontWeight: bold
                 content: %CHARA%
               - "「%CALLNAME%이라면 주인이 살찌기 전에 최대한 많이 가져와!」"
-          - "조금 걱정되기는 한다……하지만 디저트를 받은 %CHARA%은(는) 무척 기뻐 보인다"
+          - "조금 걱정되기는 한다……하지만 디저트를 받은 %CHARA%는 무척 기뻐 보인다."
       - random: true
         lines:
           - color: %COLOR%
@@ -830,7 +830,7 @@ office_gift:
               - fontWeight: bold
                 content: %CHARA%
               - "「그날이 왔을 때, 대%MAJO%가 된 천재 %MOHOSHOJO% 스위피가 세계를 지배할 수 있어!」"
-          - "봉제 인형을 받은 %CHARA%은(는) 무척 기뻐 보인다"
+          - "봉제 인형을 받은 %CHARA%는 무척 기뻐 보인다."
       - random: true
         lines:
           - color: %COLOR%
@@ -843,7 +843,7 @@ office_gift:
               - fontWeight: bold
                 content: %CHARA%
               - "「……! 이 책은!?」"
-          - "새로 받은 동화책이 %CHARA%의 마음에 쏙 든 모양이다"
+          - "새로 받은 동화책이 %CHARA%의 마음에 쏙 든 모양이다."
       # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
       - if: era.get('cflag:44:育成回合计时') > 47 + 42
         random: true
@@ -858,7 +858,7 @@ office_gift:
               - fontWeight: bold
                 content: %CHARA%
               - "「%CALLNAME%이라면 주인이 살찌기 전에 최대한 많이 가져와!」"
-          - "조금 걱정되기는 한다……하지만 디저트를 받은 %CHARA%은(는) 무척 기뻐 보인다"
+          - "조금 걱정되기는 한다……하지만 디저트를 받은 %CHARA%는 무척 기뻐 보인다."
       # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
       - if: era.get('cflag:44:育成回合计时') > 47 + 42
         random: true
@@ -872,8 +872,8 @@ office_gift:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「천재 %MOHOSHOJO% 스위피가 빨리 대마법사가 되는 건 문제도 아니야~!」"
-          - "%CHARA%은(는) 기뻐하며 %YOU%이(가) 준 이야기책을 받았다"
+              - "「천재 %MOHOSHOJO% 스위피가 금방 대마법사가 될 수 있어~!」"
+          - "%CHARA%는 기뻐하며 %YOU%이(가) 준 이야기책을 받았다."
 
 
 office_cook:
@@ -890,7 +890,7 @@ office_cook:
           - fontWeight: bold
             content: %CHARA%
           - "「……흥. 이번만 %CALLNAME%을(를) 믿어 줄게.」"
-      - "%CHARA%은(는) 말없이 %YOU%이(가) 가져온 도시락을 먹고 있다"
+      - "%CHARA%는 말없이 %YOU%이(가) 가져온 도시락을 먹고 있다."
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より前
   - if: "!t && era.get('cflag:44:育成回合计时') <= 47 + 42"
     lines:
@@ -906,7 +906,7 @@ office_cook:
               - fontWeight: bold
                 content: %CHARA%
               - "「……! 저거, 새로 나온 마법 디저트……?!」"
-          - "일단 %CHARA%에게 디저트를 사 주었다"
+          - "일단 %CHARA%에게 디저트를 사 주었다."
       # ジュニア級4月以降
       - if: era.get('cflag:44:育成回合计时') >= 12
         random: true
@@ -921,7 +921,7 @@ office_cook:
               - fontWeight: bold
                 content: %CHARA%
               - "「그리고 그 고기랑 생선 같은 것도 전부 사탕처럼 만들 수 없어?」"
-          - "설탕을 너무 많이 먹어 충치가 생기고 살까지 찌는 이중고가 절로 떠오른다. 일단 이런저런 이유를 대며 %CHARA%의 부탁을 얼버무렸다……"
+          - "설탕을 너무 많이 먹어 충치가 생기고 살까지 찌는 모습이 절로 떠오른다. 일단 이런저런 이유를 대며 %CHARA%의 부탁을 얼버무렸다……"
       # ジュニア級4月以降
       - if: era.get('cflag:44:育成回合计时') >= 12
         random: true
@@ -936,7 +936,7 @@ office_cook:
               - fontWeight: bold
                 content: %CHARA%
               - "「싫어, 싫어, 쓰고 맛없어!!」"
-          - "결국 %CHARA%은(는) 도시락의 파프리카를 하나씩 골라내고, 나머지는 깨끗이 먹어 치웠다……"
+          - "결국 %CHARA%는 도시락의 파프리카를 하나씩 골라내고, 나머지는 깨끗이 먹어 치웠다……"
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
   - if: "!t && era.get('cflag:44:育成回合计时') > 47 + 42"
     lines:
@@ -965,7 +965,7 @@ office_cook:
               - fontWeight: bold
                 content: %CHARA%
               - "「그렇게 주인한테 파프리카를 먹이고 싶으면 적어도 조리법은 바꿔~!」"
-          - "%CHARA%은(는) 파프리카를 먹지 않을 그럴듯한 이유를 찾기 시작했다……"
+          - "%CHARA%는 파프리카를 먹지 않을 그럴듯한 이유를 찾기 시작했다……"
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -980,7 +980,7 @@ office_cook:
               - fontWeight: bold
                 content: %CHARA%
               - "「고기는 어디 있어? 생선은? 디저트는 어디 있냐구~~?!!」"
-          - "마지막 요구만 아니었으면 지당한 말이다……"
+          - "마지막 요구만 아니었으면 맞는 말이다……"
 
 
 office_rest:
@@ -991,13 +991,13 @@ office_rest:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「……『일과 휴식을 병행해야 마법도 더 잘 늘어』?」"
+          - "「……『일도 하고 쉬기도 해야 마법 실력도 더 늘어』?」"
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
           - "「……%CALLNAME%부터 자.」"
-      - "일단 %YOU%은(는) 자는 척을 하다가 %CHARA%이(가) 정말 잠든 뒤에야 안심했다"
+      - "일단 %YOU%은(는) 자는 척을 하다가 %CHARA%가 정말 잠든 뒤에야 안심했다."
   # 魔法の夢（シニア級7月第1週ターン開始イベント）より前
   - if: "!t && era.get('cflag:44:育成回合计时') < 95 + 25"
     lines:
@@ -1013,7 +1013,7 @@ office_rest:
               - fontWeight: bold
                 content: %CHARA%
               - "「포피★주니퍼, %CALLNAME%, 잠들어라!!」"
-          - "결국 %CHARA% 자신이 먼저 졸기 시작했고, %YOU%와(과) 함께 낮잠을 잤다"
+          - "결국 %CHARA% 자신이 먼저 졸기 시작했고, %YOU%과(와) 함께 낮잠을 잤다."
       # ジュニア級4月以降
       - if: era.get('cflag:44:育成回合计时') >= 12
         random: true
@@ -1028,7 +1028,7 @@ office_rest:
               - fontWeight: bold
                 content: %CHARA%
               - "「천재 %MOHOSHOJO% 스위피는 낮에도 밤에도 잠의 정령 따위한테 안 져!」"
-          - "그러니까 밤에는 제대로 안 잔다는 뜻이겠지……%CHARA%에게 눈을 감고 마법을 생각해 보라고 하자, 이내 %SEX%는 꾸벅꾸벅 졸기 시작했다"
+          - "그러니까 밤에는 제대로 안 잔다는 뜻이겠지……%CHARA%에게 눈을 감고 마법을 생각해 보라고 하자, 이내 %SEX%는 꾸벅꾸벅 졸기 시작했다."
   # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
   - if: "!t && era.get('cflag:44:育成回合计时') >= 95 + 25"
     lines:
@@ -1044,7 +1044,7 @@ office_rest:
               - fontWeight: bold
                 content: %CHARA%
               - "「『그럼 커피 마실래』……? 싫어, 싫어! 써, 잘게, 잔다구!!!」"
-          - "%CHARA%은(는) 얌전히 휴게실에서 낮잠을 잤다"
+          - "%CHARA%는 얌전히 휴게실에서 낮잠을 잤다."
       - random: true
         lines:
           - color: %COLOR%
@@ -1056,8 +1056,8 @@ office_rest:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「『%CALLNAME% 봐서라도』……? %CALLNAME% 얼굴에 언제부터 그런 힘이 있었는데~~!!!」"
-          - "못마땅한 표정이었지만, %CHARA%은(는) 휴게실에서 얌전히 낮잠을 잤다"
+              - "「『%CALLNAME% 체면을 봐서라도』……? %CALLNAME%한테 언제부터 그런 체면이 있었는데~~!!!」"
+          - "못마땅한 표정이었지만, %CHARA%는 휴게실에서 얌전히 낮잠을 잤다."
 
 
 office_game:
@@ -1074,7 +1074,7 @@ office_game:
           - fontWeight: bold
             content: %CHARA%
           - "「싫어, 싫어! %CALLNAME%이(가) 놀고 싶으면, 주인은 혼자 연습할 거야!!!」"
-      - "%CHARA%은(는) 전혀 그럴 기분이 아닌 모양이다……"
+      - "%CHARA%는 전혀 그럴 기분이 아닌 모양이다……"
   # ジュニア級4月より前
   - if: "!t && era.get('cflag:44:育成回合计时') < 12"
     lines:
@@ -1088,7 +1088,7 @@ office_game:
           - fontWeight: bold
             content: %CHARA%
           - "「%CALLNAME%이(가) 게임하고 싶으면 혼자 하면 되잖아!?」"
-      - "결국 %CHARA%은(는) 옆에서 가만히 %YOU%의 게임을 지켜봤다……"
+      - "결국 %CHARA%는 옆에서 가만히 %YOU%의 게임을 지켜봤다……"
   # ジュニア級4月以降
   - if: "!t && era.get('cflag:44:育成回合计时') >= 12"
     lines:
@@ -1100,7 +1100,7 @@ office_game:
               - fontWeight: bold
                 content: %CHARA%
               - "「%CALLNAME%, 그렇게 게임이 좋아?」"
-          - "게임을 하고 있는데, 옆에 가만히 서 있던 %CHARA%이(가) 갑자기 입을 열었다"
+          - "게임을 하고 있는데, 옆에 가만히 서 있던 %CHARA%가 갑자기 입을 열었다."
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -1115,7 +1115,7 @@ office_game:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「『……그럼 나도 할래?』『……아무거나 괜찮아?』 당연히 괜찮지!」"
+              - "「『……자신 있으면 나도 해 보라고?』『……아무거나 괜찮냐고?』 당연히 괜찮지!」"
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -1125,7 +1125,7 @@ office_game:
         lines:
           - random: true
             lines:
-              - "%CHARA%와(과) 함께 RPG를 하고 있다"
+              - "%CHARA%와 함께 RPG를 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1138,7 +1138,7 @@ office_game:
                   - "「아직 최강의 마법은 쓰지도 않았는데!!!」"
           - random: true
             lines:
-              - "%CHARA%와(과) 함께 RPG를 하고 있다"
+              - "%CHARA%와 함께 RPG를 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1151,7 +1151,7 @@ office_game:
                   - "「말하는 틈에 그냥 마법을 쓰면 되잖아!?」"
           - random: true
             lines:
-              - "%CHARA%와(과) 함께 RPG를 하고 있다"
+              - "%CHARA%와 함께 RPG를 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1164,7 +1164,7 @@ office_game:
                   - "「왜 불 속성 대미지가 안 들어가!!」"
           - random: true
             lines:
-              - "%CHARA%와(과) 함께 RPG를 하고 있다"
+              - "%CHARA%와 함께 RPG를 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1173,7 +1173,7 @@ office_game:
               - "아무래도 %SEX%의 마음을 울리는 이야기도 있나 보다……"
           - random: true
             lines:
-              - "%CHARA%와(과) 함께 마법 학원 경영 게임을 하고 있다"
+              - "%CHARA%와 함께 마법 학원 경영 게임을 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1186,7 +1186,7 @@ office_game:
                   - "「흐흥~ 이 마법 주문은 벌써 외웠어!」"
           - random: true
             lines:
-              - "%CHARA%와(과) 함께 가게 경영 게임을 하고 있다"
+              - "%CHARA%와 함께 가게 경영 게임을 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1199,7 +1199,7 @@ office_game:
                   - "「왜, 왜 마음에 안 든다고 돈을 안 내는 거야!!」"
           - random: true
             lines:
-              - "%CHARA%와(과) 함께 RPG를 하고 있다"
+              - "%CHARA%와 함께 RPG를 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1222,12 +1222,12 @@ office_game:
                   - fontWeight: bold
                     content: %CHARA%
                   - "「……돈이 들어? 그럼 얻을 수 있다는 거잖아! 갖고 싶어, 갖고 싶다구!!」"
-              - "어떻게든 유료 게임에 과금하려는 %CHARA%을(를) 말렸다……"
+              - "어떻게든 게임에 돈을 쓰려는 %CHARA%를 말렸다……"
           # クラシック級
           - if: era.get('cflag:44:育成回合计时') >= 48
             random: true
             lines:
-              - "%CHARA%이(가) 탄막 게임을 하는 모습을 보고 있다"
+              - "%CHARA%가 탄막 게임을 하는 모습을 보고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1242,7 +1242,7 @@ office_game:
           - if: era.get('cflag:44:育成回合计时') >= 48
             random: true
             lines:
-              - "%CHARA%와(과) 함께 꽤 어려운 액션 게임을 하고 있다"
+              - "%CHARA%와 함께 꽤 어려운 액션 게임을 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1263,7 +1263,7 @@ office_game:
                   - fontWeight: bold
                     content: %CHARA%
                   - "「? 그런 공략법도 있어?」"
-              - "서투른 마탑 계열 게임에서는 의외로 순순하다"
+              - "익숙하지 않은 마탑 계열 게임을 할 때는 의외로 순순하다."
           # クラシック級
           - if: era.get('cflag:44:育成回合计时') >= 48
             random: true
@@ -1283,7 +1283,7 @@ office_game:
           - if: era.get('cflag:44:育成回合计时') >= 95 + 25
             random: true
             lines:
-              - "%CHARA%와(과) 함께 격투 게임을 하고 있다"
+              - "%CHARA%와 함께 격투 게임을 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1298,7 +1298,7 @@ office_game:
           - if: era.get('cflag:44:育成回合计时') >= 95 + 25
             random: true
             lines:
-              - "%CHARA%와(과) 함께 카드 게임을 하고 있다"
+              - "%CHARA%와 함께 카드 게임을 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1313,7 +1313,7 @@ office_game:
           - if: era.get('cflag:44:育成回合计时') >= 95 + 25
             random: true
             lines:
-              - "%CHARA%와(과) 함께 RPG를 하고 있다"
+              - "%CHARA%와 함께 RPG를 하고 있다."
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -1330,14 +1330,14 @@ borrow_money:
   # ジュニア級4月より前
   - if: era.get('cflag:44:育成回合计时') < 12
     lines:
-      - "%CHARA%에게 돈을 빌리고 싶다고 말했다"
+      - "%CHARA%에게 돈을 빌리고 싶다고 말했다."
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
           - "「돈을……빌린다고……?」"
-      - "%CHARA%은(는) 잠시 어리둥절한 표정이다"
-      - "하지만 금세 평소의 표정으로 돌아왔다"
+      - "%CHARA%는 잠시 어리둥절한 표정이다."
+      - "하지만 금세 평소의 표정으로 돌아왔다."
       -
       - color: %COLOR%
         content:
@@ -1355,16 +1355,16 @@ borrow_money:
           - fontWeight: bold
             content: %CHARA%
           - "「그런 소원을 주인이 쉽게 들어줄 리 없잖아!」"
-      - "아무튼 %CHARA%은(는) 돈을 빌려 달라는 부탁을 거절했다……"
+      - "아무튼 %CHARA%는 돈을 빌려 달라는 부탁을 거절했다……"
   - if: era.get('cflag:44:育成回合计时') >= 12 && !d.borrow
     lines:
-      - "%CHARA%에게 돈을 빌리고 싶다고 말했다"
+      - "%CHARA%에게 돈을 빌리고 싶다고 말했다."
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
           - "「돈을……빌린다고……?」"
-      - "%CHARA%은(는) 잠시 어리둥절한 표정이다"
+      - "%CHARA%는 잠시 어리둥절한 표정이다."
       - color: %COLOR%
         content:
           - fontWeight: bold
@@ -1376,7 +1376,7 @@ borrow_money:
           - fontWeight: bold
             content: %CHARA%
           - "「맞혀 볼게……」"
-      - "곧바로 추측하기 시작했다"
+      - "곧바로 추측하기 시작했다."
       - color: %COLOR%
         content:
           - fontWeight: bold
@@ -1387,21 +1387,21 @@ borrow_money:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「역시! 주인이 안 보고 있으면 돈 쓰는 것도 안심할 수 없다니까!」"
-      - "대뜸 결론을 내렸다"
+          - "「역시! 주인이 안 보고 있으면 돈을 어떻게 쓰는지 안심이 안 된다니까!」"
+      - "대뜸 결론을 내렸다."
       -
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「뭐, 좋아! 주인이 이번에는 너그럽게 봐서 %CALLNAME%을(를) 탓하지 않을게!」"
+          - "「뭐, 좋아! 주인이 이번에는 너그럽게 봐줘서 %CALLNAME%을(를) 탓하지 않을게!」"
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
           - "「%CALLNAME%, 기다려! 내일 주인이 네 문제를 해결해 줄게!」"
       -
-      - "다음 날, %CHARA%은(는) %YOU%의 사무실에 와서 기숙사 구석구석을 뒤져 모은 새 돈과 낡은 돈을 책상 위에 와르르 쏟아 놓았다"
+      - "다음 날, %CHARA%는 %YOU%의 사무실에 와서 기숙사 구석구석을 뒤져 모은 새 돈과 낡은 돈을 책상 위에 와르르 쏟아 놓았다."
   - if: era.get('cflag:44:育成回合计时') >= 12 && d.borrow > 0
     lines:
       - "%CHARA%에게 돈을 빌리고 싶다고 말했다"
@@ -1452,7 +1452,7 @@ s_a_tree_hollow:
           - fontWeight: bold
             content: %CHARA%
           - "「안 돼, 안 돼! 난디나 도메스티카★가르말라, 천재 %MOHOSHOJO% 스위피가 정화하겠어!!」"
-      - "%YOU%의 설명을 들은 %CHARA%은(는) 마른 나무 구멍을 향해 지팡이를 휘두를 뿐이었다"
+      - "%YOU%의 설명을 들은 %CHARA%는 마른 나무 구멍을 향해 지팡이를 휘두를 뿐이었다."
   - if: era.get('cflag:44:育成回合计时') >= 12 && !d.tree_hollow
     lines:
       - color: %COLOR%
@@ -1465,7 +1465,7 @@ s_a_tree_hollow:
           - fontWeight: bold
             content: %CHARA%
           - "「……%CALLNAME%, 주인 대신 근처에 사람이 있나 봐 줘. 시험 삼아 조금만 해 볼 거야.」"
-      - "주변에 사람이 없는 걸 확인하자, %CHARA%은(는) 다른 사람들처럼 마른 나무 구멍에 대고 외치기 시작했다"
+      - "주변에 사람이 없는 걸 확인하자, %CHARA%는 다른 사람들처럼 마른 나무 구멍에 대고 외치기 시작했다."
   - if: era.get('cflag:44:育成回合计时') >= 12 && d.tree_hollow > 0
     lines:
       - random: true
@@ -1475,7 +1475,7 @@ s_a_tree_hollow:
               - fontWeight: bold
                 content: %CHARA%
               - "「바——보——사——역——마——→」"
-          - "본인이 있는데 그런 말은 외치지 말아 줬으면 한다……"
+          - "당사자가 옆에 있는데 그런 말은 외치지 않았으면 좋겠다……"
       - random: true
         lines:
           - color: %COLOR%
@@ -1483,7 +1483,7 @@ s_a_tree_hollow:
               - fontWeight: bold
                 content: %CHARA%
               - "「아——이——스——크——림——줘——→」"
-          - "주변에 사람이 없는 걸 확인하고, %CHARA%은(는) 마른 나무 구멍에 대고 그렇게 외쳤다"
+          - "주변에 사람이 없는 걸 확인하고, %CHARA%는 마른 나무 구멍에 대고 그렇게 외쳤다."
       - random: true
         lines:
           - color: %COLOR%
@@ -1491,7 +1491,7 @@ s_a_tree_hollow:
               - fontWeight: bold
                 content: %CHARA%
               - "「파——프——리——카——맛——없——어——→」"
-          - "주변에 사람이 없는 걸 확인하고, %CHARA%은(는) 마른 나무 구멍에 대고 그렇게 외쳤다"
+          - "주변에 사람이 없는 걸 확인하고, %CHARA%는 마른 나무 구멍에 대고 그렇게 외쳤다."
       # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
       - if: era.get('cflag:44:育成回合计时') > 47 + 42
         random: true
@@ -1501,7 +1501,7 @@ s_a_tree_hollow:
               - fontWeight: bold
                 content: %CHARA%
               - "「내——가——증——명——할——거——야——→」"
-          - "주변에 사람이 없는 걸 확인하고, %CHARA%은(는) 마른 나무 구멍에 대고 그렇게 외쳤다"
+          - "주변에 사람이 없는 걸 확인하고, %CHARA%는 마른 나무 구멍에 대고 그렇게 외쳤다."
       - if: era.get('cflag:44:育成回合计时') > 47 + 42
         random: true
         lines:
@@ -1510,7 +1510,7 @@ s_a_tree_hollow:
               - fontWeight: bold
                 content: %CHARA%
               - "「잘——지——켜——봐——→」"
-          - "주변에 사람이 없는 걸 확인하고, %CHARA%은(는) 마른 나무 구멍에 대고 그렇게 외쳤다"
+          - "주변에 사람이 없는 걸 확인하고, %CHARA%는 마른 나무 구멍에 대고 그렇게 외쳤다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -1520,7 +1520,7 @@ s_a_tree_hollow:
               - fontWeight: bold
                 content: %CHARA%
               - "「마——법——은——진——짜——야——↑」"
-          - "주변에 사람이 없는 걸 확인하고, %CHARA%은(는) 마른 나무 구멍에 대고 그렇게 외쳤다"
+          - "주변에 사람이 없는 걸 확인하고, %CHARA%는 마른 나무 구멍에 대고 그렇게 외쳤다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -1530,7 +1530,7 @@ s_a_tree_hollow:
               - fontWeight: bold
                 content: %CHARA%
               - "「사——역——마——도——망——가——지——마——→」"
-          - "주변에 사람이 없는 걸 확인하고, %CHARA%은(는) 마른 나무 구멍에 대고 그렇게 외쳤다"
+          - "주변에 사람이 없는 걸 확인하고, %CHARA%는 마른 나무 구멍에 대고 그렇게 외쳤다."
 
 
 s_a_dating:
@@ -1547,7 +1547,7 @@ s_a_dating:
           - fontWeight: bold
             content: %CHARA%
           - "「싫어, 싫어! %CALLNAME%이(가) 혼자 돌아다니고 싶으면, 주인도 혼자 연습할 거야!!!」"
-      - "%CHARA%은(는) 전혀 그럴 기분이 아닌 모양이다……"
+      - "%CHARA%는 전혀 그럴 기분이 아닌 모양이다……"
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より前
   - if: "!t && era.get('cflag:44:育成回合计时') <= 47 + 42"
     lines:
@@ -1563,7 +1563,7 @@ s_a_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「……『아직 없어』? 곧 찾을 거란 뜻이지?!」"
-          - "일단 %CHARA%와(과) 함께 안뜰을 걸었다"
+          - "일단 %CHARA%와 함께 안뜰을 걸었다."
       - random: true
         lines:
           - color: %COLOR%
@@ -1576,7 +1576,7 @@ s_a_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「참새가 만든 음료도, 달에서 내려온 아이도 대나무가 없으면 못 찾잖아?!」"
-          - "일단 %CHARA%와(과) 함께 안뜰을 걸었다"
+          - "일단 %CHARA%와 함께 안뜰을 걸었다."
       - random: true
         lines:
           - color: %COLOR%
@@ -1589,7 +1589,7 @@ s_a_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「……아냐!! 주인이 『매번』 %CALLNAME%의 상을 혼자 먹어 버렸다니, 그럴 리 없잖아!!!」"
-          - "%CHARA%은(는) 화를 내며 %YOU%의 말에 반박했다"
+          - "%CHARA%는 화를 내며 %YOU%의 말에 반박했다."
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
   - if: "!t && era.get('cflag:44:育成回合计时') > 47 + 42"
     lines:
@@ -1605,7 +1605,7 @@ s_a_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「흐흥~ 봐, %CALLNAME%. 학원에 새 %CALLNAME%이(가) 왔다고 했잖아!」"
-          - "괴이한 소문을 따라간 %YOU%와(과) %CHARA%은(는) 정말로 새끼 고양이 한 마리를 발견했다"
+          - "괴이한 소문을 따라간 %YOU%과(와) %CHARA%는 정말로 새끼 고양이 한 마리를 발견했다."
       - random: true
         lines:
           - color: %COLOR%
@@ -1618,7 +1618,7 @@ s_a_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「있잖아, %CALLNAME%. 학원에 부탁해서 천재 %MOHOSHOJO% 스위피 전용 재료 밭을 만들어 달라고 하면 어때!?」"
-          - "%CHARA%와(과) 함께 안뜰을 천천히 걸었다"
+          - "%CHARA%와 함께 안뜰을 천천히 걸었다."
       - random: true
         lines:
           - color: %COLOR%
@@ -1631,7 +1631,7 @@ s_a_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「다음부터는 %CALLNAME%이(가) 납치되는 일 같은 게 아니면 긴급 연락 금지!!」"
-          - "%CHARA%와(과) 함께 안뜰을 천천히 걸었다"
+          - "%CHARA%와 함께 안뜰을 천천히 걸었다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -1646,7 +1646,7 @@ s_a_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「입을 벌릴 때는 『아——』라고 하고, 다 먹으면 주인한테 『맛있어』라고 대답해!」"
-          - "%CHARA%와(과) 함께 안뜰을 천천히 걸었다"
+          - "%CHARA%와 함께 안뜰을 천천히 걸었다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -1660,8 +1660,8 @@ s_a_dating:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「주인이 말하자면, 오늘 이 『마법의 숲』에 온 건——」"
-          - "%CHARA%와(과) 함께 안뜰을 천천히 걸었다"
+              - "「주인 생각에는, 오늘 이 『마법의 숲』에 온 건——」"
+          - "%CHARA%와 함께 안뜰을 천천히 걸었다."
 
 
 out_disabled_in_agreement:
@@ -1675,7 +1675,7 @@ out_disabled_in_agreement:
       - fontWeight: bold
         content: %CHARA%
       - "「싫어, 싫어! %CALLNAME%이(가) 혼자 돌아다니고 싶으면, 주인도 혼자 연습할 거야!!!」"
-  - "%CHARA%은(는) 전혀 그럴 기분이 아닌 모양이다……"
+  - "%CHARA%는 전혀 그럴 기분이 아닌 모양이다……"
 
 
 o_r_fishing:
@@ -1684,7 +1684,7 @@ o_r_fishing:
     lines:
       - random: true
         lines:
-          - "%CHARA%와(과) 함께 강둑에 가서 혼자 낚시를 했다"
+          - "%CHARA%와 함께 강둑에 갔다. 낚시는 혼자 했다."
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -1695,10 +1695,10 @@ o_r_fishing:
               - fontWeight: bold
                 content: %CHARA%
               - "「허니서클★페루비안 릴리, 물고기야, 잡혀라~!」"
-          - "이유는 모르겠지만, %CHARA%이(가) 떠드는 동안에는 물고기가 조금 더 빨리 잡히는 것 같았다"
+          - "이유는 모르겠지만, %CHARA%가 떠드는 동안에는 물고기가 조금 더 빨리 잡히는 것 같았다."
       - random: true
         lines:
-          - "%CHARA%와(과) 함께 강둑에 가서 혼자 낚시를 했다"
+          - "%CHARA%와 함께 강둑에 갔다. 낚시는 혼자 했다."
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -1709,13 +1709,13 @@ o_r_fishing:
               - fontWeight: bold
                 content: %CHARA%
               - "「%CALLNAME%! 명령이야. 낚시하는 동안 주인하고 더 얘기해!!」"
-          - "이유는 모르겠지만, %CHARA%와(과) 이야기하는 동안에는 물고기가 조금 더 빨리 잡히는 것 같았다"
+          - "이유는 모르겠지만, %CHARA%와 이야기하는 동안에는 물고기가 조금 더 빨리 잡히는 것 같았다."
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
   - if: era.get('cflag:44:育成回合计时') > 47 + 42
     lines:
       - random: true
         lines:
-          - "%CHARA%와(과) 함께 강둑에 가서 혼자 낚시를 했다"
+          - "%CHARA%와 함께 강둑에 갔다. 낚시는 혼자 했다."
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -1726,10 +1726,10 @@ o_r_fishing:
               - fontWeight: bold
                 content: %CHARA%
               - "「%CALLNAME%이(가) 대어를 낚게 저주를 걸겠어! 나스터튬★알스트로메리아, 대어야, 잡혀라~!」"
-          - "이유는 모르겠지만, %CHARA%이(가) 떠드는 동안에는 평소보다 조금 더 큰 물고기가 잡히는 것 같았다"
+          - "이유는 모르겠지만, %CHARA%가 떠드는 동안에는 평소보다 조금 더 큰 물고기가 잡히는 것 같았다."
       - random: true
         lines:
-          - "%CHARA%와(과) 함께 강둑에 가서 %SEX%와 나란히 낚시를 했다"
+          - "%CHARA%와 함께 강둑에 가서 %SEX%와 나란히 낚시를 했다."
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -1740,7 +1740,7 @@ o_r_fishing:
               - fontWeight: bold
                 content: %CHARA%
               - "「봐 봐! 주인이 잡은 물고기가 역시 %CALLNAME% 것보다 커~!」"
-          - "%CHARA%와(과) 이야기하며 낚시하다 보니 처음에 뭘 겨루고 있었는지 점점 잊어버렸다"
+          - "%CHARA%와 이야기하며 낚시하다 보니 처음에 뭘 겨루고 있었는지 점점 잊어버렸다."
 
 
 o_r_walking:
@@ -1759,7 +1759,7 @@ o_r_walking:
               - fontWeight: bold
                 content: %CHARA%
               - "「……『아직 없어』? 곧 찾을 거란 뜻이지?!」"
-          - "일단 %CHARA%와(과) 함께 강둑을 걸었다"
+          - "일단 %CHARA%와 함께 강둑을 걸었다."
       - random: true
         lines:
           - color: %COLOR%
@@ -1785,7 +1785,7 @@ o_r_walking:
               - fontWeight: bold
                 content: %CHARA%
               - "「그중에 재료로 딱 좋은 약초가 있을지도 모르잖아——」"
-          - "일단 %CHARA%와(과) 함께 강둑을 걸었다"
+          - "일단 %CHARA%와 함께 강둑을 걸었다."
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
   - if: era.get('cflag:44:育成回合计时') > 47 + 42
     lines:
@@ -1801,7 +1801,7 @@ o_r_walking:
               - fontWeight: bold
                 content: %CHARA%
               - "「봐 봐! %CALLNAME%, 저기 커다란 검은 그림자 봤어!?」"
-          - "%CHARA%의 시선을 따라가 보니, 물속에는 정말 큰 물고기가 있었다"
+          - "%CHARA%의 시선을 따라가 보니, 물속에는 정말 큰 물고기가 있었다."
       - random: true
         lines:
           - color: %COLOR%
@@ -1814,7 +1814,7 @@ o_r_walking:
               - fontWeight: bold
                 content: %CHARA%
               - "「『고양이가 물고기 구경하려는 것 같아』……? 고양이 아니거든!!!」"
-          - "%CHARA%은(는) 화를 내며 %YOU%의 말에 반박했다"
+          - "%CHARA%는 화를 내며 %YOU%의 말에 반박했다."
       - random: true
         lines:
           - color: %COLOR%
@@ -1827,7 +1827,7 @@ o_r_walking:
               - fontWeight: bold
                 content: %CHARA%
               - "「오늘은 주인이 누구보다 먼저 갈 거야!!」"
-          - "%CHARA%와(과) 함께 강둑을 걸었다"
+          - "%CHARA%와 함께 강둑을 걸었다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -1842,7 +1842,7 @@ o_r_walking:
               - fontWeight: bold
                 content: %CHARA%
               - "「그 『마법책』에 깃든 힘도 모르다니! 천재 %MOHOSHOJO% 스위피가 그 책을 구해 낼 거야!」"
-          - "%CHARA%와(과) 함께 강둑을 걸었다"
+          - "%CHARA%와 함께 강둑을 걸었다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -1857,7 +1857,7 @@ o_r_walking:
               - fontWeight: bold
                 content: %CHARA%
               - "「그래서 천재 %MOHOSHOJO% 스위피는 매일 강으로 산책을 오는 거야~!」"
-          - "%CHARA%와(과) 함께 강둑을 걸었다"
+          - "%CHARA%와 함께 강둑을 걸었다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -1872,7 +1872,7 @@ o_r_walking:
               - fontWeight: bold
                 content: %CHARA%
               - "「어느 쪽이든 천재 %MOHOSHOJO% 스위피가 매일 강으로 산책 오는 건 변함없어~!」"
-          - "%CHARA%와(과) 함께 강둑을 걸었다"
+          - "%CHARA%와 함께 강둑을 걸었다."
 
 
 o_s_arcade:
@@ -1891,7 +1891,7 @@ o_s_arcade:
               - fontWeight: bold
                 content: %CHARA%
               - "「! %CALLNAME%, 저거 갖고 싶어. 맞아, 저거!! 지금 당장, 꼭, 놓치면 안 돼!!!」"
-          - "%CHARA%의 지시대로 %YOU%은(는) %SEX%가 갖고 싶어 하는 봉제 인형을 무사히 뽑았다"
+          - "%CHARA%의 지시대로 %YOU%은(는) %SEX%가 갖고 싶어 하는 봉제 인형을 무사히 뽑았다."
       # ジュニア級4月以降
       - if: era.get('cflag:44:育成回合计时') >= 12
         random: true
@@ -1906,7 +1906,7 @@ o_s_arcade:
               - fontWeight: bold
                 content: %CHARA%
               - "「싫어, 싫어, 싫어! %CALLNAME%!! 다음 판에서는 버튼 만지면 안 돼!!!」"
-          - "%CHARA%에게 몇 번 이기고 나자 %SEX%는 조금 심통이 난 모양이다"
+          - "%CHARA%에게 몇 번 이기고 나자 %SEX%는 조금 심통이 난 모양이다."
       # ジュニア級4月以降
       - if: era.get('cflag:44:育成回合计时') >= 12
         random: true
@@ -1921,7 +1921,7 @@ o_s_arcade:
               - fontWeight: bold
                 content: %CHARA%
               - "「싫어, 싫어! 왜 이렇게 어려워!??」"
-          - "%CHARA%은(는) 너무 어려운 게임에 머리를 싸맨다"
+          - "%CHARA%는 너무 어려운 게임에 머리를 싸맨다."
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
   - if: era.get('cflag:44:育成回合计时') > 47 + 42
     lines:
@@ -1937,7 +1937,7 @@ o_s_arcade:
               - fontWeight: bold
                 content: %CHARA%
               - "「왜, 왜! 사람을 구했는데 전리품을 안 줘!?」"
-          - "%CHARA%은(는) 게임의 보상 방식이 못마땅한 모양이다"
+          - "%CHARA%는 게임의 보상 방식이 못마땅한 모양이다."
       - random: true
         lines:
           - color: %COLOR%
@@ -1950,7 +1950,7 @@ o_s_arcade:
               - fontWeight: bold
                 content: %CHARA%
               - "「받아라, 스위피 님의 절대 마법——!!」"
-          - "%CHARA%은(는) 게임에서 필살기를 쓴 데 만족하는 모양이다"
+          - "%CHARA%는 게임에서 필살기를 쓴 데 만족하는 모양이다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95+25
         random: true
@@ -1965,7 +1965,7 @@ o_s_arcade:
               - fontWeight: bold
                 content: %CHARA%
               - "「절대로! 무……섭……지……않……아……」"
-          - "그래도 %CHARA%은(는) 아케이드 게임의 공포 연출에 겁을 먹은 모양이다"
+          - "그래도 %CHARA%는 아케이드 게임의 공포 연출에 겁을 먹은 모양이다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95+25
         random: true
@@ -1980,23 +1980,23 @@ o_s_arcade:
               - fontWeight: bold
                 content: %CHARA%
               - "「아니, 아니! 왜 부딪히고 나서 반대 방향으로 달릴 수 있는 거야!?」"
-          - "%CHARA%은(는) 차의 방향을 바로잡는 데 꽤 오랜 시간이 걸렸다"
+          - "%CHARA%는 차의 방향을 바로잡는 데 꽤 오랜 시간이 걸렸다."
 
 
 o_s_drawing:
   - if: "!d.drawing"
     lines:
-      - "%CHARA%을(를) 데리고 (특별 제작한) 뽑기 가게에 들어갔다!"
+      - "%CHARA%를 데리고 (특별히 준비한) 뽑기 가게에 들어갔다!"
       -
       - "당근도, 당근 함박스테이크도, 심지어 당첨될지도 모르는 특등상——온천 여행권까지 갖춰져 있다!"
-      - "푸짐한 경품은 그야말로 우마%UMA%의 낙원——"
+      - "푸짐한 경품은 그야말로 %UMA%의 낙원——"
       -
-      - "옆에서 %CHARA%이(가) 지팡이로 선반의 당근 함박스테이크를 살짝 찔렀다"
-      - "함박스테이크가 아주 조금 뒤로 밀리며 옆면이 드러났다"
+      - "옆에서 %CHARA%가 지팡이로 선반의 당근 함박스테이크를 살짝 찔렀다."
+      - "함박스테이크가 아주 조금 뒤로 밀리며 옆면이 드러났다."
       -
-      - "역시 당근에 관심이 생겼는지, %CHARA%은(는) 카운터 화판에 세워 놓은 당근을 하나 집어 들었다"
-      - "앞뒤를 뒤집어 가며 뭔가 알아내려는 듯 빤히 살핀다"
-      - "마지막에는 어째서인지 공중에서 손을 놓아 당근을 떨어뜨렸다"
+      - "역시 당근에 관심이 생겼는지, %CHARA%는 카운터 위 화판에 기대어 놓은 당근을 하나 집어 들었다."
+      - "앞뒤를 뒤집어 가며 뭔가 알아내려는 듯 빤히 살핀다."
+      - "마지막에는 어째서인지 공중에서 손을 놓아 당근을 떨어뜨렸다."
       -
       - "사락——"
       - "사락——"
@@ -2014,14 +2014,14 @@ o_s_drawing:
           - fontWeight: bold
             content: %CHARA%
           - 「……」
-      - "자그마한 우마%UMA%는 바닥에 착 달라붙은 당근을 바라보며 어째서인지 말이 없어졌다"
+      - "자그마한 %UMA%는 바닥에 착 달라붙은 당근을 바라보며 어째서인지 말이 없어졌다."
       -
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
           - "「『종이 %CALLNAME%』.」"
-      - "고개를 들고 지팡이로 %YOU%을(를) 살짝 가리킨다"
+      - "고개를 들고 지팡이로 %YOU%을(를) 살짝 가리킨다."
       - color: %COLOR%
         content:
           - fontWeight: bold
@@ -2029,17 +2029,17 @@ o_s_drawing:
           - "「이런 건 네게 영양분이 되겠지. 주인은 안 먹을 테니까 먼저 먹어.」"
       -
       - "적어도 그런 이상한 별명은 붙이지 말아 줬으면 한다……"
-      - "아무튼 정성껏 준비한 이 시설에 %CHARA%을(를) 데려왔다"
+      - "아무튼 정성껏 준비한 이 시설에 %CHARA%를 데려왔다."
   - if: d.drawing > 0
     lines:
-      - "%CHARA%을(를) 데리고 (특별 제작한) 뽑기 가게에 들어갔다!"
+      - "%CHARA%를 데리고 (특별히 준비한) 뽑기 가게에 들어갔다!"
       - "당근도, 당근 함박스테이크도, 심지어 당첨될지도 모르는 특등상——온천 여행권까지 갖춰져 있다!"
-      - "푸짐한 경품은 그야말로 우마%UMA%의 낙원——"
+      - "푸짐한 경품은 그야말로 %UMA%의 낙원——"
 
 osd_loop:
   -
   - acc: 1
-    content: "(뽑기를 뽑는다!)"
+    content: "(추첨한다!)"
     lines:
       - color: %COLOR%
         content:
@@ -2047,7 +2047,7 @@ osd_loop:
             content: %CHARA%
           - "「뭐야, 뭐야! 이번엔 뭘 뽑는 거야!?」"
       -
-      - "%CHARA% 앞에서 %YOU%은(는) 뽑기 쪽지(종잇조각)를 천천히 펼쳐 안에 적힌 경품 이름을 보여 주었다"
+      - "%CHARA% 앞에서 %YOU%은(는) 뽑기 쪽지(종이 뭉치)를 천천히 펼쳐 안에 적힌 경품 이름을 보여 주었다."
       -
       - "당첨된 건——"
       - random: true
@@ -2059,7 +2059,7 @@ osd_loop:
               - fontWeight: bold
                 content: %CHARA%
               - "「흐음.」"
-          - "가장 실용적인 물건인데도 감상을 말하기조차 귀찮은 모양이다……"
+          - "가장 실용적인 물건인데도 한마디 하기도 귀찮은 모양이다……"
       - random: true
         lines:
           - "「(납작한 판지) 당근 한 개」!"
@@ -2069,7 +2069,7 @@ osd_loop:
               - fontWeight: bold
                 content: %CHARA%
               - "「싫어, 싫어! 먹지도 못하는 당근을 어디에 쓰라는 거야!!」"
-          - "일단 %CHARA%은(는) 그 작은 판지 당근을 입에 물고 위아래로 흔들고 있다"
+          - "일단 %CHARA%는 그 작은 판지 당근을 입에 물고 위아래로 흔들고 있다."
       - random: true
         lines:
           - "「(납작한 판지) 당근 한 무더기」!"
@@ -2093,7 +2093,7 @@ osd_loop:
               - fontWeight: bold
                 content: %CHARA%
               - "「……왜 뒷면에는 그림이 없어!!!」"
-          - "%CHARA%은(는) 판지 뒷면에 자신만의 당근 버거를 그리기 시작했다……"
+          - "%CHARA%는 판지 뒷면에 자신만의 당근 버거를 그리기 시작했다……"
       - random: true
         lines:
           - "「(손으로 그린) 온천 여행권」!"
@@ -2103,12 +2103,12 @@ osd_loop:
               - fontWeight: bold
                 content: %CHARA%
               - "「……%CALLNAME%이(가) 온천에 못 간다면 주인이 소원을 들어줄 수도 있어.」"
-          - "%CHARA%은(는) 손으로 온천 여행권을 대량 생산하기 시작했다……"
+          - "%CHARA%는 손으로 온천 여행권을 대량 생산하기 시작했다……"
   - acc: 2
     content: "(이제 돌아갈 시간이다)"
     lines:
-      - "여전히 이상한, 혹은 조금 깔보는 눈길로 %YOU%을(를) 보고 있다"
-      - "하지만 뽑기 가게에서 나온 %CHARA%의 기분은 확실히 좋아진 모양이다"
+      - "여전히 의아해하거나 조금 깔보는 듯한 눈길로 %YOU%을(를) 보고 있다."
+      - "하지만 뽑기 가게에서 나온 %CHARA%의 기분은 확실히 좋아진 모양이다."
 
 
 o_s_ktv:
@@ -2125,7 +2125,7 @@ o_s_ktv:
           - fontWeight: bold
             content: %CHARA%
           - "「싫어, 싫어! 왜 내가 %CALLNAME%하고 같이 노래해야 해!」"
-      - "그래도 %CHARA%은(는) 곡을 고른 뒤 옆에 앉아 들으며, %YOU%에게 그 노래를 몇 번이고 부르게 했다……"
+      - "그래도 %CHARA%는 곡을 고른 뒤 옆에 앉아 들으며, %YOU%에게 그 노래를 몇 번이고 부르게 했다……"
   # ジュニア級4月以降
   - if: era.get('cflag:44:育成回合计时') >= 12
     lines:
@@ -2141,7 +2141,7 @@ o_s_ktv:
               - fontWeight: bold
                 content: %CHARA%
               - "「천재 %MOHOSHOJO% 스위피가 부를 노래는 당연히 이거——」"
-          - "%YOU%의 원래 계획을 거절한 뒤, %CHARA%은(는) 당연하다는 듯 마법 소녀 애니메이션의 오프닝을 골랐다"
+          - "%YOU%의 원래 계획을 거절한 뒤, %CHARA%는 당연하다는 듯 마법 소녀 애니메이션의 오프닝을 골랐다."
       - random: true
         lines:
           - color: %COLOR%
@@ -2154,7 +2154,7 @@ o_s_ktv:
               - fontWeight: bold
                 content: %CHARA%
               - "「천재 %MOHOSHOJO% 스위피는 오늘 이것만 들을 거야——」"
-          - "뜻밖에도 %CHARA%은(는) 가사가 있는 관현악곡을 골라 흥얼거리기 시작했다"
+          - "뜻밖에도 %CHARA%는 가사가 있는 관현악곡을 골라 흥얼거리기 시작했다."
 
 o_s_movie:
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より前
@@ -2172,12 +2172,12 @@ o_s_movie:
               - fontWeight: bold
                 content: %CHARA%
               - "「사——역——마——! 내 팝콘은!?」"
-          - "아무튼 %CHARA%와(과) 나란히 영화를 봤다"
+          - "아무튼 %CHARA%와 나란히 영화를 봤다."
       # ジュニア級4月以降
       - if: era.get('cflag:44:育成回合计时') >= 12
         random: true
         lines:
-          - "%CHARA%와(과) 함께 주로 어린이를 대상으로 한 영화를 봤다"
+          - "%CHARA%와 함께 주로 어린이를 대상으로 한 영화를 봤다."
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -2192,7 +2192,7 @@ o_s_movie:
       - if: era.get('cflag:44:育成回合计时') >= 12
         random: true
         lines:
-          - "%CHARA%와(과) 함께 안내견이 나오는 영화를 보러 갔다"
+          - "%CHARA%와 함께 안내견이 나오는 영화를 보러 갔다."
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -2208,7 +2208,7 @@ o_s_movie:
     lines:
       - random: true
         lines:
-          - "%CHARA%와(과) 함께 움직이는 성이 나오는 영화를 보러 갔다"
+          - "%CHARA%와 함께 움직이는 성이 나오는 영화를 보러 갔다."
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -2221,7 +2221,7 @@ o_s_movie:
               - "「『다들 너처럼 어른이 되기 싫어하는 건 아니야』……? 어린애 아니거든!!」"
       - random: true
         lines:
-          - "%CHARA%와(과) 함께 로봇을 조종하는 영화를 봤다"
+          - "%CHARA%와 함께 로봇을 조종하는 영화를 봤다."
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -2317,7 +2317,7 @@ o_c_pray:
                 content: %CHARA%
               - "「누군가에게 주워진다거나 그런 문제라면 주인한테 달려오지 마.」"
           -
-          - "갑자기 운세를 믿기 시작한 %CHARA%와(과) 달리, %YOU%은(는) 갑자기 운세의 효험을 믿고 싶지 않아졌다……"
+          - "갑자기 운세를 믿기 시작한 %CHARA%와 달리, %YOU%은(는) 갑자기 운세의 효험을 믿고 싶지 않아졌다……"
       - if: era.get('cflag:44:育成回合计时') >= 47 + 42 && era.get('cflag:44:育成回合计时') < 95 + 25 && d.dice < 0.5
         lines:
           - color: %COLOR%
@@ -2326,7 +2326,7 @@ o_c_pray:
                 content: %CHARA%
               - "「말해 봐, 말해! 어떤 소원을 이루고 싶어, %CALLNAME%?」"
           -
-          - "%YOU%은(는) 자신이 기도하는 신이 %CHARA%이라고는 별로 생각하지 않는다……"
+          - "%YOU%은(는) 자신이 %CHARA%에게 기도하고 있다는 생각은 별로 들지 않는다……"
       - if: era.get('cflag:44:育成回合计时') >= 47 + 42 && era.get('cflag:44:育成回合计时') < 95 + 25 && d.dice >= 0.5
         lines:
           - color: %COLOR%
@@ -2335,7 +2335,7 @@ o_c_pray:
                 content: %CHARA%
               - "「이렇게 나오면 %CALLNAME%의 소원은 이제 안 들어줄 거야!」"
           -
-          - "%YOU%은(는) 자신이 기도하는 신이 %CHARA%이라고는 별로 생각하지 않는다……"
+          - "%YOU%은(는) 자신이 %CHARA%에게 기도하고 있다는 생각은 별로 들지 않는다……"
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25 && d.dice < 0.5
         lines:
           - color: %COLOR%
@@ -2344,7 +2344,7 @@ o_c_pray:
                 content: %CHARA%
               - "「그렇지, 그렇지? 역시 주인하고 있으면 운이 좋아져~!」"
           -
-          - "그런 효과가 있을지도 모른다"
+          - "그런 효과가 있을지도 모른다."
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25 && d.dice >= 0.5
         lines:
           - color: %COLOR%
@@ -2353,7 +2353,7 @@ o_c_pray:
                 content: %CHARA%
               - "「싫어, 싫어! 안에 [대길]을 더 잔뜩 넣을 거야~!!!」"
           -
-          - "아무튼 %CHARA%은(는) 끝내 실행에 옮기지는 않았다"
+          - "아무튼 %CHARA%는 끝내 실행에 옮기지는 않았다."
 
 
 o_s_restaurant:
@@ -2369,7 +2369,7 @@ o_s_restaurant:
           - fontWeight: bold
             content: %CHARA%
           - "「%CALLNAME%——! 거기 케첩 이리 내놔!!」"
-      - "%CHARA%은(는) 오므라이스를 거의 케첩에 절이려 하고 있다……"
+      - "%CHARA%는 오므라이스를 거의 케첩에 절이려 하고 있다……"
   - random: true
     lines:
       - color: %COLOR%
@@ -2382,7 +2382,7 @@ o_s_restaurant:
           - fontWeight: bold
             content: %CHARA%
           - "「왜 주인은 하나뿐인데 너는 두 개나 샀어!!?」"
-      - "%CHARA%의 강한 요구에 %YOU%은(는) 더 산 것을 %CHARA%에게 건넸다"
+      - "%CHARA%의 강한 요구에 %YOU%은(는) 하나 더 산 타이야키를 %CHARA%에게 건넸다."
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
   - if: era.get('cflag:44:育成回合计时') > 47 + 42
     random: true
@@ -2412,7 +2412,7 @@ o_s_restaurant:
           - fontWeight: bold
             content: %CHARA%
           - "「같이 사 왔잖아!?」"
-      - "%YOU%은(는) %CHARA%의 조금 질투 어린 시선을 받으며 크레이프를 먹었다"
+      - "%YOU%은(는) %CHARA%의 조금 질투하는 듯한 시선을 받으며 크레이프를 먹었다."
 
 o_s_dating:
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より前
@@ -2430,7 +2430,7 @@ o_s_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「흐흥~ 말 안 해도 돼! 바로 주인을 안내해!」"
-          - "일단 %CHARA%와(과) 함께 역 앞 거리를 걸었다"
+          - "일단 %CHARA%와 함께 역 앞 거리를 걸었다."
       - random: true
         lines:
           - color: %COLOR%
@@ -2443,7 +2443,7 @@ o_s_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「천재 %MOHOSHOJO% 스위피 님이 반드시 정체를 밝혀내겠어!」"
-          - "%CHARA%와(과) 이야기하며 역 근처 거리를 걸었다"
+          - "%CHARA%와 이야기하며 역 근처 거리를 걸었다."
       - random: true
         lines:
           - color: %COLOR%
@@ -2456,7 +2456,7 @@ o_s_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「지금 당장, 당장 그 %CALLNAME%이(가) 있는 곳으로 가는 거야!」"
-          - "일단 %CHARA%의 제안대로 함께 봉제 인형 가게를 돌아봤다"
+          - "일단 %CHARA%의 제안대로 함께 봉제 인형 가게를 돌아봤다."
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
   - if: era.get('cflag:44:育成回合计时') > 47 + 42
     lines:
@@ -2472,7 +2472,7 @@ o_s_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「하지만! %CALLNAME%이(가) 앞장서! 무서워서 그러는 거 아니거든!!」"
-          - "%CHARA%와(과) 이야기하며 역 근처 거리를 걸었다"
+          - "%CHARA%와 이야기하며 역 근처 거리를 걸었다."
       - random: true
         lines:
           - color: %COLOR%
@@ -2485,7 +2485,7 @@ o_s_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「이렇게 전화를 받고, 그다음——여보세요——지금 네 뒤에 있어——!!」"
-          - "%YOU%을(를) 놀라게 하지 못했다는 걸 깨닫자, %CHARA%은(는) 필사적으로 화난 척하기 시작했다"
+          - "%YOU%을(를) 놀라게 하지 못했다는 걸 깨닫자, %CHARA%는 필사적으로 화난 척하기 시작했다."
       - random: true
         lines:
           - color: %COLOR%
@@ -2498,7 +2498,7 @@ o_s_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「주인이 전에 가 본 적은 절~대 없으니까!」"
-          - "일단 %CHARA%의 제안대로 함께 케이크 가게를 돌아봤다"
+          - "일단 %CHARA%의 제안대로 함께 케이크 가게를 돌아봤다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -2513,7 +2513,7 @@ o_s_dating:
               - fontWeight: bold
                 content: %CHARA%
               - "「천재 %MOHOSHOJO% 스위피가 보기에는 이렇게 해야 맞아——」"
-          - "%CHARA%와(과) 이야기하며 역 근처 거리를 걸었다"
+          - "%CHARA%와 이야기하며 역 근처 거리를 걸었다."
       # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
@@ -2527,8 +2527,8 @@ o_s_dating:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「주인이 말하자면, 그 사람은 빨간 망토도 파란 망토도 고르지 않고 직접 꺼낸 거야……」"
-          - "%CHARA%와(과) 이야기하며 역 근처 거리를 걸었다"
+              - "「주인 생각에는, 그 사람은 빨간 망토도 파란 망토도 고르지 않고 직접 꺼낸 거야……」"
+          - "%CHARA%와 이야기하며 역 근처 거리를 걸었다."
 
 
 o_s_shopping:
@@ -2539,13 +2539,13 @@ o_s_shopping:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「천재 %MOHOSHOJO%에게는 최고의 빗자루 탈것이 필요해!」"
+          - "「천재 %MOHOSHOJO%에게는 타고 다닐 최고의 빗자루가 필요해!」"
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
           - "「여기 온 이상, %CALLNAME%, 명령이야. 지금 당장 여기서 제일 좋은 빗자루를 찾아!」"
-      - "%CHARA%와(과) 함께 쇼핑몰을 둘러보기 시작했다"
+      - "%CHARA%와 함께 쇼핑몰을 둘러보기 시작했다."
   # 新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後、魔法の夢（シニア級7月第1週ターン開始イベント）より前
   - if: t > 47 + 42 && t < 95 + 25
     lines:
@@ -2559,7 +2559,7 @@ o_s_shopping:
           - fontWeight: bold
             content: %CHARA%
           - "「오늘은 사야 할 마법 물건이 잔뜩 있단 말이야!」"
-      - "%CHARA%은(는) 바로 %YOU%의 손을 잡아끌고 쇼핑몰을 돌아다녔다"
+      - "%CHARA%는 바로 %YOU%의 손을 잡아끌고 쇼핑몰을 돌아다녔다."
   # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
   - if: t >= 95 + 25
     lines:
@@ -2573,7 +2573,7 @@ o_s_shopping:
           - fontWeight: bold
             content: %CHARA%
           - "「우선 마법 도구, 그다음은 마법책, 마지막은 당연히 디저트!」"
-      - "%CHARA%은(는) 바로 %YOU%의 손을 잡아끌고 쇼핑몰을 돌아다녔다"
+      - "%CHARA%는 바로 %YOU%의 손을 잡아끌고 쇼핑몰을 돌아다녔다."
 
 
 gn_normal_sleep:
@@ -2586,7 +2586,7 @@ gn_normal_sleep:
             - fontWeight: bold
               content: %CHARA%
             - "「……들고 있어……마……움직이……면……」"
-        - "%CHARA%은(는) 벤치에 누워 잠들어 있으며, 잠꼬대를 하는 모양이다"
+        - "%CHARA%는 벤치에 누워 잠꼬대를 하고 있다."
     - random: true
       lines:
         - color: %COLOR%
@@ -2594,7 +2594,7 @@ gn_normal_sleep:
             - fontWeight: bold
               content: %CHARA%
             - "「음냐……천재 %MOHOSHOJO% 스위……마법……대단……」"
-        - "%CHARA%은(는) 벤치에 누워 잠들어 있으며, 잠꼬대를 하는 모양이다"
+        - "%CHARA%는 벤치에 누워 잠꼬대를 하고 있다."
     - random: true
       lines:
         - color: %COLOR%
@@ -2602,7 +2602,7 @@ gn_normal_sleep:
             - fontWeight: bold
               content: %CHARA%
             - "「……후……음……주인……곁에서……한 발짝도……떨어지면……」"
-        - "%CHARA%은(는) 벤치에 누워 잠들어 있으며, 잠꼬대를 하는 모양이다"
+        - "%CHARA%는 벤치에 누워 잠꼬대를 하고 있다."
     - random: true
       lines:
         - color: %COLOR%
@@ -2610,7 +2610,7 @@ gn_normal_sleep:
             - fontWeight: bold
               content: %CHARA%
             - "「후……후……그랜마……인……정해……내……마법……최……」"
-        - "%CHARA%은(는) 벤치에 누워 잠들어 있으며, 잠꼬대를 하는 모양이다"
+        - "%CHARA%는 벤치에 누워 잠꼬대를 하고 있다."
     - random: true
       lines:
         - color: %COLOR%
@@ -2618,7 +2618,7 @@ gn_normal_sleep:
             - fontWeight: bold
               content: %CHARA%
             - "「음냐……천재 %MOHOSHOJO% 스위……역시……대마법사……」"
-        - "%CHARA%은(는) 벤치에 누워 잠들어 있으며, 잠꼬대를 하는 모양이다"
+        - "%CHARA%는 벤치에 누워 잠꼬대를 하고 있다."
 
 
 # ジュニア級4月以降、おやすみ、プレイヤーが眠り込む、一度きり
@@ -2628,16 +2628,16 @@ gn_rest:
   lines:
     - if: era.get('love:44') < 50
       lines:
-        - "평소처럼 트레이너실에서 일하고 있다"
+        - "평소처럼 트레이너실에서 일하고 있다."
         - "하지만 최근의 수면 부족 때문인지, 과로 때문인지, 아니면 약의 영향인지"
-        - "일하던 중 %YOU%은(는) 그대로 자리에 쓰러졌고, 그 뒤 무슨 일이 있었는지는 알 수 없다"
+        - "일하던 중 %YOU%은(는) 그대로 자리에 쓰러졌고, 그 뒤 무슨 일이 있었는지는 알 수 없다."
         -
         - ……
         -
-        - "몽롱한 의식 속에서 사락사락 움직이는 소리, 물을 따르는 소리, 그리고 억양 있는 말소리가 들렸다"
+        - "몽롱한 의식 속에서 사락사락 움직이는 소리, 물을 따르는 소리, 그리고 높낮이가 뚜렷한 말소리가 들렸다."
         -
-        - "천천히 눈을 뜨자, 어느새 트레이너실 소파에 반듯이 누워 담요까지 덮고 있었다"
-        - "고개를 돌리니 소파 옆에 호기심과 긴장, 초조함이 뒤섞인 눈으로 %YOU%을(를) 바라보는 %CHARA%이(가) 있었다——"
+        - "천천히 눈을 뜨자, 어느새 트레이너실 소파에 반듯이 누워 담요까지 덮고 있었다."
+        - "고개를 돌리니 소파 옆에 호기심과 긴장, 초조함이 뒤섞인 눈으로 %YOU%을(를) 바라보는 %CHARA%가 있었다——"
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -2653,7 +2653,7 @@ gn_rest:
             - fontWeight: bold
               content: %CHARA%
             - "「아. 사……살아 있는 %CALLNAME%이었구나……!」"
-        - "%CHARA%은(는) 안도의 한숨을 내쉬었다"
+        - "%CHARA%는 안도의 한숨을 내쉬었다."
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -2668,7 +2668,7 @@ gn_rest:
             - fontWeight: bold
               content: %CHARA%
             - "「그런데 『사령술』이 효과가 없었다면……」"
-        - "%YOU%이(가) 쓴웃음을 짓고 있자 %CHARA%은(는) 말을 이어 갔다"
+        - "%YOU%이(가) 쓴웃음을 짓고 있자 %CHARA%는 말을 이어 갔다."
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -2711,22 +2711,22 @@ gn_rest:
               content: %CHARA%
             - "「흐흥, 역시 천재 %MOHOSHOJO% 스위피!」"
         -
-        - "그 뒤로 %CHARA%은(는) 거의 매일 비전의 어성초차 한 병을 들고 %YOU%을(를) 찾아온다"
+        - "그 뒤로 %CHARA%는 거의 매일 비전의 어성초차 한 병을 들고 %YOU%을(를) 찾아온다."
         - "게다가 다 마시는 걸 직접 눈으로 확인하기 전에는 %YOU%을(를) 놓아주지 않는다……"
     - if: era.get('love:44') >= 50
       lines:
-        - "평소처럼 트레이너실에서 일하고 있다"
+        - "평소처럼 트레이너실에서 일하고 있다."
         - "하지만 최근의 수면 부족 때문인지, 과로 때문인지, 아니면 약의 영향인지"
-        - "일하던 중 %YOU%은(는) 그대로 자리에 쓰러졌고, 그 뒤 무슨 일이 있었는지는 알 수 없다"
+        - "일하던 중 %YOU%은(는) 그대로 자리에 쓰러졌고, 그 뒤 무슨 일이 있었는지는 알 수 없다."
         -
         - ……
         -
-        - "몽롱한 의식 속에서 사락사락 움직이는 소리, 물을 따르는 소리, 그리고 작은 흐느낌이 들렸다"
-        - "？？？？「흑……흐으……」"
+        - "몽롱한 의식 속에서 사락사락 움직이는 소리, 물을 따르는 소리, 그리고 작은 흐느낌이 들렸다."
+        - "????「흑……흐으……」"
         -
         - "천천히 눈을 뜨자——"
-        - "어느새 트레이너실 소파에 반듯이 누워 담요까지 덮고 있었다"
-        - "고개를 돌리니, 소파 옆에는 주변을 어질러 놓은 채 당황해서 울고 있는 갈색 털의 자그마한 우마%UMA%가 서 있었다"
+        - "어느새 트레이너실 소파에 반듯이 누워 담요까지 덮고 있었다."
+        - "고개를 돌리니, 소파 옆에는 주변을 어질러 놓은 채 당황해서 울고 있는 갈색 털의 자그마한 %UMA%가 서 있었다."
         -
         - color: %COLOR%
           content:
@@ -2744,8 +2744,8 @@ gn_rest:
             - fontWeight: bold
               content: %CHARA%
             - "「……흑……흐으……이, 일어났다——!!!!」"
-        - "갑작스러운 충격에 정신을 차리고 보니, %CHARA%은(는) 이미 %YOU%을(를) 꽉 끌어안고 있었다"
-        - "게다가 끌어안는 힘이 조금 세서 척추가 삐걱거리는 듯하다"
+        - "갑작스러운 충격에 정신을 차리고 보니, %CHARA%는 이미 %YOU%을(를) 꽉 끌어안고 있었다."
+        - "게다가 끌어안는 힘이 조금 세서 척추가 삐걱거리는 듯하다."
         -
         - acc: 1
           content: "「저기……」"
@@ -2753,10 +2753,10 @@ gn_rest:
           content:
             - fontWeight: bold
               content: %CHARA%
-            - "「싫어! 움직이지 마!! 아픈 게 무슨 상관이야!!! 아파도 참아, 바보 %CALLNAME%!!!!!」"
-        - "끌어안는 힘이 더 세진 것 같다……%YOU%은(는) 얼른 입을 다물었다"
+            - "「싫어! 안 움직일 거야!! 아픈 게 무슨 상관이야!!! 아파도 참아, 바보 %CALLNAME%!!!!!」"
+        - "끌어안는 힘이 더 세진 것 같다……%YOU%은(는) 얼른 입을 다물었다."
         -
-        - "한참이 지나서야 %CHARA%은(는) %YOU%을(를) 놓아주고 침대 끝으로 물러났다. 눈가에는 아직 눈물이 맺혀 있다"
+        - "한참이 지나서야 %CHARA%는 %YOU%을(를) 놓아주고 침대 끝으로 물러났다. 눈가에는 아직 눈물이 맺혀 있다."
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -2787,22 +2787,22 @@ gn_rest:
             - fontWeight: bold
               content: %CHARA%
             - "「걱정 안 했어! %CALLNAME%이(가) 주인을 곤란하게 만들려면 백 년은 일러!!」"
-        - "곧바로 %YOU%의 말을 가로막았다"
+        - "곧바로 %YOU%의 말을 가로막았다."
         -
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
             - "「……어성초 우린 물을 큰 페트병으로 세 병이나 넣었더니 냉장고가 꽉 찼어」"
-        - "혼잣말처럼 중얼거린다"
+        - "혼잣말처럼 중얼거린다."
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
             - "「네 생각 같은 건 몰라! 마셔! 몇 주든 몇 달이든 알 게 뭐야! 지켜볼 거니까!! 후회하지 마!!」"
         -
-        - "그 뒤로 %CHARA%은(는) 거의 매일 비전의 어성초차를 데워 %YOU%에게 따라 준다"
-        - "게다가 다 마시는 걸 직접 눈으로 확인하기 전에는 %YOU%을(를) 놓아주지 않는다"
+        - "그 뒤로 %CHARA%는 거의 매일 비전의 어성초차를 데워 %YOU%에게 따라 준다."
+        - "게다가 다 마시는 걸 직접 눈으로 확인하기 전에는 %YOU%을(를) 놓아주지 않는다."
 
 
 good_night_sex:
@@ -2885,7 +2885,7 @@ good_night_sex:
                 content:
                   - fontWeight: bold
                     content: %CHARA%
-                  - 「싫어, 싫어! 인정 못 해! %CALLNAME%은……마법소녀 책에 나오는 악당 같아야 한단 말이야…!!」
+                  - 「싫어, 싫어! 인정 못 해! %CALLNAME%은(는)……마법소녀 책에 나오는 악당 같아야 한단 말이야…!!」
               - 갑자기 소리를 질렀다.
               - color: %COLOR%
                 content:
@@ -2905,7 +2905,7 @@ good_night_sex:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「싫어, 싫어! 인정 못 해! %CALLNAME%은……마법소녀 책에 나오는 악당 같아야 한단 말이야…!!」
+              - 「싫어, 싫어! 인정 못 해! %CALLNAME%은(는)……마법소녀 책에 나오는 악당 같아야 한단 말이야…!!」
           - 갑자기 소리를 질렀다.
           - color: %COLOR%
             content:
@@ -2919,7 +2919,7 @@ good_night_sex:
           - "【판정…… 실패했다!】"
           -
           - "디저트를 제안해도 상대는 받아들일 생각이 없는 모양이다"
-          - "「의지력」으로 %SEX%과 오랫동안 맞선 끝에, %YOU%은 바닥을 데굴데굴 구르는 %CHARA%을 끝내 이기지 못했다"
+          - "「의지력」으로 %SEX%과 오랫동안 맞선 끝에, %YOU%은(는) 바닥을 데굴데굴 구르는 %CHARA%을 끝내 이기지 못했다"
           -
           - 결국 %YOU%은(는) 발걸음이 가벼운 건지 평소 걸음걸이인 건지 알 수 없는 %CHARA%의 뒤를 따라 휴게실로 들어갔다.
 
@@ -2929,16 +2929,16 @@ birthday:
   lines:
     - if: "!d.birthday"
       lines:
-        - "%CHARA%의 생일, %YOU%은(는) %SEX%에게 직접 선물을 건네지도, 밖으로 놀러 데려가지도 않았다"
-        - "대신 %SEX%의 손을 잡고 학원 안을 몰래 걸었다"
+        - "%CHARA%의 생일, %YOU%은(는) %SEX%에게 직접 선물을 건네지도, 밖으로 놀러 데려가지도 않았다."
+        - "대신 %SEX%의 손을 잡고 학원 안을 몰래 걸었다."
         -
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
             - "「뭐야, 뭐야, 사역마. 선물도 안 주고 말도 없이 뭘 하려는 거야——」"
-        - "갈색 털의 자그마한 우마%UMA%는 소리치면서 %YOU%에게 이끌려 방 안으로 들어갔다"
-        - "그리고 눈에 들어온 건 커다란 생일 현수막, 맛있어 보이는 생크림 케이크, 그리고 초대를 받고 모인 수많은 친구들이었다"
+        - "갈색 털의 자그마한 %UMA%는 소리치면서 %YOU%에게 이끌려 방 안으로 들어갔다."
+        - "그리고 눈에 들어온 건 커다란 생일 현수막, 맛있어 보이는 생크림 케이크, 그리고 초대를 받고 모인 수많은 친구들이었다."
         -
         - color: #无
           content:
@@ -2950,14 +2950,14 @@ birthday:
             - fontWeight: bold
               content: "친한 %UMA% B"
             - "「생일 축하해, 스윕!」"
-        - "들어서는 순간 익숙한 축하 인사가 들려왔다"
+        - "들어서는 순간 익숙한 축하 인사가 들려왔다."
         -
         - color: %COLOR_47%
           content:
             - fontWeight: bold
               content: %ZOB_ZOY%
             - "「저기……새……생일 축하해!」"
-        - "열심히 축하하고 있다"
+        - "열심히 축하하고 있다."
         -
         - acc: 1
           content: "「다음은——」"
@@ -2967,14 +2967,14 @@ birthday:
             - fontWeight: bold
               content: %MAYA%
             - 「I Copy！」
-        - "%YOU%의 목소리를 들은 %MAYA%는 곧바로 멋지게 경례했다"
+        - "%YOU%의 목소리를 들은 %MAYA%는 곧바로 멋지게 경례했다."
         - "그리고 옆에 있던 조작 버튼을 눌렀다——"
         -
         - "딸깍!"
-        - "방 안의 불이 꺼졌다"
+        - "방 안의 불이 꺼졌다."
         -
         - "누군가 라이터를 꺼내 케이크의 촛불을 하나씩 켠다——"
-        - "작지만 안정적으로 타오르는 불꽃에 점차 방 안 모든 사람의 시선이 모인다"
+        - "작지만 안정적으로 타오르는 불꽃에 점차 방 안 모든 사람의 시선이 모인다."
         -
         - color: %COLOR_5%
           content:
@@ -2988,7 +2988,7 @@ birthday:
             - fontWeight: bold
               content: %CHARA%
             - "「……뭐야, 사역마. 그리고 너희들.」"
-        - "%CHARA%은(는) 작게 말하며 입꼬리를 살짝 올렸다"
+        - "%CHARA%는 작게 말하며 입꼬리를 살짝 올렸다."
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -3006,7 +3006,7 @@ birthday:
               content: %CHARA%
             - "「너희가 불쌍하니까 어울려 줘도 뭐, 나쁘지 않겠네!」"
         -
-        - "%CHARA%은(는) 성큼성큼 케이크 앞으로 걸어갔다"
+        - "%CHARA%는 성큼성큼 케이크 앞으로 걸어갔다."
         - "허리에서 지팡이를 꺼내 불꽃이 타오르는 초를 향해 가볍게 휘두른다——"
         - color: %COLOR%
           content:
@@ -3035,7 +3035,7 @@ birthday:
             - fontWeight: bold
               content: %CHARA%
             - "「후우——!!!!」"
-        - "%CHARA%은(는) 촛불을 불어 껐다"
+        - "%CHARA%는 촛불을 불어 껐다."
         -
         - "그렇게 %CHARA%의 소원과 함께, %YOU%이(가) %SEX%를 위해 준비한 생일 파티가 본격적으로 시작되었다!"
     - if: d.birthday > 0
@@ -3052,7 +3052,7 @@ birthday:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「오늘 모임은……과자를 안 주면 장난칠 거야~!」"
-            - "파티의 주인공이라는 걸 이용해 %CHARA%은(는) 끊임없이 디저트를 요구했다"
+            - "파티의 주인공이라는 걸 이용해 %CHARA%는 끊임없이 디저트를 요구했다."
         - random: true
           lines:
             - color: %COLOR%
@@ -3065,7 +3065,7 @@ birthday:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「네 조각 먹고 싶어! ……아니, 다섯 조각!」"
-            - "생일 파티에서 %CHARA%은(는) 케이크를 더 달라고 외치고 있다"
+            - "생일 파티에서 %CHARA%는 케이크를 더 달라고 외치고 있다."
         - random: true
           lines:
             - color: %COLOR%
@@ -3078,7 +3078,7 @@ birthday:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「사역마! 대단한 걸 바라는 건 아니야. 앞으로 몇십 년 치 생일 선물을 한꺼번에 줘!」"
-            - "생일 파티에서 %CHARA%은(는) 선물 이야기를 외치고 있다"
+            - "생일 파티에서 %CHARA%는 선물을 더 달라고 외치고 있다."
 
 
 # 連続2週間交流なしのあと、ターン終了時に発火【未交流状態は2週ごとに必ず！】
@@ -3091,8 +3091,8 @@ ws_no_action_2_weeks:
           - fontWeight: bold
             content: %CHARA%
           - "「싫어, 싫어! %CALLNAME%, 또 어디서 길을 잃었던 거야!??」"
-      - "길가에서 우연히 %CHARA%을(를) 마주치자, %SEX%는 곧바로 달려와 다급한 목소리로 %YOU%에게 외쳤다"
-      - "%YOU%은(는) 그저 요즘 바빴다고 %CHARA%에게 설명했다"
+      - "길가에서 우연히 %CHARA%를 마주치자, %SEX%는 곧바로 달려와 다급한 목소리로 %YOU%에게 외쳤다."
+      - "%YOU%은(는) 그저 요즘 바빴다고 %CHARA%에게 설명했다."
   # 魔法の夢（シニア級7月第1週ターン開始イベント）より前、新生のAsphodel（クラシック級11月第2週ターン終了イベント）より後
   - if: t > 47 + 42 && t < 95 + 25
     lines:
@@ -3101,8 +3101,8 @@ ws_no_action_2_weeks:
           - fontWeight: bold
             content: %CHARA%
           - "「싫어, 싫어! %CALLNAME%, 또 어디서 놀고 있었어!??」"
-      - "길가에서 우연히 %CHARA%을(를) 마주치자, %SEX%는 곧바로 달려와 다급한 목소리로 %YOU%에게 외쳤다"
-      - "%YOU%은(는) 그저 요즘 바빴다고 %CHARA%에게 설명했다"
+      - "길가에서 우연히 %CHARA%를 마주치자, %SEX%는 곧바로 달려와 다급한 목소리로 %YOU%에게 외쳤다."
+      - "%YOU%은(는) 그저 요즘 바빴다고 %CHARA%에게 설명했다."
   # 魔法の夢（シニア級7月第1週ターン開始イベント）より後
   - if: t >= 95 + 25
     lines:
@@ -3111,8 +3111,8 @@ ws_no_action_2_weeks:
           - fontWeight: bold
             content: %CHARA%
           - "「싫어, 싫어! %CALLNAME%, 또 누구랑 놀러 갔어?!!」"
-      - "길가에서 우연히 %CHARA%을(를) 마주치자, %SEX%는 곧바로 달려와 다급한 목소리로 %YOU%에게 외쳤다"
-      - "%YOU%은(는) 그저 요즘 바빴다고 %CHARA%에게 설명했다"
+      - "길가에서 우연히 %CHARA%를 마주치자, %SEX%는 곧바로 달려와 다급한 목소리로 %YOU%에게 외쳤다."
+      - "%YOU%은(는) 그저 요즘 바빴다고 %CHARA%에게 설명했다."
 
 
 load_talk:

@@ -17,7 +17,7 @@ module.exports = {
     era.println();
     await gs.print_and_wait([
       gs.get_colored_name(),
-      '은(는) 변기에 다리를 벌리고 앉아 막대 모양 물건을 손에 든 채 생각에 잠겨 있었다.',
+      '은 변기에 다리를 벌리고 앉아 막대 모양 물건을 손에 든 채 생각에 잠겨 있었다.',
     ]);
     era.println();
     await gs.print_and_wait(
@@ -51,7 +51,7 @@ module.exports = {
     era.println();
     await era.printAndWait([
       gs.get_colored_name(),
-      '은(는) ',
+      '은 ',
       you.get_colored_name(),
       '의 옆에 서서 자기 배를 가리켰다.',
     ]);
@@ -76,7 +76,7 @@ module.exports = {
     await era.printAndWait([
       '담당 우마무스메를 임신시킨 일은 트레센의 윗선에 보고할 수밖에 없었다. ',
       taste.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       minoru.get_colored_name(),
       '은(는) 드물게도 사람 하나 죽일 듯한 눈빛을 보냈다. 그래도 두 사람은 책임감을 가지고 앞으로 시작될 육아와 명성을 훼손할 추문을 최대한 수습해 줄 것이다.',
     ]);

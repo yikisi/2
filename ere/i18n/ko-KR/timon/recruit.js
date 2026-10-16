@@ -15,7 +15,7 @@ module.exports = {
   ],
   /** @param {CharaTalk} chara */
   get_check_no_msg(chara) {
-    return [chara.get_colored_name(), '을(를) 모집하고 싶었지만 그만뒀다...'];
+    return [chara.get_colored_name(), '을(를) 모집하고 싶었지만 그만뒀다……'];
   },
   /**
    * @param {CharaTalk} chara
@@ -24,7 +24,7 @@ module.exports = {
   async rec(chara, you) {
     await era.printAndWait([
       you.get_colored_name(),
-      '은(는) 적극적으로',
+      '은(는) 적극적으로 ',
       chara.get_colored_name(),
       '을(를) 자신의 팀으로 초대했다……',
     ]);

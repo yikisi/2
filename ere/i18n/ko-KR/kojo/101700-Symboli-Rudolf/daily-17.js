@@ -585,17 +585,17 @@ module.exports = {
    */
   async o_c_pray_luna(luna, you, dice) {
     await era.printAndWait(
-      `신사는 ${you.name}와(과) ${luna.name}에게 특별한 곳은 아니다.`,
+      `신사는 ${you.name}과(와) ${luna.name}에게 특별한 곳은 아니다.`,
     );
     await era.printAndWait(
-      `${you.name}은(는) 행운을 비는 나이를 지났고, ${luna.name}은(는) 언제나 실력으로 성과를 거두었다.`,
+      `${you.name}은(는) 행운을 비는 나이를 지났고, ${luna.name}는 언제나 실력으로 성과를 거두었다.`,
     );
     await era.printAndWait([
       '하지만 ',
       you.get_colored_name(),
       '을(를) 안도하게 한 것은 ',
       luna.get_colored_name(),
-      '이(가) 예전처럼 새로운 것에 끝없는 호기심을 품고 있다는 사실이었다.',
+      '가 예전처럼 새로운 것에 끝없는 호기심을 품고 있다는 사실이었다.',
     ]);
     await era.printAndWait(
       `해마다 몇 번씩 복을 빌러 오는 것만으로도 ${luna.sex}에게는 충분히 신선한 경험이었다.`,
@@ -608,7 +608,7 @@ module.exports = {
       await luna.say_and_wait('꽤 좋은 징조인 것 같군.');
       await era.printAndWait([
         luna.get_colored_name(),
-        '은(는) 기쁜 얼굴로 길한 점괘를 ',
+        '는 기쁜 얼굴로 길한 점괘를 ',
         you.get_colored_name(),
         '에게 보여 준 뒤 나무에 매달았다.',
       ]);
@@ -616,16 +616,16 @@ module.exports = {
         `${you.name}은(는) 문득 생각했다. 나도 좋은 점괘를 뽑아 볼까?`,
       );
       await era.printAndWait(
-        `${luna.name}이(가) 기뻐한다면 그것으로 충분하다. 앞이 보이지 않는 굽이진 길에 작은 희망이라도 보태기 위해서.`,
+        `${luna.name}가 기뻐한다면 그것으로 충분하다. 앞이 보이지 않는 굽이진 길에 작은 희망이라도 보태기 위해서.`,
       );
       await era.printAndWait(
-        `어떤 도움이라도 좋다. 아아…… 세 여신이시여, ${luna.name}을(를) 지켜 주소서!`,
+        `어떤 도움이라도 좋다. 아아…… 세 여신이시여, ${luna.name}를 지켜 주소서!`,
       );
     } else {
       await luna.say_and_wait('앞으로도 많은 장애물과 마주칠 것 같군.');
       await era.printAndWait([
         luna.get_colored_name(),
-        '은(는) 점괘를 ',
+        '는 점괘를 ',
         you.get_colored_name(),
         '에게 보여 주지 않고 정성껏 접어 두었다.',
       ]);
@@ -647,7 +647,7 @@ module.exports = {
    */
   async o_c_pray_emperor(emperor, you, dice) {
     await era.printAndWait(
-      `신사는 ${you.name}와(과) ${emperor.name}에게 특별한 곳은 아니다.`,
+      `신사는 ${you.name}과(와) ${emperor.name}에게 특별한 곳은 아니다.`,
     );
     await era.printAndWait(
       `${you.name}은(는) 행운을 비는 나이를 지났고, ${emperor.name}은(는) 언제나 실력으로 성과를 거두었다.`,
@@ -788,7 +788,7 @@ module.exports = {
       );
       await chara17.print_and_wait([
         chara17.get_colored_name(),
-        '은(는) 뒤돌아보며 떨고 있다',
+        '은(는) 뒤돌아보며 떨고 있다.',
       ]);
       await chara17.say_and_wait('조심해…… 또 만나자(흐느낌)');
     } else if (i_emperor) {
@@ -796,7 +796,7 @@ module.exports = {
     } else if (era.get('love:17') >= 75) {
       await chara17.print_and_wait([
         chara17.get_colored_name(),
-        '은(는) 입술을 살짝 벌렸지만 목소리는 나오지 않았다',
+        '은(는) 입술을 살짝 벌렸지만 목소리는 나오지 않았다.',
       ]);
       await chara17.say_and_wait('——！');
       await chara17.say_and_wait('——가지 마……');

@@ -48,14 +48,14 @@ module.exports = {
           you.get_colored_name(),
           '은(는) ',
           ruby.get_colored_name(),
-          '이(가) 집사를 통해 보낸 CD를 받았다.',
+          '가 집사를 통해 보낸 CD를 받았다.',
         ]);
         era.println();
         await you.say_as_passer_by_and_wait('약혼자', '좋아, 루비. 벗어.');
         await ruby.say_and_wait('……네, 알겠습니다.');
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 각오를 다진 듯이, 약혼자의 속옷에 손을 얹었다.',
+          '는 각오를 다진 듯이, 약혼자의 속옷에 손을 얹었다.',
         ]);
         await era.printAndWait([
           '숨을 내뱉고, 마음을 진정시킨다. 그러고 나서 과감하게 속옷을 한꺼번에 아래로 내렸을 때, 거대한 남근이 기세 좋게 튀어 올라 ',
@@ -65,14 +65,14 @@ module.exports = {
         await ruby.say_and_wait('아라……');
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 짧은 비명을 흘렸다.',
+          '는 짧은 비명을 흘렸다.',
         ]);
         await era.printAndWait('그의 거근은 힘차게 우뚝 솟아 있다.');
         await era.printAndWait('그 모습은, 수컷의 상징이라 부르기에 걸맞다.');
         await era.printAndWait([
           '거근은 ',
           ruby.get_colored_name(),
-          '을(를) 노려보듯이, 검은 빛을 내뿜고 있었다.',
+          '를 노려보듯이, 검은 빛을 내뿜고 있었다.',
         ]);
         await era.printAndWait('너무 크다……');
         await era.printAndWait(
@@ -81,12 +81,12 @@ module.exports = {
         await ruby.say_and_wait('아아……');
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 음경의 크기에 무심코 감탄했다. 눈동자는 그 거근에서 떨어지지 않고 놀라움에 크게 떠 있다. 믿기 힘든 크기의 육봉을 양눈으로 응시하고 있었다.',
+          '는 음경의 크기에 무심코 감탄했다. 눈동자는 그 거근에서 떨어지지 않고 놀라움에 크게 떠 있다. 믿기 힘든 크기의 육봉을 양눈으로 응시하고 있었다.',
         ]);
         await ruby.say_and_wait('대단해요…… 이런…… 일이 벌어지다니……');
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 그 거근을 찬양하며, 특히 길이에 첫눈에 반한 듯 숨을 가쁘게 내쉬고 있다.',
+          '는 그 거근을 찬양하며, 특히 길이에 첫눈에 반한 듯 숨을 가쁘게 내쉬고 있다.',
         ]);
         await era.printAndWait([
           '그녀는 거대한 뿌리 부분을 잡았다.',
@@ -126,13 +126,13 @@ module.exports = {
         await ruby.say_and_wait('미안해요……');
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 미안한 듯한 얼굴로 카메라를 바라보았다.',
+          '는 미안한 듯한 얼굴로 카메라를 바라보았다.',
         ]);
         await era.printAndWait(
           '그 모습을 보고, 당신은 자신이 사랑받고 있었다는 것을 깨달았다.',
         );
         await era.printAndWait([
-          '그녀와 눈이 마주쳤을 때, 갑자기 거근이 사이에 끼어들었다. 눈앞은 그의 육봉으로 가득 찼고,',
+          '그녀와 눈이 마주쳤을 때, 갑자기 거근이 사이에 끼어들었다. 눈앞은 그의 육봉으로 가득 찼고, ',
           ruby.get_colored_name(),
           '도 카메라에서 시선을 돌려 눈앞의 거대한 물건에 완전히 빼앗겼다.',
         ]);
@@ -144,7 +144,7 @@ module.exports = {
         await ruby.say_and_wait('음……음……음윽……!');
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 괴로운 듯 눈썹을 찌푸린다. 검은 거근이 ',
+          '는 괴로운 듯 눈썹을 찌푸린다. 검은 거근이 ',
           ruby.get_colored_name(),
           '의 작은 입으로 들락날락할 때마다 침이 입가에서 뚝뚝 떨어졌다.',
         ]);
@@ -162,7 +162,7 @@ module.exports = {
         await ruby.say_and_wait('음……음……');
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 꿀꺽, 꿀꺽하며 정액을 다 마셨다.',
+          '는 꿀꺽, 꿀꺽하며 정액을 다 마셨다.',
         ]);
         await ruby.say_and_wait('하앗……! 음……하아……');
         await era.printAndWait([
@@ -195,7 +195,7 @@ module.exports = {
         await era.printAndWait([
           '있을 수 없다.',
           ruby.get_colored_name(),
-          '이(가) 이런 더러운 목소리로 처량하게 헐떡이다니.',
+          '가 이런 더러운 목소리로 처량하게 헐떡이다니.',
         ]);
         await era.printAndWait(
           '거대한 검은빛의 수컷이 하얀 암컷을 범하고 있다.',
@@ -241,7 +241,7 @@ module.exports = {
         await ruby.say_and_wait('안 돼요♥ 사실을 말하는 건 안 돼요♥');
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 헐떡이며 그렇게 외치고, 그것을 들은 그의 허리는 더욱 빠르게 움직이며 스퍼트를 시작했다.',
+          '는 헐떡이며 그렇게 외치고, 그것을 들은 그의 허리는 더욱 빠르게 움직이며 스퍼트를 시작했다.',
         ]);
         await ruby.say_and_wait(
           '와아앗♥ 안 돼♥ 안 돼♥ 안 돼♥ 갈 것 같아요~♥♥♥',
@@ -249,25 +249,25 @@ module.exports = {
         await era.printAndWait('그 후, 약혼자도 몸을 떨며 사정하기 시작했다.');
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 「호홋호홋♥」 하며 헐떡이고, 감은 양다리를 뻗으며 쾌감에 떨었다.',
+          '는 「호홋호홋♥」 하며 헐떡이고, 감은 양다리를 뻗으며 쾌감에 떨었다.',
         ]);
         await era.printAndWait([
-          '그가 몸을 떼고 일어서자,',
+          '그가 몸을 떼고 일어서자, ',
           ruby.get_colored_name(),
           '의 비부에서 미끌거리는 거근이 빠져나온다. 물론 피임 기구는 하지 않았기에 정액이 뚝뚝 떨어졌다.',
         ]);
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 눈을 뒤집고 다리도 몸도 경련하고 있다. 비부에서는 갈 곳을 잃은 정액이 넘쳐흐르고 있었다.',
+          '는 눈을 뒤집고 다리도 몸도 경련하고 있다. 비부에서는 갈 곳을 잃은 정액이 넘쳐흐르고 있었다.',
         ]);
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 질내사정을 받았다.',
+          '는 질내사정을 받았다.',
         ]);
         await era.printAndWait([
           '약혼자는 힘이 빠진 ',
           ruby.get_colored_name(),
-          '을(를) 가볍게 안아 올리며 귀여운 다리의 관절에 팔을 걸었다.',
+          '를 가볍게 안아 올리며 귀여운 다리의 관절에 팔을 걸었다.',
         ]);
         await era.printAndWait([
           '검은빛의 육봉이 다시 흠뻑 젖은 ',
@@ -276,9 +276,9 @@ module.exports = {
         ]);
         await ruby.say_and_wait('와아!♥');
         await era.printAndWait([
-          '단번에 깊숙이 밀려 올라가며,',
+          '단번에 깊숙이 밀려 올라가며, ',
           ruby.get_colored_name(),
-          '은(는) 저속한 목소리로 헐떡였다. 격렬하게 들락날락할 때마다,',
+          '는 저속한 목소리로 헐떡였다. 격렬하게 들락날락할 때마다, ',
           ruby.get_colored_name(),
           '의 통통한 유방이 흔들린다.',
         ]);
@@ -312,9 +312,9 @@ module.exports = {
           '다리를 뻗고 경련한다. 침이 입에서 흐르고 눈동자는 위를 향한다. 온몸을 순환하는 쾌감으로부터 도망치려는 듯 몸을 축 늘어뜨렸다.',
         );
         await era.printAndWait([
-          '그 광경을 본 약혼자는,',
+          '그 광경을 본 약혼자는, ',
           ruby.get_colored_name(),
-          '을(를) 침대로 내던졌다.',
+          '를 침대로 내던졌다.',
         ]);
         await ruby.say_and_wait(['……미안해요, callname……']);
       }

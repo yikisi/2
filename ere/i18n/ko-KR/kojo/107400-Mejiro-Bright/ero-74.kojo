@@ -5,7 +5,7 @@ join_3p:
     content:
       - fontWeight: bold
         content: %CHARA%
-      - "「아…… %CALLNAME%과…… %CALL_LOVER%?」"
+      - "「아…… %CALLNAME%과(와)…… %CALL_LOVER%?」"
   - color: %COLOR%
     content:
       - fontWeight: bold

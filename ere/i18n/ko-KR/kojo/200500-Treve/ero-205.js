@@ -14,7 +14,7 @@ module.exports = {
       treve.get_colored_name(),
       '같은 상대라면, 그 인생 자체에 큰 영향을 미치고, 나중에 몇 번이고 나를 떠올리게 하며, 계속 생각하게 만들 수 있다. 그것은 ',
       treve.get_colored_name(),
-      '의 인생 그 자체를 「범한」듯한 충족감으로, 그 쾌감은 형언할 수 없다',
+      '의 인생 그 자체를 「범한」듯한 충족감으로, 그 쾌감은 형언할 수 없다.',
     ]);
     await era.printAndWait(
       '마음의 충족감은 충분히 취하게 한다. 하지만 육체의 충족을 원한다면, 실제 접촉을 거쳐야만 한다.',
@@ -43,13 +43,13 @@ module.exports = {
     await treve.say_and_wait('간신히 잊었는데, 또 당신 때문에……');
     await treve.say_and_wait('읏……');
     await era.printAndWait(
-      `${treve.name}의 미약한 거절 따위는 아랑곳하지 않고 ${you.name}은(는) 침식을 계속한다. 몇 번 핥고, 빨고, 이빨로 ${treve.teen_sex_title}의 벚꽃처럼 가련한 꽃봉오리를 가볍게 물고, 혀끝으로 앞뒤로 움직이며 유혹한다. 뜨거운 욕망은 즉시 전류가 되어, 솟구치는 피 속에 녹아들며 ${treve.name}에게 남아 있던 미약한 정신을 갉아먹는다`,
+      `${treve.name}의 미약한 거절 따위는 아랑곳하지 않고 ${you.name}은(는) 침식을 계속한다. 몇 번 핥고, 빨고, 이빨로 ${treve.teen_sex_title}의 벚꽃처럼 가련한 꽃봉오리를 가볍게 물고, 혀끝으로 앞뒤로 움직이며 유혹한다. 뜨거운 욕망은 즉시 전류가 되어, 솟구치는 피 속에 녹아들며 ${treve.name}에게 남아 있던 미약한 정신을 갉아먹는다.`,
     );
     await era.printAndWait(
       `${treve.sex}의 의지가 어떻든, ${you.name}의 교묘한 도발 아래, 복숭아빛 끝부분은 핥히며 솟아오르고 부풀어 올라, 붉은 구슬처럼 변한다. ${you.name}은(는) 과감하게 둥근 오른쪽 유방을 움켜쥐고 반구형 꼭지를 감싸며, 눈처럼 하얀 가슴의 탄력과 팽팽함을 느끼고 몇 번이나 세게 주무른다.`,
     );
     await era.printAndWait(
-      `미끄러지듯 부드러운 감촉과, ${treve.teen_sex_title}이(가) 억누를 수 없는 낮은 신음 소리가 어우러지며 ${you.name}은(는) 다른 쪽 둥근 언덕에서도 힘을 더해 주무른다. ${treve.teen_sex_title}의 아랫배가 짧게 파도치며, 하얀 피부의 한 치 한 치가 흥분의 충격에 파도처럼 흔들린다.`,
+      `미끄러지듯 부드러운 감촉과, ${treve.teen_sex_title}가 억누를 수 없는 낮은 신음 소리가 어우러지며 ${you.name}은(는) 다른 쪽 둥근 언덕에서도 힘을 더해 주무른다. ${treve.teen_sex_title}의 아랫배가 짧게 파도치며, 하얀 피부의 한 치 한 치가 흥분의 충격에 파도처럼 흔들린다.`,
     );
     era.printButton('「네 몸이 얼마나 음탕한지, 이제 알겠지?」', 1);
     era.printButton(
@@ -108,13 +108,13 @@ module.exports = {
       `${you.name}은(는) 차갑게 웃으며, 양손으로 ${treve.name}의 고운 살결 같은 가느다란 허리를 감싸고 전신을 반쯤 ${treve.sex} 위에 올려놓으며, 말의 위협을 더욱 가중시킨다.`,
     );
     await era.printAndWait(
-      `${treve.name}은(는) 몇 번이나 흐느낌을 터뜨렸지만 ${you.name}이(가) 무릎을 찔러 ${treve.sex}의 우아하고 긴 다리를 좌우로 벌리자, ${treve.sex}은(는) 거의 저항하지 못하고 ${you.name}에게 양다리를 벌려져 반쯤 ${you.name} 위에 앉혀진 모양이 되었다. `,
+      `${treve.name}은(는) 몇 번이나 흐느낌을 터뜨렸지만 ${you.name}이(가) 무릎을 찔러 ${treve.sex}의 우아하고 긴 다리를 좌우로 벌리자, ${treve.sex}는 거의 저항하지 못하고 ${you.name}에게 양다리를 벌려져 반쯤 ${you.name} 위에 앉혀진 모양이 되었다. `,
     );
     await era.printAndWait(
       `${treve.name}의 눈물 자국이 남은 얼굴에 체념의 각오가 스치며, 활을 당기듯 ${you.name}에게 달려들어 껴안는다. 하얀 두 다리도 ${you.name}의 허리 뒤쪽에 감기며, 아래에서 ${you.name}을(를) 꽉 껴안았다.`,
     );
     await era.printAndWait(
-      `이렇게 ${you.name}은(는) 멈추지 않고, ${treve.sex}가 눈을 뒤집으며 기절할 뻔한 순간에야 비로소 ${treve.sex}을(를) 내려놓았다.`,
+      `이렇게 ${you.name}은(는) 멈추지 않고, ${treve.sex}가 눈을 뒤집으며 기절할 뻔한 순간에야 비로소 ${treve.sex}를 내려놓았다.`,
     );
     await era.printAndWait(
       `한숨 돌린 뒤, ${you.name}은(는) 재빨리 뒷정리를 했다.`,

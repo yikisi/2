@@ -84,7 +84,7 @@ module.exports = {
       await mcqueen.ct.used_to_say_and_wait([
         '뭐…… 어쨌든, 함께 홍차라도 마시는 게 어떨까요, ',
         mcqueen.cl,
-        '？',
+        '?',
       ]);
     }
     if (gs) {
@@ -124,7 +124,7 @@ module.exports = {
       await grass.ct.used_to_say_and_wait([
         '후훗~ 귀엽기도 해라, ',
         grass.cl,
-        '～',
+        '~',
       ]);
     }
     if (tachyon) {
@@ -138,7 +138,7 @@ module.exports = {
       await coffee.ct.used_to_say_and_wait([
         '……이대로 계속 있다가는, ',
         coffee.cl,
-        '……, 죽어버리실 지도 몰라요?',
+        '……, 죽어버리실지도 몰라요?',
       ]);
     }
     era.drawLine();
@@ -158,7 +158,7 @@ module.exports = {
     await era.printAndWait('——아무것도 없다.');
     era.drawLine();
     await era.printAndWait(
-      '황혼의 석양 아래, 비행기 한 대가 주황색 직선을 남기며 하늘 끝을 날아간다.',
+      '석양 아래, 비행기 한 대가 주황색 직선을 남기며 하늘 끝을 날아간다.',
     );
     await era.printAndWait(
       '난간에 기대 하늘을 바라본다. 이토록 자유로운 적도, 이토록 숨 막히는 적도 없었다.',
@@ -186,9 +186,9 @@ module.exports = {
       acute.uma_sex_title,
       '들도…… ',
       you.get_colored_name(),
-      '은(는) 생각한다.',
+      '은(는) 생각한다. ',
       acute.couple_title,
-      '은(는) 아직 ',
+      '은 아직 ',
       you.get_colored_name(),
       '에게 기대를 걸고 있다고.',
     ]);
@@ -196,10 +196,10 @@ module.exports = {
     await era.printAndWait([
       '따지고 보면 ',
       you.get_colored_name(),
-      '도 그저 【범인】일 뿐이다.',
+      '도 그저 【평범한 사람】일 뿐이다.',
     ]);
     await era.printAndWait(
-      '무엇 하나 완벽하게 해내지 못한다. 이토록 큰 기대를 감당할 그릇도 못 된다. 세상 속에서 필사적으로 발버둥 치며, 가능하다면 뒤로 도망치고 싶다는 생각마저 하는 지극히 평범한 【범인】이 아니었던가.',
+      '무엇 하나 완벽하게 해내지 못한다. 이토록 큰 기대를 감당할 그릇도 못 된다. 세상 속에서 필사적으로 발버둥 치며, 가능하다면 뒤로 도망치고 싶다는 생각마저 하는 지극히 【평범한 사람】이 아니었던가.',
     );
     await you.say_and_wait('……………………');
     await you.say_and_wait('…………');
@@ -254,7 +254,7 @@ module.exports = {
       '붙임성도, 환심을 사려는 행동도, 물론 평소의 팬 서비스도 아니다——',
     );
     await era.printAndWait([
-      '너무 가깝지도, 너무 멀지도 않은 딱 알맞은 거리.',
+      '너무 가깝지도, 너무 멀지도 않은 딱 알맞은 거리. ',
       acute.sex,
       '는 유리 접시를 든 손을 뻗어, 단무지를 ',
       you.get_colored_name(),
@@ -264,7 +264,7 @@ module.exports = {
       `정신을 차리고 보니 ${you.name}도 오른손을 내밀고 있었다.`,
     );
     await era.printAndWait('아삭, 아삭, 아삭, 아삭——');
-    await era.printAndWait('조금 쌉쌀하면서도, 뜻밖에 씹는 맛이 좋은 맛.');
+    await era.printAndWait('조금 쌉쌀하면서도, 뜻밖에 아삭하고 산뜻한 맛.');
     await era.printAndWait('배가 고프지도 않았는데…… 어째서인지——');
     await era.printAndWait('멈출 수 없을 것만 같았다.');
     await era.printAndWait(
@@ -297,7 +297,7 @@ module.exports = {
       acute.get_colored_name(),
       '라는 이름의 ',
       acute.teen_sex_title,
-      '은(는) 옥상 벽에 기대어 석양을 받으며 앉았다.',
+      '는 옥상 벽에 기대어 석양을 받으며 앉았다.',
     ]);
     await era.printAndWait(
       `${acute.sex}는 앉으면서 옆의 빈자리를 가볍게 두드렸다.`,
@@ -316,9 +316,9 @@ module.exports = {
       you.get_colored_name(),
       '의 담당이 되는 ',
       acute.teen_sex_title,
-      '、',
+      ', ',
       acute.get_colored_name(),
-      '。',
+      '와 ',
     ]);
     await era.printAndWait('많고도 많은 이야기를 나누었다——');
     era.println();

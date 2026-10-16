@@ -127,7 +127,7 @@ module.exports = {
           buffer.push(
             () => treve.say_and_wait('안아 주시면 조금은 나아질지도 몰라요.'),
             () =>
-              treve.say_and_wait('제 열정은 그림자도 형체도, 소리도 없어요……'),
+              treve.say_and_wait('제 열정은 소리도 없이 자취를 감췄어요……'),
           );
           break;
         case -2:
@@ -136,7 +136,7 @@ module.exports = {
             () => treve.say_and_wait('죽음은 삶에 매겨진 세금……'),
             () =>
               treve.say_and_wait(
-                '당신은 트레이너일 뿐만 아니라, 사랑을 찾아 떠도는 철새이기도 해요……',
+                '당신은 트레이너일 뿐만 아니라, 연애에선 바람둥이이기도 해요……',
               ),
           );
       }
@@ -159,7 +159,7 @@ module.exports = {
           '프랑스 요리는 말이죠…… 아하하하, 지금은 넘어갈게요.',
         ),
       () =>
-        treve.say_and_wait('으으, 나쁜 사람한테 입맛을 길들여 버릴 것 같아요.'),
+        treve.say_and_wait('으으, 나쁜 사람한테 입맛이 길들어 버릴 것 같아요.'),
     ];
     await get_random_entry(buffer)();
   },
@@ -246,7 +246,7 @@ module.exports = {
     const buffer = [
       () =>
         treve.say_and_wait(
-          '안심하고 제 손을 잡으세요. 멀리 날아가도 괜찮으니까요.',
+          '안심하고 제 손을 잡으세요. 어디든 멀리 떠나도 괜찮으니까요.',
         ),
       () =>
         treve.say_and_wait(
@@ -278,7 +278,7 @@ module.exports = {
       buffer.push(() =>
         treve.say_and_wait([
           callname,
-          '！',
+          '!',
           call_target,
           ' 인형이잖아요! 하나 뽑아 봐도 될까요?',
         ]),
@@ -297,7 +297,7 @@ module.exports = {
           `와와와…… ${callname}! 용돈 좀 미리 받을 수 있을까요?`,
         ),
       () =>
-        treve.say_and_wait('파리 5일 4박 호화 여행…… 당첨되면 어떻게 할까요?'),
+        treve.say_and_wait('파리 4박 5일 호화 여행…… 당첨되면 어떻게 할까요?'),
     ];
     await get_random_entry(buffer)();
   },
@@ -613,7 +613,7 @@ module.exports = {
       await era.printAndWait(
         `아무리 몸부림을 쳐봐도 사지를 파고드는 날카로운 통증만 더해질 뿐이었다. ${you.name}이(가) 구조를 요청하기 위해 다급히 주위를 둘러보던 그때, 등 뒤에서 익숙한 목소리가 들려왔다.`,
       );
-      await treve.say_and_wait(['일어나셨네요, ', callname, '。']);
+      await treve.say_and_wait(['일어나셨네요, ', callname, '.']);
       await era.printAndWait(`${treve.name}였다.`);
       await era.printAndWait(
         `${treve.sex}는 침대 맡에 선 채, 칠흑같이 어두운 심해를 닮은 눈동자로 ${you.name}을(를) 묵묵히 내려다보고 있었다.`,
@@ -639,7 +639,7 @@ module.exports = {
         `${you.name} 위에 올라탄 ${treve.name}이(가) 손을 ${you.name}의 가슴에 얹었다.`,
       );
       await era.printAndWait(
-        `본능이 이대로는 위험하다고 외친다. 하지만 아무리 몸부림쳐도 수갑은 풀리지 않는다. ${treve.uma_sex_title}을(를) 힘으로 이기는 것 따위는, 더더욱 있을 수 없는 일이다.`,
+        `본능이 이대로는 위험하다고 외친다. 하지만 아무리 몸부림쳐도 수갑은 풀리지 않는다. ${treve.uma_sex_title}를 힘으로 이기는 것 따위는, 더더욱 있을 수 없는 일이다.`,
       );
       await treve.say_and_wait([
         callname,
@@ -653,10 +653,10 @@ module.exports = {
         callname,
         ' 탓이라니까요? 절 이렇게 망가뜨려 놓은 ',
         callname,
-        '가 나쁜 거예요.',
+        '이(가) 나쁜 거예요.',
       ]);
       await era.printAndWait(
-        `시선을 돌리려 해도, ${treve.name}의 손에 제지당한다. 그리고 ${treve.name}은(는) 가차 없이 ${you.name}의 입술에 자신의 입술을 겹쳤다`,
+        `시선을 돌리려 해도, ${treve.name}의 손에 제지당한다. 그리고 ${treve.name}은(는) 가차 없이 ${you.name}의 입술에 자신의 입술을 겹쳤다.`,
       );
       await treve.say_and_wait(['읍, 으응……', callname, '……']);
       await era.printAndWait(
@@ -680,7 +680,7 @@ module.exports = {
       );
       await treve.say_and_wait([
         callname,
-        '는 제 거예요. 저 말고 그 누구도 바라봐선 안 돼요. 일본 같은 곳엔 절대 안 보내줄 거니까요. 영원히, 언제까지나, 평생 당신만을 사랑할게요.',
+        '은(는) 제 거예요. 저 말고 그 누구도 바라봐선 안 돼요. 일본 같은 곳엔 절대 안 보내줄 거니까요. 영원히, 언제까지나, 평생 당신만을 사랑할게요.',
       ]);
       await era.printAndWait(
         `${treve.name}는 ${you.name}의 뺨을 다정하게 감싸 안으며, 주체할 수 없는 격정의 여운을 담아 다시금 입술을 겹쳐왔다.`,

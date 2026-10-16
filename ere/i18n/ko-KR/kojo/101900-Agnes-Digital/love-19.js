@@ -57,14 +57,14 @@ module.exports = {
         digital.elder_sibling_sex_title,
         '의 뜻을 이어받아 데뷔한 거예요! 이 계승의 서사, 너무 뜨거워요!',
       ]);
-      await era.printAndWait(['그리고 ', you.get_colored_name(), ' 에게는,']);
+      await era.printAndWait(['그리고 ', you.get_colored_name(), ' 에게는, ']);
       await digital.say_and_wait(
         '한 치의 양보도 없는 두 사람! 나카야마 경기장의 직선은 아주 짧다구요! 와앗!',
       );
       await digital.say_and_wait(
         '으으…… 너무 멋져요. 적성과 이론을 초월해 내면에서 우러나오는 경쟁심이라니, 최고예요……',
       );
-      await era.printAndWait('하루 만에,');
+      await era.printAndWait('하루 만에, ');
       await digital.say_and_wait(
         '오이 경기장의 더트 코스는 다른 마일 코스들에 비해 멋진 추입을 보기 더 쉬운 곳이죠……',
       );
@@ -73,7 +73,7 @@ module.exports = {
         digital.sex,
         '는 비록 결과는 졌지만 행복하게 웃고 있네요.',
       ]);
-      await era.printAndWait('일본의 경기장을 거의 다 돌아다니는 것은,');
+      await era.printAndWait('일본의 경기장을 거의 다 돌아다니는 것은, ');
       await digital.say_and_wait([
         '이번에 출전한 회색 머리의 ',
         digital.uma_sex_title,
@@ -362,7 +362,7 @@ module.exports = {
       await digital.say_and_wait([
         '제가 발견한 건 바로, ',
         callname,
-        '와(과) 함께 최애를 쫓고 오타쿠 활동을 하는 즐거움이에요!',
+        '과(와) 함께 최애를 쫓고 오타쿠 활동을 하는 즐거움이에요!',
       ]);
       await era.printAndWait([
         digital.get_colored_name(),
@@ -645,7 +645,7 @@ module.exports = {
       await digital.say_and_wait('오……! 좋네요, 축제! 좋아요, 가요!');
       await era.printAndWait([
         digital.sex,
-        '가 조금이라도 긴장을 풀 수 있으면 좋겠지만...',
+        '가 조금이라도 긴장을 풀 수 있으면 좋겠지만……',
       ]);
       era.drawLine();
       await era.printAndWait(
@@ -971,7 +971,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 조금 앞쪽 빗속에서 우산을 쓴 ',
         tachyon.get_colored_name(),
-        '을(를) 보았다.',
+        '을 보았다.',
       ]);
       await you.say_and_wait('타키온을 부르지 않는 거야?');
       await digital.say_and_wait([
@@ -1273,7 +1273,7 @@ module.exports = {
       await digital.print_and_wait([
         '(공책 앞에 앉은 분홍빛 ',
         digital.teen_sex_title,
-        '은(는) 펜을 멈췄다.)',
+        '는 펜을 멈췄다.)',
       ]);
       await digital.say_and_wait('나, 계속 내 생각만 했네……');
       digital.print('……');
@@ -2283,7 +2283,7 @@ module.exports = {
         await digital.say_and_wait([
           '아뇨, 역시 관두죠. ',
           callname,
-          '와 ',
+          '과(와) ',
           child,
           '과 함께하는 매일매일이, 정말로 행복하니까요.',
         ]);
@@ -2392,7 +2392,7 @@ module.exports = {
         you.get_colored_name(),
         '에게 따뜻한 감정을 불러일으킨 사진은 ',
         you.get_colored_name(),
-        '과 ',
+        '과(와) ',
         y_call_d,
         '의 결혼사진이었다.',
       ]);

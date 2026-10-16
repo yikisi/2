@@ -32,7 +32,7 @@ module.exports = {
     await you.print_and_wait([
       '눈앞의 사랑스러운 모습을 보고 있자니, 저절로 ',
       teio.sex,
-      '을(를) 품에 안고 머리카락을 만지작거리며 머리를 쓰다듬고 있었다.',
+      '를 품에 안고 머리카락을 만지작거리며 머리를 쓰다듬고 있었다.',
     ]);
     await teio.say_and_wait('뭐야…… 또 어린애 취급이야……');
     if (success || era.get(`tcvar:${teio.id}:发情`) > 0) {
@@ -153,7 +153,7 @@ module.exports = {
       await you.print_and_wait([
         '조금은 빗나간 부탁일지도 모른다. 하지만 ',
         teio.sex,
-        '은(는) 얼굴을 붉혔을 뿐 결국 응해 주었다……',
+        '는 얼굴을 붉혔을 뿐 결국 응해 주었다……',
       ]);
       await you.print_and_wait(['게다가 아주 흥미진진해 보인다.']);
       await you.print_and_wait([
@@ -179,7 +179,7 @@ module.exports = {
       await you.print_and_wait([
         '작은',
         teio.uma_sex_title,
-        '은(는) 아직 눈치채지 못하고 있다—— 꼬리샘에서 발정의 사향까지 분비되며, 그 자리에 있는 생명체의 욕망을 더욱 부채질하고 있다는 것을.',
+        '는 아직 눈치채지 못하고 있다—— 꼬리샘에서 발정의 사향까지 분비되며, 그 자리에 있는 생명체의 욕망을 더욱 부채질하고 있다는 것을.',
       ]);
       await you.print_and_wait(['호흡이 어느샌가 거칠어진다……']);
     }

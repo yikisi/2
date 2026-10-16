@@ -45,7 +45,7 @@ module.exports = {
       chara.get_colored_name(),
       '은(는) ',
       lover.get_colored_name(),
-      '의 동의를 얻자,',
+      '의 동의를 얻자, ',
       you.get_colored_name(),
       '의 항의를 멋지게 무시했다……',
     ]);
@@ -207,7 +207,7 @@ module.exports = {
     if (era.get(`love:${chara.id}`) >= 75) {
       await era.printAndWait([
         chara.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         you.get_colored_name(),
         '은(는) 더욱 일심동체가 되었다……',
       ]);
@@ -277,7 +277,7 @@ module.exports = {
    */
   async mark_hate(chara, level) {
     if (era.get(`love:${chara.id}`) >= 75) {
-      await era.printAndWait('이미 친밀한 관계지만 너무 심했던 모양이다');
+      await era.printAndWait('이미 친밀한 관계지만 너무 심했던 모양이다.');
     }
     switch (level) {
       case 1:
@@ -524,7 +524,7 @@ module.exports = {
       } else {
         await era.printAndWait([
           mother.get_colored_name(),
-          '은(는) 손에 든 임신 테스트기의 결과에 기뻐하며,',
+          '은(는) 손에 든 임신 테스트기의 결과에 기뻐하며, ',
           father.get_colored_name(),
           '에게 즐겁게 알렸다.',
         ]);
@@ -542,7 +542,7 @@ module.exports = {
       } else {
         if (unexpected_pregnant === unexpected_pregnant_enum.mother_sleep) {
           await era.printAndWait([
-            '어떻게 임신했는지는 기억나지 않지만,',
+            '어떻게 임신했는지는 기억나지 않지만, ',
             mother.get_colored_name(),
             '은(는) 아이의 아버지는 사랑하는',
             father.get_colored_name(),
@@ -592,7 +592,7 @@ module.exports = {
       }
       if (unexpected_pregnant === unexpected_pregnant_enum.father_sleep) {
         await era.printAndWait([
-          '그 뒤,',
+          '그 뒤, ',
           mother.get_colored_name(),
           '은(는) 조심스럽게',
           father.get_colored_name(),
@@ -603,7 +603,7 @@ module.exports = {
           '은(는) 몇 번이나 확인했지만, 아이가 자신의 핏줄이라는 답만 돌아왔다.',
         ]);
         await era.printAndWait([
-          '기억은 없는데도,',
+          '기억은 없는데도, ',
           father.get_colored_name(),
           '은(는)',
           mother.get_colored_name(),
@@ -618,7 +618,7 @@ module.exports = {
         }
       } else if (era.get(`mark:${mother.id}:同心`) >= 2) {
         await era.printAndWait([
-          '그 뒤,',
+          '그 뒤, ',
           mother.get_colored_name(),
           '은(는) 주눅 든 채',
           father.get_colored_name(),
@@ -632,13 +632,13 @@ module.exports = {
         ]);
         await era.printAndWait([
           mother.get_colored_name(),
-          '은(는) 겁먹은 채,',
+          '은(는) 겁먹은 채, ',
           father.get_colored_name(),
           '에게 아버지로서 책임져 달라고 부탁했다……',
         ]);
       } else {
         await era.printAndWait([
-          '그 뒤,',
+          '그 뒤, ',
           mother.get_colored_name(),
           '은(는) 차갑게',
           father.get_colored_name(),
@@ -652,7 +652,7 @@ module.exports = {
         ]);
         await era.printAndWait([
           mother.get_colored_name(),
-          '은(는) 원망스러운 기색으로,',
+          '은(는) 원망스러운 기색으로, ',
           father.get_colored_name(),
           '에게 아버지로서 책임질 것을 요구했다……',
         ]);
@@ -705,7 +705,7 @@ module.exports = {
     if (!awake) {
       await era.printAndWait([
         chara.get_colored_name(),
-        '은(는) 잠들어 있어,',
+        '은(는) 잠들어 있어, ',
         you.get_colored_name(),
         `이(가)${chara.sex}에게 무엇을 하려는지 전혀 모르고 있다……`,
       ]);
@@ -756,7 +756,7 @@ module.exports = {
   async shop_end_sleep(chara, you) {
     await era.printAndWait([
       chara.get_colored_name(),
-      '은(는) 잠들어 있어,',
+      '은(는) 잠들어 있어, ',
       you.get_colored_name(),
       `이(가)${chara.sex}에게 한 일을 전혀 모르고 있다……`,
     ]);
@@ -768,9 +768,9 @@ module.exports = {
   async shop_end_hate(chara, you) {
     await era.printAndWait([
       chara.get_colored_name(),
-      '은(는) 몸의 변화를 견디며,',
+      '은(는) 몸의 변화를 견디며, ',
       you.get_colored_name(),
-      `이(가) ${chara.sex}을(를) 성인용품처럼 가지고 노는 것을 욕했다……`,
+      `이(가) ${chara.sex}를 성인용품처럼 가지고 노는 것을 욕했다……`,
     ]);
   },
   /**
@@ -782,7 +782,7 @@ module.exports = {
       chara.get_colored_name(),
       '은(는) 몸의 변화를 느끼고 ',
       you.get_colored_name(),
-      '와(과) 함께 쾌락을 맛보고 싶어 견딜 수가 없다……',
+      '과(와) 함께 쾌락을 맛보고 싶어 견딜 수가 없다……',
     ]);
   },
   /**
@@ -905,7 +905,7 @@ module.exports = {
     } else {
       era.print([
         you.get_colored_name(),
-        '의 부정에,',
+        '의 부정에, ',
         chara.get_colored_name(),
         '은(는) 몹시 분노하고 있다……',
       ]);

@@ -19,7 +19,7 @@ module.exports = {
     await coffee.print_and_wait([
       '꿈속의 자신은…… ',
       you.get_colored_actual_name(),
-      '와(과) 차마 입에 담을 수 없는 일을 하고 있었다……',
+      '과(와) 차마 입에 담을 수 없는 일을 하고 있었다……',
     ]);
     await coffee.print_and_wait([
       '멋대로 떠올리지 말라며 ',
@@ -87,7 +87,7 @@ module.exports = {
       await coffee.print_and_wait([
         '잠들 수가 없다. 진정되지 않는다. 생각해 보면 ',
         you.get_colored_actual_name(),
-        '와(과) 만난 뒤로, 마음속은 늘 그 사람으로 가득했다.',
+        '과(와) 만난 뒤로, 마음속은 늘 그 사람으로 가득했다.',
       ]);
       await coffee.say_and_wait([
         '저는 ',
@@ -155,7 +155,7 @@ module.exports = {
       await coffee.say_and_wait([
         '가 보고 싶은 곳이 있어요…… ',
         callname,
-        '와(과) 함께 보고 싶어서요……',
+        '과(와) 함께 보고 싶어서요……',
       ]);
       era.drawLine();
       await era.printAndWait([
@@ -181,12 +181,12 @@ module.exports = {
         coffee.get_colored_name(),
         '가 좋아할 만한 곳이다. 독특한 디자인의 커피잔, 로코코풍 주전자. 아무도 없는 오후, 검은 머리의 ',
         coffee.teen_sex_title,
-        '이(가) 홀로 진열대 사이를 걸으며 때로는 물건을 살며시 들어 살펴보고, 때로는 허리를 숙인 채 멈춰 서 있는 모습. 햇살이 유리를 통해 가게 안 가득 쏟아져 모든 것을 꿈결 같은 금빛으로 물들이는——그런 광경이 눈에 선했다.',
+        '가 홀로 진열대 사이를 걸으며 때로는 물건을 살며시 들어 살펴보고, 때로는 허리를 숙인 채 멈춰 서 있는 모습. 햇살이 유리를 통해 가게 안 가득 쏟아져 모든 것을 꿈결 같은 금빛으로 물들이는——그런 광경이 눈에 선했다.',
       ]);
       await coffee.say_and_wait([
         '……하지만 ',
         callname,
-        '와(과) 단둘이 오는 건 처음이에요……',
+        '과(와) 단둘이 오는 건 처음이에요……',
       ]);
       await era.printAndWait([
         '어느새 ',
@@ -467,7 +467,7 @@ module.exports = {
     await era.printAndWait([
       '어느 날, ',
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       coffee.get_colored_name(),
       '는 평소처럼 트레이너실에서 일과를 보내고 있었다.',
     ]);
@@ -660,7 +660,7 @@ module.exports = {
     await coffee.print_and_wait([
       '——하지만 ',
       callname,
-      '이 언젠가 나를 떠나갈지도 모른다고 생각하면……',
+      '이(가) 언젠가 나를 떠나갈지도 모른다고 생각하면……',
     ]);
     await coffee.print_and_wait(
       '심장이 꽉 조여오는 것 같고 가슴 한구석이 아릿해.',

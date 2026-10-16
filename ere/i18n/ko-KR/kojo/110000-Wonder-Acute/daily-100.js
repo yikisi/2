@@ -30,7 +30,7 @@ module.exports = {
           callname,
           '이(가) 다른 착한 아이들에게도 나눠 주고, ',
           acute.couple_title,
-          '와(과) 친해질 수 있겠지?',
+          '과 친해질 수 있겠지?',
         ]),
       () =>
         acute.say([
@@ -170,7 +170,7 @@ module.exports = {
       await era.printAndWait([
         '눈앞에 펼쳐진 「5년 레이스, 3년 모의고사」를 마주하고, 언제나 온화하던 ',
         acute.get_colored_name(),
-        '가 난처하다는 듯 곤란한 표정을 짓고 있다.',
+        '가 난처한 표정을 짓고 있다.',
       ]);
       await era.printAndWait([
         '그 모습이 신선하기도 하고 귀엽기도 하여, ',
@@ -247,7 +247,7 @@ module.exports = {
             () => acute.say_and_wait('가슴 운동은——벌써 끝냈단다~'),
             () =>
               acute.say_and_wait('오늘도 착실하게, 한 걸음씩 힘내 보자꾸나~'),
-            () => acute.say_and_wait(['가자꾸나, ', callname, '。']),
+            () => acute.say_and_wait(['가자꾸나, ', callname, '.']),
           );
           break;
         case 1:
@@ -260,7 +260,7 @@ module.exports = {
               ]),
             () =>
               acute.say_and_wait(
-                '어떤 트레이닝이든, 이 나는 진지하게 임할 거란다.',
+                '어떤 트레이닝이든, 나는 진지하게 임할 거란다.',
               ),
             () =>
               acute.say_and_wait(
@@ -298,7 +298,7 @@ module.exports = {
       buffer.push(() =>
         era.printAndWait([
           acute.get_colored_name(),
-          '은(는) 여느 때처럼 편안한 표정을 짓고 있다.',
+          '는 여느 때처럼 편안한 표정을 짓고 있다.',
         ]),
       );
     }
@@ -394,7 +394,7 @@ module.exports = {
         acute.get_colored_name(),
         '도 이런 때만큼은 또래다운 수줍음을 띤 ',
         acute.teen_sex_title,
-        '이(가) 된다.',
+        '가 된다.',
       ]);
       await era.printAndWait([
         '저도 모르게 ',
@@ -464,7 +464,7 @@ module.exports = {
       await era.printAndWait([
         '……',
         acute.get_colored_name(),
-        '에게 등 떠밀리듯 강제로 튼튼한 우산 하나를 받았다.',
+        '에게 얼떨결에 튼튼한 우산 하나를 받았다.',
       ]);
     }
   },
@@ -477,14 +477,14 @@ module.exports = {
       await era.printAndWait([
         '저녁 무렵, ',
         acute.get_colored_name(),
-        '에게 맛있는 「무말랭이」를 만드는 비법을 가르쳐 달라고 청했다——',
+        '에게 맛있는 「단무지」를 만드는 비법을 가르쳐 달라고 청했다——',
       ]);
       await acute.say_and_wait(
         '무를 말리는 비법 말이니? 으음…… 굳이 비법이라고 한다면, 역시 좋은 항아리를 쓰는 게 첫걸음이란다……',
       );
       await era.printAndWait('………………');
       await era.printAndWait(
-        '「절임」에 관한 깊고 방대한 지식을 잔뜩 전수받았다.',
+        '「절임」에 관한 여러 가지 지식을 배웠다.',
       );
     } else {
       await era.printAndWait([
@@ -502,7 +502,7 @@ module.exports = {
       ]);
       await era.printAndWait('………………');
       await era.printAndWait(
-        '문득 아주 짧은 순간, 눈앞의 그녀에게서 어머니의 잔상이 겹쳐 보였다.',
+        '문득 눈앞의 그녀에게서 어머니의 모습이 겹쳐 보였다.',
       );
     }
   },
@@ -538,12 +538,12 @@ module.exports = {
     await era.printAndWait([
       '하지만 평소 느긋해 보이는 ',
       acute.get_colored_name(),
-      '은(는) 구멍 안에 앉아 있는 쪽을 더 좋아하는 듯하다.',
+      '는 구멍 안에 앉아 있는 쪽을 더 좋아하는 듯하다.',
     ]);
     await acute.say_and_wait('음…… 여기는 정말 조용하구나~');
     await era.printAndWait([
       acute.get_colored_name(),
-      '은(는) 여전히 온화하게 말했지만, 얼굴 표정은 조금 달라진 듯했다……',
+      '는 여전히 온화하게 말했지만, 얼굴 표정은 조금 달라진 듯했다……',
     ]);
   },
   /**
@@ -559,7 +559,7 @@ module.exports = {
     await acute.say_and_wait('어머…… 여기서 데이트하는 거니? 나는 괜찮단다~');
     await era.printAndWait([
       acute.get_colored_name(),
-      '은(는) 주위 ',
+      '는 주위 ',
       acute.uma_sex_title,
       '들의 시선 따위 신경 쓰지 않는 듯했다……',
     ]);
@@ -570,7 +570,7 @@ module.exports = {
       );
       await era.printAndWait([
         acute.get_colored_name(),
-        '과(와) 아주 좋은 한낮을 보냈다.',
+        '와 아주 좋은 한낮을 보냈다.',
       ]);
     } else {
       await era.printAndWait([
@@ -605,7 +605,7 @@ module.exports = {
     await era.printAndWait('아작, 아작, 아작——');
     if (Math.random() < 0.5) {
       await era.printAndWait(
-        '언제나 변함없이 온화하고 기분 좋은 아삭한 식감——',
+        '늘 먹던 기분 좋은 아삭한 식감——',
       );
       await acute.say_and_wait(
         '후후~ 괜찮단다, 여기 아직 많이 있으니까 마음껏 먹으렴~',
@@ -615,7 +615,7 @@ module.exports = {
         '의 미소를 보자 가슴이 행복으로 가득 찼다.',
       ]);
     } else {
-      await era.printAndWait('평소보다 조금 더 짭조름한 맛이 느껴지는 식감——');
+      await era.printAndWait('평소보다 조금 더 짭조름한 맛——');
       await acute.say_and_wait([
         '요즘 날씨가 부쩍 더워졌잖니. 땀을 많이 흘리면 몸에 염분이 부족해진단다? 그래서 소금을 조금 더 쳤는데—— ',
         you.get_colored_name(),
@@ -632,14 +632,14 @@ module.exports = {
   async o_r_fishing(acute, you, jpy) {
     await era.printAndWait([
       acute.get_colored_name(),
-      '과(와) 강으로 낚시를 하러……',
+      '와 강으로 낚시를 하러……',
     ]);
     if (Math.random() < 0.5) {
       await acute.say_and_wait('어머나, 날씨가 좋구나~');
       await era.printAndWait([
         '낚싯대를 든 ',
         acute.get_colored_name(),
-        '은(는) 떠가는 구름과 해를 향해 온화하게 미소 짓는다.',
+        '는 떠가는 구름과 해를 향해 온화하게 미소 짓는다.',
       ]);
       await era.printAndWait([
         acute.get_colored_name(),
@@ -650,13 +650,13 @@ module.exports = {
         you.get_colored_name(),
         '과(와) ',
         acute.get_colored_name(),
-        '은(는) 낚시가 아니라 일광욕을 하러 온 것 같다.',
+        '는 낚시가 아니라 일광욕을 하러 온 것 같다.',
       ]);
     } else {
       await era.printAndWait([
         '——그렇기는 해도, ',
         acute.get_colored_name(),
-        '은(는) 낚싯대를 들지 않았다. 찌와 바늘이 달린 낚싯줄에 미끼를 끼우고, 손에 쥔 채 물로 던져 넣었다.',
+        '는 낚싯대를 들지 않았다. 찌와 바늘이 달린 낚싯줄에 미끼를 끼우고, 손에 쥔 채 물로 던져 넣었다.',
       ]);
       await acute.say_and_wait(
         '영차…… 후우~ 이러면 됐구나~ 이제 물고기가 걸리기를 기다렸다가 한꺼번에 잡으면 되겠어~',
@@ -681,7 +681,7 @@ module.exports = {
       await era.printAndWait([
         '기분 좋은 듯 ',
         acute.get_colored_name(),
-        '은(는) 강가에서 콧노래를 흥얼거린다.',
+        '는 강가에서 콧노래를 흥얼거린다.',
       ]);
       await era.printAndWait([
         '……어째서인지 ',
@@ -696,12 +696,12 @@ module.exports = {
       await era.printAndWait([
         '강가를 걷던 ',
         acute.get_colored_name(),
-        '은(는) 드물게 진지한 표정으로 주의를 준다.',
+        '는 드물게 진지한 표정으로 주의를 준다.',
       ]);
       await era.printAndWait([
         '……그래도 ',
         acute.get_colored_name(),
-        '은(는) 즐거워 보인다.',
+        '는 즐거워 보인다.',
       ]);
     }
   },
@@ -711,7 +711,7 @@ module.exports = {
    * @param {PrintedSpan} callname ワンダーアキュートのプレイヤーへの呼び方
    */
   async o_s_arcade(acute, you, callname) {
-    await era.printAndWait([acute.get_colored_name(), '과(와) 오락실에……']);
+    await era.printAndWait([acute.get_colored_name(), '와 오락실에……']);
     await acute.say_and_wait([
       '어머나~ ',
       callname,
@@ -719,7 +719,7 @@ module.exports = {
     ]);
     await era.printAndWait([
       acute.get_colored_name(),
-      '은(는) 오른팔을 풀고 상체를 살짝 숙인 채 펀치 머신에 온 신경을 집중한다. 늘 온화하던 ',
+      '는 오른팔을 풀고 상체를 살짝 숙인 채 펀치 머신에 온 신경을 집중한다. 늘 온화하던 ',
       acute.sex,
       '의 눈에 지금은 투지가 타오르고 있다.',
     ]);
@@ -739,7 +739,7 @@ module.exports = {
   async o_s_drawing(acute, you, callname, call_301, special_item) {
     await era.printAndWait([
       acute.get_colored_name(),
-      '과(와) 상점가의 경품 추첨에 참가했다……',
+      '와 상점가의 경품 추첨에 참가했다……',
     ]);
     await acute.say_and_wait('싱싱한 무가 당첨되면 좋겠구나~');
     await era.printAndWait('빙글빙글빙글빙글……');
@@ -806,7 +806,7 @@ module.exports = {
           await era.printAndWait([
             '가장 낮은 등수의 경품인데도 ',
             acute.get_colored_name(),
-            '은(는) 기뻐하며 점원에게 휴지를 받아 들었다——',
+            '는 기뻐하며 점원에게 휴지를 받아 들었다——',
           ]);
         },
         async () => {
@@ -829,7 +829,7 @@ module.exports = {
           ]);
           await era.printAndWait([
             acute.get_colored_name(),
-            '은(는) 돌아보았다. 온화한 미소에 부처님의 후광이 비쳤다——',
+            '는 돌아보았다. 온화한 미소에 부처님의 후광이 비쳤다——',
           ]);
         },
       ];
@@ -846,7 +846,7 @@ module.exports = {
       await era.printAndWait([
         '눈을 감으면 오토바이에 올라탄 ',
         acute.get_colored_name(),
-        '이(가) 무언가를 쫓고 있다——',
+        '가 무언가를 쫓고 있다——',
       ]);
     } else {
       await acute.say_and_wait(
@@ -858,7 +858,7 @@ module.exports = {
       await era.printAndWait([
         '눈을 감으면 ',
         acute.get_colored_name(),
-        '이(가) 허리에 손을 얹고 난간에 선 모습이 보인다——',
+        '가 허리에 손을 얹고 난간에 선 모습이 보인다——',
       ]);
       await era.printAndWait('……잠깐! 정말 올라가지 마!');
     }
@@ -868,7 +868,7 @@ module.exports = {
    * @param {PrintedSpan} callname ワンダーアキュートのプレイヤーへの呼び方
    */
   async o_s_movie(acute, callname) {
-    await era.printAndWait([acute.get_colored_name(), '과(와) 영화를 보러……']);
+    await era.printAndWait([acute.get_colored_name(), '와 영화를 보러……']);
     if (Math.random() < 0.5) {
       await era.printAndWait([
         '선천적으로 몸이 불편한 ',
@@ -890,7 +890,7 @@ module.exports = {
         acute.uma_sex_title,
         '가 젊은 시절 세상을 떠난 트레이너 반려자와 약속했던 세계 일주를 이루기 위해, 길에서 만난 간사이의 어린 ',
         acute.uma_sex_title,
-        '와(과) 세계를 누비는 전설——',
+        '와 세계를 누비는 전설——',
       ]);
       await acute.say_and_wait(
         '음…… 낭만적인 이야기구나~ 나도 할 수 있다면 이런 여행을 해 보고 싶어——',
@@ -921,7 +921,7 @@ module.exports = {
     await era.printAndWait([
       '예상대로, 어딘가 나이 지긋한 구석이 있는 ',
       acute.get_colored_name(),
-      '은(는) 「참배」 같은 행사에 무척 열의를 보였다.',
+      '는 「참배」 같은 행사에 무척 열의를 보였다.',
     ]);
     await acute.say_and_wait('다만…… 신사에 가려면 일찍 나서야 하니까……');
     await acute.say_and_wait('세뱃돈과 향도 미리 준비하고……');
@@ -952,7 +952,7 @@ module.exports = {
       await era.printAndWait([
         '대길이 적힌 운세 쪽지를 쥔 ',
         acute.get_colored_name(),
-        '은(는) 온화하게 미소 짓는다.',
+        '는 온화하게 미소 짓는다.',
       ]);
       await era.printAndWait(
         '당연하겠지. 일부러 두 시간이나 일찍 일어나 참배를 준비했으니까.',
@@ -969,7 +969,7 @@ module.exports = {
       await era.printAndWait([
         '대흉이 적힌 운세 쪽지를 쥔 ',
         acute.get_colored_name(),
-        '은(는) 여느 때처럼 온화하게 말한다. 대흉도 ',
+        '는 여느 때처럼 온화하게 말한다. 대흉도 ',
         acute.sex,
         '의 마음을 흔들지는 못한 모양이다.',
       ]);
@@ -998,7 +998,7 @@ module.exports = {
     if (Math.random() < 0.5) {
       await era.printAndWait([
         acute.get_colored_name(),
-        '과(와) 역 앞에서 김이 모락모락 나는 유부를 맛보았다……',
+        '와 역 앞에서 김이 모락모락 나는 유부를 맛보았다……',
       ]);
       await acute.say_and_wait('후우, 후우…… 앙~ 냠~ 냠냠❤️~');
       await era.printAndWait('뜨거운 유부를 불어 가며 조금씩 베어 문다.');
@@ -1038,17 +1038,17 @@ module.exports = {
       await era.printAndWait([
         '그렇게 미간을 살짝 찌푸린 ',
         acute.get_colored_name(),
-        '은(는) 김이 피어오르는 얼굴의 절반을 손으로 가렸다——',
+        '는 김이 피어오르는 얼굴의 절반을 손으로 가렸다——',
       ]);
       await era.printAndWait('…………');
       await era.printAndWait([
         acute.get_colored_name(),
-        '은(는) 어쩌면 그쪽 방면의 천재일지도 모른다.',
+        '는 어쩌면 그쪽 방면의 천재일지도 모른다.',
       ]);
     } else {
       await era.printAndWait([
         acute.get_colored_name(),
-        '과(와) 역 앞 편의점에서 특가 단무지를 맛보았다……',
+        '와 역 앞 편의점에서 특가 단무지를 맛보았다……',
       ]);
       era.printButton('「아삭——」', 1);
       await era.input();
@@ -1076,7 +1076,7 @@ module.exports = {
       await acute.say_and_wait([callname, ', 물은 여기 있단다~']);
       await era.printAndWait([
         acute.get_colored_name(),
-        '이(가) 보온병 뚜껑에 따라 준 미지근한 물을 받아 단숨에 마신다.',
+        '가 보온병 뚜껑에 따라 준 미지근한 물을 받아 단숨에 마신다.',
       ]);
       era.printButton('「꿀꺽, 꿀꺽——」', 1);
       await era.input();
@@ -1110,7 +1110,7 @@ module.exports = {
         you.get_colored_name(),
         '의 속마음을 꿰뚫어 본 듯, 곁에 있던 ',
         acute.get_colored_name(),
-        '이(가) 서두르지 않고 딱 알맞은 순간에 ',
+        '가 서두르지 않고 딱 알맞은 순간에 ',
         you.get_colored_name(),
         '의 독백 사이로 끼어들었다.',
       ]);
@@ -1222,13 +1222,13 @@ module.exports = {
   async o_s_shopping(acute, you, callname) {
     await era.printAndWait([
       acute.get_colored_name(),
-      '과(와) 역 앞 쇼핑몰을 둘러보았다……',
+      '와 역 앞 쇼핑몰을 둘러보았다……',
     ]);
     await acute.say_and_wait('단무지~ 단무지~');
     await era.printAndWait([
       '경쾌하게 콧노래를 흥얼거리며 ',
       acute.get_colored_name(),
-      '은(는) 할인 코너를 믿기 어려울 만큼 빠르게 누비고, 방금 가격표가 내려간 물건들을 바구니에 던져 넣는다.',
+      '는 할인 코너를 믿기 어려울 만큼 빠르게 누비고, 방금 가격표가 내려간 물건들을 바구니에 던져 넣는다.',
     ]);
     await era.printAndWait(
       '「이거 트레이닝에 써먹을 수 있겠는데」 하고 감탄하기도 전에 바구니는 이미 가득 찼다.',
@@ -1565,7 +1565,7 @@ module.exports = {
       await era.printAndWait([
         '그렇게 말하며 ',
         acute.get_colored_name(),
-        '은(는) 주머니에서 접으면 엄지손가락 하나 길이쯤 되는, 분해된 작은 우산을 꺼냈다.',
+        '는 주머니에서 접으면 엄지손가락 하나 길이쯤 되는, 분해된 작은 우산을 꺼냈다.',
       ]);
       await era.printAndWait([
         '그러고는 가느다란 두 손을 ',
@@ -1647,7 +1647,7 @@ module.exports = {
         you.get_colored_name(),
         '이(가) 곤란해하고 있자, 늘 속마음을 꿰뚫어 보는 ',
         acute.get_colored_name(),
-        '이(가) 살며시 다가왔다.',
+        '가 살며시 다가왔다.',
       ]);
       await acute.say_and_wait([
         callname,
@@ -1670,7 +1670,7 @@ module.exports = {
       await era.printAndWait([
         '이성은 말한다. 교직원으로서 담당 ',
         acute.uma_sex_title,
-        '와(과) 이 이상 썩은 금전 관계를 맺어서는 안 된다고.',
+        '와 이 이상 썩은 금전 관계를 맺어서는 안 된다고.',
       ]);
       await era.printAndWait('하지만 이 빚은……');
       await acute.say_and_wait([
@@ -1694,7 +1694,7 @@ module.exports = {
       await era.printAndWait([
         '그것이 ',
         acute.get_colored_name(),
-        '이(가) 최근에야 깨달은 이치다.',
+        '가 최근에야 깨달은 이치다.',
       ]);
       await era.printAndWait(
         '평범한 뽑기로 얻은, 왠지 희귀해 보이는 카드 한 장이 경매 사이트에서 백삼억 이천만 엔이나 될 줄은 몰랐다.',
@@ -1702,24 +1702,24 @@ module.exports = {
       await era.printAndWait([
         '그 경매 덕분에 ',
         acute.get_colored_name(),
-        '은(는) 큰 재산을 얻어, ',
+        '는 큰 재산을 얻어, ',
         you.get_colored_name(),
         '의 빚을 갚아 줄 수 있었다.',
       ]);
       await era.printAndWait([
         '이제 ',
         acute.get_colored_name(),
-        '은(는) ',
+        '는 ',
         you.get_colored_name(),
         '의 금전적 주인이다.',
       ]);
       await era.printAndWait([
         acute.get_colored_name(),
-        '이(가) 만든 집안일 임금표에 따르면, ',
+        '가 만든 집안일 임금표에 따르면, ',
         you.get_colored_name(),
         '이(가) 일을 하나 끝낼 때마다 ',
         acute.get_colored_name(),
-        '은(는) ',
+        '는 ',
         you.get_colored_name(),
         '의 빚을 일부 탕감해 준다.',
       ]);
@@ -1751,7 +1751,7 @@ module.exports = {
         you.get_colored_name(),
         '도 권법을 익혀야 한다. 은퇴 뒤 ',
         acute.get_colored_name(),
-        '이(가) ',
+        '가 ',
         you.get_colored_name(),
         '을(를) 고향으로 데려갔을 때, 아버지에게 인정받아야 하니까.',
       ]);

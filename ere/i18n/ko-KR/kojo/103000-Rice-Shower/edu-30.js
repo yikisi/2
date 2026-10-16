@@ -36,11 +36,11 @@ module.exports = {
     const f = async (rice, you, callname, self_name) => {
       await era.printAndWait([
         rice.get_colored_name(),
-        '와(과) 훈련을 마친 뒤——',
+        '와 훈련을 마친 뒤——',
       ]);
       await rice.say_and_wait(['어? ', callname, '은(는) 아직 안 돌아가?']);
       era.printButton('「내일 훈련을 준비해야지.」', 1);
-      era.printButton(`「라이스을(를) 넋 놓고 보고 있었어.」`, 2);
+      era.printButton(`「라이스를 넋 놓고 보고 있었어.」`, 2);
       if ((await era.input()) === 1) {
         await rice.say_and_wait([
           callname,
@@ -49,11 +49,11 @@ module.exports = {
           '를 위해서 아직도 일하고 있는 거야……?',
         ]);
       } else {
-        await rice.say_and_wait(['우아아, ', callname, '！']);
+        await rice.say_and_wait(['우아아, ', callname, '!']);
       }
-      await you.say_and_wait('라이스은(는) 먼저 쉬고 있어');
-      await rice.say_and_wait('……응, 알았어');
-      await rice.say_and_wait(['잘 자, ', callname, '']);
+      await you.say_and_wait('라이스는 먼저 쉬고 있어.');
+      await rice.say_and_wait('……응, 알았어.');
+      await rice.say_and_wait(['잘 자, ', callname, '.']);
       era.drawLine();
       await era.printAndWait([
         you.get_colored_name(),
@@ -67,7 +67,7 @@ module.exports = {
       await rice.say_and_wait('하아…… 하아…… 아, 아직……');
       await rice.say_and_wait([self_name, ', 아직 할 수 있어. 힘내야 해……']);
       await you.say_and_wait('자율 훈련?');
-      await rice.say_and_wait(['아…… ', callname, '']);
+      await rice.say_and_wait(['아…… ', callname, '.']);
       await rice.say_and_wait('들켜 버렸네……');
       await rice.say_and_wait([
         callname,
@@ -80,15 +80,15 @@ module.exports = {
       era.printButton('「그럼 조금 더 함께할까?」', 1);
       era.printButton('「그 마음만으로도 기뻐.」', 2);
       if ((await era.input()) === 1) {
-        await rice.say_and_wait(['응, 고마워, ', callname, '！']);
+        await rice.say_and_wait(['응, 고마워, ', callname, '!']);
       } else {
-        await rice.say_and_wait('그 마음만으로도 기뻐');
+        await rice.say_and_wait('그 마음만으로도 기뻐.');
         await rice.say_and_wait([
           '으…… 그래도 ',
           self_name,
           '도 ',
           callname,
-          '에게 도움이 되고 싶어',
+          '에게 도움이 되고 싶어.',
         ]);
       }
       await era.printAndWait([
@@ -105,18 +105,18 @@ module.exports = {
       await rice.say_and_wait([
         '그건…… ',
         self_name,
-        '와(과) 함께 가고 싶다는 뜻이야?',
+        '와 함께 가고 싶다는 뜻이야?',
       ]);
       await rice.say_and_wait([
         self_name,
-        ', 옷 갈아입고 올게! 조금만 기다려 줘',
+        ', 옷 갈아입고 올게! 조금만 기다려 줘.',
       ]);
       await era.printAndWait([
         '그렇게 ',
         you.get_colored_name(),
         '은(는) 옷을 갈아입은 ',
         rice.get_colored_name(),
-        '와(과) 함께 돌아갔다.',
+        '와 함께 돌아갔다.',
       ]);
     };
     f.title = title;
@@ -178,17 +178,17 @@ module.exports = {
       await era.input();
       await you.say_and_wait('상태가 안 좋아?');
       await rice.say_and_wait('어? 아, 아니야. 그냥 조금 긴장돼서……');
-      await rice.say_and_wait('하지만 이제 괜찮아');
+      await rice.say_and_wait('하지만 이제 괜찮아.');
       await rice.say_and_wait([
         '이렇게 ',
         callname,
-        '와(과) 이야기하면 마음이 놓여',
+        '과(와) 이야기하면 마음이 놓여.',
       ]);
       await rice.say_and_wait([
         self_name,
         ', 열심히 할게. 잘 지켜봐 줘, ',
         callname,
-        '！',
+        '!',
       ]);
     };
     f.title = title;
@@ -206,11 +206,11 @@ module.exports = {
       await rice.say_and_wait([
         '해, 해냈어, ',
         callname,
-        '。',
+        '. ',
         self_name,
         ', 이겼어……',
       ]);
-      await you.say_and_wait('좀 더 가슴을 펴도 돼');
+      await you.say_and_wait('좀 더 가슴을 펴도 돼.');
       await rice.say_and_wait('가슴을 펴라고……? 저기……');
       await rice.say_and_wait(
         '게다가 우승이잖아! 정말 감사한 마음으로 받아들여야 해!',
@@ -242,7 +242,7 @@ module.exports = {
         ]);
       } else {
         await rice.say_and_wait(
-          '으, 응! 다음 레이스에서도 이겨서 모두를 기쁘게 해 주고 싶어',
+          '으, 응! 다음 레이스에서도 이겨서 모두를 기쁘게 해 주고 싶어.',
         );
         await rice.say_and_wait([
           '그러니까 ',
@@ -270,17 +270,17 @@ module.exports = {
         self_name,
         ', 제대로 힘낼 수 있었어……',
       ]);
-      await rice.say_and_wait('다음에는 우승하고 싶어…… 노, 농담이야. 후후');
+      await rice.say_and_wait('다음에는 우승하고 싶어…… 노, 농담이야. 후후.');
       era.printButton('「열심히 잘했어.」', 1);
       era.printButton('「다음에는 우승하자!」', 2);
       if ((await era.input()) === 1) {
-        await rice.say_and_wait(['으, 응! 고마워, ', callname, '！']);
+        await rice.say_and_wait(['으, 응! 고마워, ', callname, '!']);
         await rice.say_and_wait([
           '하지만 ',
           self_name,
-          '、',
+          ', ',
           callname,
-          '와(과) 함께여서 이렇게 힘낼 수 있었던 것 같아',
+          '과(와) 함께여서 이렇게 힘낼 수 있었던 것 같아.',
         ]);
         await rice.say_and_wait([
           self_name,
@@ -308,27 +308,27 @@ module.exports = {
       await rice.say_and_wait([
         '미안해. ',
         self_name,
-        '、',
+        ', ',
         callname,
         '을(를) 실망시켜 버렸네……',
       ]);
       era.printButton('「다음 기회가 있잖아.」', 1);
       era.printButton('「왜 졌는지 생각해 보자.」', 2);
       if ((await era.input()) === 1) {
-        await rice.say_and_wait(['저기…… 응. ', callname, '의 말이 맞아']);
+        await rice.say_and_wait(['저기…… 응. ', callname, '의 말이 맞아.']);
         await rice.say_and_wait([
           self_name,
           ', 다음에는 꼭 이길게. ',
           callname,
-          ', 잘 지켜봐 줘',
+          ', 잘 지켜봐 줘.',
         ]);
       } else {
         await rice.say_and_wait(
-          '이유…… 맞아. 무작정 열심히 하기만 해서는 또 지고 말 거야',
+          '이유…… 맞아. 무작정 열심히 하기만 해서는 또 지고 말 거야.',
         );
-        await rice.say_and_wait('패배한 이유를 찾아서 다음 레이스에 살려야 해');
+        await rice.say_and_wait('패배한 이유를 찾아서 다음 레이스에 살려야 해.');
         await rice.say_and_wait(
-          '아무리 부족하더라도, 풀이 죽어 있기만 하면 계속 못난 채로 있을 뿐이야',
+          '아무리 부족하더라도, 풀이 죽어 있기만 하면 계속 못난 채로 있을 뿐이야.',
         );
         await rice.say_and_wait([
           self_name,
@@ -358,14 +358,14 @@ module.exports = {
       await era.printAndWait([
         '센터로 라이브를 마친 ',
         rice.get_colored_name(),
-        '와(과) ',
+        '와 ',
         you.get_colored_name(),
         ' 모두 기분이 한껏 들떠 있었다.',
       ]);
       await era.printAndWait([
         '그런데 지금의 ',
         rice.get_colored_name(),
-        '은(는) 윤기 어린 눈빛으로 작은 발걸음을 재촉하며 ',
+        '는 윤기 어린 눈빛으로 작은 발걸음을 재촉하며 ',
         you.get_colored_name(),
         '에게 달려오고 있었다.',
       ]);
@@ -373,7 +373,7 @@ module.exports = {
       await era.printAndWait([
         '승부복을 입은 ',
         rice.get_colored_name(),
-        '은(는) 들뜬 양팔로 ',
+        '는 들뜬 양팔로 ',
         you.get_colored_name(),
         '의 허리를 끌어안았다.',
       ]);
@@ -383,7 +383,7 @@ module.exports = {
         you.get_colored_name(),
         '을(를) 올려다보았다. 눈동자에서는 촉촉한 빛이 흘러넘쳤다.',
       ]);
-      await rice.say_and_wait([callname, '、', self_name, ', 뭔가 잘못했어?']);
+      await rice.say_and_wait([callname, ', ', self_name, ', 뭔가 잘못했어?']);
       await rice.say_and_wait([
         '어째서…… ',
         self_name,
@@ -403,27 +403,27 @@ module.exports = {
       ]);
       await era.printAndWait([
         rice.get_colored_name(),
-        '은(는) 아쉬운 듯 ',
+        '는 아쉬운 듯 ',
         you.get_colored_name(),
         '의 손가락을 쓰다듬고는 「이따 봐」라는 말만 남긴 채 탈의실로 향했다.',
       ]);
       await era.printAndWait([
         '무슨 일을 하든 조심스럽고 겁을 내던 ',
         rice.get_colored_name(),
-        '이(가) 이제는 작은 악마처럼 ',
+        '가 이제는 작은 악마처럼 ',
         you.get_colored_name(),
         '에게 어리광을 부리고 있었다.',
       ]);
       await era.printAndWait([
         '라이브 뒤의 훈련이 끝나자 체육복을 입은 ',
         rice.get_colored_name(),
-        '이(가) ',
+        '가 ',
         you.get_colored_name(),
         '에게 다가왔다.',
       ]);
       await era.printAndWait([
         rice.get_colored_name(),
-        '은(는) 번호표가 달린 부분을 ',
+        '는 번호표가 달린 부분을 ',
         you.get_colored_name(),
         '에게 꾹 밀착시키며 ',
         you.get_colored_name(),
@@ -472,34 +472,34 @@ module.exports = {
     const f = async (rice, bourbon, you, self_name) => {
       await era.printAndWait('훈련장');
       await rice.say_and_wait('훈련까지 아직 시간이 조금 남았네……');
-      await rice.say_and_wait('……조금 뛰고 올까');
+      await rice.say_and_wait('……조금 뛰고 올까?');
       await rice.say_and_wait([
         '에헤헤…… ',
         self_name,
         ' 선수, 환호 속에서 코스로——',
       ]);
-      await you.say_as_passer_by_and_wait(`${rice.uma_sex_title}A`, '와아!!!');
+      await you.say_as_passer_by_and_wait(`${rice.uma_sex_title} A`, '와아!!!');
       await rice.say_and_wait('어!?');
       bourbon.name = '실력파인 ' + bourbon.uma_sex_title;
       await bourbon.say_and_wait('하아…… 하아……!');
       await you.say_as_passer_by_and_wait(
-        `${rice.uma_sex_title}A`,
+        `${rice.uma_sex_title} A`,
         '또 기록 경신이야!',
       );
       await you.say_as_passer_by_and_wait(
-        `${rice.uma_sex_title}A`,
+        `${rice.uma_sex_title} A`,
         '이제 내년 클래식의 주인공은 정해졌네!',
       );
       await you.say_as_passer_by_and_wait(
-        `${rice.uma_sex_title}B`,
+        `${rice.uma_sex_title} B`,
         '응…… 정말 멋진 달리기였어. 저기, 꼭……',
       );
       await bourbon.say_and_wait(
-        '……아직 예정된 일정이 남아 있습니다. 실례하겠습니다',
+        '……아직 예정된 일정이 남아 있습니다. 실례하겠습니다.',
       );
       await era.printAndWait([
         bourbon.get_colored_name(),
-        '은(는) 달려가 버렸다.',
+        '는 달려가 버렸다.',
       ]);
       await you.say_as_passer_by_and_wait(
         `${rice.uma_sex_title}들`,
@@ -509,11 +509,11 @@ module.exports = {
       await rice.say_and_wait([
         '……지금 ',
         self_name,
-        '가 저기 가면 방해만…… 되겠지',
+        '가 저기 가면 방해만…… 되겠지.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         rice.get_colored_name(),
         '의 트윙클 시리즈 도전이 시작되었다!',
       ]);
@@ -533,14 +533,14 @@ module.exports = {
      */
     const f = async (rice, bakushin, you, b_call_r, tenn_spr) => {
       await rice.say_and_wait(
-        '와……! 관객이…… 엄청 많아……! 게다가 다들 눈이 반짝거려',
+        '와……! 관객이…… 엄청 많아……! 게다가 다들 눈이 반짝거려.',
       );
       await era.printAndWait([
         '이날 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         rice.get_colored_name(),
-        '은(는) ',
+        '는 ',
         tenn_spr,
         ' 경기장을 견학하러 와 있었다. 그 이유는——',
       ]);
@@ -581,7 +581,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         rice.get_colored_name(),
-        '의 장거리 적성은…… 확실히 강철처럼 단단하다.',
+        '에게는…… 확실히 장거리를 달릴 탄탄한 자질이 있다.',
       ]);
       await era.printAndWait([
         tenn_spr,
@@ -593,7 +593,7 @@ module.exports = {
       await era.input();
       await bakushin.say_and_wait('아싸! 혼자 가기는 쓸쓸하니까요!');
       await bakushin.say_and_wait('참고로 거기서 파는 과자는 300엔입니다!');
-      await rice.say_and_wait('……왠지 소풍 같네');
+      await rice.say_and_wait('……왠지 소풍 같네.');
       await rice.say_and_wait('에헤헤, 기대돼!');
       await era.printAndWait('——그렇게 지금에 이르렀다.');
       await bakushin.say_and_wait('아아~! 얼마나 거센 추입인가요!');
@@ -626,19 +626,19 @@ module.exports = {
         self_name,
         '……끝까지 달렸어! 메이크 데뷔에서 이겼어!',
       ]);
-      era.printButton(`「${rice.name}, 정말 잘했어.」(호감+5)`, 1);
-      era.printButton(`${rice.name}의 머리를 쓰다듬는다(연모+1)`, 2);
+      era.printButton(`「${rice.name}, 정말 잘했어.」 (호감+5)`, 1);
+      era.printButton(`${rice.name}의 머리를 쓰다듬는다 (연모+1)`, 2);
       const ret = await era.input();
       await rice.say_and_wait(['와…… 고마워! ', callname, '……']);
       await rice.say_and_wait([
         '에……헤헤. 앞으로도 자, 잘 부탁해, ',
         self_name,
-        '！',
+        '!',
       ]);
       await rice.say_and_wait([
         '——이렇게 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         self_name,
         '은(는) 첫걸음을 내디뎠다!',
       ]);
@@ -648,9 +648,9 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 다시 ',
         rice.get_colored_name(),
-        '와(과) 함께 경기장에 왔다.',
+        '와 함께 경기장에 왔다.',
       ]);
-      await rice.say_and_wait('와…… 사람이 많아. 꼭 G1 같네');
+      await rice.say_and_wait('와…… 사람이 많아. 꼭 G1 같네.');
       await rice.say_and_wait('……어라? 하지만 오늘은 G2도 G3도 아닐 텐데……?');
       await you.say_as_passer_by_and_wait(
         '중계',
@@ -671,7 +671,7 @@ module.exports = {
       ]);
       await you.say_as_passer_by_and_wait(
         '관객 A',
-        '아~ 내년 클래식이 기대되네',
+        '아~ 내년 클래식이 기대되네.',
       );
       await you.say_as_passer_by_and_wait(
         '관객 A',
@@ -689,21 +689,21 @@ module.exports = {
       await rice.say_and_wait([
         '……',
         call_26,
-        '의 달리기를 보면서 다들 웃고 있네',
+        '의 달리기를 보면서 다들 웃고 있네.',
       ]);
       await rice.say_and_wait([self_name, '도 저렇게 될 수 있을까?']);
       era.printButton('「될 수 있어!」', 1);
       await era.input();
-      await rice.say_and_wait(['어? ', callname, '！？']);
+      await rice.say_and_wait(['어? ', callname, '!?']);
       await you.say_and_wait([rice.name, '라면 분명 할 수 있어!']);
-      await rice.say_and_wait('！');
+      await rice.say_and_wait('!');
       await rice.say_and_wait([
         '……에헤헤. ',
         callname,
-        '의 목소리는 마법 같아',
+        '의 목소리는 마법 같아.',
       ]);
       await rice.say_and_wait(
-        '절대 못 할 것 같은 일도, 그렇게 생각하면 할 수 있을 것 같아져',
+        '절대 못 할 것 같은 일도, 그렇게 생각하면 할 수 있을 것 같아져.',
       );
       await you.say_and_wait('라이스도 클래식에 나가 보지 않을래?');
       await rice.say_and_wait('……클래식');
@@ -714,23 +714,23 @@ module.exports = {
       ]);
       await era.printAndWait([
         rice.get_colored_name(),
-        '와(과) ',
+        '와 ',
         bourbon.get_colored_name(),
-        '이(가) 같은 무대에서——',
+        '이 같은 무대에서——',
       ]);
-      await rice.say_and_wait('！');
+      await rice.say_and_wait('!');
       era.printButton(`「${rice.name}라면 할 수 있어.」`, 1);
       await era.input();
-      await rice.say_and_wait('……！');
+      await rice.say_and_wait('……!');
       await rice.say_and_wait([
         callname,
         '은(는) 언제나 ',
         self_name,
         '를 믿어 주는구나……',
       ]);
-      await rice.say_and_wait('알았어. 그렇게 할게');
+      await rice.say_and_wait('알았어. 그렇게 할게.');
       await rice.say_and_wait(
-        '조금 무서워. 하지만 더는 달라지지 못하는 못난 아이로 있고 싶지 않아',
+        '조금 무서워. 하지만 더는 달라지지 못하는 못난 아이로 있고 싶지 않아.',
       );
       await rice.say_and_wait([
         self_name,
@@ -740,11 +740,11 @@ module.exports = {
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         rice.get_colored_name(),
-        '은(는) 클래식에 도전하기로 약속했다.',
+        '는 클래식에 도전하기로 약속했다.',
       ]);
-      await era.printAndWait(['우선은 ', sprg_sta, '。']);
+      await era.printAndWait(['우선은 ', sprg_sta, '.']);
       await era.printAndWait(
         '3관 노선의 전초전으로 삼아, 그 목표를 향해 힘을 쏟기로 했다.',
       );
@@ -782,25 +782,25 @@ module.exports = {
       ]);
       await you.say_as_passer_by_and_wait(
         '텔레비전',
-        '이야~ 이번 클래식에는 쟁쟁한 선수들이 모였네요',
+        '이야~ 이번 클래식에는 쟁쟁한 선수들이 모였네요.',
       );
       await you.say_as_passer_by_and_wait('텔레비전', [
         '단거리의 적수 없는 강자 ',
         bakushin.get_colored_name(),
-        '、',
+        ', ',
         rice.get_colored_name(),
         '도 출전 명단에 이름을 올렸습니다만, 역시——',
       ]);
       await you.say_as_passer_by_and_wait('텔레비전', [
         bourbon.get_colored_name(),
-        '을(를) 빼놓을 수는 없죠. 뭐니 뭐니 해도 미래의 3관 ',
+        '을 빼놓을 수는 없죠. 뭐니 뭐니 해도 미래의 3관 ',
         rice.uma_sex_title,
         ' 후보니까요!',
       ]);
       await rice.say_and_wait(['새해 복 많이 받아, ', callname, '']);
-      era.printButton(`「라이스！？」`, 1);
+      era.printButton(`「라이스!?」`, 1);
       await era.input();
-      await rice.say_and_wait(['응. ', self_name, '야']);
+      await rice.say_and_wait(['응. ', self_name, '야.']);
       await rice.say_and_wait([
         '헤헤, 새해 인사하러 왔어. ',
         you.get_colored_name(),
@@ -808,11 +808,11 @@ module.exports = {
       ]);
       era.printButton('「전혀 방해되지 않았어.」', 1);
       await era.input();
-      await rice.say_and_wait('아…… 다행이다');
+      await rice.say_and_wait('아…… 다행이다.');
       await rice.say_and_wait([
         '에헤헤, 있잖아. 오늘 아침에 ',
         call_52,
-        '이(가) 그랬어',
+        '이(가) 그랬어.',
       ]);
       era.drawLine({ content: '아침' });
       await urara.say_and_wait('새해니까 슈크림 먹자~!');
@@ -823,14 +823,14 @@ module.exports = {
       await rice.say_and_wait([
         '후훗, 그렇지? ',
         self_name,
-        '도 똑같이 말했어',
+        '도 똑같이 말했어.',
       ]);
       await rice.say_and_wait('그래서, 저기……');
       await rice.say_and_wait([
         self_name,
-        '、',
+        ', ',
         callname,
-        '와(과) 새해 포부를 이야기하고 싶어. 올해 목표를……',
+        '과(와) 새해 포부를 이야기하고 싶어. 올해 목표를……',
       ]);
       await rice.say_and_wait('안 될까?');
       era.printButton('「좋아.」', 1);
@@ -839,7 +839,7 @@ module.exports = {
       await rice.say_and_wait([callname, '은(는) 어떤 목표를 세우고 싶어?']);
       era.printButton(`「라이스의 클래식 우승이야.」`, 1);
       await era.input();
-      await rice.say_and_wait([callname, '……！']);
+      await rice.say_and_wait([callname, '……!']);
       await rice.say_and_wait(['……', self_name, '도 올해 목표를 세워도 돼?']);
       era.printButton('「물론이지.」', 1);
       await era.input();
@@ -855,19 +855,19 @@ module.exports = {
       const ret = await era.input();
       switch (ret) {
         case 1:
-          await rice.say_and_wait('응! 금방 이룰 수 있을지는 모르겠어');
+          await rice.say_and_wait('응! 금방 이룰 수 있을지는 모르겠어.');
           await rice.say_and_wait([
             '그래도 ',
             self_name,
-            ', 절대 포기하지 않을게',
+            ', 절대 포기하지 않을게.',
           ]);
           await era.printAndWait([
             rice.get_colored_name(),
-            '은(는) 그렇게 새로운 결의를 다졌다.',
+            '는 그렇게 새로운 결의를 다졌다.',
           ]);
           break;
         case 2:
-          await rice.say_and_wait('아와…… 레이스 전에 감기에 걸리면 큰일이야');
+          await rice.say_and_wait('아와…… 레이스 전에 감기에 걸리면 큰일이야.');
           await rice.say_and_wait([
             '게다가 ',
             self_name,
@@ -880,19 +880,19 @@ module.exports = {
             you.get_colored_name(),
             '은(는) 혼자 고민에 빠진 ',
             rice.get_colored_name(),
-            '을(를) 황급히 달래며 앞으로의 계획을 세우기 시작했다.',
+            '를 황급히 달래며 앞으로의 계획을 세우기 시작했다.',
           ]);
           break;
         case 3:
           await rice.say_and_wait('응!');
-          await rice.say_and_wait(['왠지 ', callname, ', 선생님 같아']);
+          await rice.say_and_wait(['왠지 ', callname, ', 선생님 같아.']);
           await rice.say_and_wait('후후…… 오늘 수업도 잘 부탁해…… 선생님');
           await era.printAndWait([
             '그 뒤 ',
             you.get_colored_name(),
             '은(는) ',
             rice.get_colored_name(),
-            '와(과) 함께 레이스 영상을 보며 연구했다.',
+            '와 함께 레이스 영상을 보며 연구했다.',
           ]);
       }
       return [ret];
@@ -913,7 +913,7 @@ module.exports = {
       era.printButton('「수고했어.」', 1);
       await era.input();
       await rice.say_and_wait(['고마워, ', callname]);
-      await rice.say_and_wait('하지만 고쳐야 할 점도 많이 보였어');
+      await rice.say_and_wait('하지만 고쳐야 할 점도 많이 보였어.');
       await rice.say_and_wait([self_name, ', 더 열심히 해야 해!']);
     };
     f.title = title;
@@ -933,7 +933,7 @@ module.exports = {
       era.printButton('「수고했어.」', 1);
       await era.input();
       await rice.say_and_wait(['고마워, ', callname]);
-      await rice.say_and_wait('하지만 고쳐야 할 점도 많이 보였어');
+      await rice.say_and_wait('하지만 고쳐야 할 점도 많이 보였어.');
       await rice.say_and_wait([self_name, ', 더 열심히 해야 해!']);
       era.drawLine({ content: '지하 통로의 다른 곳' });
       await you.say_as_passer_by_and_wait(
@@ -949,23 +949,23 @@ module.exports = {
         '기자 A',
         '다들 기대하고 있습니다! 부르봉 선수가 3관을 달성하는 그 빛나는 순간을요!',
       );
-      await bourbon.say_and_wait('응원에 감사드립니다. 그럼 실례하겠습니다');
+      await bourbon.say_and_wait('응원에 감사드립니다. 그럼 실례하겠습니다.');
       await you.say_as_passer_by_and_wait(
         '기자 A',
-        '아, 잠깐만요! 한 말씀만 더 해 주세요!」',
+        '아, 잠깐만요! 한 말씀만 더 해 주세요!',
       );
       await you.say_as_passer_by_and_wait(
         '기자 A',
-        '질문 하나만 더 하겠습니다!」',
+        '질문 하나만 더 하겠습니다!',
       );
       await you.say_as_passer_by_and_wait(
         '기자 A',
         '그러니까…… 이번 레이스에서 부르봉 선수의 라이벌은 누구라고 생각하십니까?',
       );
       await bourbon.say_and_wait('라이벌?');
-      await bourbon.say_and_wait('제 판단에 그런 존재는 필요하지 않습니다');
+      await bourbon.say_and_wait('제 판단에 그런 존재는 필요하지 않습니다.');
       await bourbon.say_and_wait(
-        '우승을 노린다면 상대는 반드시 그곳에 있습니다. 라이벌로 인정할 필요는 없습니다',
+        '우승을 노린다면 상대는 반드시 그곳에 있습니다. 라이벌로 인정할 필요는 없습니다.',
       );
       await rice.say_and_wait('……대단해');
       await rice.say_and_wait(
@@ -992,11 +992,11 @@ module.exports = {
       await rice.say_and_wait('하아…… 하아……!!');
       era.printButton('「괜찮아!?」', 1);
       await era.input();
-      await rice.say_and_wait('괜찮아, 괜찮아');
+      await rice.say_and_wait('괜찮아, 괜찮아.');
       await rice.say_and_wait(['그보다 ', callname, ', 보고 있었어?']);
       await rice.say_and_wait([self_name, ', 따라잡았어!']);
       await rice.say_and_wait(['에헤헤, 해, 해냈——……']);
-      await era.printAndWait([rice.get_colored_name(), '은(는) 쓰러졌다.']);
+      await era.printAndWait([rice.get_colored_name(), '는 쓰러졌다.']);
       await rice.say_and_wait('후…… 후……');
       await era.printAndWait(
         '온 힘을 쏟아부은 뒤 팽팽하던 긴장이 갑자기 풀린 모양이었다.',
@@ -1008,17 +1008,17 @@ module.exports = {
         rice.sex,
         '를 어깨에 기대게 하고, ',
         rice.get_colored_name(),
-        '을(를) 쉬게 하려고 발걸음을 옮기려던 그때——',
+        '를 쉬게 하려고 발걸음을 옮기려던 그때——',
       ]);
       await bourbon.say_and_wait([
         '——',
         rice.sex,
-        '의 발언은 이해할 수 없습니다',
+        '의 발언은 이해할 수 없습니다.',
       ]);
       await bourbon.say_and_wait('이번 레이스 내용으로 볼 때 ');
       await bourbon.say_and_wait([
         rice.sex,
-        '는 『부르봉에게 이겼다』고 말해야 합니다',
+        '는 『부르봉에게 이겼다』고 말해야 합니다.',
       ]);
       era.printButton('이 아이한테는 그쪽이 더 중요하거든', 1);
       await era.input();
@@ -1041,12 +1041,12 @@ module.exports = {
       await era.input();
       await rice.say_and_wait(['……그렇지, ', callname]);
       await rice.say_and_wait(
-        '운 좋게 이번에 이겼을 뿐인데, 여기에 만족하면 안 돼',
+        '운 좋게 이번에 이겼을 뿐인데, 여기에 만족하면 안 돼.',
       );
       await era.printAndWait([
         '3관 노선의 마지막 경기, 잔디 3000m의 장거리 ',
         kiku_sho,
-        '。',
+        '.',
       ]);
       await era.printAndWait([
         '장거리 주자인 ',
@@ -1071,17 +1071,17 @@ module.exports = {
       await era.printAndWait('(털썩……)');
       await era.printAndWait([
         rice.get_colored_name(),
-        '은(는) 온 힘을 쏟아부은 뒤 팽팽했던 긴장이 한꺼번에 풀린 모양이었다.',
+        '는 온 힘을 쏟아부은 뒤 팽팽했던 긴장이 한꺼번에 풀린 모양이었다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
         '은(는) ',
         rice.get_colored_name(),
-        '을(를) 부축하고 쉬게 하려고 걸음을 옮겼다.',
+        '를 부축하고 쉬게 하려고 걸음을 옮겼다.',
       ]);
       await era.printAndWait('(털썩……)');
       await rice.say_and_wait([self_name, ', 정말 못났어……']);
-      await rice.say_and_wait('다음에는 지금보다 꼭 더 열심히 할게');
+      await rice.say_and_wait('다음에는 지금보다 꼭 더 열심히 할게.');
     };
     f.title = title;
     return f;
@@ -1108,10 +1108,10 @@ module.exports = {
       call_52,
       u_call_r,
     ) => {
-      bourbon.name = '어느 사이보그' + bourbon.uma_sex_title;
+      bourbon.name = '어느 사이보그 ' + bourbon.uma_sex_title;
       await era.printAndWait('더욱 실력을 키우기 위한 강화 훈련이 시작되었다.');
-      await rice.say_and_wait('……와, 어떡하지');
-      await rice.say_and_wait([self_name, '도 합숙에 와 버렸어']);
+      await rice.say_and_wait('……와, 어떡하지?');
+      await rice.say_and_wait([self_name, '도 합숙에 와 버렸어.']);
       await rice.say_and_wait([
         '다른 ',
         rice.uma_sex_title,
@@ -1122,30 +1122,30 @@ module.exports = {
       era.printButton('「지금 생각해야 할 건 그게 아니잖아?」', 1);
       await era.input();
       await rice.say_and_wait('……히익! 네, 네……!');
-      await rice.say_and_wait('후후, 좋아…… 합숙도 열심히 할게');
+      await rice.say_and_wait('후후, 좋아…… 합숙도 열심히 할게.');
       await rice.say_and_wait([self_name, ', 힘낼게……!']);
       await rice.say_and_wait('A!A!O!');
       await era.printAndWait([
         '이렇게 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         rice.get_colored_name(),
         '의 여름 합숙이 시작되었다!!',
       ]);
       era.drawLine();
       await era.printAndWait([
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         rice.get_colored_name(),
-        '이(가) 훈련을 끝내고 밥을 먹으러 가려던 때——',
+        '가 훈련을 끝내고 밥을 먹으러 가려던 때——',
       ]);
       await bourbon.say_and_wait('하아…… 하아……!');
       await bourbon.say_and_wait('기록 경신. 목표 시간까지 앞으로 5초');
-      await bourbon.say_and_wait('——훈련을 계속합니다');
+      await bourbon.say_and_wait('——훈련을 계속합니다.');
       await rice.say_and_wait([
         '……부탁이야, ',
         callname,
-        '. 한 번만 더 달리게 해 줘',
+        '. 한 번만 더 달리게 해 줘.',
       ]);
       era.printButton('「……한 번만이야.」', 1);
       await era.input();
@@ -1154,15 +1154,15 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 다시 달려 나가는 ',
         rice.get_colored_name(),
-        '을(를) 지켜보았다.',
+        '를 지켜보았다.',
       ]);
       await urara.say_and_wait(['앗! ', u_call_r, ', 달려가 버렸다!']);
       await urara.say_and_wait('에~! 이제야 이야기할 수 있나 했는데!');
       await era.printAndWait([
         rice.get_colored_name(),
-        '이(가) 한 바퀴를 돌고 돌아왔다.',
+        '가 한 바퀴를 돌고 돌아왔다.',
       ]);
-      await rice.say_and_wait(['……어? ', call_52, '……？']);
+      await rice.say_and_wait(['……어? ', call_52, '……?']);
       await urara.say_and_wait(['안녕! ', u_call_r, '! 그럼 같이 출발하자']);
       await you.say_and_wait('출발!');
       await rice.say_and_wait('어!? 둘 다……!?');
@@ -1193,13 +1193,13 @@ module.exports = {
           self_name,
           '가 배고프다는 걸 알았어?',
         ]);
-        await you.say_and_wait('오늘 정말 열심히 했으니까');
+        await you.say_and_wait('오늘 정말 열심히 했으니까.');
         await rice.say_and_wait([
           '헤헤, ',
           callname,
           ', 제대로 ',
           self_name,
-          '를 지켜봐 줬구나',
+          '를 지켜봐 줬구나.',
         ]);
         await era.printAndWait([
           '셋은 즐겁게 식사를 했다. 소중한 시간은 눈 깜짝할 사이에 지나갔다.',
@@ -1208,13 +1208,13 @@ module.exports = {
         await rice.say_and_wait('와…… 사과 사탕! 정말 먹어도 돼?');
         await rice.say_and_wait([
           self_name,
-          '에게 사과 사탕은 최고의 보상이야',
+          '에게 사과 사탕은 최고의 보상이야.',
         ]);
         await rice.say_and_wait(
-          '달리기가 끝난 뒤나 시험이 끝난 뒤에, 엄마가 『오늘도 잘했어』라고 하면서 주셨거든',
+          '달리기가 끝난 뒤나 시험이 끝난 뒤에, 엄마가 『오늘도 잘했어』라고 하면서 주셨거든.',
         );
         era.printButton(`「그럼 오늘의 라이스도 먹어도 돼.」`, 1);
-        era.printButton(`「라이스은(는) 언제나 잘해 왔잖아.」`, 2);
+        era.printButton(`「라이스는 언제나 잘해 왔잖아.」`, 2);
         await era.input();
         await urara.say_and_wait([
           '응, 응, ',
@@ -1227,7 +1227,7 @@ module.exports = {
           u_call_r,
           ', 엄청—— 열심히 했으니까!',
         ]);
-        await rice.say_and_wait(['……헤헤, 고마워. ', callname, '、', call_52]);
+        await rice.say_and_wait(['……헤헤, 고마워. ', callname, ', ', call_52]);
         await era.printAndWait(['셋은 즐겁게 먹으며 짧은 휴식 시간을 보냈다.']);
       }
       bourbon.name = undefined;
@@ -1248,9 +1248,9 @@ module.exports = {
       await era.printAndWait([
         '합숙 마지막 날, ',
         rice.get_colored_name(),
-        '가 원한 덕분에 마지막까지 훈련이 이어졌다.',
+        '의 요청으로 마지막까지 훈련이 이어졌다.',
       ]);
-      await rice.say_and_wait('하아…… 하아…… 미안해, 늦어버렸어.');
+      await rice.say_and_wait('하아…… 하아…… 미안해, 늦어 버렸어.');
       await urara.say_and_wait([
         '빨리빨리, ',
         u_call_r,
@@ -1258,7 +1258,7 @@ module.exports = {
       ]);
       await rice.say_and_wait('으…… 응! 금방 갈게!');
       await rice.say_and_wait('다행이야, 너무 늦지 않았어.');
-      await you.say_and_wait('모두가 기다려준 덕분이네.');
+      await you.say_and_wait('모두가 기다려 준 덕분이네.');
       await rice.say_and_wait('응! 모두에게 고맙다고 인사해야겠어—');
     };
     f.title = title;
@@ -1288,13 +1288,13 @@ module.exports = {
     ) => {
       await rice.say_and_wait([
         callname,
-        '。',
+        '. ',
         self_name,
-        '、',
+        ', ',
         self_name,
-        '……！',
+        '……!',
       ]);
-      await you.say_and_wait(['라이스, 해냈구나']);
+      await you.say_and_wait(['라이스, 해냈구나.']);
       await rice.say_and_wait('으…… 응……!');
       await rice.say_and_wait([
         self_name,
@@ -1303,28 +1303,28 @@ module.exports = {
         '도 할 수 있었어……!',
       ]);
       await bourbon.say_and_wait(['……', b_call_r]);
-      await rice.say_and_wait(['와아앗! ', call_26, '！？']);
+      await rice.say_and_wait(['와아앗! ', call_26, '!?']);
       await rice.say_and_wait('아, 으응. 이, 이번 레이스는……');
-      await bourbon.say_and_wait('——네, 『따라잡았다』는 거군요');
+      await bourbon.say_and_wait('——네, 『따라잡았다』는 거군요.');
       await rice.say_and_wait('……읏');
-      await bourbon.say_and_wait('사실 이해할 수 없습니다');
+      await bourbon.say_and_wait('사실 이해할 수 없습니다.');
       await bourbon.say_and_wait(['매번 『따라잡겠다』고 말하는 ', b_call_r]);
-      await bourbon.say_and_wait('레이스에 있는 것은 승리, 아니면 패배입니다');
+      await bourbon.say_and_wait('레이스에 있는 것은 승리, 아니면 패배입니다.');
       await bourbon.say_and_wait(
         '『따라잡는다』는 개념은 존재하지 않습니다. 하지만——',
       );
       await bourbon.say_and_wait([
         '지금은 분합니다. 이번 ',
         kiku_sho,
-        '에서 우승하지 못한 것, 이기지 못한 것이요',
+        '에서 우승하지 못한 것, 이기지 못한 것이요.',
       ]);
-      await bourbon.say_and_wait('……따라잡히고 말았군요');
+      await bourbon.say_and_wait('……따라잡히고 말았군요.');
       await bourbon.say_and_wait([b_call_r, ', 들으셨습니까?']);
       await rice.say_and_wait('……응');
       await era.printAndWait('(환호——!!!)');
       await you.say_as_passer_by_and_wait(
         '관객 A',
-        '정말 멋진 레이스였어! 라이스！',
+        '정말 멋진 레이스였어! 라이스!',
       );
       await you.say_as_passer_by_and_wait(
         '관객 B',
@@ -1333,16 +1333,16 @@ module.exports = {
       await rice.say_and_wait('……거짓말……');
       await rice.say_and_wait([self_name, '에게 박수를……?']);
       await rice.say_and_wait(['하지만 ', self_name, '는 그저……']);
-      await bourbon.say_and_wait('아닙니다. 관객들은 인정하고 있습니다');
+      await bourbon.say_and_wait('아닙니다. 관객들은 인정하고 있습니다.');
       await bourbon.say_and_wait([
         b_call_r,
-        '은(는) 올해 클래식의 명실상부한 승자입니다',
+        '은(는) 올해 클래식의 명실상부한 승자입니다.',
       ]);
-      await bourbon.say_and_wait('저 역시 그 견해에 동의합니다');
+      await bourbon.say_and_wait('저 역시 그 견해에 동의합니다.');
       await bourbon.say_and_wait([
         '다음에는 절대로 ',
         you.get_colored_name(),
-        '에게 지지 않겠습니다',
+        '에게 지지 않겠습니다.',
       ]);
       await bourbon.say_and_wait('——『라이벌』로서');
       await rice.say_and_wait('……라이, 벌');
@@ -1352,7 +1352,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 제 도전을 받아 주시겠습니까?',
       ]);
-      await rice.say_and_wait(['……！', self_name, '……！']);
+      await rice.say_and_wait(['……!', self_name, '……!']);
       await rice.say_and_wait([
         self_name,
         '도 지고 싶지 않아! 다음에도…… 모두에게 이길 거야!',
@@ -1377,13 +1377,13 @@ module.exports = {
      * @param {string} self_name ライスの自称
      */
     const f = async (rice, you, callname, self_name) => {
-      await rice.say_and_wait('앞으로 조금만 더 가면 됐는데');
+      await rice.say_and_wait('앞으로 조금만 더 가면 됐는데.');
       await rice.say_and_wait(
         '조금만 더 하면 따라잡을 수 있는데, 아직 부족해!',
       );
       await rice.say_and_wait([
         self_name,
-        ', 지고 싶지 않아! 다음에는 꼭 이길 거야',
+        ', 지고 싶지 않아! 다음에는 꼭 이길 거야.',
       ]);
     };
     f.title = title;
@@ -1435,15 +1435,15 @@ module.exports = {
       ]);
       await rice.say_and_wait(['에에에? ', self_name, '가 멋지다니……']);
       await era.printAndWait(
-        '그러니까 앞으로도 힘내! 우리도 라이스쨩을 응원할게',
+        '그러니까 앞으로도 힘내! 우리도 라이스쨩을 응원할게.',
       );
       await rice.say_and_wait('어!? 으…… 응!!');
-      await you.say_and_wait('응원받는다니 정말 기쁘네');
-      await rice.say_and_wait(['아, ', callname, '？']);
+      await you.say_and_wait('응원받는다니 정말 기쁘네.');
+      await rice.say_and_wait(['아, ', callname, '?']);
       await rice.say_and_wait([
         '그, 그렇지 않아…… ',
         call_26,
-        '이(가) 너무 대단해서 인사하러 온 것뿐이야',
+        '이(가) 너무 대단해서 인사하러 온 것뿐이야.',
       ]);
       await rice.say_and_wait([
         kiku_sho,
@@ -1451,7 +1451,7 @@ module.exports = {
         call_26,
         '이(가) 있었기 때문에——',
       ]);
-      await you.say_and_wait(['네가 ', rice.sex, '의 라이벌이기 때문이겠지']);
+      await you.say_and_wait(['네가 ', rice.sex, '의 라이벌이기 때문이겠지.']);
       await rice.say_and_wait([
         '우으…… 아, ',
         callname,
@@ -1460,7 +1460,7 @@ module.exports = {
       await rice.say_and_wait('그래도 멋있다니…… 에헤헤……');
       era.drawLine();
       await era.printAndWait('——하지만 다음 날, 분위기는 완전히 달라졌다.');
-      era.printButton(`「라이스？」`, 1);
+      era.printButton(`「라이스?」`, 1);
       await era.input();
       await rice.say_and_wait('……가까이 오지 마!');
       await era.printAndWait([
@@ -1479,11 +1479,11 @@ module.exports = {
       await rice.say_and_wait(['……읏…… 왜 ', self_name, ', 항상 이럴까?']);
       await rice.say_and_wait('언제나 주위에 불행을 가져오고, 폐만 끼쳐!');
       await you.say_and_wait('……라이스');
-      await rice.say_and_wait([callname, '……！']);
+      await rice.say_and_wait([callname, '……!']);
       await rice.say_and_wait([
         '……안 돼! ',
         self_name,
-        '에게 가까이 오면 불행해져',
+        '에게 가까이 오면 불행해져.',
       ]);
       await rice.say_and_wait([
         call_26,
@@ -1500,37 +1500,37 @@ module.exports = {
       ]);
       await rice.say_and_wait('3년 중 가장 중요한 시기를 이렇게……');
       await you.say_and_wait('직접 들은 거야?');
-      await rice.say_and_wait(['……듣지 않아도 ', self_name, '는 알고 있어']);
+      await rice.say_and_wait(['……듣지 않아도 ', self_name, '는 알고 있어.']);
       await rice.say_and_wait(['왜냐하면…… ', self_name, '는……']);
-      await you.say_and_wait('듣지는 않았구나');
-      await rice.say_and_wait(['어!? ', callname, '？']);
+      await you.say_and_wait('듣지는 않았구나.');
+      await rice.say_and_wait(['어!? ', callname, '?']);
       await era.printAndWait([
         you.get_colored_name(),
         '은(는) ',
         rice.get_colored_name(),
-        '을(를) 데리고 의무실에 있는 ',
+        '를 데리고 의무실에 있는 ',
         bourbon.get_colored_name(),
-        '을(를) 찾아갔다.',
+        '을 찾아갔다.',
       ]);
       await bourbon.say_and_wait('……');
       await rice.say_and_wait('……');
       era.printButton('「갑자기 찾아와서 미안해.」', 1);
       await era.input();
       await bourbon.say_and_wait(
-        '괜찮습니다. 오늘은 다른 분들의 병문안에 익숙해졌습니다',
+        '괜찮습니다. 오늘은 다른 분들의 병문안에 익숙해졌습니다.',
       );
       await bourbon.say_and_wait('그래서 이곳에 오신 목적은 무엇입니까?');
       await rice.say_and_wait('! ……죄, 죄송해요. 죄송해요…… 죄송해요……!');
       await rice.say_and_wait([
         '전부 ',
         self_name,
-        ' 탓이에요…… 다치게 해서, 중요한 시기를 허비하게 했어요',
+        ' 탓이에요…… 다치게 해서, 중요한 시기를 허비하게 했어요.',
       ]);
-      await bourbon.say_and_wait('실례하겠습니다');
+      await bourbon.say_and_wait('실례하겠습니다.');
       await bourbon.say_and_wait([
         '왜 사과하시는 겁니까? 제 부상과 ',
         b_call_r,
-        ' 사이의 인과관계는 추론할 수 없습니다',
+        ' 사이의 인과관계는 추론할 수 없습니다.',
       ]);
       await rice.say_and_wait([
         '하지만…… ',
@@ -1538,25 +1538,25 @@ module.exports = {
         '가 라이벌이 되기 전에는 다친 적 없었잖아요!',
       ]);
       await bourbon.say_and_wait(
-        '이해 불가. 부상 발생률은 일정합니다. 그 이론에는 물리적 근거가 없다고 판단합니다',
+        '이해 불가. 부상 발생률은 일정합니다. 그 이론에는 물리적 근거가 없다고 판단합니다.',
       );
       await bourbon.say_and_wait(
-        '오히려 당신이 불행을 부른다고 주장한다면, 검증해야 할 사람은 저입니다',
+        '오히려 당신이 불행을 부른다고 주장한다면, 검증해야 할 사람은 저입니다.',
       );
       await rice.say_and_wait(['', call_26, '이(가)……?']);
-      await bourbon.say_and_wait('네. 저는 당신을 라이벌로 인정했습니다');
+      await bourbon.say_and_wait('네. 저는 당신을 라이벌로 인정했습니다.');
       await bourbon.say_and_wait([
         '그것은 ',
         kiku_sho,
-        '에서 성장 가능성을 느끼고 기대했기 때문입니다',
+        '에서 성장 가능성을 느끼고 기대했기 때문입니다.',
       ]);
       await bourbon.say_and_wait(
-        '당신이라는 라이벌이 있으면 더욱 크게 성장할 수 있습니다',
+        '당신이라는 라이벌이 있으면 더욱 크게 성장할 수 있습니다.',
       );
       await bourbon.say_and_wait(
-        '그리고 함께 달리면 역사상 최고의 레이스——『기적』에 이를 가능성이 있습니다',
+        '그리고 함께 달리면 역사상 최고의 레이스——『기적』에 이를 가능성이 있습니다.',
       );
-      await bourbon.say_and_wait(['제 불행은 ', b_call_r, '와(과) 무관합니다']);
+      await bourbon.say_and_wait(['제 불행은 ', b_call_r, '과(와) 무관합니다.']);
       await rice.say_and_wait('……');
       await bourbon.say_and_wait([
         b_call_r,
@@ -1566,9 +1566,9 @@ module.exports = {
       await era.printAndWait([
         '——오랫동안 ',
         rice.get_colored_name(),
-        '은(는) 아무 말 없이 ',
+        '는 아무 말 없이 ',
         bourbon.get_colored_name(),
-        '의 시선을 받아들이고 있었다.',
+        '의 시선을 마주하고 있었다.',
       ]);
     };
     f.title = title;
@@ -1595,12 +1595,12 @@ module.exports = {
         callname,
         ', ',
         self_name,
-        '는 정해둔 소원이 하나 있어.',
+        '는 정해 둔 소원이 하나 있어.',
       ]);
       await rice.say_and_wait([
         '그래서 ',
         callname,
-        '가 들어줬으면 좋겠는데, 그래도 될까?',
+        '이(가) 들어줬으면 좋겠는데, 그래도 될까?',
       ]);
       await you.say_and_wait('신님께 비는 게 아니라 나한테 말해주는 거야?');
       await rice.say_and_wait([
@@ -1636,7 +1636,7 @@ module.exports = {
         you.get_colored_name(),
         '과(와) ',
         rice.get_colored_name(),
-        '는 신춘 휘호를 종이에 적었다.',
+        '는 소원을 적는 나무패에 새해 포부를 적었다.',
       ]);
       await rice.say_and_wait(['신님, ', self_name, '는 열심히 할게요.']);
       await rice.say_and_wait([
@@ -1650,18 +1650,18 @@ module.exports = {
       ]);
       era.print([you.get_colored_name(), '의 소원은……']);
       era.printButton(
-        `「라이스이(가) 언제나 건강하기를.」(스태미나+20, 호감+5)`,
+        `「라이스가 언제나 건강하기를.」(스태미나+20, 호감+5)`,
         1,
       );
       era.printButton(
         `「언제까지나 라이스의 달리기를 뒷받침할 수 있기를.」(모든 능력+5, 연모+2)`,
         2,
       );
-      era.printButton('「힘이 필요해……!」（스킬 포인트+30）', 3);
+      era.printButton('「힘이 필요해……!」 (스킬 포인트+30)', 3);
       const ret = await era.input();
       switch (ret) {
         case 1:
-          await rice.say_and_wait('！');
+          await rice.say_and_wait('!');
           await rice.say_and_wait([
             '헤헤, 알겠어. ',
             self_name,
@@ -1712,7 +1712,7 @@ module.exports = {
             self_name,
             '는 ',
             callname,
-            '를 위해서라면 어떤 일이라도…… 도와줄 거니까.',
+            '을(를) 위해서라면 어떤 일이라도…… 도와줄 거니까.',
           ]);
           await era.printAndWait([
             '……',
@@ -1744,7 +1744,7 @@ module.exports = {
       await rice.say_and_wait('……저, 저기, 이거……');
       await rice.say_and_wait([callname, ', 초콜릿 좋아해? 받으면 기쁠까?']);
       await era.printAndWait('「초콜릿」이라는 말을 듣고 나서야 떠올랐다.');
-      await era.printAndWait('……그러고 보니 오늘은 발렌타인데이였다.');
+      await era.printAndWait('……그러고 보니 오늘은 밸런타인데이였다.');
       await you.say_and_wait('기쁘게 받을 거야.');
       await rice.say_and_wait('정말! 그렇다면……');
       await era.printAndWait([
@@ -1762,14 +1762,14 @@ module.exports = {
       await rice.say_and_wait(
         '……많이 준비했어. 단것부터 쌉쌀한 것, 견과류가 든 것과 딸기가 든 것까지.',
       );
-      await rice.say_and_wait(['——그러니까 하나 골라봐, ', callname, '！']);
+      await rice.say_and_wait(['——그러니까 하나 골라봐, ', callname, '!']);
       await you.say_and_wait('고르라고?');
       await rice.say_and_wait('응. 싫어하는 맛을 먹게 하고 싶지 않아서.');
       await rice.say_and_wait('그래서 여러 종류를 만들었어. 분명……');
       await rice.say_and_wait([
         '이 중에 ',
         callname,
-        '가 좋아하는 맛이 하나쯤은 있을 거라고 생각해서.',
+        '이(가) 좋아하는 맛이 하나쯤은 있을 거라고 생각해서.',
       ]);
       await era.printAndWait([
         rice.get_colored_name(),
@@ -1797,14 +1797,14 @@ module.exports = {
       );
       await rice.say_and_wait([
         callname,
-        '를 향한 마음은 고작 이 정도로는 부족하거든.',
+        '을(를) 향한 마음은 고작 이 정도로는 부족하거든.',
       ]);
       await era.printAndWait([
         '그 후 ',
         you.get_colored_name(),
         '과(와) ',
         rice.get_colored_name(),
-        '는 달콤한 발렌타인 데이를 보냈다.',
+        '는 달콤한 밸런타인데이를 보냈다.',
       ]);
     };
     f.title = title;
@@ -1822,15 +1822,15 @@ module.exports = {
      */
     const f = async (rice, zob_zoy, you, callname, self_name, z_call_r) => {
       await rice.say_and_wait(['에헤헤…… 어땠어, ', callname]);
-      await rice.say_and_wait([self_name, '의 달리기, 제대로 성장하고 있어?']);
+      await rice.say_and_wait([self_name, '의 달리기 실력, 꾸준히 늘고 있어?']);
       await you.say_and_wait('응, 정말 좋은 달리기였어!');
       await rice.say_and_wait('응! 그럼 다음에도……');
       await zob_zoy.say_and_wait('……수, 수고하셨습니다!');
-      await rice.say_and_wait('！');
+      await rice.say_and_wait('!');
       await zob_zoy.say_and_wait([
         '오, 오늘은…… 저 혼자 이곳에 ',
         z_call_r,
-        '을(를) 응원하러 왔어요',
+        '을(를) 응원하러 왔어요.',
       ]);
       await rice.say_and_wait('아! 고마워! 저기, 오늘은……');
       await zob_zoy.say_and_wait('훌륭한 달리기였어요!');
@@ -1840,11 +1840,11 @@ module.exports = {
       await zob_zoy.say_and_wait('언젠가 후대의 책에 기록될 거예요……!');
       await rice.say_and_wait('우아아…… 너무 칭찬해 주는 거 아니야……?');
       await zob_zoy.say_and_wait('아, 죄송해요…… 저도 모르게……');
-      await rice.say_and_wait('아니야, 미안해. 그래도 고마워');
+      await rice.say_and_wait('아니야, 미안해. 그래도 고마워.');
       await rice.say_and_wait([
         '조금 부끄럽기는 하지만…… ',
         self_name,
-        ', 기뻐',
+        ', 기뻐.',
       ]);
     };
     f.title = title;
@@ -1914,7 +1914,7 @@ module.exports = {
       await bourbon.say_and_wait('……');
       await rice.say_and_wait('……미안해, 축하는 사양할게.');
       await rice.say_and_wait('다음번엔 꼭 너희들의 기대에 보답할게……!');
-      await urara.say_and_wait(['엣, 잠깐만, ', u_call_r, '！']);
+      await urara.say_and_wait(['엣, 잠깐만, ', u_call_r, '!']);
       await bourbon.say_and_wait('……');
       era.drawLine({ content: '밤' });
       await era.printAndWait([
@@ -1962,7 +1962,7 @@ module.exports = {
       await zob_zoy.say_as_unknown_and_wait([
         '실례하겠습니다…… 저기, ',
         zob_zoy.get_colored_name(),
-        '입니다',
+        '입니다.',
       ]);
       await zob_zoy.say_and_wait([z_call_r, '을(를) 보지 못하셨나요?']);
       await zob_zoy.say_and_wait([
@@ -1973,15 +1973,15 @@ module.exports = {
       await you.say_and_wait('——설마', true);
       era.drawLine({ content: '트레이닝장' });
       await rice.say_and_wait('하아…… 하아…… 하아……!');
-      await you.say_and_wait('라이스！');
-      await rice.say_and_wait(['어. ', callname, ', 그리고…… ', call_47, '？']);
+      await you.say_and_wait('라이스!');
+      await rice.say_and_wait(['어. ', callname, ', 그리고…… ', call_47, '?']);
       await rice.say_and_wait('……');
-      await you.say_and_wait('너무 무리하고 있어');
+      await you.say_and_wait('너무 무리하고 있어.');
       await rice.say_and_wait('미안해, 하지만……');
       await rice.say_and_wait('……');
-      await rice.say_and_wait('응, 미안해. 제대로 쉴게');
+      await rice.say_and_wait('응, 미안해. 제대로 쉴게.');
       await zob_zoy.say_and_wait('……');
-      await zob_zoy.say_and_wait(['저기, ', z_call_r, '！']);
+      await zob_zoy.say_and_wait(['저기, ', z_call_r, '!']);
       await zob_zoy.say_and_wait([
         z_call_r,
         '에게 ',
@@ -1989,18 +1989,18 @@ module.exports = {
         '은(는) 어떤 존재인가요?',
       ]);
       await zob_zoy.say_and_wait(
-        '그…… 언제나 다정하고, 그림책에서 나온 운명의 상대 같은 분이라면서요',
+        '그…… 언제나 다정하고, 그림책에서 나온 운명의 상대 같은 분이라면서요.',
       );
       await rice.say_and_wait(['으아아아!? ', call_47, '? 조…… 조용……']);
       await zob_zoy.say_and_wait(
-        '아직 조용히 있을 수는 없어요. 게다가 저도 응원하고 있는걸요',
+        '아직 조용히 있을 수는 없어요. 게다가 저도 응원하고 있는걸요.',
       );
       await rice.say_and_wait([call_47, '……']);
       await zob_zoy.say_and_wait(
-        '어려운 일이 있다면…… 다 같이 이야기해야 한다고 생각해요',
+        '어려운 일이 있다면…… 다 같이 이야기해야 한다고 생각해요.',
       );
       await rice.say_and_wait('……');
-      await you.say_and_wait('어떻게 생각해, 라이스？');
+      await you.say_and_wait('어떻게 생각해, 라이스?');
       await rice.say_and_wait('……하지만 무서워……');
       await rice.say_and_wait('의지할 사람이 있다는 건 알고 있어……');
       await rice.say_and_wait([
@@ -2008,7 +2008,7 @@ module.exports = {
         self_name,
         '에게 기대해 주는데, ',
         self_name,
-        '는 못 해낼지도 몰라',
+        '는 못 해낼지도 몰라.',
       ]);
       await rice.say_and_wait([
         self_name,
@@ -2019,9 +2019,9 @@ module.exports = {
       await era.printAndWait([
         '말을 마치자 ',
         rice.teen_sex_title,
-        '은(는) 작은 소리로 울기 시작했다.',
+        '는 작은 소리로 울기 시작했다.',
       ]);
-      await you.say_and_wait('그런 생각 하지 마');
+      await you.say_and_wait('그런 생각 하지 마.');
       await zob_zoy.say_and_wait([
         '맞아요! 저도! ',
         z_call_r,
@@ -2029,9 +2029,9 @@ module.exports = {
       ]);
       await zob_zoy.say_and_wait([
         z_call_r,
-        '을(를) 응원하는 모두도 분명 같은 마음일 거예요',
+        '을(를) 응원하는 모두도 분명 같은 마음일 거예요.',
       ]);
-      await you.say_and_wait('그러니까 혼자 무리하지 마');
+      await you.say_and_wait('그러니까 혼자 무리하지 마.');
       await rice.say_and_wait([callname, '……흑…… 으……']);
       await rice.say_and_wait('으아앙~~!');
       await era.printAndWait([
@@ -2039,7 +2039,7 @@ module.exports = {
         '의 눈에서 굵은 눈물이 둑이 터진 듯 흘러내렸다.',
       ]);
       era.drawLine({ content: '다음 날' });
-      await zob_zoy.say_and_wait(['아, ', z_call_r, '! 힘내세요']);
+      await zob_zoy.say_and_wait(['아, ', z_call_r, '! 힘내세요.']);
       await rice.say_and_wait('……으, 으으…… 정말 괜찮을까요?');
       await zob_zoy.say_and_wait('괘, 괜찮아요!');
       await zob_zoy.say_and_wait([
@@ -2047,9 +2047,9 @@ module.exports = {
         callname_47,
         '도 ',
         z_call_r,
-        '을(를) 응원하러 와 주셨잖아요',
+        '을(를) 응원하러 와 주셨잖아요.',
       ]);
-      await rice.say_and_wait('응');
+      await rice.say_and_wait('응.');
       await bourbon.say_and_wait('그럼 이동을 시작해도 되겠습니까?');
       await rice.say_and_wait(['아! 미안해요! ', call_26, '……그, 저기……!']);
       await rice.say_and_wait(['부탁이에요, ', self_name, '를 도와주세요!']);
@@ -2084,20 +2084,20 @@ module.exports = {
         '에게 없는 것을 전부 가르쳐 주세요!',
       ]);
       await bourbon.say_and_wait('……');
-      await you.say_and_wait(['라이스이(가) 기적을 일으킬 거라고 믿어 줘']);
-      await bourbon.say_and_wait('알겠습니다');
+      await you.say_and_wait(['라이스가 기적을 일으킬 거라고 믿어 줘.']);
+      await bourbon.say_and_wait('알겠습니다.');
       await bourbon.say_and_wait(
         '그것이 역사상 최고의 레이스를 만들기 위해 필요한 과정이라면',
       );
-      await bourbon.say_and_wait('신청을 수락합니다. 일정을 변경하겠습니다');
+      await bourbon.say_and_wait('신청을 수락합니다. 일정을 변경하겠습니다.');
       await bourbon.say_and_wait([
         '오후부터 첫 단계로 ',
         self_name,
-        '의 언덕 달리기 10회에 참가하겠습니다',
+        '의 언덕 달리기 10회에 참가하겠습니다.',
       ]);
-      await bourbon.say_and_wait('목적은 근력과 스피드 향상입니다');
+      await bourbon.say_and_wait('목적은 근력과 스피드 향상입니다.');
       await bourbon.say_and_wait(
-        '부하가 필요하다면 특제 중량 주머니를 빌려드릴 수 있습니다',
+        '부하가 필요하다면 특제 중량 주머니를 빌려드릴 수 있습니다.',
       );
       await bourbon.say_and_wait(
         '참고로 제 트레이닝을 『귀신』이라 부르는 사람들도 있습니다——',
@@ -2159,35 +2159,35 @@ module.exports = {
       await you.say_and_wait('정말 잘했어!');
       await rice.say_and_wait(['응! 해냈어! ', self_name, '——']);
       await urara.say_and_wait([u_call_r, '! 대——단해!!']);
-      await rice.say_and_wait([call_52, '！？']);
+      await rice.say_and_wait([call_52, '!?']);
       await urara.say_and_wait('에헤헤~ 왔어~');
       await zob_zoy.say_and_wait('아니에요! 돌아와 주세요! 이쪽이에요!');
       await zob_zoy.say_and_wait('우승자의 관계자로서 온 건데요……');
       await bourbon.say_and_wait([
         '저라도 문제없을 겁니다. 저희는 ',
         b_call_r,
-        '의 관계자입니다',
+        '의 관계자입니다.',
       ]);
       await bourbon.say_and_wait([
         '훌륭한 달리기였습니다, ',
         b_call_r,
-        '. 우선 축하드립니다',
+        '. 우선 축하드립니다.',
       ]);
       await bourbon.say_and_wait([
         '레이스 중의 당신은 ',
         b_call_z,
-        '이(가) 붙인 별명, 『집념의 귀신』에 걸맞았습니다',
+        '이(가) 붙인 별명, 『집념의 귀신』에 걸맞았습니다.',
       ]);
       await rice.say_and_wait('……집념의 귀신?');
-      await zob_zoy.say_and_wait(['와, 와! ', z_call_b, '！！']);
+      await zob_zoy.say_and_wait(['와, 와! ', z_call_b, '!!']);
       await zob_zoy.say_and_wait('그 별명은 비밀로 하자고 했잖아요!');
       await rice.say_and_wait('……후후');
       await rice.say_and_wait([
         '에헤헤…… ',
         self_name,
-        ', 모두에게 제대로 보답했어. 레이스로',
+        ', 모두에게 제대로 보답했어. 레이스로.',
       ]);
-      await you.say_and_wait('모두를 웃게 해 줬네');
+      await you.say_and_wait('모두를 웃게 해 줬네.');
       await rice.say_and_wait('응!');
       await urara.say_and_wait([
         '아하하, ',
@@ -2201,42 +2201,42 @@ module.exports = {
         '을(를) 응원할 테니까!',
       ]);
       await rice.say_and_wait(['……그러네, ', call_52]);
-      await rice.say_and_wait('라이스도 모두에게…… 손을 흔들게');
+      await rice.say_and_wait('라이스도 모두에게…… 손을 흔들게.');
       await rice.say_and_wait('크게…… 모두에게 보이도록!');
       era.drawLine({ content: '무대 뒤' });
       await rice.say_and_wait('……그렇게 말은 했지만 역시 긴장돼……');
       await rice.say_and_wait([tenn_spr, '의 위닝 라이브에서 센터라니……']);
-      await you.say_and_wait('가슴을 펴');
+      await you.say_and_wait('가슴을 펴.');
       await mcqueen.say_and_wait([
         '맞아요. ',
         m_call_r,
-        '은(는) 저를 이겼으니 좀 더 자신감을 가지세요',
+        '은(는) 저를 이겼으니 좀 더 자신감을 가지세요.',
       ]);
-      await rice.say_and_wait(['아, ', call_13, '！！']);
-      await mcqueen.say_and_wait('확실히 이 무대는 특별해요');
+      await rice.say_and_wait(['아, ', call_13, '!!']);
+      await mcqueen.say_and_wait('확실히 이 무대는 특별해요.');
       await mcqueen.say_and_wait(
-        '그렇기에 무대에 서는 저희에게는 프로로서의 자각이 필요해요',
+        '그렇기에 무대에 서는 저희에게는 프로로서의 자각이 필요해요.',
       );
       await mcqueen.say_and_wait(
         '기대를 품고 찾아와 주신 분들께 감사를 전해야 하지 않겠어요?',
       );
-      await rice.say_and_wait('그래요');
-      await mcqueen.say_and_wait('그러니 무대를 두려워하지 마세요');
-      await mcqueen.say_and_wait('기대와 마음에 보답하며 무대에서 빛나세요');
-      await mcqueen.say_and_wait('그것이 코스를 달리는 저희의 의무랍니다');
+      await rice.say_and_wait('그래요.');
+      await mcqueen.say_and_wait('그러니 무대를 두려워하지 마세요.');
+      await mcqueen.say_and_wait('기대와 마음에 보답하며 무대에서 빛나세요.');
+      await mcqueen.say_and_wait('그것이 코스를 달리는 저희의 의무랍니다.');
       await era.printAndWait([
         '그 후 ',
         mcqueen.get_colored_name(),
-        '은(는) 우아하고 고귀하게 무대로 향했다.',
+        '은 우아하고 고귀하게 무대로 향했다.',
       ]);
-      await you.say_and_wait('많은 걸 배웠네');
-      await rice.say_and_wait('응, 역시 멋진 사람이야');
-      await rice.say_and_wait([self_name, '도 기대와 마음에 보답해야지']);
+      await you.say_and_wait('많은 걸 배웠네.');
+      await rice.say_and_wait('응, 역시 멋진 사람이야.');
+      await rice.say_and_wait([self_name, '도 기대와 마음에 보답해야지.']);
       await rice.say_and_wait('모두를 향한 감사의 마음을 담아서');
       await rice.say_and_wait(['……좋아! ', self_name, ', 다녀올게!!']);
       await era.printAndWait([
         rice.get_colored_name(),
-        '은(는) 빛나는 무대를 향해 ',
+        '는 빛나는 무대를 향해 ',
         rice.sex,
         '의 한 걸음을 내디뎠다.',
       ]);
@@ -2246,18 +2246,18 @@ module.exports = {
       );
       await rice.say_and_wait([
         callname,
-        '！',
+        '!',
         self_name,
-        '는 다음에 하고 싶은 게 있어',
+        '는 다음에 하고 싶은 게 있어.',
       ]);
       await rice.say_and_wait([
         self_name,
-        '는 기대해 주는 사람들에게 더 많이 보답하고 싶어',
+        '는 기대해 주는 사람들에게 더 많이 보답하고 싶어.',
       ]);
       await rice.say_and_wait([
         '그러니까 다음에는 ',
         takz_kin,
-        '에 나가고 싶어',
+        '에 나가고 싶어.',
       ]);
       await rice.say_and_wait([
         '모두가 ',
@@ -2274,13 +2274,13 @@ module.exports = {
       await era.printAndWait([
         '……처음에는 학원 밖에서 혼자 울고 있던 ',
         rice.sex,
-        '。',
+        '.',
       ]);
       await era.printAndWait('이제는 그 자격을 갖추고 있다.');
       await you.say_and_wait(['다음은 ', takz_kin, '이구나!']);
-      await rice.say_and_wait(['응! ', self_name, ', 앞으로도 힘낼게']);
+      await rice.say_and_wait(['응! ', self_name, ', 앞으로도 힘낼게.']);
       await rice.say_and_wait('그리고 모두에게 전할 거야——');
-      await rice.say_and_wait('감사합니다');
+      await rice.say_and_wait('감사합니다.');
     };
     f.title = title;
     return f;
@@ -2307,7 +2307,7 @@ module.exports = {
     ) => {
       await era.printAndWait([takz_kin, ' 출주를 목표로 정한 뒤……']);
       await era.printAndWait(
-        '행인B「내 팬 투표, 너에게 던졌어! 반드시 1등 해야 해!」',
+        '행인B「내 팬 투표, 너에게 던졌어! 반드시 1착 해야 해!」',
       );
       await rice.say_and_wait('와아!? 으…… 응원해 주셔서 감사합니다!');
       await era.printAndWait([
@@ -2369,7 +2369,7 @@ module.exports = {
       await era.printAndWait(
         '스태프B「아, 그게 끝나면 저희도 부탁드리고 싶은 게 하나 있어서——」',
       );
-      await rice.say_and_wait('우와…… 알겠습니다~! 귀 기울여 들을게요!');
+      await rice.say_and_wait('우와…… 알겠습니다~!');
       await era.printAndWait('이런저런 리허설이 일단락된 후……');
       await rice.say_and_wait('후아……');
       await you.say_and_wait('잠시 쉬자.');
@@ -2410,7 +2410,7 @@ module.exports = {
       await era.printAndWait([
         '스태프C「어떻게 된 거야!? 문이 쓰러진다——',
         rice.get_colored_name(),
-        '씨, 위ㅎ——」',
+        ' 씨, 위ㅎ——」',
       ]);
       await era.printAndWait([
         '절체절명의 순간, ',
@@ -2423,9 +2423,9 @@ module.exports = {
       await era.printAndWait('쾅!', { fontSize: '2.5rem' });
       await rice.say_and_wait([
         callname.substring(0, 1),
-        '、',
+        ', ',
         callname,
-        '！？',
+        '?!',
       ]);
       era.drawLine();
       await rice.say_and_wait(['우…… 으…… ', callname, '……']);
@@ -2433,7 +2433,7 @@ module.exports = {
       await rice.say_and_wait([
         '아, ',
         callname,
-        '！',
+        '! ',
         callname,
         '!! 괜찮아!? 어디 아픈 데는 없어?',
       ]);
@@ -2473,7 +2473,7 @@ module.exports = {
       await era.printAndWait(
         '스태프A「한신 경기장에서의 개최가 연기될 것이라는 소식이 들어왔습니다.」',
       );
-      await rice.say_and_wait('……！');
+      await rice.say_and_wait('……!');
       await you.say_and_wait('그게 무슨 소립니까?');
       await era.printAndWait(
         '스태프A「사실…… 이번 경기장 내 사고의 원인을 아직 알 수 없습니다.」',
@@ -2546,21 +2546,21 @@ module.exports = {
       await era.printAndWait('그런 분위기가 곳곳에 감돌고 있었다.');
       await rice.say_and_wait('……');
       await rice.say_and_wait(['괜찮아, ', callname]);
-      await rice.say_and_wait([self_name, ', 괜찮아']);
+      await rice.say_and_wait([self_name, ', 괜찮아.']);
       await era.printAndWait([
         '……그렇게 말하면서도 ',
         rice.sex,
         '의 미소에는 힘이 없다.',
       ]);
       await era.printAndWait('역시 그 일 때문에——');
-      await rice.say_and_wait(['미, 미안, ', callname, '！']);
+      await rice.say_and_wait(['미, 미안, ', callname, '!']);
       await era.printAndWait([
         rice.get_colored_name(),
-        '은(는) 메시지 한 통을 확인하더니 트레이너실을 뛰쳐나갔다.',
+        '는 메시지 한 통을 확인하더니 트레이너실을 뛰쳐나갔다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '은(는) 뒤따라잡으려고 계단을 뛰어올랐다.',
+        '은(는) 뒤쫓아가려고 계단을 뛰어올랐다.',
       ]);
       await era.printAndWait([
         '이윽고 ',
@@ -2573,22 +2573,22 @@ module.exports = {
         ', 한신 직원분들께도! 교토 직원분들께도 부탁했어요!',
       ]);
       await rice.say_and_wait(['그러니까——', takz_kin, '을(를) 열어 주세요!']);
-      await you.say_and_wait('라이스！？');
+      await you.say_and_wait('라이스!?');
       await taste.say_and_wait([
         '경악!? ',
         you.actual_name,
         ' 트레이너도 왔나!!',
       ]);
-      await rice.say_and_wait(['어!? ', callname, '？']);
+      await rice.say_and_wait(['어!? ', callname, '?']);
       await you.say_and_wait('도대체 무슨 일이야?');
-      await rice.say_and_wait(['……', self_name, ', 이사장님께 부탁하러 왔어']);
+      await rice.say_and_wait(['……', self_name, ', 이사장님께 부탁하러 왔어.']);
       await rice.say_and_wait([
         '……',
         takz_kin,
         '을(를) 교토 경기장에서 열어 주셨으면 해서……',
       ]);
-      await taste.say_and_wait('재삼! 오늘뿐만 아니라 어젯밤에도 찾아왔다네');
-      await taste.say_and_wait('각처! 저마다 해야 할 일이 있네');
+      await taste.say_and_wait('재삼! 오늘뿐만 아니라 어젯밤에도 찾아왔다네.');
+      await taste.say_and_wait('각처! 저마다 해야 할 일이 있네.');
       await taste.say_and_wait('침착! 우선 협력 체계를 갖춰야——');
       await rice.say_and_wait([
         '알고 있어요! 그래서 ',
@@ -2599,7 +2599,7 @@ module.exports = {
         '폐가 될지도 몰라요. 힘드실지도 몰라요. 그래도 부디 도와주세요!',
       );
       await rice.say_and_wait(
-        '응원해 주는 모두를 위해 할 수 있는 일은 전부 할게요',
+        '응원해 주는 모두를 위해 할 수 있는 일은 전부 할게요.',
       );
       await minoru.say_and_wait('아, 기다리셨죠! 드디어 허가가 났어요!');
       await taste.say_and_wait([t_call_m, '!!! 기대~']);
@@ -2614,14 +2614,14 @@ module.exports = {
       );
       await minoru.say_and_wait('개최할 수 있게 됐어요!');
       await minoru.say_and_wait(
-        '양쪽 직원분들 모두 최선을 다하겠다고 해 주셨어요',
+        '양쪽 직원분들 모두 최선을 다하겠다고 해 주셨어요.',
       );
-      await minoru.say_and_wait(['……', self_name, '을(를) 위해서라도요']);
-      await rice.say_and_wait('……！！');
+      await minoru.say_and_wait(['……', self_name, '을(를) 위해서라도요.']);
+      await rice.say_and_wait('……!!');
       era.drawLine({ content: '트레이너실로 돌아와서' });
       await rice.say_and_wait('으…… 다행이야……');
       await rice.say_and_wait('열 수 있는 거군요……');
-      await you.say_and_wait('모두를 위해 열심히 노력했구나');
+      await you.say_and_wait('모두를 위해 열심히 노력했구나.');
       await rice.say_and_wait('응…… 응……!');
       await rice.say_and_wait('이번 일에 힘을 빌려주신 분들을 위해서');
       await rice.say_and_wait([self_name, '를 응원해 주는 모두를 위해서……!']);
@@ -2660,16 +2660,16 @@ module.exports = {
         self_name,
         ', 달리는 동안에도 들렸어',
       ]);
-      await rice.say_and_wait('모두의 목소리가');
+      await rice.say_and_wait('모두의 목소리가.');
       await rice.say_and_wait([
         '……헤헤, 이러면 안 되는데. ',
         self_name,
         ', 모두를 웃게 해 주겠다고 했는데',
       ]);
-      await rice.say_and_wait([self_name, '만 기뻐하다니']);
+      await rice.say_and_wait([self_name, '만 기뻐하다니.']);
       await rice.say_and_wait('정말 행복해……');
-      await rice.say_and_wait([takz_kin, '에서 달릴 수 있어서 다행이야']);
-      await you.say_and_wait('모두 같은 마음일 거야');
+      await rice.say_and_wait([takz_kin, '에서 달릴 수 있어서 다행이야.']);
+      await you.say_and_wait('모두 같은 마음일 거야.');
       await rice.say_and_wait('모두가?');
       await era.printAndWait([
         '관객 A「',
@@ -2677,12 +2677,12 @@ module.exports = {
         '——!! 고마워——!!」',
       ]);
       await era.printAndWait(['관객 A「올해의 ', takz_kin, ', 최고였어——!!」']);
-      await rice.say_and_wait('대단해…… 웃는 얼굴이 가득해');
-      await you.say_and_wait('네가 모두의 웃음을 지켜 준 거야');
+      await rice.say_and_wait('대단해…… 웃는 얼굴이 가득해.');
+      await you.say_and_wait('네가 모두의 웃음을 지켜 준 거야.');
       await rice.say_and_wait([self_name, ', 가?']);
-      await rice.say_and_wait(['그런 거야? ', self_name, '도…… 해냈어']);
+      await rice.say_and_wait(['그런 거야? ', self_name, '도…… 해냈어.']);
       await rice.say_and_wait('모두를 행복하게 해 줬어!!');
-      await you.say_and_wait('고마워, 라이스');
+      await you.say_and_wait('고마워, 라이스.');
       await rice.say_and_wait('으아아앙——');
       await era.printAndWait([
         '어깨를 떨며 우는 ',
@@ -2691,20 +2691,20 @@ module.exports = {
       ]);
       era.drawLine({ content: '위닝 라이브 무대' });
       await rice.say_and_wait('스읍…… 하……');
-      await you.say_and_wait('이제 안 우네');
-      await rice.say_and_wait('헤헤, 계속 울고만 있으면 안 되니까');
-      await rice.say_and_wait('이 무대에서 제대로 웃음을 전해야지');
+      await you.say_and_wait('이제 안 우네.');
+      await rice.say_and_wait('헤헤, 계속 울고만 있으면 안 되니까.');
+      await rice.say_and_wait('이 무대에서 제대로 웃음을 전해야지.');
       await rice.say_and_wait([
         '그럼 ',
         self_name,
-        ', 다녀올게. 모두가 있는 곳으로',
+        ', 다녀올게. 모두가 있는 곳으로.',
       ]);
-      await rice.say_and_wait('다녀올게');
+      await rice.say_and_wait('다녀올게.');
       await rice.say_and_wait('응!');
       await era.printAndWait([
         '이날 ',
         rice.get_colored_name(),
-        '은(는) 관객들에게 최고의 라이브를 선사했다.',
+        '는 관객들에게 최고의 라이브를 선사했다.',
       ]);
       await era.printAndWait([
         '다음 날, 신문 첫 면에는 ',
@@ -2714,16 +2714,16 @@ module.exports = {
       await era.printAndWait([
         '——언덕의 잔디 위에 피어난 주인공, 아름다운 장미: ',
         rice.get_colored_name(),
-        '。',
+        '.',
       ]);
       era.drawLine({ content: '그 후' });
       await rice.say_and_wait([
         callname,
-        '！',
+        '!',
         self_name,
         '가 나가고 싶은 건 ',
         arim_kin,
-        '！！',
+        '!!',
       ]);
       await you.say_and_wait('벌써 다음 목표를 정한 거야?');
       await rice.say_and_wait([
@@ -2733,8 +2733,8 @@ module.exports = {
       await rice.say_and_wait([call_26, '도 ', call_13, '도 출전하니까!!']);
       await rice.say_and_wait(['그러니까 ', self_name, '도 나갈 거야!']);
       await rice.say_and_wait('『최고의 레이스』를 하고 싶어!!');
-      await you.say_and_wait('알겠어');
-      await rice.say_and_wait(['와! 고마워, ', callname, '！']);
+      await you.say_and_wait('알겠어.');
+      await rice.say_and_wait(['와! 고마워, ', callname, '!']);
       await era.printAndWait([arim_kin, '도 ', takz_kin, '과(와) 같다.']);
       await era.printAndWait([
         '팬들의 지지를 얻은 ',
@@ -2750,13 +2750,13 @@ module.exports = {
       era.printButton('「많이 성장했구나」', 1);
       await era.input();
       await rice.say_and_wait(['응? ', self_name, '는 키 안 컸는데?']);
-      await you.say_and_wait('그런 뜻이 아니야');
+      await you.say_and_wait('그런 뜻이 아니야.');
       await rice.say_and_wait('그럼 무슨 뜻이야?');
-      await rice.say_and_wait(['아! 가르쳐 줘~ ', callname, '——！！']);
+      await rice.say_and_wait(['아! 가르쳐 줘~ ', callname, '——!!']);
       await era.printAndWait([
         '그날 하루 내내 ',
         rice.get_colored_name(),
-        '은(는) ',
+        '는 ',
         you.get_colored_name(),
         '에게 달라붙어 있었다.',
       ]);
@@ -2782,16 +2782,16 @@ module.exports = {
       await rice.say_and_wait([
         '모두가 『힘내라——』 『',
         rice.get_colored_name(),
-        '씨——』라고 외치며 계속 ',
+        ' 씨——』라고 외치며 계속 ',
         self_name,
         '를 응원해 줬어.',
       ]);
       await rice.say_and_wait('헤헤, 이러면 안 되는데 말이야.');
-      await rice.say_and_wait([self_name, '가 모두를 웃게 해 줘야 하는데']);
+      await rice.say_and_wait([self_name, '가 모두를 웃게 해 줘야 하는데.']);
       await rice.say_and_wait([
         '결과적으로는 모두가 ',
         self_name,
-        '를 행복하게 해줬어.',
+        '를 행복하게 해 줬어.',
       ]);
       await rice.say_and_wait('정말, 너무 행복해.');
       await era.printAndWait([
@@ -2809,8 +2809,8 @@ module.exports = {
     /** @param {CharaTalk} rice ライスシャワー */
     const f = async (rice) => {
       await era.printAndWait('오늘부터 다시 여름 합숙이 시작됐다.');
-      await rice.say_and_wait('에헤헤…… 북적북적하네');
-      await rice.say_and_wait('이 느낌…… 오랜만이야');
+      await rice.say_and_wait('에헤헤…… 북적북적하네.');
+      await rice.say_and_wait('이 느낌…… 오랜만이야.');
       await rice.say_and_wait('그때부터 벌써 일 년이 지났구나……');
     };
     f.title = title;
@@ -2831,14 +2831,14 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 벤치에 앉아 돌아갈 준비를 하는 ',
         rice.get_colored_name(),
-        '을(를) 기다리고 있었다……',
+        '를 기다리고 있었다……',
       ]);
-      await rice.say_and_wait(['아아아아아~ ', callname, '！']);
+      await rice.say_and_wait(['아아아아아~ ', callname, '!']);
       await rice.say_and_wait([
         you.get_colored_name(),
         ', 기다리게 해서 미안해……!',
       ]);
-      await rice.say_and_wait('후우…… 도와드리다 보니 벌써 이런 시간이 됐네');
+      await rice.say_and_wait('후우…… 도와드리다 보니 벌써 이런 시간이 됐네.');
       await you.say_and_wait('도와드려?');
       await rice.say_and_wait('응, 여기 합숙소에서도 많이 신세 졌잖아?');
       await rice.say_and_wait([
@@ -2849,10 +2849,10 @@ module.exports = {
       await rice.say_and_wait([
         '응! 그러니까 ',
         callname,
-        '가 지금 앉아 있는 벤치——',
+        '이(가) 지금 앉아 있는 벤치——',
       ]);
       await you.say_and_wait('……');
-      await rice.say_and_wait([callname, '？']);
+      await rice.say_and_wait([callname, '?']);
       await era.printAndWait('우당탕!!');
       await era.printAndWait([
         you.get_colored_name(),
@@ -2861,16 +2861,16 @@ module.exports = {
       await rice.say_and_wait([
         '미, 미안해! ',
         self_name,
-        '가 주의 문구를 써 놓지 않아서',
+        '가 주의 문구를 써 놓지 않아서.',
       ]);
       await rice.say_and_wait(['으아아아…… 어떡해, ', callname, '. 으아앙~~']);
-      await you.say_and_wait('다시 칠하자');
-      await rice.say_and_wait('으…… 정말 미안해');
-      await rice.say_and_wait('관리인분께도 사과드려야지');
-      await rice.say_and_wait('그리고 페인트도 빌려 와야겠다');
+      await you.say_and_wait('다시 칠하자.');
+      await rice.say_and_wait('으…… 정말 미안해.');
+      await rice.say_and_wait('관리인분께도 사과드려야지.');
+      await rice.say_and_wait('그리고 페인트도 빌려 와야겠다.');
       await era.printAndWait([
         rice.get_colored_name(),
-        '와(과) 함께 관리인의 일을 도왔다.',
+        '와 함께 관리인의 일을 도왔다.',
       ]);
     };
     f.title = title;
@@ -2886,7 +2886,7 @@ module.exports = {
      */
     const f = async (rice, you, callname, self_name) => {
       await rice.say_and_wait([self_name, '에게 팬레터가……']);
-      await you.say_and_wait('잘됐네');
+      await you.say_and_wait('잘됐네.');
       await rice.say_and_wait('응……!');
       await rice.say_and_wait('하지만……');
       await era.printAndWait([
@@ -2898,34 +2898,34 @@ module.exports = {
       await you.say_and_wait('왜 그래?');
       await rice.say_and_wait(['……가끔 ', self_name, ', 이런 생각이 들어']);
       await rice.say_and_wait([self_name, '를 응원해 줬다는 이유로']);
-      await rice.say_and_wait('이 사람들이 불행해지지는 않을까—— 하고');
+      await rice.say_and_wait('이 사람들이 불행해지지는 않을까—— 하고.');
       await rice.say_and_wait([self_name, ', 그런 건 싫어……']);
       await rice.say_and_wait('생각하고 싶지 않은데도 나도 모르게……');
       await rice.say_and_wait([
         callname,
-        '、',
+        ', ',
         self_name,
         '는 어떻게 해야 할까?',
       ]);
-      await you.say_and_wait('팬레터 내용을 읽어 보자');
-      await rice.say_and_wait('내용…… 응');
+      await you.say_and_wait('팬레터 내용을 읽어 보자.');
+      await rice.say_and_wait('내용…… 응.');
       era.println();
       await you.say_as_unknown_and_wait([
         '코스에서 열심히 달리는 ',
         rice.get_colored_name(),
-        '을(를) 보고 많은 용기를 얻었어요……',
+        '를 보고 많은 용기를 얻었어요……',
       ]);
       await you.say_as_unknown_and_wait([
         '……',
         rice.get_colored_name(),
         '의 웃는 얼굴을 보면……',
       ]);
-      await you.say_as_unknown_and_wait('……언제나 마음이 따뜻해져요');
+      await you.say_as_unknown_and_wait('……언제나 마음이 따뜻해져요.');
       era.println();
       await rice.say_and_wait([self_name, '가 열심히 하는 모습……']);
       await rice.say_and_wait([self_name, '의 웃는 얼굴……']);
-      await rice.say_and_wait('……그렇구나');
-      await rice.say_and_wait('그걸로 기뻐해 주는 사람이 있는 거구나');
+      await rice.say_and_wait('……그렇구나.');
+      await rice.say_and_wait('그걸로 기뻐해 주는 사람이 있는 거구나.');
       await rice.say_and_wait([callname, '.']);
       await rice.say_and_wait([self_name, ', 계속, 계속 노력할게……!']);
       await rice.say_and_wait([
@@ -2974,7 +2974,7 @@ module.exports = {
       await you.say_as_passer_by_and_wait('직원 A', [
         '그렇죠! 인기 투표 선두인 ',
         rice.uma_sex_title,
-        '니까요',
+        '니까요.',
       ]);
       await you.say_as_passer_by_and_wait(
         '직원 A',
@@ -3027,7 +3027,7 @@ module.exports = {
       await rice.say_and_wait([
         '——그러니까, 반드시 ',
         arim_kin,
-        '에서 1등을 해서 ',
+        '에서 1착을 해서 ',
         callname,
         '에게 선물로 줄 거야!',
       ]);
@@ -3036,20 +3036,20 @@ module.exports = {
         self_name,
         '만이 줄 수 있는 선물일 테니까.',
       ]);
-      await era.printAndWait('결국 휴식은커녕,');
+      await era.printAndWait('결국 휴식은커녕, ');
       await era.printAndWait(
-        '이 크리스마스 이브는 오히려 정신을 더욱 고양시켰다.',
+        '이번 크리스마스이브에는 오히려 의욕이 더욱 솟아올랐다.',
       );
       await rice.say_and_wait([callname, ', 오늘도 고마워!']);
       await rice.say_and_wait([
         arim_kin,
         '이 시작되면, ',
         callname,
-        '와 여러분 모두를.',
+        '과(와) 여러분 모두를.',
       ]);
       await rice.say_and_wait([
         self_name,
-        '의 달리기로 반드시 행복하게 해줄게!',
+        '의 달리기로 반드시 행복하게 해 줄게!',
       ]);
       await era.printAndWait([
         '그렇게 ',
@@ -3074,15 +3074,15 @@ module.exports = {
      * @param {string} self_name ライスの自称
      */
     const f = async (rice, you, callname, self_name) => {
-      await rice.say_and_wait('대단해, 이 함성');
-      await rice.say_and_wait('모두 이쪽을 보고 있어');
+      await rice.say_and_wait('대단해, 이 함성.');
+      await rice.say_and_wait('모두 이쪽을 보고 있어.');
       await rice.say_and_wait('모두의 기쁜 얼굴이 보여……!');
-      await you.say_and_wait('정말 잘했어');
+      await you.say_and_wait('정말 잘했어.');
       await rice.say_and_wait(['으…… 응. ', self_name, ', 열심히 했어……']);
       await rice.say_and_wait([
         '모두가 있어 줘서 ',
         self_name,
-        ', 힘낼 수 있었어',
+        ', 힘낼 수 있었어.',
       ]);
       await rice.say_and_wait('정말, 정말로…… 고마워요…… 모두……!');
       await rice.print_and_wait(['이날 ', rice.sex, '는 「주인공」으로서']);
@@ -3106,24 +3106,24 @@ module.exports = {
         rice.uma_sex_title,
         '에게 매우 소중한 시기였고, ',
         rice.get_colored_name(),
-        '은(는) 그동안 눈부신 성적을 남겼다.',
+        '는 그동안 눈부신 성적을 남겼다.',
       ]);
       await era.printAndWait([rice.sex, '는 그로써 세상의 인정을 받았다.']);
       await rice.say_and_wait('표창식……?');
-      await you.say_and_wait('모두를 만나러 가자');
+      await you.say_and_wait('모두를 만나러 가자.');
       await rice.say_and_wait([
         '……응. ',
         self_name,
-        '도 직접 모두에게 고맙다고 말하고 싶어',
+        '도 직접 모두에게 고맙다고 말하고 싶어.',
       ]);
       await era.printAndWait([
         '——다음 날, ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         rice.get_colored_name(),
-        '은(는) 한신 경기장으로 향했다.',
+        '는 한신 경기장으로 향했다.',
       ]);
-      await rice.say_and_wait('사람이 많아…… 오늘은 레이스도 없는데');
+      await rice.say_and_wait('사람이 많아…… 오늘은 레이스도 없는데.');
       await you.say_as_passer_by_and_wait('관객 A', [
         '와! ',
         rice.get_colored_name(),
@@ -3135,7 +3135,7 @@ module.exports = {
         '! 오늘도 잘 부탁해~!',
       ]);
       await rice.say_and_wait('어…… 어?');
-      await you.say_as_passer_by_and_wait('직원 A', '두 분 모두 오랜만입니다');
+      await you.say_as_passer_by_and_wait('직원 A', '두 분 모두 오랜만입니다.');
       await rice.say_and_wait('오랜만이에요. 저기…… 이건?');
       await you.say_as_passer_by_and_wait(
         '직원 A',
@@ -3152,64 +3152,64 @@ module.exports = {
       await you.say_as_passer_by_and_wait('직원 A', [
         '보시다시피 ',
         rice.get_colored_name(),
-        '을(를) 만나고 싶다는 손님들이 많이 오셔서요',
+        '를 만나고 싶다는 손님들이 많이 오셔서요.',
       ]);
-      era.printButton(`모두 라이스을(를) 정말 좋아하니까`, 1);
+      era.printButton(`모두 라이스를 정말 좋아하니까`, 1);
       await era.input();
       await rice.say_and_wait('으에에? 저, 정말 좋아한다고……');
-      await you.say_as_passer_by_and_wait('직원 A', '아하하, 맞아요');
+      await you.say_as_passer_by_and_wait('직원 A', '아하하, 맞아요.');
       await you.say_as_passer_by_and_wait(
         '직원 A',
         '그래서 계획을 바꾸고 각 분야 관계자분들께 협조를 부탁드려서……',
       );
       await you.say_as_passer_by_and_wait(
         '직원 A',
-        '표창식은 이렇게 일반 관객들도 참가할 수 있는 행사가 됐어요',
+        '표창식은 이렇게 일반 관객들도 참가할 수 있는 행사가 됐어요.',
       );
       await rice.say_and_wait([
         '그럼 이 사람들, 모두 ',
         self_name,
         '를 위해서……',
       ]);
-      await you.say_as_passer_by_and_wait('직원 A', '네, 맞아요');
+      await you.say_as_passer_by_and_wait('직원 A', '네, 맞아요.');
       await you.say_as_passer_by_and_wait(
         '직원 A',
         '그날 하지 못했던 일을 부탁드려도 될까요?',
       );
       era.drawLine();
-      await rice.say_and_wait('저기, 여러분, 안녕하세요');
+      await rice.say_and_wait('저기, 여러분, 안녕하세요.');
       await rice.say_and_wait([
         '오늘 이렇게 많은 분이 ',
         self_name,
-        '를 위해 와 주셔서 정말 감사해요',
+        '를 위해 와 주셔서 정말 감사해요.',
       ]);
       await rice.say_and_wait([
         self_name,
-        ', 이렇게 행복한 풍경은 본 적이 없어요',
+        ', 이렇게 행복한 풍경은 본 적이 없어요.',
       ]);
-      await rice.say_and_wait('지금 정말 행복해요');
-      await rice.say_and_wait([self_name, ', 이제 울지 않을 거예요']);
+      await rice.say_and_wait('지금 정말 행복해요.');
+      await rice.say_and_wait([self_name, ', 이제 울지 않을 거예요.']);
       await rice.say_and_wait([
         '왜냐하면 ',
         self_name,
-        ', 오늘은 모두의 눈을 보고 이야기하고 싶으니까요',
+        ', 오늘은 모두의 눈을 보고 이야기하고 싶으니까요.',
       ]);
       await rice.say_and_wait([
         '혼자였다면 ',
         self_name,
-        '는 지금도 조금도 나아가지 못했을 거예요',
+        '는 지금도 조금도 나아가지 못했을 거예요.',
       ]);
-      await rice.say_and_wait('자기만의 어두운 세계에서 웅크리고만 있었겠죠');
+      await rice.say_and_wait('자기만의 어두운 세계에서 웅크리고만 있었겠죠.');
       await rice.say_and_wait([
         '하지만 ',
         self_name,
-        '는 이제 혼자가 아니에요',
+        '는 이제 혼자가 아니에요.',
       ]);
       await rice.say_and_wait([
         self_name,
         '가 여기에 설 수 있는 건 ',
         you.sex,
-        ' 덕분이에요',
+        ' 덕분이에요.',
       ]);
       await rice.say_and_wait([
         self_name,
@@ -3225,8 +3225,8 @@ module.exports = {
       ]);
       await you.say_as_passer_by_and_wait('관객들', '와아아아아아아——');
       era.drawLine({ content: '돌아가는 버스' });
-      await rice.say_and_wait(['고마워, ', callname, '. 전부 당신 덕분이야']);
-      await you.say_and_wait('정말 잘했어, 라이스');
+      await rice.say_and_wait(['고마워, ', callname, '. 전부 당신 덕분이야.']);
+      await you.say_and_wait('정말 잘했어, 라이스.');
       await rice.print_and_wait([
         '이렇게 늘 자신을 못난 아이라고 여기던 ',
         rice.child_sex_title,
@@ -3242,7 +3242,7 @@ module.exports = {
       ]);
       await rice.print_and_wait([
         rice.get_colored_name(),
-        '은(는) 세상에서 가장 좋아하는 사람 곁에서 그렇게 기도하고 있었다.',
+        '는 세상에서 가장 좋아하는 사람 곁에서 그렇게 기도하고 있었다.',
       ]);
     };
     f.title = title;
@@ -3260,7 +3260,7 @@ module.exports = {
       era.printButton('잠을 설쳤어?', 1);
       await era.input();
       await rice.say_and_wait('엣!?');
-      await rice.say_and_wait(['아, 다행이다, ', callname, '～']);
+      await rice.say_and_wait(['아, 다행이다, ', callname, '~']);
       await rice.say_and_wait('사실 어제 자기 전에 무서운 책을 읽었거든.');
       await rice.say_and_wait(
         '그랬더니 책상 위 인형이 쳐다보는 것 같아서 신경 쓰이고.',
@@ -3275,7 +3275,7 @@ module.exports = {
       await era.printAndWait([
         '아무래도 ',
         rice.get_colored_name(),
-        '은(는) 잠이 부족한 모양이다.',
+        '는 잠이 부족한 모양이다.',
       ]);
       await era.printAndWait('푹 잘 수 있으면 좋으련만.');
     };
@@ -3293,7 +3293,7 @@ module.exports = {
      */
     const f = async (rice, zob_zoy, you, callname, self_name) => {
       await rice.say_and_wait('흐음…… 흠, 흠……♪');
-      await zob_zoy.say_and_wait([self_name, ', 기분이 좋아 보이시네요']);
+      await zob_zoy.say_and_wait([self_name, ', 기분이 좋아 보이시네요.']);
       await zob_zoy.say_and_wait('무슨 좋은 일이라도 있었나요?');
       await rice.say_and_wait([
         '응…… 있잖아, ',
@@ -3304,23 +3304,23 @@ module.exports = {
       await rice.say_and_wait('어제 새로운 주법을 배웠으니까 이것도——');
       await zob_zoy.say_and_wait(['……', callname, ' 덕분인가요?']);
       await rice.say_and_wait('어…… 어어, 어떻게 알았어!?');
-      await zob_zoy.say_and_wait('후후, 죄송해요');
+      await zob_zoy.say_and_wait('후후, 죄송해요.');
       await zob_zoy.say_and_wait('밤중에 책을 읽고 있으면 가끔……');
       await zob_zoy.say_and_wait([
         '행복한 목소리로 『고마워, ',
         callname,
-        '……』라고 잠꼬대하는 게 들리거든요',
+        '……』라고 잠꼬대하는 게 들리거든요.',
       ]);
       await rice.say_and_wait('으, 와, 와아아, 부끄러워!');
-      await zob_zoy.say_and_wait('죄송해요. 놀리려던 건 아니에요');
+      await zob_zoy.say_and_wait('죄송해요. 놀리려던 건 아니에요.');
       await zob_zoy.say_and_wait(
-        '이렇게까지 고마워한다면 분명 훌륭한 트레이너시겠구나 하고 생각했을 뿐이에요',
+        '이렇게까지 고마워한다면 분명 훌륭한 트레이너시겠구나 하고 생각했을 뿐이에요.',
       );
-      await rice.say_and_wait(['으, 응! ', callname, '는 최고의 트레이너야!']);
+      await rice.say_and_wait(['으, 응! ', callname, '은(는) 최고의 트레이너야!']);
       await era.printAndWait([
         '그 후 ',
         rice.get_colored_name(),
-        '은(는) ',
+        '는 ',
         you.get_colored_name(),
         '의 좋은 점을 한참 동안 이야기했다.',
       ]);
@@ -3352,7 +3352,7 @@ module.exports = {
         '그게, 예전에 다 같이 수업을 들을 때 무용실이…… 정전됐었거든.',
       );
       await rice.say_and_wait([
-        '그것 때문에 모두의 수업이 끊겨버렸어. 아마, ',
+        '그것 때문에 모두의 수업이 중단돼 버렸어. 아마, ',
         self_name,
         ' 때문일 거야……',
       ]);
@@ -3365,11 +3365,11 @@ module.exports = {
         '도 그래. 여기 있으면 또 나 때문에 무슨 일을 당할지 몰라……',
       ]);
       era.printButton(
-        '「내가 같이 있으면 곤란하니?」（스태미나+10, 근성+10）',
+        '「내가 같이 있으면 곤란하니?」 (스태미나+10, 근성+10)',
         1,
       );
       era.printButton(
-        '「마음껏 폐 끼쳐도 괜찮아!」（지능+10, 스킬 포인트+10）',
+        '「마음껏 폐 끼쳐도 괜찮아!」 (지능+10, 스킬 포인트+10)',
         2,
       );
       const ret = await era.input();
@@ -3379,23 +3379,23 @@ module.exports = {
           callname,
           ' 때문에 곤란해지진 않아!',
         ]);
-        await you.say_and_wait('그럼 도와줄게');
+        await you.say_and_wait('그럼 도와줄게.');
         await rice.say_and_wait([callname, '……']);
-        await rice.say_and_wait('고마워');
+        await rice.say_and_wait('고마워.');
         await rice.say_and_wait([
           self_name,
-          '가 잘 못하는 부분은 ',
+          '가 잘하지 못하는 부분은 ',
           callname,
-          '가 말해 줘',
+          '이(가) 말해 줘.',
         ]);
-        await you.say_and_wait('같이 힘내자');
+        await you.say_and_wait('같이 힘내자.');
         await rice.say_and_wait('응!');
         await era.printAndWait([
           '그 후 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           rice.get_colored_name(),
-          '은(는) ',
+          '는 ',
           rice.sex,
           '가 어려워하는 스텝을 철저히 연습했다.',
         ]);
@@ -3407,7 +3407,7 @@ module.exports = {
         ]);
         await you.say_and_wait([
           self_name,
-          '이(가) 혼자 고민하는 게 나한테는 더 힘들어',
+          '이(가) 혼자 고민하는 게 나한테는 더 힘들어.',
         ]);
         await rice.say_and_wait([callname, '……']);
         await rice.say_and_wait('연습하면서 생긴 고민, 같이 이야기해도 될까?');
@@ -3418,7 +3418,7 @@ module.exports = {
           you.get_colored_name(),
           '은(는) ',
           rice.get_colored_name(),
-          '와(과) 댄스에 관한 고민을 나누었다.',
+          '와 댄스에 관한 고민을 나누었다.',
         ]);
       }
       return [ret];

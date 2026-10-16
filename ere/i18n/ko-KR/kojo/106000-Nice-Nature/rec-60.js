@@ -16,7 +16,7 @@ module.exports = {
       nature.get_colored_name(),
       '!',
     ]);
-    await nature.say_as_unknown_and_wait('으음— 뭐, 평소대로의 실력이네.');
+    await nature.say_as_unknown_and_wait('으음— 뭐, 평소 실력이네.');
     await era.printAndWait([
       '목소리가 들려온 곳에는, 푹신푹신한 트윈 테일을 한 붉은 머리의 ',
       nature.uma_sex_title,
@@ -40,7 +40,7 @@ module.exports = {
     ]);
     await era.printAndWait([
       nature.get_colored_name(),
-      '은(는) ',
+      '는 ',
       you.get_colored_name(),
       '의 갑작스러운 부름에 당황한 기색이 역력했다.',
     ]);

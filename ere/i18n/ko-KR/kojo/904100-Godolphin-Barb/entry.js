@@ -10,7 +10,7 @@ module.exports = class extends (
 
   buff = '사랑';
   buff_desc = (buff, buff2) =>
-    `팀원의 지능 트레이닝 효과+${buff}%. 트레이닝으로 얻는 스킬 Pt+${buff2}%。`;
+    `팀원의 지능 트레이닝 효과+${buff}%. 트레이닝으로 얻는 스킬 Pt +${buff2}%`;
 
   bt_pray = '「신이시여, 부디 자비를……」';
 };

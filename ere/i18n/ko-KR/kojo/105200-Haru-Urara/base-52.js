@@ -59,7 +59,7 @@ module.exports = {
     const ret = await era.input();
     if (ret === 1) {
       await era.printAndWait([
-        '천천히,',
+        '천천히, ',
         urara.uma_sex_title,
         '의 등 뒤로 다가가',
         you.get_colored_name(),
@@ -70,14 +70,14 @@ module.exports = {
       await urara.say_and_wait([
         '에?',
         callname,
-        '가 곁에 있어 주는 거야? 정말? 우라라, 정말로, 나쁜 아이가 되어버려도 되는 거야?',
+        '이(가) 곁에 있어 주는 거야? 정말? 우라라, 정말로, 나쁜 아이가 되어버려도 되는 거야?',
       ]);
       await era.printAndWait([
         '울다 지친 채, 젖은 뺨을 거칠게 닦아내고, 눈물 속에서 웃어보인 ',
         urara.get_colored_name(),
         '는 몸을 돌려, ',
         you.get_colored_name(),
-        '을 부드럽게 눕힌다. ',
+        '을(를) 부드럽게 눕힌다. ',
       ]);
       await urara.say_and_wait(['']);
       era.drawLine();
@@ -183,7 +183,7 @@ module.exports = {
       you.get_colored_name(),
       '의 말에 일리가 있으면 ',
       urara.get_colored_name(),
-      '은(는) 대체로 고개를 끄덕인다. 감옥 안에서도 그런 미묘한 교감은 이어진다.',
+      '는 대체로 고개를 끄덕인다. 감옥 안에서도 그런 미묘한 교감은 이어진다.',
     ]);
     await urara.say_and_wait([
       '응! 괜찮아. ',
@@ -197,14 +197,14 @@ module.exports = {
     await era.printAndWait([
       '눈물을 참으며 ',
       urara.get_colored_name(),
-      '은(는) 붉어진 눈가를 살짝 문지르고, 아쉬운 듯 ',
+      '는 붉어진 눈가를 살짝 문지르고, 아쉬운 듯 ',
       you.get_colored_name(),
       '을(를) 위해 문의 장치를 풀어 주었다.',
     ]);
     await era.printAndWait([
       '그늘 속 쓸쓸한 작은 ',
       urara.uma_sex_title,
-      '을(를) 보고 잠깐 ',
+      '를 보고 잠깐 ',
       you.get_colored_name(),
       '은(는) 조금만 더 ',
       urara.sex,
@@ -448,7 +448,7 @@ module.exports = {
     era.print([
       '그렇게 가볍게 말하면서도 그 뒤로 웃는 얼굴에 웃음기가 없는 ',
       urara.get_colored_name(),
-      '은(는) ',
+      '는 ',
       you.get_colored_name(),
       '에게 한층 더 꼭 붙어 있었다.',
     ]);
@@ -463,7 +463,7 @@ module.exports = {
       await urara.say_and_wait([
         '에?',
         callname,
-        ', 진심이야? 그래도 그렇게 말해주는 것만으로도 기뻐. 그러니까…… 쪽…… 하아..... .',
+        ', 진심이야? 그래도 그렇게 말해주는 것만으로도 기뻐. 그러니까…… 쪽…… 하아……',
       ]);
       await urara.say_and_wait([
         '헤헤~ ',
@@ -532,7 +532,7 @@ module.exports = {
     era.print([
       '몸을 돌려 ',
       you.get_colored_name(),
-      '의 위로 올라타, 입을 열 틈조차 주지 않은 채,',
+      '의 위로 올라타, 입을 열 틈조차 주지 않은 채, ',
       urara.teen_sex_title,
       '는 부드러운 입술과 혀로, 거부할 수 없게끔 다정하면서도 단호하게 그 입을 막아버렸다.',
     ]);
