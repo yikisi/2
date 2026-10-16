@@ -10,7 +10,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-const { degeneration_to_evil } = require('#/i18n/zh-CN/snippets');
+const { degeneration_to_evil } = require('#/i18n/xx-XX/snippets');
 
 module.exports = {
   /**

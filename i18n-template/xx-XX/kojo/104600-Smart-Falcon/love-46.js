@@ -281,7 +281,7 @@ module.exports = {
           );
           await you.say_and_wait(`但是，只有此时此刻，我希望`);
           await you.say_and_wait(`真真切切的希望`);
-          await you.say_and_wait(`${falcon.name}，${callname}可以和我交往吗？`);
+          await you.say_and_wait(`${falcon.name}，你可以和我交往吗？`);
           await era.printAndWait(
             `紧紧盯着${falcon.name}的双眼，迫使着${falcon.name}得出答案。`,
           );

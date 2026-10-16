@@ -7,8 +7,8 @@ const era = require('#/era-electron');
 const { buff_colors } = require('#/data/color-const');
 
 module.exports = {
-  ...require('#/i18n/zh-CN/kojo/100300-Tokai-Teio/edu-3-hurt'),
-  ...require('#/i18n/zh-CN/kojo/100300-Tokai-Teio/edu-3-give-up'),
+  ...require('#/i18n/xx-XX/kojo/100300-Tokai-Teio/edu-3-hurt'),
+  ...require('#/i18n/xx-XX/kojo/100300-Tokai-Teio/edu-3-give-up'),
   async train_fail(teio, you) {
     if (era.get('status:3:腿伤') > 0) {
       await teio.say_and_wait('啊！唔……');

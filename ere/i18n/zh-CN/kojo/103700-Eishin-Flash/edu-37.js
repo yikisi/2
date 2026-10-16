@@ -3442,15 +3442,15 @@ module.exports = {
       );
       await you.say_as_passer_by_and_wait(
         `闪耀的母亲`,
-        `当然，即便什么都不做，${you.name} 也是我们最可爱，最珍贵的宝物。这点永远不会发生变化。`,
+        `当然，即便什么都不做，你也是我们最可爱，最珍贵的宝物。这点永远不会发生变化。`,
       );
       await you.say_as_passer_by_and_wait(
         `闪耀的父亲`,
-        `更重要的是，${you.name} 坚持贯彻了自己的道路，这点非常难得。`,
+        `更重要的是，你坚持贯彻了自己的道路，这点非常难得。`,
       );
       await you.say_as_passer_by_and_wait(
         `闪耀的父亲`,
-        `所以，以普通人的身份，我向 ${you.name} 表达敬意。`,
+        `所以，以普通人的身份，我向你表达敬意。`,
       );
       await flash.say_and_wait('爸爸……妈妈……');
       era.printButton(

@@ -7047,7 +7047,7 @@ module.exports = {
           maru.sex
         },那双轻松的,明亮的眸子,带着闪闪发光的样子看着沉浸于节日庆典的城市.`,
       );
-      era.printButton(`「${you.name}的眼睛真美丽呢」`, 1);
+      era.printButton(`「你的眼睛真美丽呢」`, 1);
       await era.input();
       await maru.say_and_wait(`呵呵♪${callname}是想和我调情吗?`);
       await maru.say_and_wait(
@@ -7150,7 +7150,7 @@ module.exports = {
         await maru.say_and_wait(
           `要追求最新潮流可真难，明明妈妈说过这种事只要掌握诀窍就没问题了……`,
         );
-        era.printButton(`「要不要试着说些妈妈教${you.name}的事呢？」`, 1);
+        era.printButton(`「要不要试着说些妈妈教你的事呢？」`, 1);
         await era.input();
         await maru.say_and_wait(
           `和后辈们说吗……原来如此，这也是个可行的办法，与其追求流行，自己主动推广的话一定会更快乐!`,
@@ -8696,7 +8696,7 @@ module.exports = {
         `${maru.elder_sibling_sex_title}我从没有这么喜欢过一个人呢♪`,
       );
       await maru.say_and_wait(`这就是所谓的爱吗♪`);
-      era.printButton(`「${maru.name}我有话想对${you.name}说，所以」`, 1);
+      era.printButton(`「${maru.name}我有话想对你说，所以」`, 1);
       await era.input();
       await maru.say_and_wait(
         `哼哼～${callname}想对${maru.elder_sibling_sex_title}撒娇吗？`,

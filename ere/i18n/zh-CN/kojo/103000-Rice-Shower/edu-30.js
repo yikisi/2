@@ -1294,14 +1294,7 @@ module.exports = {
       await bourbon.say_and_wait('下一次，我一定不会再输给你。');
       await bourbon.say_and_wait('——作为『对手』。');
       await rice.say_and_wait('……对，手。');
-      await bourbon.say_and_wait([
-        b_call_r,
-        ' 同学，',
-        you.get_colored_name(),
-        ' 要接下我对 ',
-        you.get_colored_name(),
-        ' 的挑战吗？',
-      ]);
+      await bourbon.say_and_wait([b_call_r, ' 同学，你要接下我对你的挑战吗？']);
       await rice.say_and_wait(['……！', self_name, '……！']);
       await rice.say_and_wait([
         self_name,
