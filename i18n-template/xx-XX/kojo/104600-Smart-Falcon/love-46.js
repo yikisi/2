@@ -231,17 +231,15 @@ module.exports = {
           await you.say_and_wait(`……为什么不在这里？`);
           await era.printAndWait(`河岸边没有看到${falcon.sex}的身影`);
           await era.printAndWait(`洋甘菊丛在涨潮的河水中几乎被全部淹没。`);
-          await you.say_and_wait(`……飞鹰子，${callname}在哪里？`);
+          await you.say_and_wait(`……飞鹰子，你在哪里？`);
           await era.printAndWait(`洋甘菊丛在涨潮的河水中几乎被全部淹没。`);
           await falcon.say_and_wait(
             `……如果是训练员${you.adult_sex_title}的话，说不定可以实现我的梦想。`,
           );
           await you.say_and_wait(`……没错！一定在那里！`);
+          await era.printAndWait(`直觉像闪电般突然给予了${you.name}方向。`);
           await era.printAndWait(
-            `直觉像闪电般突然给予了${you.actual_name}方向。`,
-          );
-          await era.printAndWait(
-            `一刻思考的时间也不存在，${you.actual_name}立刻朝着那边奔跑。`,
+            `一刻思考的时间也不存在，${you.name}立刻朝着那边奔跑。`,
           );
           era.drawLine({ content: '天台' });
           await era.printAndWait(
@@ -256,7 +254,7 @@ module.exports = {
           );
           await falcon.say_and_wait(`请不要再靠近飞鹰子了！`);
           await era.printAndWait(
-            `向前逼近的${you.actual_name}与一步一步向后退去的飞鹰子。`,
+            `向前逼近的${you.name}与一步一步向后退去的飞鹰子。`,
           );
           await falcon.say_and_wait(
             `飞鹰子……飞鹰子急了的话也会踢训练员${you.adult_sex_title}的哦！`,

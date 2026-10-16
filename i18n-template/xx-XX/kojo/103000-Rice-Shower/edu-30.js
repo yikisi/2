@@ -600,14 +600,14 @@ module.exports = {
       await rice.say_and_wait(['哇……谢谢！', callname, '……']);
       await rice.say_and_wait([
         '诶……嘿嘿。之后也，请、多多指教 ',
-        self_name,
+        callname,
         '！',
       ]);
-      await rice.say_and_wait([
+      await era.printAndWait([
         '——就这样，',
         you.get_colored_name(),
         ' 和 ',
-        self_name,
+        rice.get_colored_name(),
         ' 一起，迈出了最开始的一步！',
       ]);
       era.drawLine({ content: '数天后' });
@@ -1291,11 +1291,7 @@ module.exports = {
         ' 是今年的经典赛中名副其实的胜利者。',
       ]);
       await bourbon.say_and_wait('我也认同他们的观点。');
-      await bourbon.say_and_wait([
-        '下一次，我一定不会再输给 ',
-        you.get_colored_name(),
-        '。',
-      ]);
+      await bourbon.say_and_wait('下一次，我一定不会再输给你。');
       await bourbon.say_and_wait('——作为『对手』。');
       await rice.say_and_wait('……对，手。');
       await bourbon.say_and_wait([
@@ -2559,7 +2555,7 @@ module.exports = {
         self_name,
         ' 要去登台了。到大家那里去。',
       ]);
-      await rice.say_and_wait('一路顺风。');
+      await you.say_and_wait('一路顺风。');
       await rice.say_and_wait('嗯！');
       await era.printAndWait([
         '这一天，',

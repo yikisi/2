@@ -156,7 +156,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name} 轻轻摇晃手里拿着的电话，栗毛的${treve.sex}对此点头。`,
       );
-      await era.printAndWait(`总之，这样打电话也不会给 ${you.name} 添麻烦。`);
+      await era.printAndWait(`总之，这样打电话也不会给 ${treve.sex} 添麻烦。`);
       era.printButton('「得看实力。」', 1);
       await era.input();
       await taste.say_and_wait(

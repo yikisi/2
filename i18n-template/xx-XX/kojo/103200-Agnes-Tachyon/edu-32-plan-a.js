@@ -3614,10 +3614,7 @@ module.exports = {
         kobe_hai,
         '……速子前辈……到时候可以来为我加油吗！',
       ]);
-      await you.say_as_passer_by_and_wait(
-        tachyon.uma_sex_title + 'A',
-        '加油……吗？',
-      );
+      await tachyon.say_and_wait('加油……吗？');
       await you.say_as_passer_by_and_wait(
         tachyon.uma_sex_title + 'A',
         '是的！希望速子前辈能看看我的跑步的模样！',
@@ -5774,7 +5771,7 @@ module.exports = {
           call_25,
           '，希望你还请务必仔细说说！',
         ]);
-        await tachyon.say_and_wait('吵死了……走开……');
+        await coffee.say_and_wait('吵死了……走开……');
         era.println();
         await era.printAndWait([
           '看着吵闹的两人，',

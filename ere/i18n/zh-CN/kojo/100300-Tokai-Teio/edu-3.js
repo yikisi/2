@@ -59,7 +59,7 @@ module.exports = {
     const f = async (teio) => {
       await era.printAndWait('虽然遗憾，但也不错。');
       await era.printAndWait(
-        `${teio.name} 看着有点不服气的帝王蹭着步子踱出场外的样子，自己本想严肃的脸不知为何流露出了笑意。`,
+        '看着有点不服气的帝王蹭着步子踱出场外的样子，自己本想严肃的脸不知为何流露出了笑意。',
       );
       await era.printAndWait(`也算是努力了，好好安慰${teio.sex}一番吧。`);
     };

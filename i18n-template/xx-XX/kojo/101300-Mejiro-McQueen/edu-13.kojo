@@ -1641,7 +1641,7 @@ mejiro_party:
         - fontWeight: bold
           content: %RYAN%
         - 「OK！你们在这里好好逛逛，那么我就不打扰你们了。」
-    - 两人看着莱恩离去的身影，%YOU%这么说着。
+    - 两人看着莱恩离去的身影，%CHARA%这么说着。
     - color: %COLOR%
       content:
         - fontWeight: bold

@@ -7876,7 +7876,7 @@ module.exports = {
             ' 想上前帮忙，但喉咙实在痒的不行',
           ]);
           era.println();
-          await tachyon.say_and_wait('咳咳！！');
+          await you.say_and_wait('咳咳！！');
           era.println();
           await era.printAndWait([
             '在药效消失前，',

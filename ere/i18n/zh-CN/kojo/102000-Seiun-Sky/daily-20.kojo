@@ -2291,11 +2291,7 @@ orf_lake:
           - 「这么重，按市场最低价咱也不少赚了～喵哈哈～」
   - if: d.fish === 12
     lines: # 河鳗 6% +17马币
-      - color: %COLOR%
-        content:
-          - fontWeight: bold
-            content: %CHARA%
-          - 「一条黑色的河鳗在桶里不断翻腾。」
+      - 一条黑色的河鳗在桶里不断翻腾。
       - %YOU%和青云天空蹲在桶边看着它不断折腾。
       - color: %COLOR%
         content:
@@ -2880,11 +2876,7 @@ orf_sea:
             content: %CHARA%
           - 「训练员——！救命！！」
       - 没等青云天空喊完，%YOU%已经丢了手里的竿子跑了过来。
-      - color: %COLOR%
-        content:
-          - fontWeight: bold
-            content: %CHARA%
-          - 「稳杆！先稳杆！」
+      - 「稳杆！先稳杆！」
       - %YOU%蹲到%SEX%身边，一手按住竿尾，一手托住竿身的中段。
       - 两个人的力量加上去，鱼竿才勉强稳住，但竿梢依然弯成了一张满弓，在水面上剧烈地颤动。
       - 泄力器发出尖锐的嘶鸣声，鱼线被疯狂地往外拉。
@@ -3506,11 +3498,7 @@ o_s_dating: # 按顺序触发
           - 「呐，训练员～你知道怎么走吗？要不要求求小青帮帮你啊～」
       - 青云天空一脸贱贱的表情，等待%YOU%向%SEX%求助。
       - 你则若无其事的拿出手机点亮GPS。
-      - color: %COLOR%
-        content:
-          - fontWeight: bold
-            content: %CHARA%
-          - 「不要怕，导航显示这条巷子穿过去就是便利店。你饿吗？」
+      - 「不要怕，导航显示这条巷子穿过去就是便利店。你饿吗？」
       - 青云天空愣住了，脸颊微微发红。
       - color: %COLOR%
         content:

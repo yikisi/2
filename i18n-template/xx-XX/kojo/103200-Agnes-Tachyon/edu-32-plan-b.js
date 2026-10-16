@@ -1062,7 +1062,7 @@ module.exports = {
       ]);
       era.printButton('「速子，腿没事吧！」', 1);
       await era.input();
-      await era.printAndWait('……没什么，只是，有点吓到了，呵呵');
+      await tachyon.say_and_wait('……没什么，只是，有点吓到了，呵呵');
       await era.printAndWait([
         '毕竟还是',
         tachyon.uma_sex_title,

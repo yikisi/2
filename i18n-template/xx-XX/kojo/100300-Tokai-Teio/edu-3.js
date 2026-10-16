@@ -7,8 +7,8 @@ const era = require('#/era-electron');
 const { buff_colors } = require('#/data/color-const');
 
 module.exports = {
-  ...require('#/i18n/xx-XX/kojo/100300-Tokai-Teio/edu-3-hurt'),
-  ...require('#/i18n/xx-XX/kojo/100300-Tokai-Teio/edu-3-give-up'),
+  ...require('#/i18n/zh-CN/kojo/100300-Tokai-Teio/edu-3-hurt'),
+  ...require('#/i18n/zh-CN/kojo/100300-Tokai-Teio/edu-3-give-up'),
   async train_fail(teio, you) {
     if (era.get('status:3:腿伤') > 0) {
       await teio.say_and_wait('啊！唔……');
@@ -59,7 +59,7 @@ module.exports = {
     const f = async (teio) => {
       await era.printAndWait('虽然遗憾，但也不错。');
       await era.printAndWait(
-        `${teio.name} 看着有点不服气的帝王蹭着步子踱出场外的样子，自己本想严肃的脸不知为何流露出了笑意。`,
+        '看着有点不服气的帝王蹭着步子踱出场外的样子，自己本想严肃的脸不知为何流露出了笑意。',
       );
       await era.printAndWait(`也算是努力了，好好安慰${teio.sex}一番吧。`);
     };

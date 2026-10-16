@@ -4793,7 +4793,7 @@ module.exports = {
       await you.say_and_wait(`……`);
       await era.printAndWait(`不知该如何开口。`);
       await era.printAndWait(
-        `第一次见到这么慌张的${falcon.name}，就像是得知自己要与${falcon.name}永远分别一样。`,
+        `第一次见到这么慌张的${falcon.name}，就像是得知自己要与${you.name}永远分别一样。`,
       );
       await falcon.say_and_wait(`……`);
       await falcon.say_and_wait(`飞鹰子是不是搞砸了……`);

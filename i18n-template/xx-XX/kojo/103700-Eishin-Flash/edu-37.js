@@ -2691,7 +2691,7 @@ module.exports = {
       await era.printAndWait('不过……');
       await you.say_as_passer_by_and_wait(
         `客人`,
-        `等一下，明明是我先来的——好痛，${you.name} 撞到我了！`,
+        `等一下，明明是我先来的——好痛，你撞到我了！`,
       );
       await you.say_as_passer_by_and_wait(
         '店员',
@@ -3432,7 +3432,7 @@ module.exports = {
       await flash.say_and_wait('！');
       await you.say_as_passer_by_and_wait(
         `闪耀的父亲`,
-        `十分精彩的比赛，${you.name} 不亏是我们的骄傲。`,
+        `十分精彩的比赛，你不亏是我们的骄傲。`,
       );
       await flash.say_and_wait('！！');
       await era.printAndWait(

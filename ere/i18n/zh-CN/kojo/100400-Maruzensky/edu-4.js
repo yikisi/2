@@ -565,7 +565,7 @@ module.exports = {
       await maru.say_and_wait(
         `说着感谢丸善前辈在平日里的帮助什么的，将这些巧克力硬塞过来了——啊，放在这里可以吗？`,
       );
-      era.printButton(`「后辈们很喜欢${you.name}呢」`, 1);
+      era.printButton(`「后辈们很喜欢你呢」`, 1);
       await era.input();
       await era.printAndWait(
         `将放在小桌上的各种零食与漫画放在地板上，从${maru.name}的手中接过一部分巧克力。`,
@@ -1892,14 +1892,12 @@ module.exports = {
 
       await era.printAndWait(`${maru.name}只是静静的仰望着天空。`);
       era.printButton(`……不去找小特${maru.couple_title}一起去玩吗?`, 1);
-      era.printButton(`「可以告诉我${you.name}的想法吗？」`, 1, {
-        disabled: true,
-      });
+      era.printButton(`「可以告诉我你的想法吗？」`, 2);
       await era.input();
       await era.printAndWait(`${maru.name}心情不错的哼着怀旧的曲子。`);
       await you.say_and_wait(`是感觉到寂寞了吗？`, true);
       era.printButton(`「这么冷的天气为什么特意来天台呢？」`, 1);
-      era.printButton(`「${you.name}到底在想什么？」`, 1, { disabled: true });
+      era.printButton(`「你到底在想什么？」`, 2);
       await era.input();
       await era.printAndWait(
         `为了得知真实想法的 ${you.name} 顺势就和一起靠在栏杆上聊起来了`,
@@ -2160,7 +2158,7 @@ module.exports = {
         `虽然思考着如果有${maru.uma_sex_title}送巧克力过来应该怎么应对，不过走到训练室门口却没有任何前来打招呼的人。`,
       );
       await you.say_and_wait(
-        `现充啊全部爆炸吧，让FFF团的圣火把${you.name}们都烧尽。`,
+        `现充啊全部爆炸吧，让FFF团的圣火把你们都烧尽。`,
         true,
       );
       await era.printAndWait(
@@ -2286,7 +2284,7 @@ module.exports = {
         `那个，请问丸善前辈在这里吗？`,
       );
       await you.say_and_wait(
-        `${maru.name}有事暂时离开了，${you.name}先在这里坐着稍微休息一下吧。`,
+        `${maru.name}有事暂时离开了，你先在这里坐着稍微休息一下吧。`,
       );
       await maru.say_as_passer_by_and_wait(
         maru.uma_sex_title,
@@ -2300,7 +2298,7 @@ module.exports = {
         maru.uma_sex_title,
         `诶，这个是丸善前辈的！`,
       );
-      await you.say_and_wait(`${you.name}也喜欢看录像吗？`);
+      await you.say_and_wait(`你也喜欢看录像吗？`);
       await maru.say_as_passer_by_and_wait(
         maru.uma_sex_title,
         `嗯！丸善前辈冲线部分的特写，我反复看了五六遍呢！`,
@@ -2368,7 +2366,7 @@ module.exports = {
       await era.printAndWait(
         `将喝完的罐头扔进垃圾桶后，${maru.uma_sex_title}向${you.name}道别。`,
       );
-      await you.say_and_wait(`祝${you.name}武运昌隆。`);
+      await you.say_and_wait(`祝你武运昌隆。`);
       await maru.say_as_passer_by_and_wait(maru.uma_sex_title, `嗯，再见。`);
       await era.printAndWait(
         `带着苦涩笑容的${maru.uma_sex_title}轻轻关上了训练室的门。`,
@@ -3276,12 +3274,14 @@ module.exports = {
         `在意识消失之前，${you.name}听到了${maru.name}的声音。`,
       );
       era.drawLine();
-      await era.printAndWait(
+      await maru.say_as_unknown_and_wait(
         `就好好看着我吧，作为在赛${maru.uma_sex_title}生涯上的前辈。`,
       );
-      await era.printAndWait(`请好好注视着我吧，就这样被我永远的甩在后面。`);
-      await era.printAndWait(
-        `请好好祝福着我吧，现在，轮到${you.name}为我喝彩了。`,
+      await maru.say_as_unknown_and_wait(
+        `请好好注视着我吧，就这样被我永远的甩在后面。`,
+      );
+      await maru.say_as_unknown_and_wait(
+        `请好好祝福着我吧，现在，轮到你为我喝彩了。`,
       );
       await you.say_and_wait(`这样啊。`);
       await era.printAndWait(
@@ -3630,7 +3630,7 @@ module.exports = {
       await you.say_and_wait(
         `冷静一点，我也是刚刚才知道的，${maru.name}不久之前捡到了一张纸条——\n`,
       );
-      await maru.say_and_wait(
+      await maru.used_to_say_and_wait(
         `无论发生了什么，都要和 ${maru.elder_sibling_sex_title} 我商量哦？`,
       );
       await era.printAndWait(
@@ -3641,7 +3641,7 @@ module.exports = {
         `然后有些纠结的跟我说，还有一名${maru.uma_sex_title}跟 ${maru.sex} 约定了要在天台之上见面。`,
       );
       await you.say_and_wait(`所以,抱歉了。`);
-      await maru.say_and_wait(`……`);
+      await you.say_as_passer_by_and_wait(maru.uma_sex_title, `……`);
       await era.printAndWait(
         `不知道对方接下来会做什么，虽然想要逃跑，但是，如果让 ${maru.sex} 就这么回去告诉${maru.name}的话——`,
       );
@@ -4025,7 +4025,7 @@ module.exports = {
         `难得来到这片风景优美的沙滩，就酱紫和后辈们一起做公交的话，有些可惜嘛。`,
       );
       await you.say_and_wait(
-        `哈？${maru.name}，${you.name}也知道夏季合宿是快速提高能力的捷径吧？`,
+        `哈？${maru.name}，你也知道夏季合宿是快速提高能力的捷径吧？`,
       );
       await you.say_and_wait(`所以比平常要更加认真一点吧。`);
       await maru.say_and_wait(
@@ -4237,7 +4237,7 @@ module.exports = {
         `……直到舞台结束为止，我都不会离开${maru.name}身边的。`,
       );
       await you.say_and_wait(
-        `所以，请让我和${you.name}一起创造这份美好的回忆吧。拜托了！`,
+        `所以，请让我和你一起创造这份美好的回忆吧。拜托了！`,
       );
       await maru.say_and_wait(`哎呀，这是什么新型告白方式吗？`);
       await maru.say_and_wait(
@@ -4261,10 +4261,7 @@ module.exports = {
         `被稍稍提高了声音的${you.name}而吓到了的${maru.teen_sex_title}看着询问的目光看着${you.name}。`,
       );
       await era.printAndWait(`${you.name}的决定是`);
-      era.printButton(
-        `「${maru.name}，请告诉我${you.name}的痛苦与悲伤吧。」`,
-        1,
-      );
+      era.printButton(`「${maru.name}，请告诉我你的痛苦与悲伤吧。」`, 1);
       await era.input();
       await maru.say_and_wait(`……`);
       await era.printAndWait(
@@ -4506,53 +4503,51 @@ module.exports = {
           }痛苦的除了背叛誓言还有什么？`,
         );
         await you.say_and_wait(
-          `我是来把${you.name}从偶像的神座上拽下来的，${maru.name}。`,
+          `我是来把你从偶像的神座上拽下来的，${maru.name}。`,
         );
         await era.printAndWait(
           `${maru.name}有意无意释放了一点自己的领域，${you.name}体会到了在赛场上的${maru.uma_sex_title}们所感受到了恐惧。`,
         );
         await you.say_and_wait(
-          `偶像是什么？被人崇拜，被人寄托了命运，虽然说着为了让其他人看着自己的背影前进，但实际上，${you.name}是如此的傲慢。`,
+          `偶像是什么？被人崇拜，被人寄托了命运，虽然说着为了让其他人看着自己的背影前进，但实际上，你是如此的傲慢。`,
         );
         await you.say_and_wait(
-          `${you.name}真的承受得了那份被无数人寄托了希望的千斤顶吗？`,
+          `你真的承受得了那份被无数人寄托了希望的千斤顶吗？`,
         );
         await you.say_and_wait(`尽管是我，我也知道，世界上没有完美无缺的人。`);
         await you.say_and_wait(`只要是人，就一定会犯错，一定会做出错误。`);
         await you.say_and_wait(
           `错误是不可避免的，悲伤、痛苦之后，才更加懂得珍惜。`,
         );
-        await you.say_and_wait(`但是${you.name}`);
+        await you.say_and_wait(`但是${maru.name}`);
         await you.say_and_wait(
           `虽然也是作为知心大${maru.elder_sibling_sex_title}帮助困扰的${maru.uma_sex_title}们。`,
         );
         await you.say_and_wait(
-          `但是没有做好善后工作，完全没有意识到${maru.uma_sex_title}们把${you.name}当成了逃避一切问题用的避风港。`,
+          `但是没有做好善后工作，完全没有意识到${maru.uma_sex_title}们把你当成了逃避一切问题用的避风港。`,
         );
         await you.say_and_wait(
           `就这样，被${maru.uma_sex_title}擅自寄托了希望，又就这样擅自被认为背叛了的${maru.uma_sex_title}憎恨。`,
         );
         await you.say_and_wait(
-          `虽然那些${maru.uma_sex_title}们口口声声说把${you.name}的背影作为偶像看待，在实际行动里却把${you.name}当成神一样崇拜。`,
+          `虽然那些${maru.uma_sex_title}们口口声声说把你的背影作为偶像看待，在实际行动里却把你当成神一样崇拜。`,
         );
         await you.say_and_wait(
-          `虽然${you.name}不是有意这么做，也从未有这种想法，但是，悲剧就是这么诞生了。`,
+          `虽然你不是有意这么做，也从未有这种想法，但是，悲剧就是这么诞生了。`,
         );
         await you.say_and_wait(
-          `所以，请从这个神座上下来吧，我不是为了自己而请求，而是因为看到了通向地狱的单程车而拉住${you.name}。`,
+          `所以，请从这个神座上下来吧，我不是为了自己而请求，而是因为看到了通向地狱的单程车而拉住你。`,
         );
         await era.printAndWait(
           `完全不顾${maru.name}的想法，就这样一口气将自己内心挤压下来的想法说了出来。\n`,
         );
         await maru.say_and_wait(
-          `那${you.name}的解决方法又在哪里？世界上从来不缺发现问题的人，缺的从来都是能更进一步解决问题的人。`,
+          `那你的解决方法又在哪里？世界上从来不缺发现问题的人，缺的从来都是能更进一步解决问题的人。`,
         );
-        await maru.say_and_wait(`而且，说到底都是${you.name}的一面之辞吧？`);
-        await maru.say_and_wait(
-          `谁知道这不是${you.name}因为恐惧而胡扯出来的东西？`,
-        );
+        await maru.say_and_wait(`而且，说到底都是你的一面之辞吧？`);
+        await maru.say_and_wait(`谁知道这不是你因为恐惧而胡扯出来的东西？`);
         era.printButton(
-          `就像我为了冒被${maru.name}讨厌的风险一样，${you.name}也应该知道自己为什么，是为了何人而冒的风险吧！`,
+          `「就像我为了冒被${maru.name}讨厌的风险一样，你也应该知道自己为什么，是为了何人而冒的风险吧！」`,
           1,
         );
         await era.input();
@@ -5513,15 +5508,15 @@ module.exports = {
         }在换上了精心挑选的衣服之后独特的气质深深抓住了${you.name}的心.`,
       );
       await era.printAndWait(
-        `游客A:这位是${maru.name}吧?我在电视上看过${maru.sex}的跑步.`,
+        `游客A「这位是${maru.name}吧？我在电视上看过${maru.sex}的跑步。」`,
       );
       await era.printAndWait(
-        `游客B:是${maru.name}!我是${you.name}的粉丝!请务必给我签名!`,
+        `游客B「是${maru.name}！我是你的粉丝！请务必给我签名！」`,
       );
-      await maru.say_and_wait(`哎呀,原来我已经这么出名了吗?`);
-      await era.printAndWait(`不妙,好像越来越多的人注意到${maru.sex}的到来了`);
-      await era.printAndWait(`${maru.name}的魅力似乎也将无关人员也牵扯进来了,`);
-      era.printButton(`(才不能让你们打扰和${maru.name}共处的时光呢)`, 1);
+      await maru.say_and_wait(`哎呀，原来我已经这么出名了吗？`);
+      await era.printAndWait(`不妙，好像越来越多的人注意到${maru.sex}的到来了`);
+      await era.printAndWait(`${maru.name}的魅力似乎也将无关人员也牵扯进来了`);
+      era.printButton(`（才不能让你们打扰和${maru.name}共处的时光呢）`, 1);
       await era.input();
       await era.printAndWait(
         `${you.name}握紧${maru.name}逐渐温暖起来的小手，加快步伐试图甩开那些追星的粉丝们`,
@@ -5744,7 +5739,7 @@ module.exports = {
       await maru.say_and_wait(
         `而且为了让大家都来追逐我的背影，所以我要比之前更～加大显风采！`,
       );
-      era.printButton(`「我会好好协助${you.name}的！」`, 1);
+      era.printButton(`「我会好好协助你的！」`, 1);
       await era.input();
       await maru.say_and_wait(
         `${callname}真可靠呢～${maru.elder_sibling_sex_title}我很稀饭这种感觉哦？`,
@@ -6352,7 +6347,7 @@ module.exports = {
       );
       await maru.say_and_wait(`${callname}。`);
       await era.printAndWait(`熟悉的身影于门口伫立。`);
-      era.printButton(`「抱歉让${you.name}久等了。」`, 1);
+      era.printButton(`「抱歉让你久等了。」`, 1);
       await era.input();
       await maru.say_and_wait(`我也是刚刚才到。`);
       await maru.say_and_wait(
@@ -7058,9 +7053,7 @@ module.exports = {
       await maru.say_and_wait(
         `哎呀我都一把年纪了居然还会有年轻人调戏我，看来我魅力依旧不减当年呢。`,
       );
-      await era.printAndWait(
-        `${maru.name}将视线收回,然后再度将视线望向了${you.name}.`,
-      );
+      await era.printAndWait(`${maru.name}将视线收回,然后再度将视线望向了你。`);
       await maru.say_and_wait(
         `人们常说眼睛是心灵的窗户,那么在${callname}看来,我又是什么样的呢?`,
       );
@@ -7396,9 +7389,9 @@ module.exports = {
       await era.printAndWait(
         `${you.name}看向${maru.name}，${maru.sex}似乎有想法了.`,
       );
-      await maru.say_and_wait(`那么，来教${you.name}必胜法吧♪？`);
+      await maru.say_and_wait(`那么，来教你必胜法吧♪？`);
       await maru.say_and_wait(
-        `以体力决胜的A计划和以智慧取胜的B计划，${you.name}觉得哪个比较好呢？`,
+        `以体力决胜的A计划和以智慧取胜的B计划，你觉得哪个比较好呢？`,
       );
       await rice.say_and_wait('米浴……米浴也不知道,');
       await era.printAndWait(
@@ -7411,9 +7404,7 @@ module.exports = {
       if (ret === 1) {
         await maru.say_and_wait(`OK！那就采取A计划吧！`);
         await maru.say_and_wait(
-          `米浴${you.name}不是很擅长忍耐吗？那么${you.name}走过去让对面注意到${
-            you.name
-          }的存在，然后${you.name}与${
+          `米浴你不是很擅长忍耐吗？那么走过去让对面注意到你的存在，然后你与${
             maru.sex
           }保持一个相对稳定的距离，等到对方体力耗尽的时候就不得不停下来了.`,
         );
@@ -7428,7 +7419,7 @@ module.exports = {
           }的保证，米、米浴……那个，会，会去试试看……!`,
         );
         await maru.say_and_wait(
-          `呵呵♪，托${you.name}的福，我也想到能够增强耐力的训练项目了`,
+          `呵呵♪，托$你的福，我也想到能够增强耐力的训练项目了`,
         );
         await era.printAndWait(
           `没过多久，${you.name}和${maru.name}就看到了米浴成功解救同伴的小小身影。`,
@@ -7439,12 +7430,12 @@ module.exports = {
           `简单的说，就是把对面引诱到地势复杂的地方，比如说校舍之类的，然后在分叉处甩掉对方！`,
         );
         await rice.say_and_wait('米、米浴，做得到这种事情吗……!');
-        await rice.say_and_wait('可以的！米浴不是很擅长思考吗？');
+        await maru.say_and_wait('可以的！米浴不是很擅长思考吗？');
         await era.printAndWait(`${maru.name}说着紧紧地握住了米浴的手。`);
         await maru.say_and_wait(
           `只要冷静下来好好思考，米浴一定没问题的！好吗？`,
         );
-        await rice.say_and_wait('唔 ……米浴……会试试看……！');
+        await rice.say_and_wait('唔……米浴……会试试看……！');
         await maru.say_and_wait(
           `……呵呵，既然都对后辈这么说了，作为${
             maru.elder_sibling_sex_title
@@ -8568,8 +8559,8 @@ module.exports = {
         you.get_colored_name(),
         '。',
       ]);
-      await godolphin.say_and_wait('你已向我们证明了自己的勇气。');
-      await godolphin.say_and_wait(
+      await darley.say_and_wait('你已向我们证明了自己的勇气。');
+      await darley.say_and_wait(
         '直到再次见面为止，请顺着自己的想法走完这条道路吧。',
       );
       await era.printAndWait([
@@ -8577,15 +8568,15 @@ module.exports = {
         you.get_colored_name(),
         '。',
       ]);
-      await darley.say_and_wait([
+      await byerley.say_and_wait([
         '以人类之身，拼尽全力才得以触碰到',
         maru.uma_sex_title,
         '的边缘。',
       ]);
-      await darley.say_and_wait(
+      await byerley.say_and_wait(
         '强大一词，与你无缘。一直以来，不过像胆小鬼一样，钻进谎言编织的纸城堡中，妄想着城堡牢不可破。',
       );
-      await darley.say_and_wait(
+      await byerley.say_and_wait(
         '……然而，你在最后的关头，向我们深深的忏悔了。不再逃避，拼尽全力的最后一搏，就是忏悔的证明。',
       );
       await era.printAndWait([
@@ -8718,7 +8709,7 @@ module.exports = {
           you.name
         }将象征着誓约的戒指递给了${maru.sex}。`,
       );
-      era.printButton(`「比起理想，比起赛跑，我更在乎的其实是${you.name}」`, 1);
+      era.printButton(`「比起理想，比起赛跑，我更在乎的其实是你」`, 1);
       await era.input();
       era.printButton(`「所以请接受我的爱意吧」`, 1);
       await era.input();

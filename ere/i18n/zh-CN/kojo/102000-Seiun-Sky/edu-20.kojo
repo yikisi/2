@@ -7464,12 +7464,12 @@ we_sword_vs_shield_1:
           content: %CHARA%
         - 「我这么一个美少女欸！」
     - %YOU%被%SEX%一本正经的控诉逗乐了。
-    - 「笑什么！」
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「没什么。」
+        - 「笑什么！」
+    - 「没什么。」
     - %YOU%看着%SEX%气鼓鼓的样子，打趣道
     - 「那你要不要好好准备，试试让我害羞？」
     - 青云天空眨了眨眼睛。
