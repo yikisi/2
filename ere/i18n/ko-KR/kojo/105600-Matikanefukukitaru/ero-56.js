@@ -75,7 +75,7 @@ module.exports = {
       await you.print_and_wait([
         '두 사람의 혀가 얽히자, 품 안의 밤색 머리 ',
         kitaru.uma_sex_title,
-        '이(가) 목구멍에서 끈적한 대답을 흘린다.',
+        '가 목구멍에서 끈적한 대답을 흘린다.',
       ]);
       await you.print_and_wait([
         '몸도 빈틈없이 밀착한다. 혀와 혀, 점막과 이가 맞닿으며 쾌감이 상대에게 전해지고, 거기에 응하려는 ',
@@ -142,12 +142,12 @@ module.exports = {
    * @param {boolean} is_success 色仕掛けが成功したか
    */
   async lure(kitaru, you, callname, y_call_k, is_success) {
-    await you.say_and_wait([y_call_k, '。']);
+    await you.say_and_wait([y_call_k, '.']);
     await you.print_and_wait(
       '가느다란 귀에 대고, 눈앞에 있는 담당의 이름을 나직이 부른다.',
     );
     if (is_success || era.get(`tcvar:${kitaru.id}:发情`) > 0) {
-      await kitaru.say_and_wait(['아…… 저기, ', callname, '。']);
+      await kitaru.say_and_wait(['아…… 저기, ', callname, '.']);
       await you.print_and_wait([
         y_call_k,
         '은(는) 옷자락을 붙잡고 여우처럼 가슴에 바싹 달라붙어, 기대 어린 눈빛으로 응한다.',
@@ -662,7 +662,7 @@ module.exports = {
       await kitaru.print_and_wait([
         '목구멍으로 자지를 감싸 봉사하면서도 꼬리를 흔들 여유가 조금씩 생겼다.',
         kitaru.get_colored_name(),
-        '은(는) 이 방면에서 ',
+        '는 이 방면에서 ',
         you.phy_sex_title,
         '의 예상보다 재능이 있다.',
       ]);
@@ -671,7 +671,7 @@ module.exports = {
         callname,
         '이(가) 숨을 들이쉬며 턱을 드는 모습을 보고, 노래할 틈도 없는 ',
         kitaru.get_colored_name(),
-        '은(는) 알아보기 쉽게 귀를 파르르 떤다.',
+        '는 알아보기 쉽게 귀를 파르르 떤다.',
       ]);
       await kitaru.print_and_wait('어떠세요~');
       await kitaru.print_and_wait([
@@ -767,9 +767,9 @@ module.exports = {
       await kitaru.print_and_wait([
         '말없이 재촉하며 ',
         you.phy_sex_title,
-        '은(는) 다시 손에 힘을 주어 눈앞의 ',
+        '은 다시 손에 힘을 주어 눈앞의 ',
         kitaru.teen_sex_title,
-        '을(를) 사타구니에 고정했다. 자신이 만족할 때까지.',
+        '를 사타구니에 고정했다. 자신이 만족할 때까지.',
       ]);
       await kitaru.say_and_wait(['꿀꺽─!']);
       await kitaru.print_and_wait([
@@ -1781,7 +1781,7 @@ module.exports = {
       await kitaru.print_and_wait([
         '자지가 더 세게 튀어 올랐어요. 그러니까 저도 도움이 된 거겠죠, ',
         callname,
-        '。',
+        '.',
       ]);
     } else if (era.get(`tcvar:${you.id}:接近高潮`)) {
       await kitaru.print_and_wait(['안 돼요, 안 돼요, 안 돼요……']);
@@ -1866,7 +1866,7 @@ module.exports = {
       await kitaru.print_and_wait([
         '시라오키님을 향한 부끄러움이 아직 조금은 남아 있을지도 모른다. 하지만 그 부끄러움은 곧 연료가 되어, 몸을 더욱 음란하게 비틀며 자지에 맞추게 한다.',
       ]);
-      await kitaru.say_and_wait(['더 거칠어지셨네요, ', callname, '。'], true);
+      await kitaru.say_and_wait(['더 거칠어지셨네요, ', callname, '.'], true);
       await kitaru.say_and_wait(
         '점술가이자 무녀라는 두 겹의 신비로운 신분을 가진 저를, 발정 난 암말로 전락시키는 샘물처럼 겹쳐 오는 쾌감.',
         true,
@@ -1919,7 +1919,7 @@ module.exports = {
       await kitaru.print_and_wait([
         '시라오키님을 향한 부끄러움이 아직 조금은 남아 있을지도 모른다. 하지만 그 부끄러움은 곧 연료가 되어, 몸을 더욱 음란하게 비틀며 자지에 맞추게 한다.',
       ]);
-      await kitaru.say_and_wait(['더 거칠어지셨네요, ', callname, '。'], true);
+      await kitaru.say_and_wait(['더 거칠어지셨네요, ', callname, '.'], true);
       await kitaru.say_and_wait(
         '점술가이자 무녀라는 두 겹의 신비로운 신분을 가진 저를, 발정 난 암말로 전락시키는 샘물처럼 겹쳐 오는 쾌감.',
         true,
@@ -2078,7 +2078,7 @@ module.exports = {
       await era.printAndWait([
         '필사적으로 자신을 억누르려는 ',
         kitaru.get_colored_name(),
-        '이(가) 무릎을 끌어안고 구석에 웅크려 있다. 분홍빛 쇄골에는 발정의 붉은 기가 어려 있다.',
+        '가 무릎을 끌어안고 구석에 웅크려 있다. 분홍빛 쇄골에는 발정의 붉은 기가 어려 있다.',
       ]);
       await kitaru.say_and_wait(['하아❤️~ 하❤️']);
       await era.printAndWait([
@@ -2090,7 +2090,7 @@ module.exports = {
       await era.printAndWait([
         '끝내 약에 저항하지 못하게 된 ',
         kitaru.get_colored_name(),
-        '이(가) 비틀거리며 일어나고, 옷이 한 벌씩 바닥으로 떨어진다.',
+        '가 비틀거리며 일어나고, 옷이 한 벌씩 바닥으로 떨어진다.',
       ]);
       if (kitaru.sex_code - 1) {
         await era.printAndWait([
@@ -2112,7 +2112,7 @@ module.exports = {
       await era.printAndWait([
         '발정기로 적극적이 된 ',
         kitaru.get_colored_name(),
-        '이(가) 제멋대로 땀에 젖은 옷을 벗기 시작한다.',
+        '가 제멋대로 땀에 젖은 옷을 벗기 시작한다.',
       ]);
       await era.printAndWait([
         '붉은 입술은 쉴 새 없이 반쯤 벌어져 하얀 안개 같은 숨을 내쉬고, 욕정을 자극하는 호르몬이 방을 채운다.',
@@ -2120,7 +2120,7 @@ module.exports = {
       await kitaru.say_and_wait(['뜨거워요……']);
       await era.printAndWait([
         kitaru.get_colored_name(),
-        '은(는) 스스로 옷을 벗고, 달콤한 체액이 끊임없이 흘러 똑똑 나무 바닥에 떨어진다.',
+        '는 스스로 옷을 벗고, 달콤한 체액이 끊임없이 흘러 똑똑 나무 바닥에 떨어진다.',
       ]);
       await era.printAndWait([
         '그러더니 초점 없는 눈으로 ',
@@ -2129,7 +2129,7 @@ module.exports = {
         you.get_colored_name(),
         '의 허벅지에 휘감긴다.',
       ]);
-      await kitaru.say_and_wait(['도와주세요……', callname, '。']);
+      await kitaru.say_and_wait(['도와주세요……', callname, '.']);
     } else if (era.get('flag:当前位置') === location_enum.restroom) {
       if (relation < 400) {
         await kitaru.say_and_wait(['음…… 저기, ', callname, '？']);
@@ -2137,7 +2137,7 @@ module.exports = {
           you.get_colored_name(),
           '에게 힘껏 안긴 ',
           kitaru.get_colored_name(),
-          '이(가) 작게 떨고 있다. 귀는 눈에 띄게 팔랑팔랑 흔들린다.',
+          '가 작게 떨고 있다. 귀는 눈에 띄게 팔랑팔랑 흔들린다.',
         ]);
         await kitaru.say_and_wait([
           '여기서 하는 건가요…… 선도부의 ',
@@ -2161,7 +2161,7 @@ module.exports = {
         await era.printAndWait([
           '욕정이 달아오른 ',
           kitaru.get_colored_name(),
-          '이(가) 눈꼬리에 눈물을 매단 채 ',
+          '가 눈꼬리에 눈물을 매단 채 ',
           you.get_colored_name(),
           '의 품에 기대 온다.',
         ]);
@@ -2169,9 +2169,9 @@ module.exports = {
       } else {
         await era.printAndWait([
           you.get_colored_name(),
-          '와(과) 눈이 마주친 ',
+          '과(와) 눈이 마주친 ',
           kitaru.get_colored_name(),
-          '은(는) 갑자기 무언가 알아챈 듯 밤색 꼬리를 흔들던 것을 멈췄다.',
+          '는 갑자기 무언가 알아챈 듯 밤색 꼬리를 흔들던 것을 멈췄다.',
         ]);
         await kitaru.say_and_wait(['……하고 싶으신가요?']);
         await kitaru.say_and_wait(['그 눈빛은 점을 치지 않아도 알 수 있어요!']);
@@ -2191,7 +2191,7 @@ module.exports = {
           you.get_colored_name(),
           '의 목에 두르고, ',
           kitaru.get_colored_name(),
-          '은(는) 촉촉한 별빛 눈동자로 ',
+          '는 촉촉한 별빛 눈동자로 ',
           you.get_colored_name(),
           '을(를) 바라본다.',
         ]);
@@ -2222,7 +2222,7 @@ module.exports = {
         await era.printAndWait([
           '그러자 ',
           kitaru.get_colored_name(),
-          '은(는) 무의식적으로 뒤로 물러나, 바지 너머로 엉덩이 골을 스스로 ',
+          '는 무의식적으로 뒤로 물러나, 바지 너머로 엉덩이 골을 스스로 ',
           you.get_colored_name(),
           '의 자지에 밀착시킨다.',
         ]);
@@ -2234,7 +2234,7 @@ module.exports = {
           you.get_colored_name(),
           '의 집에서 행운을 부르는 배치를 고민하던 ',
           kitaru.get_colored_name(),
-          '을(를) 뒤에서 끌어안는다.',
+          '를 뒤에서 끌어안는다.',
         ]);
         await kitaru.say_and_wait(['으후후!!!']);
         await kitaru.say_and_wait([
@@ -2253,7 +2253,7 @@ module.exports = {
         await era.printAndWait([
           '갑자기 ',
           kitaru.get_colored_name(),
-          '이(가) ',
+          '가 ',
           you.get_colored_name(),
           '의 손을 붙잡아 ',
           you.get_colored_name(),
@@ -2280,7 +2280,7 @@ module.exports = {
         you.get_colored_name(),
         '에게 안긴 ',
         kitaru.get_colored_name(),
-        '이(가) 뺨을 붉히며 말한다. 귀가 팔랑거리며 얼굴에 닿는다.',
+        '가 뺨을 붉히며 말한다. 귀가 팔랑거리며 얼굴에 닿는다.',
       ]);
       await you.say_and_wait(['싫어?']);
       await kitaru.say_and_wait([
@@ -2294,14 +2294,14 @@ module.exports = {
         you.get_colored_name(),
         '에게 버림받을까 두려워하던 ',
         kitaru.get_colored_name(),
-        '이(가) 진정했다.',
+        '가 진정했다.',
       ]);
       await you.say_and_wait(['……먹어도 돼.']);
       await era.printAndWait([
         you.get_colored_name(),
         '의 품에 무너져 내린 ',
         kitaru.get_colored_name(),
-        '이(가) 촉촉한 눈으로 ',
+        '가 촉촉한 눈으로 ',
         you.get_colored_name(),
         '을(를) 바라본다.',
       ]);
@@ -2317,7 +2317,7 @@ module.exports = {
     if (era.get('nowex:0:阴茎高潮') > 0 && era.get('nowex:56:膣内精液') > 0) {
       await era.printAndWait([
         kitaru.get_colored_name(),
-        '은(는) 몸속에서 날뛰는 자지도 움찔거리며 발사할 준비를 한다는 것을 느낀다.',
+        '는 몸속에서 날뛰는 자지도 움찔거리며 발사할 준비를 한다는 것을 느낀다.',
       ]);
       await era.printAndWait([
         '눈이 뒤집힌 ',
@@ -2337,7 +2337,7 @@ module.exports = {
       await era.printAndWait([
         '절정에 이른 ',
         kitaru.get_colored_name(),
-        '은(는) 경련하는 발끝으로 균형조차 잡지 못한다.',
+        '는 경련하는 발끝으로 균형조차 잡지 못한다.',
       ]);
       await era.printAndWait([
         '자지를 계속 밀어 넣는 ',
@@ -2393,7 +2393,7 @@ module.exports = {
           await kitaru.say_and_wait('야앗!!!');
           await era.printAndWait([
             kitaru.get_colored_name(),
-            '은(는) 시선을 피하다가 ',
+            '는 시선을 피하다가 ',
             you.get_colored_name(),
             '이(가) 계속해도 되냐고 묻자 작게 고개를 끄덕였다.',
           ]);
@@ -2404,7 +2404,7 @@ module.exports = {
           await kitaru.say_and_wait('으응! 하아하아……');
           await era.printAndWait([
             kitaru.get_colored_name(),
-            '은(는) 고개를 갸웃하고 잠시 생각했다.',
+            '는 고개를 갸웃하고 잠시 생각했다.',
           ]);
           await kitaru.say_and_wait('어째서…… 기분이 좋아요.');
         }
@@ -2428,7 +2428,7 @@ module.exports = {
           await era.printAndWait([
             '격렬한 절정에 떨림을 멈추지 못하면서도, 쾌감에 지배되기 시작한 ',
             kitaru.get_colored_name(),
-            '은(는) ',
+            '는 ',
             you.get_colored_name(),
             '에게 계속 덮쳐 달라고 부탁한다.',
           ]);
@@ -2451,14 +2451,14 @@ module.exports = {
           await era.printAndWait([
             '쾌감에 지배당한 ',
             kitaru.get_colored_name(),
-            '이(가) 어디에 있는지도 모를 신을 넋 나간 눈으로 바라본다.',
+            '가 어디에 있는지도 모를 신을 넋 나간 눈으로 바라본다.',
           ]);
           await era.printAndWait([
             '입안에서 웅얼거리는 애원을 들으면, 몸이 완전히 굴복한 ',
             kitaru.sex,
-            '이(가) 기도하는 대상은 이미 이 쾌감을 안겨 준 ',
+            '가 기도하는 대상은 이미 이 쾌감을 안겨 준 ',
             you.get_colored_name(),
-            '으로 바뀌어 있다.',
+            '(으)로 바뀌어 있다.',
           ]);
         }
     }
@@ -2475,7 +2475,7 @@ module.exports = {
         await kitaru.say_and_wait('히앗~!');
         await era.printAndWait([
           kitaru.get_colored_name(),
-          '은(는) ',
+          '는 ',
           you.get_colored_name(),
           '에게 기대어, 하는 대로 몸을 맡겼다.',
         ]);
@@ -2500,14 +2500,14 @@ module.exports = {
           kitaru.sex,
           '의 민감한 곳에 닿으면 ',
           kitaru.sex,
-          '은(는) 그에 맞춰 귀여운 소리를 낸다.',
+          '는 그에 맞춰 귀여운 소리를 낸다.',
         ]);
         break;
       case 3:
         await era.printAndWait([
           '눈을 감은 ',
           kitaru.get_colored_name(),
-          '이(가) 팔을 ',
+          '가 팔을 ',
           you.get_colored_name(),
           '의 목에 두르고 살짝 발돋움해, 입술을 ',
           you.get_colored_name(),
@@ -2542,7 +2542,7 @@ module.exports = {
             kitaru.get_colored_name(),
             '의 표정이 고통으로 일그러진다. 그런데도 ',
             kitaru.sex,
-            '은(는) 이를 악물고, 아주 작은 비명만 흘린다.',
+            '는 이를 악물고, 아주 작은 비명만 흘린다.',
           ]);
         }
         break;
@@ -2575,7 +2575,7 @@ module.exports = {
             kitaru.get_colored_name(),
             '라는 ',
             kitaru.uma_sex_title,
-            '은(는) 다시 자신의 기억을 닫아 버리려 한다.',
+            '는 다시 자신의 기억을 닫아 버리려 한다.',
           ]);
         }
     }
@@ -2593,7 +2593,7 @@ module.exports = {
         await era.printAndWait([
           '정사 중인 ',
           kitaru.get_colored_name(),
-          '은(는) 손으로 눈을 가리려 한다. 이런 행위는 아직 조금 부끄러운 모양이다.',
+          '는 손으로 눈을 가리려 한다. 이런 행위는 아직 조금 부끄러운 모양이다.',
         ]);
         break;
       case 2:
@@ -2605,7 +2605,7 @@ module.exports = {
         await era.printAndWait([
           '자포자기한 듯 그렇게 말하고 ',
           kitaru.get_colored_name(),
-          '은(는) 오히려 ',
+          '는 오히려 ',
           you.get_colored_name(),
           '의 점점 대담해지는 움직임에 맞추기 시작했다.',
         ]);
@@ -2704,7 +2704,7 @@ module.exports = {
         await kitaru.say_and_wait('음…… 문양이 더 복잡해졌네요……');
         await era.printAndWait([
           kitaru.get_colored_name(),
-          '은(는) 말없이 자궁 위치에 있는 도리이 주변의 장식을 바라보고 있다……',
+          '는 말없이 자궁 위치에 있는 도리이 주변의 장식을 바라보고 있다……',
         ]);
         await kitaru.say_and_wait('시라오키님께서는 어떻게 생각하실까요.');
         break;

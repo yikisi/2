@@ -45,7 +45,7 @@ module.exports = {
       era.setWidth(12);
       await era.printAndWait([
         you.get_colored_name(),
-        '은(는) 어른으로서의 사회적 책임을 잊고 담당에게 변태 행위를 부추긴 사실이 드러났다. 트레센이라 해도,',
+        '은(는) 어른으로서의 사회적 책임을 잊고 담당에게 변태 행위를 부추긴 사실이 드러났다. 트레센이라 해도, ',
         you.get_colored_name(),
         '의 과거를 덮을 수는 없었다.',
       ]);
@@ -89,7 +89,7 @@ module.exports = {
         '이(가) 감당할 수 있는 무게를 넘어섰다.',
       ]);
       await era.printAndWait([
-        '이제 남은 것은,',
+        '이제는 ',
         you.get_colored_name(),
         '이(가) 대가를 치를 차례다……',
       ]);
@@ -115,7 +115,7 @@ module.exports = {
       era.setWidth(12);
       if (era.get(`relation:${chara.id}:0`) < 0) {
         await era.printAndWait([
-          '레이스에서도 취재에서도,',
+          '레이스에서도 취재에서도, ',
           you.get_colored_name(),
           '과(와) 담당의 험악한 관계는 모두가 알고 있었다. 그 불화가 담당의 성장을 막는다는 목소리가 끊이지 않았고, 학원 측도 이 조합에 인내심을 잃어 가고 있었다……하지만 그들보다 참을성이 없는 이들이 있었다.',
         ]);
@@ -131,7 +131,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는)',
         chara.get_colored_name(),
-        '에게 줄 벌꿀 케이크를 한 손에 들고, 폭우가 쏟아지는 길을 혼자 걷고 있었다. 뒤에서 급한 발소리가 들리더니, 허리에 송곳 같은 통증이 내달렸다.',
+        '에게 줄 벌꿀 케이크를 한 손에 들고, 폭우가 쏟아지는 길을 혼자 걷고 있었다. 뒤에서 급한 발소리가 들리더니, 갑자기 허리에 송곳 같은 통증이 내리꽂히는 것을 느꼈다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
@@ -163,11 +163,11 @@ module.exports = {
       );
       await era.printAndWait([
         you.get_colored_name(),
-        '은(는) 손발을 묶은 밧줄을 필사적으로 풀려 했지만, 몸을 더 조일 뿐이었다.',
+        '은(는) 손발을 묶은 밧줄을 필사적으로 풀려 했지만, 오히려 몸을 더 조여들 뿐이었다.',
       ]);
       await era.printAndWait([
         chara.get_colored_name(),
-        '은(는) 침대 가장자리에 앉아,',
+        '은(는) 침대 가장자리에 앉아, ',
         you.get_colored_name(),
         '에게 아름답게 미소 지으며 다정하게 보살폈다.',
       ]);
@@ -178,7 +178,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         chara.get_colored_name(),
-        '의 사랑에 갇혀,',
+        '의 사랑에 갇혀, ',
         you.get_colored_name(),
         '은(는) 결말을 맞이했다……',
       ]);
@@ -225,7 +225,7 @@ module.exports = {
     );
     await you.say_as_unknown_and_wait([
       you.get_colored_actual_name(),
-      ' 씨——자유가 부르고 있다.',
+      ' ——자유가 부르고 있다.',
     ]);
     await you.say_as_unknown_and_wait('다시는 만나지 않기를 바란다.');
     era.setWidth(24);
@@ -242,14 +242,14 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 지금까지처럼',
         uma,
-        '을(를) 모집하고,',
+        '을(를) 모집하고, ',
         they,
-        '을(를) 훈련시키며,',
+        '을(를) 훈련시키며, ',
         they,
         '과(와) 달릴 수 있다. 하지만 트레센에서 지급하는 급여는 더는 없다.',
       ]);
       await era.printAndWait([
-        '대신,',
+        '대신, ',
         you.get_colored_name(),
         '은(는) 자율 트레이닝을 하고, 레이스에 출전하여 상금과 사회적 명성을 얻을 수 있다.',
       ]);
@@ -310,16 +310,16 @@ module.exports = {
       you.get_colored_name(),
       '은(는) 지금까지처럼',
       uma,
-      '을(를) 모집하고,',
+      '을(를) 모집하고, ',
       they,
-      '을(를) 훈련시키며,',
+      '을(를) 훈련시키며, ',
       they,
       '과(와) 달리고, 자율 트레이닝을 하며 레이스에 출전할 수 있다.',
     ]);
     await era.printAndWait([
       '하지만',
       you.get_colored_name(),
-      '의 더 중요한 임무는,',
+      '의 더 중요한 임무는, ',
       they,
       '의 성욕을 받아내는 것이다!',
     ]);
@@ -346,16 +346,16 @@ module.exports = {
     );
     await you.say_as_unknown_and_wait('하지만 너는 그 생명줄을 버렸다.');
     await you.say_as_unknown_and_wait(
-      '이제는 네가 모든 것이 돌이킬 수 없게 되는 것을 일부러 지켜본 게 아닌가 하는 의심마저 드는구나.',
+      '이제는 네가 모든 것이 돌이킬 수 없게 되어버리는 것을 일부러 지켜본 게 아닌가 하는 의심마저 드는구나.',
     );
     await you.say_as_unknown_and_wait(
       '우리는 인권을 남길 기회를 그토록 여러 번 주었는데.',
     );
     await you.say_as_unknown_and_wait('물론 지금의 네게는 더는 들리지 않겠지.');
     await you.say_as_unknown_and_wait([
-      '그럼 다시 만날 일은 없다.',
+      '그럼 이제 다시 만날 일은 없겠군. ',
       you.get_colored_actual_name(),
-      ' 씨.',
+      '.',
     ]);
     await you.say_as_unknown_and_wait([
       {
@@ -389,7 +389,7 @@ module.exports = {
         you.get_colored_name(),
         '의 의무는 열등한 구멍으로 신성한 인자를 받아 ',
         they,
-        '와(과)의 우수한 자손을 낳는 것이다!',
+        '과(와)의 우수한 자손을 낳는 것이다!',
       ]);
     }
     await era.printAndWait([
@@ -398,7 +398,7 @@ module.exports = {
       '에게서 멀어졌지만, 임신 주머니로서의 정진은 계속하라.',
     ]);
     await era.printAndWait([
-      '운이 좋다면,',
+      '운이 좋다면, ',
       you.get_colored_name(),
       '은(는) 자식 덕분에 귀한 대접을 받을지도 모른다!',
     ]);

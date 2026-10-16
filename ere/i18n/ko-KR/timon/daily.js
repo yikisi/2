@@ -99,7 +99,7 @@ module.exports = {
             chara.get_colored_name(),
             '은(는) 몇 명의 ',
             chara.uma_sex_title,
-            '과(와) 둘러앉아 괴담을 나누는 모양이다. 잠시 후 ',
+            '와 둘러앉아 괴담을 나누는 모양이다. 잠시 후 ',
             chara.get_colored_name(),
             '의 얼굴이 창백해졌다. ',
           ]);
@@ -138,7 +138,7 @@ module.exports = {
             chara.get_colored_name(),
             '은(는) 다른 ',
             chara.uma_sex_title,
-            '과(와) 연애 소문을 이야기하는 모양이다. ',
+            '와 연애 소문을 이야기하는 모양이다. ',
             you.get_colored_name(),
             '이(가) 지켜보니 ',
             chara.get_colored_name(),
@@ -275,7 +275,7 @@ module.exports = {
             chara.get_colored_name(),
             '은(는) 넘어졌다. ',
             you.get_colored_name(),
-            '이(가) 상처를 치료하다 고개를 들었을 때는 이미 ',
+            '이(가) 상처를 치료하다 고개를 들었을 때는 ',
             chara.get_colored_name(),
             '은(는) 어느새 잠들어 있었다.',
           ]);
@@ -421,7 +421,7 @@ module.exports = {
             chara.get_colored_name(),
             '은(는) 지나가는 ',
             chara.uma_sex_title,
-            `을(를) 노려보고, 시선을 받은 아이들은 겁에 질려 비명을 질렀다.`,
+            `를 노려보고, 시선을 받은 아이들은 겁에 질려 비명을 질렀다.`,
           ]);
         },
       },
@@ -463,7 +463,7 @@ module.exports = {
             chara.get_colored_name(),
             '은(는) 스포츠 음료를 여러 병 안고 트레이닝장 옆에 서서, 땀에 젖은 ',
             chara.uma_sex_title,
-            '을(를) 발견하면 내민다.',
+            '를 발견하면 내민다.',
           ]);
         },
       },
@@ -682,7 +682,7 @@ module.exports = {
       you.get_colored_name(),
       '은(는) 트레이너실에서 ',
       chara.get_colored_name(),
-      `의 공부를 지도해, 풀지 못하던 문제를${chara.sex}이(가) 풀 수 있게 했다.`,
+      `의 공부를 지도해, 풀지 못하던 문제를${chara.sex}가 풀 수 있게 했다.`,
     ]);
   },
   /**
@@ -723,7 +723,7 @@ module.exports = {
           async h() {
             await era.printAndWait([
               chara.get_colored_name(),
-              '의 상태가 무척 피곤해 보인다. 이제 ',
+              '은(는) 무척 피곤해 보인다. 이제 ',
               chara.get_colored_name(),
               '을(를) 쉬게 해줄 때가 된 것 같다.',
             ]);
@@ -893,7 +893,7 @@ module.exports = {
       '과(와) 안뜰의 고목 구멍을 찾아갔다.',
     ]);
     await era.printAndWait([
-      `${chara.sex}이(가) 나무 구멍을 향해 소리 지르는 모습을 보며,`,
+      `${chara.sex}가 나무 구멍을 향해 소리 지르는 모습을 보며, `,
       you.get_colored_name(),
       '은(는) ',
       chara.get_colored_name(),
@@ -1039,7 +1039,7 @@ module.exports = {
       await era.printAndWait('제비에는 알 수 없는 술식 재료가 적혀 있었다!');
     } else if (dice < 0.01) {
       await era.printAndWait([
-        '눈앞에 형형색색의 문이 환영처럼 보이더니 갑자기 기분이 좋아졌다',
+        '눈앞에 형형색색의 문이 환영처럼 보이더니 갑자기 기분이 좋아졌다.',
       ]);
     } else if (dice < 0.02) {
       await era.printAndWait([
@@ -1153,7 +1153,7 @@ module.exports = {
      */
     const f = async (chara, you) => {
       await era.printAndWait([
-        '전당 주간은 달리기를 뜻하는 ',
+        '전당 주간은 달리기에 뜻을 둔 ',
         chara.uma_sex_title,
         '들에게 가장 중요한 축제 중 하나다.',
       ]);
@@ -1178,7 +1178,7 @@ module.exports = {
             you.get_colored_name(),
             '은(는) ',
             chara.sex,
-            '이(가) 한 계단씩 단상에 올라 두 사람이 분투한 과거를 이야기하고 청중과 경험을 나누는 모습을 보았다.',
+            '가 한 계단씩 단상에 올라 두 사람이 분투한 과거를 이야기하고 청중과 경험을 나누는 모습을 보았다.',
           ]);
           await era.printAndWait([
             you.get_colored_name(),
@@ -1234,7 +1234,7 @@ module.exports = {
             await era.printAndWait([
               '이 시기가 되면 트레센 학원에서는 여러 행사가 열린다. 그중 하나는 전당에 입성한 몇 명의 ',
               chara.uma_sex_title,
-              '을(를) 초대해 며칠간 강연을 열고, 다른 ',
+              '를 초대해 며칠간 강연을 열고, 다른 ',
               chara.uma_sex_title,
               '와 트레이너들에게 경험을 전하는 것이다.',
             ]);
@@ -1298,7 +1298,7 @@ module.exports = {
         if (era.get(`love:${chara.id}`) >= 50) {
           await era.printAndWait([
             chara.sex,
-            '은(는) 곧바로 수락했다. 두 사람은 직장인의 무거운 짐을 잠시 내려놓고 하루 종일 실컷 놀았다……',
+            '는 곧바로 수락했다. 두 사람은 직장인의 무거운 짐을 잠시 내려놓고 하루 종일 실컷 놀았다……',
           ]);
         } else {
           await chara.say_and_wait('데이트?');
@@ -1324,13 +1324,13 @@ module.exports = {
       } else {
         await era.printAndWait([
           chara.sex,
-          '은(는) 재빨리 ',
+          '는 재빨리 ',
           you.get_colored_name(),
           '에게 답장했다. ',
           you.get_colored_name(),
           '이(가) 입구에서 먼저 기다리다 고개를 들자, 새 유카타를 입고 정성껏 꾸민 ',
           chara.sex,
-          '을(를) 발견했다.',
+          '를 발견했다.',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
@@ -1358,7 +1358,7 @@ module.exports = {
           you.get_colored_name(),
           '은(는) 옆에서 조금 우스꽝스럽고 으스스하게 꾸민 ',
           chara.sex,
-          '을(를) 보며 속으로 한숨을 쉬었다.',
+          '를 보며 속으로 한숨을 쉬었다.',
         ]);
         await era.printAndWait(
           "원래는 아이들이 공들여 분장하고, 어른들은 집에서 사탕을 준비해 기다리면 되는 축제다. 학원 윗사람들은 '학생들과 하나가 되자'는 등의 이유로 교직원들에게도 분장을 권하고 밖에서 사탕을 나눠 주게 했으며, 이를 위해 반나절 휴가까지 주었다.",
@@ -1376,7 +1376,7 @@ module.exports = {
       } else {
         await era.printAndWait([
           you.get_colored_name(),
-          '이(가) 쉬고 있을 때, 문에서 갑작스러운 듯 아닌 듯 격렬한 노크 소리가 났다.',
+          '이(가) 쉬고 있을 때, 갑자기 문을 두드리는 소리가 났다. 빠르지도 느리지도 않은 간격으로 세차게 두드리는 소리였다.',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
@@ -1384,7 +1384,7 @@ module.exports = {
           chara.get_colored_name(),
           '에게 놀란 척한 뒤 ',
           chara.sex,
-          '과(와) 함께 사탕을 받으러 나갔다……',
+          '와 함께 사탕을 받으러 나갔다……',
         ]);
         await era.printAndWait('가는 길에 이상한 것들을 여럿 본 듯하다.');
       }
@@ -1420,7 +1420,7 @@ module.exports = {
       you.get_colored_name(),
       '은(는) 멀리서 ',
       chara.get_colored_name(),
-      '에게 생일 축하 인사를 전했다',
+      '에게 생일 축하 인사를 전했다.',
     ]);
     await era.printAndWait([
       chara.get_colored_name(),
@@ -1442,7 +1442,7 @@ module.exports = {
         async h() {
           await era.printAndWait([
             chara.get_colored_name(),
-            '은(는) 생일의 주인공으로서 무척 기뻐 보인다',
+            '은(는) 생일의 주인공으로서 무척 기뻐 보인다.',
           ]);
         },
       },
@@ -1450,7 +1450,7 @@ module.exports = {
         async h() {
           await era.printAndWait([
             chara.get_colored_name(),
-            '은(는) 흔들리는 촛불 앞에서 눈을 감고 올해의 생일 소원을 빌었다',
+            '은(는) 흔들리는 촛불 앞에서 눈을 감고 올해의 생일 소원을 빌었다.',
           ]);
         },
       },
@@ -1458,7 +1458,7 @@ module.exports = {
         async h() {
           await era.printAndWait([
             chara.get_colored_name(),
-            '은(는) 모두의 즐거움에 물들어 내내 미소 짓고 있다',
+            '은(는) 모두의 즐거움에 물들어 내내 미소 짓고 있다.',
           ]);
         },
       },
@@ -1474,7 +1474,7 @@ module.exports = {
             chara.get_colored_name(),
             '은(는) ',
             you.get_colored_name(),
-            `이(가)${chara.sex}을(를) 위해 생일 파티를 준비할 줄은 전혀 예상하지 못해, 놀라면서도 즐거운 하루를 보냈다`,
+            `이(가)${chara.sex}를 위해 생일 파티를 준비할 줄은 전혀 예상하지 못해, 놀라면서도 즐거운 하루를 보냈다.`,
           ]);
         },
       },
@@ -1490,7 +1490,7 @@ module.exports = {
             you.get_colored_name(),
             '의 열의를 알게 되자 ',
             you.get_colored_name(),
-            `이(가)${chara.sex}을(를) 위해 준비한 생일 파티를 예상 밖의 전교 규모 생일 축제로 바꿔 버렸다……!`,
+            `이(가)${chara.sex}를 위해 준비한 생일 파티를 예상 밖의 전교 규모 생일 축제로 바꿔 버렸다……!`,
           ]);
         },
       },
@@ -1513,12 +1513,12 @@ module.exports = {
         async h() {
           await era.printAndWait([
             chara.get_colored_name(),
-            '은(는) 이런 파티가 있을 줄 몰랐는지, 모인 사람들을 보고 조금 겁먹었다',
+            '은(는) 이런 파티가 있을 줄 몰랐는지, 모인 사람들을 보고 조금 겁먹었다.',
           ]);
           if (era.get(`cflag:${chara.id}:1`) > 0) {
-            await era.printAndWait('하지만 꼬리는 아주 빠르게 흔들리고 있다');
+            await era.printAndWait('하지만 꼬리는 아주 빠르게 흔들리고 있다.');
           } else {
-            await era.printAndWait('하지만 무척 기뻐 보인다');
+            await era.printAndWait('하지만 무척 기뻐 보인다.');
           }
         },
       },
@@ -1530,7 +1530,7 @@ module.exports = {
           await era.printAndWait([
             '이번의',
             chara.get_colored_name(),
-            '은(는) 뜻밖에도 어떤 상황에서도 주눅 들지 않고, 모두와 함께 생일 축하 노래를 불렀다',
+            '은(는) 뜻밖에도 전혀 주눅 들지 않고, 모두와 함께 생일 축하 노래를 불렀다.',
           ]);
         },
       },
@@ -1541,7 +1541,7 @@ module.exports = {
         async h() {
           await era.printAndWait([
             chara.get_colored_name(),
-            '은(는) 여전히 조금 겁먹은 듯하지만, 선물을 받았을 때는 무척 기뻐 보였다',
+            '은(는) 여전히 조금 겁먹은 듯하지만, 선물을 받았을 때는 무척 기뻐 보였다.',
           ]);
         },
       },
@@ -1554,7 +1554,7 @@ module.exports = {
             chara.get_colored_name(),
             '은(는) 말없이 생일 케이크를 먹고 ',
             era.get(`cflag:${chara.id}:1`) > 0 ? '귀를 흔들며' : '미소 지으며',
-            `주변 사람들이${chara.sex}의 옛이야기를 하는 것을 듣고 있다`,
+            `주변 사람들이${chara.sex}의 옛이야기를 하는 것을 듣고 있다.`,
           ]);
         },
       },
@@ -1566,7 +1566,7 @@ module.exports = {
         async h() {
           await era.printAndWait([
             chara.get_colored_name(),
-            "은(는) 이런 행사를 전혀 예상하지 못한 것이 분명했지만, '처음부터 알고 있었다'는 식으로 둘러대며 놀랐는지 아닌지 얼버무렸다",
+            "은(는) 이런 행사를 전혀 예상하지 못한 것이 분명했지만, '처음부터 알고 있었다'는 식으로 둘러대며 놀랐는지 아닌지 얼버무렸다.",
           ]);
         },
       },
@@ -1581,7 +1581,7 @@ module.exports = {
             era.get(`cflag:${chara.id}:1`) > 0
               ? '꼬리를 흔들며 '
               : '입을 크게 벌리고 ',
-            '케이크를 먹고 있다',
+            '케이크를 먹고 있다.',
           ]);
         },
       },
@@ -1597,7 +1597,7 @@ module.exports = {
             '의 일 처리를 나무라는 백 가지 표현이 이제야 쓸모가 있었다. ',
           ]);
           await era.printAndWait(
-            '다만 이번 생일 행사는 잘 준비했다며 뜻밖에 칭찬했다',
+            '다만 이번 생일 행사는 잘 준비했다며 뜻밖에 칭찬했다.',
           );
         },
       },

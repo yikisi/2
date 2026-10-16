@@ -61,7 +61,7 @@ module.exports = {
    * @returns {Promise<boolean>} true - 相手を犯す; false - 相手がプレイヤーを犯す
    */
   async choose_who_to_rape(chara, you) {
-    printButton(`${chara.sex}을(를) 거칠게 다룬다`, 1);
+    printButton(`${chara.sex}를 거칠게 다룬다`, 1);
     printButton('「나를 거칠게 다뤄 줘」', 2);
     const ret = (await input()) === 1;
     if (ret) {
@@ -121,11 +121,11 @@ module.exports = {
     chara.get_colored_name(),
     '은(는) ',
     you.get_colored_name(),
-    '와(과) 뜨거운 밤을 보내기를 거부한다……',
+    '과(와) 뜨거운 밤을 보내기를 거부한다……',
     { isBr: true },
     '하지만 육체의 쾌락에 타오른 마음은 ',
     chara.sex,
-    '이(가) 거절의 말을 꺼내지 못하게 한다……',
+    '가 거절의 말을 꺼내지 못하게 한다……',
   ],
   /**
    * 合意はないが、相手に同心刻印があるときベッドへ誘う
@@ -136,7 +136,7 @@ module.exports = {
     chara.get_colored_name(),
     '은(는) ',
     you.get_colored_name(),
-    '와(과) 뜨거운 밤을 보내기를 거부한다……',
+    '과(와) 뜨거운 밤을 보내기를 거부한다……',
     { isBr: true },
     '하지만 그럼에도 순순히 자신을 준비시켰다……',
   ],
@@ -153,7 +153,7 @@ module.exports = {
     chara.get_colored_name(),
     '은(는) ',
     you.get_colored_name(),
-    '와(과) 뜨거운 밤을 보내기를 거부한다……',
+    '과(와) 뜨거운 밤을 보내기를 거부한다……',
     { isBr: true },
     '어떻게 할까?',
   ],
@@ -245,7 +245,7 @@ module.exports = {
    */
   async after_rape_by_super_uma_z(chara) {
     await printAndWait([
-      '한때의 감정에 휩쓸렸지만,',
+      '한때의 감정에 휩쓸렸지만, ',
       chara.get_colored_name(),
       '이(가) 정신을 차리면 분명 수치심과 분노에 괴로워할 것이다……',
     ]);

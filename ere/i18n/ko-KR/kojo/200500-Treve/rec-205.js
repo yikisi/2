@@ -29,7 +29,7 @@ module.exports = {
       '와 회담을 가졌다. 그 결과——',
     ]);
     await era.printAndWait(
-      `곧 프랑스의 뛰어난 신예가 중앙에 교류하러 온다. ${you.name}은(는) 책임자로서 양측의 연락 창구를 맡게 되었다.`,
+      `곧 프랑스의 뛰어난 신예들이 중앙에 교류하러 온다. ${you.name}은(는) 책임자로서 양측의 연락 창구를 맡게 되었다.`,
     );
     await era.printAndWait([
       '이사장의 소꿉친구인——',
@@ -65,7 +65,7 @@ module.exports = {
       );
       era.println();
       await era.printAndWait(
-        `마침내 ${you.name}은(는) 파리 트레센 학원의 송영 차량 탑승 장소를 찾았다. 파라솔 몇 개가 나란히 서 있었다.`,
+        `마침내 ${you.name}은(는) 파리 트레센 학원의 마중 차량 탑승 장소를 찾았다. 파라솔 몇 개가 나란히 서 있었다.`,
       );
       await era.printAndWait('약 두 시간 반 뒤, 차가 멈췄다.');
       await era.printAndWait('도착했다. 면담 장소는 학원장실이었다.');
@@ -89,10 +89,10 @@ module.exports = {
         );
       }
       await era.printAndWait(
-        '몸을 떨며 의자에서 일어나 방구석에 걸어 둔 코트를 집었다. 창밖의 하늘은 흐렸고, 잿빛 빛이 쓸쓸한 트레이너실에 내려앉았다.',
+        '몸을 떨며 의자에서 일어나 방구석에 걸어 둔 코트를 집었다. 창밖의 하늘은 흐렸고, 회색빛이 쓸쓸한 트레이너실에 내려앉았다.',
       );
       await era.printAndWait(
-        '가을이 가까웠다. 외투 없이는 떨리기 시작한 이 몸이 버티지 못할 것 같았다.',
+        '가을이 가까웠다. 외투 없이는 추위에 떨리는 몸이 버티지 못할 것 같았다.',
       );
       await era.printAndWait(
         `옷걸이에 걸린 중절모를 쓰고 오른손에 봉투를 든 채 나섰다. 문을 닫는 순간, ${you.name}은(는) 조금 오래 방 안을 바라보았다. 그 어느 것도 대단한 의미는 없었다.`,
@@ -119,10 +119,10 @@ module.exports = {
         `돌길을 걸으며 체육복 차림의 ${treve.uma_sex_title}들과 스쳐 지나갔다.`,
       );
       await era.printAndWait(
-        `그때 다시 무언가가 ${you.name}의 귀를 자극했다. 주머니 속 휴대전화의 벨소리였다.`,
+        `그때 다시 ${you.name}의 귀에 무언가가 들려왔다. 주머니 속 휴대전화의 벨소리였다.`,
       );
       await era.printAndWait(
-        `발신자도 확인하지 않고 전화를 받는 것은 ${you.name}의 정보에 민감한 직업병 탓이었다.`,
+        `발신자도 확인하지 않고 전화를 받는 것은 정보에 민감한 ${you.name}의 직업병 탓이었다.`,
       );
       await era.printAndWait('전화를 받았다.');
       era.printButton('「여보세요.」', 1);
@@ -133,12 +133,12 @@ module.exports = {
         '. 겉보기에는 평범한 학원 이사장이지만, 조직력과 재능, 안목을 생각하면 틀림없이 독보적인 존재였다.',
       ]);
       await era.printAndWait(
-        `${you.name}은(는) 깊게 숨을 내쉬었다. 아까의 평온과 달리, 분명한 힘이 담긴 불쾌한 한숨이었다.`,
+        `${you.name}은(는) 깊게 숨을 내쉬었다. 아까의 평온과 달리, 불쾌한 기색이 역력한 한숨이었다.`,
       );
       era.printButton('「무슨 일이야?」', 1);
       await era.input();
       await taste.say_and_wait(
-        `보고! 사실 그쪽의 ${treve.uma_sex_title} 중에 메이크 데뷔에서 훌륭한 실력을 보였는데도 아무도 말을 걸지 않은 이가 있네. 실력도 뛰어나고 레이스에서도 일착이었다는데, 어째서 스카우트되지 않았는지 이상하지 않나?`,
+        `보고! 사실 그쪽의 ${treve.uma_sex_title} 중에 메이크 데뷔에서 훌륭한 실력을 보였는데도 아무도 말을 걸지 않은 이가 있네. 실력도 뛰어나고 레이스에서도 1착이었다는데, 어째서 스카우트되지 않았는지 이상하지 않나?`,
       );
       era.printButton('「이사장이 미리 점찍어 뒀으니까 그렇겠지.」', 1);
       await era.input();
@@ -262,7 +262,7 @@ module.exports = {
         `하지만 기우였다. ${treve.sex}는 자리에서 일어나 ${you.name}에게 걸어와 오른손을 내밀었다.`,
       );
       await era.printAndWait(
-        `미소 짓는 얼굴에는 티끌만 한 사심도 없었다. ${you.name}은(는) 그 순수함이 자신을 태우는 듯한 느낌을 알게 되었다.`,
+        `미소 짓는 얼굴에는 티끌만 한 사심도 없었다. ${you.name}은(는) 그 순수함이 자신을 태우는 듯한 느낌을 받았다.`,
       );
       await treve.say_and_wait(`저는 ${treve.name}예요. 처음 뵙겠습니다!`);
       era.printButton(`「……${you.actual_name}. 중앙 트레센의 트레이너야.」`, 1);
@@ -324,7 +324,7 @@ module.exports = {
         `트레이너는 보통 여러 ${treve.uma_sex_title}를 담당한다. 개선문상 도전이 팀의 효율을 크게 떨어뜨린다는 것은 잘 알려져 있다. 평균 성적을 위해 국제 레이스에는 나가지 않겠다고 공언하는 트레이너도 있다.`,
       );
       await era.printAndWait(
-        `처음부터 개선문상을 목표로 삼는 ${treve.name}는 그들의 지뢰를 밟은 셈이었다.`,
+        `처음부터 개선문상을 목표로 삼는 ${treve.name}는 그들이 가장 꺼리는 이야기를 꺼낸 셈이었다.`,
       );
       await treve.say_and_wait('……');
       await era.printAndWait(
@@ -442,7 +442,7 @@ module.exports = {
           era.printButton('「뜨거울 때 두드리는 건 불이 아니라 쇠야.」', 1);
           await era.input();
           await era.printAndWait(
-            `${treve.name}의 자신감이 확실한 실력에 뒷받침된 것임을 ${you.name}이(가) 알게 된 것은 트레이닝을 시작한 뒤였다.`,
+            `${treve.name}의 자신감이 확실한 실력으로 뒷받침된 것임을 ${you.name}이(가) 알게 된 것은 트레이닝을 시작한 뒤였다.`,
           );
           await era.printAndWait(
             `${treve.sex}를 담당하면서 ${you.name}은(는) 예전 기록과 요령을 참고했다.`,
@@ -472,12 +472,12 @@ module.exports = {
           await era.printAndWait(
             '다음 모의 레이스는 선행으로 가자. 다만 이번 상대들은 선배들이야……',
           );
-          await treve.say_and_wait(['이길 거예요, ', callname, '。']);
+          await treve.say_and_wait(['이길 거예요, ', callname, '.']);
           await era.printAndWait(
             '자신의 실력을 냉정하게 이해하기에 나오는 자신감이었다.',
           );
           await era.printAndWait([
-            '지나친 자만도 겸손도 없이 자신의 정신 상태를 객관적으로 볼 줄 아는 것 역시 ',
+            '지나치게 자만하거나 자신을 낮추지 않고 자신의 정신 상태를 객관적으로 볼 줄 아는 것 역시 ',
             treve.get_colored_name(),
             '라는 ',
             treve.uma_sex_title,

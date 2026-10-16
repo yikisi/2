@@ -16,7 +16,7 @@ module.exports = {
      */
     const f = async (gold_shp, you, callname) => {
       await gold_shp.print_and_wait(
-        `악연의 시작은 ${gold_shp.name}의 그 선발 레이스에 있었다. 바로 그 레이스 이후, ${gold_shp.sex}와 ${callname}은 계약을 맺고 대회에 정식 출주할 수 있는 우마무스메가 되었다.`,
+        `악연의 시작은 ${gold_shp.name}의 그 선발 레이스에 있었다. 바로 그 레이스 이후, ${gold_shp.sex}와 ${callname}은(는) 계약을 맺고 대회에 정식 출주할 수 있는 우마무스메가 되었다.`,
       );
       era.println();
       await gold_shp.say_and_wait(
@@ -28,7 +28,7 @@ module.exports = {
       );
       era.println();
       await gold_shp.print_and_wait([
-        `처음부터 ${gold_shp.sex}는 자신의 행동을 도무지 이해할 수 없었다. 일반적인 우마무스메와 트레이너 사이에서는 트레이너 측이 먼저 우마무스메를 모집한다. 하지만 ${callname}과 계약한 일은 모집당했다고 하기보다는, `,
+        `처음부터 ${gold_shp.sex}는 자신의 행동을 도무지 이해할 수 없었다. 일반적인 우마무스메와 트레이너 사이에서는 트레이너 측이 먼저 우마무스메를 모집한다. 하지만 ${callname}과(와) 계약한 일은 모집당했다고 하기보다는, `,
         {
           color: gold_color,
           content: `오히려 ${gold_shp.name}이 억지로 강매한 것이라고 할 수 있었다.`,
@@ -296,7 +296,7 @@ module.exports = {
       era.printButton('「강○범♡」', 2);
       ret.push(await era.input());
       await era.printAndWait(
-        `${you.name}와(과) ${gold_shp.name}은(는) 꼭 끌어안았다. 이 침대는 이제 ${gold_shp.sex}의 작은 흐느낌과 막 연인이 된 두 사람을 감싸고 있었다.`,
+        `${you.name}과(와) ${gold_shp.name}은(는) 꼭 끌어안았다. 이 침대는 이제 ${gold_shp.sex}의 작은 흐느낌과 막 연인이 된 두 사람을 감싸고 있었다.`,
       );
     } else {
       await era.printAndWait(
@@ -454,7 +454,7 @@ module.exports = {
       );
       era.println();
 
-      await era.printAndWait(`${gold_shp.sex}는 이렇게 말했다`);
+      await era.printAndWait(`${gold_shp.sex}는 이렇게 말했다.`);
       const buffer = [
         {
           accelerator: 1,

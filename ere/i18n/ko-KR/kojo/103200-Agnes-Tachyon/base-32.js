@@ -24,7 +24,7 @@ module.exports = {
       '내 달리기는 자네를 눈부시게 하고, 미치게 만들었지. 그렇지 않나?',
     ]);
     tachyon.say(['──그런데 지금, 자네 눈이 바라보는 것은 대체 누구지?']);
-    tachyon.say(['나는 모르겠어……', callname, '、']);
+    tachyon.say(['나는 모르겠어…… ', callname, ', ']);
     tachyon.say(['나는 이제 자네가 없는 가능성을 선택할 수 없다네.']);
     tachyon.say(['그런데 자네 눈에는 내 모습이 비치지 않아.']);
     tachyon.say([
@@ -47,7 +47,7 @@ module.exports = {
     await era.printAndWait([
       '거절당할 각오를 하고 있었다. 그런데 ',
       tachyon.get_colored_name(),
-      '은(는) 맥이 빠질 만큼 선뜻 고개를 끄덕였다.',
+      '은 맥이 빠질 만큼 선뜻 고개를 끄덕였다.',
     ]);
     era.println();
 
@@ -59,7 +59,7 @@ module.exports = {
     await era.printAndWait([
       '갑자기 ',
       tachyon.get_colored_name(),
-      '이(가) ',
+      '이 ',
       you.get_colored_name(),
       '의 앞까지 다가와, ',
       you.get_colored_name(),
@@ -83,7 +83,7 @@ module.exports = {
     await era.printAndWait([
       '그렇다면 지금의 ',
       tachyon.get_colored_name(),
-      '은(는)?',
+      '은?',
     ]);
     await era.printAndWait([
       '오직 자신에게만 취하고 자신만을 갈구하는 모습은 분명 가슴을 울린다.',
@@ -105,7 +105,7 @@ module.exports = {
       you.get_colored_name(),
       '이(가) 짐을 챙겨 나가려 할 때, ',
       tachyon.get_colored_name(),
-      '은(는) 등을 돌린 채 침대 가장자리에 앉아 있었다.',
+      '은 등을 돌린 채 침대 가장자리에 앉아 있었다.',
     ]);
 
     era.printButton('「타키온?」', 1);
@@ -124,7 +124,7 @@ module.exports = {
     await era.printAndWait([
       '처음부터 끝까지 ',
       tachyon.get_colored_name(),
-      '은(는) 돌아보지 않았다.',
+      '은 돌아보지 않았다.',
     ]);
   },
   /**
@@ -175,7 +175,7 @@ module.exports = {
 
     era.print([
       tachyon.get_colored_name(),
-      '은(는) 문고리를 잡고 있던 ',
+      '은 문고리를 잡고 있던 ',
       you.get_colored_name(),
       '의 손을 다정하게 감쌌다.',
     ]);
@@ -202,7 +202,7 @@ module.exports = {
     ]);
     await era.printAndWait([
       tachyon.get_colored_name(),
-      '은(는) 반응할 틈도 없이 정신을 잃었다.',
+      '은 반응할 틈도 없이 정신을 잃었다.',
     ]);
   },
   /** @param {CharaTalk} tachyon アグネスタキオン */

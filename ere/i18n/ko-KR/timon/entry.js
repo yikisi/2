@@ -571,7 +571,7 @@ class I18nTimon {
     you.get_colored_name(),
     '은(는) 잠에서 벌떡 깨어나 ',
     chara.get_colored_name(),
-    '와(과) ',
+    '과(와) ',
     supporter.get_colored_name(),
     '이(가) 몸 위에 엎드려 있는 것을 발견했다!】',
   ];

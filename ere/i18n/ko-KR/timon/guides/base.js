@@ -9,11 +9,11 @@ module.exports = {
   /** @param {CharaTalk} you */
   get_intro: (you) => [
     you.get_colored_name(),
-    '은(는) 아무래도,',
+    '은(는) 아무래도, ',
     { content: '【누군가】', fontWeight: 'bold' },
     '에게 납치되어 이 지하실로 끌려온 모양이다.',
     { isBr: true },
-    '햇빛이 들지 않는 이곳에서는,',
+    '햇빛이 들지 않는 이곳에서는, ',
     { content: '【시간조차 정확히 느낄 수 없다】', fontWeight: 'bold' },
     '. 앞으로 꽤 힘든 나날이 이어질 것 같다.',
     { isBr: true },
@@ -37,7 +37,7 @@ module.exports = {
       '승리를 예측할 수는 있어도, 억지로 만들어 낼 수는 없다.',
     );
     await era.printAndWait([
-      '도망칠 곳이 없을 때는,',
+      '도망칠 곳이 없을 때는, ',
       you.get_colored_name(),
       '은(는) 조용히 앉아 기력을 기르며 대책을 세우는 편이 좋다.',
     ]);
@@ -53,7 +53,7 @@ module.exports = {
       '삼가 보살펴 지치게 하지 말고, 기운을 모아 힘을 쌓는다.',
     );
     await era.printAndWait([
-      '피곤할 때는,',
+      '피곤할 때는, ',
       you.get_colored_name(),
       '은(는) 얌전히 잠을 자며 체력과 기력을 보충하는 것이 가장 좋다.',
     ]);
@@ -65,7 +65,7 @@ module.exports = {
       '군대에 식량이 없으면 망한다.',
     );
     await era.printAndWait([
-      '장기전에 대비하려면,',
+      '장기전에 대비하려면, ',
       you.get_colored_name(),
       '은(는) 식사로 몸의 소모를 보충해야 한다. 한 번 먹으면 한동안 체력이 계속 회복된다.',
     ]);
@@ -81,7 +81,7 @@ module.exports = {
       '최상의 전략은 적의 계략을 깨뜨리는 것이고, 그다음은 적의 동맹을 깨뜨리는 것이다.',
     );
     await era.printAndWait([
-      '지하실의 주인과 좋은 관계를 쌓는 것은,',
+      '지하실의 주인과 좋은 관계를 쌓는 것은, ',
       you.get_colored_name(),
       '에게 결코 손해가 아니다.',
     ]);

@@ -24,7 +24,7 @@ module.exports = {
     );
     await era.printAndWait(`${you.name}은(는) 그렇게 감탄하며 계속 걸었다.`);
     await era.printAndWait(
-      `트레센 학원의 수많은 신입 트레이너 중 한 명으로서, 아직 담당이 정해지지 않은 우마무스메들을 돌보는 것은 학원에서 대대로 이어져 온 전통이다.`,
+      `트레센 학원에서는 아직 담당이 정해지지 않은 우마무스메들을 신입 트레이너들이 돌보는 전통이 대대로 이어져 왔다.`,
     );
     await era.printAndWait(
       '막상 해 보면 신입 트레이너의 노동력을 쥐어짜는 힘든 육체노동이었다.',
@@ -42,7 +42,7 @@ module.exports = {
       `그렇다고 선발 레이스 경기장이 한두 곳도 아닌데 신입 전원을 며칠씩 쉬지도 못하게 해 평소 업무를 망칠 수도 없었다.`,
     );
     await era.printAndWait(
-      `몇 명이 함께 하면 쉽게 끝날 일이 하루에 한두 명에게 맡겨지는 고행이 되었다.`,
+      `몇 명이 함께하면 쉽게 끝날 일을 하루에 한두 명이 맡으니 고행이 되었다.`,
     );
     await era.printAndWait(
       `개인에게 배정되는 순간 날씨가 나쁜 날 걸린 사람만 손해를 보는, 누구도 행복하지 않은 고생의 악순환이 되는 것이다.`,
@@ -94,10 +94,10 @@ module.exports = {
     );
     await kita.say_and_wait(`이거 어디로 옮기면 되나요? 제가 옮길게요.`);
     await era.printAndWait(
-      `검은 머리의 아이는 웃으며 ${you.name}에게 고개를 끄덕였다. 목적지를 확인한 뒤 ${you.name}와(과) 함께 선발 레이스 경기장으로 걸어갔다.`,
+      `검은 머리의 아이는 웃으며 ${you.name}에게 고개를 끄덕였다. 목적지를 확인한 뒤 ${you.name}과(와) 함께 선발 레이스 경기장으로 걸어갔다.`,
     );
     await era.printAndWait(
-      `${kita.teen_sex_title}와(과) 나란히 걷는 동안 ${
+      `${kita.teen_sex_title}와 나란히 걷는 동안 ${
         you.name
       }은(는) 옆으로 고개를 돌려 오른쪽 앞에서 걷는 우마무스메를 살펴보았다.`,
     );
@@ -144,7 +144,7 @@ module.exports = {
       `햇빛이 나뭇그늘을 잘게 가르며 이 밝고 상냥한 ${kita.uma_sex_title}의 위로 내려앉았다.`,
     );
     await era.printAndWait(
-      `이렇게 스스럼없이 대하는 상대에게 욕정을 품고 만 ${you.name}은 조금 낯이 뜨거워졌다.`,
+      `이렇게 스스럼없이 대하는 상대에게 욕정을 품고 만 ${you.name}은(는) 조금 낯이 뜨거워졌다.`,
     );
     era.println();
     era.printButton('「정말 고마워. 큰 도움이 됐어.」', 1);
@@ -164,7 +164,7 @@ module.exports = {
       `${you.name}은(는) 이 아침이 아름답다고 생각했다. 햇빛이 나뭇그늘을 잘게 가르고, 참새들이 상쾌한 봄날을 맞아 드높이 노래했다.`,
     );
     await era.printAndWait(
-      `하지만 짧은 시간은 오래 이어지지 않았다. 운동장에 들어선 ${kita.name}이 상자를 트랙 옆에 내려놓자 나란히 걷던 시간도 끝났다.`,
+      `하지만 그 시간도 금세 끝났다. 운동장에 들어선 ${kita.name}이 상자를 트랙 옆에 내려놓자 나란히 걷던 시간도 끝났다.`,
     );
     await kita.say_and_wait(
       '그럼 트레이너 씨, 저는 준비 운동하러 갈게요. 시간 되시면 제 레이스 보러 와 주세요.',
@@ -201,9 +201,9 @@ module.exports = {
     );
     await era.printAndWait([
       kita.get_colored_name(),
-      '의 힘찬 보폭과 함께, 대도주를 전술로 삼은 우마무스메가 결승선을 통과하며 ',
+      '은 대도주 전술로 힘차게 달려 결승선을 통과했다. 이로써 ',
       kita.sex,
-      '의 승리를 알렸다.',
+      '의 승리가 확정되었다.',
     ]);
     await era.printAndWait(`지금 ${you.name}은(는)……?`);
     era.printButton(`（${kita.sex}의 트레이너가 되고 싶다……!)`, 1);

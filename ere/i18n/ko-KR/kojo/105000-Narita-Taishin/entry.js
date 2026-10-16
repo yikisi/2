@@ -31,7 +31,7 @@ module.exports = class extends (
 
   swim_up = '역류를 거슬러';
   swim_up_desc =
-    '완전히 얕보였네! 경기 중 지지 않으려는 의지로 모든 기본 능력의 발휘가 향상된다.';
+    '완전히 얕보였네! 경기 중 지지 않으려는 의지로 모든 기본 능력을 더 잘 발휘한다.';
 
   debuff = '폐출혈';
   debuff_desc =

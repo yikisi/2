@@ -110,7 +110,7 @@ module.exports = {
       era.println();
       await era.printAndWait('——그거면 됐어.');
       await era.printAndWait([
-        '귓가에서 그런 말이 들린 듯했고, 주변 공기가 순간 얼어붙은 것처럼 온도가 내려갔다……',
+        '귓가에서 그런 말이 들린 듯했고, 주변 공기는 순간 얼어붙은 듯 차가워졌다……',
       ]);
       era.println();
       await coffee.say_and_wait([callname, '……그리고 친구…… 고마워요……']);
@@ -224,7 +224,7 @@ module.exports = {
       ]);
       era.println();
       if (era.get('cflag:32:招募状态') === recruit_flags.yes) {
-        await tachyon.say_and_wait(['여어, ', callname_32, '。']);
+        await tachyon.say_and_wait(['여어, ', callname_32, '.']);
         await era.printAndWait([
           '낯익은 목소리가 들려 ',
           you.get_colored_name(),
@@ -261,7 +261,7 @@ module.exports = {
         await tachyon.say_and_wait([
           '이런, 별로 반갑지 않은 모양이군, ',
           t_call_c,
-          '……하지만 앞으로 우리의 접점은 더 깊어질 걸세. 같은 트레이너 아래 있는 담당 ',
+          '……하지만 앞으로 우리는 더 깊이 얽히게 될 걸세. 같은 트레이너 아래 있는 담당 ',
           coffee.uma_sex_title,
           '니까. 그렇지 않나? 트·레·이·너·군?',
         ]);
@@ -348,7 +348,7 @@ module.exports = {
       await coffee.say_and_wait('……네.');
       await era.printAndWait([
         coffee.get_colored_name(),
-        '。',
+        '.',
         coffee.sex,
         '가 누구에게도 알려지지 않은 채 이어 온 추격이, 마침내 레이스 무대에서 본격적으로 시작된다.',
       ]);
@@ -451,7 +451,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 이제 ',
         coffee.sex,
-        '만이 아는 세계를 이해해 보기로 했다…… 그리고 한 걸음씩 성적을 쌓아 나갈 것이다.',
+        '만이 아는 세계를 이해해 보기로 했다…… 그리고 차근차근 성적을 쌓아 나갈 것이다.',
       ]);
     };
     f.title = title;
@@ -469,7 +469,7 @@ module.exports = {
         coffee.get_colored_name(),
         '와 함께 돌아가던 중에——',
       ]);
-      await coffee.say_and_wait(['……', callname, '。']);
+      await coffee.say_and_wait(['……', callname, '.']);
       await coffee.say_and_wait(
         '당신만 괜찮다면, 이따가…… 커피 한 잔 하지 않으실래요……',
       );
@@ -481,7 +481,7 @@ module.exports = {
       era.printButton('「물론이지.」', 1);
       await era.input();
       await coffee.say_and_wait('……고마워요.');
-      await coffee.say_and_wait('그럼, 저를 집중해서 보고…… 따라오세요……');
+      await coffee.say_and_wait('그럼, 저를 잘 보고…… 따라오세요……');
       await era.printAndWait([
         coffee.get_colored_name(),
         '는 ',
@@ -531,11 +531,11 @@ module.exports = {
       await coffee.say_and_wait('…………오래 기다리셨어요. 드셔 보세요.');
       await era.printAndWait([
         coffee.sex,
-        '가 내린 커피를 입에 머금었다. 찰나의 순간, 커피의 풍미와 온도가 마치 육체와 영혼 속으로 스며드는 것 같았다.',
+        '가 내린 커피를 입에 머금었다. 찰나에, 커피의 풍미와 온도가 마치 육체와 영혼 속으로 스며드는 것 같았다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         coffee.get_colored_name(),
         '는 마주 앉아 조용히 커피를 음미했다.',
       ]);
@@ -554,7 +554,7 @@ module.exports = {
         3,
       );
       await era.input();
-      await coffee.say_and_wait('……너무 과찬이세요.');
+      await coffee.say_and_wait('……과찬이세요.');
       await coffee.say_and_wait('하지만…… 저도, 같은 마음이에요.');
       await era.printAndWait([
         you.get_colored_name(),
@@ -638,7 +638,7 @@ module.exports = {
       ]);
       await era.printAndWait('——스윽, 스스스슥……');
       await era.printAndWait([
-        '땅의 모래가 갑자기 이상해졌다. ',
+        '땅바닥의 모래가 갑자기 이상해졌다. ',
         coffee.get_colored_name(),
         '가 지나간 자리에 무거운 것을 끌고 간 듯한 자국이 남아 있었다.',
       ]);
@@ -807,7 +807,7 @@ module.exports = {
         `${coffee.sex}에게 커피를 느긋하게 음미하게 해 준다(체력+400)`,
         2,
       );
-      era.printButton('「밖을 돌아다니자」(스킬 Pt+30)', 3);
+      era.printButton('「밖을 돌아다니자.」(스킬 Pt+30)', 3);
       const ret = await era.input();
       switch (ret) {
         case 1:
@@ -939,7 +939,7 @@ module.exports = {
           call_32,
           '도 출전하는 ',
           hoch_sho,
-          '。',
+          '.',
         ]);
         await era.printAndWait([
           hoch_sho,
@@ -948,7 +948,7 @@ module.exports = {
           '이 클래식 삼관을 향해 나아가는 데 중요한 일전이다.',
         ]);
       } else {
-        await coffee.say_and_wait(['……', hoch_sho, '。']);
+        await coffee.say_and_wait(['……', hoch_sho, '.']);
       }
       era.printButton('「이유를 물어봐도 될까?」', 1);
       await era.input();
@@ -1093,7 +1093,7 @@ module.exports = {
       await coffee.say_and_wait([
         '하아, 하아…… ',
         callname,
-        '、',
+        ', ',
         you.adult_sex_title,
         '……콜록, 콜록……',
       ]);
@@ -1103,7 +1103,7 @@ module.exports = {
       await era.printAndWait([
         '이번 ',
         hoch_sho,
-        '、',
+        ', ',
         coffee.get_colored_name(),
         '의 상대들은 모두 강했다. 끝까지 손에 땀을 쥐고 지켜보던 ',
         you.get_colored_name(),
@@ -1133,7 +1133,7 @@ module.exports = {
           callname_32,
           ', 그리고 ',
           t_call_c,
-          '。',
+          '.',
         ]);
         await era.printAndWait([
           '이번에는 ',
@@ -1174,7 +1174,7 @@ module.exports = {
           tachyon.get_colored_name(),
           '은 갑자기 나타나 난해한 말을 하고 제멋대로 떠났다. 멀어지는 모습을 바라보며 말문을 잃은 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           coffee.get_colored_name(),
           '만 남겨졌다.',
         ]);
@@ -1205,7 +1205,7 @@ module.exports = {
         you.get_colored_name(),
         '이(가) ',
         coffee.get_colored_name(),
-        '에게 따내기를 바라는 레이스다. 하지만 다음 목표를 더비로 잡는다면 ',
+        '에게 우승을 기대하는 레이스다. 하지만 다음 목표를 더비로 잡는다면 ',
         coffee.sex,
         '가 버틸 수 있을지 도박을 하는 셈이다……',
       ]);
@@ -1428,13 +1428,13 @@ module.exports = {
       await era.printAndWait([
         '트레센의 관례대로 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         coffee.get_colored_name(),
         '는 여름 합숙에 왔다.',
       ]);
       await era.printAndWait([
         coffee.get_colored_name(),
-        '의 원래부터 좋지 않았던 몸은 그동안의 트레이닝과 레이스로 피로가 쌓여 있었다. 이 기간에 어떻게든 회복시켜야 한다.',
+        '는 원래 몸 상태가 좋지 않은 데다 그동안의 트레이닝과 레이스로 피로까지 쌓여 있었다. 이 기간에 어떻게든 회복시켜야 한다.',
       ]);
       await era.printAndWait([
         '하지만 ',
@@ -1460,7 +1460,7 @@ module.exports = {
         await tachyon.say_and_wait([
           '흐음~ 심령 현상보다는 신비라고 해야겠지. 그렇지 않나? ',
           callname_32,
-          '。',
+          '.',
         ]);
         await era.printAndWait([
           '조금 떨어진 곳에서 허공에 중얼거리는 ',
@@ -1474,7 +1474,7 @@ module.exports = {
         await tachyon.say_and_wait([
           '자네가 ',
           t_call_c,
-          '와(과) 무슨 일을 겪었는지는 잘 모르지만, 보이는 괴물보다 보이지 않는 존재가 더 성가신 법이지. 그러니 거리는 둬야 할 걸세.',
+          '과(와) 무슨 일을 겪었는지는 잘 모르지만, 보이는 괴물보다 보이지 않는 존재가 더 성가신 법이지. 그러니 거리는 둬야 할 걸세.',
         ]);
         await tachyon.say_and_wait([
           t_call_c,
@@ -1503,7 +1503,7 @@ module.exports = {
       await era.printAndWait(
         '평소에는 깊이 알아볼 시간도 여력도 없다. 하지만 여름 합숙이라는 기회라면……',
       );
-      await coffee.say_and_wait(['…………？ ', callname, ', 무슨 일이세요?']);
+      await coffee.say_and_wait(['…………? ', callname, ', 무슨 일이세요?']);
       era.printButton('「올여름에는…… 제대로 이야기하자.」', 1);
       await era.input();
       await coffee.say_and_wait('……기꺼이요.');
@@ -1582,7 +1582,7 @@ module.exports = {
         '사실상의 은퇴 선언…… 그렇게 받아들여도 되겠습니까?',
       );
       await tachyon.print_and_wait(
-        '그렇게 물어도 의미는 없네. 미래에 무슨 일이 일어날지는 누구도 확정할 수 없으니까.',
+        '그렇게 물어도 의미는 없네. 미래에 무슨 일이 일어날지는 누구도 확신할 수 없으니까.',
       );
       await tachyon.print_and_wait('그럼 발표는 이상이네.');
       await era.printAndWait([
@@ -1610,9 +1610,9 @@ module.exports = {
         tachyon.get_colored_name(),
         '이 방문을 열고 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         coffee.get_colored_name(),
-        '의 시선을 받아 냈다.',
+        '의 시선을 받았다.',
       ]);
       await tachyon.say_and_wait([
         '간단히 말하자면, ',
@@ -1699,7 +1699,7 @@ module.exports = {
      * @param {string} callname マンハッタンカフェがプレイヤーを呼ぶときの呼称
      */
     const f = async (coffee, you, callname) => {
-      await coffee.say_and_wait([callname, '……친구에 관한…… 이야기죠……?']);
+      await coffee.say_and_wait([callname, '…… 친구에 관한…… 이야기죠……?']);
       era.printButton('「응. 자세히 알고 싶어.」', 1);
       await era.input();
       await era.printAndWait([
@@ -1721,7 +1721,7 @@ module.exports = {
         coffee.sex,
         '를 이끌어 왔다고 한다.',
       ]);
-      await era.printAndWait('하지만 그 이끎이란 대체 무엇을 뜻할까.');
+      await era.printAndWait('하지만 이끌어 준다는 건 대체 무슨 뜻일까?');
       await coffee.say_and_wait('무엇이…… 궁금하신가요?');
       era.printButton('「친구가 이끌어 준다는 건 무슨 뜻이야?」', 1);
       await era.input();
@@ -1834,9 +1834,9 @@ module.exports = {
           await coffee.say_and_wait([
             '앗, ',
             callname,
-            '……파도에 떠밀려 해변으로 올라온 저건……',
+            '…… 파도에 떠밀려 해변으로 올라온 저건……',
           ]);
-          await coffee.say_and_wait('해조류 덩어리일까요.');
+          await coffee.say_and_wait('해조류 덩어리일까요?');
           await era.printAndWait(
             '그곳에 있는 것은 바다의 오물을 잔뜩 머금고 뒤엉킨 식물 잔해였다……',
           );
@@ -1935,7 +1935,7 @@ module.exports = {
       ]);
       if (t_plan_b) {
         await era.printAndWait([
-          '한여름 동안의 필사적인 케어가 성공하여, ',
+          '한여름 동안 정성껏 돌본 보람이 있어, ',
           coffee.get_colored_name(),
           '의 컨디션이 눈에 띄게 개선되었다.',
         ]);
@@ -1961,7 +1961,7 @@ module.exports = {
           '과 합숙 중에 알게 된 정보와 친구에 관한 이야기를 공유했다.',
         ]);
         await tachyon.say_and_wait([
-          '과연 그렇군. 의미불명인 구석이 있긴 해도, 전체적으로 꽤 흥미로…… 아니, ',
+          '과연 그렇군. 뜻을 알 수 없는 부분이 있긴 해도, 전체적으로 꽤 흥미로…… 아니, ',
           t_call_c,
           '에게 유익한 일이군.',
         ]);
@@ -2035,7 +2035,7 @@ module.exports = {
         await tachyon.say_and_wait([
           '후후, 실험 전에 결과를 논해 봐야 의미 없네, ',
           t_call_c,
-          '。',
+          '.',
         ]);
         await tachyon.say_and_wait([
           '레이스장에서 확인하도록 하지. ',
@@ -2100,7 +2100,7 @@ module.exports = {
       await era.printAndWait([
         '좋은 경기를 펼친 뒤에도 ',
         coffee.sex,
-        '에게는 여전히 조금 나약한 기색이 남아 있었다. 하지만 몸은 여름의 단련 덕분에 예전보다 훨씬 튼튼해진 듯했다.',
+        '에게는 여전히 조금 허약한 기색이 남아 있었다. 하지만 몸은 여름의 단련 덕분에 예전보다 훨씬 튼튼해진 듯했다.',
       ]);
       await era.printAndWait([
         '여기서 긴장을 늦춰서는 안 된다. 한 달 뒤에는 중요한——',
@@ -2258,7 +2258,7 @@ module.exports = {
         coffee.get_colored_name(),
         '의 몸을 괴롭히던 괴이한 현상이 사라졌다는 것을 알 수 있었다.',
       ]);
-      await coffee.say_and_wait([callname, '……다음 목표는요?']);
+      await coffee.say_and_wait([callname, '…… 다음 목표는요?']);
       await era.printAndWait('흥분이 가라앉으면 다음 목표를 정할 차례다.');
       era.printButton('「……아리마 기념이야.」', 1);
       await era.input();
@@ -2361,7 +2361,7 @@ module.exports = {
      * @param {PrintedSpan} arim_kin 有馬記念（着色名）
      */
     const f = async (coffee, you, callname, arim_kin) => {
-      await era.printAndWait([arim_kin, '。']);
+      await era.printAndWait([arim_kin, '.']);
       await era.printAndWait([
         coffee.get_colored_name(),
         '의 올해 마지막 레이스이자 동시에 ',
@@ -2454,7 +2454,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         coffee.sex,
-        '의 신발과 양말을 벗기자 익숙한 발톱 균열이 다시 나타나 있었다. 체중의 급격한 변화는 가라앉았는데, 설마 아직도……',
+        '의 신발과 양말을 벗기자 익숙한 발톱에 다시 금이 가 있었다. 급격하던 체중 변화는 잦아들었는데, 설마 아직도……',
       ]);
       await era.printAndWait([
         coffee.get_colored_name(),
@@ -2564,7 +2564,7 @@ module.exports = {
         coffee.get_colored_name(),
         '의 모습이 조금 이상해졌다…… 하지만 늘 그런 것은 아니었다.',
       ]);
-      await era.printAndWait(['평소의 ', coffee.sex, '는 매우 정숙하지만——']);
+      await era.printAndWait(['평소의 ', coffee.sex, '는 무척 조용하지만——']);
       await era.printAndWait(
         '스태프 「현장에 계신 여러분, 새해 기도를 합시다! 어떤 소원이든 신님께서 반드시 들어주실 거예요!」',
       );
@@ -2574,7 +2574,7 @@ module.exports = {
         '소원 같은 건 이루어지지 않아요. 이곳에는 신 같은 건 존재하지 않으니까요.',
       );
       await era.printAndWait([
-        '——하지만…… 가끔 이렇게 변하곤 한다. 도대체 무엇이 스위치가 되어 ',
+        '——하지만…… 가끔 이렇게 변하곤 한다. 도대체 무엇이 계기가 되어 ',
         coffee.sex,
         '를 변화시킨 걸까?',
       ]);
@@ -2596,7 +2596,7 @@ module.exports = {
       await coffee.say_and_wait([
         '친구를 쫓아가기 위해서…… ',
         callname,
-        '은 저를 위해 어떤 소원을 빌어 주실 건가요?',
+        '은(는) 저를 위해 어떤 소원을 빌어 주실 건가요?',
       ]);
       await coffee.say_and_wait('이 중에서…… 하나 골라 보세요.');
       await era.printAndWait(
@@ -2605,16 +2605,16 @@ module.exports = {
       await era.printAndWait([
         '이미 몇 차례 영적 현상을 겪었음에도 불구하고, ',
         you.get_colored_name(),
-        '은(는) 몸서리쳐지는 공포를 느꼈다.',
+        '은(는) 몸서리칠 만큼의 공포를 느꼈다.',
       ]);
       await era.printAndWait([
         '그중에서 ',
         you.get_colored_name(),
         '이(가) 선택한 것은——',
       ]);
-      era.printButton('「별빛의 치유」（체력 +500）', 1);
-      era.printButton('「전신의 비늘」（전 능력치 +10）', 2);
-      era.printButton('「망자의 예지」（스킬 포인트 +35）', 3);
+      era.printButton('「별빛의 치유」 (체력 +500)', 1);
+      era.printButton('「전신의 비늘」 (전 능력치 +10)', 2);
+      era.printButton('「망자의 예지」 (스킬 포인트 +35)', 3);
       const ret = await era.input();
       switch (ret) {
         case 1:
@@ -2644,7 +2644,7 @@ module.exports = {
             '전신의 비늘…… 머리카락도…… 망막도…… 영혼도…… 비늘로 뒤덮듯이……',
           );
           await coffee.say_and_wait(
-            '저라는 존재를 더 강하게 만들 수 있다면. 아아……',
+            '저라는 존재를 더 강하게 만들 수 있다면…… 아아……',
           );
           await era.printAndWait('——첨벙.');
           await era.printAndWait(
@@ -2680,7 +2680,7 @@ module.exports = {
             '의 머릿속으로 흘러 들어왔다.',
           ]);
           await era.printAndWait(
-            '실존했는지조차 알 수 없는 풍경들과 고대의 지혜가 한꺼번에 몰아쳤지만, 이내 수면 위의 파문처럼 금방 사라져 버렸다. 결국 기억에 남은 것은 수박 겉핥기 정도에 불과했다.',
+            '실존했는지조차 알 수 없는 풍경들과 고대의 지혜가 한꺼번에 몰아쳤지만, 이내 수면 위의 파문처럼 금방 사라져 버렸다. 결국 기억에 남은 것은 극히 일부에 불과했다.',
           );
           await era.printAndWait('하지만 그 정도만으로도……');
           await coffee.say_and_wait([
@@ -2741,7 +2741,7 @@ module.exports = {
         await tachyon.say_and_wait([
           '여어, ',
           t_call_c,
-          '와(과) ',
+          '과(와) ',
           callname_32,
           '. 표정들이 대단하군.',
         ]);
@@ -2756,9 +2756,9 @@ module.exports = {
           '…… 당신이 출전해도, 저를 막을 수는 없어요……',
         ]);
         await tachyon.say_and_wait([
-          '하하, 막는다고? ……시작하기도 전에 승리를 확신하지 말게, ',
+          '하하, 막는다고? …… 시작하기도 전에 승리를 확신하지 말게, ',
           coffee.get_colored_name(),
-          '。',
+          '.',
         ]);
         await era.printAndWait(
           '맞서는 두 사람. 승부는 레이스장에서 가릴 수밖에 없었다.',
@@ -2773,7 +2773,7 @@ module.exports = {
         await era.printAndWait([
           '할 수만 있다면…… 친구를 쫓는 건 그만두라고 말하고 싶었다——물론 그런 말을 꺼낼 수는 없었다. 그것은 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           coffee.get_colored_name(),
           '가 계약을 맺을 때 가장 먼저 나눈 약속이었으니까.',
         ]);
@@ -2893,7 +2893,7 @@ module.exports = {
         coffee.get_colored_name(),
         '에게 당분간 휴식을 주는 것도 나쁘지 않겠다……',
       ]);
-      await coffee.say_and_wait('——프랑스 원정을, 가고 싶어요.');
+      await coffee.say_and_wait('——프랑스 원정을 가고 싶어요.');
       await era.printAndWait('！？');
       await era.printAndWait([
         '순간, ',
@@ -2918,7 +2918,7 @@ module.exports = {
         await era.printAndWait([
           '갑자기 ',
           you.get_colored_name(),
-          '의 머릿속에 허공에서 어떤 의지가 나타난 듯했다.',
+          '의 머릿속에 난데없이 어떤 의지가 나타난 듯했다.',
         ]);
         await era.printAndWait([
           '아니라고? 뭐가 아니란 거지. ',
@@ -2929,7 +2929,7 @@ module.exports = {
         ]);
       }
       era.println();
-      await coffee.say_and_wait([callname, '…… 이 부탁, 들어주실 거죠?']);
+      await coffee.say_and_wait([callname, '…… 이 부탁, 들어 주실 거죠?']);
       await coffee.say_and_wait(
         '친구도 가 주었으면 한다고 말하고 있어요. 그러니까……',
       );
@@ -2955,7 +2955,7 @@ module.exports = {
       await era.printAndWait([
         '반박할 수 없었다. 그것은 분명 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         coffee.get_colored_name(),
         ' 사이에 맺어진 계약의 근간이었다.',
       ]);
@@ -3010,7 +3010,7 @@ module.exports = {
         coffee.get_colored_name(),
         '와 의논한 끝에, 해외 원정——프랑스 G1 레이스인 ',
         prix_lat,
-        '에 나가기로 정식으로 결정했다.',
+        '에 정식으로 출전하기로 했다.',
       ]);
       await era.printAndWait([
         coffee.get_colored_name(),
@@ -3270,9 +3270,9 @@ module.exports = {
       await era.printAndWait([
         '공항에서 있었던 일로 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         coffee.get_colored_name(),
-        ' 사이에는 잠시 어색한 냉전이 흘렀다. 하지만 속마음을 털어놓고 시간이 흐르면서, 두 사람의 관계는 예전처럼——아니, 그보다 더 깊어졌다.',
+        ' 사이에는 잠시 어색한 냉전이 이어졌다. 하지만 속마음을 털어놓고 시간이 흐르면서, 두 사람의 관계는 예전처럼——아니, 그보다 더 깊어졌다.',
       ]);
       await era.printAndWait([
         coffee.sex,
@@ -3284,7 +3284,7 @@ module.exports = {
         '…… 여기가…… 저의 새로운 출발점이에요……',
       ]);
       await coffee.say_and_wait('친구가 없어도…… 저는 반드시——');
-      await coffee.say_and_wait('——！？');
+      await coffee.say_and_wait('——!?');
       era.printButton('「왜 그래?」', 1);
       await era.input();
       await coffee.say_and_wait('친구가! 통로 출구에…… 아직 기다리고 있어요!');
@@ -3305,7 +3305,7 @@ module.exports = {
         await tachyon.say_and_wait([
           '그렇게 단정하지는 말게, ',
           t_call_c,
-          '。',
+          '.',
         ]);
         await era.printAndWait([
           '준비를 마친 ',
@@ -3322,7 +3322,7 @@ module.exports = {
         ]);
         await coffee.say_and_wait('……할 수 있다면, 해 보세요……!');
         await era.printAndWait([
-          '두 사람 사이에 화약 냄새가 감돈다. 맞서는 두 사람은 ',
+          '두 사람 사이에 팽팽한 긴장감이 감돈다. 서로 맞선 두 사람은 ',
           takz_kin,
           '에서 마지막 승부를 맞이한다.',
         ]);
@@ -3392,15 +3392,15 @@ module.exports = {
       await era.printAndWait([
         '이 년 반 전, ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         coffee.get_colored_name(),
         '가 우연히 만났을 무렵, ',
         coffee.sex,
-        '는 한밤의 트레이닝장에서 보이지 않는 무언가를 홀로 쫓는 고고한 ',
+        '는 한밤의 트레이닝장에서 보이지 않는 무언가를 홀로 쫓던 고고한 ',
         coffee.uma_sex_title,
         '였다.',
       ]);
-      await era.printAndWait('돌이켜 보면, 참으로 먼 길을 걸어왔다.');
+      await era.printAndWait('돌이켜 보면, 참으로 먼 길을 걸어 왔다.');
       await era.printAndWait([
         '해외 원정을 가지는 못했지만, 그래도 ',
         coffee.get_colored_name(),
@@ -3426,7 +3426,7 @@ module.exports = {
       ]);
       if (t_plan_b) {
         await era.printAndWait('그렇다면, 진짜 파리는?');
-        await tachyon.say_and_wait(['내가 졌네, ', t_call_c, '。']);
+        await tachyon.say_and_wait(['내가 졌네, ', t_call_c, '.']);
         await era.printAndWait([
           tachyon.get_colored_name(),
           '이 선수 통로로 들어와 담담하게 패배를 인정했다.',
@@ -3443,7 +3443,7 @@ module.exports = {
           prix_lat,
           '…… 내가 달리는 마지막 레이스가 될지도 모르겠어. 자네와 겨루는 건 언제나 즐거웠다네, ',
           t_call_c,
-          '。',
+          '.',
         ]);
         await coffee.say_and_wait('……당신의 레이스도, 보러 갈게요.');
         await era.printAndWait([
@@ -3512,7 +3512,7 @@ module.exports = {
         '가 편하게 잘 수 있도록 했다.',
       ]);
       await coffee.say_and_wait('………………으음……');
-      await era.printAndWait('참 귀여운 잠든 얼굴이다.');
+      await era.printAndWait('잠든 얼굴이 참 귀엽다.');
       await era.printAndWait([
         you.get_colored_name(),
         '에게도 졸음이 몰려와, ',
@@ -3536,7 +3536,7 @@ module.exports = {
       await era.printAndWait([
         '이번 여름에는 특별한 일이 없었다. ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         coffee.get_colored_name(),
         '는 매일 해변에서 트레이닝을 했고, ',
         coffee.get_colored_name(),
@@ -3562,9 +3562,9 @@ module.exports = {
         await era.printAndWait([
           '무거운 분위기가 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           coffee.get_colored_name(),
-          ' 두 사람을 감싼다. 이세계 경주마의 영혼, 신비로운 친구. 여러 인자가 ',
+          ' 두 사람을 감싼다. 이세계 경주마의 영혼, 신비로운 친구. 여러 요소가 ',
           coffee.get_colored_name(),
           '에게 얽혀 ',
           coffee.sex,
@@ -3603,16 +3603,16 @@ module.exports = {
     ) => {
       await era.printAndWait([japa_cup, ' 당일, 선수 통로.']);
       await era.printAndWait([
-        '우연한 만남으로 시작된 두 사람은 마침내 여기까지 왔다.',
+        '우연히 만나 인연을 맺은 두 사람은 마침내 여기까지 왔다.',
       ]);
       await coffee.say_and_wait('…………');
       await era.printAndWait([
         you.get_colored_name(),
-        '와(과) 나란히 걷던 ',
+        '과(와) 나란히 걷던 ',
         coffee.get_colored_name(),
         '가 갑자기 걸음을 멈추었다. 돌아본 ',
         you.get_colored_name(),
-        '와(과) 눈이 마주쳤다.',
+        '과(와) 눈이 마주쳤다.',
       ]);
       era.printButton('「긴장돼?」', 1);
       await era.input();
@@ -3744,7 +3744,7 @@ module.exports = {
         you.get_colored_name(),
         '도 진심으로 나무랄 생각은 없었다. 마사지를 하며 잔소리를 늘어놓은 뒤, 오늘 ',
         coffee.get_colored_name(),
-        '가 한 행동을 용서했다.',
+        '가 무리한 일을 더는 나무라지 않았다.',
       ]);
       await coffee.say_and_wait([
         callname,
@@ -3755,7 +3755,7 @@ module.exports = {
       await era.printAndWait([
         '마사지가 끝나고 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         coffee.get_colored_name(),
         '가 짐을 챙겨 트레센으로 돌아가려 할 때, ',
         coffee.sex,
@@ -3766,7 +3766,7 @@ module.exports = {
       await era.printAndWait([
         '생각해 보면 ',
         coffee.get_colored_name(),
-        '와 함께 걸어온 날들도 곧 삼 년이다. 즐거운 일도, 다툰 일도 있었고, 괴이 때문에 위험에 빠진 적도 있었다. 하지만 ',
+        '와 함께 걸어온 지도 곧 삼 년이다. 즐거운 일도, 다툰 일도 있었고, 괴이 때문에 위험에 빠진 적도 있었다. 하지만 ',
         you.get_colored_name(),
         '은(는) ',
         coffee.sex,
@@ -3837,7 +3837,7 @@ module.exports = {
       await era.printAndWait([
         '삼 년 동안 ',
         you.get_colored_name(),
-        '와(과) 쌓아 온 작은 추억들을 가슴에 품고, ',
+        '과(와) 쌓아 온 작은 추억들을 가슴에 품고, ',
         coffee.get_colored_name(),
         '는 마지막 게이트를 향해 걸어갔다.',
       ]);
@@ -3855,7 +3855,7 @@ module.exports = {
     const f = async (coffee, you, callname) => {
       await you.say_as_passer_by_and_wait('해설', [
         coffee.get_colored_name(),
-        '！ ',
+        '! ',
         coffee.get_colored_name(),
         '입니다——! 결승선을 통과하고도 ',
         coffee.sex,
@@ -3972,14 +3972,14 @@ module.exports = {
         '에게 존경받는 존재가 되어 있었다.',
       ]);
       await you.say_as_passer_by_and_wait(
-        `${coffee.uma_sex_title}A`,
+        `${coffee.uma_sex_title} A`,
         '저기~ 카페 씨…… 더트에서 잘 달리는 방법을 알려 주세요. 늘 잘 안 돼서요……',
       );
       await coffee.say_and_wait('더트…… 그렇군요……');
       await coffee.say_and_wait('너무 힘을 주지 않는 편이 좋을 것 같아요.');
       await coffee.say_and_wait('모래 속에서…… 추를 흔들듯이……');
       await you.say_as_passer_by_and_wait(
-        `${coffee.uma_sex_title}B`,
+        `${coffee.uma_sex_title} B`,
         '다음은 저요! 이번에는 도주에 도전해 보려고 하는데, 요령이 있을까요!?',
       );
       await coffee.say_and_wait('도주…… 별로 자신 있는 분야는 아니지만……');
@@ -4001,14 +4001,14 @@ module.exports = {
         coffee.uma_sex_title,
         '의 질문에 ',
         coffee.get_colored_name(),
-        '는 누구에게나 영감 어린 조언을 해 주었고, 그것은 실제로 ',
+        '는 누구에게나 영감을 주는 조언을 해 주었고, 그것은 실제로 ',
         coffee.couple_title,
         '에게 도움이 되었다.',
       ]);
       await era.printAndWait([
         '트레이너인 ',
         you.get_colored_name(),
-        '조차 스스로가 미치지 못함을 느낄 정도였다.',
+        '조차 자신은 그만한 조언을 해 줄 수 없겠다고 느낄 정도였다.',
       ]);
       era.drawLine();
       await coffee.say_and_wait([
@@ -4102,7 +4102,7 @@ module.exports = {
      */
     const f = async (coffee, you, callname) => {
       await era.printAndWait([
-        '깊은 밤, 새까만 학원에서 울음소리가 들려온다. 아이일까.',
+        '깊은 밤, 어둠에 잠긴 학원에서 울음소리가 들려온다. 아이일까.',
       ]);
       era.println();
       era.printButton('어서 기숙사로 돌아가자……', 1);
@@ -4123,7 +4123,7 @@ module.exports = {
           Array.isArray(e) ? e[0] : e,
         );
         const buffer = [];
-        buffer.push({ content: '？？？', fontWeight: 'bold' }, '「');
+        buffer.push({ content: '???', fontWeight: 'bold' }, '「');
         const content = '싫어, 싫어';
         for (let i = 0; i < content.length; ++i) {
           buffer.push({
@@ -4170,7 +4170,7 @@ module.exports = {
         ]);
       } else {
         await era.printAndWait([
-          '어째서인지 아이를 찾으려 마음을 다잡는 순간, ',
+          '어째서인지 아이를 찾겠다고 마음먹는 순간, ',
           you.get_colored_name(),
           '의 발걸음은 점점 빨라졌고 불이 켜진 기숙사 문이 가까워졌다. 머릿속의 울음소리는 오히려 작아져 갔다.',
         ]);
@@ -4324,7 +4324,7 @@ module.exports = {
         coffee.get_colored_name(),
         ' ',
         coffee.adult_sex_title,
-        '。」',
+        '.」',
       ]);
       era.println();
       await coffee.say_and_wait([
@@ -4346,7 +4346,7 @@ module.exports = {
       await coffee.print_and_wait([
         '——맞아요…… ',
         callname,
-        '의 밤샘에 함께해 주다가 지쳐 잠든 것이었다.',
+        '의 밤샘에 함께하다가 지쳐 잠든 것이었다.',
       ]);
       era.println();
       await coffee.say_and_wait([

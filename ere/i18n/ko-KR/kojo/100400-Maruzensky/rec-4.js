@@ -55,11 +55,11 @@ module.exports = {
     );
     maru.say('어머, 별난 트레이너네……');
     era.print(
-      `${maru.name}은(는) 곤란한 표정을 지었지만 곧 평소의 모습으로 돌아왔다.`,
+      `${maru.name}는 곤란한 표정을 지었지만 곧 평소의 모습으로 돌아왔다.`,
     );
     maru.say('그럼 트레이너 군은 어떤 우마무스메를 찾고 있는지 물어봐도 될까?');
     era.print(
-      `${you.name}은(는) ${maru.name}이(가) 달릴 때 보여 준 만족스러운 모습에 넋을 잃고 말았다고 솔직히 이야기했다.`,
+      `${you.name}은(는) ${maru.name}가 달릴 때 보여 준 만족스러운 모습에 넋을 잃고 말았다고 솔직히 이야기했다.`,
     );
     await maru.say_and_wait(
       '……그랬구나. 정말 별난 트레이너네. 그럼 앞으로도 내가 달리는 모습을 지켜봐 줘.',
@@ -72,7 +72,7 @@ module.exports = {
    */
   async rec_rooftop(maru, you, callname) {
     await era.printAndWait(
-      `${you.name}이(가) 옥상에 올라가자 다시 ${maru.name}와(과) 마주쳤다.`,
+      `${you.name}이(가) 옥상에 올라가자 다시 ${maru.name}와 마주쳤다.`,
     );
     await maru.say_and_wait([
       '……응응, 후배들은 참 귀엽네♪ 또 궁금한 게 있으면 언제든 ',
@@ -80,11 +80,11 @@ module.exports = {
       '에게 물어봐♪',
     ]);
     era.print(
-      `${maru.name}은(는) 휴대폰을 내려놓고 운동장에서 연습하는 후배 우마무스메들을 바라보고 있었다. 콧노래에 맞춰 꼬리가 리듬을 타며 흔들렸다.`,
+      `${maru.name}는 휴대폰을 내려놓고 운동장에서 연습하는 후배 우마무스메들을 바라보고 있었다. 콧노래에 맞춰 꼬리가 리듬을 타며 흔들렸다.`,
     );
     await maru.say_and_wait('역시 맑은 날 먹는 도시락이 최고지♪');
     era.print(
-      `${maru.name}은(는) 도시락을 열다가 무심코 앞을 둘러보고 ${you.name}을(를) 발견했다.`,
+      `${maru.name}는 도시락을 열다가 무심코 주위를 둘러보고 ${you.name}을(를) 발견했다.`,
     );
     await maru.say_and_wait([
       '무슨 일이…… 어머♪ 얼마 전에 훈련장에서 만난 ',
@@ -104,18 +104,18 @@ module.exports = {
       '무패 삼관, 황제를 뛰어넘는 것, 아니면 담당과 함께 세계 무대에 도전하는 걸까?',
     );
     await maru.say_and_wait('뭐든 누나한테 상담해도 좋아♪');
-    era.print(`${maru.name}은(는) 미소를 지으며 ${you.name}을(를) 살폈다.`);
+    era.print(`${maru.name}는 미소를 지으며 ${you.name}을(를) 살폈다.`);
     era.print(
       `${you.name}의 머릿속에 그 붉은 그림자와 달릴 때의 만족스러운 미소가 떠올랐다.`,
     );
     era.printButton(
-      '담당이 달릴 때 달리기의 즐거움을 마음껏 만끽하는 모습을 보고 싶어.',
+      '담당이 마음껏 달리며 그 즐거움을 만끽하는 모습을 보고 싶어.',
       1,
     );
     await era.input();
     await maru.say_and_wait('！');
     era.print(
-      `${maru.name}의 귀가 눈에 띄게 떨렸다. 꼬리가 ${maru.name}이(가) ${you.name}을(를) 살피는 박자에 맞춰 흔들렸다.`,
+      `${maru.name}의 귀가 눈에 띄게 떨렸다. 꼬리가 ${maru.name}가 ${you.name}을(를) 살피는 박자에 맞춰 흔들렸다.`,
     );
     await maru.say_and_wait('……그러네. 너, 내 트레이너가 되어 주지 않을래?');
 

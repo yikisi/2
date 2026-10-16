@@ -7,7 +7,7 @@ const { get } = require('#/era-electron');
 const { get_random_entry } = require('#/utils/list-utils');
 
 module.exports = {
-  contestants_conjunction: '와(과) ',
+  contestants_conjunction: '과(와) ',
   prepare_report_sim: '선수들이 편자를 확인하고 있습니다……',
   /** @param {PrintedSpan} chara 1番人気の選手名 */
   get_prepare_report_high_mot: (chara) => [
@@ -45,31 +45,31 @@ module.exports = {
    */
   get_prepare_record_sats_sho: (chara, uma) => [
     chara,
-    '은(는) 무사히 게이트에 들어갔습니다. 앞으로 명',
+    '은(는) 무사히 게이트에 들어갔습니다. 앞으로 이름을 떨칠 ',
     uma,
-    '이(가) 될 예감이 드는군요.',
+    '가 될 예감이 드는군요.',
   ],
   /** @param {string} uma ウマ娘 or ウマ郎 */
   get_prepare_record_toky_yus: (uma) => [
     uma,
-    '일생에 단 한 번인 더비. 곧 승자가 결정됩니다.',
+    '에게 일생에 단 한 번뿐인 더비. 곧 승자가 결정됩니다.',
   ],
   /** @param {PrintedSpan} race レース名 */
   get_prepare_record_kiku_sho: (race) => [
-    '올해의',
+    '올해의 ',
     race,
     '은(는) 그야말로 군웅할거, 강호들이 모였습니다.',
   ],
   /** @param {PrintedSpan} chara 1番人気の選手名 */
   get_prepare_record_takz_kin: (chara) => [
-    '여러분의 꿈은 누구입니까? 저의 꿈은',
+    '여러분의 꿈은 누구입니까? 저의 꿈은 ',
     chara,
     '입니다',
   ],
   beginning_report_sim: [
-    '출발 게이트 점검 중...',
-    '스타팅 건 점검 중...',
-    '우마무스메 입장...',
+    '출발 게이트 점검 중……',
+    '스타팅 건 점검 중……',
+    '우마무스메 입장……',
     '출발!',
   ],
   /**
@@ -95,7 +95,7 @@ module.exports = {
       [
         '곧 출발합니다……',
         ['출전 ', uma, ' ', gates, '명……'],
-        [get('flag:当前年').toString(), '년', race, '……'],
+        [get('flag:当前年').toString(), '년 ', race, '……'],
         '——스타트!',
       ],
     ];
@@ -117,12 +117,12 @@ module.exports = {
     first,
     '이(가) 먼저 치고 나왔습니다! 다른 ',
     uma,
-    '이(가) 뒤따르고, 마지막은 ',
-    Math.random() < 0.5 ? '출발이 늦은' : '뒤처진',
+    '가 뒤따르고, 마지막은 ',
+    Math.random() < 0.5 ? '출발이 늦은 ' : '뒤처진 ',
     last,
     '!',
   ],
-  location_change_location_report_template: '%LANE%에 진입',
+  location_change_location_report_template: '%LANE%에 진입 ',
   get_location_change_slope_report: (up_slope) =>
     `주행 구간: ${up_slope ? '오르막' : '내리막'}`,
   get_location_change_slope_over_report: (up_slope) =>
@@ -323,7 +323,7 @@ module.exports = {
       top,
       '을(를) 제친 지금이야말로 ',
       over,
-      '의 승리할 때입니다!',
+      '의 승부를 결정지을 순간입니다!',
     ],
     (top) => [top, '이(가) 선두! 승기를 굳혔을까요!'],
   ],

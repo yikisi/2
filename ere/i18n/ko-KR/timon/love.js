@@ -16,7 +16,7 @@ module.exports = {
      */
     const f = async (chara, you) => {
       await chara.print_and_wait([
-        '어느 날 밤,',
+        '어느 날 밤, ',
         chara.get_colored_name(),
         '은(는) 격렬하게 혼자 자위하면서 ',
         you.get_colored_name(),
@@ -35,7 +35,7 @@ module.exports = {
     const f = async (chara, you) => {
       const ret = [];
       await chara.print_and_wait([
-        '어느 날 밤,',
+        '어느 날 밤, ',
         chara.get_colored_name(),
         '은(는) 자신이',
         you.get_colored_name(),
@@ -89,7 +89,7 @@ module.exports = {
       // FLAGNAME:5 = 当前互动角色
       if (era.get('flag:5') > 0) {
         await era.printAndWait([
-          '트레이너실로 돌아오자,',
+          '트레이너실로 돌아오자, ',
           chara.get_colored_name(),
           '은(는) 긴장한 얼굴로',
           you.get_colored_name(),
@@ -97,7 +97,7 @@ module.exports = {
         ]);
       } else {
         await era.printAndWait([
-          '트레이너실로 돌아오자,',
+          '트레이너실로 돌아오자, ',
           chara.get_colored_name(),
           '은(는) 긴장한 얼굴로',
           you.get_colored_name(),
@@ -115,7 +115,7 @@ module.exports = {
       if (ret[0] === 1) {
         await era.printAndWait([
           you.get_colored_name(),
-          '의 승낙을 듣자,',
+          '의 승낙을 듣자, ',
           chara.get_colored_name(),
           '은(는) 긴장했던 얼굴을 풀고 흥분한 듯',
           // CFLAGNAME:6 = 身高
@@ -128,7 +128,7 @@ module.exports = {
         ]);
       } else {
         await era.printAndWait([
-          '가슴속에 만감이 교차했지만,',
+          '가슴속에 만감이 교차했지만, ',
           you.get_colored_name(),
           '은(는) 두 사람이 평생 함께할 수는 없으리라 믿었다.',
         ]);
@@ -137,9 +137,9 @@ module.exports = {
           '은(는) 붉은 입술을 살짝 깨물며 온몸을 떨고 눈물을 참았다.',
         ]);
         await era.printAndWait([
-          '예의를 다하기 위해,',
+          '예의를 다하기 위해, ',
           you.get_colored_name(),
-          `은(는)${chara.sex}을(를) 정성껏 위로하며 슬픔의 소나기가 잦아들 때까지 곁을 지켰다.`,
+          `은(는)${chara.sex}를 정성껏 위로하며 슬픔의 소나기가 잦아들 때까지 곁을 지켰다.`,
         ]);
       }
       return ret;
@@ -155,7 +155,7 @@ module.exports = {
      */
     const f = async (chara, you) => {
       await chara.print_and_wait([
-        '어느 날 밤,',
+        '어느 날 밤, ',
         chara.get_colored_name(),
         '은(는) 자신과',
         you.get_colored_name(),
@@ -179,16 +179,16 @@ module.exports = {
     const f = async (chara, you) => {
       const ret = [];
       await era.printAndWait([
-        '어느 날,',
+        '어느 날, ',
         chara.get_colored_name(),
         '은(는)',
         you.get_colored_name(),
         '을(를) 데리고 나가 데이트했다.',
       ]);
       era.print([
-        '하루 동안 낭만을 즐기며 함께한 뒤,',
+        '하루 동안 낭만을 즐기며 함께한 뒤, ',
         chara.get_colored_name(),
-        '은(는) 결심이 담긴 눈빛으로,',
+        '은(는) 결심이 담긴 눈빛으로, ',
         you.get_colored_name(),
         '에게 결혼반지를 내밀었다.',
       ]);
@@ -213,7 +213,7 @@ module.exports = {
         ]);
         await era.printAndWait([
           {
-            content: '그토록 많은 일을 함께 이겨 냈음에도,',
+            content: '그토록 많은 일을 함께 이겨 냈음에도, ',
           },
           you.get_colored_name(),
           '은(는) 이것이 올바른 결정인지 확신할 수 없었다.',
@@ -222,9 +222,9 @@ module.exports = {
           '윤리, 인간관계, 사회적 책임……생각해야 할 것, 두 사람을 옭아매는 것이 너무나 많았다.',
         );
         era.print([
-          '다만,',
+          '다만, ',
           chara.get_colored_name(),
-          '의 풀이 죽은 얼굴을 보자,',
+          '의 풀이 죽은 얼굴을 보자, ',
           you.get_colored_name(),
           '도 자신도 모르게 생각했다. 그렇게까지 생각할 필요가 있을까……',
         ]);
@@ -242,7 +242,7 @@ module.exports = {
      */
     const f = async (chara, you) => {
       await chara.print_and_wait([
-        '어느 날 밤,',
+        '어느 날 밤, ',
         chara.get_colored_name(),
         '은(는) 침대에서 뒤척이며 좀처럼 잠들지 못했다.',
       ]);
@@ -267,7 +267,7 @@ module.exports = {
     const f = async (chara, you) => {
       await era.printAndWait([
         chara.get_colored_name(),
-        '은(는) 누구보다 먼저 트레이너실에 도착해,',
+        '은(는) 누구보다 먼저 트레이너실에 도착해, ',
         you.get_colored_name(),
         '을(를) 놓지 않고 끌어안았다.',
       ]);

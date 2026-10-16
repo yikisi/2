@@ -13,7 +13,7 @@ module.exports = {
      */
     const f = async (teio, you) => {
       await era.printAndWait(
-        `이미 ${you.name}와(과) 토카이 테이오가 출전 포기를 발표했는데도 팬들의 열기는 여전했다.`,
+        `이미 ${you.name}과(와) 토카이 테이오가 출전 포기를 발표했는데도 팬들의 열기는 여전했다.`,
       );
       await era.printAndWait(
         `다리 부상 때문이라는 것을 알자 모두 이해해 주며 두 사람에게 응원을 보내 주었다.`,
@@ -51,7 +51,7 @@ module.exports = {
       era.printButton('「달릴게. 반드시…… 언제까지나 함께 달릴게」', 1);
       await era.input();
       await era.printAndWait(
-        `${teio.teen_sex_title}은(는) 턱을 살짝 당기고 돌아서서 힘차게 팔을 흔들었다. 망토가 활짝 휘날렸다. 타오르는 불꽃처럼 경기장으로 들어서더니 앞쪽의 빛 속으로 녹아들었다.`,
+        `${teio.teen_sex_title}는 턱을 살짝 당기고 돌아서서 힘차게 팔을 흔들었다. 망토가 활짝 휘날렸다. 타오르는 불꽃처럼 경기장으로 들어서더니 앞쪽의 빛 속으로 녹아들었다.`,
       );
     };
     f.title = title;
@@ -115,7 +115,7 @@ module.exports = {
       await era.printAndWait(`중계「——${teio.name}——」`);
       era.println();
       await era.printAndWait(
-        `${teio.teen_sex_title}은(는) 몸을 낮추고 마지막 스퍼트를 걸었다.`,
+        `${teio.teen_sex_title}는 몸을 낮추고 마지막 스퍼트를 걸었다.`,
       );
     };
     f.title = title;

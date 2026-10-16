@@ -118,7 +118,7 @@ module.exports = {
       await printAndWait([
         '갑작스러운 폭우와 천둥. ',
         you.get_colored_name(),
-        '은(는) 쫒기듯 이 작은 보물창고에 도착했다.',
+        '은(는) 쫓기듯 이 작은 보물창고에 도착했다.',
       ]);
       println();
       await you.say_and_wait('아마 둘 중 하나를 고르라는 걸까?');
@@ -205,7 +205,7 @@ module.exports = {
         '이(가) 머리를 싸매고 있다. 정확히는 돈 문제다. 트레센 예산이 또 초과되었다——!!',
       ]);
       await printAndWait(
-        '지금 이 주황 머리의 작은 이사장은 녹색 비서에게 혼나며 벌벌 떨고 있다…… 무시무시한 재정의 구멍을 어떻게 메워야 할까?',
+        '지금 이 주황 머리의 작은 이사장은 녹색 비서에게 혼나며 벌벌 떨고 있다…… 외면할 수 없는 재정 문제를 어떻게 해결해야 할까?',
       );
       printButton(
         '「수입과 지출을 바로잡자. 우선 솔선해서 감봉이다!」 (빚 +40, 육성 중인 우마무스메의 스킬 Pt +10)',
@@ -273,7 +273,7 @@ module.exports = {
         '을(를) 발견했다.',
       ]);
       await printAndWait(
-        '시선을 따라가자 눈가로 유성 한 줄기가 스쳐 사라졌다.',
+        '시선을 따라가자 시야 한쪽으로 유성 하나가 스쳐 지나갔다.',
       );
       printButton(
         '「이건 무언가의 징조다!」 (육성 중인 우마무스메의 의욕 +1 또는 -1)',
@@ -467,7 +467,7 @@ module.exports = {
         [
           '【학원 공지——조금 전 ',
           tachyon.get_colored_name(),
-          '이(가) 실수로 운동장에 뿌린 약품의 정체는 현재 불명입니다. 각 트레이너께서는 꼭 필요한 경우가 아니면 운동장에서의 트레이닝을 삼가 주세요.】',
+          '이 실수로 운동장에 뿌린 약품의 정체는 현재 불명입니다. 각 트레이너께서는 꼭 필요한 경우가 아니면 운동장에서의 트레이닝을 삼가 주세요.】',
         ],
         { fontSize: '1.5rem' },
       );
@@ -503,7 +503,7 @@ module.exports = {
               you.get_colored_name(),
               '의 추궁에 ',
               tachyon.get_colored_name(),
-              '은(는)',
+              '은',
               tachyon.sex,
               '가 뿌린 약의 대략적인 효과를 털어놓았다——',
             ]);
@@ -589,7 +589,7 @@ module.exports = {
         ' 대회인 것 같다. 체력에 자신이 없더라도 현장에서 지원해준다고 하는데, 참가해 볼까?',
       ]);
       printButton(
-        '(해 봐도 손해는 없겠지) (체력 및 기력 -25%, 상품 확률 획득)',
+        '(해 봐도 손해는 없겠지) (체력 및 기력 -25%, 상품 획득 가능)',
         1,
       );
       printButton('(너무 바빠서 참가할 시간이 없어——!)', 2);
@@ -603,9 +603,9 @@ module.exports = {
         );
       } else {
         await printAndWait([
-          '결국 ',
+          '나중에 들으니 ',
           aoi.get_colored_name(),
-          '이(가) 먼저 말문을 열고, 세 여신상 앞에서 경건하게 기도하면 두 번째 기회를 얻을 수 있다는 소문을 들은 적이 있다고 말했다.',
+          '이(가) 아무런 지원 없이 우승했다고 한다.',
         ]);
         await printAndWait('역시 저 사람은 무시무시하게 강하다……');
       }
@@ -621,7 +621,7 @@ module.exports = {
      */
     const f = async (you) => {
       await printAndWait([
-        '게으르게 제대로 일하지 않은 탓일까. 아니면 운이 ',
+        '게으름을 피우며 제대로 일하지 않은 탓일까. 아니면 운이 ',
         you.get_colored_name(),
         '의 편을 들어주지 않은 것뿐일까. 어쨌든 ',
         you.get_colored_name(),
@@ -707,11 +707,11 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 낚싯대를 들고 강가에 갔다가 한 명의 ',
         sky.uma_sex_title,
-        '을(를) 만났다.',
+        '를 만났다.',
       ]);
       await printAndWait([
         sky.sex,
-        '은(는) 돌아보지 않고 ',
+        '는 돌아보지 않고 ',
         you.get_colored_name(),
         '에게 등을 보인 채 말했다.',
       ]);
@@ -774,7 +774,7 @@ module.exports = {
           await printAndWait([
             '다 씻고 나자 ',
             chara.sex,
-            '은(는) 아직 부족하다는 눈빛으로 ',
+            '는 아직 부족하다는 눈빛으로 ',
             you.get_colored_name(),
             '을(를) 바라봤다……',
           ]);
@@ -1237,7 +1237,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 신경 쓰지 않았다. ',
         chara.uma_sex_title,
-        '은(는) 예민하니까.',
+        '는 예민하니까.',
       ]);
       await printAndWait('……');
       await printAndWait([
@@ -1343,8 +1343,8 @@ module.exports = {
         ]);
         await chara.say_and_wait('——우리는 한 몸이나 마찬가지니까.');
         await printAndWait('……');
-        printButton(`${chara.sex}을(를) 꼭 안아 감사를 전한다. (호감 +25)`, 1);
-        printButton(`${chara.sex}을(를) 데리고 돌아가 제대로 감사한다.`, 2);
+        printButton(`${chara.sex}를 꼭 안아 감사를 전한다. (호감 +25)`, 1);
+        printButton(`${chara.sex}를 데리고 돌아가 제대로 감사한다.`, 2);
         ret.push(await input());
       } else if (get('talent:0:泌乳') === 3 || get('flag:惩戒力度') === 3) {
         await printAndWait('손목에 부드럽지만 거스를 수 없는 힘이 가해졌다.');
@@ -1418,7 +1418,7 @@ module.exports = {
             you.get_colored_name(),
             '은(는) 아직 변명하고 싶었지만, 발정한 ',
             chara.uma_sex_title,
-            '이(가) ',
+            '가 ',
             you.get_colored_name(),
             '의 뒷말을 들을 리 없었다.',
           ]);
@@ -1471,7 +1471,7 @@ module.exports = {
             you.get_colored_name(),
             '의 목덜미에 깊이 얼굴을 묻었고, 그것이',
             chara.sex,
-            '이(가) ',
+            '가 ',
             you.get_colored_name(),
             '을(를) 위해 움직인 보상인 듯했다.',
           ]);
@@ -1518,7 +1518,7 @@ module.exports = {
         await minoru.say_and_wait('Y(^_^)Y');
         await printAndWait([
           minoru.sex,
-          '은(는) 여전히 교문에서 한 명 한 명을 맞이하고 있다.',
+          '는 여전히 교문에서 한 명 한 명을 맞이하고 있다.',
         ]);
         println();
       }
@@ -1531,7 +1531,7 @@ module.exports = {
       println();
       if (doto) {
         await doto.say_and_wait('(๑•́ωก̀๑)');
-        await printAndWait([doto.sex, '은(는) 또 울고 있나?']);
+        await printAndWait([doto.sex, '는 또 울고 있나?']);
         println();
       }
       if (maya) {
@@ -1565,7 +1565,7 @@ module.exports = {
           you.get_colored_name(),
           '은(는) ',
           tachyon.sex,
-          '을(를) 찾으러 가기로 했다.',
+          '를 찾으러 가기로 했다.',
         ]);
         println();
         await chara.say_and_wait('(｢･ω･)｢헤이');
@@ -1599,12 +1599,12 @@ module.exports = {
         await printAndWait([
           '잠시 후, ',
           chara.sex,
-          '은(는) 겨우 뜻을 이해하고 ',
+          '는 겨우 뜻을 이해하고 ',
           you.get_colored_name(),
           '과(와) 동행해 주었다.',
         ]);
         drawLine();
-        await printAndWait(['금새 ', tachyon.sex, '의 연구실에 도착했다.']);
+        await printAndWait(['금세 ', tachyon.sex, '의 연구실에 도착했다.']);
         await tachyon.say_and_wait('(¦3[▓▓]');
         await you.say_and_wait('(ノಠ∩ಠ)ノ彡(o°o)');
         await tachyon.say_and_wait('Σ(っ °Д °;)っ');
@@ -1824,7 +1824,7 @@ module.exports = {
                   '은(는) 창문을 닫아 바깥 소리를 차단했다.',
                 ]);
                 await printAndWait([
-                  '아쉽지만,',
+                  '아쉽지만, ',
                   you.get_colored_name(),
                   '에게는 일이 있어 아직 쉴 수 없다.',
                 ]);
@@ -1932,7 +1932,7 @@ module.exports = {
                   await printAndWait('……다만 입꼬리가 귀 뒤까지 찢어져 있다.');
                   await printAndWait([
                     you.sex,
-                    '은(는) 거울틀에 손을 걸고 힘을 주기 시작했다.',
+                    '는 거울틀에 손을 걸고 힘을 주기 시작했다.',
                   ]);
                   await printAndWait([
                     you.get_colored_name(),
@@ -1945,18 +1945,18 @@ module.exports = {
                   await printAndWait([
                     '……',
                     you.sex,
-                    '이(가) ',
+                    '가 ',
                     you.get_colored_name(),
                     '의 얼굴을 똑똑히 볼 때까지.',
                   ]);
-                  await printAndWait(['……', you.sex, '은(는) 도망쳤다.']);
+                  await printAndWait(['……', you.sex, '는 도망쳤다.']);
                   await printAndWait('지금 거울 속은 텅 비어 있다.');
                   await printAndWait([
                     you.get_colored_name(),
                     '은(는) 하품했다.',
                   ]);
                 } else {
-                  await printAndWait(['이것이', you.get_colored_name(), '。']);
+                  await printAndWait(['이것이', you.get_colored_name(), '.']);
                 }
                 break;
               default:
@@ -2124,9 +2124,9 @@ module.exports = {
       await printAndWait([you.get_colored_name(), '은(는) 거리로 나갔다.']);
       await printAndWait([
         you.get_colored_name(),
-        '은(는) 또 ',
+        '은(는) ',
         tachyon.get_colored_name(),
-        '에게 약을 먹여졌다고 느꼈다.',
+        '이 또 약을 먹인 것 같다고 생각했다.',
       ]);
       await printAndWait('이번에는 무슨 효과지?');
       print(
@@ -2163,7 +2163,7 @@ module.exports = {
       await printAndWait([
         '……',
         chara.sex,
-        '은(는) 이미 ',
+        '는 이미 ',
         you.get_colored_name(),
         '을(를) 똑바로 보고 있어 무엇을 해도 소용없다!',
       ]);
@@ -2191,11 +2191,11 @@ module.exports = {
       );
       await printAndWait([
         chara.sex,
-        '은(는) ',
+        '는 ',
         you.get_colored_name(),
         '에게 달려들었다.',
       ]);
-      await chara.say_and_wait(['미안,', callname, '! 실수했어!']);
+      await chara.say_and_wait(['미안, ', callname, '! 실수했어!']);
       await chara.say_and_wait('지각할 것 같아서 그만 빨리 달렸네.');
       await chara.say_and_wait('착각이겠지……', true);
       await printAndWait('입으로는 그렇게 말하면서도 몸은 움직이지 않았다.');
@@ -2204,7 +2204,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 눈앞에서 자신의 냄새를 맡기 시작한 ',
         chara.uma_sex_title,
-        '을(를) 보고 장난기가 생겼다.',
+        '를 보고 장난기가 생겼다.',
       ]);
       await printAndWait([
         you.get_colored_name(),
@@ -2212,11 +2212,11 @@ module.exports = {
         chara.sex,
         '에게 지금 상황을 이야기했다.',
       ]);
-      await printAndWait([chara.sex, '은(는) 얼굴이 새빨개졌다.']);
+      await printAndWait([chara.sex, '는 얼굴이 새빨개졌다.']);
       await chara.say_and_wait('……');
       await chara.say_and_wait('착각이겠지……', true);
       await chara.say_and_wait('……읏, 지각하겠다. 먼저 갈게……');
-      await printAndWait([chara.sex, '은(는) 돌아보지 않고 달려갔다.']);
+      await printAndWait([chara.sex, '는 돌아보지 않고 달려갔다.']);
       await you.say_and_wait('귀엽네.');
       if (horse_hair) {
         await you.say_as_passer_by_and_wait(
@@ -2235,7 +2235,7 @@ module.exports = {
       if (get('cflag:32:招募状态') === 1) {
         await printAndWait([
           tachyon.sex,
-          '은(는) 등을 돌리고 하얀 플라스틱 의자에 앉아 있다?',
+          '는 등을 돌리고 하얀 플라스틱 의자에 앉아 있다?',
         ]);
         await tachyon.say_and_wait('오지 말았어야 했어.');
         await you.say_and_wait('또 뭘 먹인 거야. 해독제 내놔.');
@@ -2245,11 +2245,11 @@ module.exports = {
         await you.say_and_wait('계속 장난칠 거면 점심은 없어.');
         await printAndWait([
           tachyon.get_colored_name(),
-          '은(는) 빛의 속도로 무릎을 꿇었다.',
+          '은 빛의 속도로 무릎을 꿇었다.',
         ]);
         await printAndWait([
           tachyon.sex,
-          '은(는) ',
+          '는 ',
           you.get_colored_name(),
           '의 허벅지에 매달려 속으로 기대하고 있다.',
         ]);
@@ -2289,7 +2289,7 @@ module.exports = {
       } else {
         await printAndWait([
           tachyon.sex,
-          '은(는) 의자에 앉아 ',
+          '는 의자에 앉아 ',
           you.get_colored_name(),
           '이(가) 올 줄 알고 있었던 듯했다.',
         ]);
@@ -2304,7 +2304,7 @@ module.exports = {
         );
         await printAndWait([
           tachyon.sex,
-          '은(는) 옆의 기록지와 그 옆에 놓인 약을 가리켰다.',
+          '는 옆의 기록지와 그 옆에 놓인 약을 가리켰다.',
         ]);
         await printAndWait([
           '단숨에 들이켜자 세상은 다시 조용해졌고 ',
@@ -2518,7 +2518,7 @@ module.exports = {
       println();
       await printAndWait([
         chara.sex,
-        '이(가) 모르는 사이 베개가 조용히 젖었다.',
+        '가 모르는 사이 베개가 조용히 젖었다.',
       ]);
       println();
     };
@@ -2890,7 +2890,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 눈앞에서 절망한 낯선 트레이너와 빠르게 다가오는 붉은 눈의 ',
         chara.uma_sex_title,
-        '을(를) 보고,',
+        '를 보고, ',
       ]);
       printButton('낯선 트레이너를 돕는다', 1);
       printButton(`${chara.name}을(를) 돕는다`, 2);
@@ -2910,7 +2910,7 @@ module.exports = {
             you.get_colored_name(),
             '은(는) 짙은 위험의 기운을 풍기는 ',
             chara.uma_sex_title,
-            '을(를) 보며 몰래 침을 삼켰다.',
+            '를 보며 몰래 침을 삼켰다.',
           ]);
           await you.say_and_wait([
             '저기, 다툼이라면 대화로 차분히 해결하자. 안 그러면 ',
@@ -2928,7 +2928,7 @@ module.exports = {
             you.get_colored_name(),
             '의 눈앞에서 ',
             chara.uma_sex_title,
-            '은(는) 망설이기 시작했다.',
+            '는 망설이기 시작했다.',
           ]);
           await chara.say_and_wait(
             '트레이너…… 도망칠 수는 없어. 다음에는 이렇게 좋은 동료를 만나지 못할 거야……',
@@ -2945,7 +2945,7 @@ module.exports = {
           await printAndWait([
             '그러고는 ',
             chara.sex,
-            '은(는) 몸을 홱 돌려 떠났다.',
+            '는 몸을 홱 돌려 떠났다.',
           ]);
           await printAndWait([
             you.get_colored_name(),
@@ -2975,7 +2975,7 @@ module.exports = {
             you.get_colored_name(),
             '은(는) 짙은 위험의 기운을 풍기는 ',
             chara.uma_sex_title,
-            '을(를) 보자 거스를 기운이 나지 않았다.',
+            '를 보자 거스를 기운이 나지 않았다.',
           ]);
           await you.say_and_wait('두 분이서 이야기하세요. 저는 이만.');
           await printAndWait([
@@ -2986,7 +2986,7 @@ module.exports = {
           await printAndWait([
             '행동이 이상한 ',
             chara.uma_sex_title,
-            '은(는) 곧바로 낯선 트레이너의 팔을 잡고 조금 강제로 끌어당겼다.',
+            '는 곧바로 낯선 트레이너의 팔을 잡고 조금 강제로 끌어당겼다.',
           ]);
           await chara.say_and_wait(
             "몰래 도망치다니…… 이렇게 건방진 트레이너는 제대로 '보살펴' 줘야겠네……",
@@ -2995,12 +2995,12 @@ module.exports = {
             you.get_colored_name(),
             '은(는) 숨을 죽인 채, ',
             chara.uma_sex_title,
-            '이(가) 다정하게 트레이너의 팔에 뺨을 비비면서 상대를 끌고 가는 모습을 보았다.',
+            '가 다정하게 트레이너의 팔에 뺨을 비비면서 상대를 끌고 가는 모습을 보았다.',
           ]);
           await printAndWait([
             '갑자기 그 ',
             chara.uma_sex_title,
-            '은(는) 무언가 생각난 듯 물건을 꺼내 ',
+            '는 무언가 생각난 듯 물건을 꺼내 ',
             you.get_colored_name(),
             '에게 던졌다.',
           ]);
@@ -3021,7 +3021,7 @@ module.exports = {
           await printAndWait([
             '이상한 ',
             chara.uma_sex_title,
-            '과(와) 낯선 트레이너가 ',
+            '와 낯선 트레이너가 ',
             you.get_colored_name(),
             '의 시야에서 사라질 때까지, ',
             you.get_colored_name(),
@@ -3031,7 +3031,7 @@ module.exports = {
             you.get_colored_name(),
             '도 알고 있다. 어느 쪽에도 손을 내밀지 않는 것은 본질적으로 이상한 ',
             chara.uma_sex_title,
-            '을(를) 돕는 일이다.',
+            '를 돕는 일이다.',
           ]);
           await printAndWait([
             '그래도 ',

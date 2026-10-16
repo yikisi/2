@@ -53,7 +53,7 @@ module.exports = {
   async drop_family_uma_s() {
     await printAndWait('【우마 점프 S 패밀리 팩】을 버렸다……');
     await printAndWait(
-      '……그리고 화학 제제 불법 투기로 우마 코인 100의 벌금을 물었다',
+      '……그리고 화학 제제 불법 투기로 우마 코인 100의 벌금을 물었다.',
     );
   },
 
@@ -136,12 +136,12 @@ module.exports = {
   /** @param {CharaTalk} chara */
   get_chara_remove_fat: (chara) => [
     chara.get_colored_name(),
-    '은(는) 이제 살이 찌지 않는다',
+    '은(는) 이제 살찐 상태가 아니다',
   ],
   /** @param {CharaTalk} chara */
   get_chara_remove_headache: (chara) => [
     chara.get_colored_name(),
-    '은(는) 이제 편두통에 걸리지 않는다',
+    '은(는) 이제 편두통에 고통받지 않는다',
   ],
   /** @param {CharaTalk} chara */
   get_chara_drink_tea: (chara) => [
@@ -213,7 +213,7 @@ module.exports = {
     count,
     '병의',
     item,
-    '을(를) 팔아,',
+    '을(를) 팔아, ',
     money,
     '우마 코인을 얻었다',
   ],
@@ -288,6 +288,6 @@ module.exports = {
     }
   },
 
-  fixer_start: '【현실 침투 시작...】',
+  fixer_start: '【현실 침투 시작……】',
   fixer_stop: '【현실 법칙 복원 완료.】',
 };

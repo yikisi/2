@@ -17,7 +17,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '은(는) 저항을 멈추고,',
+      '은(는) 저항을 멈추고, ',
       defender.get_colored_name(),
       '이(가) 하는 대로 두었다】',
     ]);
@@ -1052,7 +1052,7 @@ module.exports = {
       await printAndWait([
         '【',
         attacker.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         defender.get_colored_name(),
         '은(는) 식스나인 자세를 취했다】',
       ]);
@@ -1060,7 +1060,7 @@ module.exports = {
       await printAndWait([
         '【',
         attacker.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         defender.get_colored_name(),
         '은(는) 식스나인 자세로 서로에게 봉사했다】',
       ]);
@@ -1293,7 +1293,7 @@ module.exports = {
         attacker.get_colored_name(),
         '은(는) 계속해서 ',
         defender.get_colored_name(),
-        '와(과) 음핵을 서로 문질렀다】',
+        '과(와) 음핵을 서로 문질렀다】',
       ]);
   },
   /**
@@ -1467,7 +1467,7 @@ module.exports = {
         attacker.get_colored_name(),
         '은(는) ',
         defender.get_colored_name(),
-        '와(과) 마주 보고 앉아 육봉을 ',
+        '과(와) 마주 보고 앉아 육봉을 ',
         defender.get_colored_name(),
         '의 음부에 집어넣었다】',
       ]);
@@ -1477,7 +1477,7 @@ module.exports = {
         attacker.get_colored_name(),
         '은(는) ',
         defender.get_colored_name(),
-        '와(과) 마주 보고 앉아 육봉으로 음부를 찔렀다】',
+        '과(와) 마주 보고 앉아 육봉으로 음부를 찔렀다】',
       ]);
   },
   /**
@@ -1492,7 +1492,7 @@ module.exports = {
         attacker.get_colored_name(),
         '은(는) ',
         defender.get_colored_name(),
-        '와(과) 마주 보고 앉아 육봉을 ',
+        '과(와) 마주 보고 앉아 육봉을 ',
         defender.get_colored_name(),
         '의 항문에 집어넣었다】',
       ]);
@@ -1502,7 +1502,7 @@ module.exports = {
         attacker.get_colored_name(),
         '은(는) ',
         defender.get_colored_name(),
-        '와(과) 마주 보고 앉아 육봉으로 항문을 찔렀다】',
+        '과(와) 마주 보고 앉아 육봉으로 항문을 찔렀다】',
       ]);
   },
   /**
@@ -1563,7 +1563,7 @@ module.exports = {
         attacker.get_colored_name(),
         '은(는) ',
         defender.get_colored_name(),
-        '와(과) 마주 보고 서서 육봉을 음부에 집어넣었다】',
+        '과(와) 마주 보고 서서 육봉을 음부에 집어넣었다】',
       ]);
     else
       await printAndWait([
@@ -1586,7 +1586,7 @@ module.exports = {
         attacker.get_colored_name(),
         '은(는) ',
         defender.get_colored_name(),
-        '와(과) 마주 보고 서서 육봉을 항문에 집어넣었다】',
+        '과(와) 마주 보고 서서 육봉을 항문에 집어넣었다】',
       ]);
     else
       await printAndWait([
@@ -2264,7 +2264,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '의 지시에,',
+      '의 지시에, ',
       supporter.get_colored_name(),
       '은(는) ',
       defender.get_colored_name(),
@@ -2282,7 +2282,7 @@ module.exports = {
       attacker.get_colored_name(),
       '은(는) ',
       defender.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       '에게 함께 자신의 유두를 핥아 달라고 부탁했다】',
     ]);
@@ -2296,7 +2296,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       '은(는) 함께 ',
       defender.get_colored_name(),
@@ -2314,7 +2314,7 @@ module.exports = {
       attacker.get_colored_name(),
       '은(는) ',
       supporter.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       defender.get_colored_name(),
       '에게 함께 자신의 육봉에 봉사해 달라고 부탁했다】',
     ]);
@@ -2328,7 +2328,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       '은(는) 함께 ',
       defender.get_colored_name(),
@@ -2346,7 +2346,7 @@ module.exports = {
       attacker.get_colored_name(),
       '은(는) ',
       defender.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       '에게 함께 자신의 음핵을 핥아 달라고 부탁했다】',
     ]);
@@ -2360,7 +2360,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       '은(는) 함께 ',
       defender.get_colored_name(),
@@ -2378,7 +2378,7 @@ module.exports = {
       attacker.get_colored_name(),
       '은(는) ',
       defender.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       '에게 함께 혀로 자신의 음부를 만져 달라고 부탁했다】',
     ]);
@@ -2392,7 +2392,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       '은(는) 함께 혀로 ',
       defender.get_colored_name(),
@@ -2410,7 +2410,7 @@ module.exports = {
       attacker.get_colored_name(),
       '은(는) ',
       defender.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       '에게 함께 양 가슴으로 자신의 육봉에 봉사해 달라고 부탁했다】',
     ]);
@@ -2424,7 +2424,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       '은(는) 함께 가슴으로 ',
       defender.get_colored_name(),
@@ -2443,7 +2443,7 @@ module.exports = {
       attacker.get_colored_name(),
       '은(는) ',
       defender.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       is_first
         ? '에게 번갈아 가며 음부로 육봉을 받아 달라고 부탁했다】'
@@ -2462,7 +2462,7 @@ module.exports = {
       attacker.get_colored_name(),
       '은(는) ',
       defender.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       is_first
         ? '에게 번갈아 가며 자신의 음부를 찔러 달라고 부탁했다】'
@@ -2481,7 +2481,7 @@ module.exports = {
       attacker.get_colored_name(),
       '은(는) ',
       defender.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       is_first
         ? '에게 앞뒤에서 자신의 음부와 항문을 찔러 달라고 부탁했다】'
@@ -2500,7 +2500,7 @@ module.exports = {
       attacker.get_colored_name(),
       '은(는) ',
       defender.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       is_first
         ? '에게 입과 음부를 동시에 찔러 달라고 부탁했다】'
@@ -2519,7 +2519,7 @@ module.exports = {
       attacker.get_colored_name(),
       '은(는) ',
       defender.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       is_first
         ? '에게 입과 항문을 동시에 찔러 달라고 부탁했다】'
@@ -2556,7 +2556,7 @@ module.exports = {
         attacker.get_colored_name(),
         '은(는) ',
         defender.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         supporter.get_colored_name(),
         '에게 식스나인 자세를 취하면 자신이 삽입하게 해 달라고 부탁했다】',
       ]);
@@ -2566,7 +2566,7 @@ module.exports = {
         attacker.get_colored_name(),
         '은(는) 계속해서 ',
         supporter.get_colored_name(),
-        '와(과) 식스나인 자세로 서로 입으로 봉사하는 ',
+        '과(와) 식스나인 자세로 서로 입으로 봉사하는 ',
         defender.get_colored_name(),
         '을(를) 계속 찔렀다】',
       ]);
@@ -2580,7 +2580,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       '의 음부가 번갈아 가며 ',
       defender.get_colored_name(),
@@ -2597,7 +2597,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       is_first ? '은(는) 번갈아 가며 ' : '은(는) 계속 번갈아 가며 ',
       defender.get_colored_name(),
@@ -2614,7 +2614,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       is_first ? '은(는) 앞뒤에서 ' : '은(는) 계속 앞뒤에서 ',
       defender.get_colored_name(),
@@ -2631,7 +2631,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       is_first ? '은(는) 위아래에서 ' : '은(는) 계속 위아래에서 ',
       defender.get_colored_name(),
@@ -2648,7 +2648,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       supporter.get_colored_name(),
       is_first ? '은(는) 위아래에서 ' : '은(는) 계속 위아래에서 ',
       defender.get_colored_name(),

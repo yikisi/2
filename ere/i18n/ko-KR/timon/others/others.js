@@ -313,7 +313,7 @@ module.exports = {
       await printAndWait([
         '연못에 비친 달이 문득 흔들리고 희미한 빛이 떠돌았다.',
         you.get_colored_name(),
-        '은(는) 몇 개의 목소리가 동시에 머릿속에 울려 퍼지는 것을 느꼈다——',
+        '은(는) 여러 목소리가 동시에 머릿속에 울려 퍼지는 것을 느꼈다——',
       ]);
       await printAndWait(
         '인생은 무상하다. 앞서 나가는 용자도, 한 시대를 다스린 패자도, 영역을 제패한 제왕도, 그 길이 반드시 순탄한 것은 아니다. 빛도 어둠도 결국은 꿈과 환영, 물거품과 그림자.',
@@ -357,7 +357,7 @@ module.exports = {
     } else {
       await printAndWait([
         you.get_colored_name(),
-        '은(는) 세 여신상을 바라보았다. 물안개가 그들의 얼굴을 흐리게 했고,',
+        '은(는) 세 여신상을 바라보았다. 물안개가 그들의 얼굴을 흐리게 했고, ',
         you.get_colored_name(),
         '은(는) 무언가 하려는 듯 입을 열고 손을 뻗다가——',
       ]);
@@ -498,7 +498,7 @@ module.exports = {
    */
   async fund_reject(bryne, callname) {
     await bryne.say_and_wait([
-      '미안하지만,',
+      '미안하지만, ',
       callname,
       ', 자금이 부족하지 않아? 내 인맥 중에는 우마 코인 1,000 미만의 소액 투자를 받는 기관이 없는데……',
     ]);
@@ -579,14 +579,14 @@ module.exports = {
       '이(가) 트레센 학원에서 보낸 시간은 어느덧 10년이 되었다.',
     ]);
     await printAndWait([
-      '이 10년 동안,',
+      '이 10년 동안, ',
       you.get_colored_name(),
-      '은(는) 한 명 한 명의',
+      '은(는) 한 명 한 명의 ',
       uma,
       '의 성장을 지켜보며, 신입 트레이너에서 학원의 존경받는 존재로 성장했다.',
     ]);
     await printAndWait([
-      '뒤에서 조용히 지키며,',
+      '뒤에서 조용히 지키며, ',
       uma,
       '들과 함께 길을 걸어온',
       you.get_colored_name(),
@@ -607,7 +607,7 @@ module.exports = {
   async TWENTY(you, uma, they) {
     await printAndWait('20년의 세월은 눈 깜짝할 사이에 흘렀다.');
     await printAndWait([
-      '트레센 학원의 트레이닝장에서,',
+      '트레센 학원의 트레이닝장에서, ',
       uma,
       '의 발걸음은 아직 멈추지 않았다.',
     ]);
@@ -634,7 +634,7 @@ module.exports = {
    */
   async THIRTY(you) {
     await printAndWait([
-      '30년은,',
+      '30년은, ',
       you.get_colored_name(),
       '을(를) 한 시대의 전설로 만들기에 충분한 세월이었다.',
     ]);
@@ -664,7 +664,7 @@ module.exports = {
       '의 이야기는 이미 트레센 학원과 떼어 놓을 수 없는 일부가 되었다.',
     ]);
     await printAndWait([
-      '세월이 흘러도,',
+      '세월이 흘러도, ',
       you.get_colored_name(),
       '의 끈기는 변하지 않는다.',
     ]);
@@ -702,7 +702,7 @@ module.exports = {
       uma,
       '들 중에는 전설이 된 이도, 뒤에서 돕는 자리로 물러난 이도 있다. 하지만',
       they,
-      '의 이야기는 모두,',
+      '의 이야기는 모두, ',
       you.get_colored_name(),
       '덕분에 이어졌다.',
     ]);

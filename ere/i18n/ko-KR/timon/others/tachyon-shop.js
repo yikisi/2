@@ -19,7 +19,7 @@ module.exports = {
    */
   async start_first_love(tachyon, you, callname) {
     await tachyon.say_and_wait([
-      '오호,',
+      '오호, ',
       callname,
       '……이런 곳까지 오다니. 꽤……성급하군……',
     ]);
@@ -123,7 +123,7 @@ module.exports = {
       ]);
       await printAndWait([
         tachyon.get_colored_name(),
-        '은(는) 어째서인지 긴장한 얼굴로 물었다',
+        '은 어째서인지 긴장한 얼굴로 물었다',
       ]);
       printButton('물론 있다', 1);
       printButton('없다', 2);
@@ -142,7 +142,7 @@ module.exports = {
           '……후후, 예상대로군. 온몸에서 빛이 나는 수상한 자네를 좋아하는 사람이 있다면 오히려 관찰하고 연구해 보고 싶을 정도야.',
         );
         await tachyon.say_and_wait([
-          '하지만 그렇다면 약을 찾는 이유를 모르겠군. 이봐,',
+          '하지만 그렇다면 약을 찾는 이유를 모르겠군. 이봐, ',
           callname,
           '. 범죄에 가까운 짓을 하려는 건 아니겠지?',
         ]);
@@ -166,7 +166,7 @@ module.exports = {
    * @param {PrintedSpan} callname タキオンからプレイヤーへの呼び名
    */
   async start_first(tachyon, you, callname) {
-    await tachyon.say_and_wait(['오호,', callname, '아닌가.']);
+    await tachyon.say_and_wait(['오호, ', callname, '아닌가.']);
     await printAndWait([
       '돌아다니던 ',
       you.get_colored_name(),
@@ -391,7 +391,7 @@ module.exports = {
               '을(를) 바라보았다',
             ]);
             await tachyon.say_and_wait([
-              '상인이자 미치광이 과학자로서 참견하지 않으려 했지만, 신고하고 싶어지는군,',
+              '상인이자 미치광이 과학자로서 참견하지 않으려 했지만, 신고하고 싶어지는군, ',
               callname,
             ]);
             await printAndWait([
@@ -487,7 +487,7 @@ module.exports = {
     tachyon.say(
       '더 다루기 쉬운 실험동물만 있었다면, 이 약들에 살아 있는 것을 저주하게 할 만한 무언가를 섞어 넣었을텐데 말이지.',
     );
-    print([tachyon.sex, '은(는) 태연하게 위험한 말을 했다']);
+    print([tachyon.sex, '는 태연하게 위험한 말을 했다']);
     tachyon.say('직접 보게. 돈을 놓고 얼른 사라지게나.');
   },
   /**

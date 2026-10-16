@@ -43,14 +43,14 @@ good_morning:
           content:
             - fontSize: bold
               content: %CHARA%
-            - "「%CALLNAME%이 저의 달리기 방식을 믿어주신다면, 저는 자신감을 가지고 끝까지 관철하겠어요.」"
+            - "「%CALLNAME%이(가) 저의 달리기 방식을 믿어주신다면, 저는 자신 있게 제 방식대로 끝까지 달리겠어요.」"
     - random: true
       lines:
         - color: %COLOR%
           content:
             - fontSize: bold
               content: %CHARA%
-            - "「서툰 일이라도…… %CALLNAME%이 곁에 있다면, 분명 극복할 수 있을 거예요.」"
+            - "「서툰 일이라도…… %CALLNAME%이(가) 곁에 있다면, 분명 극복할 수 있을 거예요.」"
     - random: true
       lines:
         - color: %COLOR%
@@ -150,7 +150,7 @@ good_night_sex:
             content:
               - fontSize: bold
                 content: "사일런스 스즈카"
-              - "「%CALLNAME%은 정말 분위기를 모르시네요……」"
+              - "「%CALLNAME%은(는) 정말 분위기를 모르시네요……」"
           - "말을 마친 스즈카는 작게 콧노래를 흥얼거리며 뒤돌아 떠났다."
           - "%YOU%은(는) 뒷머리를 긁적이며 서둘러 뒤를 쫓았다."
       - if: d.check === 2
@@ -160,7 +160,7 @@ good_night_sex:
             content:
               - fontSize: bold
                 content: "사일런스 스즈카"
-              - "「오늘은 그렇게 쉽게 %CALLNAME%을 보내주지 않을 거예요……」"
+              - "「오늘은 그렇게 쉽게 %CALLNAME%을(를) 보내주지 않을 거예요……」"
 
 talk:
   # CFLAGNAME:40 = やる気
@@ -369,7 +369,7 @@ o_r_walk:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「이런 느낌…… 정말 좋네요. 다음에도 %CALLNAME%이 저와 산책하러 와주시면 좋겠어요.」"
+          - "「이런 느낌…… 정말 좋네요. 다음에도 %CALLNAME%이(가) 저와 산책하러 와주시면 좋겠어요.」"
   - random: true
     lines:
       - color: %COLOR%
@@ -384,7 +384,7 @@ o_r_walk:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「%CALLNAME%와 함께 산책하는 건 정말 행복한 경험이에요.」"
+          - "「%CALLNAME%과(와) 함께 산책하는 건 정말 행복한 경험이에요.」"
 
 o_s_arcade:
   - random: true
@@ -467,7 +467,7 @@ o_s_movie:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「제가 어떤 영화를 좋아하냐고요? 음…… %CALLNAME%이 좋아하는 거라면 저도 다 좋아요~」"
+          - "「제가 어떤 영화를 좋아하냐고요? 음…… %CALLNAME%이(가) 좋아하는 거라면 저도 다 좋아요~」"
 
 o_s_restaurant:
   - random: true
@@ -491,7 +491,7 @@ o_s_restaurant:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「에? 왜 안 먹냐고요? %CALLNAME%을 보느라 넋을 잃고 있었거든요. 후후……」"
+          - "「에? 왜 안 먹냐고요? %CALLNAME%을(를) 보느라 넋을 잃고 있었거든요. 후후……」"
 
 o_s_dating:
   - random: true
@@ -507,7 +507,7 @@ o_s_dating:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「%CALLNAME%이 특별히 가고 싶은 곳이 있나요? 같이 가요.」"
+          - "「%CALLNAME%이(가) 특별히 가고 싶은 곳이 있나요? 같이 가요.」"
   - random: true
     lines:
       - color: %COLOR%
@@ -562,7 +562,7 @@ s_a_tree_hollow:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「다음엔 반드시 더 빠르게, 이전의 나보다도 앞서서 달릴 거야. 그 풍경을 위해서, 그리고…… %CALLNAME%을 위해서……」"
+          - "「다음엔 반드시 더 빠르게, 이전의 나보다도 앞서서 달릴 거야. 그 풍경을 위해서, 그리고…… %CALLNAME%을(를) 위해서……」"
 
 s_a_dating:
   - random: true
@@ -606,7 +606,7 @@ office_cook:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「%CALLNAME%와 함께 요리하니까 정말 따뜻하네요. 마치 부부가 된 것 같은 느낌이에요……」"
+          - "「%CALLNAME%과(와) 함께 요리하니까 정말 따뜻하네요. 마치 부부가 된 것 같은 느낌이에요……」"
 
 office_study:
   - random: true
@@ -654,9 +654,9 @@ office_rest:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「으음, 어제 잠은 충분히 잤거든요. 낮잠 같은 건…… 네, %CALLNAME%이 정 그렇게 말씀하신다면 조금만 잘게요……」"
+          - "「으음, 어제 잠은 충분히 잤거든요. 낮잠 같은 건…… 네, %CALLNAME%이(가) 정 그렇게 말씀하신다면 조금만 잘게요……」"
       - "권유에 못 이겨 누운 스즈카는 오 분도 지나지 않아 잠들었다."
-      - "%YOU%은(는) 스즈카의 평온한 잠자리를 지켜보며, 자신의 옷을 %SEX%의 몸 위에 살포시 덮어주었다."
+      - "%YOU%은(는) 스즈카의 평온하게 잠든 얼굴을 지켜보며, 자신의 옷을 %SEX%의 몸 위에 살포시 덮어주었다."
   - random: true
     lines:
       - color: %COLOR%
@@ -695,13 +695,13 @@ office_rest:
           - fontSize: bold
             content: %CHARA%
           - "「%CALLNAME%, 한 번만 안아주실 수 있나요?」"
-      - "두 팔을 뻗어 안아 달라는 스즈카를 거절할 마음은 들지 않았다. 한 걸음 다가가 살며시 %SEX%을(를) 안았다."
+      - "두 팔을 뻗어 안아 달라는 스즈카를 거절할 마음은 들지 않았다. 한 걸음 다가가 살며시 %SEX%를 안았다."
       - color: %COLOR%
         content:
           - fontSize: bold
             content: %CHARA%
           - "「%CALLNAME%, 기분 좋아요…… 오늘도 함께 쉬어요.」"
-      - "그렇게 %YOU%와 스즈카는 서로 맞닿은 채 낮잠 시간을 보냈다."
+      - "그렇게 %YOU%과(와) 스즈카는 서로 맞닿은 채 낮잠 시간을 보냈다."
 
 office_game:
   - random: true
@@ -710,14 +710,14 @@ office_game:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「음, 조금 어렵네요…… 하지만 저와 %CALLNAME%이 힘을 합친다면 분명 할 수 있을 거예요……」"
+          - "「음, 조금 어렵네요…… 하지만 저와 %CALLNAME%이(가) 힘을 합친다면 분명 할 수 있을 거예요……」"
   - random: true
     lines:
       - color: %COLOR%
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「클리어했어요! %CALLNAME%은 정말 대단하시네요.」"
+          - "「클리어했어요! %CALLNAME%은(는) 정말 대단하시네요.」"
       - "스즈카의 진심 어린 칭찬에 %YOU%은(는) 오히려 쑥스러워졌다."
 
 valentine:
@@ -731,7 +731,7 @@ valentine:
   - "%YOU%은(는) 자리에서 일어나 스즈카를 위해 문을 열어주었다."
   - acc: 1
     content: "「스즈카, 무슨 일이야?」"
-  - "스즈카는 두 손을 등 뒤로 숨긴 채, 어리둥절해하는 %YOU%의 모습을 보며 입가에 살짝 미소를 띄웠다."
+  - "스즈카는 두 손을 등 뒤로 숨긴 채, 어리둥절해하는 %YOU%의 모습을 보며 입가에 살짝 미소를 띠었다."
   - color: %COLOR%
     content:
       - fontWeight: bold
@@ -743,9 +743,9 @@ valentine:
     content:
       - fontWeight: bold
         content: %CHARA%
-      - "「%CALLNAME%이 어떤 디저트를 좋아하실지 몰라서, 결국 제가 제일 좋아하는 딸기 찹쌀떡을 만들어 왔어요. 부디 입에 맞으셨으면 좋겠어요!」"
+      - "「%CALLNAME%이(가) 어떤 디저트를 좋아하실지 몰라서, 결국 제가 제일 좋아하는 딸기 찹쌀떡을 만들어 왔어요. 부디 입에 맞으셨으면 좋겠어요!」"
   - "%YOU%은(는) 한참 뒤에야 오늘이 발렌타인데이라는 사실을 깨달았다."
-  - "멍하니 있는 얼굴을 보고 스즈카는 한층 더 기쁘게 웃었다. %SEX%은(는) 딸기 찹쌀떡을 기어이 %YOU%의 손에 쥐여주었다."
+  - "멍하니 있는 얼굴을 보고 스즈카는 한층 더 기쁘게 웃었다. %SEX%는 딸기 찹쌀떡을 기어이 %YOU%의 손에 쥐여주었다."
   - color: %COLOR%
     content:
       - fontWeight: bold
@@ -781,15 +781,15 @@ valentine:
   - acc: 2
     content: "「너무 맛있다. 하나 더 먹어야지.」"
     lines:
-      - "스즈카의 디저트는 %YOU%을(를) 멈출 수 없게 만들었고, 결국 두 번째 딸기 찹쌀떡도 먹기로 했다."
+      - "스즈카의 디저트에 %YOU%은(는) 좀처럼 손을 멈출 수 없었고, 결국 두 번째 딸기 찹쌀떡도 먹기로 했다."
       - "역시 첫 입부터 환상적인 맛이었다."
       - "결국 두 번째 떡도 오래 버티지 못하고 깔끔하게 %YOU%의 뱃속으로 사라졌다."
-      - "두 개를 연달아 먹고도 아쉬움이 남은 %YOU%은(는) 무심코 옆에 있던 스즈카에게 시선을 던졌다."
+      - "두 개를 연달아 먹고도 아쉬움이 남은 %YOU%은(는) 무심코 옆에 있던 스즈카에게 시선을 돌렸다."
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「후후, %CALLNAME%이 드시는 모습도 참 귀엽네요.」"
+          - "「후후, %CALLNAME%이(가) 드시는 모습도 참 귀엽네요.」"
       - "스즈카는 %YOU%의 시선을 눈치채고 미소 지으며 말했다."
       - "%YOU%은(는) 쑥스러운 듯 웃었다. 평소라면 이런 모습으로 먹진 않았을 텐데."
   - "%YOU%은(는) 도시락 통을 정리해 스즈카에게 돌려주었다."
@@ -809,14 +809,14 @@ valentine:
       - fontWeight: bold
         content: %CHARA%
       - "「%CALLNAME%, 그런 농담 하지 마세요! 자꾸 그러시면 저 정말 화낼 거예요!」"
-  - "또 한 번 수줍어하는 얼굴을 볼 수 있었다. 그 대가로 %SEX%을(를) 달래는 데 한참이나 걸렸지만."
+  - "또 한 번 수줍어하는 얼굴을 볼 수 있었다. 그 대가로 %SEX%를 달래는 데 한참이나 걸렸지만."
 
 halloween:
   - "오늘은 할로윈, 요괴와 유령들의 축제다."
   - "트레이너실로 오는 길에 기묘한 차림을 여럿 보았다. 그중에는 하마터면 펄쩍 뛸 뻔한 것도 있었다."
   - "하지만 결국 %YOU%은(는) 무사히 트레이닝실에 도착해 다음 훈련 계획을 세우기 시작했다."
   - "계획을 세운다고는 하지만, 사실 %YOU%의 마음은 콩밭에 가 있었다."
-  - "서랍 속에는 어느 %UMA%를 위해 준비한 고급 과자 봉지가 있었다. 이제 %SEX%이(가) 제 발로 찾아와 주기만 하면 된다……"
+  - "서랍 속에는 어느 %UMA%를 위해 준비한 고급 과자 봉지가 있었다. 이제 %SEX%가 제 발로 찾아와 주기만 하면 된다……"
   - "갑자기 트레이닝실 문을 두드리는 소리가 들렸다. %YOU%은(는) 깜짝 놀라 펜을 떨어뜨릴 뻔했다."
   - "숨을 고르고 기대에 부풀어 앞으로 나아가, 힘차게 문을 열었다——"
   - acc: 1
@@ -826,9 +826,9 @@ halloween:
       - fontWeight: bold
         content: %UMA%A
       - "「사탕 안 주면 장난칠 거야!」"
-  - "무언가 괴물 분장을 한 귀여운 %UMA%이(가) 서 있었다."
+  - "무언가 괴물 분장을 한 귀여운 %UMA%가 서 있었다."
   - "%YOU%은(는) 잠시 멍하니 있다가, 곧 정신을 차리고 미소를 지으며 서랍에서 미리 준비해둔 일반 사탕 몇 개를 꺼냈다."
-  - "바구니에 꽤 많은 양을 넣어 주자, %SEX%은(는) 기쁜 듯 꾸벅 인사하고는 옆 트레이너의 방문을 두드리러 달려갔다."
+  - "바구니에 꽤 많은 양을 넣어 주자, %SEX%는 기쁜 듯 꾸벅 인사하고는 옆 트레이너의 방문을 두드리러 달려갔다."
   - "%YOU%은(는) 길게 한숨을 내쉬며 다시 자리로 돌아왔다."
   - "이윽고 다시 문 두드리는 소리가 났다."
   - content:
@@ -881,13 +881,13 @@ forbid_running:
     - acc: 1
       content: "「안 돼. 큰 잘못이니까 용서 못 해. 사흘 동안 달리기 금지야. 집에서 제대로 반성해.」"
     - "스즈카는 벼락이라도 맞은 것처럼 그 자리에 힘없이 주저앉았다."
-    - "곧 %SEX%은(는) 몸을 날려 %YOU%의 다리에 매달렸다."
+    - "곧 %SEX%는 몸을 날려 %YOU%의 다리에 매달렸다."
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
         - "「안 돼요…… 그러면 살아갈 수가 없어요——」"
-    - "슬퍼하는 스즈카를 아랑곳하지 않고, %SEX%이(가) 다리에 매달린 채로 한 걸음씩 침실로 향했다."
+    - "슬퍼하는 스즈카를 아랑곳하지 않고, %SEX%가 다리에 매달린 채로 한 걸음씩 침실로 향했다."
     - "스즈카는 얌전히 팔을 풀고 간단히 씻은 뒤 잠옷으로 갈아입었다. %YOU%이(가) 눕자 그 옆으로 파고들었다."
     - color: %COLOR%
       content:
@@ -965,7 +965,7 @@ forbid_running:
     - acc: 1
       content: "「……사흘 더 늘릴까?」"
     - "말이 끝나기가 무섭게 스즈카는 재빨리 현관에서 멀어졌다."
-    - "그러고는 %SEX%이(가) 살며시 %YOU%을(를) 껴안았다."
+    - "그러고는 %SEX%가 살며시 %YOU%을(를) 껴안았다."
     - color: %COLOR%
       content:
         - fontWeight: bold

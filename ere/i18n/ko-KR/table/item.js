@@ -1,6 +1,6 @@
 module.exports = class extends require('#/i18n/zh-CN/table/item') {
   template = '【%NAME%】';
-  got_template = '도구 %INAME%을(를) 획득했다!';
+  got_template = '아이템 %INAME%을(를) 획득했다!';
 
   0 = '야채주스';
   1 = '강화녹즙';

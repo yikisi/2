@@ -52,7 +52,7 @@ module.exports = {
       );
       era.println();
       await era.printAndWait(
-        `그리고 3월, 선수 생활을 마치고 엄격한 투표를 통과한 ${chara.uma_sex_title}이(가) 전당에 입성하며, 《현창 ${chara.uma_sex_title}》라는 최고의 영예를 얻는다.`,
+        `그리고 3월, 선수 생활을 마치고 엄격한 투표를 통과한 ${chara.uma_sex_title}가 전당에 입성하며, 《현창 ${chara.uma_sex_title}》라는 최고의 영예를 얻는다.`,
       );
       era.println();
       await era.printAndWait([
@@ -67,7 +67,7 @@ module.exports = {
       }
       era.println();
       await era.printAndWait([
-        `${chara.sex}을(를) 본뜬 동상이 공개되고, `,
+        `${chara.sex}를 본뜬 동상이 공개되고, `,
         ...title,
         chara.get_colored_name(),
         '의 전설은 영원히 전당에 새겨진다……',
@@ -244,14 +244,14 @@ module.exports = {
           you.get_colored_name(),
           '은(는) ',
           chara.get_colored_name(),
-          `의 자율 트레이닝을 묵인하고, ${chara.sex}의 의욕을 칭찬했다`,
+          `의 자율 트레이닝을 묵인하고, ${chara.sex}의 의욕을 칭찬했다.`,
         ]);
       } else {
         await era.printAndWait([
           you.get_colored_name(),
           '은(는) ',
           chara.get_colored_name(),
-          '의 자율 트레이닝을 막고 충분히 쉬라고 타일렀다',
+          '의 자율 트레이닝을 막고 충분히 쉬라고 타일렀다.',
         ]);
       }
       return ret;
@@ -337,7 +337,7 @@ module.exports = {
       era.print('어떻게 할까?');
       era.println();
       era.printButton('「푹 쉬어!」', 1);
-      era.printButton('「근성으로 극복해!」', 2);
+      era.printButton('「근성으로 극복하자!」', 2);
       ret.push(await era.input());
       return ret;
     };

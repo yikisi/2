@@ -29,7 +29,7 @@ module.exports = {
       await daiya.say_and_wait('……아.');
       await era.printAndWait([
         you.get_colored_name(),
-        '는 ',
+        '은(는) ',
         daiya.get_colored_name(),
         '의 시선을 따라간다…… 아직 훈련에 열중하는 ',
         kita.get_colored_name(),
@@ -53,14 +53,14 @@ module.exports = {
         '의 달리기가 점점 더 빠르고 강해지고 있어요……',
       ]);
       await daiya.say_and_wait(
-        '조바심이 나는 건 인정해요. 하지만…… 그보다 더 달리고 싶은 충동이에요!',
+        '조바심이 나는 건 인정해요. 하지만…… 그보다 달리고 싶은 마음이 더 커요!',
       );
       await daiya.say_and_wait('투지가 불타올랐거든요! 그러니까…… 부탁드려요!');
       era.printButton('「그럼 해 볼까!」', 1);
       era.printButton('「그 열정은 내일을 위해 아껴 두자.」', 2);
       const ret = await era.input();
       if (ret === 1) {
-        await daiya.say_and_wait(['에헤헤, 역시 ', callname, '！']);
+        await daiya.say_and_wait(['에헤헤, 역시 ', callname, '!']);
         await daiya.say_and_wait('감사해요! 그럼 저도 달리고 올게요!');
         await daiya.say_and_wait(['──', call_68, '. 저…… 지지 않을 거예요!']);
         await era.printAndWait([
@@ -94,9 +94,9 @@ module.exports = {
         await era.printAndWait([
           '그렇게 ',
           daiya.get_colored_name(),
-          '의 열띤 중계과 함께 ',
+          '의 열띤 중계와 함께 ',
           kita.get_colored_name(),
-          '를 중심으로 한 레이스 영상을 지켜보았다.',
+          '을 중심으로 한 레이스 영상을 지켜보았다.',
         ]);
       }
       return [ret];
@@ -114,7 +114,7 @@ module.exports = {
     const f = async (daiya, you, fail_again) => {
       await era.printAndWait([
         you.get_colored_name(),
-        '는 다친 사토노 다이아몬드를 보건실로 데려왔다.',
+        '은(는) 다친 사토노 다이아몬드를 보건실로 데려왔다.',
       ]);
       await daiya.say_and_wait('트레이너님, 이렇게 신경 써 주셔서 감사해요.');
       await daiya.say_and_wait(
@@ -155,7 +155,7 @@ module.exports = {
         await era.printAndWait([
           '이번에는 ',
           you.get_colored_name(),
-          '가 곧바로 훈련을 중단하고 사토노 다이아몬드를 푹 쉬게 했다.',
+          '이(가) 곧바로 훈련을 중단하고 사토노 다이아몬드를 푹 쉬게 했다.',
         ]);
       } else {
         await daiya.say_and_wait('……후! 이걸로 끝났어요!');
@@ -250,7 +250,7 @@ module.exports = {
     return f;
   })(),
   before_g1: (() => {
-    const title = '나의 따뜻한 ';
+    const title = '나를 감싸는 온기';
     /** @param {CharaTalk} daiya サトノダイヤモンド */
     const f = async (daiya) => {
       await era.printAndWait(
@@ -428,7 +428,7 @@ module.exports = {
         );
         era.printButton('「우선 심호흡부터 하자.」', 1);
         await era.input();
-        await daiya.say_and_wait('힘이라니…… 그게, 저기……');
+        await daiya.say_and_wait('네!');
         await daiya.say_and_wait('들이쉬고…… 내쉬고……! 들이쉬고…… 내쉬고……');
         era.printButton('「……진정됐어?」', 1);
         await era.input();
@@ -479,7 +479,7 @@ module.exports = {
         `RKST 점수란 매년 칠월에 발표되는 데뷔 전 ${daiya.uma_sex_title}의 평가 점수다.`,
       );
       await era.printAndWait(
-        `은퇴한 트레이너나 ${daiya.uma_sex_title}평론가 등이 능력을 분석해 종합 평가를 수치로 나타낸 것이다.`,
+        `은퇴한 트레이너나 ${daiya.uma_sex_title} 평론가 등이 능력을 분석해 종합 평가를 수치로 나타낸 것이다.`,
       );
       await era.printAndWait(
         '사토노 다이아몬드는 이억 삼천만 점. 기록상 압도적인 고득점이다. 그래서 데뷔 전부터 이토록 주목받고 있다.',
@@ -536,7 +536,7 @@ module.exports = {
       era.printButton('「학원에 부탁해서 취재를 제한해 달라고 할까?」', 1);
       await era.input();
       await era.printAndWait(
-        '메이크 데뷔 준비는 중요한 시기다. 타즈나 씨에게 부탁하면 취재를 적당한 수준으로 조절해 줄 것이다.',
+        '메이크 데뷔를 준비하는 중요한 시기다. 타즈나 씨에게 부탁하면 취재를 적당한 수준으로 조절해 줄 것이다.',
       );
       await daiya.say_and_wait(
         `아니요, 괜찮아요. 취재에 응하는 것도 ${daiya.uma_sex_title}의 일이니까요.`,
@@ -564,7 +564,7 @@ module.exports = {
       era.printButton('「네가 괜찮다면 문제없어……!」', 1);
       await era.input();
       await era.printAndWait(
-        `오히려 ${daiya.sex}에게 ${you.name}을(를) 걱정하게 했다. 본인이 신경 쓰지 않는다면 ${you.name}이(가) 지나치게 염려할 필요도 없겠다.`,
+        `오히려 ${daiya.sex}가 ${you.name}을(를) 걱정하게 하고 말았다. 본인이 신경 쓰지 않는다면 ${you.name}이(가) 지나치게 염려할 필요도 없겠다.`,
       );
       era.drawLine();
       await era.printAndWait('그리고 메이크 데뷔 당일──');
@@ -630,7 +630,7 @@ module.exports = {
       );
       await you.say_as_passer_by_and_wait(
         '관중 C',
-        `사토노 다이아몬드라는 ${daiya.uma_sex_title}、${
+        `사토노 다이아몬드라는 ${daiya.uma_sex_title}, ${
           daiya.sex
         }의 달리기, 정말 멋졌어! 그 오억 대결 말이야!`,
       );
@@ -644,7 +644,7 @@ module.exports = {
       );
       await you.say_as_passer_by_and_wait(
         `관중 B`,
-        `……응? 그런데──사토노 그룹에서 G1을 우승한 ${daiya.uma_sex_title}가 나온 적 있나……?`,
+        `……응? 그런데──사토노 그룹에서 G1에서 우승한 ${daiya.uma_sex_title}가 나온 적 있나……?`,
       );
       await you.say_as_passer_by_and_wait(
         `관중 A`,
@@ -689,7 +689,7 @@ module.exports = {
         `메이크 데뷔 이후, ${you.name}은(는) 사토노 다이아몬드와 다음 목표를 의논했다.`,
       );
       await era.printAndWait(
-        `「G1을 우승하는 뛰어난 ${daiya.uma_sex_title}가 된다」──${
+        `「G1에서 우승하는 뛰어난 ${daiya.uma_sex_title}가 된다」──${
           daiya.sex
         }의 목표를 생각하면 주니어급 G1을 고르는 게 순서일 것이다──`,
       );
@@ -708,10 +708,10 @@ module.exports = {
         `아시다시피 사토노 가문은 ${daiya.uma_sex_title}계에 공헌하기 위해 오랫동안 운영 협력과 자선 활동에 힘써 왔어요.`,
       );
       await daiya.say_and_wait(
-        `『G1을 우승하는 뛰어난 ${daiya.uma_sex_title}』를 많이 길러 내는 것도 ${daiya.uma_sex_title}계를 지탱하는 공헌 중 하나예요.`,
+        `『G1에서 우승하는 뛰어난 ${daiya.uma_sex_title}』를 많이 길러 내는 것도 ${daiya.uma_sex_title}계를 지탱하는 공헌 중 하나예요.`,
       );
       await daiya.say_and_wait(
-        `제 목표는 안에서부터 ${daiya.uma_sex_title}계와 ${daiya.uma_sex_title}레이스 문화를 뒷받침하는 존재가 되는 거예요.`,
+        `제 목표는 안에서부터 ${daiya.uma_sex_title}계와 ${daiya.uma_sex_title} 레이스 문화를 뒷받침하는 존재가 되는 거예요.`,
       );
       await daiya.say_and_wait(
         `그렇다면 가장 정통적인 길을 걸어야 해요. 제 출전이 클래식 3관을 뜨겁게 달군다면 그것도 ${daiya.uma_sex_title}계에 대한 공헌이겠죠.`,
@@ -745,7 +745,7 @@ module.exports = {
         `방금 말씀드린 대로 사토노 가문은 ${daiya.uma_sex_title}계의 발전에 열정을 쏟아 왔어요. 하지만 뛰어난 ${daiya.uma_sex_title}를 길러 낸 경험은 한 번도 없어요.`,
       );
       await daiya.say_and_wait(
-        `사토노 가문의 ${daiya.uma_sex_title}중에서 G1을 우승한 사람은 아무도 없어요.`,
+        `사토노 가문의 ${daiya.uma_sex_title} 중에서 G1에서 우승한 사람은 아무도 없어요.`,
       );
       await daiya.say_and_wait(
         '어느새 그건 『사토노 가문의 징크스』라고 불리게 되었죠.',
@@ -775,7 +775,7 @@ module.exports = {
       await daiya.say_and_wait(
         `사토노 가문의 ${daiya.uma_sex_title}는 G1에서 이기지 못한다는 징크스, 저라면 깰 수 있어요──`,
       );
-      await daiya.say_and_wait('클래식 3관을 우승해 증명하겠어요!');
+      await daiya.say_and_wait('클래식 3관을 제패해 증명하겠어요!');
       era.printButton('「알았어, 클래식 3관을 목표로 하자.」', 1);
       await era.input();
       await daiya.say_and_wait('감사해요! 그럼 첫 경기는 『사츠키상』이네요.');
@@ -832,7 +832,7 @@ module.exports = {
         kiku_sho,
         '은 반드시 이길 거야!!',
       ]);
-      await kita.say_and_wait('다이아의 언니로서 먼저 G1을 이겨야지!');
+      await kita.say_and_wait('다이아의 언니로서 먼저 G1에서 이겨야지!');
       await daiya.say_and_wait('내 다음 목표도 클래식 3관이야.');
       await kita.say_and_wait('뭐!? 정말!?');
       await daiya.say_and_wait([
@@ -925,7 +925,7 @@ module.exports = {
         sats_sho,
         '와 ',
         toky_yus,
-        '를 우승한 그분……',
+        '에서 우승한 그분……',
       ]);
       await nature.say_and_wait(
         `맞아, ${nature.sex}는 오늘 안 나왔어. 키타산은 『국화상』에서 그 사람을 이기려고 지금까지 애써 왔으니까.`,
@@ -994,7 +994,7 @@ module.exports = {
       await daiya.say_and_wait('시작해요. 첫 번째 징크스는 뭔가요!?');
       era.drawLine();
       await era.printAndWait(
-        `학원의 징크스, 첫 번째. 『옥상에서 딱지치기를 이긴 사람은 내려가다 미끄러진다』.${you.name}이(가) 서둘러 딱지를 꺼냈을 때──`,
+        `학원의 징크스, 첫 번째. 『옥상에서 딱지치기에서 이긴 사람은 내려가다 미끄러진다』. ${you.name}이(가) 서둘러 딱지를 꺼냈을 때──`,
       );
       await pama.print_and_wait('??? 「어? 사토노랑 트레이너잖아!」');
       await pama.say_and_wait(
@@ -1012,7 +1012,7 @@ module.exports = {
         '네, 그렇군요. 학원의 징크스라면 많지는 않지만 열 가지 정도는 알고 있어요.',
       );
       await dictus.say_and_wait(
-        '여기는 『옥상에서 딱지치기를 이긴 사람은 내려가다 미끄러진다』겠죠.',
+        '여기는 『옥상에서 딱지치기에서 이긴 사람은 내려가다 미끄러진다』겠죠.',
       );
       await dictus.say_and_wait(
         '사토노가 딱지치기에서 이기고 내려가면서 미끄러지지 않으면 징크스가 깨지는 셈이에요.',
@@ -1152,7 +1152,7 @@ module.exports = {
         '『봄 시니어 3관』……! 더 많은 사람에게 응원받도록 잘 달릴게! 그리고 웃음을 전할 거야!',
       );
       await daiya.say_and_wait(
-        `저는 『클래식 3관』을 우승하겠어요! 사토노 가문의 ${daiya.uma_sex_title}로서 눈부신 달리기를 보여 드릴 것을 맹세해요!`,
+        `저는 『클래식 3관』을 제패하겠어요! 사토노 가문의 ${daiya.uma_sex_title}로서 눈부신 달리기를 보여 드릴 것을 맹세해요!`,
       );
       await era.printAndWait(
         `목표 레이스는 달라도 ${daiya.couple_title}의 눈에 깃든 빛은 같았다──`,
@@ -1193,7 +1193,7 @@ module.exports = {
         '부탁해! 전력을 다해 승부할 수 있는 걸로 생각해 줘!',
       );
       await era.printAndWait(
-        `${daiya.couple_title}가 둘 다 전력을 다할 수 있는, 새해다운 대결이라면……`,
+        `${daiya.couple_title}이 둘 다 전력을 다할 수 있는, 새해다운 대결이라면……`,
       );
       era.printButton('「장거리 역전 경주 응원단을 한다」(스태미나+20)', 1);
       era.printButton('「떡 뿌리기 행사에서 떡을 줍는다」(체력+200)', 2);
@@ -1248,7 +1248,7 @@ module.exports = {
           era.printButton('「…………윽! …………으으!!」', 1);
           await era.input();
           await era.printAndWait(
-            `……${daiya.couple_title}가 새해에 살찔 걱정은 없겠다. 다행이다.`,
+            `……${daiya.couple_title}이 새해에 살찔 걱정은 없겠다. 다행이다.`,
           );
           break;
         case 2:
@@ -1262,7 +1262,7 @@ module.exports = {
           await kita.say_and_wait('저쪽에 많이 떨어질 것 같아! 간다────!!');
           await daiya.say_and_wait('어? 어…… 꺅!');
           await daiya.say_and_wait(
-            `사람들…… 인파에 떠밀려 나왔어요……${daiya.uma_sex_title}이 구역도 일반 구역도…… 사람으로 가득해요……`,
+            `사람들…… 인파에 떠밀려 나왔어요……${daiya.uma_sex_title} 구역도 일반 구역도…… 사람으로 가득해요……`,
           );
           era.printButton('「뒤쪽 바닥을 찾아봐.」', 1);
           await era.input();
@@ -1440,7 +1440,7 @@ module.exports = {
         await daiya.say_and_wait('……윽! 그렇다면 절대 지지 않아!!', true);
         await daiya.say_and_wait('으아아아아앗!');
         await era.printAndWait(
-          `사토노 다이아몬드는 외치며 ${daiya.uma_sex_title}전용 통로를 달렸다.`,
+          `사토노 다이아몬드는 외치며 ${daiya.uma_sex_title} 전용 통로를 달렸다.`,
         );
         era.printButton('「제발 늦지 마라……!」', 1);
         await era.input();
@@ -1493,7 +1493,7 @@ module.exports = {
           `이 바람이라면 전철이 멈출지도 모른다. ${you.name}은(는) 택시로 나카야마 경기장에 가기로 했다.`,
         );
         await era.printAndWait(
-          '하지만 고속도로도 날씨 탓에 정체되었다. 경기장에 도착할 예정 시간이 되어도 아직 고속도로를 벗어나지 못했다──',
+          '하지만 고속도로도 날씨 탓에 정체되었다. 경기장 도착 예정 시간이 되어도 아직 고속도로를 벗어나지 못했다──',
         );
         await era.printAndWait(
           '나들목을 빠져나온 뒤에도 정체가 계속된다. 이대로라면 늦는다……!',
@@ -1521,7 +1521,7 @@ module.exports = {
         await daiya.say_and_wait('……윽! 그렇다면 절대 지지 않아!!', true);
         await daiya.say_and_wait('으아아아아앗!');
         await era.printAndWait(
-          `사토노 다이아몬드는 외치며 ${daiya.uma_sex_title}전용 통로를 달렸다.`,
+          `사토노 다이아몬드는 외치며 ${daiya.uma_sex_title} 전용 통로를 달렸다.`,
         );
         era.printButton('「제발 늦지 마라……!」', 1);
         await era.input();
@@ -1703,7 +1703,7 @@ module.exports = {
       );
       await you.say_as_passer_by_and_wait(
         '게임 센터 직원',
-        '일 인당 한 번, 호화 경품에 무료로 도전하세요! 지금 『사토노 다이아몬드 G1 우승 기념 행사』가 진행 중입니다!!',
+        '1인당 한 번, 호화 경품에 무료로 도전하세요! 지금 『사토노 다이아몬드 G1 우승 기념 행사』가 진행 중입니다!!',
       );
       era.printButton('「사토노 다이아몬드 기념 행사!?」', 1);
       await era.input();
@@ -1734,10 +1734,10 @@ module.exports = {
         '이제 패밀리 레스토랑에 가려고 해. 트레이너도 같이 갈래?',
       );
       await daiya.say_and_wait('맞아요! 함께 가요!');
-      era.printButton('「그럼 같이 갈까」', 1);
+      era.printButton('「그럼 같이 갈까?」', 1);
       await era.input();
       await daiya.say_and_wait('잘됐어요! 에헤헤♪');
-      await daiya.say_and_wait('아……맞다. 그 전에 잠깐만 기다려 주세요.');
+      await daiya.say_and_wait('아…… 맞다. 그 전에 잠깐만 기다려 주세요.');
       await era.printAndWait(
         '그렇게 말한 사토노 다이아몬드는 직원에게 말을 걸어 사인 보드를 건네고 게임기 한 대에도 사인을 했다.',
       );
@@ -1769,20 +1769,20 @@ module.exports = {
         '……레이스 전날이면 어머니는 요리사 대신 직접 함박스테이크를 만들어 주셨어요.',
       );
       await daiya.say_and_wait(
-        '동그란 함박스테이크 위에 다이아몬드 모양의 치즈……가운데에는 어머니가 직접 만드신 깃발이 꽂혀 있었죠.',
+        '동그란 함박스테이크 위에 다이아몬드 모양의 치즈…… 가운데에는 어머니가 직접 만드신 깃발이 꽂혀 있었죠.',
       );
       await daiya.say_and_wait(
         '아무리 바쁘셔도 어머니는 꼭 저를 응원하는 함박스테이크를 만들어 주셨어요.',
       );
       await kita.say_and_wait('그래서 『다이아 함박스테이크』구나!');
-      await daiya.say_and_wait('응. 맛까지 완전히 같지는 않겠지만……기대돼♪');
+      await daiya.say_and_wait('응. 맛까지 완전히 같지는 않겠지만…… 기대돼♪');
       await era.printAndWait(
         '패밀리 레스토랑 직원「기다리셨습니다. 『다이아 함박스테이크』 나왔습니다.」',
       );
       await daiya.say_and_wait('와아, 나왔네요! 잘 먹겠습니다──!');
       await daiya.say_and_wait('냠냠…………음!');
       await daiya.say_and_wait(
-        '이 맛……어머니가 만드신 것과 정말 비슷해요! 특히 속이 폭신한 식감이……!',
+        '이 맛…… 어머니가 만드신 것과 정말 비슷해요! 특히 속이 폭신한 식감이……!',
       );
       await daiya.say_and_wait('……후후후, 분명 어머니가 감수하셨을 거예요♪');
       await era.printAndWait(
@@ -1839,13 +1839,13 @@ module.exports = {
      */
     const f = async (daiya, you, sats_sho, toky_yus) => {
       await era.printAndWait(
-        `수많은 ${daiya.uma_sex_title}가 꿈꾸는 무대──『일본 더비』. 본 경기를 내일 앞두고 사토노 다이아몬드는 평소보다 더욱 의욕에 차 있다.`,
+        `수많은 ${daiya.uma_sex_title}가 꿈꾸는 무대──『일본 더비』. 경기를 하루 앞두고 사토노 다이아몬드는 평소보다 더욱 의욕에 차 있다.`,
       );
       await daiya.say_and_wait('승부복과 편자는 어제 다 준비해 뒀어요.');
       await daiya.say_and_wait(
         '그러니 오늘은 마지막 트레이닝에 집중할 수 있어요!',
       );
-      era.printButton('「그래도 가볍게 조정하는 정도밖에 못 하겠지만」', 1);
+      era.printButton('「그래도 가볍게 조정하는 정도밖에 못 하겠지만.」', 1);
       await era.input();
       await daiya.say_and_wait(
         '피로가 남은 채로 레이스에 나갈 수는 없으니까요. 괜찮아요. 전부 트레이너님의 지시대로 할게요.',
@@ -1858,7 +1858,7 @@ module.exports = {
         '슬슬 시간이네요. 후후, 오늘은 모든 게 순조롭네요♪',
       );
       await era.printAndWait(
-        `사토노 다이아몬드의 상태는 좋다.${daiya.sex}의 말대로 오늘은 『사츠키상』 때와 달리 경기장까지 오는 길도 순탄했다.`,
+        `사토노 다이아몬드의 상태는 좋다. ${daiya.sex}의 말대로 오늘은 『사츠키상』 때와 달리 경기장까지 오는 길도 순탄했다.`,
       );
       await daiya.say_and_wait('마지막으로 편자를 확인하고──');
       await daiya.say_and_wait('꺄악!');
@@ -1866,7 +1866,7 @@ module.exports = {
       await era.input();
       await daiya.say_and_wait('신발이……');
       await daiya.say_and_wait(
-        '밑창이 찢어진 것 같아요……편자를 박은 곳부터 갈라졌어요……',
+        '밑창이 찢어진 것 같아요…… 편자를 박은 곳부터 갈라졌어요……',
       );
       await daiya.say_and_wait('………………어제 봤을 때는 아무렇지도 않았는데……');
       await era.printAndWait(
@@ -1929,12 +1929,12 @@ module.exports = {
       await daiya.say_and_wait('아무것도 없어요!!', true);
       await daiya.say_and_wait('아아아아아아아아아아아!!');
       await era.printAndWait(
-        '무언가를 떨쳐 내려는 듯한……날것 그대로의 포효. 사토노 다이아몬드가 엄청난 기세로 잔디를 달린다.',
+        '무언가를 떨쳐 내려는 듯한…… 날것 그대로의 포효. 사토노 다이아몬드가 엄청난 기세로 잔디를 달린다.',
       );
       if (rank === 1) {
         await you.say_as_passer_by_and_wait(
           '중계',
-          `선두는……사토노 다이아몬드──! 올해의 더비 ${daiya.uma_sex_title}는 사토노 다이아몬드!`,
+          `선두는…… 사토노 다이아몬드──! 올해의 더비 ${daiya.uma_sex_title}는 사토노 다이아몬드!`,
         );
         await you.say_as_passer_by_and_wait('관중', '우와아아아아아아아!');
         await you.say_as_passer_by_and_wait(
@@ -1953,7 +1953,7 @@ module.exports = {
       }
       await daiya.say_and_wait('하아, 하아……');
       await daiya.say_and_wait(
-        '신발은……멀쩡했는데, 저는……신발이 신경 쓰여서 견딜 수가 없었어요……',
+        '신발은…… 멀쩡했는데, 저는…… 신발이 신경 쓰여서 견딜 수가 없었어요……',
         true,
       );
       await daiya.say_and_wait('정말 한심하게 달렸어요……!!', true);
@@ -1962,7 +1962,7 @@ module.exports = {
           `사토노 다이아몬드${daiya.adult_sex_title}, 축하드립니다! 더비 ${daiya.uma_sex_title}가 되신 소감은요?`,
         );
         await daiya.say_and_wait(
-          `……감사합니다.${daiya.uma_sex_title}의 역사에 이름을 남기게 되어 영광이에요.`,
+          `……감사합니다. ${daiya.uma_sex_title}의 역사에 이름을 남기게 되어 영광이에요.`,
         );
         await daiya.say_and_wait(
           '『일본 더비』에서의 승리는 사토노 가문에도 더없이 큰 영예예요.',
@@ -1972,7 +1972,7 @@ module.exports = {
           '네, 물론이죠. 다만 자만하지 말라는 말씀도 하시겠죠.',
         );
         await etsuko.say_and_wait(
-          `어머! 그 성실한 향상심이야말로 사토노 다이아몬드 ${daiya.adult_sex_title}를 강하게 만들어 온 원동력이겠네요!`,
+          `어머! 그 성실한 향상심이야말로 사토노 다이아몬드 ${daiya.adult_sex_title}을 강하게 만들어 온 원동력이겠네요!`,
         );
         await daiya.say_and_wait(
           '네. 그룹 여러분은 늘 제가 더 성장하도록 격려해 주세요.',
@@ -1993,18 +1993,18 @@ module.exports = {
           `대기실로 돌아와서도 ${daiya.sex}의 얼굴에는 어딘가 불만이 남아 있다.`,
         );
         era.printButton(
-          `「축하해. 오늘부터 너는 더비 ${daiya.uma_sex_title}야」`,
+          `「축하해. 오늘부터 너는 더비 ${daiya.uma_sex_title}야.」`,
           1,
         );
         await era.input();
         await daiya.say_and_wait('감사해요. 하지만……');
         await daiya.say_and_wait(
-          `더비 ${daiya.uma_sex_title}를 가리는 레이스에서……그렇게 달렸다니, 제 자신이 한심해서……`,
+          `더비 ${daiya.uma_sex_title}를 가리는 레이스에서…… 그렇게 달렸다니, 제 자신이 한심해서……`,
         );
         era.printButton('「왜 그래?」', 1);
         await era.input();
         await daiya.say_and_wait(
-          '저……레이스 내내 신발 상태가 신경 쓰여서 견딜 수가 없었어요.',
+          '저…… 레이스 내내 신발 상태가 신경 쓰여서 견딜 수가 없었어요.',
         );
       } else {
         era.drawLine();
@@ -2026,7 +2026,7 @@ module.exports = {
         '아무 이상도 없었는데, 몇 번이나 직접 확인하고 문제가 없다고 판단했는데도요!',
       );
       await daiya.say_and_wait(
-        '……그때 저는……징크스를 너무 두려워하고 있었어요……',
+        '……그때 저는…… 징크스를 너무 두려워하고 있었어요……',
       );
       if (rank === 1) {
         await daiya.say_and_wait(
@@ -2053,7 +2053,7 @@ module.exports = {
       );
       await daiya.say_and_wait('불운도 징크스도 압도적인 실력으로 짓밟겠어요!');
       await era.printAndWait(
-        `완벽한 승리를 맹세하는 선언.──${you.name}은(는) 그저 감탄했다.`,
+        `완벽한 승리를 맹세하는 선언. ──${you.name}은(는) 그저 감탄했다.`,
       );
       await daiya.say_and_wait('트레이너님!');
       era.printButton('「트레이닝 준비는 나한테 맡겨!」', 1);
@@ -2070,7 +2070,7 @@ module.exports = {
         `징크스에 맞서려는 ${daiya.sex}를 격려하려고 달콤한 디저트를 사 주기로 했다.`,
       );
       await daiya.say_and_wait(
-        '뭘 시켜도 괜찮나요……? 음……과일 파르페에 치즈 케이크를 추가해도……?',
+        '뭘 시켜도 괜찮나요……? 음…… 과일 파르페에 치즈 케이크를 추가해도……?',
       );
       era.printButton('「물론이지!」', 1);
       await era.input();
@@ -2112,7 +2112,7 @@ module.exports = {
       );
       await you.say_as_passer_by_and_wait(
         '관전을 마치고 온 남성 손님 B',
-        `맞아, 맞아! ${daiya.sex}은(는) 특별히 눈부신 느낌보다는 평범하고 우리와 가까운 느낌이야.`,
+        `맞아, 맞아! ${daiya.sex}는 특별히 눈부신 느낌보다는 평범하고 우리와 가까운 느낌이야.`,
       );
       await you.say_as_passer_by_and_wait(
         '관전을 마치고 온 남성 손님 B',
@@ -2122,10 +2122,10 @@ module.exports = {
         '저도 그렇게 생각해요! 두 분도 키타짱의 매력을 잘 아시네요!',
       );
       await daiya.say_and_wait(
-        `키타짱……${daiya.sex}는 새해 참배 때 자기를 응원해 주는 사람을 늘리겠다는 목표를 세웠어요……`,
+        `키타짱…… ${daiya.sex}는 새해 참배 때 자기를 응원해 주는 사람을 늘리겠다는 목표를 세웠어요……`,
       );
       await daiya.say_and_wait('그걸 이뤘네요.');
-      era.printButton('「팬 투표 1위니까」', 1);
+      era.printButton('「팬 투표 1위니까.」', 1);
       await era.input();
       await daiya.say_and_wait(
         '네. 팬분들도 즐겁게 키타짱의 레이스 이야기를 하고 계세요.',
@@ -2140,7 +2140,7 @@ module.exports = {
       await daiya.say_and_wait(
         '지금은 키타짱이 앞서 달리고 있어요. 하지만 저는 제 길을 나아가서 반드시 따라잡겠어요!',
       );
-      era.printButton('「『국화상』에서는 더욱 질 수 없겠네」', 1);
+      era.printButton('「『국화상』에서는 더욱 질 수 없겠네.」', 1);
       await era.input();
       await daiya.say_and_wait(
         '네. 키타짱이 작년에 우승한 『국화상』. 이 레이스에서는 절대로 질 수 없어요!',
@@ -2178,7 +2178,7 @@ module.exports = {
         '후후, 물론 의욕은 넘치지. 『국화상』에서 꼭 이길 거니까.',
       );
       await daiya.say_and_wait(
-        '키타짱이 우승한 『국화상』에서 이기고……사토노 가문의 징크스를 깨뜨려서……키타짱의 라이벌에 걸맞은 내가 될 거야!',
+        '키타짱이 우승한 『국화상』에서 이기고…… 사토노 가문의 징크스를 깨뜨려서…… 키타짱의 라이벌에 걸맞은 내가 될 거야!',
       );
       await kita.say_and_wait(
         '다이아……! 그래! 언젠가 같은 레이스를 달리기 위해서.',
@@ -2190,7 +2190,7 @@ module.exports = {
         '「힘내자, 오──!」',
       ]);
       await era.printAndWait(
-        '두 사람의 기합 소리가 여름 하늘에 울려 퍼진다.──뜨거운 여름 합숙이 될 것 같다.',
+        '두 사람의 기합 소리가 여름 하늘에 울려 퍼진다. ──뜨거운 여름 합숙이 될 것 같다.',
       );
     };
     f.title = title;
@@ -2220,8 +2220,8 @@ module.exports = {
       kita,
       you,
     ) => {
-      await daiya.say_and_wait('하아, 하아……페이스주……끝났어요……');
-      era.printButton('「수고했어. 쉬자」', 1);
+      await daiya.say_and_wait('하아, 하아…… 페이스주…… 끝났어요……');
+      era.printButton('「수고했어. 쉬자.」', 1);
       await era.input();
       await daiya.say_and_wait('네……');
       await era.printAndWait(
@@ -2239,14 +2239,14 @@ module.exports = {
       await daiya.say_and_wait('아니요, 괜찮아요! 그럼 시작할게요!');
       era.drawLine();
       await daiya.say_and_wait('하아, 하아, 하아……');
-      era.printButton('「오전 트레이닝은 여기까지 하자」', 1);
+      era.printButton('「오전 트레이닝은 여기까지 하자.」', 1);
       await era.input();
-      await daiya.say_and_wait('그, 그래도……예정된 훈련이 아직……');
+      await daiya.say_and_wait('그, 그래도…… 예정된 훈련이 아직……');
       await era.printAndWait(
         `${you.name}은(는) 지친 상태로 계속해도 효과가 적다고 설명했다. 실제로 지금 기록은 크게 떨어져 있다.`,
       );
       await daiya.say_and_wait(
-        '몸이 한계라고 멈춰 버리면……앞으로 나아갈 수 없어요! 징크스를 뛰어넘을 실력을 얻으려면 더 필사적으로 해야 해요!!',
+        '몸이 한계라고 멈춰 버리면…… 앞으로 나아갈 수 없어요! 징크스를 뛰어넘을 실력을 얻으려면 더 필사적으로 해야 해요!!',
       );
       await daiya.say_and_wait(
         '게다가 키타짱은 아직도 열심히 하고 있어요! 저도 질 수 없어요!',
@@ -2267,7 +2267,7 @@ module.exports = {
       await era.printAndWait(
         `지금까지 ${daiya.sex}는 좋은 환경에서 훈련해 왔다. 무더위 속에서 훈련한 경험은 적기에 낯선 환경이 체력과 기력을 더욱 소모시키고 있다.`,
       );
-      era.printButton('「우선 점심부터 먹자」', 1);
+      era.printButton('「우선 점심부터 먹자.」', 1);
       await era.input();
       await daiya.say_and_wait('……네……');
       await turbo.say_as_unknown_and_wait('어──이! 사토노! 거기 트레이너도!');
@@ -2284,7 +2284,7 @@ module.exports = {
         '이쿠노 딕터스뿐만 아니라 오늘은 트윈 터보, 마치카네 탄호이저, 다이타쿠 헬리오스도 있다.',
       );
       await dictus.say_and_wait(
-        '사토노, 괜찮다면 함께 합동 트레이닝을 하지 않겠어요?',
+        '사토노, 괜찮다면 합동 트레이닝을 하지 않겠어요?',
       );
       await dictus.say_and_wait(
         '많은 사람과 교류할 수 있다는 것도 여름 합숙의 장점입니다. 이번 기회에 해 보겠어요?',
@@ -2299,7 +2299,7 @@ module.exports = {
       await pama.say_and_wait('그런 거야. 어울려 주면 고맙겠어.');
       await turbo.say_and_wait('좋지! 응, 사토노! 응──응──응──응──!!');
       await nature.say_and_wait('괜찮으면 우리랑 같이 트레이닝해 주지 않을래?');
-      await daiya.say_and_wait('그렇네요……어떻게 할까요, 트레이너님?');
+      await daiya.say_and_wait('그렇네요…… 어떻게 할까요, 트레이너님?');
       era.printButton('「어떤 트레이닝을 하려는 거야?」', 1);
       await era.input();
       await dictus.say_and_wait('생각해 둔 건 두 가지입니다──');
@@ -2309,7 +2309,7 @@ module.exports = {
       await era.printAndWait(
         '무엇보다 재미있어 보인다. 기분 전환도 될 것 같다.',
       );
-      era.printButton('「그럼 합동 트레이닝에 끼워 달라고 하자」', 1);
+      era.printButton('「그럼 합동 트레이닝에 끼워 달라고 하자.」', 1);
       await era.input();
       await turbo.say_and_wait(
         '아싸──!! 사토노, 나머지는 터보 선배한테 맡겨────!',
@@ -2345,7 +2345,7 @@ module.exports = {
         await nature.say_and_wait(
           '터널을 만들 모래도 엄청 많이 파야 해. 계속, 계속, 계속 파는 거지.',
         );
-        await daiya.say_and_wait('그렇군요……그거라면 단련이 되겠네요!');
+        await daiya.say_and_wait('그렇군요…… 그거라면 단련이 되겠네요!');
         await daiya.say_and_wait('후우, 이 정도면 될까요?');
         await tannhauser.say_and_wait(
           '네, 딱 좋아요~ 자기가 판 구덩이에 빠지지 않게 조심하세요!',
@@ -2356,14 +2356,14 @@ module.exports = {
           '그럼──다음은 기초 공사예요. 모래에 물을 듬~뿍 붓고 밟아서 다지는 거죠.',
         );
         await tannhauser.say_and_wait(
-          '터널 높이까지 모래를 쌓고, 밟고, 쌓고, 밟고……저랑 같이──♪',
+          '터널 높이까지 모래를 쌓고, 밟고, 쌓고, 밟고…… 저랑 같이──♪',
         );
-        await era.printAndWait('일동「터널 완성이에요~!」');
+        await era.printAndWait('일동 「터널 완성이에요~!」');
         await daiya.say_and_wait('와아~! 정말로 지나갈 수 있어요!');
         await pama.say_and_wait('처음 만들어 본 것치고 완성도가 높은데!');
         await nature.say_and_wait('후우~ 끝나자마자 피로가 확 밀려오네……');
         await daiya.say_and_wait(
-          '모래를 파고, 바닷물을 나르고, 모래산을 밟아 다지고……계속 몸을 움직였으니까요.',
+          '모래를 파고, 바닷물을 나르고, 모래산을 밟아 다지고…… 계속 몸을 움직였으니까요.',
         );
         await daiya.say_and_wait('그래도 재미있었어요!');
         await era.printAndWait(
@@ -2396,18 +2396,18 @@ module.exports = {
         await daiya.say_and_wait('네~♪');
         await pama.say_and_wait('서브 간다~! 에잇──!');
         await era.printAndWait(
-          `종이 풍선은 ${daiya.sex}가 높이 쳐 올린 뒤……한참이 지나도 내려오지 않는다.`,
+          `종이 풍선은 ${daiya.sex}가 높이 쳐 올린 뒤…… 한참이 지나도 내려오지 않는다.`,
         );
         await turbo.say_and_wait(
-          '좋아, 와라, 와라, 와라, 와라! 와라, 와라…………아직도 안 와────!?',
+          '좋아, 와라, 와라, 와라, 와라! 와라, 와라………… 아직도 안 와────!?',
         );
         await daiya.say_and_wait(
-          '떨어질 곳은 이 근처……앗! 바람 방향이……! 네트를 넘어서……!',
+          '떨어질 곳은 이 근처…… 앗! 바람 방향이……! 네트를 넘어서……!',
         );
-        await daiya.say_and_wait('아……넘어가지 않았네요……');
+        await daiya.say_and_wait('아…… 넘어가지 않았네요……');
         await turbo.say_and_wait('뭐야──! 이 풍선 너무 느리잖아!!');
         await daiya.say_and_wait(
-          '천천히 떠다닌다는 게……이런 뜻이었군요. 종이 풍선은 보통 공보다 훨씬 가벼우니까 공중에 떠 있는 시간이 길어요.',
+          '천천히 떠다닌다는 게…… 이런 뜻이었군요. 종이 풍선은 보통 공보다 훨씬 가벼우니까 공중에 떠 있는 시간이 길어요.',
         );
         await daiya.say_and_wait(
           '게다가 네트를 넘기려면 힘 조절도 필요하네요. 그 때문에 움직이지 않고 기다리기도 해야 하고요.',
@@ -2419,7 +2419,7 @@ module.exports = {
           '바람 때문에 멀리 날아가기도 하고! 이리저리 뛰게 되니까 완전 웃겨☆',
         );
         await daiya.say_and_wait(
-          '기회를 기다린다……레이스에서 승부를 거는 타이밍과 같네요.',
+          '기회를 기다린다…… 레이스에서 승부를 거는 타이밍과 같네요.',
         );
         await daiya.say_and_wait(
           '주변에 휩쓸리지 않고 자신에게 가장 좋은 순간까지 버티는 거군요. 상당한 인내심이 필요하겠어요. 좋은 트레이닝이 될 것 같아요!',
@@ -2453,12 +2453,12 @@ module.exports = {
       await era.input();
       await daiya.say_and_wait('……앞으로의 일을 생각하고 있었어요.');
       await daiya.say_and_wait(
-        '『국화상』까지 대략 두 달……그동안 얼마나 성장할 수 있을까요.',
+        '『국화상』까지 대략 두 달…… 그동안 얼마나 성장할 수 있을까요.',
       );
       await daiya.say_and_wait(
         '아직 징크스에 전혀 흔들리지 않을 만큼 강해졌다고는 할 수 없을 것 같아요.',
       );
-      era.printButton('「아직 두 달이나 있어」', 1);
+      era.printButton('「아직 두 달이나 있어.」', 1);
       await era.input();
       await era.printAndWait(
         '여름 합숙은 기초 트레이닝이 중심이었다. 『국화상』을 위한 본격적인 조정은 이제부터다.',
@@ -2504,7 +2504,7 @@ module.exports = {
     ) => {
       await daiya.say_and_wait('우오오오오오──!');
       await daiya.say_and_wait(
-        '하아, 하아……아직 부족해요. 이 정도로는 이길 수 없어요……',
+        '하아, 하아…… 아직 부족해요. 이 정도로는 이길 수 없어요……',
       );
       await daiya.say_and_wait(
         '『국화상』에서 이기려면 어떤 돌발 상황에도 흔들리지 않을 만큼 강해져야……!',
@@ -2518,7 +2518,7 @@ module.exports = {
       await era.printAndWait(
         `특히 ${daiya.sex}는 요즘 『징크스를 제압할 실력을』이라는 말을 자주 입에 올린다.`,
       );
-      await daiya.say_and_wait('하아, 하아……후읏!');
+      await daiya.say_and_wait('하아, 하아…… 후읏!');
       await daiya.say_and_wait(
         '트레이너님, 이제는 언덕길 스프린트도 수월하게 할 수 있어요.',
       );
@@ -2530,8 +2530,8 @@ module.exports = {
       );
       await era.printAndWait(`『${daiya.sex}』에게 도움을 청해 보자.`);
       await mcqueen.say_and_wait('오늘 잘 부탁드려요, 사토노.');
-      await daiya.say_and_wait('매, 매……맥퀸!? 맥퀸이 함께 트레이닝을!?');
-      era.printButton('「배울 게 많을 거야」', 1);
+      await daiya.say_and_wait('매, 매…… 맥퀸!? 맥퀸이 함께 트레이닝을!?');
+      era.printButton('「배울 게 많을 거야.」', 1);
       await era.input();
       await daiya.say_and_wait('네!! 맥퀸, 귀한 시간 내 주셔서 감사해요!');
       await mcqueen.say_and_wait(
@@ -2541,12 +2541,12 @@ module.exports = {
         '자, 시간이 많지 않네요. 우선 지구력 달리기로 몸을 풀고 나서 병주 연습을 하죠.',
       );
       await daiya.say_and_wait('잘 부탁드려요!');
-      await era.printAndWait('두 사람「우오오오오! 우오오오오!」');
-      await daiya.say_and_wait('하아, 하아……조금만 더 가면 됐는데……');
+      await era.printAndWait('두 사람 「우오오오오! 우오오오오!」');
+      await daiya.say_and_wait('하아, 하아…… 조금만 더 가면 됐는데……');
       await mcqueen.say_and_wait(
         '전반에 너무 뒤처졌어요. 선행 주자의 페이스에 맞춰 승부를 거는 타이밍을 바꾸는 연습을 더 하는 게 좋겠네요.',
       );
-      await daiya.say_and_wait('말씀대로예요……덕분에 부족한 점을 알았어요!');
+      await daiya.say_and_wait('말씀대로예요…… 덕분에 부족한 점을 알았어요!');
       await mcqueen.say_and_wait(
         '후후, 바로 그거예요. 마지막으로 긴 거리를 가볍게 달리며 몸을 식히죠.',
       );
@@ -2555,12 +2555,12 @@ module.exports = {
         '사토노 다이아몬드의 표정이 밝다. 팽팽하게 긴장한 기색은 더 이상 보이지 않는다.',
       );
       await era.printAndWait(
-        `${you.name}은(는) 처지가 비슷한 메지로 맥퀸이라면 사토노 다이아몬드의 마음을 이해할 거라 생각했다.${daiya.sex}에게 부탁하길 잘했다.`,
+        `${you.name}은(는) 처지가 비슷한 메지로 맥퀸이라면 사토노 다이아몬드의 마음을 이해할 거라 생각했다. ${daiya.sex}에게 부탁하길 잘했다.`,
       );
-      await daiya.say_and_wait('하아, 하아…………앗! 죄송해요, 맥퀸!');
+      await daiya.say_and_wait('하아, 하아………… 앗! 죄송해요, 맥퀸!');
       await mcqueen.say_and_wait('무슨 일이죠?');
       await daiya.say_and_wait(
-        '벌꿀 음료를 파는 노점이 보여서요! 저……사 와도 될까요?',
+        '벌꿀 음료를 파는 노점이 보여서요! 저…… 사 와도 될까요?',
       );
       await mcqueen.say_and_wait(
         '어머, 정말이네요. 그럼 여기서 잠깐 쉬면서 수분을 보충하죠.',
@@ -2611,16 +2611,16 @@ module.exports = {
       await mcqueen.say_and_wait(
         '저도 비슷한 경험이 있어요. 중요한 레이스에서 불운이 닥친 적이 있죠.',
       );
-      await daiya.say_and_wait('맥퀸도……아……');
+      await daiya.say_and_wait('맥퀸도…… 아……');
       await daiya.say_and_wait(['', tenn_spr, ' 말씀이시군요……?']);
       await mcqueen.say_and_wait(
-        '네……그 레이스는 연패가 걸린 중요한 승부였어요.',
+        '네…… 그 레이스는 연패가 걸린 중요한 승부였어요.',
       );
       await mcqueen.say_and_wait(
-        '게이트에 들어가기 전에 오른쪽 다리에 뭔가 걸리는 느낌이 들어 확인했더니……편자가 빠져 있더군요.',
+        '게이트에 들어가기 전에 오른쪽 다리에 뭔가 걸리는 느낌이 들어 확인했더니…… 편자가 빠져 있더군요.',
       );
       await daiya.say_and_wait(
-        '알고 있어요. 편자 절반이 휘어져서……그 자리에서 다시 박으셨다고요.',
+        '알고 있어요. 편자 절반이 휘어져서…… 그 자리에서 다시 박으셨다고요.',
       );
       await mcqueen.say_and_wait(
         '맞아요. 하지만 그때 저는 편자가 빠진 일을 불운이라고 생각하지 않았어요.',
@@ -2646,27 +2646,27 @@ module.exports = {
       );
       await mcqueen.say_and_wait('어머, 그럼 이미 그 이치는 알고 있었군요.');
       await daiya.say_and_wait(
-        '……징크스에 너무 집착해서 오히려 징크스에 옭아매여 있었던 걸까요……?',
+        '……징크스에 너무 집착해서 오히려 징크스에 옭매여 있었던 걸까요……?',
       );
       await daiya.say_and_wait(
         '그렇게까지 신경 쓰지 않으면 징크스에 손발이 묶일 일도 없겠죠……',
       );
       await mcqueen.say_and_wait('저는 그렇게 생각해요.');
       await daiya.say_and_wait(
-        '……생각해 본 적도 없어요……하지만 곰곰이 생각해 보니……',
+        '……생각해 본 적도 없어요…… 하지만 곰곰이 생각해 보니……',
       );
       await daiya.say_and_wait(
         '……맥퀸이 흔들리지 않는 강함을 지킬 수 있는 이유를 알 것 같아요……',
       );
       await daiya.say_and_wait(
-        '언제나 자신의 달리기와 목표만을 바라보시니까……언제나 의연하고 흔들리지 않으시는 거군요.',
+        '언제나 자신의 달리기와 목표만을 바라보시니까…… 언제나 의연하고 흔들리지 않으시는 거군요.',
       );
       await daiya.say_and_wait(
         '자신의 중심을 잡고 계신 거겠죠. 에헤헤, 맥퀸은 정말 멋진 분이에요!',
       );
       await mcqueen.say_and_wait('그렇게 말씀해 주시니 영광이네요.');
       await mcqueen.say_and_wait(
-        '그리고……징크스라고 불리는 것들 대부분은 결과를 보고 만들어져요.',
+        '그리고…… 징크스라고 불리는 것들 대부분은 결과를 보고 만들어져요.',
       );
       await mcqueen.say_and_wait(
         '그 레이스에서 졌다면 징크스라고 불렸을지도 모르죠. 하지만 이기면 징크스라고 부를 여지가 없어지는 거예요.',
@@ -2675,21 +2675,21 @@ module.exports = {
         '듣고 보니 정말 그렇네요! 그럼 벌꿀 레몬을 마시면 진다는 징크스도……',
       );
       await mcqueen.say_and_wait(
-        '아마……살이 찌기 때문이 아닐까요? 그만큼 마시면 열량이 너무 높고, 레몬이 단맛을 가려 버리니까요.',
+        '아마…… 살이 찌기 때문이 아닐까요? 그만큼 마시면 열량이 너무 높고, 레몬이 단맛을 가려 버리니까요.',
       );
       await daiya.say_and_wait('…………');
-      await daiya.say_and_wait('저기……버, 벌써 다 마셔 버렸는데요……');
+      await daiya.say_and_wait('저기…… 버, 벌써 다 마셔 버렸는데요……');
       await daiya.say_and_wait(
-        '트……트레이너님!! 아까 마신 벌꿀 레몬의 열량을……추가 트레이닝으로 소모하게 해 주세요~!',
+        '트……트레이너님!! 아까 마신 벌꿀 레몬의 열량을…… 추가 트레이닝으로 소모하게 해 주세요~!',
       );
       era.drawLine({ content: '다음 날' });
       await daiya.say_and_wait([
-        '저……어젯밤에 ',
+        '저…… 어젯밤에 ',
         kiku_sho,
         '까지 해결해야 할 과제들을 적어 봤어요.',
       ]);
       await daiya.say_and_wait(
-        '3000미터의 페이스 배분, 위치 경쟁 연구, 승부를 걸 타이밍 구상……스태미나도 더 필요해요.',
+        '3000미터의 페이스 배분, 위치 경쟁 연구, 승부를 걸 타이밍 구상…… 스태미나도 더 필요해요.',
       );
       await daiya.say_and_wait(
         '할 일이 산더미예요! 이제 징크스를 신경 쓸 틈 같은 건 없어요!',
@@ -2718,7 +2718,7 @@ module.exports = {
       era.printButton('「긴장돼?」', 1);
       await era.input();
       await daiya.say_and_wait(
-        '아니요. 제 페이스대로 달리면 된다……그렇게 생각하니 신기하게 마음이 차분해져요.',
+        '아니요. 제 페이스대로 달리면 된다…… 그렇게 생각하니 신기하게 마음이 차분해져요.',
       );
       await daiya.say_and_wait(
         '클래식 3관의 마지막, 『국화상』. 제 목표도 오늘이면 한 고비를 넘기게 돼요.',
@@ -2727,7 +2727,7 @@ module.exports = {
         '이 목표를 이룰 때까지 절대로 방심하지 않겠어요!',
       );
       await kita.say_and_wait('다이아 트레이너! 어때? 다이아 상태는?');
-      era.printButton('「평소와 같아」', 1);
+      era.printButton('「평소와 같아.」', 1);
       await era.input();
       await era.printAndWait(
         '이번에는 사고 없이 레이스를 치를 수 있을 것 같다. 오늘 하루 사토노 다이아몬드는 징크스 이야기를 한 번도 하지 않았다.',
@@ -2778,28 +2778,28 @@ module.exports = {
      */
     const f = async (daiya, kita, you, rank, sats_sho, toky_yus, arim_kin) => {
       await daiya.say_and_wait(
-        '이 흐름이라면……이제 곧 자리싸움이 시작되겠지. 지금은 이 위치에서 버티고……',
+        '이 흐름이라면…… 이제 곧 자리싸움이 시작되겠지. 지금은 이 위치에서 버티고……',
         true,
       );
       await era.printAndWait(
-        '중계「안쪽에서 승부를 겁니다! 지금 이 타이밍에 나섭니다! 후방 주자들도 뒤따릅니다!」',
+        '중계 「안쪽에서 승부를 겁니다! 지금 이 타이밍에 나섭니다! 후방 주자들도 뒤따릅니다!」',
       );
       await daiya.say_and_wait('아직이야. 참는 거야. 내 페이스대로……', true);
       await daiya.say_and_wait('──지금이야!!');
       await daiya.say_and_wait('하아아아아아아아아아아!!');
       await era.printAndWait(
-        '중계「나왔다──!! 사토노 다이아몬드! 멋진 막판 스퍼트를 터뜨립니다──!」',
+        '중계 「나왔다──!! 사토노 다이아몬드! 멋진 막판 스퍼트를 터뜨립니다──!」',
       );
       if (rank === 1) {
         await era.printAndWait(
-          `중계「1착은 사토노 다이아몬드!! ${daiya.sex}는 다이아몬드처럼 모든 장애물을 부숴 버렸습니다──!」`,
+          `중계 「1착은 사토노 다이아몬드!! ${daiya.sex}는 다이아몬드처럼 모든 장애물을 부숴 버렸습니다──!」`,
         );
         await you.say_as_passer_by_and_wait('관중', '와아아아아아아아아!');
         await kita.say_and_wait('해냈다! 잘됐다, 잘됐다, 잘됐다──────!!');
         await kita.say_and_wait('다이아! 해냈어, 다이아!!');
         await you.say_as_passer_by_and_wait(
           '관중 A',
-          '대단해……소름이 돋았어……! 사토노 다이아몬드, 정말 강해!!',
+          '대단해…… 소름이 돋았어……! 사토노 다이아몬드, 정말 강해!!',
         );
         await you.say_as_passer_by_and_wait('관중 B', [
           `하하, 이게 ${daiya.sex}의 진짜 힘인가! ${daiya.sex}가 `,
@@ -2811,14 +2811,14 @@ module.exports = {
         await kita.say_and_wait('……다이아는 역시 굉장해!');
       } else {
         await era.printAndWait(
-          '중계「사토노 다이아몬드, 비록 1착은 놓쳤지만 최상급 다이아몬드에 걸맞은 달리기를 보여 주었습니다!!」',
+          '중계 「사토노 다이아몬드, 비록 1착은 놓쳤지만 최상급 다이아몬드에 걸맞은 달리기를 보여 주었습니다!!」',
         );
         await you.say_as_passer_by_and_wait('관중', '짝짝짝짝짝!');
-        await kita.say_and_wait('대단해……다이아, 언제 이렇게까지……!');
+        await kita.say_and_wait('대단해…… 다이아, 언제 이렇게까지……!');
         await kita.say_and_wait('헤헤헤! 같이 달릴 날이 기대돼!');
         await you.say_as_passer_by_and_wait(
           '관중 A',
-          '나도……소름이……사토노 다이아몬드, 정말 멋진 달리기였어.',
+          '나도…… 소름이…… 사토노 다이아몬드, 정말 멋진 달리기였어.',
         );
         await you.say_as_passer_by_and_wait('관중 B', [
           '',
@@ -2832,8 +2832,8 @@ module.exports = {
           `${daiya.sex}의 다음 레이스가 기대되네!`,
         );
       }
-      await daiya.say_and_wait('하아……하아……');
-      await daiya.say_and_wait('다리가……가벼워…………이렇게나……', true);
+      await daiya.say_and_wait('하아…… 하아……');
+      await daiya.say_and_wait('다리가…… 가벼워………… 이렇게나……', true);
       await daiya.say_and_wait('나……', true);
       await daiya.say_and_wait('나…………읏!', true);
       await daiya.say_and_wait('트레이너님……!');
@@ -2851,8 +2851,8 @@ module.exports = {
       );
       await daiya.say_and_wait('저도 만족할 만한 달리기를 했어요!!');
       await daiya.say_and_wait('다리에 채워진 족쇄가 풀린 것 같아요……!');
-      await daiya.say_and_wait('……몸도…………마음도……가벼워요……!');
-      era.printButton('「아무래도 징크스를 『극복』한 것 같네」', 1);
+      await daiya.say_and_wait('……몸도………… 마음도…… 가벼워요……!');
+      era.printButton('「아무래도 징크스를 『극복』한 것 같네.」', 1);
       await era.input();
       await daiya.say_and_wait('……！');
       await daiya.say_and_wait('…………후우…………흑……');
@@ -2862,15 +2862,15 @@ module.exports = {
       await daiya.say_and_wait('으아아아아아아……!!');
       await era.printAndWait('지하 통로에 울음소리가 가득 찼다.');
       await era.printAndWait(
-        `${daiya.sex}가 태어나기 전부터 끊이지 않았던 사토노 가문의 징크스에 관한 소문.${daiya.sex}가 짊어져 온 그 무게는 어렵지 않게 짐작할 수 있었다.`,
+        `${daiya.sex}가 태어나기 전부터 끊이지 않았던 사토노 가문의 징크스에 관한 소문. ${daiya.sex}가 짊어져 온 그 무게는 어렵지 않게 짐작할 수 있었다.`,
       );
       await era.printAndWait(
         `언제나 사람들에게 징크스에 지지 않겠다고 선언해 온 것도 ${daiya.sex}가 스스로를 북돋우기 위한 방법이었을 것이다.`,
       );
       await era.printAndWait(`${daiya.sex}는 마침내 그 속박에서 풀려났다.`);
-      await daiya.say_and_wait('……에헤헤……흑……이런 모습 보여서 죄송해요……');
+      await daiya.say_and_wait('……에헤헤…… 흑…… 이런 모습 보여서 죄송해요……');
       await daiya.say_and_wait(
-        '……정말 맥퀸의 말대로예요. 계속 징크스를 너무 의식해서……오히려 스스로 한계를 만들고 있었네요.',
+        '……정말 맥퀸의 말대로예요. 계속 징크스를 너무 의식해서…… 오히려 스스로 한계를 만들고 있었네요.',
       );
       await daiya.say_and_wait('하지만 이제 괜찮아요. 더는 얽매이지 않겠어요!');
       await daiya.say_and_wait(
@@ -2881,7 +2881,7 @@ module.exports = {
       if (rank === 1) {
         await kita.say_and_wait('『국화상』 1착, 축하해, 다이아!');
         await daiya.say_and_wait(
-          '고마워! 작년에 키타짱이 우승한 레이스……나도 이겼어! 그러니까 자신 있게 말할게!',
+          '고마워! 작년에 키타짱이 우승한 레이스…… 나도 이겼어! 그러니까 자신 있게 말할게!',
         );
         await daiya.say_and_wait('키타짱! 『아리마 기념』에서 승부하자!');
 
@@ -2892,7 +2892,7 @@ module.exports = {
       } else {
         await kita.say_and_wait('멋진 달리기였어, 다이아!');
         await daiya.say_and_wait(
-          '고마워! 내 달리기……키타짱의 상대가 될 자격이 있었을까……?',
+          '고마워! 내 달리기…… 키타짱의 상대가 될 자격이 있었을까……?',
         );
         await kita.say_and_wait('──다이아.');
         await kita.say_and_wait('『아리마 기념』에서 같이 승부하자!');
@@ -2935,18 +2935,18 @@ module.exports = {
         '후후, 그때 상상했던 무대도 G1이었지만 현실은 훨씬 더 멋져요.',
       );
       await daiya.say_and_wait(
-        `일류 ${daiya.uma_sex_title}가 되겠다는 제 꿈으로 향하는 길에 키타짱도 있어요……${kita.sex}는 라이벌로서 제 앞에 서 있죠.`,
+        `일류 ${daiya.uma_sex_title}가 되겠다는 제 꿈으로 향하는 길에 키타짱도 있어요…… ${kita.sex}는 라이벌로서 제 앞에 서 있죠.`,
       );
       await daiya.say_and_wait(
         '이보다 더 운명적이고 가슴 뛰는 상황은 없을 거예요!',
       );
-      era.printButton('「최고의 무대네」', 1);
+      era.printButton('「최고의 무대네.」', 1);
       await era.input();
       await daiya.say_and_wait(
         `네. 앞서 달리는 키타짱을 따라잡고 뛰어넘어서 제 꿈을 이루겠어요. 저와 사토노 가문의 꿈을요.`,
       );
       await era.printAndWait(
-        `사토노 다이아몬드의 눈에는 한 치의 망설임도 없다.${daiya.sex}의 눈동자 깊은 곳에서 타오르는 불꽃은 처음 만났을 때와 같다. 뜨겁고 맹렬하게 타오르고 있다.`,
+        `사토노 다이아몬드의 눈에는 한 치의 망설임도 없다. ${daiya.sex}의 눈동자 깊은 곳에서 타오르는 불꽃은 처음 만났을 때와 같다. 뜨겁고 맹렬하게 타오르고 있다.`,
       );
       era.printButton('「우선은 『아리마 기념』이야!」', 1);
       await era.input();
@@ -2972,19 +2972,19 @@ module.exports = {
         '사토노 다이아몬드의 득표 순위는 2위. 1위는 키타산 블랙이다.',
       );
       await era.printAndWait(
-        `관중 A「오늘은 키타산 블랙이 이길 거야! 막판 끈기가 차원이 다르거든!!」`,
+        `관중 A 「오늘은 키타산 블랙이 이길 거야! 막판 끈기가 차원이 다르거든!!」`,
       );
       await era.printAndWait(
-        '관중 B「매번 마지막에 한 단계 더 끌어올리지! 평범한 막판 스퍼트로는 따라잡을 수 없어!」',
+        '관중 B 「매번 마지막에 한 단계 더 끌어올리지! 평범한 막판 스퍼트로는 따라잡을 수 없어!」',
       );
       await era.printAndWait(
-        `관중 A「키타산은 우리의 희망의 별이야! ${daiya.sex}, 힘내 줬으면 좋겠어!」`,
+        `관중 A 「키타산은 우리의 희망의 별이야! ${daiya.sex}, 힘내 줬으면 좋겠어!」`,
       );
       await daiya.say_and_wait('다들 입을 열자마자 키타짱 이야기네요.');
       era.printButton('「다이아도 근소한 차이로 2위잖아!」', 1);
       await era.input();
       await daiya.say_and_wait(
-        '어머, 트레이너님도 참……너무 제 편만 드시네요. 2만 표 차이를 근소하다고는 하지 않죠.',
+        '어머, 트레이너님도 참…… 너무 제 편만 드시네요. 2만 표 차이를 근소하다고는 하지 않죠.',
       );
       await daiya.say_and_wait(
         '그래도 많은 분이 투표해 주셔서 정말 기쁘고 영광이에요♪',
@@ -2997,7 +2997,7 @@ module.exports = {
       );
       era.printButton('「……부러운 거야?」', 1);
       await era.input();
-      await daiya.say_and_wait('네……부럽지 않다고 하면 거짓말이겠죠……');
+      await daiya.say_and_wait('네…… 부럽지 않다고 하면 거짓말이겠죠……');
       await daiya.say_and_wait(
         '사람은 자기도 모르게 남을 부러워하게 되니까요.',
       );
@@ -3005,17 +3005,17 @@ module.exports = {
         '그리고 키타짱의 팬분들을 실망시키게 될 거라고 생각하니 조금 죄송하기도 해서요.',
       );
       await era.printAndWait(
-        `말을 마친 사토노 다이아몬드가 장난스럽게 미소 지었다. 이기겠다는 선언이나 다름없다.${daiya.sex}는 강하고 든든하다.`,
+        `말을 마친 사토노 다이아몬드가 장난스럽게 미소 지었다. 이기겠다는 선언이나 다름없다. ${daiya.sex}는 강하고 든든하다.`,
       );
       await daiya.say_and_wait('시간이네요. 그럼 다녀올게요!');
       await era.printAndWait(
-        '중계「더없이 귀한 보석의 이름을 지닌 아가씨, 등장! 팬 투표 2위, 사토노 다이아몬드!」',
+        '중계 「더없이 귀한 보석의 이름을 지닌 아가씨, 등장! 팬 투표 2위, 사토노 다이아몬드!」',
       );
-      await era.printAndWait('관중「와아아아아아아아!」');
+      await era.printAndWait('관중 「와아아아아아아아!」');
       await era.printAndWait(
-        '중계「기다리셨습니다, 마지막 출주자! 팬 투표 1위, 키타산 블랙!」',
+        '중계 「기다리셨습니다, 마지막 출주자! 팬 투표 1위, 키타산 블랙!」',
       );
-      await era.printAndWait('관중「와아아아아아아아아아아아!」');
+      await era.printAndWait('관중 「와아아아아아아아아아아아!」');
       await daiya.say_and_wait('……키타짱, 오래 기다렸지!');
       await kita.say_and_wait('응! 계속 이날을 기다렸어, 다이아!');
       await daiya.say_and_wait(
@@ -3081,7 +3081,7 @@ module.exports = {
           '클래식급을 마무리하며 이렇게 멋진 레이스를 할 수 있어서 정말 기뻐요.',
         );
         await daiya.say_and_wait(
-          '올 한 해……클래식 3관을 목표로 걸어왔어요. 결코 쉬운 길은 아니었죠.',
+          '올 한 해…… 클래식 3관을 목표로 걸어왔어요. 결코 쉬운 길은 아니었죠.',
         );
         await daiya.say_and_wait(
           '도중에 여러 일이 있었어요. 예상하지 못한 일도 있었고요.',
@@ -3090,10 +3090,10 @@ module.exports = {
         await daiya.say_and_wait([
           '예를 들면 ',
           sats_sho,
-          ' 때의 악천후요……상상을 뛰어넘을 만큼 궂은 날씨였죠.',
+          ' 때의 악천후요…… 상상을 뛰어넘을 만큼 궂은 날씨였죠.',
         ]);
         await daiya.say_and_wait(
-          '트윙클 시리즈는 때로 가혹한 레이스이기도 하네요……하지만 오늘은 정말 멋진 승부였어요.',
+          '트윙클 시리즈는 때로 가혹한 레이스이기도 하네요…… 하지만 오늘은 정말 멋진 승부였어요.',
         );
         await daiya.say_and_wait(
           '여기까지 함께 걸어와 주신 여러분께 진심으로 감사드려요. 감사합니다.',
@@ -3118,7 +3118,7 @@ module.exports = {
         ]);
       } else {
         await daiya.say_and_wait('하아, 하아, 하아……');
-        await kita.say_and_wait('하아, 하아……다이아……정말 따라잡았네……!');
+        await kita.say_and_wait('하아, 하아…… 다이아…… 정말 따라잡았네……!');
         await kita.say_and_wait(
           '다이아의 기백을 피부로 느꼈어. 지금도 찌릿찌릿해.',
         );
@@ -3145,11 +3145,11 @@ module.exports = {
       await you.say_as_passer_by_and_wait('관중', '오오오오오오오오오!');
       await you.say_as_passer_by_and_wait(
         '관중 A',
-        '관중 A「그러니까 『봄 시니어 3관』이구나! 꼭 달성해, 키타산!!」',
+        '그러니까 『봄 시니어 3관』이구나! 꼭 달성해, 키타산!!',
       );
       await kita.say_and_wait('네! 꼭 현장에서 지켜봐 주세요!');
-      await daiya.say_and_wait(['저도 나갈게요!', '！！']);
-      era.printButton('「뭐……다이아!?」', 1);
+      await daiya.say_and_wait(['저도 나갈게요!', '!!']);
+      era.printButton('「뭐…… 다이아!?」', 1);
       await era.input();
       await era.printAndWait(
         `다음 레이스는커녕 시니어급에서의 방침조차 아직 상의하지 않았다.`,
@@ -3168,7 +3168,7 @@ module.exports = {
       );
       await you.say_as_passer_by_and_wait('관중 A', [
         arim_kin,
-        '는 시작에 불과한 거구나……오오오! 앞으로도 지켜볼게!!',
+        '는 시작에 불과한 거구나…… 오오오! 앞으로도 지켜볼게!!',
       ]);
       await era.printAndWait(
         `관중석을 뒤덮은 함성은 한동안 그치지 않았다. 그때 키타산 블랙이 함께 출주한 ${daiya.uma_sex_title}들을 위너스 서클로 불렀다.`,
@@ -3191,14 +3191,14 @@ module.exports = {
       await daiya.say_and_wait('네. 『오사카배』도 G1이니까요. 문제없어요.');
       if (rank === 1) {
         await daiya.say_and_wait(
-          `오늘 위너스 서클에서 키타짱을 보고……새삼 ${kita.sex}가 얼마나 대단한지 알았어요.`,
+          `오늘 위너스 서클에서 키타짱을 보고…… 새삼 ${kita.sex}가 얼마나 대단한지 알았어요.`,
         );
         await daiya.say_and_wait(
           '레이스에서는 이겼지만 아직 키타짱이 걸어온 길을 완전히 따라잡지는 못했어요……',
         );
       } else {
         await daiya.say_and_wait(
-          `오늘 레이스가 끝나고 키타짱을 보고……새삼 ${kita.sex}가 얼마나 대단한지 깨달았어요.`,
+          `오늘 레이스가 끝나고 키타짱을 보고…… 새삼 ${kita.sex}가 얼마나 대단한지 깨달았어요.`,
         );
         await daiya.say_and_wait('……키타짱과의 거리는 아직 멀어요……');
       }
@@ -3215,7 +3215,7 @@ module.exports = {
         `『일류 ${daiya.uma_sex_title}』가 어떤 모습이어야 하는지 저는 아직 답을 찾지 못했어요.`,
       );
       await daiya.say_and_wait(
-        `키타짱은 ${kita.sex}가 진지하게 달리는 모습 그 자체가 응원하고 싶어지게 해요.`,
+        `키타짱을 보면 ${kita.sex}가 진지하게 달리는 모습만으로도 응원하고 싶어져요.`,
       );
       await daiya.say_and_wait(
         '팬들의 마음을 사로잡고 뒤흔들죠. 그게 키타짱의 방식이에요.',
@@ -3223,7 +3223,7 @@ module.exports = {
       await daiya.say_and_wait(
         '……사토노 가문의 영애인 저는 그런 열기를 만들어 낼 수 없어요.',
       );
-      era.printButton('「다이아에게는 다이아만의 장점이 있어」', 1);
+      era.printButton('「다이아에게는 다이아만의 장점이 있어.」', 1);
       await era.input();
       await era.printAndWait(
         `흔들리지 않는 강한 의지. 기품을 지키고 약한 모습을 보이지 않는 게 ${daiya.sex}의 방식이다.`,
@@ -3232,7 +3232,7 @@ module.exports = {
         `그만큼 ${daiya.sex}의 노력은 눈에 잘 띄지 않는다. 하지만 ${daiya.sex}의 노력은 키타산 블랙에게 뒤지지 않는다. 언제나 가장 강하게 빛나고 있다.`,
       );
       await daiya.say_and_wait(
-        '후후, 그렇게 말씀해 주셔서 기뻐요……하지만 걱정하지 마세요.',
+        '후후, 그렇게 말씀해 주셔서 기뻐요…… 하지만 걱정하지 마세요.',
       );
       await daiya.say_and_wait(
         `저만의 『일류 ${daiya.uma_sex_title}』의 모습을 찾을 거예요.`,
@@ -3241,13 +3241,13 @@ module.exports = {
         `사토노 다이아몬드인 제가 어떤 형태로 ${daiya.uma_sex_title}계에 힘을 보탤 수 있을지……`,
       );
       await daiya.say_and_wait(
-        `키타짱의 모습을 보면서, ${kita.sex}의 등을 쫓아가다 보면……그 답에 닿을 수 있을 것 같아요.`,
+        `키타짱의 모습을 보면서, ${kita.sex}의 등을 쫓아가다 보면…… 그 답에 닿을 수 있을 것 같아요.`,
       );
       era.printButton('「알았어. 다음 레이스는 『오사카배』네!」', 1);
       await era.input();
       await daiya.say_and_wait('네! 트레이너님, 앞으로도 잘 부탁드려요!');
       await era.printAndWait(
-        `『일류 ${daiya.uma_sex_title}』의 모습. 아직 알 수 없는 그 답을 찾기 위해 ${you.name}와(과) 사토노 다이아몬드는 시니어급으로 발을 내딛는다.`,
+        `『일류 ${daiya.uma_sex_title}』의 모습. 아직 알 수 없는 그 답을 찾기 위해 ${you.name}과(와) 사토노 다이아몬드는 시니어급으로 발을 내딛는다.`,
       );
     };
     f.title = title;
@@ -3282,7 +3282,7 @@ module.exports = {
         '다이아의 아버지「다이아의 직감은 틀리지 않았던 거군요──시니어급에서도 잘 부탁드립니다.」',
       );
       era.printButton(
-        `「네. 『일류 ${daiya.uma_sex_title}』로 이끌겠습니다」`,
+        `「네. 『일류 ${daiya.uma_sex_title}』로 이끌겠습니다.」`,
         1,
       );
       await era.input();
@@ -3292,7 +3292,7 @@ module.exports = {
       );
       await daiya.say_and_wait('트레이너님은 편하게 쉬고 계세요.');
       await era.printAndWait(
-        `사토노 다이아몬드의 부모님은 사토노 가문에서도 중심에 가까운 인물이다. 그러니 ${
+        `사토노 다이아몬드의 부모님은 사토노 가문에서도 핵심 인물이다. 그러니 ${
           daiya.sex_code === 1 ? '아들' : '딸'
         }인 ${daiya.sex}도 바쁜 모양이다.`,
       );
@@ -3325,7 +3325,7 @@ module.exports = {
         `저는 아직 『일류 ${daiya.uma_sex_title}』가 어떤 모습이어야 할지 찾는 중인걸요.`,
       );
       await era.printAndWait(
-        `다이아의 옛 트레이너「일류 ${daiya.uma_sex_title}가 되었다는 건……해외 원정도 생각하고 있니?」`,
+        `다이아의 옛 트레이너「일류 ${daiya.uma_sex_title}가 되었다는 건…… 해외 원정도 생각하고 있니?」`,
       );
       await era.printAndWait(
         '스포츠 용품 회사 담당자「해외 원정 계획이 있으시다면 현지에 맞춘 트레이닝 기구와 신발을 준비해 드릴 수 있습니다.」',
@@ -3362,10 +3362,10 @@ module.exports = {
         `신년회가 끝난 뒤 ${you.name}은(는) 사토노 다이아몬드와 새해 참배를 하러 갔다.`,
       );
       await daiya.say_and_wait('──트레이너님, 꽤 오래 기도하셨네요.');
-      era.printButton('「신께 내 결심을 전하려고」', 1);
+      era.printButton('「신께 내 결심을 전하려고.」', 1);
       await era.input();
       await daiya.say_and_wait('제 레이스와 관련된 일인가요?');
-      era.printButton('「물론이지」', 1);
+      era.printButton('「물론이지.」', 1);
       await era.input();
       await daiya.say_and_wait(
         '그렇다면 저도 함께 결심을 말씀드리고 싶었는데……',
@@ -3374,7 +3374,7 @@ module.exports = {
         '하지만 트레이너님의 진지한 얼굴을 봤으니 이번에는 넘어갈게요♪ 후후후!',
       );
       await daiya.say_and_wait(
-        '그럼 이다음에는……트레이너님은 어떻게 지내실 생각이세요?',
+        '그럼 이다음에는…… 트레이너님은 어떻게 지내실 생각이세요?',
       );
       await daiya.say_and_wait(
         '괜찮으시면 트레이너님이 새해를 어떻게 보내시는지 알고 싶어요!',
@@ -3402,14 +3402,14 @@ module.exports = {
             '정말 잠을 자는 사람도 있지만 외출하지 않고 집에서 느긋하게 쉰다는 뜻이라고 설명했다.',
           );
           await daiya.say_and_wait(
-            '어머, 새해가 시작되자마자 집에서 느긋하게……죄책감이 들 것 같네요♪ 그럼 함께 뒹굴며 쉬어요!',
+            '어머, 새해가 시작되자마자 집에서 느긋하게…… 죄책감이 들 것 같네요♪ 그럼 함께 뒹굴며 쉬어요!',
           );
           await era.printAndWait(
             `트레이너실에서 과자를 먹으며 둘이 새해 특집 방송을 보기로 했다.`,
           );
           await daiya.say_and_wait('……버스 여행인데 거의 걸어 다니시네요……');
           await daiya.say_and_wait('와아! 이 장어덮밥, 맛있겠어요……!');
-          era.printButton('「보고 있으니 먹고 싶네」', 1);
+          era.printButton('「보고 있으니 먹고 싶네.」', 1);
           await era.input();
           await daiya.say_and_wait(
             '오늘도 영업하는 것 같으니 배달시켜 먹을까요?',
@@ -3428,10 +3428,10 @@ module.exports = {
             '복주머니 상품! 기대감에 가슴이 부푸는 물건이죠! 저도 갖고 싶어요!',
           );
           await era.printAndWait(
-            `복주머니 상품을 사러 ${you.name}와(과) 사토노 다이아몬드는 쇼핑몰로 향했다.`,
+            `복주머니 상품을 사러 ${you.name}과(와) 사토노 다이아몬드는 쇼핑몰로 향했다.`,
           );
           await daiya.say_and_wait(
-            '어느 가게로 갈까요……어머, 먹을거리나 차가 든 복주머니도 있네요.',
+            '어느 가게로 갈까요…… 어머, 먹을거리나 차가 든 복주머니도 있네요.',
           );
           era.printButton('「그걸 사 볼까?」', 1);
           await era.input();
@@ -3439,7 +3439,7 @@ module.exports = {
             '먹을거리라면 취향에 안 맞아도 다른 분들께 나눠 드릴 수 있죠. 그럼 그걸로 해요!',
           );
           await daiya.say_and_wait(
-            '줄이 기네요……한동안 기다려야 할 것 같으니 기다리는 동안 관찰 퀴즈를 해요.',
+            '줄이 기네요…… 한동안 기다려야 할 것 같으니 기다리는 동안 관찰 퀴즈를 해요.',
           );
           await daiya.say_and_wait(
             '지나가는 분이 어느 가게에 들어갈지 맞히는 거예요!',
@@ -3449,10 +3449,10 @@ module.exports = {
           await daiya.say_and_wait(
             '그럼 저기 패딩을 입은 남성분부터요. 저는 카페로 예상할게요!',
           );
-          era.printButton('「나는 위층 서점일 것 같아」', 1);
+          era.printButton('「나는 위층 서점일 것 같아.」', 1);
           await era.input();
           await daiya.say_and_wait(
-            '…………아, 카페에 들어가셨어요! 후후후, 제가 이겼네요♪ 피곤해 보이셨거든요.',
+            '………… 아, 카페에 들어가셨어요! 후후후, 제가 이겼네요♪ 피곤해 보이셨거든요.',
           );
           await daiya.say_and_wait(
             '놀다 보니 시간이 금방 가네요. 자, 복주머니를 열어 보러 돌아가요!',
@@ -3463,7 +3463,7 @@ module.exports = {
           break;
         case 3:
           await daiya.say_and_wait(
-            '새해 포부 쓰기……그렇다면 커다란 종이에 쓰고 싶어요!',
+            '새해 포부 쓰기…… 그렇다면 커다란 종이에 쓰고 싶어요!',
           );
           era.printButton('「서예 퍼포먼스 말이야?」', 1);
           await era.input();
@@ -3474,10 +3474,10 @@ module.exports = {
             `다행히 새해에는 체육관이 비어 있어서 빌린 뒤 서예 퍼포먼스를 하기로 했다.`,
           );
           await daiya.say_and_wait(
-            '음……미리 구도를 잡지 않으면 균형이 안 맞겠네요.',
+            '음…… 미리 구도를 잡지 않으면 균형이 안 맞겠네요.',
           );
           await era.printAndWait(
-            `사토노 다이아몬드는 화선지 앞에서 꼼꼼하게 동작을 연습한 뒤 ${daiya.sex}와 키가 거의 같은 붓으로 단숨에 써 내려갔다.`,
+            `사토노 다이아몬드는 화선지 앞에서 꼼꼼하게 동작을 연습한 뒤 ${daiya.sex}의 키만큼 긴 붓으로 단숨에 써 내려갔다.`,
           );
           await daiya.say_and_wait('이야아아아아아아! 핫! 에잇! 핫!');
           await daiya.say_and_wait('후우────! 어땠나요, 트레이너님!');
@@ -3499,20 +3499,20 @@ module.exports = {
      */
     const f = async (daiya, you, result) => {
       await era.printAndWait(
-        `돌아오는 길에 ${you.name}와(과) 사토노 다이아몬드가 상점가를 지나는데──`,
+        `돌아오는 길에 ${you.name}과(와) 사토노 다이아몬드가 상점가를 지나는데──`,
       );
       await era.printAndWait(
         '상점가 사람「자, 자, 새해 대추첨 행사 중입니다~! 특등은 『온천 여행권』!」',
       );
       await era.printAndWait(
-        '상점가 사람「일 등은 『특상 당근 함박스테이크』, 이 등은 『산더미 같은 당근』, 삼 등은 『당근 한 개』!」',
+        '상점가 사람「1등은 『특상 당근 함박스테이크』, 2등은 『산더미 같은 당근』, 3등은 『당근 한 개』!」',
       );
       await era.printAndWait(
         '상점가 사람「자, 자, 즐거운 경품 추첨이에요! 누구나 오세요~!」',
       );
       await daiya.say_and_wait('와아, 경품 추첨이에요!');
       await daiya.say_and_wait(
-        '저건……손으로 돌리는 추첨기! 경품 추첨은 저런 게 제일 신나죠!',
+        '저건…… 손으로 돌리는 추첨기! 경품 추첨은 저런 게 제일 신나죠!',
       );
       era.printButton('「특별히 좋아하는 이유가 있어?」', 1);
       await era.input();
@@ -3540,7 +3540,7 @@ module.exports = {
           );
           await era.printAndWait('「온천 여행권」을 얻었다.');
           await daiya.say_and_wait(
-            '서……성공이에요~~!! 특등! 특등이에요, 트레이너님!!',
+            '서…… 성공이에요~~!! 특등! 특등이에요, 트레이너님!!',
           );
           await daiya.say_and_wait(
             '거봐요! 제 말대로죠? 행운은 기백으로 잡는 거예요!!',
@@ -3551,7 +3551,7 @@ module.exports = {
             `${daiya.sex}의 말대로 특등이 나왔다. 정말 기백으로 행운을 잡은 것 같다.`,
           );
           await daiya.say_and_wait('후후후, 올해는 좋은 해가 될 것 같아요♪');
-          era.printButton('「키타산이랑 온천에 가면 되겠네」', 1);
+          era.printButton('「키타산이랑 온천에 가면 되겠네.」', 1);
           await era.input();
           await daiya.say_and_wait(
             '아니요, 트레이너님께 드릴게요. 추첨권은 트레이너님 거잖아요.',
@@ -3561,15 +3561,15 @@ module.exports = {
           await era.input();
           await daiya.say_and_wait('그럼 저랑 트레이너님이 같이 가요.');
           await daiya.say_and_wait(
-            '수고를 위로하는 여행으로요. 네, 그게 좋겠어요! 결정이에요!',
+            '그동안의 수고를 달래는 여행으로요. 네, 그게 좋겠어요! 결정이에요!',
           );
           await daiya.say_and_wait(
-            '트윙클 시리즈의 첫 삼 년이 일단락되면 함께 수고를 위로하는 여행을 가요! 하나의 과정을 마쳤으면 축하해야죠!',
+            '트윙클 시리즈의 첫 삼 년이 일단락되면 함께 그동안의 수고를 달래러 여행을 가요! 하나의 과정을 마쳤으면 축하해야죠!',
           );
           await daiya.say_and_wait(
             '그리고 보상이 있으면 할 일에도 의욕이 나잖아요?',
           );
-          era.printButton('「그렇지」', 1);
+          era.printButton('「그렇지.」', 1);
           await era.input();
           await daiya.say_and_wait('그럼 결정이에요! 약속이에요!');
           await era.printAndWait(
@@ -3578,7 +3578,7 @@ module.exports = {
           break;
         case 1:
           await era.printAndWait(
-            '상점가 사람「일 등 축하합니다~! 경품은 『특상 당근 함박스테이크』!」',
+            '상점가 사람「1등 축하합니다~! 경품은 『특상 당근 함박스테이크』!」',
           );
           await era.printAndWait('「특상 당근 함박스테이크」를 얻었다.');
           await daiya.say_and_wait('어머, 당근 함박스테이크……!');
@@ -3591,9 +3591,9 @@ module.exports = {
           era.printButton('「처음부터 끝까지 세워 둔 채로!?」', 1);
           await era.input();
           await daiya.say_and_wait(
-            '네♪ 우선 당근 위쪽부터……직접 보여 드리는 게 빠르겠네요. 트레이너님, 함께 먹어요!',
+            '네♪ 우선 당근 위쪽부터…… 직접 보여 드리는 게 빠르겠네요. 트레이너님, 함께 먹어요!',
           );
-          await daiya.say_and_wait('후후후, 잘 보세요……다이아의 비기예요!');
+          await daiya.say_and_wait('후후후, 잘 보세요…… 다이아의 비기예요!');
           await era.printAndWait(
             '사토노 다이아몬드는 우아하게 나이프와 포크를 사용하며 당근을 한 번도 쓰러뜨리지 않고 함박스테이크를 먹어 나갔다.',
           );
@@ -3603,7 +3603,7 @@ module.exports = {
           era.printButton('「칼솜씨가 엄청난데……!」', 1);
           await era.input();
           await daiya.say_and_wait(
-            '에헤헤……예전에 당근 함박스테이크의 당근이 쓰러진 방향에 불행이 닥친다는 징크스를 들은 적이 있어서요.',
+            '에헤헤…… 예전에 당근 함박스테이크의 당근이 쓰러진 방향에 불행이 닥친다는 징크스를 들은 적이 있어서요.',
           );
           await daiya.say_and_wait(
             '그렇다면 쓰러뜨리지 않으면 불행한 방향도 생기지 않겠다고 생각해서 이 기술을 연마했어요.',
@@ -3619,7 +3619,7 @@ module.exports = {
           break;
         case 2:
           await era.printAndWait(
-            '상점가 사람「이 등~!! 경품은 『산더미 같은 당근』!」',
+            '상점가 사람「2등~!! 경품은 『산더미 같은 당근』!」',
           );
           await era.printAndWait('「산더미 같은 당근」을 얻었다.');
           await daiya.say_and_wait('와아~, 당근이 잔뜩이에요♪');
@@ -3628,20 +3628,20 @@ module.exports = {
           );
           era.printButton('「이렇게 많으면 다 못 먹어!」', 1);
           await era.input();
-          await daiya.say_and_wait('어머……그럼 기숙사 분들께 나눠 드려요.');
+          await daiya.say_and_wait('어머…… 그럼 기숙사 분들께 나눠 드려요.');
           await daiya.say_and_wait(
             '그냥 드리는 건 재미없으니 요리해서 나눠 드리죠♪',
           );
           era.printButton('「뭘 만들려고?」', 1);
           await era.input();
           await daiya.say_and_wait(
-            '사실 계속 만들어 보고 싶었던 요리가 있어요……당근 붕어빵이에요!!',
+            '사실 계속 만들어 보고 싶었던 요리가 있어요…… 당근 붕어빵이에요!!',
           );
           await daiya.say_and_wait(
             '붕어빵 안에 모두가 좋아하는 당근 앙금을 넣고, 당근 초절임으로 포인트를 주는 거죠.',
           );
           await daiya.say_and_wait(
-            '반죽에도 당근을……얇게 썬 당근도 넣고요! 주황색의 귀여운 붕어빵이 될 거예요♪',
+            '반죽에도 당근을…… 얇게 썬 당근도 넣고요! 주황색의 귀여운 붕어빵이 될 거예요♪',
           );
           await daiya.say_and_wait(
             '그리고 위에는 통당근 하나를! 당근 함박스테이크처럼요!!',
@@ -3660,11 +3660,11 @@ module.exports = {
           break;
         case 3:
           await era.printAndWait(
-            '상점가 사람「삼 등~! 경품은 『당근 한 개』!」',
+            '상점가 사람「3등~! 경품은 『당근 한 개』!」',
           );
           await era.printAndWait('「당근 한 개」를 얻었다.');
           await daiya.say_and_wait(
-            '한 개……정말 죄송해요, 트레이너님. 귀한 추첨권을 낭비해서……',
+            '한 개…… 정말 죄송해요, 트레이너님. 귀한 추첨권을 낭비해서……',
           );
           await daiya.say_and_wait('제 기백이 부족했나 봐요……');
           era.printButton('「그럼 이 당근으로 기운을 보충하자!」', 1);
@@ -3673,15 +3673,15 @@ module.exports = {
           era.printButton('「먹어 줘!」', 1);
           await era.input();
           await daiya.say_and_wait(
-            '단 하나뿐인 소중한 당근을 저에게……감사해요.',
+            '단 하나뿐인 소중한 당근을 저에게…… 감사해요.',
           );
-          await daiya.say_and_wait('…………후후.');
+          await daiya.say_and_wait('………… 후후.');
           await daiya.say_and_wait(
-            '트레이너님이 주신 당근……세상에 하나뿐인, 저만의 당근……',
+            '트레이너님이 주신 당근…… 세상에 하나뿐인, 저만의 당근……',
           );
           await daiya.say_and_wait('세상에서 제일 맛있을 거예요♪');
           await era.printAndWait(
-            '사토노 다이아몬드가 기뻐하는 게 가장 중요하다.──하지만 상점가 사람은 세상에서 제일 맛있을 거라는 말에 부담을 느끼고 있었다.',
+            '사토노 다이아몬드가 기뻐하는 게 가장 중요하다. ──하지만 상점가 사람은 세상에서 제일 맛있을 거라는 말에 부담을 느끼고 있었다.',
           );
           break;
         case 4:
@@ -3689,13 +3689,13 @@ module.exports = {
             '상점가 사람「아쉽지만 꽝! 참가상은 『두루마리 휴지』예요~」',
           );
           await era.printAndWait('「두루마리 휴지」를 얻었다.');
-          await daiya.say_and_wait('…………꽝……이라고요……?');
-          await daiya.say_and_wait('…………한 번 더.');
+          await daiya.say_and_wait('………… 꽝……이라고요……?');
+          await daiya.say_and_wait('………… 한 번 더.');
           await daiya.say_and_wait('한 번 더 뽑겠어요!');
           await daiya.say_and_wait(
             '꽝이라는 결과는 인정할 수 없어요! 반드시 뒤집어 보이겠어요!!',
           );
-          await era.printAndWait('상점가 사람「저기……추첨권이 더 있으세요?」');
+          await era.printAndWait('상점가 사람「저기…… 추첨권이 더 있으세요?」');
           await daiya.say_and_wait('아니요. 어디서 살 수 있죠?');
           await era.printAndWait(
             '상점가 사람「추첨권은 안 팔아요~ 상점가에서 물건을 사면 드리는 거라──」',
@@ -3709,11 +3709,11 @@ module.exports = {
             `말리지 마세요!! 사토노 가문의 ${daiya.uma_sex_title}로서 이 난관에서 도망칠 수는 없어요!`,
           );
           await era.printAndWait(
-            `${daiya.sex}의 불운에 맞서려는 결의가 불을 뿜은 모양이다. 징크스를 깨려는 집념과 같다.──아니, 그저 지기 싫어하는 것뿐일지도……`,
+            `${daiya.sex}의 불운에 맞서려는 결의가 불을 뿜은 모양이다. 징크스를 깨려는 집념과 같다. ──아니, 그저 지기 싫어하는 것뿐일지도……`,
           );
-          await daiya.say_and_wait('지갑은……앗!?');
+          await daiya.say_and_wait('지갑은…… 앗!?');
           await era.printAndWait(
-            `이날 사토노 다이아몬드는 지갑을 기숙사에 두고 나왔다. 덕분에 경품 추첨 재도전은 멈췄다.`,
+            `이날 사토노 다이아몬드는 지갑을 기숙사에 두고 나왔다. 덕분에 경품 추첨에 다시 도전하려던 계획은 무산됐다.`,
           );
       }
     };
@@ -3757,13 +3757,13 @@ module.exports = {
         '그러다 사토노 그룹의 자회사가 거대 인형 뽑기 행사를 열었다는 기사를 찾았죠!',
       );
       await daiya.say_and_wait(
-        '정말 재미있어 보여서 장비와 직원분들을 빌려 왔어요♪',
+        '정말 재미있어 보여서 장비를 빌리고 직원분들도 모셔 왔어요♪',
       );
       await daiya.say_and_wait(
         '경품은 밸런타인 초콜릿이에요! 종류를 많이 준비했으니 좋아하시는 걸 집어 주세요!',
       );
       await daiya.say_and_wait(
-        '문방구 과자 초콜릿부터 유명 가게의 한정 초콜릿까지 종류가 꽤 다양해요.',
+        '문방구에서 파는 초콜릿부터 유명 가게의 한정 초콜릿까지 종류가 꽤 다양해요.',
       );
       await daiya.say_and_wait(
         '가고 싶은 방향을 말씀하시면 직원분들이 크레인을 조작해 주실 거예요♪',
@@ -3774,13 +3774,13 @@ module.exports = {
         '네, 트레이너님이에요! 다이아 특제 밸런타인을 마음껏 즐겨 주세요!',
       );
       await era.printAndWait(
-        `……호기심 많은 사토노 다이아몬드다운 발상이다.${daiya.sex}의 트레이너로서 ${you.name}도 각오를 다질 수밖에 없다……!`,
+        `……호기심 많은 사토노 다이아몬드다운 발상이다. ${daiya.sex}의 트레이너로서 ${you.name}도 각오를 다질 수밖에 없다……!`,
       );
       await daiya.say_and_wait('트레이너님~! 가고 싶은 방향을 말씀해 주세요~!');
       era.printButton('「이, 이쯤이면 되겠어……!」', 1);
       await era.input();
       await daiya.say_and_wait(
-        `네~~! 그럼 천천히 ${you.sex}을(를) 내려 주세요──!`,
+        `네~~! 그럼 천천히 ${you.sex}를 내려 주세요──!`,
       );
       await era.printAndWait(
         `역시 크레인 조작에 익숙한 직원들이다. 안정적인 조작 덕분에 ${you.name}은(는) 안심하고 초콜릿 더미로 내려갔다.`,
@@ -3789,24 +3789,24 @@ module.exports = {
         `아니, 오히려 ${you.name}은(는) 재미가 붙었다! 손 닿는 곳의 초콜릿을 모으자 양손이 가득 찼다.`,
       );
       await daiya.say_and_wait(
-        '와아! 트레이너님, 잘하시네요! 그 균형 감각……대단하세요!',
+        '와아! 트레이너님, 잘하시네요! 그 균형 감각…… 대단하세요!',
       );
       await daiya.say_and_wait(
         '어머, 아직 하나 더요!? 떨어뜨리지 않게 조심하세요……!',
       );
       await daiya.say_and_wait(
-        `후후, 푹 빠지셨네요.${you.sex}이(가) 즐거워하셔서 다행이에요♪`,
+        `후후, 푹 빠지셨네요. ${you.sex}가 즐거워하셔서 다행이에요♪`,
       );
       era.drawLine();
       await daiya.say_and_wait(
         '트레이너님, 정말 잘하셨어요! 넋을 잃고 봤어요!',
       );
-      await daiya.say_and_wait('그리고……후후후, 즐거워 보이셨어요.');
+      await daiya.say_and_wait('그리고…… 후후후, 즐거워 보이셨어요.');
       era.printButton('「정말 재미있었어!」', 1);
       await era.input();
       await daiya.say_and_wait('에헤헤, 기뻐요……♪');
       await daiya.say_and_wait(
-        '레이스 말고도 이렇게 기쁜 일을……트레이너님과 나눌 수 있다면 멋지겠네요.',
+        '레이스 말고도 이렇게 기쁜 일을…… 트레이너님과 나눌 수 있다면 멋지겠네요.',
       );
       era.printButton('「그러게!」', 1);
       await era.input();
@@ -3824,7 +3824,7 @@ module.exports = {
       await era.input();
       await daiya.say_and_wait('앗……! 그 초콜릿은……!');
       await era.printAndWait(
-        `하나만 포장이 조금 삐뚤어진 초콜릿이 있다.${you.name}은(는) 몸을 흔들며 손수 만든 듯한 그 초콜릿을 향해 손을 뻗었다.`,
+        `하나만 포장이 조금 삐뚤어진 초콜릿이 있다. ${you.name}은(는) 몸을 흔들며 손수 만든 듯한 그 초콜릿을 향해 손을 뻗었다.`,
       );
       await daiya.say_and_wait('트, 트레이너님! 무리하지 마세요……!');
       await daiya.say_and_wait('아아, 아까 힘들게 집은 초콜릿이 떨어져서……');
@@ -3833,7 +3833,7 @@ module.exports = {
         `${you.name}은(는) 거대 인형 뽑기에서 그럭저럭 성과를 거뒀다. 무엇보다 포장이 삐뚤어진 초콜릿을 끝내 집었다!`,
       );
       era.drawLine();
-      await daiya.say_and_wait('……그건……제가 만든 초콜릿이에요.');
+      await daiya.say_and_wait('……그건…… 제가 만든 초콜릿이에요.');
       era.printButton('「그럴 줄 알았어!」', 1);
       await era.input();
       await daiya.say_and_wait('역시 손수 만든 걸 알아보시고 집으셨군요……');
@@ -3866,7 +3866,7 @@ module.exports = {
         `${you.name}은(는) 맛을 하나 더하면 더 맛있어질 것 같아 어울리는 재료를 찾자고 제안했다.`,
       );
       await daiya.say_and_wait(
-        '그렇군요……과일이나 과자와 함께 먹으며 어떤 조합이 좋은지 시험하는 거네요.',
+        '그렇군요…… 과일이나 과자와 함께 먹으며 어떤 조합이 좋은지 시험하는 거네요.',
       );
       await daiya.say_and_wait('재미있겠어요! 그렇게 해요!');
       await era.printAndWait(
@@ -3879,7 +3879,7 @@ module.exports = {
         '후후후, 트레이너님과 제가 함께 완성한 세상에 하나뿐인 초콜릿이네요.',
       );
       await daiya.say_and_wait(
-        '정말 맛있지만……이 배합은 아무에게도 알려 주지 않을 거예요. 우리 둘만의 비밀이니까요♪',
+        '정말 맛있지만…… 이 배합은 아무에게도 알려 주지 않을 거예요. 우리 둘만의 비밀이니까요♪',
       );
     };
     f.title = title;
@@ -3925,10 +3925,10 @@ module.exports = {
         `『일류 ${daiya.uma_sex_title}』에 걸맞은 달리기로 이기겠어요. 우선은 그게 제가 할 일이에요.`,
       );
       await era.printAndWait(
-        '패독의 관중들은 온통 사토노 다이아몬드와 키타산 블랙 이야기뿐이었다.',
+        '패독에서는 관중들이 온통 사토노 다이아몬드와 키타산 블랙 이야기만 하고 있었다.',
       );
       await era.printAndWait(
-        `관중 A「키타산 블랙 대 사토노 다이아몬드……이 대결을 또 볼 수 있다니! ${daiya.couple_title}, 둘 다 힘냈으면 좋겠다!」`,
+        `관중 A「키타산 블랙 대 사토노 다이아몬드…… 이 대결을 또 볼 수 있다니! ${daiya.couple_title}, 둘 다 힘냈으면 좋겠다!」`,
       );
       await era.printAndWait(
         `관중 B「키타산 블랙은 작년 『오사카배』에서 아쉽게 2착이었지. 이번에는 이기고 싶겠네.」`,
@@ -3942,7 +3942,7 @@ module.exports = {
       era.printButton('(어라……? 왠지……)', 1);
       await era.input();
       await era.printAndWait(
-        `……평소와 다르다.${you.name}은(는) 키타산 블랙의 분위기가 평소와 다르다는 걸 알아챘다.`,
+        `……평소와 다르다. ${you.name}은(는) 키타산 블랙의 분위기가 평소와 다르다는 걸 알아챘다.`,
       );
       await kita.say_and_wait(
         '──다이아. 있잖아, 출발 전에 해 두고 싶은 말이 있어.',
@@ -3961,7 +3961,7 @@ module.exports = {
       await era.printAndWait(
         `……그 기백에 압도되었다. 키타산 블랙의 의연한 모습에 늘 침착하던 사토노 다이아몬드조차 순간 말을 잃었다.`,
       );
-      await daiya.say_and_wait('방금 잠깐……키타짱이 두려웠어……', true);
+      await daiya.say_and_wait('방금 잠깐…… 키타짱이 두려웠어……', true);
       await daiya.say_and_wait(
         '기백에서 먼저 지면 이길 수 없어!! 그런데 나는……!',
         true,
@@ -3999,7 +3999,7 @@ module.exports = {
         );
         await you.say_as_passer_by_and_wait(
           '관중 B',
-          `${daiya.sex}의 실력은 작년에 두각을 드러낸 키타산 블랙에 필적해……아니, 뛰어넘었다고 해도 되겠어……`,
+          `${daiya.sex}의 실력은 작년에 두각을 드러낸 키타산 블랙에 필적해…… 아니, 뛰어넘었다고 해도 되겠어……`,
         );
         await you.say_as_passer_by_and_wait(
           '관중 A',
@@ -4008,7 +4008,7 @@ module.exports = {
       } else {
         await you.say_as_passer_by_and_wait(
           '중계',
-          `키타산 블랙, 접근을 허용하지 않습니다! ${daiya.sex}는 작년의 설욕에 성공했습니다. 오늘도 키타산 축제입니다!」`,
+          `키타산 블랙, 접근을 허용하지 않습니다! ${daiya.sex}는 작년의 설욕에 성공했습니다. 오늘도 키타산 축제입니다!`,
         );
         await you.say_as_passer_by_and_wait('관중', '와아아아아아아아아!');
         await you.say_as_passer_by_and_wait(
@@ -4026,14 +4026,14 @@ module.exports = {
       }
       await teio.say_and_wait('응, 응, 키타짱도 다이아도 많이 컸네!');
       await mcqueen.say_and_wait(
-        '당신이 무슨 입장에서 하는 말인지……하지만 저도 그렇게 생각해요.',
+        '당신이 무슨 입장에서 하는 말인지…… 하지만 저도 그렇게 생각해요.',
       );
       await teio.say_and_wait(
         `${daiya.couple_title}의 달리기를 보면 나랑 네가 대결하던 시절이 생각나.`,
       );
       await mcqueen.say_and_wait(['당신은 ', tenn_spr, ' 때를 말하는 거겠죠.']);
       await mcqueen.say_and_wait(
-        `어쩌면……${daiya.couple_title}의 다음 레이스도 그럴지 모르겠네요.`,
+        `어쩌면…… ${daiya.couple_title}의 다음 레이스도 그럴지 모르겠네요.`,
       );
       await teio.say_and_wait('그럴지도~ 있잖아, 맥퀸.');
       await teio.say_and_wait('나 지금 엄~~~~청 달리고 싶어졌어!');
@@ -4053,7 +4053,7 @@ module.exports = {
           '다이아를 떨쳐 내지 못했어! 계속 힘든 트레이닝을 해 왔는데.',
         );
         await kita.say_and_wait(
-          '그래도 다이아는 따라잡았어! 아니, 마지막에 방심해서 추월당한 거야!',
+          '그래도 다이아가 따라잡았어! 아니, 마지막에 방심해서 추월당한 거야!',
         );
         await kita.say_and_wait('아, 분해, 분해! 역시 다이아야!');
         await daiya.say_and_wait(
@@ -4063,7 +4063,7 @@ module.exports = {
           '진심인 다이아랑 승부해서 정말 즐거웠어! 더 많이 같이 달리고 싶어!',
         );
         await kita.say_and_wait([
-          '진심인 다이아를 이기고 싶어! 그러니까……',
+          '진심인 다이아를 이기고 싶어! 그러니까…… ',
           tenn_spr,
           '에 나와 줬으면 해!',
         ]);
@@ -4102,7 +4102,7 @@ module.exports = {
         );
         await kita.say_and_wait([tenn_spr, '!! 다이아도 나와 줬으면 해!']);
       }
-      await daiya.say_and_wait([tenn_spr, '……키타짱의 연패가 걸린 레이스지.']);
+      await daiya.say_and_wait([tenn_spr, '…… 키타짱의 연패가 걸린 레이스지.']);
       await kita.say_and_wait(
         '응! G1 중 가장 긴 3200미터. 다이아랑 달려 보고 싶어!',
       );
@@ -4112,20 +4112,20 @@ module.exports = {
       await daiya.say_and_wait('……트레이너님, 다음 레이스 말인데요……');
       era.printButton('「『텐노상(봄)』에 나가고 싶은 거지?」', 1);
       await era.input();
-      await daiya.say_and_wait('네! 그런데……어떻게 아셨어요?');
+      await daiya.say_and_wait('네! 그런데…… 어떻게 아셨어요?');
       await era.printAndWait(
-        `사토노 다이아몬드는 전에 키타산 블랙의 등을 쫓으며 『일류 ${daiya.uma_sex_title}』의 모습에 대한 답을 찾겠다고 말했다.`,
+        `사토노 다이아몬드는 전에 키타산 블랙의 뒷모습을 쫓으며 『일류 ${daiya.uma_sex_title}』의 모습에 대한 답을 찾겠다고 말했다.`,
       );
       await era.printAndWait(
         `그래서 ${you.name}은(는) ${daiya.sex}가 키타산 블랙과 같은 레이스를 원하리라 짐작했다.`,
       );
       await era.printAndWait([
-        `게다가 사토노 다이아몬드의 성격이라면 키타산 블랙에게 유리하고 연패에 도전하는 `,
+        `게다가 사토노 다이아몬드의 성격이라면 키타산 블랙에게 유리한 데다 키타산 블랙의 연패가 걸린 `,
         tenn_spr,
         '를 일부러 고를 것이다.',
       ]);
       await daiya.say_and_wait(
-        '전부 꿰뚫어 보셨네요……후후, 이러면 앞으로는 저 혼자 결정해도 괜찮겠어요.',
+        '전부 꿰뚫어 보셨네요…… 후후, 이러면 앞으로는 저 혼자 결정해도 괜찮겠어요.',
       );
       era.printButton('「안 돼, 제대로 상의해야지!?」', 1);
       await era.input();
@@ -4169,7 +4169,7 @@ module.exports = {
         `오늘은 봄 팬 감사제. ${daiya.uma_sex_title}들과 수많은 팬이 다양한 교류를 나누고 있다.`,
       );
       await era.printAndWait(
-        `사토노 다이아몬드도 여성 팬들에게 둘러싸여 ${daiya.couple_title}는 즐겁게 이야기를 나누고 있었다.`,
+        `사토노 다이아몬드도 여성 팬들에게 둘러싸여 있었다. ${daiya.couple_title}은 즐겁게 이야기를 나누고 있었다.`,
       );
       await era.printAndWait(
         '다이아의 팬 A「다이아가 달리는 모습, 정말 좋아해요!!」',
@@ -4179,7 +4179,7 @@ module.exports = {
       );
       await daiya.say_and_wait('와아, 기뻐요!! 언제나 응원해 주셔서 감사해요!');
       await era.printAndWait(
-        `다이아의 팬 A「네! 다이아를 직접 보고 싶어서 전에 ${daiya.sex}와 처음으로 현장 관전을 갔어요!」`,
+        `다이아의 팬 A「네! 다이아를 직접 보고 싶어서 전에 ${daiya.sex}와 처음으로 경기장에 보러 갔어요!」`,
       );
       await era.printAndWait(
         '다이아의 팬 B「『국화상』을 현장에서 보고 저도 다이아의 팬이 됐어요!! 위닝 라이브도 귀여웠어요!」',
@@ -4188,7 +4188,7 @@ module.exports = {
         '어머, 경기장에 처음 가셨던 거예요!? 저를 위해 와 주셔서 감사해요!',
       );
       await era.printAndWait(
-        '다이아의 팬 A「말을 걸기도 조심스러웠는데……이렇게 이야기할 수 있다니……저, 정말 감격이에요……!」',
+        '다이아의 팬 A「말을 걸기도 조심스러웠는데…… 이렇게 이야기할 수 있다니…… 저, 정말 감격이에요……!」',
       );
       await daiya.say_and_wait('에헤헤, 말을 걸어 주셔서 저도 정말 즐거워요♪');
       await era.printAndWait(
@@ -4220,7 +4220,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name}은(는) ${daiya.sex}가 팬들과 즐겁게 어울리고 있어서 말을 걸기 어려웠다고 전했다.`,
       );
-      await daiya.say_and_wait('저도 그만 신이 나서……실례했네요……');
+      await daiya.say_and_wait('저도 그만 신이 나서…… 실례했네요……');
       await you.say_as_passer_by_and_wait(
         `중계를 맡은 ${daiya.uma_sex_title}`,
         '경기 안내입니다. 『비정한 카드 짝 맞추기』 참가자는 준비 구역으로 모여 주세요.',
@@ -4235,9 +4235,9 @@ module.exports = {
         '직감, 계략, 열혈! 승자의 자리는 엘 콘도르 파사의 것임다────!!',
       );
       await gs.say_and_wait('대게, 털게, 마쓰바게!! 좋아, 게 축제다!!');
-      await festa.say_and_wait('훗……재미있는 얼굴들이 모였군.');
-      await sirius.say_and_wait('이봐, 이봐……꼬맹이들 친목회에는 관심 없어.');
-      await coffee.say_and_wait('……응, 그래……같은 그림을 뒤집는 거야……');
+      await festa.say_and_wait('훗…… 재미있는 얼굴들이 모였군.');
+      await sirius.say_and_wait('이봐, 이봐…… 꼬맹이들 친목회에는 관심 없어.');
+      await coffee.say_and_wait('……응, 그래…… 같은 그림을 뒤집는 거야……');
       await daiya.say_and_wait('? 카페, 누구랑 이야기하는 거예요……?');
       await era.printAndWait(
         `중계를 맡은 ${daiya.uma_sex_title}「6명 모두 출발 위치에 섰습니다! 그럼 『비정한 카드 짝 맞추기』, 시작합니다!!」`,
@@ -4255,10 +4255,10 @@ module.exports = {
         `중계를 맡은 ${daiya.uma_sex_title}「사토노 다이아몬드, 꾸준히 점수를 쌓고 있습니다!」`,
       );
       await era.printAndWait(
-        `중계를 맡은 ${daiya.uma_sex_title}「……이건!? 맨하탄 카페가 연이어 짝을 맞추며 현재 점수 선두!」`,
+        `중계를 맡은 ${daiya.uma_sex_title}「……이건!? 맨하탄 카페가 연이어 짝을 맞추며 현재 점수 1위!」`,
       );
       await coffee.say_and_wait(
-        '……같은 그림은……오른쪽 구석……응, 다행이야……고마워……',
+        '……같은 그림은…… 오른쪽 구석…… 응, 다행이야…… 고마워……',
       );
       await era.printAndWait(
         `중계를 맡은 ${daiya.uma_sex_title}「시작부터 한 번도 실수하지 않았습니다! ${daiya.sex}는 혼잣말로 정답을 확인하고 있습니다. 이 신중함이 실수하지 않는 비결일까요!」`,
@@ -4315,7 +4315,7 @@ module.exports = {
       await sirius.say_and_wait('나도 이의 없어! 덤벼!!');
       await era.printAndWait('세 사람「가위, 바위, 보!!」');
       await daiya.say_and_wait('해냈어요!! 제가 이겼어요!');
-      await festa.say_and_wait('……심리전에서 날 이기다니……대단한 아가씨군.');
+      await festa.say_and_wait('……심리전에서 날 이기다니…… 대단한 아가씨군.');
       await festa.say_and_wait('내 점수는 전부 가져가.');
       await era.printAndWait(
         `중계를 맡은 ${daiya.uma_sex_title}「사토노 다이아몬드가 나카야마 페스타와 시리우스 심볼리의 점수를 획득!! 이로써 ${daiya.sex}는 카페를 제치고 1위로──!」`,
@@ -4340,7 +4340,7 @@ module.exports = {
         '에헤헤♪ 여러분이 응원해 주셔서 과감해질 수 있었어요!',
       );
       await era.printAndWait(
-        '다이아의 팬 A「저……정말 멋져요~~!! 앞으로도 응원하게 해 주세요!」',
+        '다이아의 팬 A「저…… 정말 멋져요~~!! 앞으로도 응원하게 해 주세요!」',
       );
       await daiya.say_and_wait(
         '저야말로 앞으로도 잘 부탁드려요! 계속 응원해 주세요♪',
@@ -4379,7 +4379,7 @@ module.exports = {
         `관중 C「처음에는 무명이었지만 노력과 끈기에 관중들이 공감하면서 차츰 두각을 드러낸 키타산 블랙……」`,
       );
       await era.printAndWait(
-        `관중 A「게다가 ${daiya.couple_title}는 소꿉친구잖아. 운명의 대결 같아!」`,
+        `관중 A「게다가 ${daiya.couple_title}은 소꿉친구잖아. 운명의 대결 같아!」`,
       );
       await era.printAndWait(
         `관중 C「그래도 오늘은 키타산 블랙이 더 유리하겠지. 작년 우승자도 ${daiya.sex}니까.」`,
@@ -4389,13 +4389,13 @@ module.exports = {
       );
       await era.printAndWait('후드티 입은 남성「갑자기 왜 그래?」');
       await era.printAndWait(
-        `안경 쓴 남성「키타산 블랙은 작년에 출주한 경험이 있어. 그게 ${daiya.sex}의 우위지……예전에도 비슷한 대화를 한 것 같은데.」`,
+        `안경 쓴 남성「키타산 블랙은 작년에 출주한 경험이 있어. 그게 ${daiya.sex}의 우위지…… 예전에도 비슷한 대화를 한 것 같은데.」`,
       );
       await era.printAndWait(
         '후드티 입은 남성「……아, 그때구나! 똑같은 『텐노상(봄)』, 메지로 맥퀸 대 토카이 테이오 때!」',
       );
       await era.printAndWait(
-        '안경 쓴 남성「그렇군……확실히 그때와 겹쳐 보이네……」',
+        '안경 쓴 남성「그렇군…… 확실히 그때와 겹쳐 보이네……」',
       );
       await teio.say_and_wait(
         '하핫, 다들 오늘 레이스가 우리 때랑 비슷하다고 생각하는구나!',
@@ -4405,15 +4405,15 @@ module.exports = {
       );
       await mcqueen.say_and_wait('신기한 인연이네요.');
       await teio.say_and_wait(
-        '둘 다 우리 그 승부는 봤을 거야. 그때 우리보다 더 멋지게 달렸으면 좋겠네!',
+        '둘 다 우리의 그 승부는 봤을 거야. 그때 우리보다 더 멋지게 달렸으면 좋겠네!',
       );
       await mcqueen.say_and_wait(
         '네. 적어도 그때 저희에 필적하는 달리기를 보여 줬으면 해요.',
       );
       await daiya.say_and_wait(
-        '양강 대결……이 열기의 한 축이 될 수 있어 영광이에요.',
+        '양강 대결…… 이 열기의 한 축이 될 수 있어 영광이에요.',
       );
-      era.printButton('「다이아에게는 그런 의미구나」', 1);
+      era.printButton('「다이아에게는 그런 의미구나.」', 1);
       await era.input();
       await daiya.say_and_wait(
         `네. 예전 사토노 가문은 이루지 못했던 일이니까요. 『출주자로서 ${daiya.uma_sex_title}계에 기여하는 것』이죠.`,
@@ -4421,20 +4421,20 @@ module.exports = {
       await daiya.say_and_wait(
         '데뷔 전부터 취재해 주신 기자분들께도 감사드려야겠어요.',
       );
-      era.printButton('「항상 성실하게 취재에 응했기 때문이지」', 1);
+      era.printButton('「항상 성실하게 취재에 응했기 때문이지.」', 1);
       await era.input();
       await daiya.say_and_wait('후후후♪ 키타짱에게도 감사해야겠네요.');
       await daiya.say_and_wait(
         '키타짱이 모두에게 웃음을 주려고 계속 달려 왔기에 오늘 이렇게 주목받는 거니까요.',
       );
       await daiya.say_and_wait(
-        `『일류 ${daiya.uma_sex_title}』가 어떤 모습이어야 할지……역시 키타짱과 함께 달려야 찾을 수 있을 것 같아요.`,
+        `『일류 ${daiya.uma_sex_title}』가 어떤 모습이어야 할지…… 역시 키타짱과 함께 달려야 찾을 수 있을 것 같아요.`,
       );
       await daiya.say_and_wait(
         `『일류 ${daiya.uma_sex_title}』가 되기 위해서라도 이겨야 해요.`,
       );
       await daiya.say_and_wait(
-        '키타짱은 작년에 『텐노상(봄)』을 경험한 만큼 유리해 보일지도 몰라요. 그렇기에 이 승부에서 이기는 의미가 커요.',
+        '키타짱은 작년에 『텐노상(봄)』을 경험한 만큼 유리해 보일지도 몰라요. 그렇기에 이 승부에서 이기는 게 더욱 의미 있어요.',
       );
       await daiya.say_and_wait(
         `이 레이스에서 이겨 모두가 실력을 인정하는 ${daiya.uma_sex_title}가 되겠어요!`,
@@ -4478,11 +4478,11 @@ module.exports = {
       await era.printAndWait('관중 B「키타산, 가라────!!」');
       if (rank === 1) {
         await era.printAndWait(
-          '중계「키타산 블랙, 사토노 다이아몬드! 양강 대결의 승자는……사토노 다이아몬드──!」',
+          '중계「키타산 블랙, 사토노 다이아몬드! 양강 대결의 승자는…… 사토노 다이아몬드──!」',
         );
       } else {
         await era.printAndWait(
-          '중계「키타산 블랙, 사토노 다이아몬드! 양강 대결의 승자는……키타산 블랙──! 키타산 블랙, 연패 달성────!!」',
+          '중계「키타산 블랙, 사토노 다이아몬드! 양강 대결의 승자는…… 키타산 블랙──! 키타산 블랙, 연패 달성────!!」',
         );
       }
       await you.say_as_passer_by_and_wait(
@@ -4491,7 +4491,7 @@ module.exports = {
       );
       await you.say_as_passer_by_and_wait(
         '관중 A',
-        '……대단해……엄청난 달리기였어……',
+        '……대단해…… 엄청난 달리기였어……',
       );
       await you.say_as_passer_by_and_wait(
         '관중 C',
@@ -4499,18 +4499,18 @@ module.exports = {
       );
       await you.say_as_passer_by_and_wait(
         '후드티 입은 남성',
-        '으으……둘 다……! 둘 다 훌륭했어……!!',
+        '으으…… 둘 다……! 둘 다 훌륭했어……!!',
       );
       await teio.say_and_wait(
-        `하……아하하! ${daiya.couple_title}, 둘 다 대단하잖아!`,
+        `하…… 아하하! ${daiya.couple_title}, 둘 다 대단하잖아!`,
       );
       await teio.say_and_wait('……있잖아, 맥퀸.');
       await mcqueen.say_and_wait('네, 가죠.');
       if (rank === 1) {
         await kita.say_and_wait(
-          '하아, 하아……헤헤헤, 아직도 심장이 빨리 뛰어……',
+          '하아, 하아…… 헤헤헤, 아직도 심장이 빨리 뛰어……',
         );
-        await daiya.say_and_wait('나도 그래……하아, 하아……');
+        await daiya.say_and_wait('나도 그래…… 하아, 하아……');
         await kita.say_and_wait(
           '……응, 전력을 다하고 졌으니 인정해야지! 오늘은 내 완패야!',
         );
@@ -4519,19 +4519,19 @@ module.exports = {
           '이긴 건 키타짱 덕분이야! 키타짱이 앞에서 날 이끌어 줘서 한계를 넘을 수 있었어.',
         );
       } else {
-        await daiya.say_and_wait('하아, 하아……다리가 떨려……');
+        await daiya.say_and_wait('하아, 하아…… 다리가 떨려……');
         await kita.say_and_wait(
-          '하아, 하아……헤헤헤, 나도……! 정말 엄────청 지쳤어──!!',
+          '하아, 하아…… 헤헤헤, 나도……! 정말 엄────청 지쳤어──!!',
         );
-        await daiya.say_and_wait('……분해……전력을 다했는데……');
+        await daiya.say_and_wait('……분해…… 전력을 다했는데……');
         await daiya.say_and_wait(
-          '내 한계를 뛰어넘을 만큼 애썼는데……그래도 이길 수 없다니……',
+          '내 한계를 뛰어넘을 만큼 애썼는데…… 그래도 이길 수 없다니……',
         );
         await kita.say_and_wait('다이아……');
-        await daiya.say_and_wait('내 완패야……연패 축하해, 키타짱.');
+        await daiya.say_and_wait('내 완패야…… 연패 축하해, 키타짱.');
         await kita.say_and_wait('……고마워, 다이아.');
         await daiya.say_and_wait(
-          '에헤헤, 그래도……키타짱이 앞에서 이끌어 줘서 오늘은 한계를 넘을 수 있었어……',
+          '에헤헤, 그래도…… 키타짱이 앞에서 이끌어 줘서 오늘은 한계를 넘을 수 있었어……',
         );
       }
       await daiya.say_and_wait(
@@ -4558,7 +4558,7 @@ module.exports = {
         '「에에에에에~~!?」',
       ]);
       await daiya.say_and_wait(
-        '저, 정말 출주하시는 건가요!? 그런 이야기는 못 들었는데……너무 갑작스러워요……',
+        '저, 정말 출주하시는 건가요!? 그런 이야기는 못 들었는데…… 너무 갑작스러워요……',
       );
       await mcqueen.say_and_wait('네, 원래 예정에는 없었어요.');
       await mcqueen.say_and_wait(
@@ -4566,7 +4566,7 @@ module.exports = {
       );
       await mcqueen.say_and_wait('두 분과 한 번 달려 보고 싶어졌어요.');
       await mcqueen.say_and_wait('두 분의 달리기가 저희 투지에 불을 붙였어요.');
-      await daiya.say_and_wait('……！');
+      await daiya.say_and_wait('……!');
       await mcqueen.say_and_wait('──어떤가요? 저희 도전을 받아 주시겠어요?');
       await daiya.say_and_wait('읏! 영광이에요!! 부디 그 기회를 주세요!');
       await kita.say_and_wait('저도요! 잘 부탁드립니다!!');
@@ -4580,24 +4580,24 @@ module.exports = {
       await mcqueen.say_and_wait('그럼 저는 이만.');
       await kita.say_and_wait('다이아……! 꿈 아니지……?');
       await daiya.say_and_wait(
-        '응! 하지만……둘이 동시에 꿈을 꾸고 있을 가능성도 없지는 않아……',
+        '응! 하지만…… 둘이 동시에 꿈을 꾸고 있을 가능성도 없지는 않아……',
       );
-      era.printButton('「나도 다 들었어. 꿈이 아니야」', 1);
+      era.printButton('「나도 다 들었어. 꿈이 아니야.」', 1);
       await era.input();
       await kita.say_and_wait(
         '우와아아아!! 정말 꿈이 아니었어! 테이오랑 달릴 수 있어!!',
       );
       await daiya.say_and_wait('맥퀸과 트윙클 시리즈 무대에서……!');
-      await daiya.say_and_wait('기뻐……이런 날이 오다니……');
+      await daiya.say_and_wait('기뻐…… 이런 날이 오다니……');
       await era.printAndWait(
         '사토노 다이아몬드의 눈에 감격의 눈물이 맺혔다. 키타산 블랙도 마찬가지였다.',
       );
       await era.printAndWait(
-        `${daiya.couple_title}는 각각 메지로 맥퀸과 토카이 테이오를 동경해 트레센에 들어왔다. 크게 반응하는 것도 당연할 것이다.`,
+        `${daiya.couple_title}은 각각 메지로 맥퀸과 토카이 테이오를 동경해 트레센에 들어왔다. 크게 반응하는 것도 당연할 것이다.`,
       );
       await kita.say_and_wait([tenn_sho, '도 ', japa_cup, '도, 난 나갈 거야!']);
       await kita.say_and_wait(
-        '원래 『가을 시니어 3관』 목표 레이스니까. 다이아는?',
+        '원래 목표인 『가을 시니어 3관』에 포함된 레이스니까. 다이아는?',
       );
       await daiya.say_and_wait([
         '나는 ',
@@ -4607,12 +4607,12 @@ module.exports = {
       era.printButton('「『텐노상(가을)』인가……」', 1);
       await era.input();
       await era.printAndWait(
-        `그러면 그 전에 여름 합숙이 있다.${daiya.sex}는 원래 무더위 속 트레이닝에 강하지 않다……`,
+        `그러면 그 전에 여름 합숙이 있다. ${daiya.sex}는 원래 무더위 속 트레이닝에 강하지 않다……`,
       );
       await era.printAndWait(
         `여름이 끝나자마자 정면 대결을 벌이는 건 ${you.name}으로서도 불안하다. 『텐노상(가을)』 전에 다른 레이스로 상태를 확인해 두고 싶다.`,
       );
-      era.printButton('「그 전에 『교토 대상전』에 나가자」', 1);
+      era.printButton('「그 전에 『교토 대상전』에 나가자.」', 1);
       await era.input();
       await daiya.say_and_wait([
         '그러니까 ',
@@ -4631,11 +4631,11 @@ module.exports = {
         tenn_sho,
         '를 향해 열심히 노력하자!',
       ]);
-      await daiya.say_and_wait('후우…………아직도 꿈속인 것 같아요……');
-      era.printButton('「차츰 실감이 날 거야」', 1);
+      await daiya.say_and_wait('후우………… 아직도 꿈속인 것 같아요……');
+      era.printButton('「차츰 실감이 날 거야.」', 1);
       await era.input();
       await daiya.say_and_wait(
-        '네……그러니 기뻐하기만 해서는 안 되겠죠. 모처럼 맥퀸과 달릴 수 있으니까요.',
+        '네…… 그러니 기뻐하기만 해서는 안 되겠죠. 모처럼 맥퀸과 달릴 수 있으니까요.',
       );
       await daiya.say_and_wait(
         `맥퀸도 테이오도 이미 『일류 ${daiya.uma_sex_title}』로서 여러 방면에서 활약하고 계세요.`,
@@ -4649,10 +4649,10 @@ module.exports = {
       await daiya.say_and_wait(
         `사토노 가문의 대표로서 저는 어떤 『일류 ${daiya.uma_sex_title}』가 되어야 할까요──`,
       );
-      era.printButton('「고민은 언제든 들어줄게」', 1);
+      era.printButton('「고민은 언제든 들어 줄게.」', 1);
       await era.input();
       await era.printAndWait(
-        `『G1에서 이길 수 있는 일류 ${daiya.uma_sex_title}가 된다』.${you.name}은(는) ${daiya.sex}와 그 꿈을 함께 이루기로 약속했다.`,
+        `『G1에서 이길 수 있는 일류 ${daiya.uma_sex_title}가 된다』. ${you.name}은(는) ${daiya.sex}와 그 꿈을 함께 이루기로 약속했다.`,
       );
       await era.printAndWait(
         `${daiya.sex}의 트레이너로서 ${daiya.sex}의 미래에 도움이 된다면 ${you.name}은(는) 가능한 한 힘이 될 생각이다.`,
@@ -4663,7 +4663,7 @@ module.exports = {
         `『일류 ${daiya.uma_sex_title}』인 메지로 맥퀸을 이기는 것은 실질적으로 『일류 ${daiya.uma_sex_title}』의 실력에 도달했다는 증거가 된다.`,
       );
       await era.printAndWait(
-        `사토노 가문의 숙원도 머지않았다──${you.name}은(는) 차마 다 하지 못한 말의 뒤를 헤아리며 새삼 자신의 책임을 느꼈다.`,
+        `사토노 가문의 숙원도 머지않았다──${you.name}은(는) 차마 끝맺지 못한 말의 뜻을 헤아리며 새삼 자신의 책임을 느꼈다.`,
       );
       await era.printAndWait([
         '우선은 ',
@@ -4685,7 +4685,7 @@ module.exports = {
       await daiya.say_and_wait('……키타짱……');
       await kita.say_and_wait('………………읏.');
       await era.printAndWait(
-        '관중 A「야, 키타산 왜 저러지……오늘 상태가 안 좋은가……?」',
+        '관중 A「야, 키타산 왜 저러지…… 오늘 상태가 안 좋은가……?」',
       );
       await era.printAndWait(
         '관중 B「마지막에 평소의 끈기가 없었네. 키타산이라면 더 잘해야 하는데……」',
@@ -4699,10 +4699,10 @@ module.exports = {
       await era.printAndWait(
         '오늘 키타산 블랙에게는 평소의 날카로움이 없었다. 힘을 다 발휘하지 못한 이유는──',
       );
-      await daiya.say_and_wait('하아, 하아…………키타짱.');
-      await kita.say_and_wait('과, 관중들의 말……더는 듣고 있을 수가 없어……');
+      await daiya.say_and_wait('하아, 하아………… 키타짱.');
+      await kita.say_and_wait('과, 관중들의 말…… 더는 듣고 있을 수가 없어……');
       await kita.say_and_wait('제대로 못 달렸다는 건 나도 알아……');
-      await kita.say_and_wait('……읏……하지만…………');
+      await kita.say_and_wait('……읏…… 하지만…………');
       await kita.say_and_wait('내가 실망시킨 거야────!!');
       await kita.say_and_wait('으아아아아아아아아아아아아아!');
       await daiya.say_and_wait('……키타짱……');
@@ -4710,34 +4710,34 @@ module.exports = {
         '……키타짱, 오늘은 완벽한 상태에서 달린 게 아니었지……?',
       );
       await kita.say_and_wait(
-        '응……흑……오늘 왜 그랬지……이상해서……몸이 무겁고……',
+        '응…… 흑…… 오늘 왜 그랬지…… 이상해서…… 몸이 무겁고……',
       );
       await kita.say_and_wait(
-        '페이스를 올려야 하는 건 아는데……흑, 다리가……점점 안 움직여서……!',
+        '페이스를 올려야 하는 건 아는데…… 흑, 다리가…… 점점 안 움직여서……!',
       );
       await kita.say_and_wait('……이렇게 열심히 했는데……');
       await kita.say_and_wait(
-        '……『타카라즈카 기념』……흑……팬 투표 1위가 돼서……정말 기뻤어……!',
+        '……『타카라즈카 기념』…… 흑…… 팬 투표 1위가 돼서…… 정말 기뻤어……!',
       );
       await kita.say_and_wait(
-        '기대에 보답해야 한다고……그래서 정말, 정말 열심히 했는데!!',
+        '기대에 보답해야 한다고…… 그래서 정말, 정말 열심히 했는데!!',
       );
       await kita.say_and_wait('왜 이렇게 된 거야!?');
       await daiya.say_and_wait(
-        '아마……몸에 피로가 남아 있던 게 아닐까? 나도 『텐노상(봄)』이 끝나고 피로가 남아 있었어.',
+        '아마…… 몸에 피로가 남아 있던 게 아닐까? 나도 『텐노상(봄)』이 끝나고 피로가 남아 있었어.',
       );
       await era.printAndWait(
-        `『텐노상(봄)』의 격전으로 키타산 블랙의 몸에도 피로가 쌓여 있었다.${kita.sex}본인은 깨닫지 못했다.`,
+        `『텐노상(봄)』의 격전으로 키타산 블랙의 몸에도 피로가 쌓여 있었다. ${kita.sex} 본인은 깨닫지 못했다.`,
       );
       await era.printAndWait(
         `${kita.sex}는 기대에 보답하고 싶은 마음뿐이라 피로를 느끼지 못했지만, 피로는 사라지지 않고 ${kita.sex}의 몸에 조용히 쌓여 갔다.`,
       );
-      await daiya.say_and_wait('너무 열심히 한 거야……키타짱답네.');
-      await kita.say_and_wait('……지쳐 있었다고……? 그럴 수가……하지만……');
+      await daiya.say_and_wait('너무 열심히 한 거야…… 키타짱답네.');
+      await kita.say_and_wait('……지쳐 있었다고……? 그럴 수가…… 하지만……');
       await kita.say_and_wait(
-        '내가 지쳤다는 것도 몰랐어……그래서 모두의 기대를 저버렸어……',
+        '내가 지쳤다는 것도 몰랐어…… 그래서 모두의 기대를 저버렸어……',
       );
-      await kita.say_and_wait('분해……정말 분해……!');
+      await kita.say_and_wait('분해…… 정말 분해……!');
       await daiya.say_and_wait(
         '──괜찮아. 키타짱이 너무 열심히 했다는 걸 팬분들도 이해해 주실 거야.',
       );
@@ -4745,13 +4745,13 @@ module.exports = {
         '다들 노력하는 키타짱을 지켜보며 키타짱에게 힘을 받아 온 분들이잖아.',
       );
       await kita.say_and_wait(
-        '……그래도 일부러 투표까지 해 줬는데 이런 결과라니……실망했을 거야……',
+        '……그래도 일부러 투표까지 해 줬는데 이런 결과라니…… 실망했을 거야……',
       );
       await daiya.say_and_wait(
         '……기대에 보답하지 못하면 더는 응원받지 못할 거라고 생각하는 거야……?',
       );
       await kita.say_and_wait(
-        '응……눈에 띄지 않던 내가 주목받게 된 건 계속 이겼기 때문이니까……',
+        '응…… 눈에 띄지 않던 내가 주목받게 된 건 계속 이겼기 때문이니까……',
       );
       await kita.say_and_wait('계속 이겨서 응원해 주는 사람이 늘어난 거야!');
       await kita.say_and_wait(
@@ -4772,7 +4772,7 @@ module.exports = {
         `관전을 마치고 온 남성 손님 A「키타산 블랙은 매번 전력을 다해 달려서 자꾸 응원하고 싶어져. 정말 흔들림이 없다니까.」`,
       );
       await era.printAndWait(
-        `관전을 마치고 온 남성 손님 B「맞아, 맞아! ${kita.sex}은(는) 특별히 눈부시다기보다는 평범하고 우리와 가까운 느낌이야.」`,
+        `관전을 마치고 온 남성 손님 B「맞아, 맞아! ${kita.sex}는 특별히 눈부시다기보다는 평범하고 우리와 가까운 느낌이야.」`,
       );
       await era.printAndWait(
         `관전을 마치고 온 남성 손님 B「그래서 더 이겼으면 좋겠어! 마치 내가 뭔가 해낸 듯한 기분이 들거든!」`,
@@ -4781,7 +4781,7 @@ module.exports = {
         '관중분들이 그러셨어. 키타짱이 이기면 자기 일처럼 기쁘다고.',
       );
       await daiya.say_and_wait(
-        '『키타산이 노력하니까 나도 힘낼 수 있다』……키타짱은 나와 달리 그런 응원을 받고 있어.',
+        '『키타산이 노력하니까 나도 힘낼 수 있다』…… 키타짱은 나와 달리 그런 응원을 받고 있어.',
       );
       await daiya.say_and_wait('가끔은 그런 키타짱이 조금 부럽기도 해.');
       await kita.say_and_wait('아……');
@@ -4808,17 +4808,17 @@ module.exports = {
       await era.printAndWait(
         '대기실을 나온 사토노 다이아몬드는 무언가 생각에 잠긴 듯했다.',
       );
-      await daiya.say_and_wait('……트레이너님은 어떤 제 모습을 보고 싶으세요?');
+      await daiya.say_and_wait('……트레이너님은 저의 어떤 모습을 보고 싶으세요?');
       era.printButton('「응……? 무슨 뜻이야?」', 1);
       await era.input();
       await era.printAndWait(
         `${you.name}은(는) 뜻을 몰라 ${daiya.sex}에게 되물었다.`,
       );
       await daiya.say_and_wait(
-        '아까부터 생각했어요. 다들 키타짱에게 자신을 겹쳐 보며 응원한다면 저를 응원하는 분들은 무엇을 보고 계실까요?',
+        '아까부터 생각했어요. 다들 키타짱에게 자신의 모습을 보며 응원한다면 저를 응원하는 분들은 무엇을 보고 계실까요?',
       );
       await daiya.say_and_wait(
-        `『일류 ${daiya.uma_sex_title}』로서의 기여……키타짱${kita.sex}는 이미 웃음을 전한다는 기여를 하고 있어요.`,
+        `『일류 ${daiya.uma_sex_title}』로서 할 수 있는 일…… 키타짱은 이미 하고 있어요. ${kita.sex}는 사람들에게 웃음을 전하고 있죠.`,
       );
       await daiya.say_and_wait(
         '저는 무엇을 해야 할지조차 아직 떠오르지 않는데……',
@@ -4830,12 +4830,12 @@ module.exports = {
         `${daiya.uma_sex_title}로서 제 달리기가 여러분께 전할 수 있는 것은 무엇일까요……`,
       );
       await era.printAndWait(
-        `모두가 사토노 다이아몬드에게 바라는 것.${daiya.sex}의 달리기는 팬들에게 어떤 꿈을 보여 줄까.`,
+        `모두가 사토노 다이아몬드에게 바라는 것. ${daiya.sex}의 달리기는 팬들에게 어떤 꿈을 보여 줄까.`,
       );
       await era.printAndWait(
         `『일류 ${daiya.uma_sex_title}』는 저마다 다른 꿈을 전할 수 있다.`,
       );
-      era.printButton('「나는 너에게서 『가능성』을 느껴」', 1);
+      era.printButton('「나는 너에게서 『가능성』을 느껴.」', 1);
       await era.input();
       await daiya.say_and_wait('가능성……');
       await era.printAndWait(
@@ -4844,10 +4844,10 @@ module.exports = {
       await era.printAndWait(
         `사토노 가문을 오랫동안 옭아맨 징크스를 극복한 ${daiya.sex}라면 무엇이든 할 수 있을지도 모른다──그렇게 느끼게 한다.`,
       );
-      await daiya.say_and_wait('그렇군요……감사해요.');
+      await daiya.say_and_wait('그렇군요…… 감사해요.');
       await daiya.say_and_wait('……조금 더 혼자 생각해 볼게요……');
       await era.printAndWait(
-        `사토노 다이아몬드는 다시 깊이 생각에 잠겼다.${daiya.sex}의 생각을 방해하지 않도록 둘은 말없이 역으로 향했다.`,
+        `사토노 다이아몬드는 다시 깊이 생각에 잠겼다. ${daiya.sex}의 생각을 방해하지 않도록 둘은 말없이 역으로 향했다.`,
       );
     };
     f.title = title;
@@ -4865,7 +4865,7 @@ module.exports = {
       await era.input();
       await daiya.say_and_wait('……네, 괜찮아요.');
       await daiya.say_and_wait('몸도 가볍고 움직임이 둔한 느낌도 없어요.');
-      era.printButton('「무리하지는 마」', 1);
+      era.printButton('「무리하지는 마.」', 1);
       await era.input();
       await daiya.say_and_wait('무리는 부상의 원인이죠?');
       await daiya.say_and_wait(
@@ -4888,7 +4888,7 @@ module.exports = {
       );
       await daiya.say_and_wait('방금 잘 부탁한다고 했어……');
       await kita.say_and_wait('응! 안 질 거야!!');
-      await daiya.say_and_wait('…………？');
+      await daiya.say_and_wait('…………?');
       await daiya.say_and_wait(
         '……키타짱은 『오사카배』나 『텐노상(봄)』 때 더……',
         true,
@@ -4911,7 +4911,7 @@ module.exports = {
       await era.printAndWait([
         `${you.name}은(는) 사토노 다이아몬드와 함께 키타산 블랙이 출주하는 `,
         takz_kin,
-        '를 관전하러 왔다.',
+        '을 관전하러 왔다.',
       ]);
       await daiya.say_and_wait([
         '예정대로 ',
@@ -4929,18 +4929,18 @@ module.exports = {
         `의 격전으로 피로가 심해 안전을 생각해서 이번에는 쉬기로 했다.`,
       ]);
       await era.printAndWait(
-        `같은 레이스를 막 마친 키타산 블랙이 계속 출주할 수 있다니 정말 튼튼하다.──그렇게 생각했는데……`,
+        `같은 레이스를 막 마친 키타산 블랙이 계속 출주할 수 있다니 정말 튼튼하다.── 그렇게 생각했는데……`,
       );
       await era.printAndWait(
         '중계「힘겹습니다! 키타산 블랙! 앞으로 나가지 못합니다! 평소의 달리기를 보여 주지 못합니다!!」',
       );
       await era.printAndWait(
-        '중계「──키타산 블랙, 패배!! 키타산 블랙은 후방 집단에 가라앉았습니다!」',
+        '중계「──키타산 블랙, 패배!! 키타산 블랙은 후방으로 처졌습니다!」',
       );
       await daiya.say_and_wait('……키타짱……');
       await kita.say_and_wait('………………읏.');
       await era.printAndWait(
-        '관중 A「야, 키타산 왜 저러지……오늘 상태가 안 좋은가……?」',
+        '관중 A「야, 키타산 왜 저러지…… 오늘 상태가 안 좋은가……?」',
       );
       await era.printAndWait(
         '관중 B「왜 『타카라즈카 기념』에서 지는 거야. 질 이유가 없었는데……」',
@@ -4954,10 +4954,10 @@ module.exports = {
       await era.printAndWait(
         '오늘 키타산 블랙에게는 평소의 날카로움이 없었다. 힘을 다 발휘하지 못한 이유는──',
       );
-      await daiya.say_and_wait('하아, 하아…………키타짱.');
-      await kita.say_and_wait('과, 관중들의 말……더는 듣고 있을 수가 없어……');
+      await daiya.say_and_wait('하아, 하아………… 키타짱.');
+      await kita.say_and_wait('과, 관중들의 말…… 더는 듣고 있을 수가 없어……');
       await kita.say_and_wait('제대로 못 달렸다는 건 나도 알아……');
-      await kita.say_and_wait('……읏……하지만…………');
+      await kita.say_and_wait('……읏…… 하지만…………');
       await kita.say_and_wait('내가 실망시킨 거야────!!');
       await kita.say_and_wait('으아아아아아아아아아아아아아!');
       await daiya.say_and_wait('……키타짱……');
@@ -4965,34 +4965,34 @@ module.exports = {
         '……키타짱, 오늘은 완벽한 상태에서 달린 게 아니었지……?',
       );
       await kita.say_and_wait(
-        '응……흑……오늘 왜 그랬지……이상해서……몸이 무겁고……',
+        '응…… 흑…… 오늘 왜 그랬지…… 이상해서…… 몸이 무겁고……',
       );
       await kita.say_and_wait(
-        '페이스를 올려야 하는 건 아는데……흑, 다리가……점점 안 움직여서……!',
+        '페이스를 올려야 하는 건 아는데…… 흑, 다리가…… 점점 안 움직여서……!',
       );
       await kita.say_and_wait('……이렇게 열심히 했는데……');
       await kita.say_and_wait(
-        '……『타카라즈카 기념』……흑……팬 투표 1위가 돼서……정말 기뻤어……!',
+        '……『타카라즈카 기념』…… 흑…… 팬 투표 1위가 돼서…… 정말 기뻤어……!',
       );
       await kita.say_and_wait(
-        '기대에 보답해야 한다고……그래서 정말, 정말 열심히 했는데!!',
+        '기대에 보답해야 한다고…… 그래서 정말, 정말 열심히 했는데!!',
       );
       await kita.say_and_wait('왜 이렇게 된 거야!?');
       await daiya.say_and_wait(
-        '아마……몸에 피로가 남아 있던 게 아닐까? 나도 『텐노상(봄)』이 끝나고 피로가 남아 있었어.',
+        '아마…… 몸에 피로가 남아 있던 게 아닐까? 나도 『텐노상(봄)』이 끝나고 피로가 남아 있었어.',
       );
       await era.printAndWait(
-        `『텐노상(봄)』의 격전으로 키타산 블랙의 몸에도 피로가 쌓여 있었다.${kita.sex}본인은 깨닫지 못했다.`,
+        `『텐노상(봄)』의 격전으로 키타산 블랙의 몸에도 피로가 쌓여 있었다. ${kita.sex} 본인은 깨닫지 못했다.`,
       );
       await era.printAndWait(
         `${kita.sex}는 기대에 보답하고 싶은 마음뿐이라 피로를 느끼지 못했지만, 피로는 사라지지 않고 ${kita.sex}의 몸에 조용히 쌓여 갔다.`,
       );
-      await daiya.say_and_wait('너무 열심히 한 거야……키타짱답네.');
-      await kita.say_and_wait('……지쳐 있었다고……? 그럴 수가……하지만……');
+      await daiya.say_and_wait('너무 열심히 한 거야…… 키타짱답네.');
+      await kita.say_and_wait('……지쳐 있었다고……? 그럴 수가…… 하지만……');
       await kita.say_and_wait(
-        '내가 지쳤다는 것도 몰랐어……그래서 모두의 기대를 저버렸어……',
+        '내가 지쳤다는 것도 몰랐어…… 그래서 모두의 기대를 저버렸어……',
       );
-      await kita.say_and_wait('분해……정말 분해……!');
+      await kita.say_and_wait('분해…… 정말 분해……!');
       await daiya.say_and_wait(
         '──괜찮아. 키타짱이 너무 열심히 했다는 걸 팬분들도 이해해 주실 거야.',
       );
@@ -5000,13 +5000,13 @@ module.exports = {
         '다들 노력하는 키타짱을 지켜보며 키타짱에게 힘을 받아 온 분들이잖아.',
       );
       await kita.say_and_wait(
-        '……그래도 일부러 투표까지 해 줬는데 이런 결과라니……실망했을 거야……',
+        '……그래도 일부러 투표까지 해 줬는데 이런 결과라니…… 실망했을 거야……',
       );
       await daiya.say_and_wait(
         '……기대에 보답하지 못하면 더는 응원받지 못할 거라고 생각하는 거야……?',
       );
       await kita.say_and_wait(
-        '응……눈에 띄지 않던 내가 주목받게 된 건 계속 이겼기 때문이니까……',
+        '응…… 눈에 띄지 않던 내가 주목받게 된 건 계속 이겼기 때문이니까……',
       );
       await kita.say_and_wait('계속 이겨서 응원해 주는 사람이 늘어난 거야!');
       await kita.say_and_wait(
@@ -5027,7 +5027,7 @@ module.exports = {
         `관전을 마치고 온 남성 손님 A「키타산 블랙은 매번 전력을 다해 달려서 자꾸 응원하고 싶어져. 정말 흔들림이 없다니까.」`,
       );
       await era.printAndWait(
-        `관전을 마치고 온 남성 손님 B「맞아, 맞아! ${kita.sex}은(는) 특별히 눈부시다기보다는 평범하고 우리와 가까운 느낌이야.」`,
+        `관전을 마치고 온 남성 손님 B「맞아, 맞아! ${kita.sex}는 특별히 눈부시다기보다는 평범하고 우리와 가까운 느낌이야.」`,
       );
       await era.printAndWait(
         `관전을 마치고 온 남성 손님 B「그래서 더 이겼으면 좋겠어! 마치 내가 뭔가 해낸 듯한 기분이 들거든!」`,
@@ -5036,7 +5036,7 @@ module.exports = {
         '관중분들이 그러셨어. 키타짱이 이기면 자기 일처럼 기쁘다고.',
       );
       await daiya.say_and_wait(
-        '『키타산이 노력하니까 나도 힘낼 수 있다』……키타짱은 나와 달리 그런 응원을 받고 있어.',
+        '『키타산이 노력하니까 나도 힘낼 수 있다』…… 키타짱은 나와 달리 그런 응원을 받고 있어.',
       );
       await daiya.say_and_wait('가끔은 그런 키타짱이 조금 부럽기도 해.');
       await kita.say_and_wait('아……');
@@ -5063,17 +5063,17 @@ module.exports = {
       await era.printAndWait(
         `지하 통로를 나온 사토노 다이아몬드는 무언가 생각에 잠긴 듯했다.`,
       );
-      await daiya.say_and_wait('……트레이너님은 어떤 제 모습을 보고 싶으세요?');
+      await daiya.say_and_wait('……트레이너님은 저의 어떤 모습을 보고 싶으세요?');
       era.printButton('「응……? 무슨 뜻이야?」', 1);
       await era.input();
       await era.printAndWait(
         `${you.name}은(는) 뜻을 몰라 ${daiya.sex}에게 되물었다.`,
       );
       await daiya.say_and_wait(
-        '아까부터 생각했어요. 다들 키타짱에게 자신을 겹쳐 보며 응원한다면 저를 응원하는 분들은 무엇을 보고 계실까요?',
+        '아까부터 생각했어요. 다들 키타짱에게 자신의 모습을 보며 응원한다면 저를 응원하는 분들은 무엇을 보고 계실까요?',
       );
       await daiya.say_and_wait(
-        `『일류 ${daiya.uma_sex_title}』로서의 기여……키타짱${kita.sex}는 이미 웃음을 전한다는 기여를 하고 있어요.`,
+        `『일류 ${daiya.uma_sex_title}』로서 할 수 있는 일…… 키타짱은 이미 하고 있어요. ${kita.sex}는 사람들에게 웃음을 전하고 있죠.`,
       );
       await daiya.say_and_wait(
         '저는 무엇을 해야 할지조차 아직 떠오르지 않는데……',
@@ -5085,12 +5085,12 @@ module.exports = {
         `${daiya.uma_sex_title}로서 제 달리기가 여러분께 전할 수 있는 것은 무엇일까요……`,
       );
       await era.printAndWait(
-        `모두가 사토노 다이아몬드에게 바라는 것.${daiya.sex}의 달리기는 팬들에게 어떤 꿈을 보여 줄까.`,
+        `모두가 사토노 다이아몬드에게 바라는 것. ${daiya.sex}의 달리기는 팬들에게 어떤 꿈을 보여 줄까.`,
       );
       await era.printAndWait(
         `『일류 ${daiya.uma_sex_title}』는 저마다 다른 꿈을 전할 수 있다.`,
       );
-      era.printButton('「나는 너에게서 『가능성』을 느껴」', 1);
+      era.printButton('「나는 너에게서 『가능성』을 느껴.」', 1);
       await era.input();
       await daiya.say_and_wait('가능성……');
       await era.printAndWait(
@@ -5099,10 +5099,10 @@ module.exports = {
       await era.printAndWait(
         `사토노 가문을 오랫동안 옭아맨 징크스를 극복한 ${daiya.sex}라면 무엇이든 할 수 있을지도 모른다──그렇게 느끼게 한다.`,
       );
-      await daiya.say_and_wait('그렇군요……감사해요.');
+      await daiya.say_and_wait('그렇군요…… 감사해요.');
       await daiya.say_and_wait('……조금 더 혼자 생각해 볼게요……');
       await era.printAndWait(
-        `사토노 다이아몬드는 다시 깊이 생각에 잠겼다.${daiya.sex}의 생각을 방해하지 않도록 둘은 말없이 역으로 향했다.`,
+        `사토노 다이아몬드는 다시 깊이 생각에 잠겼다. ${daiya.sex}의 생각을 방해하지 않도록 둘은 말없이 역으로 향했다.`,
       );
     };
     f.title = title;
@@ -5131,13 +5131,13 @@ module.exports = {
       await era.printAndWait('매년 열리는 여름 합숙이 올해도 시작됐다!');
       await kita.say_and_wait('다이아, 잠깐 괜찮아?');
       await daiya.say_and_wait('무슨 일이야?');
-      await kita.say_and_wait(['있잖아……', takz_kin, ' 때 다이아가 해 준 말.']);
+      await kita.say_and_wait(['있잖아…… ', takz_kin, ' 때 다이아가 해 준 말.']);
       await kita.say_and_wait('다들 나한테 『기대』하고 있다고……');
       await daiya.say_and_wait('응.');
       await kita.say_and_wait(
         '나름대로 생각해 봤어. 다들 뭘 『기대』하는 걸까 하고.',
       );
-      await kita.say_and_wait('그래서……정했어!!');
+      await kita.say_and_wait('그래서…… 정했어!!');
       await kita.say_and_wait(
         '내가 노력하는 모습이 모두의 힘이 된다면 포기하지 않는 모습을 계속 보여 줄 거야!',
       );
@@ -5145,15 +5145,15 @@ module.exports = {
         '바닥에서 역전하는 모습을 다들 기대하는 것 같아!',
       );
       await kita.say_and_wait(
-        '의지로 절대 포기하지 않고 끝까지 끈질기게 버틴다. 그게 내 달리기야!',
+        '굳은 의지로 절대 포기하지 않고 끝까지 끈질기게 버틴다. 그게 내 달리기야!',
       );
       await daiya.say_and_wait('후후후! 그거야말로 키타짱이지!');
       await kita.say_and_wait([
         '그러니까 목표는 ',
         tenn_spr,
-        '、',
+        ', ',
         japa_cup,
-        '、',
+        ', ',
         arim_kin,
         '에서 전부 이기는 것!',
       ]);
@@ -5185,12 +5185,12 @@ module.exports = {
         '나쁜 경기장 상태에도 흔들리지 않는 강한 다리 힘. 힘차게 내딛는 발걸음이 정말 인상적이었어요.',
       );
       await daiya.say_and_wait(
-        '저에게도 그런 다리 힘이 있다면……집단을 뚫고 앞으로 나가기 쉬워져서 앞으로의 레이스에도 도움이 될 거예요.',
+        '저에게도 그런 다리 힘이 있다면…… 집단을 뚫고 앞으로 나가기 쉬워져서 앞으로의 레이스에도 도움이 될 거예요.',
       );
       await daiya.say_and_wait(
         '……아니요──지금 부족한 점을 보완하는 건 맥퀸 일행을 이기기 위해 필요한 일이에요.',
       );
-      era.printButton('「그렇구나」', 1);
+      era.printButton('「그렇구나.」', 1);
       await era.input();
       await daiya.say_and_wait(
         '맥퀸 일행이 주신 귀한 기회잖아요. 완벽한 상태로 도전해서 이기고 싶어요……!',
@@ -5207,7 +5207,7 @@ module.exports = {
       era.printButton('「갑자기 해외를 목표로 삼은 이유가 뭐야?」', 1);
       await era.input();
       await daiya.say_and_wait(
-        '결정한 건 아니에요. 다만……전에 제 달리기가 여러분께 무엇을 전할 수 있을지 상담드렸잖아요?',
+        '결정한 건 아니에요. 다만…… 전에 제 달리기가 여러분께 무엇을 전할 수 있을지 상담드렸잖아요?',
       );
       await daiya.say_and_wait(
         '그때 트레이너님이 주신 답이 『가능성』이었고, 거기서 해외 원정이 떠올랐어요.',
@@ -5221,13 +5221,13 @@ module.exports = {
       await daiya.say_and_wait(
         '그렇다면 지금부터 해외 원정도 미래의 목표에 넣어 두는 게 좋을지도 모르죠.',
       );
-      era.printButton('「알았어」', 1);
+      era.printButton('「알았어.」', 1);
       await era.input();
       await era.printAndWait(
-        `파워를 키우면 ${daiya.sex}의 말대로 대응력이 높아진다.${you.name}에게 거절할 이유는 없었다.`,
+        `파워를 키우면 ${daiya.sex}의 말대로 대응력이 높아진다. ${you.name}에게 거절할 이유는 없었다.`,
       );
       await daiya.say_and_wait('죄송해요. 부담이 늘어나겠네요. 잘 부탁드려요.');
-      await daiya.say_and_wait('힘이 넘치는 새로운 달리기……반드시 익히겠어요!');
+      await daiya.say_and_wait('힘이 넘치는 새로운 달리기…… 반드시 익히겠어요!');
       await daiya.say_and_wait('그러지 못하면 맥퀸을 볼 면목이 없어요!');
       await era.printAndWait(
         '동경하던 상대에게 도전하고 앞으로의 방향도 정한 사토노 다이아몬드는 의욕이 넘쳤다.',
@@ -5246,7 +5246,7 @@ module.exports = {
     const f = async (daiya, dictus, kita) => {
       await daiya.say_and_wait('하아, 하아, 하아……!');
       await daiya.say_and_wait(
-        '다……다리에 부담이 꽤 크네요……그래도 발걸음은 확실히 단단해지고 있어요.',
+        '다…… 다리에 부담이 꽤 크네요…… 그래도 발걸음은 확실히 단단해지고 있어요.',
       );
       await daiya.say_and_wait('이 달리기를 반드시 제 것으로 만들겠어요……!');
       await daiya.say_and_wait('한 바퀴 더……!');
@@ -5272,15 +5272,15 @@ module.exports = {
         '모래사장을 달리는 탓도 있겠죠. 일시적인 현상이길 바랍니다.',
       );
       await era.printAndWait(
-        '이쿠노 딕터스의 말대로였으면 좋겠다……일단 조금 더 지켜보자.',
+        '이쿠노 딕터스의 말대로였으면 좋겠다…… 일단 조금 더 지켜보자.',
       );
       await era.printAndWait('어느새 여름 합숙 마지막 날이 되었다.');
-      await daiya.say_and_wait('키타짱, 돌아가는 버스 같이 앉자♪');
-      await kita.say_and_wait('짐은 벌써 올려놨어! 가자!');
+      await daiya.say_and_wait('키타짱, 돌아가는 버스에서 같이 앉자♪');
+      await kita.say_and_wait('짐은 벌써 올려 놨어! 가자!');
       await kita.say_and_wait('……응? 다이아?');
       await daiya.say_and_wait('……새근…………새근…………');
       await kita.say_and_wait('잠들었네……');
-      await daiya.say_and_wait('음……더 힘차게 달려야 해……');
+      await daiya.say_and_wait('음…… 더 힘차게 달려야 해……');
       await kita.say_and_wait('후후, 합숙 동안 다이아 정말 열심히 했지.');
       await kita.say_and_wait('……잘 자, 다이아.');
     };
@@ -5312,14 +5312,14 @@ module.exports = {
         '까지 맞출 수 있을까요……?',
       ]);
       era.printButton(
-        '「지금부터 바로잡으면 아슬아슬하게 맞출 수 있을지도 몰라」',
+        '「지금부터 바로잡으면 아슬아슬하게 맞출 수 있을지도 몰라.」',
         1,
       );
       await era.input();
       await era.printAndWait([
         '전초전인 ',
         kyot_dai,
-        '는 100%의 상태로 나가지 않아도 되지만 ',
+        '은 100%의 상태로 나가지 않아도 되지만 ',
         tenn_sho,
         '까지 이제 시간이 얼마 없다.',
       ]);
@@ -5333,9 +5333,9 @@ module.exports = {
       await era.printAndWait(
         `${daiya.sex}에게도 힘든 결정일 것이다. 그 마음에 보답하기 위해서라도 ${you.name}은(는) ${daiya.sex}를 완벽한 상태로 『텐노상(가을)』에 내보내겠다!`,
       );
-      await daiya.say_and_wait('하아, 하아…………왜……?');
+      await daiya.say_and_wait('하아, 하아………… 왜……?');
       await daiya.say_and_wait(
-        '예전에는 더 빠르게 발을 움직일 수 있었는데……그러니까……',
+        '예전에는 더 빠르게 발을 움직일 수 있었는데…… 그러니까……',
       );
       await daiya.say_and_wait('읏……!');
       await era.printAndWait(
@@ -5345,7 +5345,7 @@ module.exports = {
         `${daiya.sex}는 원래 달리기로 돌아가려는 조바심에 균형이 더 흐트러졌고, 그 때문에 또 초조해져 한 부분에만 신경을 썼다.`,
       );
       await era.printAndWait(
-        '이 악순환을 어떻게 끊을까.──사토노 다이아몬드가 정말 원래 달리기를 잊었다면 차라리……',
+        '이 악순환을 어떻게 끊을까.── 사토노 다이아몬드가 정말 원래 달리기를 잊었다면 차라리……',
       );
       era.drawLine();
       await kita.say_and_wait('실례할게. 트레이너, 상의할 게 뭐야?');
@@ -5357,7 +5357,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name}은(는) 설명했다. 사토노 다이아몬드가 원래 달리기를 되찾으려 하지만 잘되지 않아 막막한 상태라고.`,
       );
-      await kita.say_and_wait('응, 응……그럼 나랑 한 번 달려 볼래?');
+      await kita.say_and_wait('응, 응…… 그럼 나랑 한 번 달려 볼래?');
       await kita.say_and_wait(
         '해결 방법은 모르지만 직접 달려 보면 뭔가 잡힐지도 모르잖아!',
       );
@@ -5366,10 +5366,10 @@ module.exports = {
       await kita.say_and_wait([
         '응! ',
         takz_kin,
-        '와 같은 2200미터. 그때의 감각을 되짚어 보고 싶어.',
+        '과 같은 2200미터. 그때의 감각을 되짚어 보고 싶어.',
       ]);
       await daiya.say_and_wait('……트레이너님.');
-      era.printButton('「그 부탁, 들어주자!」', 1);
+      era.printButton('「그 부탁, 들어 주자!」', 1);
       await era.input();
       await daiya.say_and_wait([
         '……그렇네요. 거리도 마침 ',
@@ -5379,7 +5379,7 @@ module.exports = {
         '의 중간이니 저에게도 좋은 훈련이 되겠어요.',
       ]);
       await kita.say_and_wait('고마워, 다이아!!');
-      await daiya.say_and_wait('정말……고맙다고 해야 할 사람은 나야.');
+      await daiya.say_and_wait('정말…… 고맙다고 해야 할 사람은 나야.');
       await era.printAndWait(
         '그렇게 키타산 블랙과의 2200미터 달리기가 시작됐다.',
       );
@@ -5388,7 +5388,7 @@ module.exports = {
         '여기서 차이가 벌어지면 안 돼. 페이스를 조금 올려서……',
         true,
       );
-      await daiya.say_and_wait('하아아……읏! 윽……!');
+      await daiya.say_and_wait('하아아…… 읏! 윽……!');
       await daiya.say_and_wait(
         '……앞으로 나갈 수 없어! 발걸음이 무거워……? 안 돼, 차이가 벌어져……!',
         true,
@@ -5402,14 +5402,14 @@ module.exports = {
         '하지만 다이아, 병주에도 집중하지 못하는 것 같아.',
       );
       await kita.say_and_wait('집중하지 못하면 다칠지도 몰라. 오늘은 쉬자.');
-      era.printButton('「그래, 오늘은 여기까지 하자. 푹 쉬어」', 1);
+      era.printButton('「그래, 오늘은 여기까지 하자. 푹 쉬어.」', 1);
       await era.input();
       await daiya.say_and_wait('……알겠어요. 수고하셨어요.');
       await era.printAndWait(
         `사토노 다이아몬드는 ${daiya.sex}가 자신의 부상을 걱정하는 마음을 알아챈 모양이다. 얌전히 고개를 끄덕였다.`,
       );
       await kita.say_and_wait('있잖아, 아직 이르니까 조금 산책하다 돌아가자!');
-      await daiya.say_and_wait('키타짱……미안해, 나는──');
+      await daiya.say_and_wait('키타짱…… 미안해, 나는──');
       await kita.say_and_wait('가자!!');
       await daiya.say_and_wait('앗! ……키타짱, 나……!');
       await kita.say_and_wait('배고파! 먼저 상점가에 가자!');
@@ -5426,7 +5426,7 @@ module.exports = {
         '목말라. 음료수 사자! 사서 경치 좋은 곳에서 마시자!',
       );
       await daiya.say_and_wait(
-        '키타짱! 손을……갑자기 잡아당기면 붕어빵이 떨어지잖아!',
+        '키타짱! 손을…… 갑자기 잡아당기면 붕어빵이 떨어지잖아!',
       );
       await kita.say_and_wait('미안, 미안! 그래도 안 떨어졌지!');
       await daiya.say_and_wait(
@@ -5434,7 +5434,7 @@ module.exports = {
         true,
       );
       await daiya.print_and_wait(
-        '【어린 다이아「키타짱……아직 더 걸어야 해……?」】',
+        '【어린 다이아「키타짱…… 아직 더 걸어야 해……?」】',
       );
       await kita.print_and_wait('【어린 키타산「이제 다 왔어. 봐……」】');
       await daiya.print_and_wait('【어린 다이아「와아~! 높다……!」】');
@@ -5442,10 +5442,10 @@ module.exports = {
         '【어린 키타산「여기가 내 비밀 기지야! 계속 다이아를 데려오고 싶었어!」】',
       );
       await daiya.say_and_wait('여러 곳에 데려가 줬지……', true);
-      await kita.say_and_wait('하아, 하아……단숨에 올라오니까 역시 힘드네……!');
-      await daiya.say_and_wait('응……하아, 하아……');
+      await kita.say_and_wait('하아, 하아…… 단숨에 올라오니까 역시 힘드네……!');
+      await daiya.say_and_wait('응…… 하아, 하아……');
       await daiya.say_and_wait(
-        '예전에도 여기 왔었어……그때도 키타짱이 손을 잡아끌어 줬지.',
+        '예전에도 여기 왔었어…… 그때도 키타짱이 손을 잡아끌어 줬지.',
       );
       await daiya.say_and_wait(
         '여기뿐만 아니라 여러 곳으로. 키타짱이 바깥세상을 알려 줬어.',
@@ -5459,9 +5459,9 @@ module.exports = {
         '──있잖아, 다이아! 경주하자! 강까지 누가 더 빠른지!',
       );
       await daiya.say_and_wait('어? 경주? 갑작스럽네?');
-      await kita.say_and_wait('조금 달리는 정도는 괜찮잖아. 자! 준비……땅!!');
-      await daiya.say_and_wait('잠깐……치사해, 키타짱!!');
-      await kita.say_and_wait('헤헤헤, 내가 이겼다! 다음은……공원까지!');
+      await kita.say_and_wait('조금 달리는 정도는 괜찮잖아. 자! 준비…… 땅!!');
+      await daiya.say_and_wait('잠깐…… 치사해, 키타짱!!');
+      await kita.say_and_wait('헤헤헤, 내가 이겼다! 다음은…… 공원까지!');
       await daiya.say_and_wait('어!? 정말……!');
       await kita.say_and_wait('빨리 안 오면 두고 간다!');
       await kita.print_and_wait(
@@ -5469,17 +5469,17 @@ module.exports = {
       );
       await daiya.print_and_wait('【어린 다이아「기다려──! 키타짱!!」】');
       await daiya.print_and_wait(
-        '【어린 다이아「하아, 하아……에헤헤, 조금만 더 가면 됐는데……!」】',
+        '【어린 다이아「하아, 하아…… 에헤헤, 조금만 더 가면 됐는데……!」】',
       );
-      await daiya.say_and_wait('후우……뒤처지지 않을 거야!');
+      await daiya.say_and_wait('후우…… 뒤처지지 않을 거야!');
       await kita.say_and_wait('그럼 마지막은 기숙사까지! 기숙사가 결승점이야!');
       await daiya.say_and_wait('……후후, 이번에는 꼭 따라잡을게.');
       await daiya.say_and_wait('……예전에도 이렇게 그저 저 등만 쫓았지……', true);
       await daiya.say_and_wait('그저 키타짱을 따라잡고 싶어서.', true);
       await daiya.say_and_wait('……좋아──!');
-      await daiya.say_and_wait('……어라? 나……평소처럼 달리고 있어……', true);
+      await daiya.say_and_wait('……어라? 나…… 평소처럼 달리고 있어……', true);
       await daiya.say_and_wait(
-        '아무 생각 없이……그저 자연스럽게 달리고 있어……!',
+        '아무 생각 없이…… 그저 자연스럽게 달리고 있어……!',
         true,
       );
       await daiya.say_and_wait(
@@ -5490,7 +5490,7 @@ module.exports = {
         '그저 상상하는 거야──저 등을 따라잡고 앞질렀을 때 키타짱이 어떤 표정을 지을지.',
         true,
       );
-      await daiya.say_and_wait('그러면 즐거워서……달리는 게 즐거워서!!', true);
+      await daiya.say_and_wait('그러면 즐거워서…… 달리는 게 즐거워서!!', true);
       await kita.say_and_wait('골인────!');
       await daiya.say_and_wait('하아, 하아, 하아…………');
       await daiya.say_and_wait('…………키타짱.');
@@ -5521,7 +5521,7 @@ module.exports = {
       await daiya.say_and_wait('후우……');
       era.printButton('「괜찮아?」', 1);
       await era.input();
-      await daiya.say_and_wait('아, 네……오늘만큼은 조금 긴장돼서요……');
+      await daiya.say_and_wait('아, 네…… 오늘만큼은 조금 긴장돼서요……');
       await era.printAndWait(
         '사토노 다이아몬드의 상태는 조정 끝에 조금씩 돌아오고 있다. 하지만 그 일 이후 첫 레이스다.',
       );
@@ -5561,7 +5561,7 @@ module.exports = {
       era.printButton('「그런 거였구나……」', 1);
       await era.input();
       await era.printAndWait(
-        `그 말은 틀리지 않았다. 가문의 숙원을 짊어지는 것도 ${daiya.sex}스스로 선택한 길이라고 전에 말했었다.`,
+        `그 말은 틀리지 않았다. 가문의 숙원을 짊어지는 것도 ${daiya.sex} 스스로 선택한 길이라고 전에 말했었다.`,
       );
       await era.printAndWait(`${daiya.sex}는 자신의 꿈을 향해 나아가고 있다.`);
       await daiya.say_and_wait(
@@ -5607,7 +5607,7 @@ module.exports = {
       await daiya.say_and_wait(
         '트레이너님도 문제없다고 하시니 정말 안심이에요!',
       );
-      era.printButton('「발걸음에 힘이 실려 있었어」', 1);
+      era.printButton('「발걸음에 힘이 실려 있었어.」', 1);
       await era.input();
       await era.printAndWait(
         `아직 아주 강하다고 할 정도는 아니지만 ${you.name}은(는) 발걸음에서 힘과 안정감이 느껴졌다고 ${daiya.sex}에게 전했다.`,
@@ -5615,16 +5615,16 @@ module.exports = {
       await daiya.say_and_wait(
         '정말인가요……? 저는 그냥 자연스럽게 달렸을 뿐인데……',
       );
-      era.printButton('「이제 그 달리기가 몸에 익고 있는 거야」', 1);
+      era.printButton('「이제 그 달리기가 몸에 익고 있는 거야.」', 1);
       await era.input();
       await era.printAndWait(
-        `${you.name}은(는) 생각한다.${daiya.sex}가 자신의 달리기를 되찾았기에 그동안의 훈련 성과도 드러난 것이리라.`,
+        `${you.name}은(는) 생각한다. ${daiya.sex}가 자신의 달리기를 되찾았기에 그동안의 훈련 성과도 드러난 것이리라.`,
       );
       await daiya.say_and_wait(
         '다행이에요……! 그렇다면 안심하고 발을 내딛는 힘을 계속 기를 수 있겠어요……!',
       );
       await daiya.say_and_wait('즉, 해외 레이스에 나갈 가능성도 있다는 거죠……');
-      era.printButton('「너에게 맞는 방법을 함께 찾자」', 1);
+      era.printButton('「너에게 맞는 방법을 함께 찾자.」', 1);
       await era.input();
       await era.printAndWait(
         `앞으로 훈련하다 다시 달리기에 영향이 생길 수도 있다. 하지만 지금의 ${daiya.sex}라면 괜찮을 것이다.`,
@@ -5634,7 +5634,7 @@ module.exports = {
       );
       await daiya.say_and_wait('네, 걱정 마세요. 더는 헤매지 않아요.');
       await daiya.say_and_wait('오직 꿈만 바라보며 앞으로 나아갈게요!');
-      era.printButton('「『텐노상(가을)』에서도 그대로 달려」', 1);
+      era.printButton('「『텐노상(가을)』에서도 그대로 달려.」', 1);
       await era.input();
       await daiya.say_and_wait('네! 드디어 맥퀸과……! 그리고 키타짱도!!');
       await daiya.say_and_wait('계속 꿈꿔 온 무대가 드디어……!');
@@ -5642,7 +5642,7 @@ module.exports = {
         `그리고 이기면 『일류 ${daiya.uma_sex_title}』의 실력을 갖췄다고 증명할 수 있어요.`,
       );
       await daiya.say_and_wait(
-        `동경하던 분과 오랜 라이벌……${daiya.couple_title}와 승부할 수 있는 이 기회──`,
+        `동경하던 분과 오랜 라이벌…… ${daiya.couple_title}과 승부할 수 있는 이 기회──`,
       );
       await daiya.say_and_wait('모든 것을 걸 각오로 도전하겠어요!!');
     };
@@ -5657,11 +5657,11 @@ module.exports = {
      * @param {CharaTalk} you プレイヤー
      */
     const f = async (daiya, kita, you) => {
-      await kita.say_and_wait('──드디어 이날이다……『텐노상(가을)』.');
+      await kita.say_and_wait('──드디어 이날이다…… 『텐노상(가을)』.');
       await daiya.say_and_wait('네……! 드디어 맥퀸과……!');
       await daiya.say_and_wait('제가 동경하던 메지로 맥퀸──', true);
       await daiya.say_and_wait(
-        `메지로 가문의 ${daiya.uma_sex_title}로서 ${daiya.sex}의 책무를 다한 『일류 ${daiya.uma_sex_title}』。`,
+        `메지로 가문의 ${daiya.uma_sex_title}로서 ${daiya.sex}의 책무를 다한 『일류 ${daiya.uma_sex_title}』.`,
         true,
       );
       await daiya.say_and_wait(
@@ -5673,7 +5673,7 @@ module.exports = {
         true,
       );
       await daiya.say_and_wait(
-        '사토노 가문의 숙원을 이루려 꿈을 계속 쫓다 보니……어느새 여기까지 왔네요.',
+        '사토노 가문의 숙원을 이루려 꿈을 계속 쫓다 보니…… 어느새 여기까지 왔네요.',
         true,
       );
       await daiya.say_and_wait(
@@ -5707,7 +5707,7 @@ module.exports = {
         '중계「폭우 속에서도 이토록 많은 관중이 찾아왔습니다. 꿈의 대결을 한눈에 보기 위해서입니다!」',
       );
       await daiya.say_and_wait('……맥퀸은 역시 대단하네.');
-      await kita.say_and_wait('응……하지만 우리도 질 수 없어!');
+      await kita.say_and_wait('응…… 하지만 우리도 질 수 없어!');
       await daiya.say_and_wait('맞아! 여기까지 온 우리라면!');
       await daiya.say_and_wait('반드시 맥퀸을 이길 수 있어!');
       await era.printAndWait('두 사람「1착은 내 거야!! 1착은 내 거라고!!」');
@@ -5734,7 +5734,7 @@ module.exports = {
       await daiya.say_and_wait('하아아아아아아아아아아아아!!');
       await you.say_as_passer_by_and_wait(
         '중계',
-        '1착은 사토노 다이아몬드────!! 최상급 다이아몬드에는 흐림이 없습니다! 맑고 투명한 빛입니다!',
+        '1착은 사토노 다이아몬드────!! 최상급 다이아몬드에는 흐림 한 점 없습니다! 맑고 투명하게 빛납니다!',
       );
       await you.say_as_passer_by_and_wait(
         '관중',
@@ -5746,7 +5746,7 @@ module.exports = {
       );
       await you.say_as_passer_by_and_wait(
         '관중 A',
-        '진흙투성이가 되어도 의연하고 흔들리지 않는……저 모습, 정말 아름다워……',
+        '진흙투성이가 되어도 의연하고 흔들리지 않는…… 저 모습, 정말 아름다워……',
       );
       await kita.say_and_wait('으아아아아아아아아!! 분해, 분해, 분해!!');
       await kita.say_and_wait('내 상태는 완벽했는데!');
@@ -5759,7 +5759,7 @@ module.exports = {
       await daiya.say_and_wait('맥퀸! 감사해요. 하지만──');
       await mcqueen.say_and_wait('무슨 일인가요?');
       await daiya.say_and_wait(
-        '거리는 제가 유리했어요. 스테이어인 맥퀸은 장거리가 더 특기잖아요.',
+        '거리는 제가 유리했어요. 스테이어인 맥퀸은 장거리에 더 강하시잖아요.',
       );
       await mcqueen.say_and_wait([
         '네, 하지만 ',
@@ -5768,15 +5768,15 @@ module.exports = {
       ]);
       await daiya.say_and_wait('꼬, 꼭 장거리에서도 함께 달리고 싶어요!!');
       await daiya.say_and_wait('장거리에서 맥퀸을 이기고 싶어요……!');
-      await mcqueen.say_and_wait('……！');
+      await mcqueen.say_and_wait('……!');
       await teio.say_as_unknown_and_wait('훌륭한 마음가짐이네~, 다이아!');
       await daiya.say_and_wait('테이오!');
       await teio.say_and_wait('그럼 이렇게 하는 건 어때?');
       await teio.say_and_wait('우리 모두 같은 레이스를 달리자!!');
       await daiya.say_and_wait('……! 네, 기꺼이! 그 기회를 주세요!!');
-      await mcqueen.say_and_wait('정말……테이오도 다이아와 달리고 싶은 거죠?');
+      await mcqueen.say_and_wait('정말…… 테이오도 다이아와 달리고 싶은 거죠?');
       await teio.say_and_wait('헤헤♪ 들켰네.');
-      await mcqueen.say_and_wait(['──', arim_kin, '！']);
+      await mcqueen.say_and_wait(['──', arim_kin, '!']);
       await mcqueen.say_and_wait([
         '여러분만 괜찮다면 ',
         arim_kin,
@@ -5792,9 +5792,9 @@ module.exports = {
       await kita.say_and_wait('저도요!! 그때 잘 부탁드립니다!!');
       await you.say_as_passer_by_and_wait('관중', '우오오오오오오오오오오오!!');
       await era.printAndWait([
-        '6만 명의 함성이 관중석을 뒤흔든다.',
+        '6만 명의 함성이 관중석을 뒤흔든다. ',
         arim_kin,
-        '는 세기의 꿈 같은 승부가 될 것이다.',
+        '는 세기의 꿈같은 승부가 될 것이다.',
       ]);
       await era.printAndWait([
         '후추의 뜨거운 함성 앞에서 ',
@@ -5804,7 +5804,7 @@ module.exports = {
       await daiya.say_and_wait('──저기, 맥퀸!');
       await daiya.say_and_wait('한 가지 여쭤봐도 될까요?');
       await mcqueen.say_and_wait('무엇인가요?');
-      await daiya.say_and_wait('맥퀸은……왜 저희와 달리려고 하셨나요?');
+      await daiya.say_and_wait('맥퀸은…… 왜 저희와 달리려고 하셨나요?');
       await mcqueen.say_and_wait(
         `……두 분의 레이스가 제 투지에 불을 붙였어요. 그리고 메지로 가문의 ${daiya.uma_sex_title}로서 그래야 한다고 생각했죠.`,
       );
@@ -5820,10 +5820,10 @@ module.exports = {
       );
       await mcqueen.say_and_wait('네, 맞아요.');
       await mcqueen.say_and_wait(
-        `──새로움이 없다는 말이 나올 만큼 절대적인 실력으로 ${daiya.uma_sex_title}계에 메지로 가문의 이름을 떨치는 것. 그것이 제 자신에게 부과해 온 과제예요.`,
+        `──새로움이 없다는 말이 나올 만큼 절대적인 실력으로 ${daiya.uma_sex_title}계에 메지로 가문의 이름을 떨치는 것. 그것이 제 스스로에게 부여해 온 과제예요.`,
       );
       await mcqueen.say_and_wait(
-        `그러니 메지로 가문과 제가 특히 중시하는 『텐노상(봄)』에……강력한 ${daiya.uma_sex_title}가 출주한다면 나서야 하죠.`,
+        `그러니 메지로 가문과 제가 특히 중시하는 『텐노상(봄)』에…… 강력한 ${daiya.uma_sex_title}가 출주한다면 나서야 하죠.`,
       );
       await mcqueen.say_and_wait(
         `그뿐만이 아니에요. 트윙클 시리즈에서 좋은 성적을 거둔 ${daiya.uma_sex_title}와 달리는 것은 물론이고──`,
@@ -5852,9 +5852,9 @@ module.exports = {
       await mcqueen.say_and_wait('다이아의 앞날을 미리 축하할게요. 그럼 이만.');
       await daiya.say_and_wait('……역시 맥퀸은 정말 멋진 분이에요!');
       await daiya.say_and_wait(
-        `${mcqueen.sex}는 『일류 ${daiya.uma_sex_title}』의 정의와 목표를 저렇게 명확히 갖고 계시다니……정말 존경스러워요……!`,
+        `${mcqueen.sex}는 『일류 ${daiya.uma_sex_title}』의 정의와 목표를 저렇게 명확히 갖고 계시다니…… 정말 존경스러워요……!`,
       );
-      era.printButton('「참고가 됐다니 다행이네」', 1);
+      era.printButton('「참고가 됐다니 다행이네.」', 1);
       await era.input();
       await daiya.say_and_wait(
         '네! 맥퀸 말씀대로 제가 무엇을 할 수 있을지 잘 생각해 볼게요……',
@@ -5894,7 +5894,7 @@ module.exports = {
         `테이오가 『일류 ${daiya.uma_sex_title}』의 모습을 어떻게 보여 주는지 직접 보고 싶어.`,
       );
       await kita.say_and_wait(
-        '응……잘은 모르겠지만 다이아에게는 그러고 싶은 이유가 있는 거지.',
+        '응…… 잘은 모르겠지만 다이아에게는 그러고 싶은 이유가 있는 거지.',
       );
       await kita.say_and_wait('하지만! 테이오는 내가 계속 동경해 온 사람이야!');
       await kita.say_and_wait(
@@ -5908,7 +5908,7 @@ module.exports = {
       );
       await teio.say_and_wait('내 실력을 보여 줄게!');
       await teio.say_and_wait('키타짱, 다이아! 전력으로 덤벼!!');
-      await era.printAndWait('두 사람「지지 않겠어요!! 안 질 거예요!!」');
+      await era.printAndWait('두 사람 「지지 않겠어요!! 안 질 거예요!!」');
     };
     f.title = title;
     return f;
@@ -5930,7 +5930,7 @@ module.exports = {
         '이런 실력을 갖췄을 줄이야……! 멋진 달리기였어, 다이아.',
       );
       await daiya.say_and_wait('감사합니다!');
-      await teio.say_and_wait('키타짱도 내 상상보다 강해졌어!');
+      await teio.say_and_wait('키타짱도 내가 생각했던 것보다 강해졌어!');
       await kita.say_and_wait([
         '정말요!? 하지만 저는 ',
         arim_kin,
@@ -5943,9 +5943,9 @@ module.exports = {
       await teio.say_and_wait('──좋네. 키타짱도 다이아도 정말 좋아.');
       await teio.say_and_wait('우릴 이기겠다고 마음먹은 그 눈빛이 좋아.');
       await teio.say_and_wait('그만 옛날의 내가 떠올랐어.');
-      await daiya.say_and_wait('옛날의……테이오 말인가요?');
+      await daiya.say_and_wait('옛날의…… 테이오 말인가요?');
       await teio.say_and_wait(
-        '응. 옛날의 나도 회장님을 동경하면서……언젠가 꼭 뛰어넘겠다고 생각하며 트윙클 시리즈를 달렸어.',
+        '응. 옛날의 나도 회장님을 동경하면서…… 언젠가 꼭 뛰어넘겠다고 생각하며 트윙클 시리즈를 달렸어.',
       );
       await teio.say_and_wait('마침내 회장님과 정면으로 맞붙었을 때──');
       await teio.say_and_wait(
@@ -5968,7 +5968,7 @@ module.exports = {
       await daiya.say_and_wait('──읏! 네!!');
       await kita.say_and_wait('네!! 진심으로 맞서겠어요!');
       await daiya.say_and_wait(
-        `언제 어떤 때라도 도전하는 마음을 잊지 않는다……그것이 테이오${teio.sex}의 『일류 ${daiya.uma_sex_title}』로서의 방식……`,
+        `언제 어떤 때라도 도전하는 마음을 잊지 않는다…… 그것이 테이오${teio.sex}의 『일류 ${daiya.uma_sex_title}』로서의 방식……`,
       );
       await daiya.say_and_wait(
         '맥퀸은 도전을 받는 쪽, 테이오는 도전하는 쪽.',
@@ -5976,7 +5976,7 @@ module.exports = {
       );
       await daiya.say_and_wait('그렇다면 나는……', true);
       await daiya.say_and_wait(
-        '사토노 가문의 첫 G1 승리……징크스에 도전하고, 깨뜨리고, 이긴다.',
+        '사토노 가문의 첫 G1 승리…… 징크스에 도전하고, 깨뜨리고, 이긴다.',
         true,
       );
       await daiya.say_and_wait(
@@ -5995,7 +5995,7 @@ module.exports = {
         '네. 저는 지금까지도 여러 가지에 도전해 왔어요. 사토노 가문을 가로막는 징크스에도, 키타짱에게도요.',
       );
       await daiya.say_and_wait(
-        `그러니 『일류 ${daiya.uma_sex_title}』인 저도 계속 도전하는 것이 가장 어울리는 방식 아닐까요.`,
+        `그러니 『일류 ${daiya.uma_sex_title}』인 저에게도 계속 도전하는 것이 가장 어울리는 방식 아닐까요?`,
       );
       await daiya.say_and_wait(
         '맥퀸과 테이오에게 도전해서 사토노 가문 역사에 새 장을 열었던 것처럼요.',
@@ -6007,7 +6007,7 @@ module.exports = {
         '그렇게 생각하니 다시 깨달았어요. 해외 레이스에 도전하고 싶다고요.',
       );
       await daiya.say_and_wait(
-        '여러분께 가능성을 느끼게 해 드리기 위해서만이 아니라 저 자신의 소망으로요.',
+        '여러분께 가능성을 느끼게 해 드리기 위해서만이 아니라 저 자신이 바라기 때문이에요.',
       );
       await daiya.say_and_wait(
         `역사 깊은 해외 레이스에서 이겨 사토노의 이름을 ${daiya.uma_sex_title}계의 역사에 새기고 싶어요.`,
@@ -6018,11 +6018,11 @@ module.exports = {
       await daiya.say_and_wait(
         `그것이 제가 할 수 있는 ${daiya.uma_sex_title}계에 대한 기여라고 생각해요.`,
       );
-      era.printButton('「너만의 답을 찾았구나」', 1);
+      era.printButton('「너만의 답을 찾았구나.」', 1);
       await era.input();
       await daiya.say_and_wait('네!');
       await daiya.say_and_wait(
-        `『일류 ${daiya.uma_sex_title}』로서 사토노 다이아몬드의 모습……목표는 정해졌어요.`,
+        `『일류 ${daiya.uma_sex_title}』로서 사토노 다이아몬드의 모습…… 목표는 정해졌어요.`,
       );
       await daiya.say_and_wait(
         `『아리마 기념』에서 이겨 『일류 ${daiya.uma_sex_title}』의 반열에 들겠어요!`,
@@ -6057,23 +6057,23 @@ module.exports = {
         '하지만 상대가 누구든 제왕님이 쓰러뜨려 주겠어!!',
       );
       await kita.say_and_wait(
-        '쓰러지지 않겠어요! 저는……테이오를 이길 거예요!!',
+        '쓰러지지 않겠어요! 저는…… 테이오를 이길 거예요!!',
       );
       await daiya.say_and_wait('다행이에요! 키타짱, 기백으로는 밀리지 않네요!');
-      await era.printAndWait('관중 A「키타산, 힘내!! 동경을 뛰어넘어라!」');
+      await era.printAndWait('관중 A 「키타산, 힘내!! 동경을 뛰어넘어라!」');
       await era.printAndWait(
-        '관중 B「『제왕』을 뛰어넘어! 우리 키타산이라면 할 수 있어!!」',
+        '관중 B 「『제왕』을 뛰어넘어! 우리 키타산이라면 할 수 있어!!」',
       );
       await era.printAndWait(
-        `관중 C「${daiya.couple_title}에게 『제왕』의 관록을 보여 줘! 토카이 테이오!!」`,
+        `관중 C 「${daiya.couple_title}에게 『제왕』의 관록을 보여 줘! 토카이 테이오!!」`,
       );
       await daiya.say_and_wait('……양쪽의 응원 열기는 막상막하인 것 같네요……');
       await era.printAndWait(
-        `${daiya.couple_title}는 원래 열성 팬이 많은 두 사람이다. 이번 『재팬컵』도 예년보다 북적이고 있다.`,
+        `${daiya.couple_title}은 원래 열성 팬이 많은 두 사람이다. 이번 『재팬컵』도 예년보다 북적이고 있다.`,
       );
-      await daiya.say_and_wait('키타짱……힘내──!');
+      await daiya.say_and_wait('키타짱…… 힘내──!');
       await era.printAndWait(
-        '중계「오, 토카이 테이오! 여기서 단숨에 올라옵니다! 벌써 키타산 블랙의 바로 뒤입니다!」',
+        '중계 「오, 토카이 테이오! 여기서 단숨에 올라옵니다! 벌써 키타산 블랙의 바로 뒤입니다!」',
       );
       await daiya.say_and_wait(
         '네……!? 빨라요……! 평소 테이오라면 여기서 가속하지 않을 텐데……!',
@@ -6083,8 +6083,8 @@ module.exports = {
       );
       await era.printAndWait('테이오에게는 드문 공격 방식이다.');
       await teio.say_and_wait('하아아아아아아아!');
-      await kita.say_and_wait('읏……아아아아아아아!');
-      await daiya.say_and_wait('키타짱도 가속했어……아니, 달라. 이건……!');
+      await kita.say_and_wait('읏…… 아아아아아아아!');
+      await daiya.say_and_wait('키타짱도 가속했어…… 아니, 달라. 이건……!');
       await era.printAndWait(
         '키타산 블랙은 테이오의 압박에 일단 페이스를 올렸다가 다시 원래 리듬으로 되돌린다.',
       );
@@ -6092,7 +6092,7 @@ module.exports = {
         '토카이 테이오와 키타산 블랙 사이에서 치열한 공방이 펼쳐졌다.',
       );
       await daiya.say_and_wait(
-        `키타짱도 테이오도 ${kita.couple_title}는 『재팬컵』을 경험했는데도……`,
+        `키타짱도 테이오도 ${kita.couple_title}은 『재팬컵』을 경험했는데도……`,
       );
       await daiya.say_and_wait(
         '자신의 달리기에만 갇히지 않고 적극적으로 승부를 걸고 있어……!',
@@ -6102,9 +6102,9 @@ module.exports = {
         '사토노 다이아몬드는 전개를 보며 자신이 달리고 있다면 어떨지 가정하기 시작한 듯했다.',
       );
       await era.printAndWait(
-        '중계「토카이 테이오, 계속 가속합니다! 키타산 블랙은 선두를 지킬 것인가, 테이오에게 추월당할 것인가──」',
+        '중계 「토카이 테이오, 계속 가속합니다! 키타산 블랙은 선두를 지킬 것인가, 테이오에게 추월당할 것인가──」',
       );
-      await era.printAndWait('관중「와아아아아아아아아아아아!」');
+      await era.printAndWait('관중 「와아아아아아아아아아아아!」');
       await kita.say_and_wait(
         '놀랐어요……! 테이오가 그렇게 끈질기게 따라붙을 줄은……',
       );
@@ -6120,7 +6120,7 @@ module.exports = {
       await daiya.say_and_wait('──읏! 네!!');
       await kita.say_and_wait('네!! 진심으로 맞서겠어요!');
       await daiya.say_and_wait(
-        `언제 어떤 때라도 도전하는 마음을 잊지 않는다……그것이 테이오${teio.sex}의 『일류 ${daiya.uma_sex_title}』로서의 방식……`,
+        `언제 어떤 때라도 도전하는 마음을 잊지 않는다…… 그것이 테이오${teio.sex}의 『일류 ${daiya.uma_sex_title}』로서의 방식……`,
       );
       await daiya.say_and_wait(
         '맥퀸은 도전을 받는 쪽, 테이오는 도전하는 쪽.',
@@ -6128,7 +6128,7 @@ module.exports = {
       );
       await daiya.say_and_wait('그렇다면 나는……', true);
       await daiya.say_and_wait(
-        '사토노 가문의 첫 G1 승리……징크스에 도전하고, 깨뜨리고, 이긴다.',
+        '사토노 가문의 첫 G1 승리…… 징크스에 도전하고, 깨뜨리고, 이긴다.',
         true,
       );
       await daiya.say_and_wait(
@@ -6147,7 +6147,7 @@ module.exports = {
         '네. 저는 지금까지도 여러 가지에 도전해 왔어요. 사토노 가문을 가로막는 징크스에도, 키타짱에게도요.',
       );
       await daiya.say_and_wait(
-        `그러니 『일류 ${daiya.uma_sex_title}』인 저도 계속 도전하는 것이 가장 어울리는 방식 아닐까요.`,
+        `그러니 『일류 ${daiya.uma_sex_title}』인 저에게도 계속 도전하는 것이 가장 어울리는 방식 아닐까요?`,
       );
       await daiya.say_and_wait(
         '맥퀸과 테이오에게 도전해서 사토노 가문 역사에 새 장을 열었던 것처럼요.',
@@ -6159,7 +6159,7 @@ module.exports = {
         '그렇게 생각하니 다시 깨달았어요. 해외 레이스에 도전하고 싶다고요.',
       );
       await daiya.say_and_wait(
-        '여러분께 가능성을 느끼게 해 드리기 위해서만이 아니라 저 자신의 소망으로요.',
+        '여러분께 가능성을 느끼게 해 드리기 위해서만이 아니라 저 자신이 바라기 때문이에요.',
       );
       await daiya.say_and_wait(
         `역사 깊은 해외 레이스에서 이겨 사토노의 이름을 ${daiya.uma_sex_title}계의 역사에 새기고 싶어요.`,
@@ -6170,11 +6170,11 @@ module.exports = {
       await daiya.say_and_wait(
         `그것이 제가 할 수 있는 ${daiya.uma_sex_title}계에 대한 기여라고 생각해요.`,
       );
-      era.printButton('「너만의 답을 찾았구나」', 1);
+      era.printButton('「너만의 답을 찾았구나.」', 1);
       await era.input();
       await daiya.say_and_wait('네!');
       await daiya.say_and_wait(
-        `『일류 ${daiya.uma_sex_title}』로서 사토노 다이아몬드의 모습……목표는 정해졌어요.`,
+        `『일류 ${daiya.uma_sex_title}』로서 사토노 다이아몬드의 모습…… 목표는 정해졌어요.`,
       );
       await daiya.say_and_wait(
         `『아리마 기념』에서 이겨 『일류 ${daiya.uma_sex_title}』의 반열에 들겠어요!`,
@@ -6239,7 +6239,7 @@ module.exports = {
         '아, 선물은 있어요! 산타클로스가 밤에 양말에 넣어 주세요!',
       );
       await daiya.say_and_wait(
-        '다만 영화 같은 가족 크리스마스 파티는 경험이 없어서……사실 동경하고 있었어요.',
+        '다만 영화 같은 가족 크리스마스 파티는 경험이 없어서…… 사실 동경하고 있었어요.',
       );
       await pama.say_and_wait('그럼 하자!');
       await daiya.say_and_wait('뭐!?');
@@ -6265,7 +6265,7 @@ module.exports = {
       await dictus.say_and_wait('그럼 바로 장식부터 하죠.');
       await nature.say_and_wait('후우──대충 이 정도면 되겠네.');
       await daiya.say_and_wait(
-        '멋져……정말 멋져요! 전부 손수 만든 장식인데 이렇게 예쁘다니……!',
+        '멋져…… 정말 멋져요! 전부 손수 만든 장식인데 이렇게 예쁘다니……!',
       );
       await tannhauser.say_and_wait('다녀왔어~! 요리랑 과자 사 왔어──!');
       await helios.say_and_wait('프라이드치킨에 피자☆ 예이!');
@@ -6282,11 +6282,11 @@ module.exports = {
       );
       await pama.say_and_wait('자, 자, 옛날이야기는 나중에! 식기 전에 먹자!');
       await daiya.say_and_wait(
-        '피자, 샐러드, 프라이드치킨……마른오징어, 가오리 지느러미, 다시마 초절임……?',
+        '피자, 샐러드, 프라이드치킨…… 마른오징어, 가오리 지느러미, 다시마 초절임……?',
       );
       await daiya.say_and_wait('그렇군요. 이게 보통 가정의 파티 메뉴로군요.');
       await kita.say_and_wait(
-        '아닌데……맞는 것 같기도 해. 우리 집 크리스마스에도 안주가 나오니까 부정할 수가 없어……!',
+        '아닌데…… 맞는 것 같기도 해. 우리 집 크리스마스에도 안주가 나오니까 부정할 수가 없어……!',
       );
       await tannhauser.say_and_wait(
         '아~, 상점가 분들이 잔뜩 주셔서~ 옛날 과자랑 안주가 섞여 있어. 정말 고맙지~',
@@ -6302,7 +6302,7 @@ module.exports = {
       );
       await nature.say_and_wait('……터보, 포기해. 표정에 너무 드러나……');
       await era.printAndWait(
-        `그렇게 즐거운 시간을 보내고……크리스마스 파티는 막을 내렸다.`,
+        `그렇게 즐거운 시간을 보내고…… 크리스마스 파티는 막을 내렸다.`,
       );
       era.drawLine();
       await era.printAndWait(
@@ -6317,7 +6317,7 @@ module.exports = {
       await kita.say_and_wait(
         '아, 그러자! 틀림없이 좋아할 거야! 내년에도 같이 크리스마스 파티 하자!',
       );
-      await daiya.say_and_wait('내년에도……트레이너님이 와 주실 건가요?');
+      await daiya.say_and_wait('내년에도…… 트레이너님이 와 주실 건가요?');
       era.printButton('「좋아!」', 1);
       await era.input();
       await daiya.say_and_wait('정말인가요? 그럼 약속이에요?');
@@ -6328,9 +6328,9 @@ module.exports = {
         '아직 아무 일정도 없던 내년에 사토노 다이아몬드와 함께 보낼 크리스마스 약속이 생겼다.',
       );
       await dictus.say_and_wait('그럼 슬슬 케이크를 먹죠──');
-      await tannhauser.say_and_wait('앗!? 케이크……사는 걸 잊었어!!');
+      await tannhauser.say_and_wait('앗!? 케이크…… 사는 걸 잊었어!!');
       await era.printAndWait(
-        `${you.name}와(과) 사토노 다이아몬드는 케이크를 사러 나갔다. 하지만 근처 가게는 매진이라 조금 더 멀리 가게 되었다.`,
+        `${you.name}과(와) 사토노 다이아몬드는 케이크를 사러 나갔다. 하지만 근처 가게는 매진이라 조금 더 멀리 가게 되었다.`,
       );
       await daiya.say_and_wait('조명이 예쁘네요.');
       await daiya.say_and_wait(
@@ -6343,13 +6343,13 @@ module.exports = {
         '함께 자선 활동을 하며 배운 것도 많고 저도 자부심을 갖고 돕고 있어요.',
       );
       await daiya.say_and_wait('다만 이런 시간도 나쁘지 않겠다고……');
-      era.printButton('「천천히 걷자」', 1);
+      era.printButton('「천천히 걷자.」', 1);
       await era.input();
-      await daiya.say_and_wait('하지만……여러분이 케이크를 기다리실 텐데……');
-      era.printButton('「과자는 아직 잔뜩 있어. 괜찮아」', 1);
+      await daiya.say_and_wait('하지만…… 여러분이 케이크를 기다리실 텐데……');
+      era.printButton('「과자는 아직 잔뜩 있어. 괜찮아.」', 1);
       await era.input();
       await daiya.say_and_wait(
-        '후후후, 그렇네요. 과자가 다 먹지 못할 만큼 있었죠!',
+        '후후후, 그렇네요. 과자가 다 못 먹을 만큼 있었죠!',
       );
       await daiya.say_and_wait('……그럼 천천히 걸어요.');
       await daiya.say_and_wait(
@@ -6357,7 +6357,7 @@ module.exports = {
       );
       await daiya.say_and_wait('……옛날 해외여행 때 걸었던 거리가 생각나요.');
       await daiya.say_and_wait(
-        '……저도……트레이너님과 외국 거리를 걸어 보고 싶어요.',
+        '……저도…… 트레이너님과 외국 거리를 걸어 보고 싶어요.',
       );
       await daiya.say_and_wait('트레이너님은 어떠세요?');
       await daiya.say_and_wait(
@@ -6367,7 +6367,7 @@ module.exports = {
         '그러니 이번에는 트레이너님의 마음을 제대로 여쭤보고 싶어요.',
       );
       await daiya.say_and_wait('저와 함께 해외에 가 주실래요?');
-      era.printButton('「네가 원한다면 함께 갈게」', 1);
+      era.printButton('「네가 원한다면 함께 갈게.」', 1);
       await era.input();
       await daiya.say_and_wait('……에헤헤.');
       await daiya.say_and_wait(
@@ -6375,7 +6375,7 @@ module.exports = {
       );
       await daiya.say_and_wait('그때는 함께 외국 거리를 걸어요!');
       await era.printAndWait(
-        `이국적인 정취가 감도는 크리스마스 거리를 바라보며 ${you.name}와(과) 사토노 다이아몬드는 머지않은 미래를 약속했다.`,
+        `이국적인 정취가 감도는 크리스마스 거리를 바라보며 ${you.name}과(와) 사토노 다이아몬드는 머지않은 미래를 약속했다.`,
       );
     };
     f.title = title;
@@ -6431,26 +6431,26 @@ module.exports = {
      */
     const f = async (daiya, teio, mcqueen, kita) => {
       await era.printAndWait(
-        '중계「제2코너 내리막을 지나 건너편 직선! 선두 집단의 페이스는 어떨까요!」',
+        '중계 「제2코너 내리막을 지나 건너편 직선! 선두 집단의 페이스는 어떨까요!」',
       );
       await era.printAndWait(
-        '안경 쓴 남성「나카야마 잔디 2500미터는 코너 6개를 돌아. 높낮이 차도 커서 끈기가 중요하지. 스피드만으로 밀어붙이기는 어려워.」',
+        '안경 쓴 남성 「나카야마 잔디 2500미터는 코너 6개를 돌아. 높낮이 차도 커서 끈기가 중요하지. 스피드만으로 밀어붙이기는 어려워.」',
       );
-      await era.printAndWait('후드티 입은 남성「갑자기 왜 그래?」');
+      await era.printAndWait('후드티 입은 남성 「갑자기 왜 그래?」');
       await era.printAndWait(
-        '안경 쓴 남성「결승점 앞에는 가파른 『심장 파열 언덕』이 기다려. 결과는 마지막까지 몰라.」',
+        '안경 쓴 남성 「결승점 앞에는 가파른 『심장 파열 언덕』이 기다려. 결과는 마지막까지 몰라.」',
       );
       await era.printAndWait('모두 숨을 죽이고 레이스를 지켜본다. 그리고──');
       await daiya.say_and_wait('하아아아아아아아아아아아아!!');
       await era.printAndWait(
-        '중계「빠져나왔다! 사토노 다이아몬드! 선두는 사토노 다이아몬드!!」',
+        '중계 「빠져나왔다! 사토노 다이아몬드! 선두는 사토노 다이아몬드!!」',
       );
       await kita.say_and_wait('으아아아아아아!!');
-      await era.printAndWait('맥퀸 & 테이오「하아아아아아아아!」');
+      await era.printAndWait('맥퀸 & 테이오 「하아아아아아아아!」');
       await era.printAndWait(
-        '중계「사토노 다이아몬드, 마지막 언덕으로! 절친도 동경하던 상대도 단숨에 앞질러──」',
+        '중계 「사토노 다이아몬드, 마지막 언덕으로! 절친도 동경하던 상대도 단숨에 앞질러──」',
       );
-      await era.printAndWait('중계「사토노 다이아몬드, 1착으로 골인!!」');
+      await era.printAndWait('중계 「사토노 다이아몬드, 1착으로 골인!!」');
       await era.printAndWait('(와아아아아아아아아아아아!)');
       await daiya.say_and_wait('하아, 하아, 하아……');
       await mcqueen.say_and_wait('축하해요, 다이아. 당신의 승리예요.');
@@ -6463,14 +6463,14 @@ module.exports = {
       );
       await daiya.say_and_wait('감사합니다……!');
       await teio.say_and_wait(
-        '으음~, 다이아도 키타짱도 벌써 이렇게 강해졌다니……내 상상을 뛰어넘었어.',
+        '으음~, 다이아도 키타짱도 벌써 이렇게 강해졌다니…… 내 상상을 뛰어넘었어.',
       );
       await kita.say_and_wait('테이오……! 기, 기뻐요~~!!');
       await teio.say_and_wait(
         '이봐, 이봐, 이걸로 끝이 아니잖아. 오히려 이제부터지!',
       );
       await teio.say_and_wait(
-        '발을 멈추면 금방 추월당해. 나는 또 둘에게 도전할 거야.',
+        '걸음을 멈추면 금방 추월당해. 나는 또 둘에게 도전할 거야.',
       );
       await teio.say_and_wait(
         `게다가 너희 같은 대단한 ${daiya.uma_sex_title}는 앞으로도 계속 나타날 테고.`,
@@ -6504,9 +6504,9 @@ module.exports = {
       );
       await daiya.say_and_wait('네!');
       await daiya.say_and_wait('여러분, 응원해 주셔서 감사합니다!');
-      await era.printAndWait('관중 A「다이아────!! 축하해────!」');
+      await era.printAndWait('관중 A 「다이아────!! 축하해────!」');
       await era.printAndWait(
-        `관중 B「${daiya.uma_sex_title}계의 보물!! 다이아의 빛보다 눈부신 건 없어!」`,
+        `관중 B 「${daiya.uma_sex_title}계의 보물!! 다이아의 빛보다 눈부신 건 없어!」`,
       );
       await daiya.say_and_wait('후후후, 이 빛을 오래도록 지키고 싶어요.');
       await daiya.say_and_wait(
@@ -6530,12 +6530,12 @@ module.exports = {
       );
       await kita.say_and_wait('지금 내 목표는 우선 그거야!');
       await daiya.say_and_wait('후후후! 안 질 거야!');
-      await era.printAndWait('관중 C「우오오오오! 좋아, 너희들!! 기대할게!」');
+      await era.printAndWait('관중 C 「우오오오오! 좋아, 너희들!! 기대할게!」');
       await era.printAndWait(
-        '안경 쓴 남성「약속할게. 사토노의, 그리고 두 사람의 역사를 계속 지켜보겠어!!」',
+        '안경 쓴 남성 「약속할게. 사토노의, 그리고 두 사람의 역사를 계속 지켜보겠어!!」',
       );
       await era.printAndWait(
-        '후드티 입은 남성「우리 마음은 언제까지나 너희와 함께야! 응원할게! 쭉!!」',
+        '후드티 입은 남성 「우리 마음은 언제까지나 너희와 함께야! 응원할게! 쭉!!」',
       );
       await daiya.say_and_wait('감사합니다! 이렇게 따뜻한 응원을 받아서……');
       await daiya.say_and_wait('에헤헤, 다이아는 행복한 사람이에요!');
@@ -6561,23 +6561,23 @@ module.exports = {
     const f = async (daiya, mcqueen, tenn_sho, japa_cup, arim_kin) => {
       await era.printAndWait([
         tenn_sho,
-        '、',
+        ', ',
         japa_cup,
         ', 그리고 ',
         arim_kin,
-        '。',
+        '.',
       ]);
       await era.printAndWait(
         '사토노 다이아몬드는 모두 우승하며 『가을 시니어 3관』을 달성했다!',
       );
       await daiya.say_and_wait('──전송. 이걸로 답장은 전부 끝났네요.');
-      era.printButton('「성대한 행사가 되겠네」', 1);
+      era.printButton('「성대한 행사가 되겠네.」', 1);
       await era.input();
       await era.printAndWait(
         '사토노 그룹 관련 시설에서 사토노 다이아몬드의 『가을 시니어 3관 기념 행사』가 열린다고 한다.',
       );
       await daiya.say_and_wait(
-        '네. 제 『가을 시니어 3관』 기념 행사……최선을 다해 돕겠다고 방금 답장했어요.',
+        '네. 제 『가을 시니어 3관』 기념 행사…… 최선을 다해 돕겠다고 방금 답장했어요.',
       );
       await daiya.say_and_wait(
         '오늘부터 카페에 『가을 시니어 3관 선데』가 나올 거예요. 인사드리러 가려고요.',
@@ -6588,7 +6588,7 @@ module.exports = {
       await daiya.say_and_wait('에헤헤, 잘됐어요♪ 그럼 가요.');
       await mcqueen.say_and_wait('어머, 다이아. 마침 찾고 있었어요.');
       await daiya.say_and_wait('맥퀸! 저에게 볼일이 있으신가요?');
-      await mcqueen.say_and_wait('네, 축하해 드리려고요……바쁜 중이었나요?');
+      await mcqueen.say_and_wait('네, 축하해 드리려고요…… 바쁜 중이었나요?');
       await daiya.say_and_wait(
         '사실 지금 사토노 그룹 카페에 가려던 참이에요……',
       );
@@ -6603,7 +6603,7 @@ module.exports = {
         '한정……! 그, 그렇군요. 모처럼이니 함께 갈게요.',
       );
       await mcqueen.say_and_wait(
-        '다시 한번……두 분의 『가을 시니어 3관』 달성을 축하드려요.',
+        '다시 한번…… 두 분의 『가을 시니어 3관』 달성을 축하드려요.',
       );
       await mcqueen.say_and_wait(
         '저와 테이오, 그리고 키타산을 꺾고 얻은 『가을 시니어 3관』이죠.',
@@ -6612,7 +6612,7 @@ module.exports = {
         `다이아 개인의 공적일 뿐만 아니라 사토노 가문이 ${daiya.uma_sex_title}계에 남긴 빛나는 성적이기도 해요.`,
       );
       await mcqueen.say_and_wait('……정말 잘했어요, 다이아.');
-      await daiya.say_and_wait('……! 아……감사합니다!!');
+      await daiya.say_and_wait('……! 아…… 감사합니다!!');
       await mcqueen.say_and_wait(
         '후후, 선배인 척 축하하고 있지만 입장은 같아요.',
       );
@@ -6628,8 +6628,8 @@ module.exports = {
       await mcqueen.say_and_wait(
         '네. 그래도 고민이 생기면 상담해 주세요. 같은 학원에 다니는 사이잖아요.',
       );
-      await daiya.say_and_wait('와……맥퀸……!');
-      await daiya.say_and_wait('정말 멋진 분이에요……저의 영원한 동경……!');
+      await daiya.say_and_wait('와…… 맥퀸……!');
+      await daiya.say_and_wait('정말 멋진 분이에요…… 저의 영원한 동경……!');
       await mcqueen.say_and_wait(
         '후후, 영광이네요. 하지만 이제 다이아를 동경하는 사람도 나타날 거예요.',
       );
@@ -6640,7 +6640,7 @@ module.exports = {
       await mcqueen.say_and_wait('괜찮을 거예요. 그렇죠, 트레이너?');
       era.printButton('「응! 괜찮을 거야!」', 1);
       await era.input();
-      await daiya.say_and_wait('두 분 다……감사해요! 에헤헤, 기뻐요……♪');
+      await daiya.say_and_wait('두 분 다…… 감사해요! 에헤헤, 기뻐요……♪');
       await daiya.say_and_wait(
         '아, 선데가 녹기 시작했어요! 먹어요! 맥퀸도 편하게 드세요.',
       );
@@ -6667,10 +6667,10 @@ module.exports = {
       await mcqueen.say_and_wait('어머, 감사해요. 그럼 마실게요.');
       await mcqueen.say_and_wait('……딸꾹!');
       await mcqueen.say_and_wait(
-        '멈추지 않네요……조금 뒤 모임에서 인사해야 하는데.',
+        '멈추지 않네요…… 조금 뒤 모임에서 인사해야 하는데.',
       );
       await mcqueen.say_and_wait(
-        '지금 이 순간에도 시간은 흘러가고 있어요……어떻게 해야 할까요……!',
+        '지금 이 순간에도 시간은 흘러가고 있어요…… 어떻게 해야 할까요……!',
       );
       await daiya.say_and_wait('맥퀸……');
       await daiya.say_and_wait(
@@ -6680,16 +6680,16 @@ module.exports = {
       await daiya.say_and_wait('학원 방송으로 옥상 출입을 금지해 주세요!');
       era.printButton('「뭘 하려고?」', 1);
       await era.input();
-      await daiya.say_and_wait('지금은 설명할 시간이……부탁드려요!');
+      await daiya.say_and_wait('지금은 설명할 시간이…… 부탁드려요!');
       await mcqueen.say_and_wait('어, 어쩐지 일이 커지는데요……');
       await era.printAndWait(
-        `${daiya.sex}의 부탁에 ${you.name}은(는) 어쩔 수 없이 방송했다.${daiya.sex}는 이제 무엇을 하려는 걸까……?`,
+        `${daiya.sex}의 부탁에 ${you.name}은(는) 어쩔 수 없이 방송했다. ${daiya.sex}는 이제 무엇을 하려는 걸까……?`,
       );
       await mcqueen.say_and_wait('…………딸꾹. 모임 시간이 얼마 안 남았어요……');
-      await daiya.say_and_wait('조금만 더……아, 왔어요!');
+      await daiya.say_and_wait('조금만 더…… 아, 왔어요!');
       await you.say_and_wait('프로펠러 소리……!', true);
       await era.printAndWait(
-        '의료진「HQ! HQ! 트레센 학원에 도착! 지금부터 아가씨의 학우를 지원한다!」',
+        '의료진 「HQ! HQ! 트레센 학원에 도착! 지금부터 아가씨의 학우를 지원한다!」',
       );
       await mcqueen.say_and_wait('헤, 헬리콥터!? 이게 대체……!?');
       await daiya.say_and_wait('그룹의 전용 의료팀을 불렀어요.');
@@ -6707,13 +6707,13 @@ module.exports = {
       );
       await daiya.say_and_wait('어? 정말인가요? 그럼 딸꾹질을 이긴 거네요!');
       await mcqueen.say_and_wait(
-        '정말, 이렇게 놀라게 하지 마세요. 그래도……고마워요, 다이아.',
+        '정말, 이렇게 놀라게 하지 마세요. 그래도…… 고마워요, 다이아.',
       );
       await daiya.say_and_wait(
-        '아니에요, 이 정도는 아무것도 아닌걸요! 조금이라도 도움이 됐다면……기뻐요!',
+        '아니에요, 이 정도는 아무것도 아닌걸요! 조금이라도 도움이 됐다면…… 기뻐요!',
       );
-      era.printButton('「이만큼이나 동원하다니, 수고했어!」(스태미나+20)', 1);
-      era.printButton('「상상을 뛰어넘는 규모네……」(파워+20)', 2);
+      era.printButton('「이만큼이나 동원하다니, 수고했어!」 (스태미나 +20)', 1);
+      era.printButton('「상상을 뛰어넘는 규모네……」 (파워 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await daiya.say_and_wait('에헤헤, 맥퀸을 돕는 일이니까요♪');
@@ -6721,7 +6721,7 @@ module.exports = {
           '또 무슨 일이 있으면 말씀해 주세요! 반드시 최선을 다해 도울게요!',
         );
         await mcqueen.say_and_wait(
-          '네, 네……그때는 상식적인 범위에서 부탁드려요……',
+          '네, 네…… 그때는 상식적인 범위에서 부탁드려요……',
         );
         await daiya.say_and_wait('후후후, 네!');
         await era.printAndWait(
@@ -6755,7 +6755,7 @@ module.exports = {
      */
     const f = async (daiya, tachyon, sweepy, kita, you) => {
       await era.printAndWait(
-        `그 일은 ${you.name}와(과) 사토노 다이아몬드가 복도를 걷던 중 일어났다.`,
+        `그 일은 ${you.name}과(와) 사토노 다이아몬드가 복도를 걷던 중 일어났다.`,
       );
       await sweepy.print_and_wait('???「찾았다──────!!!!」');
       await sweepy.say_and_wait(
@@ -6770,7 +6770,7 @@ module.exports = {
         '헤헤♪ 스윕이 만든 단체인데 『마법소녀☆Sweepy5』라고 해.',
       );
       await kita.say_and_wait('나도 방금 마법소녀 키타산으로 임명됐어!');
-      await kita.say_and_wait('그래서 다이아도 같이 들어와 줬으면 해서……어때?');
+      await kita.say_and_wait('그래서 다이아도 같이 들어와 줬으면 해서…… 어때?');
       await sweepy.say_and_wait(
         '단원은 나──천재 마법소녀 스위피랑 마법소녀 키타산, 그리고 타키온 박사야.',
       );
@@ -6787,7 +6787,7 @@ module.exports = {
         '적은 언제 나타날지 모르니까. 제대로 연습해야지!',
       );
       await daiya.say_and_wait(
-        `트레이너님을 쓰러뜨린다고요……? 그런데 어떻게 ${you.sex}을(를) 쓰러뜨리면 되나요?`,
+        `트레이너님을 쓰러뜨린다고요……? 그런데 어떻게 ${you.sex}를 쓰러뜨리면 되나요?`,
       );
       await you.say_and_wait('쓰러뜨리는 건 이미 정해진 건가……', true);
       await sweepy.say_and_wait(
@@ -6805,8 +6805,8 @@ module.exports = {
       await daiya.say_and_wait(
         '후후, 둘 다 재미있겠어요♪ 그런데 트레이너님은 누구에게 배우면 좋을 것 같으세요?',
       );
-      era.printButton('「스윕 토쇼에게 배우자」(스피드+20)', 1);
-      era.printButton('「아그네스 타키온의 도움을 받자」(파워+20)', 2);
+      era.printButton('「스윕 토쇼에게 배우자.」 (스피드 +20)', 1);
+      era.printButton('「아그네스 타키온의 도움을 받자.」 (파워 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await sweepy.say_and_wait(
@@ -6817,7 +6817,7 @@ module.exports = {
           '……아무 일도 일어나지 않았다. 하지만 자세만큼은 당당해서 자칭 마법소녀답다.',
         );
         await sweepy.say_and_wait('후후, 알겠어? 너다운 주문을 외우면 돼♪');
-        await daiya.say_and_wait('그렇군요. 저다운 주문……좋아요, 해 볼게요!');
+        await daiya.say_and_wait('그렇군요. 저다운 주문…… 좋아요, 해 볼게요!');
         await kita.say_and_wait('힘내! 다이아라면 괜찮아!');
         await daiya.say_and_wait(
           '보아라, 눈부신 다이아몬드의 반짝임을! 고요한 빛──!',
@@ -6840,9 +6840,9 @@ module.exports = {
           '후후후, 좋은 선택이야! 그럼 다이아, 우선 약물로 몸을 강화하겠네. 단숨에 마시게.',
         );
         await era.printAndWait(
-          `아그네스 타키온이 수상한 빛깔의 약을 꺼내려 했다……${you.name}은(는) 위험을 느낀다.`,
+          `아그네스 타키온이 수상한 빛깔의 약을 꺼내려 했다…… ${you.name}은(는) 위험을 느꼈다.`,
         );
-        await kita.say_and_wait('색깔이 굉장하네……다이아, 정말 마실 거야?');
+        await kita.say_and_wait('색깔이 굉장하네…… 다이아, 정말 마실 거야?');
         era.printButton('「그만두자!」', 1);
         await era.input();
         await tachyon.say_and_wait('에이! 뭐야, 이제 와서 그만두겠다고?');
@@ -6858,15 +6858,15 @@ module.exports = {
         await tachyon.say_and_wait(
           '오──! 혈액 순환을 촉진하려고 캡사이신을 듬뿍 넣었는데 아무렇지도 않은 건가!',
         );
-        await tachyon.say_and_wait('후후후……제법이군! 좋아, 그대로 달려 보게!');
+        await tachyon.say_and_wait('후후후…… 제법이군! 좋아, 그대로 달려 보게!');
         await you.say_and_wait('캡사이신……!?', true);
         await sweepy.say_and_wait(
           '너, 너 제법이네……! 마법소녀 다이아! 오늘부터 정식으로 『마법소녀☆Sweepy5』의 단원이야♪',
         );
         await era.printAndWait(
-          `스윕 토쇼 일행이 떠난 뒤 ${you.name}은(는) 사토노 다이아몬드에게 다가갔다……아까 캡사이신을 마신 게 마음에 걸린다.`,
+          `스윕 토쇼 일행이 떠난 뒤 ${you.name}은(는) 사토노 다이아몬드에게 다가갔다…… 아까 캡사이신을 마신 게 마음에 걸렸다.`,
         );
-        era.printButton('「방금……맵지 않았어?」', 1);
+        era.printButton('「방금…… 맵지 않았어?」', 1);
         await era.input();
         await daiya.say_and_wait('……눈치채셨나요?');
         await daiya.say_and_wait(
@@ -6894,11 +6894,11 @@ module.exports = {
       );
       await gs.say_and_wait('대충 이 정도 크기인가? 아니, 더 들어가려면……');
       await daiya.say_and_wait('골시, 뭔가 생각 중인가요?');
-      await gs.say_and_wait('다이아냐……좋아, 알려 주지. 따라와.');
+      await gs.say_and_wait('다이아냐…… 좋아, 알려 주지. 따라와.');
       await gs.say_and_wait('야, 이 수영장 보고 무슨 생각 드냐?');
-      await daiya.say_and_wait('글쎄요……평소 훈련에서 자주 쓰죠?');
+      await daiya.say_and_wait('글쎄요…… 평소 훈련에서 자주 쓰죠?');
       await daiya.say_and_wait(
-        '또……음, 조금 더 넓으면 더 재미있겠어요. 해외에서 큰 수영장에 갔을 때 정말 즐거웠거든요!',
+        '또…… 음, 조금 더 넓으면 더 재미있겠어요. 해외에서 큰 수영장에 갔을 때 정말 즐거웠거든요!',
       );
       await gs.say_and_wait('좋은 말 하는데, 나이스! 564점 주마!');
       await daiya.say_and_wait('와아, 감사해요♪');
@@ -6907,9 +6907,9 @@ module.exports = {
         `${daiya.uma_sex_title}의 가능성을 난 더 믿거든! 넓은 수영장의 해방감이 ${daiya.uma_sex_title}에게 어떤 신세계를 열어 줄지 내 눈으로 보고 싶단 말이야!`,
       );
       await daiya.say_and_wait(
-        `어머! 골시는 그렇게나……${daiya.uma_sex_title}를 생각하고 계셨군요!`,
+        `어머! 골시는 그렇게나…… ${daiya.uma_sex_title}를 생각하고 계셨군요!`,
       );
-      await gs.say_and_wait('그래. 그래서 정했다……나는──');
+      await gs.say_and_wait('그래. 그래서 정했다…… 나는──');
       await gs.say_and_wait('이 수영장을 오호츠크해로 만들겠어!');
       await daiya.say_and_wait(
         '오호츠크해! ……오호츠크해요? 그러니까 무슨 뜻인가요?',
@@ -6927,11 +6927,11 @@ module.exports = {
         '그래도 현실적인 문제만 빼면 정말 멋진 이상이라고 생각해요.',
       );
       await daiya.say_and_wait('……그리고 듣다 보니 정말 기대돼요!');
-      await gs.say_and_wait('다이아……이 녀석!');
+      await gs.say_and_wait('다이아…… 이 녀석!');
       await daiya.say_and_wait('수영장을 넓히는 데도 찬성이에요.');
       await daiya.say_and_wait('해 봐요, 골시! 최선을 다해 도울게요!');
-      era.printButton('「지금 넓이로 충분해」(파워+20)', 1);
-      era.printButton('「학원에 이 제안을 전하자!」(지능+20)', 2);
+      era.printButton('「지금 넓이로 충분해.」 (파워 +20)', 1);
+      era.printButton('「학원에 이 제안을 전하자!」 (지능 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await daiya.say_and_wait(
@@ -6941,16 +6941,16 @@ module.exports = {
           '소중한 시간을 전부 양동이로 물 나르는 데 쓰게 될 텐데?',
         );
         await daiya.say_and_wait('앗……!? 그, 그건……');
-        await gs.say_and_wait('곤란하네……그렇게까지 말하면 강요할 수는 없지.');
+        await gs.say_and_wait('곤란하네…… 그렇게까지 말하면 강요할 수는 없지.');
         await gs.say_and_wait(
-          '하지만 언젠가는 할 거야. 실행 전에 만반의 준비를 하고 송곳니를 갈아 두겠어……무 강판으로 말이지.',
+          '하지만 언젠가는 할 거야. 실행 전에 만반의 준비를 하고 송곳니를 갈아 두겠어…… 무 강판으로 말이지.',
         );
         await daiya.say_and_wait('……네!');
         await era.printAndWait(
-          `두 사람은 힘차게 악수하며 약속했다. 실행하는 날이 온다면……그때는 ${you.name}이(가) 말리자.`,
+          `두 사람은 힘차게 악수하며 약속했다. 실행하는 날이 온다면…… 그때는 ${you.name}이(가) 말리자.`,
         );
       } else {
-        await daiya.say_and_wait('그렇다면……기획서를 만들어야겠네요?');
+        await daiya.say_and_wait('그렇다면…… 기획서를 만들어야겠네요?');
         await gs.say_and_wait(
           '좋은 생각이야! 구체적으로 쓰면 설득력이 생기지!',
         );
@@ -6986,16 +6986,16 @@ module.exports = {
       await mcqueen.say_and_wait('시선이 느껴지는데? ……아니, 기분 탓이겠죠.');
       await daiya.say_and_wait('……후우. 위험했어요……!');
       await daiya.say_and_wait(
-        '맥퀸의 강함의 비밀을 알아낼 때까지 관찰하는 걸 들켜서는 안 돼요.',
+        '맥퀸이 강한 비결을 알아낼 때까지 관찰하는 걸 들켜서는 안 돼요.',
       );
-      await you.say_and_wait(`차라리 직접 ${mcqueen.sex}에게 물어보면 되잖아`);
+      await you.say_and_wait(`차라리 직접 ${mcqueen.sex}에게 물어보면 되잖아.`);
       await daiya.say_and_wait('안 돼요! 직접 조사하는 게 더 재미있는걸요!');
       await daiya.say_and_wait('……어머? 맥퀸이 없어요!?');
-      await daiya.say_and_wait('잠깐 한눈팔았을 뿐인데……어디로 가셨을까요?');
-      era.printButton('「연습실에서 노래 연습을 할지도 몰라」(근성+20)', 1);
-      era.printButton('「식당에서 머리를 싸매고 있을 것 같아」(지능+20)', 2);
+      await daiya.say_and_wait('잠깐 한눈팔았을 뿐인데…… 어디로 가셨을까요?');
+      era.printButton('「연습실에서 노래 연습을 할지도 몰라.」 (근성 +20)', 1);
+      era.printButton('「식당에서 머리를 싸매고 있을 것 같아.」 (지능 +20)', 2);
       era.printButton(
-        `「${mcqueen.sex}라면 분명 훈련 코스에서 단련하고 있을 거야!」(파워+20)`,
+        `「${mcqueen.sex}라면 분명 훈련 코스에서 단련하고 있을 거야!」 (파워 +20)`,
         3,
       );
       const ret = await era.input();
@@ -7004,11 +7004,11 @@ module.exports = {
           await daiya.say_and_wait('알겠어요. 가 봐요!');
           await daiya.say_and_wait('연습실이 여러 개네요. 어디부터 찾으면──');
           await mcqueen.print_and_wait('???「우오~, 불타올라라~!」');
-          await daiya.say_and_wait('노랫소리……이 방에서 들려요.');
+          await daiya.say_and_wait('노랫소리…… 이 방에서 들려요.');
           await mcqueen.say_and_wait('꿈을 싣고, 아아──우리의~ 승리……♪');
-          await daiya.say_and_wait('와아~! 맑고 힘찬 목소리……멋져요♪');
+          await daiya.say_and_wait('와아~! 맑고 힘찬 목소리…… 멋져요♪');
           await mcqueen.say_and_wait('다이아!? 네? 저기, 어떻게 여기에……?');
-          await mcqueen.say_and_wait('설마……방음이 된다고 너무 큰 소리로……!');
+          await mcqueen.say_and_wait('설마…… 방음이 된다고 너무 큰 소리로……!');
           await daiya.say_and_wait('후후, 덕분에 찾았어요! 맥퀸의 비밀을요.');
           await mcqueen.say_and_wait(
             '비, 비밀!? 무슨 뜻인지 모르겠네요. 그, 그냥 기분 전환으로 노래했을 뿐인데……!',
@@ -7018,30 +7018,30 @@ module.exports = {
             '노래로 자신을 북돋워 능력을 끌어올리는 거군요!',
           );
           await mcqueen.say_and_wait(
-            '……네? 아, 아아……그런 뜻이었군요? 오, 오호호호~',
+            '……네? 아, 아아…… 그런 뜻이었군요? 오, 오호호호~',
           );
           await daiya.say_and_wait(
-            '저기……저에게도 가르쳐 주세요. 방금 들으니 가슴이 뛰던 그 노래를……!',
+            '저기…… 저에게도 가르쳐 주세요. 방금 듣고 가슴이 뛰었던 그 노래를……!',
           );
           await mcqueen.say_and_wait(
-            '가슴이 뛴다고요……? 그러니까……마음에 드셨나요?',
+            '가슴이 뛴다고요……? 그러니까…… 마음에 드셨나요?',
           );
           await daiya.say_and_wait(
             '네. 선율이 정말 열정적이라 어느새 즐거워져서──',
           );
           await daiya.say_and_wait('이 노래에 담긴 마음을 더 알고 싶어요!');
-          await mcqueen.say_and_wait('……！');
+          await mcqueen.say_and_wait('……!');
           await mcqueen.say_and_wait(
             '……먼저 두 가지 말할게요. 하나, 오늘 일은 아무에게도 말하지 말 것.',
           );
           await mcqueen.say_and_wait('둘──제 지도는 만만하지 않을 거예요.');
           await daiya.say_and_wait('……! 알겠어요!');
           await mcqueen.say_and_wait(
-            '자, 가슴을 펴고! 하늘에 울려 퍼질 목소리로……셋, 시작.',
+            '자, 가슴을 펴고! 하늘에 울려 퍼질 목소리로…… 셋, 시작.',
           );
           await daiya.say_and_wait('불타올라라~!');
           await era.printAndWait(
-            '사토노 다이아몬드는 목소리를 한껏 높여 노래하며 뜨거운 열혈 노래를 익혔다.',
+            '사토노 다이아몬드는 목소리를 한껏 높여 노래하며 열정적인 노래를 익혔다.',
           );
           break;
         case 2:
@@ -7049,39 +7049,39 @@ module.exports = {
             '후후후, 그 모습이 저절로 떠오르네요. 그럼 가요.',
           );
           await mcqueen.say_and_wait(
-            '팬케이크, 과일 타르트……고구마 맛탕에 행인두부……!',
+            '팬케이크, 과일 타르트…… 고구마 맛탕에 행인두부……!',
           );
           await mcqueen.say_and_wait(
-            '다 매력적이네요……하지만 열량 초과는 피해야 해요! 생각해……잘 생각해……!',
+            '다 매력적이네요…… 하지만 열량 초과는 피해야 해요! 생각해…… 잘 생각해……!',
           );
           await daiya.say_and_wait(
             '맥퀸이 디저트를 고르는 데 이렇게 진지하다니……!',
           );
-          await daiya.say_and_wait('……알 것 같아요. 맥퀸의 강함의 비밀을요.');
+          await daiya.say_and_wait('……알 것 같아요. 맥퀸이 강한 비결을요.');
           await daiya.say_and_wait(
-            '일상의 사소한 일까지 진지하게 생각하며 한 걸음씩 신중하게 내딛는 것……중요하군요!',
+            '일상의 사소한 일까지 진지하게 생각하며 한 걸음씩 신중하게 내딛는 것…… 중요하군요!',
           );
           await daiya.say_and_wait('맥퀸!');
-          await mcqueen.say_and_wait('꺅! 다, 다이아……!? 설마……전부 보고……!?');
+          await mcqueen.say_and_wait('꺅! 다, 다이아……!? 설마…… 전부 보고……!?');
           await daiya.say_and_wait(
-            '네. 정말 진지한 표정을 봤어요……멋졌어요, 맥퀸!',
+            '네. 정말 진지한 표정을 봤어요…… 멋졌어요, 맥퀸!',
           );
           await mcqueen.say_and_wait(
-            '그, 그렇게 말하니……기쁜 건지 부끄러운 건지……!',
+            '그, 그렇게 말하니…… 기쁜 건지 부끄러운 건지……!',
           );
           await daiya.say_and_wait('저도 맥퀸처럼 신중하게 디저트를 고를게요.');
-          await daiya.say_and_wait('으음, 뭘 고를까요……어머?');
+          await daiya.say_and_wait('으음, 뭘 고를까요…… 어머?');
           await daiya.say_and_wait(
-            '지금 개최 중인……『진기한 디저트전』이에요! 그럼 저걸로 할게요♪',
+            '지금 개최 중인…… 『진기한 디저트전』이에요! 그럼 저걸로 할게요♪',
           );
           await mcqueen.say_and_wait(
-            '『오징어 치즈 케이크』, 『푸딩 초밥』……이건 무슨 메뉴죠!?',
+            '『오징어 치즈 케이크』, 『푸딩 초밥』…… 이건 무슨 메뉴죠!?',
           );
           await mcqueen.say_and_wait(
-            '저기, 다이아……방금 신중하게 고르겠다고 하지 않으셨나요?',
+            '저기, 다이아…… 방금 신중하게 고르겠다고 하지 않으셨나요?',
           );
           await daiya.say_and_wait(
-            '네! 이 신비하고 기묘한 디저트들……골라서 먹어 볼 가치가 있지 않나요♪',
+            '네! 이 신비하고 기묘한 디저트들…… 골라서 먹어 볼 가치가 있지 않나요♪',
           );
           await mcqueen.say_and_wait(
             '……! 훌륭한 탐구심이네요……! 디저트와 정면 대결하는 거군요?',
@@ -7090,7 +7090,7 @@ module.exports = {
             '……저도 도전하겠어요! 『진기한 디저트전』에!',
           );
           await daiya.say_and_wait('맥퀸……! 함께 디저트의 신세계를 열어 봐요.');
-          await daiya.say_and_wait('그럼……저 『버섯 몽블랑』은 어떨까요?');
+          await daiya.say_and_wait('그럼…… 저 『버섯 몽블랑』은 어떨까요?');
           await mcqueen.say_and_wait(
             '……저기, 다이아. 조금 더 생각해도 될까요?',
           );
@@ -7100,7 +7100,7 @@ module.exports = {
           break;
         case 3:
           await daiya.say_and_wait('비밀 특훈의 정석이죠. 보러 가요……!');
-          await mcqueen.say_and_wait('저기……코스 한가운데서 뭘 하는 건가요?');
+          await mcqueen.say_and_wait('저기…… 코스 한가운데서 뭘 하는 건가요?');
           await gs.say_and_wait('관문 역할이지. 지나가고 싶으면 웃겨 봐.');
           await mcqueen.say_and_wait(
             '다른 분들께 방해돼요. 비켜 주세요, 골시.',
@@ -7110,7 +7110,7 @@ module.exports = {
           await mcqueen.say_and_wait('하나, 둘──읏!!');
           await gs.say_and_wait('어어!? 밀어낼 수가 없어……!?');
           await gs.say_and_wait(
-            '그대로 가 버렸네……힘이 너무 세잖아. 저 녀석, 보통이 아니군.',
+            '그대로 가 버렸네…… 힘이 너무 세잖아. 저 녀석, 보통이 아니군.',
           );
           await daiya.say_and_wait(
             '저기, 방금 뭘 하신 건가요? 씨름처럼 보였는데……',
@@ -7121,14 +7121,14 @@ module.exports = {
           await daiya.say_and_wait(
             '그럼 맥퀸이 강한 이유는 아주 튼튼한 허리와 다리……!?',
           );
-          await daiya.say_and_wait('……골시. 저와도 씨름해 주실래요……부탁해요!');
+          await daiya.say_and_wait('……골시. 저와도 씨름해 주실래요…… 부탁해요!');
           await gs.say_and_wait(
             '후──……아직 일러. 먼저 엉뚱한 소리 하는 법부터 배워.',
           );
           await daiya.say_and_wait('엉뚱한 소리요……?');
           await mcqueen.say_and_wait('……후우, 기록이 오르지 않네요.');
           await mcqueen.say_and_wait(
-            '아까 힘을 너무 썼나 봐요. 골시……또 누군가에게 폐를 끼치고 있지 않으면 좋겠는데.',
+            '아까 힘을 너무 썼나 봐요. 골시…… 또 누군가에게 폐를 끼치고 있지 않으면 좋겠는데.',
           );
           await mcqueen.say_and_wait('……어머? 저건?');
           await gs.say_and_wait('근육, 근육──');
@@ -7140,7 +7140,7 @@ module.exports = {
           await daiya.say_and_wait('……네!!');
           await mcqueen.say_and_wait('저는 그런 걸 한 기억이 없어요!');
           await daiya.say_and_wait('맥퀸!?');
-          await daiya.say_and_wait('저기, 이건 무슨……어머, 골시가 없네요?');
+          await daiya.say_and_wait('저기, 이건 무슨…… 어머, 골시가 없네요?');
           await era.printAndWait(
             '사토노 다이아몬드는 기묘한 개그 특훈 덕분에 뜻밖에도 근육을 단련할 수 있었다!',
           );
@@ -7159,13 +7159,13 @@ module.exports = {
     const f = async (daiya, you) => {
       await era.printAndWait('오늘은 승부복 촬영을 포함한 취재가 있는 날이다.');
       await era.printAndWait(
-        `${you.name}와(과) 사토노 다이아몬드는 조금 일찍 스튜디오로 향했다. 지금──`,
+        `${you.name}과(와) 사토노 다이아몬드는 조금 일찍 스튜디오로 향했다. 지금──`,
       );
       await daiya.say_and_wait('흥, 흥, 흐흥~♪');
       await era.printAndWait(
         `승부복으로 갈아입은 ${daiya.sex}는 카메라 앞에서 움직이며 자세를 잡고 가끔 화면으로 결과를 확인하고 있다.`,
       );
-      era.printButton('「진지하게 확인하네」', 1);
+      era.printButton('「진지하게 확인하네.」', 1);
       await era.input();
       await daiya.say_and_wait(
         '네. 전하고 싶은 느낌이 제대로 담겼는지 확인하고 있어요.',
@@ -7175,13 +7175,13 @@ module.exports = {
         '네. 이 승부복은 평소 소중히 여기는 마음을 주제로 디자인됐어요.',
       );
       await daiya.say_and_wait(
-        '취재를 보시는 분들이 그 마음을 느끼셨으면 해요.',
+        '취재 내용을 보시는 분들이 그 마음을 느끼셨으면 해요.',
       );
       await era.printAndWait(
         `듣고 보니 ${daiya.sex}의 승부복에는 특히 인상적인 부분이 있다.`,
       );
-      era.printButton('「다이아몬드 장식이 제일 인상적이야」(근성+20)', 1);
-      era.printButton('「프릴이 제일 인상적이야」(스태미나+20)', 2);
+      era.printButton('「다이아몬드 장식이 제일 인상적이야.」 (근성 +20)', 1);
+      era.printButton('「프릴이 제일 인상적이야.」 (스태미나 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await daiya.say_and_wait('네, 맞아요!');
@@ -7193,7 +7193,7 @@ module.exports = {
           '비가 땅에 내리고 석회 성분을 품은 물이 떨어지며 만들어져요.',
         );
         await daiya.say_and_wait(
-          '몇만 년, 몇십만 년 동안 같은 자리에 쌓여 단단하고 커지죠.',
+          '몇만 년, 몇십만 년 동안 같은 자리에 쌓여 단단해지고 커지죠.',
         );
         await daiya.say_and_wait(
           `${daiya.uma_sex_title}의 강함도 그와 비슷하다고 생각해요.`,
@@ -7203,7 +7203,7 @@ module.exports = {
           '목표를 정하고 계속 나아가는 것. 그 노력이 승리를 가져온다고 믿어요.',
         );
         await era.printAndWait(
-          `${daiya.sex}가 그렇게 말하는 눈에는 다이아몬드 장식처럼 강한 신념과 의지가 떠올라 있었다.`,
+          `그렇게 말하는 ${daiya.sex}의 눈에는 다이아몬드 장식처럼 강한 신념과 의지가 떠올라 있었다.`,
         );
       } else {
         await daiya.say_and_wait('어머, 그걸 알아보셨군요!');
@@ -7223,15 +7223,15 @@ module.exports = {
           '그러면 불필요한 걱정을 줄이고 나아갈 방향에 집중할 수 있다고 믿어요.',
         );
         await era.printAndWait(
-          `${daiya.sex}가 그렇게 말하는 눈에는 프릴에 담긴 마음처럼 부드러운 빛이 떠올라 있었다.`,
+          `그렇게 말하는 ${daiya.sex}의 눈에는 프릴에 담긴 마음처럼 부드러운 빛이 떠올라 있었다.`,
         );
         await era.printAndWait(
           `그 뒤에도 한동안 이야기를 나눴지만 본 촬영까지는 아직 시간이 남았다.`,
         );
-        era.printButton('「뭐라도 마시면서 기다리자」', 1);
+        era.printButton('「뭐라도 마시면서 기다리자.」', 1);
         await era.input();
         await daiya.say_and_wait('좋아요! 그럼 함께 차를 마셔요!');
-        await daiya.say_and_wait('그런데 차는……어디서 살 수 있나요?');
+        await daiya.say_and_wait('그런데 차는…… 어디서 살 수 있나요?');
         era.printButton('「복도에 자판기가 있었을 텐데──」', 1);
         await era.input();
         await daiya.say_and_wait(
@@ -7241,10 +7241,10 @@ module.exports = {
           '트레이너님, 제게 맡겨 주세요. 자판기에서 차를 사 올게요.',
         );
         await era.printAndWait(
-          `${you.name}은(는) 의욕 넘치는 사토노 다이아몬드를 보냈다……아까 『보통과 다르다』는 말이 신경 쓰이기 시작한다.`,
+          `${you.name}은(는) 의욕 넘치는 사토노 다이아몬드를 보냈다…… 아까 『보통과 다르다』는 말이 신경 쓰이기 시작한다.`,
         );
         await era.printAndWait(
-          `따라가는 게 좋겠다.${you.name}이(가) ${daiya.sex}를 따라가려는 순간──`,
+          `따라가는 게 좋겠다. ${you.name}이(가) ${daiya.sex}를 따라가려는 순간──`,
         );
         await daiya.say_and_wait(
           '……어머, 캔도 페트병도 없네요. 이 패널은? 누르면 될까요? 아니면 이 버튼……?',
@@ -7290,23 +7290,23 @@ module.exports = {
         '대단해요……! 이 가게는 디저트가 무려 129종류나……!',
       );
       await daiya.say_and_wait(
-        '……네? 『모든 메뉴를 정복한 고객에게 특별한 영예를……!?』이건……무슨 뜻인가요?',
+        '……네? 『모든 메뉴를 정복한 고객에게 특별한 영예를……!?』 이건…… 무슨 뜻인가요?',
       );
       await mcqueen.say_and_wait(
-        '그, 그건……저도 소문으로만 들었는데 모든 메뉴를 먹은 분에게 『마스터』 칭호를 준대요.',
+        '그, 그건…… 저도 소문으로만 들었는데 모든 메뉴를 먹은 분에게 『마스터』 칭호를 준대요.',
       );
       await mcqueen.say_and_wait('지금까지 그 칭호를 얻은 사람은 없다고……');
       await gs.say_and_wait('맞아──(감량 중인) 맥퀸 말고는 없지.');
       await mcqueen.say_and_wait('어떻게 알고 있죠!? 그리고 왜 여기에!?');
-      await daiya.say_and_wait('맥퀸만 얻은 칭호……정말 흥미로워요!');
+      await daiya.say_and_wait('맥퀸만 얻은 칭호…… 정말 흥미로워요!');
       await daiya.say_and_wait(
         '도전해 보고 싶어요! 우선 메뉴 왼쪽의 스무 가지부터!',
       );
-      era.printButton('「필요 이상의 열량이야」(체력+100)', 1);
-      era.printButton('「도전해 볼까」(체력+300, 체중 증가)', 2);
+      era.printButton('「필요 이상의 열량이야.」 (체력 +100)', 1);
+      era.printButton('「도전해 볼까?」 (체력 +300, 체중 증가)', 2);
       const ret = await era.input();
       if (ret === 1) {
-        await daiya.say_and_wait('그건 그렇지만……으음, 안 되나요……?');
+        await daiya.say_and_wait('그건 그렇지만…… 으음, 안 되나요……?');
         await mcqueen.say_and_wait(
           '현명한 판단이에요. 저는 열흘 동안 필사적으로 완주했더니 체중이──',
         );
@@ -7316,17 +7316,17 @@ module.exports = {
         await gs.say_and_wait(
           '내 추천은 돈가스덮밥에 오이절임, 그리고 바지락국이야.',
         );
-        await daiya.say_and_wait('그렇다면……그걸로──');
+        await daiya.say_and_wait('그렇다면…… 그걸로──');
         await mcqueen.say_and_wait(
           '그런 메뉴는 없어요! 골시는 얼른 돌아가세요!',
         );
         await era.printAndWait(
-          '그 뒤 사토노 다이아몬드는 메지로 맥퀸이 추천한 디저트를 주문했다……열량을 고려한 선택이다.',
+          '그 뒤 사토노 다이아몬드는 메지로 맥퀸이 추천한 디저트를 주문했다…… 열량을 고려한 선택이다.',
         );
       } else {
         await daiya.say_and_wait('네! 반드시 맥퀸을 따라잡겠어요!');
         await daiya.say_and_wait(
-          '으으……더, 더는 안 되겠어요……온몸에서 디저트의 단맛이 나오는 것 같아요……',
+          '으으…… 더, 더는 안 되겠어요…… 온몸에서 디저트의 단맛이 나오는 것 같아요……',
         );
         await daiya.say_and_wait('아직 맥퀸의 경지에는 도달하지 못했어요……');
         await mcqueen.say_and_wait(
@@ -7339,7 +7339,7 @@ module.exports = {
           '무슨 후계자예요!? 하아, 제 실수 때문에 후배까지 휘말리다니……!',
         );
         await era.printAndWait(
-          `사토노 다이아몬드는 엄청난 열량을 섭취했다.${daiya.sex}는 이대로 두 번째 『마스터』가 되는 걸까……!?`,
+          `사토노 다이아몬드는 엄청난 열량을 섭취했다. ${daiya.sex}는 이대로 두 번째 『마스터』가 되는 걸까……!?`,
         );
       }
       return [ret];
@@ -7362,15 +7362,15 @@ module.exports = {
       );
       await kita.say_and_wait('아, 다이아. 채소 가게 아저씨가 곤란해하셔서……');
       await era.printAndWait(
-        '채소 가게 아저씨「이야~, 오늘은 채소가 잔뜩 남았어……손님도 통 없고.」',
+        '채소 가게 아저씨 「이야~, 오늘은 채소가 잔뜩 남았어…… 손님도 통 없고.」',
       );
       await era.printAndWait(
-        '채소 가게 아저씨「싸요, 싸~ 신선하고 맛있는 채소예요……」',
+        '채소 가게 아저씨 「싸요, 싸~ 신선하고 맛있는 채소예요……」',
       );
-      era.printButton('「…………정말 아무도 안 오네」', 1);
+      era.printButton('「…………정말 아무도 안 오네.」', 1);
       await era.input();
       await era.printAndWait(
-        '채소 가게 아저씨「그렇지? 응원하는 야구팀이 지면 매번 이래. 정말 싫은 징크스야……」',
+        '채소 가게 아저씨 「그렇지? 응원하는 야구팀이 지면 매번 이래. 정말 싫은 징크스야……」',
       );
       await kita.say_and_wait('아저씨는 이 징크스에 몇 번이나 당하셨대.');
       await daiya.say_and_wait('……읏!');
@@ -7378,7 +7378,7 @@ module.exports = {
         '아저씨, 징크스는 깰 수 있어요! 포기하지 말고 맞서 봐요!',
       );
       await daiya.say_and_wait(
-        '예를 들면……남은 채소를 제가 전부 사면 어떨까요?',
+        '예를 들면…… 남은 채소를 제가 전부 사면 어떨까요?',
       );
       era.printButton('「그건 좀……」', 1);
       await era.input();
@@ -7389,14 +7389,14 @@ module.exports = {
       await daiya.say_and_wait('저도요! 함께 징크스를 깨 봐요!');
       await kita.say_and_wait('상점가 여러분!');
       await kita.say_and_wait('채소 어떠세요──!');
-      await era.printAndWait('행인「무슨 일이야!?」');
+      await era.printAndWait('행인 「무슨 일이야!?」');
       await era.printAndWait(
         '키타산 블랙의 힘찬 호객 소리가 상점가에 울려 퍼지자 지나가던 사람들이 발을 멈췄다.',
       );
       await daiya.say_and_wait(
-        '싱싱한 토마토에 윤기 나는 가지! 저녁거리 어떠세요~?',
+        '싱싱한 토마토에 윤기 나는 가지! 저녁거리로 어떠세요~?',
       );
-      await era.printAndWait('주부「어머, 기운찬 목소리네~ 잠깐 보고 갈까.」');
+      await era.printAndWait('주부 「어머, 기운찬 목소리네~ 잠깐 보고 갈까.」');
       await daiya.say_and_wait('모두 추천해요♪ 편하게 둘러보세요.');
       await kita.say_and_wait('헤헤헤, 좋아! 효과 만점이야!');
       await daiya.say_and_wait('키타짱의 힘찬 목소리 덕분이야♪');
@@ -7405,7 +7405,7 @@ module.exports = {
       );
       await era.printAndWait('사람들이 모여들어 북적였다……');
       await era.printAndWait(
-        '채소 가게 아저씨「이건……! 응원하는 팀이 진 뒤에 이렇게 많이 팔린 건 처음이야!」',
+        '채소 가게 아저씨 「이건……! 응원하는 팀이 진 뒤에 이렇게 많이 팔린 건 처음이야!」',
       );
       await daiya.say_and_wait(
         '후후후, 특별한 건 하지 않았어요. 아저씨도 평소처럼 기운 내시면 저희가 없어도 잘 팔릴 거예요.',
@@ -7414,16 +7414,16 @@ module.exports = {
         '아, 맞아요! 오늘 아저씨 호객 소리에는 평소 같은 활기가 없었던 것 같아요!',
       );
       await era.printAndWait(
-        '채소 가게 아저씨「아, 그렇구나……! 듣고 보니 풀이 죽어 있었네.」',
+        '채소 가게 아저씨 「아, 그렇구나……! 듣고 보니 풀이 죽어 있었네.」',
       );
       await daiya.say_and_wait(
-        '『징크스에 지지 않겠어!』『신경 쓰지 말고 즐겁게 지내자!』',
+        '『징크스에 지지 않겠어!』 『신경 쓰지 말고 즐겁게 지내자!』',
       );
       await daiya.say_and_wait(
         '그런 마음으로 손님을 부르면 징크스는 금방 깨질 거예요♪',
       );
-      era.printButton('「언제나 긍정적인 게 최고야!」(스피드+20)', 1);
-      era.printButton('「어떤 징크스든 깰 수 있어?」(스태미나+20)', 2);
+      era.printButton('「언제나 긍정적인 게 최고야!」 (스피드 +20)', 1);
+      era.printButton('「어떤 징크스든 깰 수 있어?」 (스태미나 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await daiya.say_and_wait('후후, 맞아요!');
@@ -7439,13 +7439,13 @@ module.exports = {
           '어머, 안 믿으세요? 그럼 징크스를 하나 더 깨서 보여 드릴게요!',
         );
         await era.printAndWait(
-          '채소 가게 아저씨「징크스라면 또 있어! 『장사가 잘되는 날에는 꼭 오이가 남는다』는 징크스야!」',
+          '채소 가게 아저씨 「징크스라면 또 있어! 『장사가 잘되는 날에는 꼭 오이가 남는다』는 징크스야!」',
         );
         await kita.say_and_wait(
-          '그럼 오이를 먹으면 좋은 점을 홍보하자. 예를 들면……맛있게 먹는 시범 같은 거?',
+          '그럼 오이를 먹으면 좋은 점을 홍보하자. 예를 들면…… 맛있게 먹는 시범 같은 거?',
         );
         await daiya.say_and_wait(
-          '좋은 생각이야! 평소 자주 먹는 별 셋짜리 레스토랑 셰프에게 방법을 여쭤볼게♪',
+          '좋은 생각이야! 평소 자주 가는 별 셋짜리 레스토랑 셰프에게 방법을 여쭤볼게♪',
         );
         await era.printAndWait(
           '시식 판매가 호평을 받아 사토노 다이아몬드 일행은 오이도 모두 팔았다!',
@@ -7467,26 +7467,26 @@ module.exports = {
         '외출 중 사토노 다이아몬드가 거대한 포스터 앞에서 걸음을 멈췄다.',
       );
       await daiya.say_and_wait(
-        '『유원지 역사상 가장 무서운 롤러코스터──헤븐 탄생……용감한 도전자를 모집합니다』?',
+        '『유원지 역사상 가장 무서운 롤러코스터──헤븐 탄생…… 용감한 도전자를 모집합니다』?',
       );
       await daiya.say_and_wait(
-        '높이 때문일까요……아니면 속도? 어떤 롤러코스터일까요……!',
+        '높이 때문일까요…… 아니면 속도? 어떤 롤러코스터일까요……!',
       );
       await daiya.say_and_wait('유원지에 가야겠어요!');
       era.printButton('「뭐!? 잠깐……」', 1);
       await era.input();
       await daiya.say_and_wait('자, 트레이너님. 가요♪');
       await daiya.say_and_wait(
-        '아, 저거예요! 저 높은 곳의 레일……전설의 공포 롤러코스터가 틀림없겠죠!?',
+        '아, 저거예요! 저 높은 곳의 레일…… 전설의 공포 롤러코스터가 틀림없겠죠!?',
       );
       await era.printAndWait(
-        '그것이 『헤븐』……구름을 꿰뚫을 듯한 높이는 이름에 걸맞은 규모였다!',
+        '그것이 『헤븐』…… 구름을 꿰뚫을 듯한 높이가 그 이름에 걸맞았다!',
       );
       await era.printAndWait(
-        '행인 A「우와……정말 『천국』에 다녀온 것 같아……! 저럴 줄은 몰랐어……」',
+        '행인 A 「우와…… 정말 『천국』에 다녀온 것 같아……! 저럴 줄은 몰랐어……」',
       );
       await era.printAndWait(
-        '행인 B「안 돼, 못 타겠어……오 대 위 조상님까지 보였어……!」',
+        '행인 B 「안 돼, 못 타겠어…… 5대 위 조상님까지 보였어……!」',
       );
       await daiya.say_and_wait(
         '어머, 타신 분들이 저렇게 무서워하다니……! 이러면──',
@@ -7497,12 +7497,12 @@ module.exports = {
       era.printButton('「재미있어 보이기는 하는데……」', 1);
       await era.input();
       await era.printAndWait(
-        `${you.name}은(는) 도전하고 싶은 마음과 무서운 마음이 맞서고 있었다……`,
+        `${you.name}의 마음속에서는 도전하고 싶은 마음과 두려움이 맞서고 있었다……`,
       );
       await daiya.say_and_wait(
         '트레이너님, 왜 그러세요? 별로 타고 싶지 않으신가요……?',
       );
-      await daiya.say_and_wait('그렇다면……타고 싶어지실 때까지 기다릴게요♪');
+      await daiya.say_and_wait('그렇다면…… 타고 싶어지실 때까지 기다릴게요♪');
       await era.printAndWait(
         `일단 유원지 안을 둘러보며 느긋하게 지내기로 했다.`,
       );
@@ -7511,7 +7511,7 @@ module.exports = {
       await daiya.say_and_wait(
         '아, 롤러코스터. 지금은 줄이 조금 짧아진 것 같은데요?',
       );
-      era.printButton('「혼자 타도 괜찮아」', 1);
+      era.printButton('「혼자 타도 괜찮아.」', 1);
       await era.input();
       await daiya.say_and_wait(
         '으음, 그건 사양할게요! 혼자라도 재미있겠지만……',
@@ -7525,25 +7525,25 @@ module.exports = {
       await daiya.say_and_wait('미지의 세계를 들여다보고 새로운 걸 찾고──');
       await daiya.say_and_wait('새로운 경험을 하고 더 재미있는 걸 찾아서……');
       await daiya.say_and_wait(
-        '조금만 떠올려도 멋진 추억이 가득해요……그래서 알았어요.',
+        '조금만 떠올려도 멋진 추억이 가득해요…… 그래서 알았어요.',
       );
       await daiya.say_and_wait(
-        '트레이너님이 곁에 계시면……모든 설렘이 두 배가 된다는 걸요!',
+        '트레이너님이 곁에 계시면…… 모든 설렘이 두 배가 된다는 걸요!',
       );
       await daiya.say_and_wait(
         '그러니 언제까지나 기다릴게요♪ 그 긴장과 짜릿함을 함께 맛봐 주실 때까지!',
       );
-      era.printButton('「아직 각오가 안 됐어……」(스태미나+20)', 1);
-      era.printButton('「좋아, 타자!」(근성+20)', 2);
-      era.printButton('「다른 모험을 찾아볼까?」(지능+20)', 3);
+      era.printButton('「아직 각오가 안 됐어……」 (스태미나 +20)', 1);
+      era.printButton('「좋아, 타자!」 (근성 +20)', 2);
+      era.printButton('「다른 모험을 찾아볼까?」 (지능 +20)', 3);
       const ret = await era.input();
       switch (ret) {
         case 1:
           await daiya.say_and_wait('네──알겠어요♪');
           await era.printAndWait(
-            `하지만 ${you.name}은(는) 결심하지 못한 채 통금 시간이 다가오고 말았다……`,
+            `하지만 ${you.name}이(가) 결심하지 못하는 사이 통금 시간이 다가오고 말았다……`,
           );
-          await daiya.say_and_wait('그럼……돌아가요!');
+          await daiya.say_and_wait('그럼…… 돌아가요!');
           era.printButton('「괜찮아?」', 1);
           await era.input();
           await daiya.say_and_wait(
@@ -7551,7 +7551,7 @@ module.exports = {
           );
           await daiya.say_and_wait('그러니 언젠가 함께 경험해 봐요♪');
           await era.printAndWait(
-            `그날이 오면 ${you.name}은(는) 용기를 내겠다.${daiya.sex}의 미소를 위해 마음속으로 그렇게 맹세했다!`,
+            `그날이 오면 ${you.name}은(는) 용기를 내겠다. ${daiya.sex}의 미소를 위해 마음속으로 그렇게 맹세했다!`,
           );
           break;
         case 2:
@@ -7573,11 +7573,11 @@ module.exports = {
             '어머, 좋은 생각이에요! 사실 다른 놀이기구도 궁금했거든요♪',
           );
           await daiya.say_and_wait(
-            '회전 찻잔에 귀신의 집……마지막 순간까지 놀아요!',
+            '회전 찻잔에 귀신의 집…… 마지막 순간까지 놀아요!',
           );
           await daiya.say_and_wait('자, 트레이너님! 먼저 귀신의 집이에요~');
           await daiya.say_and_wait(
-            '어디 볼까요──가장 무서운 귀신의 집……『헬』!',
+            '어디 볼까요──가장 무서운 귀신의 집…… 『헬』!',
           );
           await era.printAndWait(
             `롤러코스터를 타지 않아도 ${you.name}은(는) 사토노 다이아몬드와 즐거운 시간을 보낼 수 있었다!`,
@@ -7599,7 +7599,7 @@ module.exports = {
       await era.printAndWait(
         `사토노 다이아몬드가 봐 달라고 부탁해서 ${you.name}은(는) ${daiya.sex}의 춤 연습에 함께하고 있다.`,
       );
-      await daiya.say_and_wait('이렇게, 그다음은 이렇게……그리고 이렇게──');
+      await daiya.say_and_wait('이렇게, 그다음은 이렇게…… 그리고 이렇게──');
       await daiya.say_and_wait(
         '……으음, 뭔가 달라요. 고수라면 이렇게 추지 않을 텐데.',
       );
@@ -7614,15 +7614,15 @@ module.exports = {
       era.printButton('「고민이 있어?」', 1);
       await era.input();
       await daiya.say_and_wait('……');
-      await daiya.say_and_wait('사실……키타짱은 노래를 잘하잖아요?');
+      await daiya.say_and_wait('사실…… 키타짱은 노래를 잘하잖아요?');
       await daiya.say_and_wait(
         '저도 연습은 하고 있지만 하루아침에 도달할 수준이 아니에요.',
       );
       await daiya.say_and_wait(
         '그래서 적어도 스텝만큼은 자랑할 만한 수준에 이르고 싶어서요.',
       );
-      era.printButton('「기초부터 다시 점검해 볼까」(스피드+20)', 1);
-      era.printButton('「키타산 블랙의 노래에 맞춰 춰 볼래?」(파워+20)', 2);
+      era.printButton('「기초부터 다시 점검해 볼까?」 (스피드 +20)', 1);
+      era.printButton('「키타산 블랙의 노래에 맞춰 춰 볼래?」 (파워 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await daiya.say_and_wait(
@@ -7665,7 +7665,7 @@ module.exports = {
           '하지만 좋겠네요. 키타짱의 노래에 질 수 없다는 마음이 더 강해질 테니까요!',
         );
         await daiya.say_and_wait('그럼──');
-        await daiya.say_and_wait('……！', true);
+        await daiya.say_and_wait('……!', true);
         await daiya.say_and_wait(
           '키타짱의 목소리는 힘차고 생동감이 넘쳐……',
           true,
@@ -7676,14 +7676,14 @@ module.exports = {
           true,
         );
         await daiya.say_and_wait(
-          '어라? 출수록 뜨거워져……이 느낌, 즐거워요!!',
+          '어라? 출수록 뜨거워져…… 이 느낌, 즐거워요!!',
           true,
         );
         await era.printAndWait(
           '사토노 다이아몬드는 혼잣말하며 한동안 계속 춤을 췄다.',
         );
         await era.printAndWait(
-          `조금 걱정스럽기는 하지만……${daiya.sex}의 스텝은 훨씬 더 절도 있어졌다!`,
+          `조금 걱정스럽기는 하지만…… ${daiya.sex}의 스텝은 훨씬 더 절도 있어졌다!`,
         );
       }
       return [ret];
@@ -7699,54 +7699,54 @@ module.exports = {
      */
     const f = async (daiya, coffee) => {
       await era.printAndWait(
-        '「맛있는 커피 내리는 법을 배우고 싶어요」. 맨하탄 카페는 사토노 다이아몬드의 소원을 도와주기로 했다.',
+        '「맛있는 커피 내리는 법을 배우고 싶어요」. 맨하탄 카페는 사토노 다이아몬드의 소원을 이루도록 도와주기로 했다.',
       );
       await daiya.say_and_wait('오늘 잘 부탁드려요!');
       era.printButton('「잘 부탁해!」', 1);
       await era.input();
-      await coffee.say_and_wait('네, 잘 부탁해요……맛있는 커피를 내려 봐요.');
+      await coffee.say_and_wait('네, 잘 부탁해요…… 맛있는 커피를 내려 봐요.');
       await coffee.say_and_wait(
-        '커피는 농장마다 맛이 달라요……품종이나 재배 방식도 큰 영향을 주죠.',
+        '커피는 농장마다 맛이 달라요…… 품종이나 재배 방식도 큰 영향을 주죠.',
       );
       await coffee.say_and_wait(
-        '좋아하는 원두를 찾는 것도 즐거움이에요……골라 봐요……',
+        '좋아하는 원두를 찾는 것도 즐거움이에요…… 골라 봐요……',
       );
       await daiya.say_and_wait('이렇게 많이……! 뭘 골라야 할지 모르겠어요.');
       await coffee.say_and_wait(
-        '그럴 때는……블렌딩을 해 봐도 좋아요. 미지의 세계……당신만의 한 잔이 탄생하죠.',
+        '그럴 때는…… 블렌딩을 해 봐도 좋아요. 미지의 세계…… 당신만의 한 잔이 탄생하죠.',
       );
       await daiya.say_and_wait(
-        '미지의 세계……멋져요! 그럼 블렌딩에 도전할게요!',
+        '미지의 세계…… 멋져요! 그럼 블렌딩에 도전할게요!',
       );
       await daiya.say_and_wait(
-        '온두라스……초콜릿 향에 패션프루트 풍미……이것도!',
+        '온두라스…… 초콜릿 향에 패션프루트 풍미…… 이것도!',
       );
-      await coffee.say_and_wait('이걸로 열 종류……저기, 일단 이 정도에서──');
+      await coffee.say_and_wait('이걸로 열 종류…… 저기, 일단 이 정도에서──');
       await coffee.say_and_wait(
-        '……네? 새로운 맛이 나올지도 모른다고요? 그건……틀린 말은 아니지만……',
+        '……네? 새로운 맛이 나올지도 모른다고요? 그건…… 틀린 말은 아니지만……',
       );
-      await daiya.say_and_wait('좋아──이것도……아, 이것도!');
+      await daiya.say_and_wait('좋아──이것도…… 아, 이것도!');
       await daiya.say_and_wait(
-        '후후……직접 내린 나만의 블렌드♪ 잘 마시겠습니다.',
+        '후후…… 직접 내린 나만의 블렌드♪ 잘 마시겠습니다.',
       );
       await era.printAndWait([
         { color: daiya.color, content: '두 ', fontWeight: 'bold' },
         { color: coffee.color, content: '사람', fontWeight: 'bold' },
         '「',
         { color: daiya.color, content: '꿀꺽' },
-        '、',
+        ', ',
         { color: coffee.color, content: '꿀꺽' },
         '……」',
       ]);
       await daiya.say_and_wait(
-        '으음……쓴맛과 신맛이 서로 잡아당기네요. 별로 취향은 아니에요……!',
+        '으음…… 쓴맛과 신맛이 서로 잡아당기네요. 제 취향은 아니에요……!',
       );
       era.printButton('「실패네……」', 1);
       await era.input();
       await coffee.say_and_wait(
-        '……원두 종류가 많을수록 맛은 복잡해져요. 각각의 자기주장이……너무 강했어요.',
+        '……원두 종류가 많을수록 맛은 복잡해져요. 각각의 자기주장이…… 너무 강했어요.',
       );
-      await daiya.say_and_wait('그렇군요……으음──맛이 싸우지 않게 하려면……');
+      await daiya.say_and_wait('그렇군요…… 으음──맛이 싸우지 않게 하려면……');
       await daiya.say_and_wait(
         '아! 방법이 있어요! 맛끼리 사이좋게 만들어 줄 도우미가!',
       );
@@ -7759,28 +7759,28 @@ module.exports = {
       await era.input();
       await coffee.say_and_wait('……다이아의 제안에 찬성해요.');
       await coffee.say_and_wait(
-        '커피의 개념 자체를 뒤집다니……상식을 깨는 방식은 생각하지 못했어요……',
+        '커피의 개념 자체를 뒤집다니…… 상식을 깨는 방식은 생각하지 못했어요……',
       );
       await daiya.say_and_wait('카페……!');
       await coffee.say_and_wait(
-        '분명 재미있는 커피가 나올 거예요……『친구』도……그렇게 말하고 있어요.',
+        '분명 재미있는 커피가 나올 거예요…… 『친구』도…… 그렇게 말하고 있어요.',
       );
       await daiya.say_and_wait(
         '에헤헤, 그렇죠? 저도 어떤 커피가 될지 상상도 안 돼요.',
       );
       await daiya.say_and_wait(
-        '그래서 더 도전하고 싶어요……맛없는 커피가 되더라도……!',
+        '그래서 더 도전하고 싶어요…… 맛없는 커피가 되더라도……!',
       );
-      era.printButton('「그 전에 기초를 익히는 게 어때?」(근성+20)', 1);
-      era.printButton('「맛있어질 때까지 계속 도전하자!」(지능+20)', 2);
+      era.printButton('「그 전에 기초를 익히는 게 어때?」 (근성 +20)', 1);
+      era.printButton('「맛있어질 때까지 계속 도전하자!」 (지능 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
-        await daiya.say_and_wait('그렇군요……우선 기초라는 거죠.');
+        await daiya.say_and_wait('그렇군요…… 우선 기초라는 거죠.');
         await daiya.say_and_wait(
-          '알겠어요……기초를 익힌 뒤 모험은 나중에 할게요.',
+          '알겠어요…… 기초를 익힌 뒤 모험은 나중에 할게요.',
         );
         await daiya.say_and_wait(
-          '……좋아, 뜨거운 물을 부으면 완성이에요! 아……그런데 이 원두도 더하면──',
+          '……좋아, 뜨거운 물을 부으면 완성이에요! 아…… 그런데 이 원두도 더하면──',
         );
         await coffee.say_and_wait('저기, 레시피에는……');
         await daiya.say_and_wait('──맞아요! 레시피대로……!');
@@ -7790,20 +7790,20 @@ module.exports = {
       } else {
         await daiya.say_and_wait('맡겨 주세요! 기대해 주세요!');
         await coffee.say_and_wait(
-          '채소를 넣은 커피……됐어요. 시금치, 피망……초록색이네요.',
+          '채소를 넣은 커피…… 됐어요. 시금치, 피망…… 초록색이네요.',
         );
-        await daiya.say_and_wait('향도 채소 그 자체네요……자, 잘 마시겠습니다!');
+        await daiya.say_and_wait('향도 채소 그 자체네요…… 자, 잘 마시겠습니다!');
         await era.printAndWait([
           { color: daiya.color, content: '두 ', fontWeight: 'bold' },
           { color: coffee.color, content: '사람', fontWeight: 'bold' },
           '「',
           { color: daiya.color, content: '꿀꺽' },
-          '、',
+          ', ',
           { color: coffee.color, content: '꿀꺽' },
           '……」',
         ]);
-        await daiya.say_and_wait('이건……맛이 없어요……! 아하, 아하하하!');
-        await coffee.say_and_wait('……네……후후.');
+        await daiya.say_and_wait('이건…… 맛이 없어요……! 아하, 아하하하!');
+        await coffee.say_and_wait('……네…… 후후.');
         await era.printAndWait('맛은 어쨌든 웃음을 가져다준 한 잔이었다!');
       }
       return [ret];
@@ -7812,7 +7812,7 @@ module.exports = {
     return f;
   })(),
   os_satono_uma: (() => {
-    const title = (daiya) => `사토노 가문으로서, ${daiya.uma_sex_title}로서`;
+    const title = (daiya) => `사토노 가문의 일원으로서, ${daiya.uma_sex_title}로서`;
     /**
      * @param {CharaTalk} daiya サトノダイヤモンド
      * @param {CharaTalk} ryan メジロライアン
@@ -7825,9 +7825,9 @@ module.exports = {
       await bright.say_and_wait('그런 것 같네요~ 조금 더 여기서 기다려요~');
       era.printButton('「사토노 다이아몬드에게 무슨 일 있어?」', 1);
       await era.input();
-      await ryan.say_and_wait('당신은……다이아의 트레이너죠.');
+      await ryan.say_and_wait('당신은…… 다이아의 트레이너죠.');
       await ryan.say_and_wait(
-        '사실 오늘 아침에 네이처가 다이아가 나가는 걸 봤대요. 회사에 간다고 했거든요.',
+        '사실 오늘 아침에 파머가 다이아가 나가는 걸 봤대요. 회사에 간다고 했거든요.',
       );
       era.printButton('「회사!?」', 1);
       await era.input();
@@ -7837,7 +7837,7 @@ module.exports = {
       await ryan.say_and_wait(
         '저녁에는 돌아온다고 했는데 아직 안 와서 걱정돼서요……',
       );
-      era.printButton('「알려 줘서 고마워」', 1);
+      era.printButton('「알려 줘서 고마워.」', 1);
       await era.input();
       await era.printAndWait(
         `${you.name}은(는) ${daiya.couple_title}에게 이제부터는 자신이 맡겠다고 전하고 사토노 다이아몬드에게 전화하기로 했다.`,
@@ -7851,7 +7851,7 @@ module.exports = {
       await daiya.say_and_wait(
         '『어머, 걱정을 끼쳐 드렸네요. 하지만 이제 괜찮아요. 볼일은 거의 끝났어요.』',
       );
-      era.printButton('「그래도 걱정돼. 데리러 갈게」', 1);
+      era.printButton('「그래도 걱정돼. 데리러 갈게.」', 1);
       await era.input();
       await daiya.say_and_wait(
         '데리러 와 주시나요? 그럼 회사 사람들에게 바로 들어오시게 해 달라고 전해 둘게요.',
@@ -7861,10 +7861,10 @@ module.exports = {
         `${you.name}은(는) ${daiya.sex}가 알려 준 건물에 들어가 사토노 다이아몬드가 있는 층으로 향했다.`,
       );
       await era.printAndWait(
-        `${daiya.sex}는 어디 있을까.${you.name}이(가) 주위를 둘러보자──`,
+        `${daiya.sex}는 어디 있을까. ${you.name}이(가) 주위를 둘러보자──`,
       );
       await era.printAndWait(
-        '사토노 그룹 직원「──그럼 자선 레이스 건은 어떻게 할까요?」',
+        '사토노 그룹 직원 「──그럼 자선 레이스 건은 어떻게 할까요?」',
       );
       await daiya.say_and_wait('우선 일정과 개최지를 정해야겠어요.');
       await daiya.say_and_wait(
@@ -7884,10 +7884,10 @@ module.exports = {
         `저도 사토노 가문의 일원이자 ${daiya.uma_sex_title}이기도 하니까 뭔가 도울 수 없을까 해서 작은 힘이나마 보태려고요.`,
       );
       await era.printAndWait(
-        `${daiya.sex}가 그렇게 말하는 표정은 평소보다 의연했고 큰 책임감이 느껴졌다.`,
+        `그렇게 말하는 ${daiya.sex}의 표정은 평소보다 의연했고 큰 책임감이 느껴졌다.`,
       );
-      era.printButton('「역시 사토노 가문의 일원이네」(지능+20)', 1);
-      era.printButton('「자선 레이스에는 너도 나가?」(스태미나 & 파워+10)', 2);
+      era.printButton('「역시 사토노 가문의 일원이네.」 (지능 +20)', 1);
+      era.printButton('「자선 레이스에는 너도 나가?」 (스태미나 & 파워 +10)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await daiya.say_and_wait('후후, 칭찬해 주셔서 영광이에요♪');
@@ -7907,17 +7907,17 @@ module.exports = {
           '사토노 가문을 짊어진 사람으로서 이 정도에 풀이 죽을 수는 없죠♪',
         );
         await ryan.say_and_wait(
-          '아하하, 정말 네이처 말대로야! 그런 점은 맥퀸과 닮았네.',
+          '아하하, 정말 파머 말대로야! 그런 점은 맥퀸과 닮았네.',
         );
         await daiya.say_and_wait(
-          '어머, 정말인가요!? 라이언, 방금 이야기 더 자세히 들려주세요!',
+          '어머, 정말인가요!? 라이언, 방금 이야기 더 자세히 들려 주세요!',
         );
         await daiya.say_and_wait('네, 그럴 생각이에요.');
         await daiya.say_and_wait(
           `아까 말씀드렸듯 저는 사토노 가문의 일원이자 ${daiya.uma_sex_title}이기도 해요.`,
         );
         await daiya.say_and_wait(
-          `지금은 아직 어린 후배지만 언젠가 사토노 가문에도, ${daiya.uma_sex_title}업계에도 기여하고 싶어요!`,
+          `지금은 아직 어린 후배지만 언젠가 사토노 가문에도, ${daiya.uma_sex_title} 업계에도 기여하고 싶어요!`,
         );
         await era.printAndWait(
           `현재뿐 아니라 먼 앞날까지 바라보는 ${daiya.sex}의 눈에서 ${you.name}은(는) 앞으로 활약할 모습을 그려 보았다.`,
@@ -7958,14 +7958,14 @@ module.exports = {
      */
     const f = async (daiya, jordan, you) => {
       await era.printAndWait(
-        `${you.name}와(과) 사토노 다이아몬드가 외출했다 돌아가는 길──`,
+        `${you.name}과(와) 사토노 다이아몬드가 외출했다 돌아가는 길──`,
       );
       await daiya.say_and_wait('어머? 어머, 어머, 어머!?');
       await daiya.say_and_wait(
         '트레이너님, 엄청난 걸 찾았어요! 저기 『골목길』이 있어요!',
       );
       await daiya.say_and_wait(
-        '와아~, 지금까지 몰랐어요! 저 길은……어디로 이어질까요!',
+        '와아~, 지금까지 몰랐어요! 저 길은…… 어디로 이어질까요!',
       );
       await era.printAndWait(
         `${you.name}이(가) 말릴 틈도 없이 사토노 다이아몬드가 골목길로 달려갔다……`,
@@ -7980,10 +7980,10 @@ module.exports = {
       );
       await jordan.say_and_wait('그나저나 여기서 뭐 해?');
       await daiya.say_and_wait(
-        '이 골목길이 어디로 이어지는지 궁금해서……지금 모험 중이에요.',
+        '이 골목길이 어디로 이어지는지 궁금해서…… 지금 모험 중이에요.',
       );
       await daiya.say_and_wait(
-        '여기 풍경은 유독 달라서 다른 세계에 들어온 것 같아요……후후후, 신나고 기대돼요♪',
+        '여기 풍경은 유독 달라서 다른 세계에 들어온 것 같아요…… 후후후, 신나고 기대돼요♪',
       );
       await jordan.say_and_wait(
         '그래? 그럼 같이 걸을래? 좋은 곳에 데려가 줄게!',
@@ -7992,7 +7992,7 @@ module.exports = {
         '……그래서~, 이 집 개가 엄청 무섭거든! 눈이 마주치면 바로 짖어!',
       );
       await daiya.say_and_wait('기운찬 강아지네요! 어떤 아이일까요……?');
-      await era.printAndWait('큰 개「멍멍! 멍!!」');
+      await era.printAndWait('큰 개 「멍멍! 멍!!」');
       await daiya.say_and_wait('와아, 정말이네요! 후후후, 귀여워요~!');
       await jordan.say_and_wait(
         '즐거워 보이네~! 겸사겸사 신나는 가게도 들를래?',
@@ -8013,47 +8013,47 @@ module.exports = {
       await era.input();
       await jordan.say_and_wait('큰일인데!? 야, 다이아──!');
       await daiya.say_and_wait('어머, 불량소녀인가요……? 연속극에서 봤던 그……');
-      await era.printAndWait('불량소녀「뭐? 뭐라고!?」');
+      await era.printAndWait('불량소녀 「뭐? 뭐라고!?」');
       await daiya.say_and_wait(
         '아, 사토노 다이아몬드라고 해요. 몇 가지 여쭤보고 싶어서요.',
       );
       await daiya.say_and_wait(
-        '불량소녀 하면 비 오는 날 젖은 강아지를 구해 주는 장면을 좋아하는데……그런 경험이 있으신가요?',
+        '불량소녀 하면 비 오는 날 젖은 강아지를 구해 주는 장면을 좋아하는데…… 그런 경험이 있으신가요?',
       );
       await jordan.say_and_wait('잠깐, 잠깐! 멈춰, 멈춰!');
       await jordan.say_and_wait('아이고, 죄송해요! 지금 바로 물러갈게요~!');
       await daiya.say_and_wait('네? 아, 그래도……!');
-      era.printButton('「자, 얼른 돌아가자!」(지능+20)', 1);
-      era.printButton('「갑자기 말을 건 것부터 사과하자」(파워+20)', 2);
+      era.printButton('「자, 얼른 돌아가자!」 (지능 +20)', 1);
+      era.printButton('「갑자기 말을 건 것부터 사과하자.」 (파워 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await daiya.say_and_wait('아, 알겠어요?');
         await daiya.say_and_wait('그럼 실례할게요. 안녕히 계세요♪');
         await daiya.say_and_wait(
-          `아아, 불량한 ${daiya.teen_sex_title}……조금만 더 이야기할 수 있었으면……아쉬워요.`,
+          `아아, 불량한 ${daiya.teen_sex_title}…… 조금만 더 이야기할 수 있었으면…… 아쉬워요.`,
         );
         await jordan.say_and_wait('설마 안 무서워!?');
         await daiya.say_and_wait(
           `무섭지 않은데요? 연속극의 불량한 ${daiya.teen_sex_title}는 떠돌이 강아지를 구해 주는 마음씨 착한 분들뿐인걸요♪`,
         );
-        await jordan.say_and_wait('다이아, 위험한 의미로 강하네~!');
+        await jordan.say_and_wait('다이아, 위험할 정도로 겁이 없네~!');
         await era.printAndWait(
           `사토노 다이아몬드가 쓸쓸해 보여 ${you.name}도 더는 나무랄 수 없었다.`,
         );
       } else {
         await daiya.say_and_wait(
-          '그건 확실히 실례였네요……죄송해요. 제가 무례했어요.',
+          '그건 확실히 실례였네요…… 죄송해요. 제가 무례했어요.',
         );
         await era.printAndWait(
-          `불량한 ${daiya.teen_sex_title}「쳇, 일반인이랑 싸울 취미는 없어. 다음부터 조심해.」`,
+          `불량한 ${daiya.teen_sex_title} 「쳇, 일반인이랑 싸울 취미는 없어. 다음부터 조심해.」`,
         );
         await daiya.say_and_wait(
           `감사해요! 불량한 ${daiya.teen_sex_title}는 도리를 지키는 강직한 분이라는 말이 사실이군요!`,
         );
         await era.printAndWait(
-          `불량한 ${daiya.teen_sex_title}「오? 잘 아네. 헤헤, 같이 한잔하러 갈래?」`,
+          `불량한 ${daiya.teen_sex_title} 「오? 잘 아네. 헤헤, 같이 한잔하러 갈래?」`,
         );
-        await daiya.say_and_wait('어머, 괜찮나요? 꼭 그 기회를 주세요♪');
+        await daiya.say_and_wait('어머, 괜찮나요? 꼭 함께하고 싶어요♪');
         await jordan.say_and_wait('진짜? 다이아 너무 강한데!?');
         await era.printAndWait(
           `그 뒤 사토노 다이아몬드는 호기심 가득한 얼굴로 불량한 ${daiya.teen_sex_title}의 이야기에 귀를 기울였다.`,
@@ -8078,38 +8078,38 @@ module.exports = {
     const f = async (daiya, gs, condor, coffee, festa, sirius, you) => {
       await era.printAndWait([
         you.name,
-        '와(과) 사토노 다이아몬드가 외출했다 돌아가는 길, 편의점 앞에……두 명의 ',
+        '과(와) 사토노 다이아몬드가 외출했다 돌아가는 길, 편의점 앞에…… 두 명의 ',
         daiya.uma_sex_title,
         '가 모여 있었다.',
       ]);
       await gs.say_and_wait(
         '젠장! 또──플라밍고 걸이냐! 벌써 다섯 장째라고……!?',
       );
-      await festa.say_and_wait('나도야……또 데굴데굴 애벌레군.');
+      await festa.say_and_wait('나도야…… 또 데굴데굴 애벌레군.');
       await daiya.say_and_wait(
-        '어머, 골시와 페스타네요? 두 분이 여기서 뭘……여쭤보고 올게요!',
+        '어머, 골시와 페스타네요? 두 분이 여기서 뭘…… 여쭤보고 올게요!',
       );
       await era.printAndWait(
-        `불길한 예감이 든다……${you.name}은(는) 그렇게 생각하면서 사토노 다이아몬드를 뒤따랐다.`,
+        `불길한 예감이 든다…… ${you.name}은(는) 그렇게 생각하면서 사토노 다이아몬드를 뒤따랐다.`,
       );
       await daiya.say_and_wait('안녕하세요. 두 분은 뭘 하고 계세요?');
       await gs.say_and_wait(
         '오, 다이아냐! 방금 『경이로운 생물 초콜릿』을 잔뜩 샀거든!',
       );
       await gs.say_and_wait(
-        '그런데 제일 희귀한 암모나이트 나이트가 통 안 나와서……여기서 계속 초콜릿을 먹고 있어.',
+        '그런데 제일 희귀한 암모나이트 나이트가 통 안 나와서…… 여기서 계속 초콜릿을 먹고 있어.',
       );
       await daiya.say_and_wait(
         '어머, 새로운 도전인가요? 재미있겠어요! 저도 참가해도 될까요?',
       );
       await festa.say_and_wait(
-        '하하, 호기심 많은 아가씨군……좋아, 어느 봉지로 할래? 골라.',
+        '하하, 호기심 많은 아가씨군…… 좋아, 어느 봉지로 할래? 골라.',
       );
       await daiya.say_and_wait(
         '글쎄요. 트레이너님은 어느 쪽이 좋을 것 같으세요?',
       );
-      era.printButton('「포장이 깔끔한 쪽」(스태미나+20)', 1);
-      era.printButton('「포장이 구겨진 쪽」(근성+20)', 2);
+      era.printButton('「포장이 깔끔한 쪽」 (스태미나 +20)', 1);
+      era.printButton('「포장이 구겨진 쪽」 (근성 +20)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await daiya.say_and_wait('저도 그쪽이 좋겠어요! 그럼 열게요. 갑니다──');
@@ -8119,7 +8119,7 @@ module.exports = {
           '──프테라노돈 두목!!!! 우오오, 프테라노돈 두목이다!!',
         );
         await festa.say_and_wait(
-          '호오, 골드 등급인가……운이 나쁘지 않군, 다이아.',
+          '호오, 골드 등급인가…… 운이 나쁘지 않군, 다이아.',
         );
         await daiya.say_and_wait(
           '어머, 좋은 게 나왔나요!? 그럼 더 열어 보고 싶어요!',
@@ -8128,12 +8128,12 @@ module.exports = {
           '좋아, 열어! 카드는 이쪽에 던지고 초콜릿은 내가 먹을게!',
         );
         await daiya.say_and_wait('네! 그럼 시작할게요──');
-        await condor.print_and_wait('???「잠깐!」');
-        await daiya.say_and_wait('？');
+        await condor.print_and_wait('??? 「잠깐!」');
+        await daiya.say_and_wait('?');
         await condor.say_and_wait(
           '그 『경이로운 생물 초콜릿』, 엘도 사려고 했슴다!!',
         );
-        await condor.say_and_wait('품절이라니……골시랑 페스타 선배 짓이군요!?');
+        await condor.say_and_wait('품절이라니…… 골시랑 페스타 선배 짓이군요!?');
         await gs.say_and_wait('콘도르, 그렇게 화내지 마……어쩔 수 없네. 그럼──');
         await gs.say_and_wait(
           '──승부다! 네가 이기면 프테라노돈 두목을 주겠어! 지면 졸음 매미만 준다!!',
@@ -8152,18 +8152,18 @@ module.exports = {
         era.printButton('「응……」', 1);
         await era.input();
         await coffee.print_and_wait(
-          '???「──걱정할 필요 없어요. 내버려 두면 곧 질릴 테니까……」',
+          '??? 「──걱정할 필요 없어요. 내버려 두면 곧 질릴 테니까……」',
         );
         await daiya.say_and_wait('카페! 쇼핑하러 오셨나요?');
         await coffee.say_and_wait(
-          '네, 자주 가는 카페가 문을 닫아서……그래서 여기로……',
+          '네, 자주 가는 카페가 문을 닫아서…… 그래서 여기로……',
         );
-        await coffee.say_and_wait('하지만──다른 가게로 갈게요……먼저 갈게요……');
+        await coffee.say_and_wait('하지만──다른 가게로 갈게요…… 먼저 갈게요……');
         await daiya.say_and_wait(
           '어머, 아는 카페가 많으시군요. 괜찮다면 저도 함께 가도 될까요!?',
         );
         await era.printAndWait(
-          '바로 곁의 전쟁보다 호기심을 우선하는 사토노 다이아몬드……그 솔직한 성격을 또 한 번 실감했다.',
+          '바로 곁의 전쟁보다 호기심을 우선하는 사토노 다이아몬드…… 그 솔직한 성격을 또 한 번 실감했다.',
         );
       } else {
         await daiya.say_and_wait(
@@ -8172,11 +8172,11 @@ module.exports = {
         await era.printAndWait(
           '하지만 사토노 다이아몬드가 포장을 뜯으려는 순간──돌풍이 초콜릿 봉지를 누군가의 발밑으로 날렸다.',
         );
-        await sirius.print_and_wait('???「응……이게 뭐야?」');
+        await sirius.print_and_wait('??? 「응…… 이게 뭐야?」');
         await sirius.say_and_wait(
           '……정말, 과자 봉지잖아. 여기서 무슨 친목회를 하고 있어?',
         );
-        await festa.say_and_wait('후후……잘 왔다. 너도 낄래, 시리우스?');
+        await festa.say_and_wait('후후…… 잘 왔다. 너도 낄래, 시리우스?');
         await sirius.say_and_wait(
           '끼라니, 과자로 승부하자는 거야? 이봐, 이봐, 나이가 몇인데──',
         );
@@ -8189,7 +8189,7 @@ module.exports = {
           '그래. 방금 내 발밑으로 날아온 봉지가 당첨이면 네 승리야.',
         );
         await sirius.say_and_wait(
-          '반대로 꽝이면 네 패배. 내 요구를 하나 들어줘.──어때?',
+          '반대로 꽝이면 네 패배. 내 요구를 하나 들어줘. ──어때?',
         );
         era.printButton('(뭐……!?)', 1);
         await era.input();
@@ -8202,7 +8202,7 @@ module.exports = {
           gs.get_colored_name(),
           '&',
           festa.get_colored_name(),
-          '「……！！」',
+          '「……!!」',
         ]);
         await era.printAndWait([
           gs.get_colored_name(),
@@ -8235,7 +8235,7 @@ module.exports = {
         );
         await daiya.say_and_wait('후후후♪ 이렇게 또 목표가 늘었네요.');
         await era.printAndWait(
-          `사토노 다이아몬드는 선배 앞에서도 주눅 들지 않고 나아간다.${you.name}은(는) 새삼 ${daiya.sex}의 강함을 알게 되었다.`,
+          `사토노 다이아몬드는 선배 앞에서도 주눅 들지 않고 나아간다. ${you.name}은(는) 새삼 ${daiya.sex}의 강함을 알게 되었다.`,
         );
       }
       return [ret];
@@ -8253,7 +8253,7 @@ module.exports = {
      */
     const f = async (daiya, maya, creek, you) => {
       await era.printAndWait(
-        `${you.name}와(과) 사토노 다이아몬드가 외출했다 돌아가는 길에 쇼핑몰에 들르자──`,
+        `${you.name}과(와) 사토노 다이아몬드가 외출했다 돌아가는 길에 쇼핑몰에 들르자──`,
       );
       await daiya.say_and_wait(
         '가게가 너무 많아서 눈이 돌아가요. 언젠가 전부 돌아보고 말겠어요──어머?',

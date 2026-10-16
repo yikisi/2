@@ -171,7 +171,7 @@ module.exports = {
           you.get_colored_name(),
           '은(는) 스스로 욕망의 수렁에 발을 들여놓고 ',
         ]);
-        await printAndWait([chara.sex, '과(와) 함께 끝없이 가라앉았다……']);
+        await printAndWait([chara.sex, '와 함께 끝없이 가라앉았다……']);
       } else {
         await printAndWait([
           you.get_colored_name(),
@@ -224,7 +224,7 @@ module.exports = {
       ]);
       await printAndWait([
         chara.sex,
-        '이(가) 깨어난 뒤 두 사람은 어디선가 들려오는 만족스러운 웃음소리를 뒤로하고 메지로 시티를 떠났다……',
+        '가 깨어난 뒤 두 사람은 어디선가 들려오는 만족스러운 웃음소리를 뒤로하고 메지로 시티를 떠났다……',
       ]);
       await printAndWait([
         '……하지만 그날 이후 ',
@@ -304,7 +304,7 @@ module.exports = {
   city_bs_hair_color: '염색',
   city_bs_hair_color_confirm: '어떤 색으로 염색하시겠습니까?',
   city_bs_hair_color_current_suffix: '（현재 머리색）',
-  city_bs_uma_template: '%UMA%(으)로 변경 (「은총」100, 되돌릴 수 없음!)',
+  city_bs_uma_template: '%UMA%로 변경 (「은총」100, 되돌릴 수 없음!)',
   city_bs_body_hair_color: '털 색 변경 (「은총」1)',
   city_bs_body_hair_color_current_suffix: '(현재 털 색)',
   city_bs_change_done: '네, 힘을 빼세요. 금방 끝납니다~',

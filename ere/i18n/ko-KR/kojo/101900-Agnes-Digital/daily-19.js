@@ -411,7 +411,7 @@ module.exports = {
         digital.say_and_wait([
           '오오오, 잡았어요, 잡았어! 캠핑 중이라면 구워 먹을 수 있겠네요, ',
           callname,
-          '！',
+          '!',
         ]),
       () =>
         digital.say_and_wait(
@@ -750,7 +750,7 @@ module.exports = {
         `그래서 정말로 ${digital.sex}가 작은 의자에 앉아 낚싯대를 쥔 채 조용히 기다리는 모습은 무척 드물었다.`,
       );
       await digital.say_and_wait(
-        `그렇군요…… 낚시란 이런 거였네요. 여가 활동일 텐데, 왜 이렇게 기운이 드는 걸까요……`,
+        `그렇군요…… 낚시란 이런 거였네요. 여가 활동일 텐데, 왜 이렇게 힘이 드는 걸까요……`,
       );
       await digital.say_and_wait(
         `낚시하는 다른 ${digital.uma_sex_title}짱들은 대체 무슨 생각을 하고 있을까요……`,
@@ -789,7 +789,7 @@ module.exports = {
         ]);
         await era.printAndWait([
           sky.get_colored_name(),
-          '은(는) 작은 손으로 눈을 비비며 가련한 눈빛을 보냈다.',
+          '는 작은 손으로 눈을 비비며 가련한 눈빛을 보냈다.',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
@@ -861,7 +861,7 @@ module.exports = {
       await era.printAndWait([
         '순식간에 ',
         sky.get_colored_name(),
-        '은(는) 도망치려는 ',
+        '는 도망치려는 ',
         digital.get_colored_name(),
         '을(를) 붙잡았다. ',
         digital.get_colored_name(),
@@ -911,14 +911,14 @@ module.exports = {
         digital.get_colored_name(),
         '과(와) 정반대로 ',
         sky.get_colored_name(),
-        '은(는) 기운이 넘쳤다. 신종 흡성대법인가?',
+        '는 기운이 넘쳤다. 신종 흡성대법인가?',
       ]);
       era.println();
       if (era.get('cflag:20:招募状态') === recruit_flags.yes) {
         await sky.say_and_wait([callname_20, ', 있잖아요!']);
         await era.printAndWait([
           sky.get_colored_name(),
-          '은(는) ',
+          '는 ',
           you.get_colored_name(),
           '에게 몸을 돌렸다. 방금까지 크게 웃던 표정을 금세 가라앉히고, 가만히 ',
           you.get_colored_name(),
@@ -953,7 +953,7 @@ module.exports = {
           );
           await era.printAndWait([
             sky.get_colored_name(),
-            '은(는) 한 손을 머리에 얹고 분홍빛 혀를 내밀었다. ',
+            '는 한 손을 머리에 얹고 분홍빛 혀를 내밀었다. ',
             you.get_colored_name(),
             '은(는) 문득 어떤 이모티콘을 떠올렸다.',
           ]);
@@ -973,7 +973,7 @@ module.exports = {
           );
           await era.printAndWait([
             sky.get_colored_name(),
-            '은(는) 스마트폰을 조작했다. 상품들이 ',
+            '는 스마트폰을 조작했다. 상품들이 ',
             sky.get_colored_name(),
             '의 손끝을 따라 흘러갔다. 숫자를 본 ',
             you.get_colored_name(),
@@ -991,7 +991,7 @@ module.exports = {
           await era.printAndWait([
             '스마트폰을 집어넣은 ',
             sky.get_colored_name(),
-            '은(는) 본론으로 들어갈 모양이었다.',
+            '는 본론으로 들어갈 모양이었다.',
           ]);
           await sky.say_and_wait([
             s_call_d,
@@ -1010,7 +1010,7 @@ module.exports = {
           ]);
           await era.printAndWait([
             sky.get_colored_name(),
-            '은(는) 농담을 빌려 지금 ',
+            '는 농담을 빌려 지금 ',
             you.get_colored_name(),
             '이(가) 서둘러 해야 할 일을 전하고 있었다…… 낚싯대도 아마 그 일환이겠지.',
           ]);
@@ -1031,7 +1031,7 @@ module.exports = {
           await era.printAndWait([
             '몸을 휙 돌린 ',
             sky.get_colored_name(),
-            '은(는) 석양을 향해 등을 보였다.',
+            '는 석양을 향해 등을 보였다.',
           ]);
           await sky.say_and_wait(['아직 ', s_call_s, '을(를) 기억해요?']);
           await you.say_and_wait('무슨 소리야. 기억하고 말고 할 게 어디 있어.');
@@ -1076,7 +1076,7 @@ module.exports = {
         await sky.say_and_wait([s_call_d, '의 트레이너라니——']);
         await era.printAndWait([
           sky.get_colored_name(),
-          '은(는) 고개를 ',
+          '는 고개를 ',
           you.get_colored_name(),
           '에게 돌렸다.',
         ]);
@@ -1091,13 +1091,13 @@ module.exports = {
           you.get_colored_name(),
           '은(는) ',
           sky.get_colored_name(),
-          '을(를) 잘 알지는 못하지만, ',
+          '를 잘 알지는 못하지만, ',
           digital.sex,
           '의 평판은 들어 보았다…… 레이스를 위해서라면 수단을 가리지 않는다던가?',
         ]);
         await era.printAndWait([
           sky.get_colored_name(),
-          '과(와)는 ',
+          '와는 ',
           digital.sex,
           '의 레이스가 겹칠 일도 없을 텐데. 그렇다면 ',
           digital.sex,
@@ -1112,7 +1112,7 @@ module.exports = {
           await era.printAndWait([
             '머리 뒤로 손을 돌린 ',
             sky.get_colored_name(),
-            '은(는) 제 유명세가 자랑스러운 모양이었다.',
+            '는 제 유명세가 자랑스러운 모양이었다.',
           ]);
           await you.say_and_wait(
             '앉아서 이야기하자. 디지털에 관해 생각해 둔 게 있겠지.',
@@ -1167,7 +1167,7 @@ module.exports = {
             you.get_colored_name(),
             '이(가) 그렇게 말할 때까지 ',
             sky.get_colored_name(),
-            '은(는) 깊은 눈빛으로 ',
+            '는 깊은 눈빛으로 ',
             you.get_colored_name(),
             '을(를) 바라보았다. 그 말을 듣자 ',
             digital.sex,
@@ -1203,7 +1203,7 @@ module.exports = {
           ]);
           await era.printAndWait([
             sky.get_colored_name(),
-            '은(는) ',
+            '는 ',
             you.get_colored_name(),
             '을(를) 바라보며 하품했다.',
           ]);

@@ -151,5 +151,5 @@ module.exports = class extends require('#/i18n/zh-CN/sex/actions') {
   other_condom = '상대에게 콘돔 착용';
   use_item = '성인용품 사용';
   take_off_item = '성인용품 해제';
-  ask_use_item = '도구 사용 부탁';
+  ask_use_item = '아이템 사용 부탁';
 };

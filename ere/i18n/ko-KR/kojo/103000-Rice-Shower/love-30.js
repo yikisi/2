@@ -17,7 +17,7 @@ module.exports = {
       await rice.print_and_wait([
         '우선, ',
         callname,
-        '는 정말 멋지고 상냥하고 믿음직스러워. 설령 ',
+        '은(는) 정말 멋지고 상냥하고 믿음직스러워. 설령 ',
         self_call,
         '가 ',
         callname,
@@ -30,19 +30,19 @@ module.exports = {
         self_call,
         '는 ',
         callname,
-        '를 좋아해.',
+        '을(를) 좋아해.',
       ]);
       await rice.print_and_wait([
         '몇 번이고, 몇 번이고, 몇 번이나, ',
         self_call,
         '는 ',
         callname,
-        '를 덮치고 싶다고 생각했어.',
+        '을(를) 덮치고 싶다고 생각했어.',
       ]);
       await rice.print_and_wait([
         '하지만 그러면 ',
         callname,
-        '가 슬퍼할지도 모른다는 생각에, ',
+        '이(가) 슬퍼할지도 모른다는 생각에, ',
         self_call,
         '는 꾹 참아왔어.',
       ]);
@@ -86,7 +86,7 @@ module.exports = {
         self_call,
         '는 ',
         callname,
-        '를 가장 좋아해.',
+        '을(를) 가장 좋아해.',
       ]);
       await rice.print_and_wait(
         '가장 좋아하기 때문에, 이 사랑은 설령 결실을 보지 못하더라도 괜찮아.',
@@ -127,7 +127,7 @@ module.exports = {
         self_call,
         '의 모든 것은, ',
         callname,
-        '가 준 것이나 다름없어.',
+        '이(가) 준 것이나 다름없어.',
       ]);
       await rice.say_and_wait([
         '그래서 ',
@@ -150,7 +150,7 @@ module.exports = {
       ]);
       await rice.say_and_wait([
         callname,
-        '가 나의 트레이너가 되어 주겠다고 했을 때, 정말로 기뻤어.',
+        '이(가) 나의 트레이너가 되어 주겠다고 했을 때, 정말로 기뻤어.',
       ]);
       await rice.say_and_wait(
         '난 어릴 때부터 누군가에게 행복을 주는 사람이 되고 싶어 노력했거든.',
@@ -207,7 +207,7 @@ module.exports = {
       await rice.say_and_wait([
         '약속이야? ',
         callname,
-        '는 계속 ',
+        '은(는) 계속 ',
         self_call,
         '의 곁에 있어야 해.',
       ]);
@@ -264,11 +264,11 @@ module.exports = {
       await rice.print_and_wait([
         '우연히, ',
         callname,
-        '가 길을 지나가고 있었다.',
+        '이(가) 길을 지나가고 있었다.',
       ]);
       await rice.print_and_wait([
         callname,
-        '는 곤란한 표정으로 ',
+        '은(는) 곤란한 표정으로 ',
         rice.get_colored_name(),
         '의 손을 잡아주었다.',
       ]);
@@ -289,7 +289,7 @@ module.exports = {
         rice.get_colored_name(),
         '는 ',
         callname,
-        '의 품에 자신의 몸을 맡겼다.',
+        '의 품에 몸을 맡겼다.',
       ]);
       await rice.print_and_wait('거짓말처럼 조금 전의 불안이 사라졌다.');
       await rice.say_and_wait('후우…');
@@ -328,7 +328,7 @@ module.exports = {
       await rice.print_and_wait([
         '그러자 ',
         callname,
-        '는 손을 ',
+        '은(는) 손을 ',
         rice.get_colored_name(),
         '의 꼬리 뿌리 쪽에 가져다 댔다.',
       ]);
@@ -349,7 +349,7 @@ module.exports = {
       await rice.print_and_wait([
         '그리고 ',
         callname,
-        '는 ',
+        '은(는) ',
         rice.get_colored_name(),
         '의 꼬리를 뿌리부터 잡아당겼다.',
       ]);
@@ -406,26 +406,26 @@ module.exports = {
       await rice.say_and_wait([
         '그러니까 ',
         callname,
-        '는 ',
+        '은(는) ',
         self_call,
         '에게 벌을 줘야 해. ',
         self_call,
         '가 나쁜 아이니까, 그래서 ',
         callname,
-        '가 ',
+        '이(가) ',
         self_call,
         '에게 사랑을 주지 않는 거니까.',
       ]);
       await rice.say_and_wait([
         '왜? ',
         callname,
-        '를 위해서라면 ',
+        '을(를) 위해서라면 ',
         self_call,
         '는 매일 트레이닝하고, 매주 레이스에 나갈 수도 있어. 휴식 같은 건 필요 없어.',
       ]);
       await rice.say_and_wait([
         callname,
-        '가 ',
+        '이(가) ',
         self_call,
         '를 사랑해 주기만 한다면, 설령 ',
         self_call,
@@ -447,11 +447,11 @@ module.exports = {
       ]);
       await rice.say_and_wait([
         callname,
-        '、',
+        ', ',
         self_call,
         '을(를) 쓰다듬어 줄래?',
       ]);
-      await rice.say_and_wait(['에헤헤? 고마워, ', callname, '。']);
+      await rice.say_and_wait(['에헤헤? 고마워, ', callname, '.']);
       await rice.say_and_wait('정말 좋아해!');
     };
     f.title = title;

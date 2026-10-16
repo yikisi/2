@@ -8,7 +8,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/titles') {
   template_got_tt = (name, desc) => [name, '：', desc];
   title_template_got_tt = '[%TITLE%] %NAME%\n%DESC%\n（조회 시간：%TIME%）';
 
-  ungot = '？？？';
+  ungot = '???';
   title_template_ungot_tt = '%NAME%：%TITLE%\n%DESC%';
 
   template_in_rec = (name, desc) => [name, '：', desc];

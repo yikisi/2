@@ -131,7 +131,7 @@ module.exports = {
     await attacker.print_and_wait([
       '그래도 손쉽게 붙잡혀 가차 없이 당겨지고, 눈앞의 ',
       defender.uma_sex_title,
-      '은(는) 말을 더듬으며 용서를 빈다.',
+      '는 말을 더듬으며 용서를 빈다.',
     ]);
     await attacker.print_and_wait([
       '거친 손길에 본능적으로 경련하는 귀끝이 충혈되어 사랑스러운 분홍빛으로 물든다.',
@@ -962,7 +962,7 @@ module.exports = {
       a_call_d,
       '의 두 팔을 당겨 조금 힘을 주었을 뿐인데 ',
       defender.sex,
-      '은(는) 암캐처럼 엉덩이를 들고 바닥에 무릎을 꿇는다.',
+      '는 암캐처럼 엉덩이를 들고 바닥에 무릎을 꿇는다.',
     ]);
     await attacker.print_and_wait([
       '저항하려는 ',
@@ -1049,7 +1049,7 @@ module.exports = {
       await attacker.print_and_wait([
         '역시 ',
         defender.uma_sex_title,
-        '은(는) 유연성도 균형 감각도 뛰어나다.',
+        '는 유연성도 균형 감각도 뛰어나다.',
       ]);
     }
     await attacker.print_and_wait([

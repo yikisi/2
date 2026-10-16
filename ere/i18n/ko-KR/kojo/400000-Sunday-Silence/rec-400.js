@@ -16,7 +16,7 @@ module.exports = {
     await era.printAndWait([
       '조금 쌀쌀한 이른 아침, ',
       you.get_colored_name(),
-      '은(는) 일어난 뒤 시간이 아직 이른 것을 확인하고, 가볍게 씻은 후 평소 일할 때 입는 평상복으로 갈아입고 학원 안을 산책하기로 했다.',
+      '은(는) 일어난 뒤 시간이 아직 이른 것을 확인하고, 가볍게 씻은 후 평소 일할 때 입는 옷으로 갈아입고 학원 안을 산책하기로 했다.',
     ]);
     await era.printAndWait([
       title,
@@ -46,7 +46,7 @@ module.exports = {
     await era.printAndWait([
       '눈앞을 가로막은 나뭇가지를 헤치고, ',
       you.get_colored_name(),
-      '은(는) 다시 숲속 오솔길로 나오자 그 검은 실루엣을 보게 되었다.',
+      '은(는) 다시 숲속 오솔길로 나와 그 검은 실루엣을 보게 되었다.',
     ]);
     era.println();
     await era.printAndWait([
@@ -64,7 +64,7 @@ module.exports = {
       you.get_colored_name(),
       '의 존재를 알아챘다. 하지만 ',
       ss.sex,
-      '의 붉은 눈은 ',
+      '는 붉은 눈으로 ',
       you.get_colored_name(),
       '을(를) 힐끗 보고는 다시 호흡을 가다듬었다. 마치 ',
       you.get_colored_name(),
@@ -75,14 +75,14 @@ module.exports = {
       you.get_colored_name(),
       '은(는) 머릿속을 필사적으로 뒤져 이 ',
       ss.uma_sex_title,
-      '에 대한 인상을 찾았다. 기억을 더듬으며 길가에 멈춰 섰다.',
+      '를 본 기억을 찾았다. 기억을 더듬으며 길가에 멈춰 섰다.',
     ]);
     era.println();
     await ss.say_as_unknown_and_wait('안녕……');
     await era.printAndWait([
       '조용한 검은 머리의 ',
       ss.uma_sex_title,
-      '가 감정 없는 차가운 말로 ',
+      '가 감정이 실리지 않은 차가운 목소리로 ',
       you.get_colored_name(),
       '을(를) 회상에서 끌어냈다.',
     ]);
@@ -90,7 +90,7 @@ module.exports = {
     await you.say_and_wait([
       era.get('cflag:25:招募状态') === 1 ? '' : '너는…… ',
       call_coffee,
-      '？',
+      '?',
     ]);
     era.println();
     await era.printAndWait([
@@ -143,7 +143,7 @@ module.exports = {
     await era.printAndWait([
       '눈앞의 ',
       ss.get_colored_name(),
-      '이(가) 무표정하게 건넨 위협은 ',
+      '가 무표정하게 건넨 위협은 ',
       you.get_colored_name(),
       '에게 조금 귀엽게 느껴졌다. 하지만 이 자리에서 그걸 드러낼 용기는 이미 없었다.',
     ]);
@@ -167,7 +167,7 @@ module.exports = {
       you.get_colored_name(),
       '이(가) 계속해서 ',
       ss.sex,
-      '에게 말을 걸려고 하자 어느샌가 말없이 떠나버렸다는 걸 깨달았다.',
+      '에게 말을 걸려고 하자 어느새 말없이 떠나버렸다는 걸 깨달았다.',
     ]);
     await era.printAndWait([
       '나중에야 ',
@@ -209,7 +209,7 @@ module.exports = {
       ss.get_colored_name(),
       '가 ',
       you.get_colored_name(),
-      '보다 한발 먼저 선택을 내린 것 같았다.',
+      '보다 한발 먼저 결정을 내린 것 같았다.',
     ]);
     await era.printAndWait([
       ss.sex,
@@ -253,7 +253,7 @@ module.exports = {
         you.get_colored_name(),
         '이(가) 보건실에서 눈을 뜨자 ',
         ss.get_colored_name(),
-        '이(가) 무표정하게 옆 의자에 앉아 ',
+        '가 무표정하게 옆 의자에 앉아 ',
         you.get_colored_name(),
         '을(를) 보고 있었다.',
       ]);

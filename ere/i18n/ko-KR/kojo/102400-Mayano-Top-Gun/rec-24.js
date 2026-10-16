@@ -13,7 +13,7 @@ module.exports = {
   async rec_start(maya, you) {
     const ret = [];
     await era.printAndWait(
-      `오늘은 장래가 유망한 우마무스메를 알아보고 발굴하기 위한 선발 레이스가 열리는 날이다. 어떤 우마무스메를 만나게 될까——${you.name}은(는) 가슴을 두근거리며 경기장으로 향했다.`,
+      `오늘은 장래가 유망한 우마무스메를 알아보고 발굴하기 위한 선발 레이스가 열리는 날이다. 어떤 우마무스메를 만나게 될까——${you.name}은(는) 두근거리는 가슴을 안고 경기장으로 향했다.`,
     );
     await maya.say_and_wait(
       '싫어, 싫어, 싫어————! 마야도 레이스 나가고 싶어! 나가게 해 줘!!',
@@ -94,7 +94,7 @@ module.exports = {
         `직원의 떠넘기기가 마지막 한 방이 되었다. 앞으로 매일 혹사당하며 잡일꾼보다 못한 조연으로 전락하고, 끝내 걷어차일 것이라 생각하자 절망이 ${you.name}의 가슴을 가득 채웠다.`,
       );
       await era.printAndWait(
-        `${you.name}은(는) 바닥에 웅크려, 나이가 몇인데도 어린아이처럼 울었다.`,
+        `${you.name}은(는) 나잇값도 못 하고 바닥에 웅크려 어린아이처럼 울었다.`,
       );
       await maya.say_and_wait('어……?');
       await era.printAndWait(`직원도 ${maya.name}도 할 말을 잃었다.`);
@@ -169,7 +169,7 @@ module.exports = {
         '혹시…… 이게 전설의 첫눈에 반했다는 거야!? 꺄~☆ 마야는 인기쟁이네',
       );
       await era.printAndWait(
-        `아직 말로는 다 표현하지 못하지만 레이스의 전개를 완전히 읽어 낸 ${maya.name}。`,
+        `아직 말로는 다 표현하지 못하지만 레이스의 전개를 완전히 읽어 낸 ${maya.name}.`,
       );
       await era.printAndWait(
         `${maya.sex}가 드러낸 재능의 편린이 ${you.name}의 가슴에 깊이 남았다……`,
@@ -239,7 +239,7 @@ module.exports = {
     era.printButton('「저 아이는 트레이닝을 잘 못하나요?」', 1);
     await era.input();
     await era.printAndWait(
-      `교관 A 「음…… 잘 못하는 게 있다기보다는…… 아예 없어요. 뭘 시켜도 금방 배우는 대단한 아이죠.」`,
+      `교관 A 「음…… 잘 못하는 거라면…… 아예 없어요. 뭘 시켜도 금방 배우는 대단한 아이죠.」`,
     );
     await era.printAndWait(
       `교관 A 「더트를 처음 달렸을 때도 요령을 터득했고, 위닝 라이브 댄스 수업에서도 애먹는 모습을 본 적이 없어요.」`,

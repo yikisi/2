@@ -43,7 +43,7 @@
       content:
         - fontWeight: bold
           content: %CHARA%
-        - "「정답이에요～ %CALLNAME%은 이유를 알아맞히는 데 아주 능하시네요～」"
+        - "「정답이에요～ %CALLNAME%은(는) 이유를 알아맞히는 데 아주 능하시네요～」"
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -103,7 +103,7 @@
         -
         - divider: true
           position: left
-          content: "열심히 심고 난 후..."
+          content: "열심히 심고 난 후……"
         -
         - "얼마나 부지런히 손을 움직였을까, 머리 위로 쏟아지는 따스한 햇살을 받으며 마침내 코코아나무를 온전히 심어내었다."
         - color: %COLOR%
@@ -183,7 +183,7 @@
       content:
         - fontWeight: bold
           content: %CHARA%
-        - "「%CALLNAME%와 함께 느긋~하게요.」"
+        - "「%CALLNAME%과(와) 함께 느긋~하게요.」"
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -273,7 +273,7 @@
       content:
         - fontWeight: bold
           content: %CHARA%
-        - "「어라, %CALLNAME%은 아직 안 깨어나셨나요?」"
+        - "「어라, %CALLNAME%은(는) 아직 안 깨어나셨나요?」"
     - "아직 잠 기운이 가시지 않은 %CHARA%는, %YOU%의 몸을 품에 살포시 끌어안았다."
     - "이내 눈을 다시 지긋이 감으며, 전신으로 느껴지는 익숙한 향기에 깊이 가라앉았다."
     - color: %COLOR%
@@ -607,7 +607,7 @@
           content:
             - fontWeight: bold
               content: %CHARA%
-            - "「어라, 혹시 %CALLNAME%은 그렇게 불리는 게 마음에 드셨나요?」"
+            - "「어라, 혹시 %CALLNAME%은(는) 그렇게 불리는 게 마음에 드셨나요?」"
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -617,7 +617,7 @@
           content:
             - fontWeight: bold
               content: %CHARA%
-            - "「아니면…… %CALLNAME%은 이보다 더어욱 깊고 내밀한 호칭을 원하시는 걸까요?」"
+            - "「아니면…… %CALLNAME%은(는) 이보다 더어욱 깊고 내밀한 호칭을 원하시는 걸까요?」"
         - "묘한 상상력을 자극하는 유혹적인 대사를 나직하게 속삭이며, 그녀는 몸을 이끌고 %YOU%의 가슴팍에 천천히 기대어 왔다."
         - "옷자락을 가볍게 붙잡은 양손의 손가락이 피부 위를 기분 좋게 톡톡 두드리며 유연하게 움직였다."
         - "초점이 다소 풀린 듯한 나른한 눈빛으로 %YOU%을(를) 응시하던 그녀의 시선이 이내 몽롱하게 흐려지기 시작했다."
@@ -657,7 +657,7 @@
           content:
             - fontWeight: bold
               content: %CHARA%
-            - "「우후훗～ %CALLNAME%은 참 엉뚱하기도 하시지이～」"
+            - "「우후훗～ %CALLNAME%은(는) 참 엉뚱하기도 하시지이～」"
         - "%YOU%의 눈앞에 서 있던 %CHARA%는 망설임 없이 앞으로 한 걸음 내딛더니, 이내 허리에 두 팔을 감싸 안고 재차 포옹을 걸어왔다."
         - color: %COLOR%
           content:
@@ -747,7 +747,7 @@
     content:
       - fontWeight: bold
         content: %CHARA%
-      - "「역시, %CALLNAME%이 없으면…… 당신이 곁에 없으면, 전 더 이상 버틸 수 없나 봐요.」"
+      - "「역시, %CALLNAME%이(가) 없으면…… 당신이 곁에 없으면, 전 더 이상 버틸 수 없나 봐요.」"
   - color: %COLOR%
     content:
       - fontWeight: bold
@@ -1006,7 +1006,7 @@ small_party:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - "「……도베르가 저한테, %CALLNAME%과 사이좋게 지내고 싶다고 계속 이야기했답니다～」"
+        - "「……도베르가 저한테, %CALLNAME%과(와) 사이좋게 지내고 싶다고 계속 이야기했답니다～」"
     - acc: 1
       content: "「응?」"
     - color: %D_COLOR%
@@ -1055,7 +1055,7 @@ all_along:
       content: "「방 어디에서 냄새가 난다는 거지……」"
     - "일을 갑자기 중단하자 피로가 %YOU%의 어깨 위로 밀려왔다."
     - "이왕 피곤해진 김에 조금 쉬자."
-    - "그렇게 생각한 %YOU%는 자리에서 일어나 소파 한쪽에 앉아 몸을 기댔다."
+    - "그렇게 생각한 %YOU%은(는) 자리에서 일어나 소파 한쪽에 앉아 몸을 기댔다."
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -1087,7 +1087,7 @@ all_along:
       content: "「조금 더운 정도야 괜찮겠지.」"
       lines:
         - "조금 더운 정도는 괜찮다. 에어컨도 있으니까."
-        - "그렇게 생각하며 %YOU%는 소파에 누운 채 피곤한 눈을 감고 잠깐 쉴 생각이었다."
+        - "그렇게 생각하며 %YOU%은(는) 소파에 누운 채 피곤한 눈을 감고 잠깐 쉴 생각이었다."
         - "원래라면 이 낮잠은 오후까지 이어지다 알람이나 누군가 깨우는 소리에 끝났을 것이다."
         - color: %COLOR%
           content:
@@ -1107,7 +1107,7 @@ all_along:
             - fontWeight: bold
               content: %CHARA%
             - "「아, %CALLNAME%……이렇게 해 드리는 걸 좋아하시나요?」"
-        - "%YOU%가 바라보는 앞에서 %CHARA%는 천천히 입을 벌려 지퍼를 물고 아래로 내렸다."
+        - "%YOU%이(가) 바라보는 앞에서 %CHARA%는 천천히 입을 벌려 지퍼를 물고 아래로 내렸다."
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -1339,7 +1339,7 @@ miss_tram_sex:
         content: %CHARA%
       - "「%CALL_64%, 그런 말씀은 하지 마셔요~」"
   - "전차에 나란히 앉은 두 자매는 서로 장난을 치며, 양옆에서 가운데 낀 %YOU%을(를) 콕콕 찔러댔다."
-  - "하지만 이미 졸음이 쏟아지던 %YOU%는 %THEY%의 장난에 답하지 않았다."
+  - "하지만 이미 졸음이 쏟아지던 %YOU%은(는) %THEY%의 장난에 답하지 않았다."
   - color: %COLOR%
     content:
       - fontWeight: bold
@@ -1497,7 +1497,7 @@ the_fruit:
         - fontWeight: bold
           content: %CHARA%
         - "「절 조금만 도와주실 수 있으신가요~」"
-    - "%YOU%가 일이 적어 여유를 부리던 때, %CHARA%가 불쑥 나타났다."
+    - "%YOU%이(가) 일이 적어 여유를 부리던 때, %CHARA%가 불쑥 나타났다."
     - "%CHARA%는 능청스럽게 %YOU%의 손을 맞잡고는 응석을 부리듯 가볍게 잡아당겼다."
     - color: %COLOR%
       content:
@@ -1656,7 +1656,7 @@ know_us:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - "「원래는 조금 더 북적북적하게 %CALLNAME%를 환영해 드리고 싶었는데요.」"
+        - "「원래는 조금 더 북적북적하게 %CALLNAME%을(를) 환영해 드리고 싶었는데요.」"
     - "금빛 눈동자에 언뜻 쓸쓸한 빛이 서리더니, 그녀는 조금 불안한 듯 %YOU%을(를) 슬그머니 올려다보았다."
     - acc: 1
       content: "「괜찮아, 가끔은 이렇게 조용한 것도 나쁘지 않지.」"
@@ -1842,7 +1842,7 @@ dear_elder_sister:
     - "주변 사람들의 의아하고 기묘한 시선을 뒤로한 채, %YOU%은(는) 두 마리의 %UMA%를 이끌고 서둘러 휴게실 안으로 대피했다."
     - "평소라면 이용객으로 붐볐을 방이었지만, 묘하게도 오늘은 신기할 정도로 내부에 아무도 없었다."
     - "(어째서 오늘따라 이렇게 유독 조용한 거지?)"
-    - "%YOU%가 이유를 생각하는 사이, %CHARA%가 뒤로 다가와 살며시 허리를 꼬집었다."
+    - "%YOU%이(가) 이유를 생각하는 사이, %CHARA%가 뒤로 다가와 살며시 허리를 꼬집었다."
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -1914,7 +1914,7 @@ dear_elder_sister:
             - fontWeight: bold
               content: %CHARA%
             - "「그러니 %CALLNAME%…… 헛된 저항은 하지 않는 편이 좋으실 거예요~」"
-        - "힘센 두 손이 %YOU%를 소파에 밀어 눕혔다."
+        - "힘센 두 손이 %YOU%을(를) 소파에 밀어 눕혔다."
     - acc: 2
       content: "「%YOU_CALL_27%, 일단 진정하고 물부터 마셔.」"
       lines:

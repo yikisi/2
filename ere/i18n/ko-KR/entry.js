@@ -63,7 +63,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ui_love = '애정';
   ui_love_template = '애정：%LOVEINFO%';
   get_ui_colored_love = (love) => ['애정：', love];
-  love_u = '？';
+  love_u = '?';
   love_0 = '중립';
   love_1 = '희미';
   love_2 = '두근거림';
@@ -76,7 +76,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ui_relation = '호감';
   ui_relation_template = '호감：%RELATIONINFO%';
   get_ui_colored_relation = (relation) => ['호감：', relation];
-  relation_u = '？';
+  relation_u = '?';
   relation_0 = '실망';
   relation_1 = '의심';
   relation_2 = '냉담';
@@ -112,7 +112,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
     },
     '입니다. 게임의 특성상, 미성년자가 접할 수 있는 공개 장소에서 본 게임을 전시하거나 배포하는 것을 금지하며, 어떠한 상업 활동(판매/부록 제공 등)이나 공개 활동(라이브 방송 등)에서도 본 게임을 사용하는 것을 금지합니다. ',
     { isBr: true },
-    '6. 게임의 출처를 명확히 명시하거나 보존하고, 어떠한 상업적 목적이나 경제적 이익도 포함하지 않으며, 본 면책 조항을 준수하는 경우,',
+    '6. 게임의 출처를 명확히 명시하거나 보존하고, 어떠한 상업적 목적이나 경제적 이익도 포함하지 않으며, 본 면책 조항을 준수하는 경우, ',
     {
       content: 'GPL 2.0 only 오픈소스 라이선스',
       fontWeight: 'bold',
@@ -192,7 +192,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   tk_speak_border = ['「', '」'];
   tk_think_border = ['（', '）'];
   tk_past_border = ['（', '）'];
-  tk_unknown = '？？？';
+  tk_unknown = '???';
 
   nt_ask = '관련된 쪽지를 볼까요?';
   nt_no = '나중에 메인 페이지에서 본다';
@@ -200,7 +200,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ui_comma = ', ';
   ui_comma2 = '・';
   ui_period = '.';
-  ui_exclamation = '！';
+  ui_exclamation = '!';
   ui_conjunction = ' 및 ';
   ui_ellipses = '……';
   ui_semicolon = '；';
@@ -259,7 +259,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ];
   get_ui_add_skills = (chara, skills) => [
     chara,
-    '의 새로 습득한 스킬: ',
+    '이(가) 새로 습득한 스킬: ',
     ...skills,
   ];
   ui_get_pt_template = '스킬 Pt를 %PT% 획득했다!';
@@ -300,9 +300,9 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   get_trigger_love_event = (chara) => [
     '（',
     chara,
-    '와(과)의 관계가 한 단계 더 나아갈 수 있을 것 같다……）',
+    '과(와)의 관계가 한 단계 더 나아갈 수 있을 것 같다……）',
   ];
-  ui_love_level_up = '이제 돌이킬 수 없다...';
+  ui_love_level_up = '이제 돌이킬 수 없다……';
   get_ui_hurt_uma = (chara) => ['【', chara, '이(가) 부상을 입었다!】'];
   get_ui_hurt_uma_plus = (chara) => ['【', chara, '의 부상이 악화되었다!】'];
   get_ui_hurt_tired_uma = (chara) => [
@@ -465,10 +465,10 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
 
   ui_act_event_tip = '이 행동에는 이벤트가 있습니다';
   ui_loc_npc_tip_template = '이 장소에 있는 사람 %COUNT% 명';
-  ui_loc_back_tip = '돌아올 때 트리거되는 이벤트 존재';
-  ui_loc_event_tip = '이 장소에 이벤트 존재';
+  ui_loc_back_tip = '돌아올 때 발생하는 이벤트가 있습니다';
+  ui_loc_event_tip = '이 장소에서 발생하는 이벤트가 있습니다';
   ui_loc_celebration_tip_template =
-    '이 장소에서 %COUNT% 명이 기념일 이벤트가 있음';
+    '이 장소에 기념일 이벤트가 있는 캐릭터가 %COUNT%명 있습니다';
 
   ui_cost_chara_stamina_tip_template =
     '담당 캐릭터의 체력이 부족합니다 (필요: %STAMINA%)';
@@ -477,7 +477,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ui_cost_you_stamina_tip_template = '체력이 부족합니다 (필요: %STAMINA%)';
   ui_cost_you_time_tip_template = '기력이 부족합니다 (필요: %TIME%)';
   ui_cost_money_tip_template = '우마코인이 부족합니다 (필요: %MONEY%)';
-  ui_foreign_lan_max_tip_template = '%LAN% 실력은 이미 충분히 숙련되었습니다';
+  ui_foreign_lan_max_tip_template = '%LAN% 실력은 이미 충분합니다';
   ui_foreign_rest_max_tip = '이미 건강을 회복했습니다';
   ui_foreign_train_max_tip = '코스에 완전히 적응했습니다';
   ui_celebration_remote_tip = '멀리 떨어져 있으면 함께 축하할 수 없습니다';
@@ -512,7 +512,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ui_train_adapt_dis = '거리 적성';
   ui_train_adapt_style = '각질 적성';
   ui_train_adapt_ui_conjunction = '・';
-  ui_train_learnt_skills = '습득완료기술';
+  ui_train_learnt_skills = '습득한 스킬';
   ui_train_learn_skill = '스킬 습득';
   ui_train_reset_skill = '스킬 초기화';
   ui_train_with_s_rate_template =
@@ -626,7 +626,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
     race,
     '에서 ',
     rank,
-    '！',
+    '!',
   ];
   ui_race_end_event = '누구를 축하/위로해 줄까?';
   ui_race_event_chara_template = '%NAME% (%RANK%)';
@@ -666,7 +666,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
     ' 우마코인을 받았다',
   ];
 
-  get_ui_out_confirm = (chara) => [chara, '와(과) 어디로 갈까?'];
+  get_ui_out_confirm = (chara) => [chara, '과(와) 어디로 갈까?'];
   ui_out_self_confirm = '혼자 어디로 갈까?';
   get_ui_bt_talk_with_npc_template = '%NAME%에게 말 걸기';
   ui_deep_interact_with_npc_template =
@@ -754,7 +754,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
     '현재 보유한 아이템: (아이템을 클릭하면 사용하거나 설명을 볼 수 있습니다)';
   ui_storage_no_items = '보유한 아이템이 없습니다';
   ui_storage_select_header_template = '%ITEM%을(를) 사용할 대상 선택';
-  ui_storage_no_targets_template = '%ITEM%의 사용 대상이 없다...';
+  ui_storage_no_targets_template = '%ITEM%의 사용 대상이 없다……';
 
   ui_bt_self_info = '자신정보';
   ui_bt_chara_info = '상대정보';
@@ -798,10 +798,10 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ui_save_name_save_confirm_template =
     '이 이야기의 이름을 [%NAME%](으)로 정할까요?';
   ui_save_name_save_result_template =
-    '이 이야기의 제목은 이제 [%NAME%] 입니다...';
+    '이 이야기의 제목은 이제 [%NAME%] 입니다……';
   ui_save_name_remove_confirm_template = '[%NAME%] 이름을 지울까요?';
   ui_save_name_remove_result =
-    '세이브파일 이름 지정이 취소되었으며 다음 저장 시 기본 이름을 사용합니다...';
+    '세이브파일 이름 지정이 취소되었으며 다음 저장 시 기본 이름을 사용합니다……';
   ui_save_override_confirm_template = '%NO%번 슬롯의 세이브를 덮어쓸까요?';
   ui_save_save_result_template = '%NO%번 슬롯에 성공적으로 저장되었습니다';
   ui_save_rename_confirm_template =
