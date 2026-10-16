@@ -906,9 +906,9 @@ module.exports = {
       await era.printAndWait([
         '게다가 ',
         urara.get_colored_name(),
-        '는 진심으로 「1착 하는 것」을 바라고 있다.',
+        '는 진심으로 「1착 하는 것」을 바라고 있다. ',
         urara.sex,
-        '그렇다면 의욕에 넘쳐 착실하게 연습해 줄 것이다!',
+        '는 의욕에 넘쳐 착실하게 연습해 줄 것이다!',
       ]);
       await era.printAndWait([
         '「',

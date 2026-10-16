@@ -2485,7 +2485,7 @@ module.exports = {
 
       await era.printAndWait([
         urara.sex,
-        '그 기척을 ',
+        '의 기척을 ',
         you.get_colored_name(),
         '에게 새기기로 결심하기까지, 작은 ',
         urara.uma_sex_title,
