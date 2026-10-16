@@ -12,7 +12,7 @@ module.exports = {
      * @param {string} callname ナイスネイチャのプレイヤーへの呼び方
      */
     const f = async (nature, callname) => {
-      await nature.say_and_wait(`1착…… 내가 1착! ${callname}봐! 나, 1착이야!`);
+      await nature.say_and_wait(`1착…… 내가 1착! ${callname}, 봐! 나, 1착이야!`);
       era.printButton('「축하해. 네가 강하니까 이긴 거야.」', 1);
       era.printButton('「네 힘으로 이긴 거야.」', 2);
       if ((await era.input()) === 1) {
@@ -48,7 +48,7 @@ module.exports = {
       await era.input();
       await nature.say_and_wait('아하하! 대답이 시원시원하네──');
       await nature.say_and_wait(
-        `나도 먼저 ${callname}의 앞으로 계획을 알고 싶은데.`,
+        `나도 먼저 ${callname}의 앞으로의 계획을 알고 싶은데.`,
       );
       era.printButton('「먼저 물어볼게. 나가고 싶은 레이스가 있어?」', 1);
       await era.input();
@@ -210,7 +210,7 @@ module.exports = {
       await era.input();
       await nature.say_and_wait('그야…… 이상하잖아? 내가 테이오보다 강하다니.');
       await nature.say_and_wait(
-        '조금도 빛나지 않는 나라고? 뭔가 잘못된 거야. ──정말! 착각하고, 창피해──!',
+        '조금도 빛나지 않는 나라고? 뭔가 잘못된 거야. ──정말! 착각했다니, 창피해──!',
       );
       await era.printAndWait(
         `나이스 네이처는 분명히 이겼다. 그리고 그 이유는 틀림없이 ${nature.sex}의 실력이다. 하지만 ${nature.sex}는……`,
@@ -259,7 +259,7 @@ module.exports = {
       await era.printAndWait([
         '이렇게 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         nature.get_colored_name(),
         '는 다음 목표를 『코쿠라 기념』으로 정했다!',
       ]);
@@ -358,7 +358,7 @@ module.exports = {
       await era.printAndWait([
         '이렇게 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         nature.get_colored_name(),
         '는 다음 목표를 『코쿠라 기념』으로 정했다!',
       ]);
@@ -378,7 +378,7 @@ module.exports = {
       );
       await nature.say_and_wait('더워……');
       await nature.say_and_wait(
-        '햇님도 기운이 넘치네. 그늘에서 사는 나한테는 너무 눈부셔……',
+        '해님도 기운이 넘치네. 그늘에서 사는 나한테는 너무 눈부셔……',
       );
       await nature.say_and_wait(
         '벌써부터 마지막까지 무사히 버틸 수 있을지 걱정되기 시작했어.',
@@ -407,7 +407,7 @@ module.exports = {
       );
       await nature.say_and_wait('트레이너, 속으로는 기대하고 있지……');
       await era.printAndWait(
-        `이렇게 ${you.name}와(과) 나이스 네이처의 뜨거운 여름 합숙이 시작됐다.`,
+        `이렇게 ${you.name}과(와) 나이스 네이처의 뜨거운 여름 합숙이 시작됐다.`,
       );
       await nature.say_and_wait('아, 열혈은 적당히 부탁해. 그럼 잘 부탁해──');
     };
@@ -434,7 +434,7 @@ module.exports = {
       await nature.say_and_wait(
         '……그렇게 응원받으니까 이래도 괜찮겠다는 생각이 들더라. 난 내 방식대로 한 걸음씩…… 천천히 나아가면 되는 거지?',
       );
-      await nature.say_and_wait('언젠가 닿을 수 있을지 몰라도……');
+      await nature.say_and_wait('언젠가 닿을 수 있을지는 모르지만……');
       await nature.say_and_wait(
         `……있잖아, ${callname}. 좀 멋없는 말 하나 할게.`,
       );
@@ -611,7 +611,7 @@ module.exports = {
       await nature.say_and_wait(
         '내 방식을 지키면서 한 걸음씩…… 천천히 나아가면 되는 거잖아.',
       );
-      await nature.say_and_wait('언젠가 닿을 수 있을지 몰라도……');
+      await nature.say_and_wait('언젠가 닿을 수 있을지는 모르지만……');
       await nature.say_and_wait('……할 수 있는 한 정면으로 맞서는 거야.');
       await nature.say_and_wait(
         '아직 가슴을 펴고 자신 있게 레이스에 나설 수 있는 건 아니야……',
@@ -655,7 +655,7 @@ module.exports = {
       era.printButton('「아니, 방금은……」', 1);
       await era.input();
       await era.printAndWait(
-        `${you.name}은(는) 자신을 격려하려던 말이 무심코 입 밖으로 나와 버렸다.`,
+        `${you.name}은(는) 스스로를 격려하려던 말을 무심코 입 밖에 내고 말았다.`,
       );
       await nature.say_and_wait(
         '풉, 후후후…… 아하하하! 정말! 『망했다』는 표정 짓지 마.',
@@ -753,14 +753,14 @@ module.exports = {
       era.printButton('「그럼 도전하자!」', 1);
       await era.input();
       await era.printAndWait(
-        `이렇게 ${you.name}와(과) 나이스 네이처는 클래식급 마지막 도전을 『아리마 기념』으로 정했다!`,
+        `이렇게 ${you.name}과(와) 나이스 네이처는 클래식급 마지막 도전을 『아리마 기념』으로 정했다!`,
       );
       if (era.get('love:60') >= 75) {
         era.printButton('「그리고……이것도 축하 선물이야」', 1);
         await era.input();
         await nature.say_and_wait('응? 뭔데, 뭔데?');
         await era.printAndWait(
-          '나이스 네이처의 물음에 바로 답하지 않고, 뒤로 손을 뻗어 대기실 문을 잠갔다',
+          '나이스 네이처의 물음에 바로 답하지 않고, 뒤로 손을 뻗어 대기실 문을 잠갔다.',
         );
         era.printButton('「우리 집안이 자랑하는 염색체야」', 1);
         await era.input();
@@ -768,14 +768,14 @@ module.exports = {
           '……뭐? 잠깐, 잠깐, 잠깐! 여기서 하겠다고? 여긴 대기실이잖아!',
         );
         await era.printAndWait(
-          `${you.name}가 갑자기 옷을 벗기 시작하자, 나이스 네이처는 얼굴이 새빨개져 소파 뒤로 몸을 움츠렸다.`,
+          `${you.name}이(가) 갑자기 옷을 벗기 시작하자, 나이스 네이처는 얼굴이 새빨개져 소파 뒤로 몸을 움츠렸다.`,
         );
         era.printButton(
           '「괜찮아. 여긴 방음도 잘되고, 아무도 안 와……너도 하고 싶잖아?」',
           1,
         );
         await era.printAndWait(
-          `막 레이스를 마친 ${nature.uma_sex_title}는 전력으로 달린 열기가 아직 몸에 남아 발정에 가까운 상태가 된다. 지금이 딱 그랬다. 승부복 아래의 스패츠마저 살짝 젖어 있는 것이 보였다`,
+          `막 레이스를 마친 ${nature.uma_sex_title}는 전력으로 달린 열기가 아직 몸에 남아 발정에 가까운 상태가 된다. 지금이 딱 그랬다. 승부복 아래의 스패츠마저 살짝 젖어 있는 것이 보였다.`,
         );
         await nature.say_and_wait('그……그래도 땀 냄새가——');
         era.printButton(
@@ -784,7 +784,7 @@ module.exports = {
         );
         await era.input();
         await era.printAndWait(
-          `나이스 네이처가 말을 마치기도 전에, ${you.name}는 소파에 쓰러뜨리고 승부복 안으로 두 손을 밀어 넣었다. 나이스 네이처도 곧 저항을 멈추고 몸을 ${you.name}에게 맡겼다……`,
+          `나이스 네이처가 말을 마치기도 전에, ${you.name}은(는) 소파에 쓰러뜨리고 승부복 안으로 두 손을 밀어 넣었다. 나이스 네이처도 곧 저항을 멈추고 몸을 ${you.name}에게 맡겼다……`,
         );
       }
     };
@@ -803,7 +803,7 @@ module.exports = {
      */
     const f = async (nature, teio, luna, maya, you, callname) => {
       await era.printAndWait(
-        `${you.name}와(과) 나이스 네이처가 다음 목표인 『아리마 기념』을 향해 트레이닝을 이어 가던 어느 날……`,
+        `${you.name}과(와) 나이스 네이처가 다음 목표인 『아리마 기념』을 향해 트레이닝을 이어 가던 어느 날……`,
       );
       await nature.say_and_wait(`벤치 프레스 끝~ ${callname}, 잠깐 쉬어도 돼?`);
       era.printButton('「그럼.」', 1);
@@ -972,7 +972,7 @@ module.exports = {
         '난 이런 레이스에서 더 힘을 낼 수 있을지도 몰라. 응, 나가고 싶어…… 『타카라즈카 기념』!',
       );
       await era.printAndWait(
-        `다만 그 레이스까지는 아직 시간이 조금 남아 있다. ${you.name}와(과) 나이스 네이처는 그동안 다양한 레이스에 나가며 『타카라즈카 기념』을 향해 성장해 나가기로 했다.`,
+        `다만 그 레이스까지는 아직 시간이 조금 남아 있다. ${you.name}과(와) 나이스 네이처는 그동안 다양한 레이스에 나가며 『타카라즈카 기념』을 향해 성장해 나가기로 했다.`,
       );
       await nature.say_and_wait(
         '우리, 너무 성급한가? 여기서 다음 레이스까지 정해 버리다니──',
@@ -1045,7 +1045,7 @@ module.exports = {
         '『아리마 기념』 이후 나이스 네이처는 메지로 맥퀸과 메지로 라이언에게 그토록 강한 이유를 물었다.',
       );
       await era.printAndWait(
-        `오늘 ${nature.sex}는 두 사람의 초대를 받아 강함의 이유를 배우러 갔다. ──메지로 가문으로 하루 유학을 떠났다고 해도 좋을 것이다.`,
+        `오늘 ${nature.sex}는 두 사람의 초대를 받아 강해지는 비결을 배우러 갔다. ──메지로 가문으로 하루 유학을 떠났다고 해도 좋을 것이다.`,
       );
       await era.printAndWait(
         `나이스 네이처는 성실하다. ${nature.sex}는 반드시 무언가를 얻어 돌아올 것이다. ${you.name}은(는) 그렇게 믿고 조용히 기다리기로 했다──`,
@@ -1139,7 +1139,7 @@ module.exports = {
       await nature.say_and_wait('네……!');
       era.drawLine();
       await era.printAndWait(
-        `다음 날 아침, ${you.name}이(가) 나이스 네이처를 만나니 ${nature.sex}의 표정은 밝게 개어 있었다.`,
+        `다음 날 아침, ${you.name}이(가) 나이스 네이처를 만나니 ${nature.sex}의 표정은 밝아져 있었다.`,
       );
       await nature.say_and_wait(
         '나…… 그 두 사람한테 이기고 싶어. ──『타카라즈카 기념』에서!',
@@ -1213,7 +1213,7 @@ module.exports = {
       );
       await nature.say_and_wait('가자. 가을의 큰 무대로……!');
       await era.printAndWait(
-        `──이렇게 ${you.name}와(과) 나이스 네이처는 중거리 최강을 다투는 『텐노상(가을)』에 도전하기로 했다!`,
+        `──이렇게 ${you.name}과(와) 나이스 네이처는 중거리 최강을 다투는 『텐노상(가을)』에 도전하기로 했다!`,
       );
       if (era.get('love:60') >= 75) {
         era.printButton('「그리고 늘 하던 그거──」', 1);
@@ -1254,7 +1254,7 @@ module.exports = {
         '수준 높은 레이스에서 진지하게 싸워서…… 성과를 냈어.',
       );
       await nature.say_and_wait(
-        '한계 같은 건 생각하지 않고…… 내 손으로 성과를 잡았어.',
+        '한계 같은 건 생각하지 않고…… 내 손으로 성과를 거뒀어.',
       );
       await nature.say_and_wait(
         '……이대로라면 닿을 수 있을까? 빛나고 싶다는…… 꿈에……',
@@ -1336,7 +1336,7 @@ module.exports = {
       await nature.say_and_wait('왜…… 그런 말을 한 거야? 나 바보야──!!');
       await nature.say_and_wait('정통파 주인공한테 선전포고를 해 버렸잖아……!');
       await era.printAndWait(
-        `이야기는 텐노상(가을)이 끝난 뒤, ${you.name}와(과) 나이스 네이처가 돌아오는 길에 토카이 테이오를 만나 `,
+        `이야기는 텐노상(가을)이 끝난 뒤, ${you.name}과(와) 나이스 네이처가 돌아오는 길에 토카이 테이오를 만나 `,
       );
       await era.printAndWait(
         `${nature.sex}도 올해 아리마 기념에 나간다는 걸 알게 된 때로 거슬러 올라간다. 그 자리의 기세에 휩쓸려 나이스 네이처는 「아리마 기념에서 너를 이기겠어」라고 선언해 버렸다──`,
@@ -1352,7 +1352,7 @@ module.exports = {
       era.printButton('「네이처!」', 1);
       await era.input();
       await nature.say_and_wait(
-        `우왓!? ${callname.substring(0, 1).repeat(4)}、${callname}！？`,
+        `우왓!? ${callname.substring(0, 1).repeat(4)}, ${callname}!?`,
       );
       await nature.say_and_wait('왜 여기에…… 아, 잠깐!');
       await nature.say_and_wait('혹시 벌써 트레이닝 시간이야……?');
@@ -1463,7 +1463,7 @@ module.exports = {
         '이길 거야. 소중한…… 정말 소중한 이유가 있으니까.',
       );
       await nature.say_and_wait(
-        '……그나저나 트레이너도 고생이 많네. 정신 관리까지 해야 하고.',
+        '……그나저나 트레이너도 고생이 많네. 마음까지 챙겨 줘야 하고.',
       );
       await nature.say_and_wait('뭐, 그것도 일의 일부일지 모르지만.');
       era.printButton('「내 일은 네가 빛나게 하는 거니까.」', 1);
@@ -1533,7 +1533,7 @@ module.exports = {
       era.printButton('「전부 네가 쟁취한 거야.」', 1);
       await era.input();
       await nature.say_and_wait('……');
-      await nature.say_and_wait(`으으~~~~! ${callname}……！`);
+      await nature.say_and_wait(`으으~~~~! ${callname}……!`);
       await nature.say_and_wait(
         '포기하지 않아서 다행이야……! 꿈을 계속 좇아서 다행이야~~!',
       );
@@ -1588,7 +1588,7 @@ module.exports = {
       );
       await nature.say_and_wait('하지만…… 그래도 이것만큼은 약속할 수 있어요.');
       await nature.say_and_wait(
-        `──여러분의 믿음을 가장 저버리지 않을 ${nature.uma_sex_title}니까요!`,
+        `──누구보다 여러분의 믿음에 보답할 ${nature.uma_sex_title}니까요!`,
       );
     };
     f.title = title;
@@ -1707,7 +1707,7 @@ module.exports = {
         await era.input();
         await nature.say_and_wait('가, 자, 고!');
         await era.printAndWait(
-          `이렇게 여주인의 따뜻한 배웅을 받으며 ${you.name}와(과) 나이스 네이처는 가게를 나섰다.`,
+          `이렇게 여주인의 따뜻한 배웅을 받으며 ${you.name}과(와) 나이스 네이처는 가게를 나섰다.`,
         );
       } else {
         await nature.say_and_wait('에…… 에엣?! 나를?!');
@@ -1731,7 +1731,7 @@ module.exports = {
         );
         await nature.say_and_wait('게다가 아주머니한테 들키잖아……');
         await era.printAndWait(
-          `물론, ${you.name}가 그 말을 들었는지는 또 다른 이야기다……`,
+          `물론, ${you.name}이(가) 그 말을 들었는지는 또 다른 이야기다……`,
         );
       }
       return [ret];
@@ -1764,7 +1764,7 @@ module.exports = {
       await era.printAndWait('그렇게 상점가 동네 야구 대항전의 막이 올랐다.');
       era.drawLine();
       await era.printAndWait(
-        '두 팀은 한 치도 물러서지 않고 점수는 0대 0인 채로 경기가 뜨거워졌다.',
+        '두 팀이 한 치도 물러서지 않으면서, 경기는 0대 0인 채로 점점 뜨거워졌다.',
       );
       await nature.say_and_wait(
         '와, 점점 뜨거워지네~ 하지만 트레이너, 완전히 지쳤잖아.',
@@ -1794,7 +1794,7 @@ module.exports = {
         '그 대화를 들은 나이스 네이처는 레이스에서 받았던 모두의 응원을 떠올렸다……',
       );
       await nature.say_and_wait(
-        '등을 밀어 줘서 힘낼 수 있었던 건 모두와 트레이너 덕분이었지……',
+        '힘낼 수 있었던 건 모두와 트레이너가 응원해 준 덕분이었지……',
         true,
       );
       await nature.say_and_wait(
@@ -1842,7 +1842,7 @@ module.exports = {
       );
       era.printButton('「네 응원 덕분이야!」', 2);
       if (era.get('love:60') >= 75) {
-        era.printButton('「네이처～! 고마워～!」', 3);
+        era.printButton('「네이처~! 고마워~!」', 3);
       }
       const ret = await era.input();
       switch (ret) {
@@ -1886,7 +1886,7 @@ module.exports = {
             '왜 그래? 이 옷, 부끄럽기도 하고 바람이 들어와서 쌀쌀하단 말이야……',
           );
           await era.printAndWait(
-            `나이스 네이처는 투덜거리면서도 걸음을 멈추고, ${you.name}을 향해 돌아선다.`,
+            `나이스 네이처는 투덜거리면서도 걸음을 멈추고, ${you.name}을(를) 향해 돌아선다.`,
           );
           era.printButton('「그게…… 그런 차림의 네이처가 너무 귀여워서……」', 1);
           await era.input();
@@ -1902,15 +1902,15 @@ module.exports = {
             '……가가가갑자기 무슨 소리를 하는 거야아아아!',
           );
           await era.printAndWait(
-            '연달아 기습을 당한 나이스 네이처는 소리를 질렀다가,',
+            '연달아 기습을 당한 나이스 네이처는 소리를 질렀다가, ',
           );
           await era.printAndWait(
-            '그 바람에 상점가 사람들의 시선이 몰렸다는 것을 깨닫고는,',
+            '그 바람에 상점가 사람들의 시선이 몰렸다는 것을 깨닫고는, ',
           );
           await era.printAndWait(
             '주위에 어색하게 웃어 보인 뒤 다시 이쪽을 돌아보며',
           );
-          await era.printAndWait('둘만 들을 수 있는 목소리로 투덜거렸다');
+          await era.printAndWait('둘만 들을 수 있는 목소리로 투덜거렸다.');
           await nature.say_and_wait(
             `밝히는 ${callname}! 이런 데서 그런 말 하지 마!`,
           );
@@ -1918,10 +1918,10 @@ module.exports = {
           await era.input();
           await nature.say_and_wait('으냐냐냐냐! 알았어! 그만 말해!');
           await era.printAndWait(
-            `얼굴이 새빨개진 네이처는 두 손을 휘저어 ${you.name}의 말을 막았다`,
+            `얼굴이 새빨개진 네이처는 두 손을 휘저어 ${you.name}의 말을 막았다.`,
           );
           await nature.say_and_wait(
-            `으으……${callname}를 이렇게 흥분시킨 건 나 때문이네`,
+            `으으……${callname}을(를) 이렇게 흥분시킨 건 나 때문이네`,
           );
           await nature.say_and_wait(
             '책임지고 해결해 줄게……그래도 여기서 할 순 없잖아?',
@@ -1933,9 +1933,9 @@ module.exports = {
           await era.input();
           await nature.say_and_wait(`그게 무슨 말이야! 잠깐……${callname}！？`);
           await era.printAndWait(
-            `${you.name}는 나이스 네이처가 반대할 틈도 주지 않고 ${nature.sex}를 옆으로 안아 들고 탈의실로 뛰어들어 칸막이 안쪽 문을 잠갔다.`,
+            `${you.name}은(는) 나이스 네이처가 반대할 틈도 주지 않고 ${nature.sex}를 옆으로 안아 들고 탈의실로 뛰어들어 칸막이 안쪽 문을 잠갔다.`,
           );
-          await era.printAndWait('다행히 이 광경을 본 사람은 없는 듯했다');
+          await era.printAndWait('다행히 이 광경을 본 사람은 없는 듯했다.');
           await era.printAndWait(
             '칸막이 안에서 격렬한 한판이 시작되려 하고 있었다……',
           );
@@ -1955,7 +1955,7 @@ module.exports = {
      */
     const f = async (nature, you, callname, self_call) => {
       await era.printAndWait(
-        `${you.name}와(과) 나이스 네이처가 함께 돌아가는 길──`,
+        `${you.name}과(와) 나이스 네이처가 함께 돌아가는 길──`,
       );
       await nature.say_and_wait(
         '있잖아, 아직 시간도 있으니까…… 그……………… 물고기 보러 안 갈래?',
@@ -2010,23 +2010,23 @@ module.exports = {
       const ret = await era.input();
       if (ret === 1) {
         await nature.say_and_wait('……저기 말이야. 내 말 듣고 있었어?');
-        era.printButton('「듣고 있었어」', 1);
+        era.printButton('「듣고 있었어.」', 1);
         await era.input();
         await nature.say_and_wait(
           '응, 알고 있어. 하지만 그런 뜻이 아니었거든?',
         );
         await nature.say_and_wait(
-          '아니, 뭐…… 결국 내가 맞춰준다고 말하긴 했으니까.',
+          '아니, 뭐…… 결국 내가 맞춰 준다고 말하긴 했으니까.',
         );
         await nature.say_and_wait(
           '알았어 알았어. 쌤이 보면서 힐링할 수 있다면, 뭐.',
         );
         await nature.say_and_wait(
-          '난 『꺄아～』 같은 귀여운 반응은 못 해주니까, 그 점은 이해해 줘──',
+          '난 『꺄아~』 같은 귀여운 반응은 못 해 주니까, 그 점은 이해해 줘──',
         );
         era.drawLine();
         await nature.say_and_wait(
-          '오오, 힘이 넘치는 돌고래네～ 어? 푸핫!? 잠깐만, 물! 물이──',
+          '오오, 힘이 넘치는 돌고래네~ 어? 푸핫!? 잠깐만, 물! 물이──',
         );
         await nature.say_and_wait('가아아악──!!?');
         await nature.say_and_wait('제길…… 저 물보라는 반칙이잖아.');
@@ -2034,9 +2034,9 @@ module.exports = {
           '원래 돌고래 쇼가 이렇게 스릴 넘치는 오락이었나……',
         );
         await nature.say_and_wait(
-          '정말이지…… 『꺄아～』는커녕, 단전에서 비명이 터져 나왔네.',
+          '정말이지…… 『꺄아~』는커녕, 단전에서 비명이 터져 나왔네.',
         );
-        era.printButton('「즐거워 보이네」', 1);
+        era.printButton('「즐거워 보이네.」', 1);
         await era.input();
         await nature.say_and_wait(
           '후후…… 응, 그러게. 나한텐 이런 방식이 더 잘 맞는 것 같아.',
@@ -2045,9 +2045,9 @@ module.exports = {
           `${you.name}과(와) 나이스 네이처는 수족관에서 즐거운 시간을 보내며 푹 쉬었다.`,
         );
       } else {
-        await nature.say_and_wait('오～ 재밌어 보이는데!');
+        await nature.say_and_wait('오~ 재밌어 보이는데!');
         await nature.say_and_wait(
-          '게다가 무려 『공포의』 전시라니. 얼마나 무서운지 실력 좀 감상해 볼까～',
+          '게다가 무려 『공포의』 전시라니. 얼마나 무서운지 실력 좀 감상해 볼까~',
         );
         await era.printAndWait(
           `그렇게 ${you.name}과(와) 나이스 네이처는 전시 구역으로 향했다……`,
@@ -2057,11 +2057,11 @@ module.exports = {
         await era.input();
         await nature.say_and_wait('귀, 여, 워, 죽, 겠, 어!!');
         await nature.say_and_wait(
-          '우와아아～～～!! 뭐야 이거! 동글동글한 눈 좀 봐! 『우무문어』라고 하는구나～',
+          '우와아아~~~!! 뭐야 이거! 동글동글한 눈 좀 봐! 『우무문어』라고 하는구나~',
         );
-        await nature.say_and_wait('꺄아～～～～');
+        await nature.say_and_wait('꺄아~~~~');
         await nature.say_and_wait('──앗!!');
-        era.printButton('「네가 즐거워하니 다행이야」', 1);
+        era.printButton('「네가 즐거워하니 다행이야.」', 1);
         await era.input();
         await nature.say_and_wait(
           '너…… 너무 반칙이잖아! 공포의 전시라더니, 결과적으로 다 이렇게 귀여운 생물들뿐이고!',
@@ -2069,7 +2069,7 @@ module.exports = {
         await nature.say_and_wait('제길………… 너무 귀여워.');
         era.printButton('「저쪽 물고기도 나쁘지 않은데……」', 1);
         await era.input();
-        await nature.say_and_wait('우와, 진짜네! 못생겨서 더 귀여워～～!');
+        await nature.say_and_wait('우와, 진짜네! 못생겨서 더 귀여워~~!');
         await era.printAndWait(
           `${you.name}과(와) 나이스 네이처는 수족관에서 즐거운 시간을 보내며 푹 쉬었다.`,
         );

@@ -70,7 +70,7 @@ module.exports = {
         );
       } else {
         await chara17.say_and_wait(
-          '……이것이 그대이 원하던 결말이라면, 반대하지 않겠어.',
+          '……이것이 그대가 원하던 결말이라면, 반대하지 않겠어.',
         );
       }
       era.printButton('「어쩔 수 없는 선택이었어.」', 1);
@@ -193,17 +193,17 @@ module.exports = {
      */
     const f = async (luna, you) => {
       await era.printAndWait(
-        `심볼리 가문과 약간의 상의를 거친 뒤, ${you.name}은(는) 루나의 데뷔전을 신청했다.`,
+        `심볼리 가문과 간단히 상의한 뒤, ${you.name}은(는) 루나의 데뷔전을 신청했다.`,
       );
       await era.printAndWait('바로 재팬컵 당일이다.');
       await era.printAndWait(
         `루나는 ${you.name}의 판단을 듣고 미간을 찌푸렸으나, 결국 반대하지 않았다.`,
       );
       await era.printAndWait(
-        `${you.name}은(는) 이것이 상당히... 악의적이라는 것을 알았지만, 확실히 어쩔 수 없는 선택이었다.`,
+        `${you.name}은(는) 이것이 상당히…… 악의적이라는 것을 알았지만, 달리 도리가 없는 선택이었다.`,
       );
       await era.printAndWait(
-        '일본은 자신감을 북돋울 필요가 있었다, 설령 그것이 미래에 희망을 거는 일일지라도.',
+        '일본에는 자신감을 되찾을 계기가 필요했다. 설령 미래에 희망을 거는 것뿐일지라도.',
       );
       await era.printAndWait(
         `그렇기에 경쟁이라 부르기도 민망한 레이스를 목격했을 때, ${you.name}은(는) 본능적으로 안도의 한숨을 내쉬었다.`,
@@ -212,7 +212,7 @@ module.exports = {
         `정신을 차리고 보니 어느새 두 손을 꽉 쥐고 있었다.`,
       );
       await you.say_and_wait(
-        '내가 누구한테 주먹이라도 휘두르려는 건가? 젠장...',
+        '내가 누구한테 주먹이라도 휘두르려는 건가? 젠장……',
         true,
       );
       await era.printAndWait(
@@ -270,10 +270,10 @@ module.exports = {
         `${chara17.sex}는 계획대로 레이스를 승리로 이끌었다.`,
       );
       await era.printAndWait(
-        `${you.name}의 곁눈질에 동료들의 모습이 들어왔다.`,
+        `${you.name}이(가) 곁눈질하자 동료들의 모습이 보였다.`,
       );
       await era.printAndWait(
-        '담당이 돌아오기 전, 그들이 애써 태연한 척하기까지는 아직 약간의 시간이 남아 있었다.',
+        '담당이 돌아오면 애써 태연한 척해야겠지만, 아직은 시간이 조금 남아 있었다.',
       );
       await era.printAndWait(
         `그렇기에 ${you.name}은(는) 그들의 깊은 한숨과, 자신을 향한 선망 혹은 질투 섞인 시선을 탓하지 않았다.`,
@@ -283,7 +283,7 @@ module.exports = {
       );
       await era.printAndWait('하지만');
       era.printButton(
-        i_emperor ? '「개선을 축하드립니다...!」' : '「수고했어...!」',
+        i_emperor ? '「개선을 축하드립니다……!」' : '「수고했어……!」',
         1,
       );
       await era.input();
@@ -291,7 +291,7 @@ module.exports = {
         `${chara17.name}의 귀환을 보고 인사하려던 참에, 다른 ${chara17.uma_sex_title}가 ${chara17.sex}를 맞이했다.`,
       );
       await era.printAndWait(
-        `${you.name}은(는) 나도 모르게 긴장했다——마루젠스키였다.`,
+        `${you.name}은(는) 저도 모르게 긴장했다——마루젠스키였다.`,
       );
       await era.printAndWait(`만약 이 타이밍에 ${chara17.name}를 자극한다면——`);
       await era.printAndWait(
@@ -349,7 +349,7 @@ module.exports = {
         '루나와 「공범」이 된 후, 어느덧 새로운 한 해가 밝았다.',
       );
       await era.printAndWait(
-        `시도 때도 없이 찾아오는 전전긍긍함과 공포 탓에 ${you.name}은(는) 밤잠을 설치기 일쑤였다.`,
+        `시도 때도 없이 찾아오는 불안과 공포 탓에 ${you.name}은(는) 밤잠을 설치기 일쑤였다.`,
       );
       await era.printAndWait(
         `하지만 신년의 차가운 바람이 불어오자, ${you.name}은(는) 조금은 용기가 생기는 것 같았다.`,
@@ -405,7 +405,7 @@ module.exports = {
         `루나가 ${you.name}의 얼굴을 어루만졌다. ${you.name}은(는) ${luna.sex}의 체온과 영혼 속의 갈망을 느낄 수 있었다.`,
       );
       await luna.say_and_wait(
-        '그대이 만수무강했으면 좋겠어. 그래야 영원히 내 곁에 있어 줄 수 있을 테니까.',
+        '그대가 만수무강했으면 좋겠어. 그래야 영원히 내 곁에 있어 줄 수 있을 테니까.',
       );
       await era.printAndWait(`${you.name}은(는) 하하하 웃음을 터뜨렸다.`);
       await luna.say_and_wait('그리고, 썰렁한 농담을 더 많이 들을 수 있기를.');
@@ -438,10 +438,10 @@ module.exports = {
         '이토록 압도적인 강함, 이토록 의문의 여지가 없는 강함.',
       );
       await era.printAndWait(
-        '관중들은 전설의 개막을 알리는 듯한 광경에 지금까지 중 가장 뜨거운 환호를 보냈다.',
+        '관중들은 전설의 개막을 알리는 듯한 광경에 어느 때보다 뜨거운 환호를 보냈다.',
       );
-      era.printButton('「어쩌면 정말 실현될지도 몰라... 황제라면.」', 1);
-      era.printButton('「어쩌면 정말 실현될지도 몰라... 루나라면.」', 2);
+      era.printButton('「어쩌면 정말 실현될지도 몰라…… 황제라면.」', 1);
+      era.printButton('「어쩌면 정말 실현될지도 몰라…… 루나라면.」', 2);
       await era.input();
       await era.printAndWait(
         `${you.name}은(는) 기억하고 있었다. 그날 루나가 ${you.name}에게 했던 말을.`,
@@ -522,7 +522,7 @@ module.exports = {
           `처음부터 끝까지 ${you.name}이(가) 두려워한 것은 루나가 자기 안의 야수에게 짓눌리는 일뿐이었다.`,
         );
         await era.printAndWait(
-          `${you.name}은(는) 자신을 비웃듯 바라보는 황제를 향해 고개를 숙였다. 그녀에게서 뿜어져 나오는 산악 같은 압박감에 ${you.name}은(는) 식은땀을 흘렸다.`,
+          `${you.name}은(는) 자신을 비웃듯 바라보는 황제를 향해 고개를 숙였다. 그녀에게서 뿜어져 나오는 산처럼 짓누르는 압박감에 ${you.name}은(는) 식은땀을 흘렸다.`,
         );
         await era.printAndWait(
           `사츠키상을 넘어 이제 더비로…… 지금 이 순간, 훈련 상태보다 ${you.name}이(가) 지키고 싶은 것은 루나의 몸이었다.`,
@@ -576,7 +576,7 @@ module.exports = {
           '이 정도조차 해내지 못한다면, 우리의 이상은 결코 실현될 수 없어.',
         );
         await era.printAndWait(
-          `${you.name}은(는) 속으로 입술을 깨물며 무어라 더 말하려 했다.`,
+          `${you.name}은(는) 남몰래 이를 악물며 무어라 더 말하려 했다.`,
         );
         await era.printAndWait(
           `루나는 발을 구르며 다시 트랙으로 향하려 했으나, ${you.name}의 걱정 어린 시선을 이기지 못하고 결국 멈춰 섰다.`,
@@ -634,7 +634,7 @@ module.exports = {
         `지금 이 순간에도, 그 이야기를 떠올리면 ${you.name}은(는) 깊은 경외심을 느낀다.`,
       );
       await era.printAndWait(
-        `하지만 다시 생각해보니, ${you.name}은(는) 왠지 모를 씁쓸함이 느껴졌다.`,
+        `하지만 다시 생각해보니, ${you.name}은(는) 왠지 모를 씁쓸함을 느꼈다.`,
       );
       await era.printAndWait(
         '선구자들 또한 해냈던 일이지만, 시간은 조금의 자비도 없이 흘러 모든 위대함은 결국 추억이 되어버렸다.',
@@ -651,7 +651,7 @@ module.exports = {
         `본격화가 사라지면 아무리 강한 ${chara17.uma_sex_title}라도 평범한 이들 속에 묻혀 희미한 기억만을 남긴다.`,
       );
       await era.printAndWait(
-        `이것은 거부할 수 없는 순리이며, 언젠가는 ${chara17.name} 또한...`,
+        `이것은 거부할 수 없는 순리이며, 언젠가는 ${chara17.name} 또한……`,
       );
       await era.printAndWait(
         `${you.name}의 흥분 뒤에 숨겨진 비탄을 느낀 듯, ${chara17.name}는 조용히 당신을 바라보았다.`,
@@ -659,7 +659,7 @@ module.exports = {
       if (i_emperor) {
         await chara17.say_and_wait('정벌은 결코 멈추지 않을 것이다.');
       } else {
-        await chara17.say_and_wait('우리의 꿈...나는 해답을 찾은 것 같아.');
+        await chara17.say_and_wait('우리의 꿈…… 나는 해답을 찾은 것 같아.');
       }
       era.printButton('「……」', 1);
       await era.input();
@@ -669,7 +669,7 @@ module.exports = {
       await chara17.say_and_wait('에덴……');
       era.drawLine();
       await chara17.print_and_wait(
-        `${you.name}와(과) ${chara17.name}이(가) 헤어진 뒤, ${chara17.sex}는 홀로 학원의 안뜰로 향했다.`,
+        `${you.name}과(와) ${chara17.name}이(가) 헤어진 뒤, ${chara17.sex}는 홀로 학원의 안뜰로 향했다.`,
       );
       await chara17.print_and_wait(
         '세 여신상을 바라보며 영역에 발을 들였던 광경을 회상하던, 세대의 정점에 선 우마무스메는 주먹을 꽉 쥐었다.',
@@ -703,7 +703,7 @@ module.exports = {
         `${you.name}은(는) 우마무스메들에게 겹겹이 둘러싸인 루나를 보며 식은땀을 흘렸다.`,
       );
       await era.printAndWait(
-        '만인의 주목을 받는 학생회장으로서 학생들의 자율 훈련을 지도하고,',
+        '만인의 주목을 받는 학생회장으로서 학생들의 자율 훈련을 지도하고, ',
       );
       await era.printAndWait(
         '한계에 부딪힌 학생들을 돕고, 때로는 직접 시범을 보였다.',
@@ -730,16 +730,16 @@ module.exports = {
         `루나가 보낸 메시지를 보며 ${you.name}은(는) 빙그레 미소 지었다.`,
       );
       era.printButton(
-        '「전화를 거신 지역은 통화 가능 지역이 아닙니다. 잠시 후 다시 걸어 주세요.」',
+        '「지금 거신 번호는 통화 가능 지역을 벗어나 있습니다. 잠시 후 다시 걸어 주세요.」',
         1,
       );
       era.printButton('「네가 너무 내 눈길을 사로잡아서 그래.」', 2);
       await era.input();
       await luna.say_and_wait(
-        '말은 참 잘한다니까. 하지만 학원 환경의 정화를 위해, 나 이외의 아이들에게는 삼가주길 바라.',
+        '말은 참 잘한다니까. 하지만 학원의 건전한 분위기를 위해, 나 이외의 아이들에게는 삼가주길 바라.',
       );
       await luna.say_and_wait('맞다.');
-      await luna.say_and_wait('그대은 늘 그랬지!');
+      await luna.say_and_wait('그대는 늘 그랬지!');
       await luna.say_and_wait(
         '심볼리 가문에서도 감언이설을 늘어놓다니, 용케 살아남았네.',
       );
@@ -753,7 +753,7 @@ module.exports = {
         `다음 날 아침, 루나가 훈련을 나가려는 채비를 하자 ${you.name}이(가) ${luna.sex}를 불러세웠다.`,
       );
       await era.printAndWait(
-        `여름 합숙이 시작되기 전부터 ${luna.sex}는 이미 수많은 업무를 촘촘히 처리해왔고, 훈련 또한 거르지 않았다.`,
+        `여름 합숙이 시작되기 전부터 ${luna.sex}는 이미 빽빽한 업무 일정을 소화해 왔고, 훈련 또한 거르지 않았다.`,
       );
       await era.printAndWait(
         `피로는 반드시 축적되기 마련이라고 ${you.name}은(는) 확신했다.`,
@@ -770,7 +770,7 @@ module.exports = {
         `아침 햇살이 ${luna.sex}의 얼굴을 가득 비추어, 당신에게는 ${luna.sex}의 표정이 보이지 않았다.`,
       );
       await luna.say_and_wait(
-        '타인을 위해 노력한다는 건 언제나 아름다운 염원이야.',
+        '타인을 위해 노력하겠다는 마음은 언제나 아름답지.',
       );
       await luna.say_and_wait(
         '그렇긴 해도, 우리는 국화상을 위해 정진해야만 해.',
@@ -846,7 +846,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name}은(는) 알고 있었다. 약속과 꿈은 아직 멀었다는 것을.`,
       );
-      await era.printAndWait('하지만 지금은 잠시만... 아주 잠시만이라도...');
+      await era.printAndWait('하지만 지금은 잠시만…… 아주 잠시만이라도……');
       await era.printAndWait(
         `${you.name}은(는) 고개를 숙인 채, 아무도 모르는 곳에서 소리 높여 울었다.`,
       );
@@ -971,7 +971,7 @@ module.exports = {
         `그러나 다음 날, 눈을 떴을 때 ${you.name}은(는) 자신의 어깨에 이불이 덮여 있는 것을 발견했다.`,
       );
       await era.printAndWait(
-        `${you.name}은(는) 옆의 문을 거칠게 열었다. 문은 살짝 열려 있었고, 병실 안에서 쉬고 있어야 할 루나는 흔적도 없이 사라져 있었다.`,
+        `${you.name}은(는) 옆의 문을 홱 바라보았다. 문은 살짝 열려 있었고, 병실 안에서 쉬고 있어야 할 루나는 흔적도 없이 사라져 있었다.`,
       );
       era.printButton('「설마?!」', 1);
       await era.input();
@@ -987,7 +987,7 @@ module.exports = {
       );
       await luna.say_and_wait('트레이너, 무슨 일인가?');
       await era.printAndWait(
-        `${you.name}은(는) 숨을 헐떡이며 모두가 자신을 빤히 바라보는 것을 느꼈다. 결국 그는 어색하게 웃어넘길 수밖에 없었다.`,
+        `${you.name}은(는) 숨을 헐떡이며 모두가 자신을 빤히 바라보는 것을 느꼈다. 결국 어색하게 웃어넘길 수밖에 없었다.`,
       );
       era.printButton('「두고 가신 물건이 있어서……」', 1);
       era.printButton('「좀 더 쉬어야 한다고……」', 2);
@@ -1003,7 +1003,7 @@ module.exports = {
       era.printButton('「미안해……」', 2);
       await era.input();
       await era.printAndWait(
-        `${you.name}은(는) 넋이 나간 채 학생회를 떠났다. ${you.name}은(는) 알고 있었다. 학원에는 루나가 필요하다.`,
+        `${you.name}은(는) 넋이 나간 채 학생회실을 떠났다. ${you.name}은(는) 알고 있었다. 학원에는 루나가 필요하다.`,
       );
       await era.printAndWait(
         '루나도 알고 있었다. 지금 일본은 심볼리 루돌프를 잃을 수 없다.',
@@ -1059,7 +1059,7 @@ module.exports = {
         await chara17.say_and_wait('해야 할 일은 단 하나뿐이야.');
       }
       await era.printAndWait(
-        `${chara17.teen_sex_title}이(가) 눈을 뜨며 나지막이 중얼거렸다.`,
+        `${chara17.teen_sex_title}가 눈을 뜨며 나지막이 중얼거렸다.`,
       );
     };
     f.title = title;
@@ -1080,7 +1080,7 @@ module.exports = {
         `또 한 번 새해가 밝았다. ${you.name}은(는) 루나의 뒤에 서서 ${luna.sex}의 일을 도왔다. 인사를 하고, 선물을 받고, 감사의 말을 전했다.`,
       );
       await era.printAndWait(
-        '지인들에게 신년 인사를 건네고, 신년 결의 대회를 개최하며, 작년에 남겨진 업무들을 마무리한다……',
+        '지인들에게 신년 인사를 건네고, 새해 결의를 다지는 행사를 열며, 작년에 남겨진 업무들을 마무리한다……',
       );
       await era.printAndWait(
         `루나의 업무를 아주 조금 분담했을 뿐인데도, ${you.name}은(는) 정신이 아득해질 지경이었다.`,
@@ -1095,7 +1095,7 @@ module.exports = {
         `한 차례 업무를 끝내고서야 참배할 시간이 생겼다. 길을 걷던 중 루나가 문득 중얼거렸다.`,
       );
       await era.printAndWait(
-        `${you.name}은(는) 황급히 부정했다. 루나는 긍정도 부정도 하지 않은 채, ${luna.sex}는 신사의 종과 북을 바라보다 눈을 감았다.`,
+        `${you.name}은(는) 황급히 부정했다. 루나는 긍정도 부정도 하지 않았다. ${luna.sex}는 신사의 종과 북을 바라보다 눈을 감았다.`,
       );
       await era.printAndWait(
         `새로운 일 년, 루나의 소원은 무엇일까? ${you.name}은(는) 묻지 않았다. 원래 소원은 입 밖으로 내뱉으면 이루어지지 않는 법이니까.`,
@@ -1110,7 +1110,7 @@ module.exports = {
         '어쩌면, 나 또한 실례되는 생각을 하고 있었을지도 모르겠네.',
       );
       await era.printAndWait(
-        `그 순간, ${you.name}의 얼굴이 확 붉어졌다. 그동안 겪어온 파란만장한 이야기들이 떠올라 감회가 새로웠다.`,
+        `그 순간, ${you.name}의 얼굴이 확 붉어졌다. 그동안 겪어온 파란만장했던 일들이 떠올라 감회가 새로웠다.`,
       );
       await era.printAndWait(`${you.name}이(가) 정중하게 루나에게 말했다:`);
       era.printButton('「잘 먹고 잘 자서 건강에 신경 쓰길 바라.」', 1);
@@ -1250,7 +1250,7 @@ module.exports = {
         `루나는 ${you.name}을(를) 바라보며 손을 뻗어 ${you.name}의 뺨을 어루만졌다.`,
       );
       await luna.say_and_wait(
-        '내가 멈추면, 수많은 이들이 미궁 속에 빠져 방황하게 될 거야. 나는 계속해야만 해.',
+        '내가 멈추면, 수많은 이들이 갈피를 잃고 헤매게 될 거야. 나는 계속해야만 해.',
       );
       await luna.say_and_wait('우리는 아직 꿈을 이루지 못했으니까.');
       await era.printAndWait(`${you.name}은(는) 루나의 손을 맞잡았다.`);
@@ -1340,7 +1340,7 @@ module.exports = {
      */
     const f = async (luna, you) => {
       await era.printAndWait(
-        `내일은 텐노상(봄)이 시작되는 날이다. 하지만 최근 ${you.name}은(는) 루나가 아무리 애써도 【황제】를 불러내지 못한다는 사실을 발견했다.`,
+        `내일은 텐노상(봄)이 시작되는 날이다. 하지만 최근 ${you.name}은(는) 루나가 아무리 애써도 【황제】를 불러내지 못한다는 사실을 알아차렸다.`,
       );
       era.printButton('「계속 쌓여온 피로가 결국 한계에 달했어.」', 1);
       era.printButton('「더 이상 자신을 몰아세우지 마!」', 2);
@@ -1362,7 +1362,7 @@ module.exports = {
         '꿈을 위해 무모할 정도로 달려왔어. 내 독단적인 고집이 그대까지 끌어들인 거야……',
       );
       await luna.say_and_wait(
-        '게다가 그대은 몇 번이고 건강을 챙기라고 말해줬는데, 내가 모든 걸 망쳐버렸어.',
+        '게다가 그대는 몇 번이고 건강을 챙기라고 말해줬는데, 내가 모든 걸 망쳐버렸어.',
       );
       await luna.say_and_wait(
         '【황제】를 잃어버린 지금의 나로서는 결코 모두를 만족시킬 수 없어.',
@@ -1483,7 +1483,7 @@ module.exports = {
         '운명은 결코 자비롭지 않다. 모든 것에는 보이지 않는 가격표가 붙어 있는 법이다.',
       );
       await era.printAndWait(
-        `심볼리 가문처럼 강대한 혈통일지라도, ${chara17.couple_title}은 혈맥에 흐르는 폭력성을 억제하지 못해 자아 파멸의 길을 걷기도 한다.`,
+        `심볼리 가문처럼 강대한 혈통일지라도, ${chara17.couple_title}은 혈맥에 흐르는 폭력성을 억제하지 못해 스스로 파멸에 이르기도 한다.`,
       );
       await era.printAndWait(
         `루나는 영역에 들어가는 기분을 묘사한 적이 있다. 모든 것이 정지하고, 오직 ${chara17.sex}만이 끝없는 초원에 서 있는 느낌이라고.`,
@@ -1518,7 +1518,7 @@ module.exports = {
         );
       }
       await era.printAndWait(
-        `말을 마친 ${chara17.teen_sex_title}이(가) 경기장으로 향했다.`,
+        `말을 마친 ${chara17.teen_sex_title}가 경기장으로 향했다.`,
       );
     };
     f.title = title;
@@ -1575,7 +1575,7 @@ module.exports = {
         { content: '」', color: luna.color },
       ]);
       await era.printAndWait([
-        { content: '？？？「', color: emperor.color },
+        { content: '???「', color: emperor.color },
         { content: '조금만 더……', color: luna.color },
         { content: '아주 조금만 더 하면', color: emperor.color },
         { content: '（에덴에）', color: luna.color },
@@ -1610,7 +1610,7 @@ module.exports = {
         `${chara17.sex}는 더 이상 무소불위의 존재가 아니었다.`,
       );
       await chara17.print_and_wait(
-        `한 걸음을 내디딜 때마다 ${chara17.name}는 거대한 위화감을 느꼈다.`,
+        `한 걸음을 내디딜 때마다 ${chara17.name}는 강한 위화감을 느꼈다.`,
       );
       await chara17.print_and_wait(
         `발을 딛고 다시 들어 올릴 때마다 극심한 통증에 ${chara17.sex}의 얼굴이 무섭게 일그러졌다.`,
@@ -1632,7 +1632,7 @@ module.exports = {
         '우마무스메들이 달리고 있다. 잔디를 차고 먼지를 일으키며 흩날리는 풀잎들을 바람에 싣고 간다.',
       );
       await chara17.print_and_wait(
-        '자신의 심장 소리는 점점 빨라지는데, 정작 힘은 손톱만큼도 써지지 않는다.',
+        '자신의 심장 소리는 점점 빨라지는데, 정작 힘은 조금도 나오지 않는다.',
       );
       await chara17.print_and_wait(
         '몸의 부품들, 근육과 힘줄 그리고 내장이 거대한 관성에 의해 찢겨나가는 것 같다.',
@@ -1741,7 +1741,7 @@ module.exports = {
         `${chara17.sex}는 더 이상 무소불위의 존재가 아니었다.`,
       );
       await chara17.print_and_wait(
-        `한 걸음을 내디딜 때마다 ${chara17.name}는 거대한 위화감을 느꼈다.`,
+        `한 걸음을 내디딜 때마다 ${chara17.name}는 강한 위화감을 느꼈다.`,
       );
       await chara17.print_and_wait(
         `발을 딛고 다시 들어 올릴 때마다 극심한 통증에 ${chara17.sex}의 얼굴이 무섭게 일그러졌다.`,
@@ -1763,7 +1763,7 @@ module.exports = {
         '우마무스메들이 달리고 있다. 잔디를 차고 먼지를 일으키며 흩날리는 풀잎들을 바람에 싣고 간다.',
       );
       await chara17.print_and_wait(
-        '자신의 심장 소리는 점점 빨라지는데, 정작 힘은 손톱만큼도 써지지 않는다.',
+        '자신의 심장 소리는 점점 빨라지는데, 정작 힘은 조금도 나오지 않는다.',
       );
       await chara17.print_and_wait(
         '몸의 부품들, 근육과 힘줄 그리고 내장이 거대한 관성에 의해 찢겨나가는 것 같다.',
@@ -1851,7 +1851,7 @@ module.exports = {
       await luna.print_and_wait('그렇구나.');
       await luna.print_and_wait('그녀는 눈을 깜빡였다.');
       await luna.print_and_wait(
-        `우마무스메 「${you.actual_name}, 그대는 항상 내게 쉬라고 했었지. 이제야... 영원히 안식할 수 있는 곳에 도착했나 봐.」`,
+        `우마무스메 「${you.actual_name}, 그대는 항상 내게 쉬라고 했었지. 이제야…… 영원히 안식할 수 있는 곳에 도착했나 봐.」`,
       );
       await luna.print_and_wait(
         '우마무스메 「처음 【에덴】이라는 이름을 들었을 때, 이곳이 이렇게 웅장하고 아름다운 풍경일 줄은 상상도 못 했어.」',
@@ -1870,7 +1870,7 @@ module.exports = {
         '우마무스메의 질주는 점차 느려졌고, 결국 그녀는 여신들의 앞에 멈춰 섰다.',
       );
       await era.printAndWait(
-        '세 여신 「아이야, 모든 종착지이자... 모든 시작의 땅에 도달한 것을 축하한다. 네가 에덴에 도달한 첫 번째 우마무스메란다.」',
+        '세 여신 「아이야, 모든 종착지이자…… 모든 시작의 땅에 도달한 것을 축하한다. 네가 에덴에 도달한 첫 번째 우마무스메란다.」',
       );
       await era.printAndWait(
         '세 여신 「우리는 너를 포상하고, 너의 진정한 꿈을 이루어주마! 자, 소원을 말하기 전에 묻고 싶은 것이 있느냐?」',
@@ -1892,7 +1892,7 @@ module.exports = {
         '우마무스메는 마음속 의문을 던졌지만, 여신들이 대답하기도 전에 스스로 답을 내놓았다.',
       );
       await luna.print_and_wait(
-        '우마무스메 「우마무스메와 트레이너... 우리 사이의 인연 덕분이었을까요?」',
+        '우마무스메 「우마무스메와 트레이너…… 우리 사이의 인연 덕분이었을까요?」',
       );
       await luna.print_and_wait(
         '그녀는 이마를 짚고 고개를 들어 활짝 미소 지었다.',
@@ -1991,7 +1991,7 @@ module.exports = {
         `${you.name}은(는) ${luna.sex}가 내민 손을 잡았다. 두 사람은 마음껏 끌어안고 비 오듯 눈물을 흘렸다.`,
       );
       await era.printAndWait(
-        `${you.name}은(는) 확신했다. 지금 ${you.name}의 품에 안긴 ${luna.sex}, 오직 ${you.name}와(과) 뜨겁게 포옹하고 입을 맞추는 ${luna.sex}도 더 이상 그 물음에 얽매이지 않는다는 것을.`,
+        `${you.name}은(는) 확신했다. 지금 ${you.name}의 품에 안긴 ${luna.sex}, 오직 ${you.name}과(와) 뜨겁게 포옹하고 입을 맞추는 ${luna.sex}도 더 이상 그 물음에 얽매이지 않는다는 것을.`,
       );
       await era.printAndWait(
         '깊은 입맞춤이 끝나고 두 사람은 숨을 헐떡이며, 진심을 확인하는 다음 폭풍이 몰아치기 전 잠시 숨을 골랐다.',
@@ -2046,7 +2046,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name}은(는) 고개를 들어 하늘을 보았고, 맑은 하늘 한구석에 걸린 달을 발견했다——해와 달이 함께 떠 있다.`,
       );
-      await era.printAndWait(`？？？「${you.actual_name}」`);
+      await era.printAndWait(`???「${you.actual_name}」`);
       await era.printAndWait(
         `마침내 ${you.name}은(는) ${chara17.sex}의 부름을 들었다. 거센 불안감 속에서 ${you.name}은(는) ${chara17.sex}를 바라보았지만, ${chara17.sex}에게 대답하지 못했다.`,
       );
@@ -2143,7 +2143,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name}은(는) 고개를 들어 하늘을 보았고, 맑은 하늘 한구석에 걸린 달을 발견했다——해와 달이 함께 떠 있다.`,
       );
-      await era.printAndWait(`？？？「${you.actual_name}」`);
+      await era.printAndWait(`???「${you.actual_name}」`);
       await era.printAndWait(
         `마침내 ${you.name}은(는) ${chara17.sex}의 부름을 들었다. 거센 불안감 속에서 ${you.name}은(는) ${chara17.sex}를 바라보았지만, ${chara17.sex}에게 대답하지 못했다.`,
       );
@@ -2222,7 +2222,7 @@ module.exports = {
       await luna.print_and_wait(
         '심볼리 가문은 그런 곳이야. 오직 실력만을 중요하게 여기지.',
       );
-      await luna.print_and_wait('그래서 강인한 언니들은 트랙 위를 질주했고,');
+      await luna.print_and_wait('그래서 강인한 언니들은 트랙 위를 질주했고, ');
       await luna.print_and_wait(
         '나는 잔디밭에 누워 온종일 잠을 자도 괜찮았어.',
       );
@@ -2273,7 +2273,7 @@ module.exports = {
         '내게서 희대의 재능이 엿보이자, 심볼리 가문은 본격적으로 나를 육성하기 시작했어.',
       );
       await luna.print_and_wait(
-        '마음만 먹으면 모든 자원을 손에 넣을 수 있었고,',
+        '마음만 먹으면 모든 자원을 손에 넣을 수 있었고, ',
       );
       await luna.print_and_wait(
         '마음만 먹으면 모든 총애를 독차지할 수 있었지.',
@@ -2348,7 +2348,7 @@ module.exports = {
         `루나가 어떻게 황제로 변하게 되었나? ${you.name}은(는) 마침내 기억해냈다.`,
       );
       await era.printAndWait(
-        '그것은 무모한 책략이었고, 풋내기 애송이가 심볼리의 미래가 될 스타에게 건네버린 미혹이었다.',
+        '그것은 무모한 책략이었고, 풋내기 애송이가 심볼리의 미래가 될 스타에게 심어 준 헛된 생각이었다.',
       );
       era.printButton(
         '「폭압을 증오한다면, 다른 이에게 그 역할을 맡기면 되잖아?」',
@@ -2365,16 +2365,16 @@ module.exports = {
         `${you.name}은(는) 고민에 빠진 루나를 달래기 위해 농담조로 던진 말이었지만, 웬일인지 평소 장난기 많던 아이는 무척 진지하게 귀를 기울였다.`,
       );
       await era.printAndWait(
-        `${luna.sex}의 재촉하는 눈빛에 ${you.name}은(는) 머리를 쥐어짜며 허무맹랑한 서술을 이어갔다.`,
+        `${luna.sex}의 재촉하는 눈빛에 ${you.name}은(는) 머리를 쥐어짜며 허무맹랑한 이야기를 이어갔다.`,
       );
       era.printButton(
         '「루나와는 전혀 다른, 호전적이고 위압적인 존재를 만들어내는 거야.」',
         1,
       );
-      era.printButton('「네 개성 위에 세워진, 상상 속의 이미지를 말이지.」', 2);
+      era.printButton('「네 개성을 바탕으로 만든, 상상 속의 이미지를 말이지.」', 2);
       await era.input();
       await era.printAndWait(
-        `${you.name}은(는) 한숨을 내쉬며 돌발적인 영감을 내뱉었다.`,
+        `${you.name}은(는) 한숨을 내쉬며 문득 떠오른 생각을 입 밖에 냈다.`,
       );
       await you.say_and_wait('그래, 마치 【황제】처럼 말이야!');
       await era.printAndWait(
@@ -2403,7 +2403,7 @@ module.exports = {
       );
       await era.printAndWait(`${you.name}은(는) 식은땀에 흠뻑 젖어 있었다.`);
       await era.printAndWait(
-        `그때의 ${you.name}은(는) 그저 오만한 얼간이에 불과했다. 도처에서 재능을 인정받지 못한다며 투덜댔지만, 실상은 학생의 허풍이나 다름없었다.`,
+        `그때의 ${you.name}은(는) 그저 오만한 얼간이에 불과했다. 가는 곳마다 재능을 인정받지 못한다며 투덜댔지만, 실상은 학생의 허풍이나 다름없었다.`,
       );
       await era.printAndWait(
         `루나와 만났을 때, ${you.name}은(는) 머릿속에만 묻어 두었던 전략과 견문, 환상, 그리고 ${you.name}이(가) 루나에게서 읽어 낸——${luna.sex}는 언젠가 거물이 되리라는 생각을 단숨에 쏟아냈다.`,
@@ -2457,7 +2457,7 @@ module.exports = {
         '——레이스가 코앞이었다. 지금 황제가 「나타나지」 않는다면 모든 것이 수포로 돌아간다.',
       );
       await era.printAndWait(
-        `어쩔 수 없이 ${you.name}은(는) 목소리를 가다듬고, 마치 우스꽝스러운 어릿광대처럼 소리를 높였다.`,
+        `어쩔 수 없이 ${you.name}은(는) 목소리를 억지로 쥐어짜며, 마치 우스꽝스러운 어릿광대처럼 소리를 높였다.`,
       );
       era.printButton(
         '「황제여, 위대한 나의 황제여! 들리십니까? 만백성의 저 천둥 같은 함성이!」',
@@ -2481,7 +2481,7 @@ module.exports = {
       );
       await era.input();
       await era.printAndWait(
-        `편집증에 사로잡힌 ${you.name}의 얼굴은 일그러졌고 목소리는 쉬어 터졌다.`,
+        `집착에 사로잡힌 ${you.name}의 얼굴은 일그러졌고 목소리는 쉬어 터졌다.`,
       );
       await era.printAndWait(
         '그 광기가 효과가 있었던 것일까, 루나의 몸이 점차 떨림을 멈췄다.',
@@ -2513,7 +2513,7 @@ module.exports = {
           await luna.say_and_wait(
             '난 황제가 아니야! 제발 루나를 없애지 마. 이대로라면 루나는 정말 사라져 버릴 거야.',
           );
-          await luna.say_and_wait('그대이 아직 나를 사랑한다면, 제발……');
+          await luna.say_and_wait('그대가 아직 나를 사랑한다면, 제발……');
           await era.printAndWait(
             `루나는 절망적인 눈빛으로 ${you.name}을(를) 바라보며, 마치 구원의 동아줄이라도 잡으려는 듯 손을 뻗었다.`,
           );
@@ -2542,7 +2542,7 @@ module.exports = {
           `${you.name}은(는) 탄식하지 않을 수 없었다. 자신이 루나에게 대체 무슨 짓을 시킨 것인가.`,
         );
         await era.printAndWait(
-          '어째서 진작 루나의 이상을 알아채지 못했을까. 어떤 거친 파도가 몰아친다 해도.',
+          '어째서 진작 루나의 이상 징후를 알아채지 못했을까. 어떤 거친 파도가 몰아친다 해도.',
         );
         await era.printAndWait(
           `하지만 지금이라도 늦지 않았다! 루나의 트레이너이자 보호자, 그리고…… 연인으로서 ${you.name}은(는) 루나를 위해 모든 풍파를 막아낼 것이다.`,

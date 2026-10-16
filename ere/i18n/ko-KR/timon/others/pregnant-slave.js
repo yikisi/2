@@ -62,7 +62,7 @@ module.exports = {
     ]);
     await printAndWait([
       you.get_colored_name(),
-      `은(는) ${chara.sex}이(가) 요즘 쌓인 스트레스를 풀고 싶을 뿐이라고 생각한 순간, 그루터기 위로 밀쳐졌다.`,
+      `은(는) ${chara.sex}가 요즘 쌓인 스트레스를 풀고 싶을 뿐이라고 생각한 순간, 그루터기 위로 밀쳐졌다.`,
     ]);
     await printAndWait([
       '그러고는 ',
@@ -189,7 +189,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) ',
         child.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         father.get_colored_name(),
         '에게 빈틈없이 끼여 있었다.',
       ]);
@@ -265,7 +265,7 @@ module.exports = {
     await printAndWait([
       '얼마 지나지 않아, ',
       chara.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       child.get_colored_name(),
       '은(는) 짙은 정액을 쏟아냈다',
     ]);
@@ -284,7 +284,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 상상에 빠져 눈앞의 ',
         chara.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         child.get_colored_name(),
         '의 육봉이 그 행동에 다시 일어서고 있다는 것을 알아차리지 못했다',
       ]);
@@ -293,7 +293,7 @@ module.exports = {
         you.get_colored_name(),
         '의 행동을 보고, ',
         chara.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         child.get_colored_name(),
         '의 육봉은 다시 일어섰다',
       ]);
@@ -1004,7 +1004,7 @@ module.exports = {
         '은(는) 아랫배의 음문에 나타난 임신 문양을 바라보다 세면장으로 뛰어가 토했다.',
       ]);
       await printAndWait([
-        '삶의 발걸음을 흔들어 놓는 이 작은 생명에게,',
+        '삶의 발걸음을 흔들어 놓는 이 작은 생명에게, ',
         you.get_colored_name(),
         '은(는)——',
       ]);
@@ -1019,7 +1019,7 @@ module.exports = {
         ]);
         await printAndWait('아이가 생긴 뒤의 미래, 태어난 뒤의 교육……');
         await printAndWait([
-          '하지만,',
+          '하지만, ',
           you.get_colored_name(),
           '이(가) 마음속으로 가장 궁금해하는 것은 역시',
         ]);
@@ -1044,7 +1044,7 @@ module.exports = {
         println();
         await printAndWait('누구든, 새로운 생명의 탄생은 기쁜 일이다.');
         await printAndWait([
-          '다만,',
+          '다만, ',
           you.get_colored_name(),
           '이(가) 가장 걱정하는 것은 역시……',
         ]);
@@ -1064,7 +1064,7 @@ module.exports = {
           you.get_colored_name(),
           '이(가) 의식을 잃을 뻔한 뒤에야 뒤쪽의 ',
           father.uma_sex_title,
-          '은(는) 마침내 쏟아냈고, ',
+          '는 마침내 쏟아냈고, ',
           you.get_colored_name(),
           '의 얼굴에 육봉을 닦고 그대로 떠났다',
         ]);
@@ -1102,13 +1102,13 @@ module.exports = {
         );
         println();
         await printAndWait([
-          '어느새,',
+          '어느새, ',
           you.get_colored_name(),
           '은(는) 아이의 미래에 이유 모를 두려움을 느끼고 있었다.',
         ]);
         if (children_count > 0) {
           await printAndWait(
-            `그 아이의 어린 시절이 떠오른다. 마치 엊그제 일처럼 느껴지는데 ${father.sex}은(는) 순수한 눈빛을 가진 유아에서, 자신이 태어난 곳을 탐욕스러운 눈으로 바라보는 짐승이 되어 있었다.`,
+            `그 아이의 어린 시절이 떠오른다. 마치 엊그제 일처럼 느껴지는데 ${father.sex}는 순수한 눈빛을 가진 유아에서, 자신이 태어난 곳을 탐욕스러운 눈으로 바라보는 짐승이 되어 있었다.`,
           );
           await printAndWait([
             you.get_colored_name(),
@@ -1227,12 +1227,12 @@ module.exports = {
         );
         printButton('「！」', 1);
         await printAndWait([
-          '갑자기,',
+          '갑자기, ',
           you.get_colored_name(),
           '은(는) 소리를 질렀다.',
         ]);
         await printAndWait([
-          '아이가 처음 본 소변은 마치 겨냥한 것처럼 뿜어져 나와,',
+          '아이가 처음 본 소변은 마치 겨냥한 것처럼 뿜어져 나와, ',
           you.get_colored_name(),
           '의 얼굴을 적셨다.',
         ]);
@@ -1297,13 +1297,13 @@ module.exports = {
         println();
         if (get('exp:0:生产次数') > 0) {
           await printAndWait([
-            '다시 공허한 꿈을 품으며,',
+            '다시 공허한 꿈을 품으며, ',
             you.get_colored_name(),
             '은(는) 이번에야말로 이 아이를 잘 키우겠다고 결심했다.',
           ]);
         } else {
           await printAndWait([
-            '공허한 꿈을 품으며,',
+            '공허한 꿈을 품으며, ',
             you.get_colored_name(),
             '은(는) 이 아이를 잘 키우겠다고 결심했다.',
           ]);
@@ -1340,13 +1340,13 @@ module.exports = {
           `아이의 아버지를 바라보고, 품 안의 아이를 ${father.sex}에게 보여 주었다.`,
         );
         await printAndWait(
-          `이 아이가,${father.sex}의 책임감을 일깨워 줄 수 있다면.`,
+          `이 아이가, ${father.sex}의 책임감을 일깨워 줄 수 있다면.`,
         );
         await printAndWait([
           father.get_colored_name(),
           '은(는) ',
           you.get_colored_name(),
-          '와(과) 아이를 힘껏 끌어안고, 앞으로 소중히 여기겠다고 맹세했다.',
+          '과(와) 아이를 힘껏 끌어안고, 앞으로 소중히 여기겠다고 맹세했다.',
         ]);
         await printAndWait(
           '마음을 고쳐먹은 아버지와, 곁을 떠나지 않는 어머니.',
@@ -1394,7 +1394,7 @@ module.exports = {
           '을(를) 노려보았다.',
         ]);
         await printAndWait(
-          `이런 ${father.sex}이(가) 아버지로서 책임을 질 리 없다.`,
+          `이런 ${father.sex}가 아버지로서 책임을 질 리 없다.`,
         );
         await printAndWait(
           '필요한 것은 치욕 속에서도 자신과 아이를 지탱하고, 아이를 지켜 줄 상대다.',
@@ -1464,7 +1464,7 @@ module.exports = {
         await printAndWait([
           '이 아이는 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           father.get_colored_name(),
           '이(가) 맺어져 태어난 아이다.',
         ]);
@@ -1480,7 +1480,7 @@ module.exports = {
           '의 몸은, 궁합을 이겨낼 수 없고, 유전자의 깊은 갈망을 이겨낼 수 없다',
         ]);
         await printAndWait([
-          '이 아이의 얼굴을 보자,',
+          '이 아이의 얼굴을 보자, ',
           you.get_colored_name(),
           '의 마음은 갖가지 애정으로 가득 찬다.',
         ]);
@@ -1506,7 +1506,7 @@ module.exports = {
         await printAndWait([
           '이 아이는 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           father.get_colored_name(),
           '이(가) 맺어져 태어난 아이다.',
         ]);
@@ -1523,7 +1523,7 @@ module.exports = {
           '에게 씨를 뿌려질 준비를 갖춘다',
         ]);
         await printAndWait([
-          '품 안의 아이를 보며,',
+          '품 안의 아이를 보며, ',
           you.get_colored_name(),
           '은(는) 원망했어야 했다.',
         ]);

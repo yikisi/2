@@ -23,7 +23,7 @@ module.exports = {
     await maya.say_and_wait(
       '경기장이라면, 다시 한번 그때의 기분을 느낄 수 있지 않을까 해서.',
     );
-    await maya.say_and_wait(`그렇게 마야는 ${callname}과 만나게 됐어.`);
+    await maya.say_and_wait(`그렇게 마야는 ${callname}과(와) 만나게 됐어.`);
     await maya.say_and_wait(
       '새로운 것들도 많이 경험하고, 새로운 기분들도 많이 느꼈어.',
     );
@@ -47,7 +47,7 @@ module.exports = {
     await maya.print_and_wait(
       `비록 너무 자극적인 나머지 중간에 포기하긴 했지만, 책의 내용은 ${maya.name}에게 깊은 인상을 남겼다.`,
     );
-    await maya.say_and_wait(`하지만, 만약 ${callname}과 함께라면……?`);
+    await maya.say_and_wait(`하지만, 만약 ${callname}과(와) 함께라면……?`);
     await maya.print_and_wait(
       `${maya.name}은 천재다. 무엇이든 금방 배우며———— 조만간 누군가는 그 사실을 뼈저리게 깨닫게 될지도 모른다.`,
     );
@@ -94,7 +94,7 @@ module.exports = {
     );
     era.printButton('「어떻게 정하고 싶어?」', 1);
     await era.input();
-    await maya.say_and_wait(`……${callname}은 어떻게 생각해?`);
+    await maya.say_and_wait(`……${callname}은(는) 어떻게 생각해?`);
     await maya.say_and_wait([
       '고, 공개 모집이면 팬들도 좋아하겠지! 하지만 안내를 잘하는 ',
       m_call_k,
@@ -379,7 +379,7 @@ module.exports = {
         '예이예이~☆ 다들 응원해줘서 고마워! 마야는 정말 행복해~!',
       );
       await maya.say_and_wait(
-        `앞으로도 ${callname}과 함께 모두에게 이 눈부신 빛을 전해주겠다고 맹세할게!`,
+        `앞으로도 ${callname}과(와) 함께 모두에게 이 눈부신 빛을 전해주겠다고 맹세할게!`,
       );
       await maya.say_and_wait(`그치! ${callname}♪`);
       era.printButton('「!…… 물론이지, 나도 맹세할게!」', 1);

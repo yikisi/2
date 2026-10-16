@@ -113,7 +113,7 @@ talk:
               - fontSize: bold
                 content: %CHARA%
               - "「잠깐, 그 표정은 뭔데!」"
-          - "순간 타이신의 행복한 미소가 쑥스러운 눈초리로 바뀌었다."
+          - "순간 타이신은 행복하게 웃다가 쑥스러운 듯 눈을 흘겼다."
       - random: true
         if: era.get('love:50') >= 90 && era.get('status:0:熬夜') > 0
         lines:
@@ -163,7 +163,7 @@ talk:
             content:
               - fontSize: bold
                 content: %CHARA%
-              - "「모바일 게임 새 이벤트, 할 게 너무 많아. 밤새워야 다 모으겠는데.」"
+              - "「모바일 게임 새 이벤트, 할 게 너무 많아. 밤새워야 보상을 다 모으겠는데.」"
           - color: %COLOR%
             content:
               - fontSize: bold
@@ -314,7 +314,7 @@ office_rest:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「적당히 쉬면 트레이닝 효과도 배가 된다며. 너도 하야히데도 비슷한 말을 했어.」"
+          - "「적당히 쉬면 트레이닝 효과도 더 좋아진다며. 너도 하야히데도 비슷한 말을 했어.」"
 
 office_game:
   - random: true
@@ -397,7 +397,7 @@ o_r_fishing:
           - fontSize: bold
             content: %CHARA%
           - "「낚시에서 중요한 건 침착함이야. 참고 기회를 기다리는 거지. 중반에 돌파구를 찾는 것처럼.」"
-      - "%CHARA%는 능숙하게 낚싯대를 들어 물고기 한 마리를 낚았다."
+      - "%CHARA%은 능숙하게 낚싯대를 들어 물고기 한 마리를 낚았다."
   - random: true
     lines:
       - color: %COLOR%
@@ -438,11 +438,11 @@ o_s_arcade:
       - fontSize: bold
         content: %CHARA%
       - "「리듬 게임, 같이 할래? 좋아. 쉬운 곡으로 해 줄게……」"
-  - "하지만 쉬운 곡이어도 이런 게임을 해 본 적 없는 %YOU%는 상대가 되지 않았다."
+  - "하지만 쉬운 곡이어도 이런 게임을 해 본 적 없는 %YOU%은(는) 상대가 되지 않았다."
   - "한편 타이신의 화면에는 커다란 FULL COMBO가 떠 있었다."
 
 o_s_drawing:
-  - "계산을 마치고 돌아가려는 %YOU%를 가게 주인이 불러 세웠다."
+  - "계산을 마치고 돌아가려는 %YOU%을(를) 가게 주인이 불러 세웠다."
   - "가게 주인 「잠시만요, 손님.」"
   - "주인은 옆 탁자에서 작은 종이 한 장을 꺼내 건넸다."
   - "가게 주인 「무료 추첨권입니다. 저쪽에서 뽑으시면 돼요. 행운을 빕니다.」"
@@ -451,7 +451,7 @@ o_s_drawing:
       - fontSize: bold
         content: %CHARA%
       - "「추첨이네. 요즘 게임 뽑기 운이 없으니까 네가 뽑아, %CALLNAME%.」"
-  - "추첨권을 건넨 %YOU%는 천천히 추첨기의 손잡이를 돌렸다……"
+  - "추첨권을 건넨 %YOU%은(는) 천천히 추첨기의 손잡이를 돌렸다……"
   -
   - if: d.dice === 0
     lines:
@@ -461,7 +461,7 @@ o_s_drawing:
             content: %CHARA%
           - "「이, 일등!? 별일이네.」"
       - "가게 주인 「축하합니다. 운이 좋으시네요. 자, 두 분이 가실 수 있는 온천 여행권입니다. 받으세요.」"
-      - "%YOU%는 주인에게 여행권을 받았다."
+      - "%YOU%은(는) 주인에게 여행권을 받았다."
       - color: %COLOR%
         content:
           - fontSize: bold
@@ -491,7 +491,7 @@ o_s_drawing:
           - fontSize: bold
             content: %CHARA%
           - "「시끄러워!」"
-      - "%YOU%는 능숙하게 %CHARA%의 발길질을 피했다."
+      - "%YOU%은(는) 능숙하게 %CHARA%의 발길질을 피했다."
   - if: d.dice === 1
     lines:
       - color: %COLOR%
@@ -499,7 +499,7 @@ o_s_drawing:
           - fontSize: bold
             content: %CHARA%
           - "「햄버그 크네. 혼자선 다 못 먹겠어…… 같이 먹자, %CALLNAME%.」"
-      - "%CHARA%와 함께 햄버그를 먹었다."
+      - "%CHARA%과 함께 햄버그를 먹었다."
   - if: d.dice === 2
     lines:
       - color: %COLOR%
@@ -521,7 +521,7 @@ o_s_drawing:
           - fontSize: bold
             content: %CHARA%
           - "「쳇…… 없는 것보단 낫네.」"
-      - "그렇다 해도 꼴등 상품만 뽑은 것은 운이 없었다고 할 수밖에 없다."
+      - "그래도 꼴등 경품이라니 운이 없었다고 할 수밖에 없다."
 
 o_s_ktv:
   - color: %COLOR%
@@ -537,7 +537,7 @@ o_s_movie:
         content:
           - fontSize: bold
             content: %CHARA%
-          - "「『시끌벅적한 우리의 레이스장』. 지방 우마%UMA%가 주인공인 이야기네. 나쁘지 않겠어. 이걸로 하자.」"
+          - "「『시끌벅적한 우리의 레이스장』. 지방 %UMA%가 주인공인 이야기네. 나쁘지 않겠어. 이걸로 하자.」"
       - divider: true
         content: "⏰영화가 끝난 뒤⏰"
         position: left
@@ -568,7 +568,7 @@ o_s_movie:
           - fontSize: bold
             content: %CHARA%
           - "「『마지막 백기사』. 어두운 시대, 금발의 %UMA%가 일어나 손에 든 창으로 어둠을 꿰뚫는다…… 저기, %CALLNAME%. 아무것도 안 타는데 왜 기사야?……」"
-      - "갑자기 불길해진 %YOU%는 %CHARA%의 손을 잡고 다른 영화를 골랐다."
+      - "갑자기 불길한 예감이 든 %YOU%은(는) %CHARA%의 손을 잡고 다른 영화를 골랐다."
 
 # 50 恋慕以上
 o_s_restaurant:
@@ -591,4 +591,4 @@ o_s_restaurant:
     content:
       - fontSize: bold
         content: %CHARA%
-      - "「전에 네가 일부러 말해 줬으니까, 나도 제대로 신경 쓸게.」"
+      - "「전에 네가 신경 써서 말해 줬으니까, 나도 제대로 신경 쓸게.」"

@@ -111,7 +111,7 @@ module.exports = {
           you.get_colored_name(),
           '의 머리카락을 만지작거리며 ',
           kita.get_colored_name(),
-          '은 태양처럼 뜨거운 미소를 지었다.',
+          '은 햇살처럼 환한 미소를 지었다.',
         ]);
       },
     );
@@ -208,7 +208,7 @@ module.exports = {
         () => {
           kita.say([
             callname,
-            '은(는) 저의 도움 대장이에요. 그러니까 항상 고마워요, ',
+            '은(는) 저를 도와주는 대장님이에요. 그러니까 항상 고마워요, ',
             callname,
             '! 에헤헤!',
           ]);
@@ -239,7 +239,7 @@ module.exports = {
           kita.say([
             '음, 어제 ',
             call_7,
-            '와(과) 나란히 달리고 나서 발이 조금 아파요……',
+            '과(와) 나란히 달리고 나서 발이 조금 아파요……',
           ]);
           kita.say([callname, ', 좀 봐 주실래요?']);
           era.print([
@@ -257,7 +257,7 @@ module.exports = {
             '은(는) 늘 저를 잘 돌봐 주셨어요!',
           ]);
           kita.say(
-            '하지만 졸업하면 이렇게 챙겨 주시는 시간도 끝나겠죠. 그러니까 졸업할 때까지 제대로 보답해야 해요!',
+            '하지만 졸업하면 이렇게 챙겨 주시는 시간도 끝나겠죠. 그러니까 졸업하기 전에 제가 제대로 보답할게요!',
           );
           era.print([
             '문득 감회에 젖은 표정을 보인 ',
@@ -398,7 +398,7 @@ module.exports = {
         ),
       () =>
         kita.say_and_wait(
-          '으으으…… 아무리 노력해도 수학은 수학이라, 역시 모르겠어요……',
+          '으으으…… 아무리 노력해도 수학은 여전히 모르겠어요……',
         ),
     ];
     await get_random_entry(buffer)();
@@ -438,7 +438,7 @@ module.exports = {
       },
       async () => {
         await kita.say_and_wait(
-          '가속할 때는 무게중심을 낮추는 거군요. 알겠어요. 해내면 다음엔 이길 수 있겠네요.',
+          '가속할 때는 무게중심을 잘 잡는 거군요. 알겠어요. 해내면 다음엔 이길 수 있겠네요.',
         );
         await era.printAndWait([
           '화이트보드의 계획을 진지하게 살펴본 ',
@@ -472,7 +472,7 @@ module.exports = {
       case -1:
         buffer.push(
           () => kita.say_and_wait('으으음…… 힘이 안 들어가요. 이상하네……'),
-          () => kita.say_and_wait('저기…… 왠지 붕 뜬 것 같은데요?'),
+          () => kita.say_and_wait('저기…… 왠지 어질어질한데요?'),
         );
         break;
       case 0:
@@ -531,7 +531,7 @@ module.exports = {
           '네에? 트레이너실에서 전골을요? 역시 어른은 대담하네요.',
         );
         await era.printAndWait([
-          '발열제로 데우는 냄비를 경외의 눈으로 바라보는 ',
+          '발열제로 데우는 냄비를 감탄 어린 눈으로 바라보는 ',
           kita.get_colored_name(),
           '은 신기한 것을 본 작은 검은 고양이 같았다.',
         ]);
@@ -609,7 +609,7 @@ module.exports = {
         await era.printAndWait([
           '의욕이 넘치던 ',
           kita.get_colored_name(),
-          '는 Ｓ◯ＧＡ 게임기인 것을 확인하자마자 눈에 띄게 귀를 축 늘어뜨렸다.',
+          '은 Ｓ◯ＧＡ 게임기인 것을 확인하자마자 눈에 띄게 귀를 축 늘어뜨렸다.',
         ]);
       },
       async () => {
@@ -701,7 +701,7 @@ module.exports = {
         await kita.say_and_wait('흠흠흠~ 흠흠흠흠흠~');
         await era.printAndWait([
           kita.get_colored_name(),
-          '은 작게 콧노래를 부르며 조용히 물고기가 물기를 기다렸다.',
+          '은 작게 콧노래를 부르며 조용히 물고기가 미끼를 물기를 기다렸다.',
         ]);
       },
     ];
@@ -732,7 +732,7 @@ module.exports = {
           ', 농담도 잘하시네요~ 그냥 발목을 삔 거예요~',
         ]);
         await era.printAndWait([
-          '말을 돌린 ',
+          '웃어넘긴 ',
           kita.get_colored_name(),
           '은 다친 격투가를 업고 폭이 몇 미터나 되는 강을 가볍게 뛰어넘었다.',
         ]);
@@ -773,7 +773,7 @@ module.exports = {
         ]);
         await kita.say_and_wait([
           call_3,
-          '와(과) ',
+          '과(와) ',
           call_13,
           '의 인형이에요! 트레센 근처 인형 뽑기 기계에도 드디어 들어왔어요!',
         ]);
@@ -868,7 +868,7 @@ module.exports = {
           await era.printAndWait('슝~');
           await era.printAndWait('상점가 경품 획득: 【당근】!');
           await kita.say_and_wait(
-            '으…… 당근 한 개뿐이에요? 너무 싼 것 같아서 조금 아쉬운데……',
+            '으…… 당근 한 개뿐이에요? 경품치고는 좀 소박해서 조금 아쉬운데……',
           );
           await kita.say_and_wait(
             '아! 하지만 당근을 라이브 마이크로 써도 되겠네요! 에헤헤~',
@@ -894,14 +894,14 @@ module.exports = {
             you.get_colored_name(),
             '은(는) 몰래 하나를 빼 두었다. ',
             kita.teen_sex_title,
-            '이(가) 자기 몫까지 잊지 않도록.',
+            '가 자기 몫까지 잊지 않도록.',
           ]);
         },
         async () => {
           await kita.say_and_wait([
             '에헤헤, ',
             call_44,
-            '이(가) 생리대를 사고 주신 추첨권이에요. 뭐가 나올까요?',
+            '이(가) 냅킨을 사고 주신 추첨권이에요. 뭐가 나올까요?',
           ]);
           await era.printAndWait('빙글빙글빙글빙글……');
           await era.printAndWait('슝~');
@@ -980,7 +980,7 @@ module.exports = {
         await era.printAndWait([
           '야한 가사를 듣고 나서 ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           kita.get_colored_name(),
           '은 서둘러 노래를 바꿨다.',
         ]);
@@ -1040,7 +1040,7 @@ module.exports = {
     );
     await era.printAndWait([
       you.get_colored_name(),
-      '은(는) 그렇게 생각하며 도리이를 지나 ',
+      '은(는) 그렇게 생각하며 토리이를 지나 ',
       kita.get_colored_name(),
       '이 ',
       you.get_colored_name(),
@@ -1053,7 +1053,7 @@ module.exports = {
     await era.printAndWait([
       '찾아온 사람은 ',
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       kita.get_colored_name(),
       ' 둘뿐이었고, 신관이나 무녀의 모습도 보이지 않았다.',
     ]);
@@ -1092,7 +1092,7 @@ module.exports = {
       await kita.say_and_wait([
         '그다지 좋지 않은 운세가 나왔네요…… 그래도 괜찮아요. ',
         call_98,
-        '에게 가서 개운 의식을 부탁하면 되니까요!',
+        '에게 가서 운을 틔워 주는 의식을 부탁하면 되니까요!',
       ]);
       await era.printAndWait([
         '늘 그렇듯 기운찬 ',
@@ -1136,7 +1136,7 @@ module.exports = {
         await era.printAndWait([
           '억지로 낡은 가게 안으로 끌려 들어간 뒤, ',
           you.get_colored_name(),
-          '와(과) ',
+          '과(와) ',
           kita.get_colored_name(),
           '은 벽을 짚으며 밖으로 나왔다.',
         ]);
@@ -1146,7 +1146,7 @@ module.exports = {
           '에헤헤, 요즘 상점가 일을 도와드리고 고깃집 쿠폰을 받았어요. 같이 가실래요?',
         );
         await era.printAndWait([
-          '기름이 오른 뜨끈한 불고기 덮밥을 곱빼기로 먹고 나자 ',
+          '기름기가 자르르한 뜨끈한 불고기 덮밥을 곱빼기로 먹고 나자 ',
           kita.get_colored_name(),
           '의 기분은 눈에 띄게 좋아졌다.',
         ]);
@@ -1218,14 +1218,14 @@ module.exports = {
         await era.printAndWait([
           '입구에서 안을 기웃거리던 ',
           kita.get_colored_name(),
-          '은 결국 미용실 안으로 들어갈 결심을 하지 못했다.',
+          '은 결국 미용실 안으로 들어갈 용기를 하지 못했다.',
         ]);
       },
       async () => {
         await kita.say_and_wait([
           '예쁜 기념품 가게네요. ',
           call_3,
-          '와(과) ',
+          '과(와) ',
           call_13,
           '의 기념품도 있을까요?',
         ]);
@@ -1240,7 +1240,7 @@ module.exports = {
       buffer.push(async () => {
         await kita.say_and_wait([
           callname,
-          '와(과) 함께 거리를 걷기만 해도 정말 마음이 놓여요~ 흠흠흠~',
+          '과(와) 함께 거리를 걷기만 해도 정말 마음이 놓여요~ 흠흠흠~',
         ]);
         await kita.say_and_wait([callname, ', 좀 더 같이 걸어 주실래요?']);
         await era.printAndWait([
@@ -1402,13 +1402,13 @@ module.exports = {
         '밸런타인데이, 달리 성 발렌티노의 날이라고도 하는 이날은 서로 좋아하는 남녀가 선물을 주고받는 기념일이다.',
       );
       await era.printAndWait(
-        '사회에서는 남녀 연인들이 서로 어리광을 부리며 달콤하게 달라붙는 하루가 된다.',
+        '연인들에게는 서로 애정을 표현하며 달콤한 시간을 보내는 날이다.',
       );
       await era.printAndWait(
         '하지만 학원에서는 과자를 자랑하고 누구에게나 초콜릿을 나눠 주는 날이기도 하다. 모두 즐겁게 단것을 먹으며 선생님 몫도 잊지 않는다.',
       );
       await era.printAndWait([
-        '돌봐 주던 학생들과 동료들에게 받은 초콜릿 일고여덟 상자를 내려놓은 뒤, ',
+        '돌봐 주던 학생들과 동료들에게 받은 초콜릿 일곱여덟 상자를 내려놓은 뒤, ',
         you.get_colored_name(),
         '은(는) 책상 뒤에 앉아 일을 시작할 준비를 했다.',
       ]);
@@ -1455,9 +1455,9 @@ module.exports = {
       await era.printAndWait([
         '지금 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         kita.get_colored_name(),
-        '도 다른 사람들처럼 식당에서 명절을 기념하며 휴일 특별 메뉴를 즐기고 있었다.',
+        '도 다른 사람들처럼 식당에서 크리스마스를 기념하며 특별 메뉴를 즐기고 있었다.',
       ]);
       await kita.say_and_wait(
         '으음…… 감자튀김 큰 걸로 두 접시, 치킨 너겟이랑 치킨버거 네 개, 콜라 두 잔……',

@@ -14,7 +14,7 @@ module.exports = {
       () => ruby.say('안녕하신가요, 그럼 훈련을 시작하도록 하죠.'),
       () =>
         ruby.say(
-          '오늘도 잘 부탁드립니다. 지난날의 일족에 걸맞은 수준에 도달할 수 있도록, 저를 철저하게 지도해 주십시오.',
+          '오늘도 잘 부탁드립니다. 선대의 일족에 걸맞은 수준에 도달할 수 있도록, 저를 철저하게 지도해 주십시오.',
         ),
       () =>
         ruby.say(
@@ -26,7 +26,7 @@ module.exports = {
         ),
       () =>
         ruby.say(
-          '레이스에서 성과를 내는 것은 책임입니다. 목적은 명확하니, 그렇다면 게으름 피우지 않고 전진할 뿐입니다.',
+          '레이스에서 성과를 내는 것은 책임입니다. 목적은 명확하니, 꾸준히 앞으로 나아갈 뿐입니다.',
         ),
       () =>
         ruby.say(
@@ -220,7 +220,7 @@ module.exports = {
               ),
             () =>
               ruby.say_and_wait(
-                '아뇨…… 사양할 필요 없습니다. 시간은 한정되어 있고, 해야 할 일은 더 많으니까요.',
+                '아뇨…… 염려하실 필요 없습니다. 시간은 한정되어 있고, 해야 할 일은 더 많으니까요.',
               ),
           );
           break;
@@ -317,7 +317,7 @@ module.exports = {
           ),
         () =>
           ruby.say_and_wait(
-            '어릴 때부터 바삐 일하러 나가시는 부모님을 배웅하며 일어나곤 해서, 지금도 알람은 필요 없습니다.',
+            '어릴 때부터 바삐 일하러 나가시는 부모님을 배웅하려고 일어나곤 해서, 지금도 알람은 필요 없습니다.',
           ),
       );
       if (era.get('love:85') >= 75) {
@@ -394,7 +394,7 @@ module.exports = {
         call_67,
         ' ',
         ruby.sex,
-        '가 밤낮으로 빠져드는 이유를 조금은 알 것 같습니다.',
+        '가 그토록 즐기는 이유를 조금은 알 것 같습니다.',
       ]);
     }
   },
@@ -402,7 +402,7 @@ module.exports = {
   async s_a_tree_hollow(ruby) {
     if (Math.random() < 0.5) {
       await ruby.say_and_wait([
-        '그 대신 저를 동반해 주시겠어요? 이 유약한 ',
+        '그 대신 제 곁에 있어 주시겠어요? 이 유약한 ',
         ruby.child_sex_title,
         '의 푸념을 들어주시겠습니까?',
       ]);
@@ -481,7 +481,7 @@ module.exports = {
     const buffer = [];
     buffer.push(() =>
       ruby.say_and_wait(
-        '아무리 갈 길이 멀다 한들, 이 강물은 저 파란만장하고 넓은 바다로 흘러가겠죠.',
+        '아무리 갈 길이 멀다 한들, 이 강물은 저 파도 넘실대는 드넓은 바다로 흘러가겠죠.',
       ),
     );
     if (era.get('love:85') >= 50) {
@@ -506,7 +506,7 @@ module.exports = {
   async o_s_arcade(ruby) {
     if (Math.random() < 0.5) {
       await ruby.say_and_wait(
-        `이건 저도 알고 있습니다. 사토노 그룹에서 새로 출시한 JRPG군요. 그 기원인 《진 · 삼여신전생》의 명성은 저조차도 익히 들은 바 있습니다.`,
+        `이건 저도 알고 있습니다. 사토노 그룹에서 새로 출시한 JRPG군요. 그 원조인 《진 · 삼여신전생》의 명성은 저조차도 익히 들은 바 있습니다.`,
       );
     } else {
       await ruby.say_and_wait(
@@ -689,7 +689,7 @@ module.exports = {
      */
     const f = async (ruby, you) => {
       await era.printAndWait([
-        '정월의 행복한 기색에,',
+        '정월의 행복한 기색에, ',
         you.get_colored_name(),
         '은(는) 아침부터 지금까지 흥분 상태였다.',
       ]);
@@ -702,7 +702,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         ruby.get_colored_name(),
-        '은(는) 화난 듯이 ',
+        '는 화난 듯이 ',
         you.get_colored_name(),
         '을(를) 노려보며, 「사라지렴」이라며 손으로 가리켰다.',
       ]);
@@ -716,19 +716,19 @@ module.exports = {
       const ret = await era.input();
       if (ret === 1) {
         await era.printAndWait([
-          '밤새도록,',
+          '밤새도록, ',
           you.get_colored_name(),
           '은(는) 뒤척이며 잠들지 못했다.',
         ]);
         await era.printAndWait([
-          '결국,',
+          '결국, ',
           you.get_colored_name(),
           '은(는) 눈물을 흘리며 화장실에서 새해의 첫 타격을 했다.',
         ]);
       } else {
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 비명을 지르며, 신발도 벗지 못한 채 ',
+          '는 비명을 지르며, 신발도 벗지 못한 채 ',
           you.get_colored_name(),
           '에게 침대로 밀쳐졌다.',
         ]);
@@ -757,11 +757,11 @@ module.exports = {
           '의 매끄럽고 좁은 입구에 맞물리고, 그 후 어린 통로를 몇 번이고 꿰뚫기 시작했다.',
         ]);
         await era.printAndWait([
-          '마지막으로,',
+          '마지막으로, ',
           ruby.get_colored_name(),
           '의 작은 자궁 내벽에 부딪혀 멈췄다. 그럼에도 뿌리 부분 일부는 아직 공기에 노출되어 있다.',
         ]);
-        await ruby.say_and_wait('부서... 부서져 버려요!');
+        await ruby.say_and_wait('부서…… 부서져 버려요!');
         await era.printAndWait([
           ruby.get_colored_name(),
           '의 작은 양손은 ',
@@ -771,11 +771,11 @@ module.exports = {
         await era.printAndWait([you.get_colored_name(), '은(는) 멈췄다.']);
         await era.printAndWait([
           ruby.get_colored_name(),
-          '이(가) 조금 익숙해진 후, 허리를 안고 미끄러뜨리기 시작했다.',
+          '가 조금 익숙해진 후, 허리를 안고 미끄러뜨리기 시작했다.',
         ]);
         await era.printAndWait([
           ruby.get_colored_name(),
-          '의 특수한 체질 때문인지,',
+          '의 특수한 체질 때문인지, ',
           you.get_colored_name(),
           '의 하체는 나아갈 때 거의 부담을 느끼지 못한다.',
         ]);
@@ -783,7 +783,7 @@ module.exports = {
           '약간 무게감이 있는 인형을 안고 있는 듯한 가벼움이었다.',
         ]);
         await era.printAndWait([
-          '거기서 전해지는 포용과 마찰이,',
+          '거기서 전해지는 포용과 마찰이, ',
           you.get_colored_name(),
           '을(를) 구름 위로 데려간다.',
         ]);
@@ -795,13 +795,13 @@ module.exports = {
         ]);
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) ',
+          '는 ',
           you.get_colored_name(),
           '에게, 좀 더 다정하게, 좀 더 느리게라고 애원했다.',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
-          '은(는) 허리의 리듬을 빠르게 하고,',
+          '은(는) 허리의 리듬을 빠르게 하고, ',
           ruby.get_colored_name(),
           '의 신음과 외침도 늘어갔다.',
         ]);
@@ -814,7 +814,7 @@ module.exports = {
           '의 위닝 라이브 노래 소리는, 의심할 여지 없이 마음을 빼앗는 천사의 목소리다.',
         ]);
         await era.printAndWait([
-          '하지만 지금의 교성은,',
+          '하지만 지금의 교성은, ',
           you.get_colored_name(),
           '의 영혼을 타락의 지옥으로 끌어내릴 뿐이었다.',
         ]);
@@ -823,7 +823,7 @@ module.exports = {
           '이(가) 아직 욕망의 샘솟음을 느끼기도 전에.',
         ]);
         await era.printAndWait([
-          '갑자기,',
+          '갑자기, ',
           ruby.get_colored_name(),
           '의 전신이 뒤로 활 모양이 되고, 질도 떨리며 조여왔다.',
         ]);
@@ -835,7 +835,7 @@ module.exports = {
         ]);
         await era.printAndWait([
           ruby.get_colored_name(),
-          '이(가) 몇 분간 의식을 잃고, 멍하니 돌아왔다.',
+          '가 몇 분간 의식을 잃고, 멍하니 돌아왔다.',
         ]);
         await era.printAndWait([
           '거기서 ',
@@ -849,7 +849,7 @@ module.exports = {
           '의 하얀 타이즈를 절반 벗기고, 코끝으로 가져갔다.',
         ]);
         await era.printAndWait([
-          '방금 벗은 타이즈에는,',
+          '방금 벗은 타이즈에는, ',
           ruby.get_colored_name(),
           '의 향기가 남아 있다.',
         ]);
@@ -868,13 +868,13 @@ module.exports = {
         ]);
         await era.printAndWait([
           ruby.get_colored_name(),
-          '은(는) 입술을 강하게 깨물며, 쾌감의 침입에 저항하고 있는 듯했다.',
+          '는 입술을 강하게 깨물며, 쾌감의 침입에 저항하고 있는 듯했다.',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
           '은(는) ',
           ruby.get_colored_name(),
-          '이(가) 다시 절정에 이를 때까지 참고, 그 후 욕망을 해방했다.',
+          '가 다시 절정에 이를 때까지 참고, 그 후 욕망을 해방했다.',
         ]);
         await era.printAndWait([
           '그녀의 실신한 모습은 과장될 정도로, 눈물도 침도 모두 넘쳐흐르고 있었다.',
@@ -890,7 +890,7 @@ module.exports = {
         await era.printAndWait([
           '하지만 ',
           ruby.get_colored_name(),
-          '은(는) 이제는 기진맥진하여, 죽어가는 듯한 모습이었다.',
+          '는 이제는 기진맥진하여, 죽어가는 듯한 모습이었다.',
         ]);
         await era.printAndWait([
           '절정에 달하는 모습은 더욱더 귀엽고, 피부는 조홍의 아름다운 광택을 띠고 있다.',
@@ -903,9 +903,9 @@ module.exports = {
         ]);
         await era.printAndWait([
           ruby.get_colored_name(),
-          '이(가) 숨을 거둘까 걱정되어, 자신도 조금 힘이 다한 ',
+          '가 숨을 거둘까 걱정되어, 자신도 조금 힘이 다한 ',
           you.get_colored_name(),
-          '은, 내년 다시 싸우기로 했다.',
+          '은(는), 내년 다시 싸우기로 했다.',
         ]);
       }
       return [ret];
@@ -926,7 +926,7 @@ module.exports = {
       await ruby.say_and_wait('진지한 대답이군요.');
       await era.printAndWait([
         ruby.get_colored_name(),
-        '은(는) 손의 움직임을 멈추고, 얼굴을 살짝 붉혔다.',
+        '는 손의 움직임을 멈추고, 얼굴을 살짝 붉혔다.',
       ]);
       await ruby.say_and_wait('그렇다면, 당신의 노력에 달려 있군요.');
       await era.printAndWait([
@@ -951,14 +951,14 @@ module.exports = {
       await era.printAndWait([
         '이어 몸단장을 할 시간이다. ',
         ruby.get_colored_name(),
-        '의 말은 모호했지만,',
+        '의 말은 모호했지만, ',
         you.get_colored_name(),
         '에게는 오늘 밤을 기대하고 있다는 것을 알 수 있었다.',
       ]);
       await era.printAndWait([
-        '무사히 목욕을 마치고,',
+        '무사히 목욕을 마치고, ',
         ruby.get_colored_name(),
-        '이(가) 먼저 올라와, 침실의 큰 침대 가장자리에 앉았다.',
+        '가 먼저 올라와, 침실의 큰 침대 가장자리에 앉았다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
@@ -966,10 +966,10 @@ module.exports = {
         you.get_colored_name(),
         '은(는) ',
         ruby.get_colored_name(),
-        '을(를) 안고, 달려들었다.',
+        '를 안고, 달려들었다.',
       ]);
       await era.printAndWait([
-        '마취처럼,',
+        '마취처럼, ',
         you.get_colored_name(),
         '은(는) 더 가까이, 더 가까이 쓰다듬고, 키스하고, 핥고 싶었을 뿐이었다.',
       ]);
@@ -994,7 +994,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         ruby.get_colored_name(),
-        '은(는) 고개를 들고,',
+        '는 고개를 들고, ',
         you.get_colored_name(),
         '에게 미소 지으며, 혀를 내밀어 끝을 찔렀다.',
       ]);
@@ -1006,7 +1006,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         ruby.get_colored_name(),
-        '은(는) 순순히 ',
+        '는 순순히 ',
         you.get_colored_name(),
         '을(를) 받아들이고, 입을 최대한 벌려 겨우 물었다.',
       ]);
@@ -1014,7 +1014,7 @@ module.exports = {
         '목울대를 울리며 천천히 빼고, 입술만 끝에 닿는 곳에서 다시 물었다.',
       );
       await era.printAndWait([
-        '움직임은 느린데,',
+        '움직임은 느린데, ',
         you.get_colored_name(),
         '은(는) 비명을 지를 것 같았다.',
       ]);
@@ -1026,7 +1026,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         ruby.get_colored_name(),
-        '은(는) 조금 저항한 후, 필사적으로 ',
+        '는 조금 저항한 후, 필사적으로 ',
         you.get_colored_name(),
         '의 리듬에 맞췄다.',
       ]);
@@ -1036,20 +1036,20 @@ module.exports = {
         '에게 이렇게 구강을 침범당하면, 출혈하지 않더라도 피부가 벗겨질 것이다.',
       ]);
       await era.printAndWait([
-        '잠시 후,',
+        '잠시 후, ',
         ruby.get_colored_name(),
-        '의 뺨이 시큼해진 후에야,',
+        '의 뺨이 시큼해진 후에야, ',
         you.get_colored_name(),
         '은(는) 드디어 사정했다.',
       ]);
       await era.printAndWait([
         ruby.get_colored_name(),
-        '이(가) 다 마시지 못한 부분은 몸에 뿜어졌다.',
+        '가 다 마시지 못한 부분은 몸에 뿜어졌다.',
       ]);
       await era.printAndWait([
-        '잠시 입이 닫히지 않아,',
+        '잠시 입이 닫히지 않아, ',
         ruby.get_colored_name(),
-        '은(는) 곁눈질로 ',
+        '는 곁눈질로 ',
         you.get_colored_name(),
         '을(를) 보았다.',
       ]);
@@ -1059,23 +1059,23 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 애마의 어깨를 안고, 귀여운 귀를 쓰다듬으며, 입꼬리에 키스하여 겨우 ',
         ruby.get_colored_name(),
-        '을(를) 달랬다.',
+        '를 달랬다.',
       ]);
       await era.printAndWait([
         ruby.get_colored_name(),
-        '은(는) 자세를 바꾸고, 등을 돌려 ',
+        '는 자세를 바꾸고, 등을 돌려 ',
         you.get_colored_name(),
         '의 가슴 위에 앉아 일부러 엉덩이를 내밀었다.',
       ]);
       await era.printAndWait([
         '하얀 두 개의 꽃잎이 ',
         you.get_colored_name(),
-        '의 눈앞에서 흔들리고,',
+        '의 눈앞에서 흔들리고, ',
         you.get_colored_name(),
         '은(는) 처음 만났을 때도 여기에 시선이 끌렸던 것을 떠올렸다.',
       ]);
       await era.printAndWait([
-        '엉덩이를 잡고,',
+        '엉덩이를 잡고, ',
         you.get_colored_name(),
         '은(는) 참지 못하고 주물렀다.',
       ]);
@@ -1084,27 +1084,27 @@ module.exports = {
       );
       await era.printAndWait([
         ruby.get_colored_name(),
-        '은(는) 두 번 떨렸고, 붉은 손가락 자국이 곧바로 떠올라 선명했다.',
+        '는 두 번 떨렸고, 붉은 손가락 자국이 곧바로 떠올라 선명했다.',
       ]);
       await ruby.say_and_wait('빨리……');
       await era.printAndWait([
         you.get_colored_name(),
         '은(는) ',
         ruby.get_colored_name(),
-        '이(가) 말한 대로, 혀를 내밀어 깊은 사타구니를 핥으며 위에서 아래로 작은 홈까지 미끄러져 들어갔다.',
+        '가 말한 대로, 혀를 내밀어 깊은 사타구니를 핥으며 위에서 아래로 작은 홈까지 미끄러져 들어갔다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
         '은(는) 검지로 벌리니, 주름투성이로 분홍색으로 오므라들어 있다.',
       ]);
       await era.printAndWait([
-        '육욕의 냄새가 안에서 흘러나와,',
+        '육욕의 냄새가 안에서 흘러나와, ',
         you.get_colored_name(),
         '을(를) 탐색으로 유혹한다.',
       ]);
       await era.printAndWait([
         ruby.get_colored_name(),
-        '은(는) 기진맥진하여 ',
+        '는 기진맥진하여 ',
         you.get_colored_name(),
         '의 다리 위로 쓰러졌고, 코끝에는 우뚝 솟은 딱딱함이 있다. 그녀는 이 온존을 즐기고 있었다.',
       ]);
@@ -1121,7 +1121,7 @@ module.exports = {
   async load_talk(ruby) {
     await ruby.say_and_wait('……이것이, 당신의 의지이신가요?');
     await ruby.say_and_wait('……');
-    await ruby.say_and_wait('……알겠습니다');
+    await ruby.say_and_wait('……알겠습니다.');
     await ruby.say_and_wait([
       ruby.get_colored_name(),
       '는, 다른, 트레이너를——',
@@ -1148,13 +1148,13 @@ module.exports = {
       );
       era.print('눈꺼풀 위로도 꿈은 그 얇은 사를 두른다.');
       era.print(
-        `루비의 몸을 통과한 타이즈, 취할 듯한 기색과 따스한 체온이 그려내는 아련한 아름다움이 ${you.name}을 안달 나게 한다.`,
+        `루비의 몸을 통과한 타이즈, 취할 듯한 기색과 따스한 체온이 그려내는 아련한 아름다움이 ${you.name}을(를) 안달 나게 한다.`,
       );
       era.print(
-        `루비의, 진작에 ${you.name}을 정복한 아름다운 발이 ${you.name}의 앞에서 멈춰 서서, 때때로 코끝으로 가볍게 찌르고 비비며 다시 올라온다.`,
+        `루비의, 진작에 ${you.name}을(를) 정복한 아름다운 발이 ${you.name}의 앞에서 멈춰 서서, 때때로 코끝으로 가볍게 찌르고 비비며 다시 올라온다.`,
       );
       await era.printAndWait(
-        `${you.name}은 고개를 들고, 체온이 남은 발바닥에 입을 맞추려 한다. 공허할 때, 몇 번이고 떨어지는 가벼운 키스가 몇 번이고 ${you.name}의 체내의 피학적 광열을 부른다……`,
+        `${you.name}은(는) 고개를 들고, 체온이 남은 발바닥에 입을 맞추려 한다. 공허할 때, 몇 번이고 떨어지는 가벼운 키스가 몇 번이고 ${you.name}의 체내의 피학적 광열을 부른다……`,
       );
       era.println();
 
@@ -1162,13 +1162,13 @@ module.exports = {
       era.println();
 
       era.print(
-        `유혹하는 리듬이 규칙적으로 울리고, ${you.name}은 허무 속에서 마음을 빼앗겨 마지않는 모습이 걸어오는 것을 본 기분이 들었다.`,
+        `유혹하는 리듬이 규칙적으로 울리고, ${you.name}은(는) 허무 속에서 마음을 빼앗겨 마지않는 모습이 걸어오는 것을 본 기분이 들었다.`,
       );
       era.print(
         `그 아리따운 곡선, 요염한 자태, 그리고 녹아내리는 두 눈동자가 ${you.name}의 고동을 더욱 격렬하게 만든다.`,
       );
       await era.printAndWait(
-        `현실인지 꿈인지 이제 알 수 없다. ${you.name}은 자신의 경위를 잊고, 지금은 침대에 누워 있는 것도 아닌 것 같은 기분이 들었다.`,
+        `현실인지 꿈인지 이제 알 수 없다. ${you.name}은(는) 자신의 경위를 잊고, 지금은 침대에 누워 있는 것도 아닌 것 같은 기분이 들었다.`,
       );
       era.println();
 
@@ -1178,10 +1178,10 @@ module.exports = {
       era.println();
 
       era.print(
-        `${you.name}은 혀도 구강도 마비되고, 머릿속은 텅 비어 사정하기를 너무 많이 해서 언어 능력을 잊은 듯했다.`,
+        `${you.name}은(는) 혀도 구강도 마비되고, 머릿속은 텅 비어 사정하기를 너무 많이 해서 언어 능력을 잊은 듯했다.`,
       );
       era.print(
-        `루비 마마의 말을 듣고 ${you.name}은 무심코 멍청하게 웃었고, 뒷마당의 로터도 전류가 다해 멈췄다. 모든 것이 퍼져나가 평범으로 돌아간 것처럼.`,
+        `루비 마마의 말을 듣고 ${you.name}은(는) 무심코 멍청하게 웃었고, 뒷마당의 로터도 전류가 다해 멈췄다. 모든 것이 퍼져나가 평범으로 돌아간 것처럼.`,
       );
       era.print(
         `그리고 ${you.name}의 루비 마마는 지금 가볍게 웃으며 일어선다. 위엄이 있고 매력으로 가득 차 있다.`,
@@ -1190,10 +1190,10 @@ module.exports = {
         `아름다운 발이 가슴의 봉오리를 찌르고, 이미 탁액으로 범벅이 된 하얀 타이즈를 자신의 발에 신으며 몸을 숙여 ${you.name}의 가슴 위에서 타이즈를 신기 시작했다.`,
       );
       era.print(
-        `거친 감촉에 관성의 매끄러움이 섞인다. ${you.name}은 기분 좋음에 신음했고, ${you.name}은 삶의 의미를 찾은 것처럼 루비 마마의 발판이 되고, 육변기가 되고, 복종적인 천한 개가 되어 정액을 바치는 것도 나쁘지 않다고 생각했다.`,
+        `거친 감촉에 관성의 매끄러움이 섞인다. ${you.name}은(는) 기분 좋음에 신음했고, ${you.name}은(는) 삶의 의미를 찾은 것처럼 루비 마마의 발판이 되고, 육변기가 되고, 복종적인 천한 개가 되어 정액을 바치는 것도 나쁘지 않다고 생각했다.`,
       );
       era.print(
-        `${you.name}은 지금까지의 죄도 잘못도 이것으로 속죄한 기분이 들어, 이 과정을 즐기고 있었다.`,
+        `${you.name}은(는) 지금까지의 죄도 잘못도 이것으로 속죄한 기분이 들어, 이 과정을 즐기고 있었다.`,
       );
       await era.printAndWait(
         `발받침처럼 취급당하며, 루비 마마가 ${you.name}이(가) 좋아하는 검은 가죽 구두를 신는 것을 본다. 딱딱한 문양이 봉오리를 짓누르고, 전격 같은 감각이 ${you.name}을(를) 구름 사이, 황천 위에서 양분되는 것처럼 느끼게 했다.`,
@@ -1218,10 +1218,10 @@ module.exports = {
         `${you.name}은(는) 지쳐서 어렴풋이 다시 잠에 빠져들었다. 그렇게 하면 ${you.name}은(는) 루비 마마의 발자취를 쫓고, 루비 마마를 만나, 루비 마마의 발치 아래로 가라앉아, 영원히 루비 마마의 아름다운 발 냄새를 맡을 수 있을 것 같은 기분이 들었다.`,
       );
       era.print(
-        `육봉은 다시 서서히 일어서고, ${you.name}은 자신이 어떤 상황에 있는지, 어디에 있는지 알 수 없다……`,
+        `육봉은 다시 서서히 일어서고, ${you.name}은(는) 자신이 어떤 상황에 있는지, 어디에 있는지 알 수 없다……`,
       );
       await era.printAndWait(
-        `하지만 꿈의 바로 직전에서, 루비 마마는 요염한 양발을 뻗어 발바닥을 ${you.name} 앞으로 향하게 하고, 다정하게 웃으며 ${you.name}을 바라보고 있다……`,
+        `하지만 꿈의 바로 직전에서, 루비 마마는 요염한 양발을 뻗어 발바닥을 ${you.name} 앞으로 향하게 하고, 다정하게 웃으며 ${you.name}을(를) 바라보고 있다……`,
       );
     };
     f.title = title;

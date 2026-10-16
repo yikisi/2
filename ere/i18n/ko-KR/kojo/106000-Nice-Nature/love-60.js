@@ -40,7 +40,7 @@ module.exports = {
       await nature.print_and_wait([
         '불빛 아래에서 ',
         nature.teen_sex_title,
-        '은(는) 소중히 간직한 종이 트로피를 만지작거리다가 무심코 중얼거렸다.',
+        '는 소중히 간직한 종이 트로피를 만지작거리다가 무심코 중얼거렸다.',
       ]);
       await nature.say_and_wait([
         '잠깐! 나 방금 무슨 말을 한 거야! 꼭 사랑에 빠진 ',
@@ -86,11 +86,11 @@ module.exports = {
       ]);
       nature.say([
         callname,
-        '、',
+        ', ',
         callname,
         '……이렇게 야한 짓을 하는 건, ',
         callname,
-        '를 생각하다 이렇게 돼 버려서……',
+        '을(를) 생각하다 이렇게 돼 버려서……',
       ]);
       await nature.print_and_wait([
         nature.sex,
@@ -101,7 +101,7 @@ module.exports = {
       nature.say([
         '나……나, ',
         callname,
-        '가 좋아, 정말 좋아! 그러니까 더 세게……!',
+        '이(가) 좋아, 정말 좋아! 그러니까 더 세게……!',
       ]);
       nature.say(['가, 가 버려, ', callname, ', 가 버려～～～～!!']);
       await nature.print_and_wait([
@@ -208,7 +208,7 @@ module.exports = {
     await nature.print_and_wait([
       '붉은 머리의 ',
       nature.teen_sex_title,
-      '은(는) 같은 생각을 되풀이했다. 필사적으로 정답을 찾았지만 답은 나오지 않았다.',
+      '는 같은 생각을 되풀이했다. 필사적으로 정답을 찾았지만 답은 나오지 않았다.',
     ]);
     nature.say(['하아~~~ ', callname, '……']);
     era.printButton('「네이처, 무슨 일이야?」', 1);
@@ -252,7 +252,7 @@ module.exports = {
     await nature.print_and_wait([
       '자업자득이라고 ',
       nature.teen_sex_title,
-      '은(는) 생각하면서도 각오를 다지고 편지를 ',
+      '는 생각하면서도 각오를 다지고 편지를 ',
       callname,
       '에게 건넸다.',
     ]);
@@ -316,7 +316,7 @@ module.exports = {
       ', 좋아하는 ',
       nature.uma_sex_title,
       nature.child_sex_title,
-      '、',
+      ', ',
       nature.sex,
       '도 귀엽고 하니까 잘 어울리지 않을까?',
     ]);
@@ -444,7 +444,7 @@ module.exports = {
     await nature.print_and_wait([
       '통 안에는 종이접기로 만든 트로피가 가지런히 쌓여 있었다. 하나하나가 ',
       you.get_colored_actual_name(),
-      '와(과) 함께 걸어온 발자취이자 둘도 없는 추억이었다. 달려온 레이스뿐 아니라 둘이 함께 보낸 행복한 시간까지 그 안에 담겨 있었다.',
+      '과(와) 함께 걸어온 발자취이자 둘도 없는 추억이었다. 달려온 레이스뿐 아니라 둘이 함께 보낸 행복한 시간까지 그 안에 담겨 있었다.',
     ]);
     await nature.print_and_wait([
       '이 수집품이 앞으로 더 늘어날 거라고 생각하자 ',

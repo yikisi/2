@@ -65,7 +65,7 @@ select:
               content:
                 - fontWeight: bold
                   content: %CHARA%
-                - "「%CALLNAME%는 계속 곁에 있어 줄…… 거지?」"
+                - "「%CALLNAME%은(는) 계속 곁에 있어 줄…… 거지?」"
     - if: era.get('status:64:10') > 0 || era.get('status:64:39') > 0
       lines:
         - random: true
@@ -128,7 +128,7 @@ office_study:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「에헤, 그런 거야? 역시 %CALLNAME%네.」"
+          - "「에헤, 그런 거야? 역시 %CALLNAME%(이)네.」"
       - "%CHARA%는 기쁘게 답안을 작성하더니, 곁에 있는 %YOU%을(를) 향해 엄지를 치켜세우는 것도 잊지 않았다."
   - random: true
     lines:
@@ -155,7 +155,7 @@ office_prepare:
           - fontWeight: bold
             content: %CHARA%
           - "「편자도 다 박았네, 고마워, %CALLNAME%!」"
-      - "%CHARA%는 조금 놀란 표정이었으나, 이내 얼굴에 따스한 미소를 띄웠다."
+      - "%CHARA%는 조금 놀란 표정이었으나, 이내 얼굴에 따스한 미소를 띠었다."
   - random: true
     lines:
       - color: %COLOR%
@@ -382,7 +382,7 @@ talk:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「%CALLNAME%는 파머를 버리지 않을 거지?」"
+              - "「%CALLNAME%은(는) 파머를 버리지 않을 거지?」"
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -395,7 +395,7 @@ talk:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「가끔 생각해. %CALLNAME%가 없었으면 지금처럼 못 웃었겠구나…… 아니야, 아니야! 방금 말은 취소!」"
+              - "「가끔 생각해. %CALLNAME%이(가) 없었으면 지금처럼 못 웃었겠구나…… 아니야, 아니야! 방금 말은 취소!」"
       - if: era.get('love:64') >= 75
         random: true
         lines:
@@ -411,7 +411,7 @@ talk:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - "「%CALLNAME%는 계속 파머의 『트레이너』로 있어 줄 거지?」"
+              - "「%CALLNAME%은(는) 계속 파머의 『트레이너』로 있어 줄 거지?」"
       # CFLAGNAME:81 = 妊娠段階
       - if: (era.get('cflag:64:81') >> 2) > 0
         random: true
@@ -562,7 +562,7 @@ office_rest:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「%CALLNAME%와 함께하는 시간은…… 정말 안심이 돼.」"
+          - "「%CALLNAME%과(와) 함께하는 시간은…… 정말 안심이 돼.」"
   - if: era.get('love:64') === 100
     random: true
     lines:
@@ -594,7 +594,7 @@ office_game:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「%CALLNAME%와 함께라면 뭐든 즐거워, 에헤헤~」"
+          - "「%CALLNAME%과(와) 함께라면 뭐든 즐거워, 에헤헤~」"
   - random: true
     lines:
       - color: %COLOR%
@@ -641,7 +641,7 @@ s_a_dating:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「저기, 여기서 데이트 하는건 좀…… 그치?」"
+          - "「저기, 여기서 데이트하는 건 좀…… 그치?」"
       - "%CHARA%는 내심 신경 쓰는 눈치였으나, 맞잡은 손은 조금도 놓을 기색이 없었다."
   - if: d.half_life === 1
     lines:
@@ -650,7 +650,7 @@ s_a_dating:
           - fontWeight: bold
             content: %CHARA%
           - "「데이트라……」"
-      - "%CHARA%는 %YOU%의 팔에 꼭 매달린 채, 주변의 시선에 아랑곳하지 않고 어깨에 얼굴을 가까이 밀착했다."
+      - "%CHARA%는 %YOU%의 팔에 꼭 매달린 채, 주변의 시선에 아랑곳하지 않고 어깨에 얼굴을 바짝 붙였다."
       - color: %COLOR%
         content:
           - fontWeight: bold
@@ -665,7 +665,7 @@ s_r_lunch:
           - fontWeight: bold
             content: %CHARA%
           - "「평소 옥상엔 사람이 별로 없네. 이것도 데이트려나…… 에헤헤.」"
-      - "볼을 긁으며 뭔가 중얼거리는 %CHARA%를 보고 %YOU%는 %SEX%의 도시락에 문어 모양 소시지 하나를 덜어 줬다."
+      - "볼을 긁으며 뭔가 중얼거리는 %CHARA%를 보고 %YOU%은(는) %SEX%의 도시락에 문어 모양 소시지 하나를 덜어 줬다."
       - color: %COLOR%
         content:
           - fontWeight: bold
@@ -728,7 +728,7 @@ o_r_fishing:
           - fontWeight: bold
             content: %CHARA%
           - "「그립네~ 예전에도 자주 이렇게 멀리 나갔지~」"
-      - "%CHARA%는 낚싯대를 던지고 잔잔한 수면 위 찌를 보며 편하게 이야기를 시작했다."
+      - "%CHARA%는 낚싯줄을 드리우고 잔잔한 수면 위 찌를 보며 편하게 이야기를 시작했다."
 
 o_r_walking:
   - random: true
@@ -767,7 +767,7 @@ o_s_arcade:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「옛날에 %SIBLINGS%들이랑 자주 이걸로 놀았어. %CALLNAME%, 각오해?」"
+          - "「옛날에 %SIBLINGS%들이랑 자주 이걸로 놀았어. %CALLNAME%, 긴장해야 할걸?」"
       - "눈앞의 오락기를 바라보는 %CHARA%의 눈동자가 반짝였다."
 
 o_s_drawing:
@@ -843,7 +843,7 @@ o_s_movie:
           - fontWeight: bold
             content: %CHARA%
           - "「있잖아, %CALLNAME%…… 로맨스 영화 좋아해?」"
-      - "%CHARA%는 조금 굳은 채 뭔가 기대하는 듯했다."
+      - "%CHARA%는 조금 긴장한 채 무언가를 기대하는 듯했다."
   - if: era.get('love:64') >= 50 && era.get('love:64') < 75
     random: true
     lines:
@@ -852,7 +852,7 @@ o_s_movie:
           - fontWeight: bold
             content: %CHARA%
           - "「둘이서 영화라니, 왠지 다른 의미도 있는 것 같네……」"
-      - "%CHARA%는 옆에서 한동안 중얼거렸지만 %YOU%와 맞잡은 손에는 오히려 힘이 들어갔다."
+      - "%CHARA%는 옆에서 한동안 중얼거렸지만 %YOU%과(와) 맞잡은 손에는 오히려 힘이 들어갔다."
 
 o_c_pray:
   - "트레센 근처 신사는 규모는 작아도 %UMA%들 사이에서는 꽤 유명했다."
@@ -869,9 +869,9 @@ o_c_pray:
       - fontWeight: bold
         content: %CHARA%
       - "「왠지…… 여기 있으면 여러 가지를 잊을 수 있거든.」"
-  - "%CHARA%는 머리를 감싼 채 힘을 뺀 느긋한 걸음으로 %YOU% 곁을 걸었다."
+  - "%CHARA%는 머리에 손을 얹은 채 느긋한 걸음으로 %YOU% 곁을 걸었다."
   - "신사에는 사람이 거의 없었다. 미풍이 주변 나뭇가지를 스치고 얼굴에 닿는 감촉이 기분 좋았다."
-  - "눈앞의 제비통을 본 %CHARA%는 말없이 옆의 %YOU%를 쿡 찌르고는 별일 아니라는 표정을 지었다."
+  - "눈앞의 제비통을 본 %CHARA%는 말없이 옆의 %YOU%을(를) 쿡 찌르고는 별일 아니라는 표정을 지었다."
   - color: %COLOR%
     content:
       - fontWeight: bold
@@ -909,7 +909,7 @@ o_c_pray:
       - "제비를 펼쳤지만 대길은 나오지 않았다."
       - "종이에 적힌 흉을 보고 %CHARA%는 어색한 듯 %YOU%의 눈을 피했다."
       - acc: 1
-        content: "「운은 보존되는 거야. 내일은 운이 좋을 거야.」"
+        content: "「오늘 운이 나빴으니 내일은 운이 좋을 거야.」"
       - "%CHARA%는 조금 풀이 죽어 %YOU% 쪽으로 몸을 돌리고 시선을 피했다."
       - color: %COLOR%
         content:
@@ -917,7 +917,7 @@ o_c_pray:
             content: %CHARA%
           - "「어쩌지, 오늘 이거……」"
       - "조금 긴장했는지 손가락을 가만두지 못했다."
-      - "불안해하는 %CHARA%를 보고 %YOU%는 손을 들어 %SEX%의 부드러운 머리카락을 살며시 쓰다듬었다."
+      - "불안해하는 %CHARA%를 보고 %YOU%은(는) 손을 들어 %SEX%의 부드러운 머리카락을 살며시 쓰다듬었다."
       - acc: 1
         content: "「괜찮아.」"
       - "%CHARA%는 말이 없었다. 쫑긋거리는 귀만이 마음을 전했다."
@@ -926,7 +926,7 @@ o_c_pray:
           - fontWeight: bold
             content: %CHARA%
           - "「고마워……」"
-      - "작은 목소리였지만 넓은 신사에서는 또렷하게 들렸다."
+      - "작은 목소리였지만 한산한 신사에서는 또렷하게 들렸다."
 
 o_s_restaurant:
   - random: true
@@ -944,7 +944,7 @@ o_s_restaurant:
           - fontWeight: bold
             content: %CHARA%
           - "「흥흥~ 파머 씨는 맛있는 거 잘 찾거든.」"
-      - "%CHARA%는 허리에 손을 얹고 두 사람 앞에서 김 나는 정식을 뿌듯하게 봤다."
+      - "%CHARA%는 허리에 손을 얹고 두 사람 앞에 놓인 먹음직스러운 정식을 뿌듯하게 바라봤다."
   - if: era.get('love:64') >= 75
     random: true
     lines:
@@ -1015,7 +1015,7 @@ o_s_dating:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - "「왜인지는 모르겠지만…… 놓으면 %CALLNAME%가 곁에서 사라질 것 같아서……」"
+          - "「왜인지는 모르겠지만…… 놓으면 %CALLNAME%이(가) 곁에서 사라질 것 같아서……」"
       - "%YOU%의 어깨에 기대 다른 사람에게는 들리지 않게 작게 말했다."
 
 o_s_shopping:
@@ -1042,7 +1042,7 @@ o_s_shopping:
           - fontWeight: bold
             content: %CHARA%
           - "「%CALLNAME%, 갖고 싶은 거 있어? 파머도 선물해 줄 수 있어!」"
-      - "%CHARA%는 조금 들뜬 채 %YOU% 앞에서 통통 튀듯 바라봤다."
+      - "%CHARA%는 조금 들뜬 채 %YOU% 앞에서 깡충깡충 뛰며 바라봤다."
   - if: era.get('love:64') >= 50
     random: true
     lines:
@@ -1077,7 +1077,7 @@ good_night_normal:
                 - "「내일도 볼 수 있지? 또 봐!」"
         - random: true
           lines:
-            - "바쁜 하루가 끝나고 똑같이 쓰러질 듯한 %CHARA%를 기숙사까지 데려다줬다."
+            - "바쁜 하루가 끝나고 마찬가지로 지쳐 쓰러질 듯한 %CHARA%를 기숙사까지 데려다줬다."
             - color: %COLOR%
               content:
                 - fontWeight: bold
@@ -1089,7 +1089,7 @@ good_night_normal:
         - "지금 장난을 치면 %SEX%는 잠에서 깰까?"
     - if: era.get('status:0:10') > 0
       lines:
-        - "잠에 빠져들던 %YOU%는 몽롱한 와중에 %CHARA%가 손을 뻗으려다 망설이는 모습을 본 것 같았다. 마지막에는 친근함과 다정함이 섞인 작별 인사만 남았다."
+        - "잠에 빠져들던 %YOU%은(는) 몽롱한 와중에 %CHARA%가 손을 뻗으려다 망설이는 모습을 본 것 같았다. 마지막에는 친근함과 다정함이 섞인 작별 인사만 남았다."
 
 good_night_sex:
   - "%CHARA%를 기숙사까지 데려다주자 소매를 살짝 잡아당겼다."
@@ -1120,7 +1120,7 @@ good_night_sex:
                 content: %CHARA%
               - "「하지만……」"
           - "객관적으로 %UMA%의 힘은 보통 사람보다 훨씬 세다……"
-          - "그러니 지금 %YOU%를 붙잡는 것도 어렵지 않다."
+          - "그러니 지금 %YOU%을(를) 붙잡는 것도 어렵지 않다."
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -1129,7 +1129,7 @@ good_night_sex:
       - if: d.check !== 2
         lines:
           - "%CHARA%의 표정에서 기대가 사라지고 그늘이 졌다. 내려온 앞머리 뒤로 실망을 감췄다."
-          - "얌전히 돌아서 기숙사로 들어가면서도 입구에서 한 번 더 몰래 %YOU%를 본 뒤 고개를 숙이고 모퉁이 너머로 사라졌다."
+          - "얌전히 돌아서 기숙사로 들어가면서도 입구에서 한 번 더 몰래 %YOU%을(를) 본 뒤 고개를 숙이고 모퉁이 너머로 사라졌다."
 
 load_talk:
   # CFLAGNAME:81 = 妊娠段階
@@ -1158,7 +1158,7 @@ tree_hollow_snails:
   title: "달팽이가 되어 버려///"
   lines:
     # 条件：愛欲以上、アイテムにアナルプラグがあり、アナル中出し後、中庭へ行くと発生
-    - "저녁 무렵 %YOU%는 파머의 손을 잡고 학원을 산책했다. %SEX%의 걸음은 몹시 뻣뻣해 %YOU%가 이끌어야 겨우 발을 뗐다."
+    - "저녁 무렵 %YOU%은(는) 파머의 손을 잡고 학원을 산책했다. %SEX%의 걸음은 몹시 뻣뻣해 %YOU%이(가) 이끌어야 겨우 발을 뗐다."
     -
     - color: %COLOR%
       content:
@@ -1166,7 +1166,7 @@ tree_hollow_snails:
           content: %CHARA%
         - "「%CALLNAME%? 이제 그만…… 읏.」"
     -
-    - "%YOU%가 중지로 %TEEN%의 치마 속 금속을 튕기자 %SEX%의 말은 작은 신음으로 끊기고 움츠린 어깨가 살짝 경련했다."
+    - "%YOU%이(가) 중지로 %TEEN%의 치마 속 금속을 튕기자 %SEX%의 말은 작은 신음으로 끊기고 움츠린 어깨가 살짝 경련했다."
     -
     - color: %COLOR%
       content:
@@ -1174,14 +1174,14 @@ tree_hollow_snails:
           content: %CHARA%
         - "「%CALLNAME% 취향도 참…… 벌써 뒤가…… 이상해.」"
     -
-    - "주위에 아무도 없는 걸 확인한 %YOU%는 뒤에서 파머의 치마를 걷었다. 하얗고 도톰한 엉덩이 사이로 플러그 끝의 금속이 선명하게 보였다."
+    - "주위에 아무도 없는 걸 확인한 %YOU%은(는) 뒤에서 파머의 치마를 걷었다. 하얗고 도톰한 엉덩이 사이로 플러그 끝의 금속이 선명하게 보였다."
     - "몇 마디로 파머를 설득해 정액을 직장에 가둔 채 밖으로 데리고 나왔다. 지금 %SEX%는 후회하고 있을까."
-    - "항문이 막힌 파머는 갈 곳 없는 강아지 같았다. 꼬리는 허벅지 사이에 끼었고, 저항할 수 없는 %SEX%는 %YOU%가 하라는 대로 따를 수밖에 없었다……"
+    - "항문이 막힌 파머는 갈 곳 없는 강아지 같았다. 꼬리는 허벅지 사이에 끼었고, 저항할 수 없는 %SEX%는 %YOU%이(가) 하라는 대로 따를 수밖에 없었다……"
     -
     - acc: 1
       content: "플러그를 잡고 움직인다"
       lines:
-        - "파머를 나무 그늘로 끌어당긴 %YOU%는 플러그 끝을 잡고 앞뒤로 움직였다. 직장 안의 정액이 뒤섞이며 「질척질척」 소리가 났다."
+        - "파머를 나무 그늘로 끌어당긴 %YOU%은(는) 플러그 끝을 잡고 앞뒤로 움직였다. 직장 안의 정액이 뒤섞이며 「질척질척」 소리가 났다."
         -
         - color: %COLOR%
           content:
@@ -1198,7 +1198,7 @@ tree_hollow_snails:
       acc: 2
       content: "사타구니를 쓰다듬는다"
       lines:
-        - "파머와 벽 쪽 그늘을 나란히 걸으며 %YOU%는 치마 밑으로 손을 넣어 %SEX%의 매끄럽고 탄탄한 엉덩이를 꼬집었다."
+        - "파머와 벽 쪽 그늘을 나란히 걸으며 %YOU%은(는) 치마 밑으로 손을 넣어 %SEX%의 매끄럽고 탄탄한 엉덩이를 꼬집었다."
         -
         - color: %COLOR%
           content:
@@ -1206,8 +1206,8 @@ tree_hollow_snails:
               content: %CHARA%
             - "「만지지 마…… 들키겠어.」"
         -
-        - "파머의 항의는 흘려듣고 %YOU%는 %SEX%의 사타구니를 따라 천천히 안으로 손을 뻗었다. 손가락이 따뜻하게 젖은 음부 아래에 닿을 때까지."
-        - "샅에 묻은 애액을 윤활 삼아 %YOU%는 중지를 %TEEN%의 질 안으로 밀어 넣고 내벽을 건드렸다."
+        - "파머의 항의는 흘려듣고 %YOU%은(는) %SEX%의 사타구니를 따라 천천히 안으로 손을 뻗었다. 손가락이 따뜻하게 젖은 음부 아래에 닿을 때까지."
+        - "샅에 묻은 애액을 윤활 삼아 %YOU%은(는) 중지를 %TEEN%의 질 안으로 밀어 넣고 내벽을 건드렸다."
         -
         - color: %COLOR%
           content:
@@ -1218,7 +1218,7 @@ tree_hollow_snails:
         - "교성이 새어 나오자 파머는 결국 걷기를 포기하고 %YOU%에게 기대 끊임없이 떨었다. 액체가 허벅지를 타고 한 방울씩 떨어졌다."
         - "쾌감에 굴복한 파머는 더는 주위를 경계하지 않았다. 그럴 여유가 없는 건지, 노출의 흥분에 빠진 건지."
     - divider: true
-    - "%TEEN%의 몸이 변하는 걸 느낀 %YOU%는 절정이 다가오자 손을 멈췄다. 파머의 허리가 괴로운 듯 비틀렸다."
+    - "%TEEN%의 몸이 변하는 걸 느낀 %YOU%은(는) 절정이 다가오자 손을 멈췄다. 파머의 허리가 괴로운 듯 비틀렸다."
     -
     - color: %COLOR%
       content:
@@ -1226,7 +1226,7 @@ tree_hollow_snails:
           content: %CHARA%
         - "「으음…… %CALLNAME%?」"
     -
-    - "파머의 촉촉한 눈을 바라보며 %YOU%는 플러그 끝을 잡아 단숨에 뽑았다——"
+    - "파머의 촉촉한 눈을 바라보며 %YOU%은(는) 플러그 끝을 잡아 단숨에 뽑았다——"
     - "「뽁!」"
     -
     - color: %COLOR%
@@ -1235,7 +1235,7 @@ tree_hollow_snails:
           content: %CHARA%
         - "「우앗!……」"
     -
-    - "파머의 눈이 크게 뜨였다. 쾌감이 터지자 %SEX%는 균형을 잡으려고 %YOU%를 꽉 끌어안았고 체면을 잃은 신음이 목에서 샜다."
+    - "파머의 눈이 크게 뜨였다. 쾌감이 터지자 %SEX%는 균형을 잡으려고 %YOU%을(를) 꽉 끌어안았고 체면을 잃은 신음이 목에서 샜다."
     -
     - "함께 새어 나온 것은 또 없었을까?"
     -
@@ -1245,8 +1245,8 @@ tree_hollow_snails:
           content: %CHARA%
         - "「안 돼…… %CALLNAME%…… 제발.」"
     -
-    - "잠시 뒤 조금 진정한 파머를 %YOU%가 밀어내려 하자 흐느낌 섞인 애원이 들렸다. 고개를 저으며 거절하고 있었다."
-    - "%SEX%를 벽을 따라 걷게 하고 %YOU%는 조금 떨어져 뒤의 모습을 바라봤다."
+    - "잠시 뒤 조금 진정한 파머를 %YOU%이(가) 밀어내려 하자 흐느낌 섞인 애원이 들렸다. 고개를 저으며 거절하고 있었다."
+    - "%SEX%를 벽을 따라 걷게 하고 %YOU%은(는) 조금 떨어져 뒤의 모습을 바라봤다."
     - "%TEEN%는 힘 풀린 다리를 끌었고 흔들리는 치마 사이로 유백색 액체가 줄줄 흘러내려 땅에 자취를 남겼다……"
 
 # 育成中バージョン
@@ -1263,7 +1263,7 @@ cl_palace:
         - fontWeight: bold
           content: %CHARA%
         - "「오늘 전당 입성 주간이야! 늦으면 자리 없어!」"
-    - "파머는 행사장으로 뛰어가다 이따금 %YOU%를 돌아보고는 초조하게 속도를 늦췄다."
+    - "파머는 행사장으로 뛰어가다 이따금 %YOU%을(를) 돌아보고는 초조하게 속도를 늦췄다."
     - "여러 번 망설이던 파머는 %YOU%의 팔을 잡고 단숨에 행사장까지 달리기로 했다."
     - color: %COLOR%
       content:
@@ -1275,7 +1275,7 @@ cl_palace:
         - fontWeight: bold
           content: %CHARA%
         - "「딱 자리 있네. 완전 럭키!」"
-    - "숨이 찬 %YOU%를 끌어 앉히고 기대에 찬 눈으로 단상 위 선배를 봤다."
+    - "숨이 찬 %YOU%을(를) 끌어 앉히고 기대에 찬 눈으로 단상 위 선배를 봤다."
     - "선배가 들려주는 과거와 경험담을 파머는 진지하게 들으며 저도 모르게 기대 어린 미소를 지었다."
     - color: %COLOR%
       content:
@@ -1294,7 +1294,7 @@ cl_palace:
         - fontWeight: bold
           content: %CHARA%
         - "「그럼 더, 훨——씬 더 열심히 해야겠네! 진심으로!」"
-    - "파머는 다시 단상을 봤다. 눈동자에 동경의 별이 떠올랐다."
+    - "파머는 다시 단상을 봤다. 눈동자가 동경으로 반짝였다."
 
 # 育成中バージョン
 cl_fans_in_edu:
@@ -1308,8 +1308,8 @@ cl_fans_in_edu:
         - fontWeight: bold
           content: %CHARA%
         - "「큰일이네. 이거 적당히 달릴 분위기가 아닌데.」"
-    - "주로에 서고 나서야 깨달았다. 옆의 기운이 조금 이상했다."
-    - "주변 %UMA%들은 이미 임시 출발선 앞에서 자세를 잡았다. 파머는 뒤늦게 이해했다."
+    - "주로에 서고 나서야 주변 분위기가 심상치 않다는 걸 깨달았다."
+    - "주변 %UMA%들은 이미 임시 출발선 앞에서 자세를 잡았다. 파머는 그제야 상황을 파악했다."
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -1329,7 +1329,7 @@ cl_fans_in_edu:
         - "「파머까지 진심이 됐잖아!」"
     - divider: true
       content: "시범 경기 종료 후"
-    - "경기가 끝나자 갑자기 전력을 내느라 준비가 부족했던 파머는 코스 옆에 앉아 부채질했다."
+    - "준비도 없이 갑자기 전력을 다한 파머는 경기가 끝나자 코스 옆에 앉아 부채질했다."
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -1391,7 +1391,7 @@ cl_fans_in_edu:
 cl_fans:
   title: "팬 감사제"
   lines:
-    - "팬 감사제 당일 파머는 %YOU%를 따라 트레센에 돌아왔다."
+    - "팬 감사제 당일 파머는 %YOU%을(를) 따라 트레센에 돌아왔다."
     - "평소에도 여러 이유로 트레센에 오지만 팬 감사제 날은 달랐다."
     - "이미 드림 컵으로 옮겨 간 %UMA%든 은퇴한 %UMA%든, 팬들은 이날을 기다린다."
     - color: %COLOR%
@@ -1430,7 +1430,7 @@ cl_fans:
               content: %CHARA%
             - "「아, 먼저 승부복으로 갈아입고 올게.」"
         - "파머는 다른 쪽으로 뛰어가 순식간에 보이지 않게 됐다."
-        - "연기처럼 사라진 파머가 달려간 쪽을 보고 %YOU%는 믿음을 품고 관중석으로 향했다."
+        - "연기처럼 사라진 파머가 달려간 쪽을 보고 %YOU%은(는) 믿음을 품고 관중석으로 향했다."
         - divider: true
           content: "임시 코스"
         - color: %COLOR%
@@ -1470,7 +1470,7 @@ cl_fans:
               content: %CHARA%
             - "「오, 다들!」"
         - color: %COLOR%
-          content: "살짝 흔들리는 귀가 주변의 외침에서 자기 이름을 알아듣고 관중석에 손을 흔들었다."
+          content: "파머는 귀를 살짝 움직여 주변의 외침에서 자기 이름을 알아듣고, 관중석에 손을 흔들었다."
         - color: %COLOR%
           content: "관중석에서 똑같이 환호하는 %YOU%도 물론 그 안에 있었다."
         - color: %COLOR%
@@ -1479,7 +1479,7 @@ cl_fans:
               content: %CHARA%
             - "「트레이너…… 역시 있네.」"
         - color: %COLOR%
-          content: "관중석을 보는 파머의 눈에 원래의 마음과 함께 가벼운 기쁨이 더해졌다."
+          content: "관중석을 바라보는 파머의 눈에 기쁨이 조금 더 어렸다."
         - if: era.get('love:64') >= 50
           lines:
             - color: %COLOR%
@@ -1526,7 +1526,7 @@ cl_fans:
           content: "임시 코스"
         - "직접 나가지 않더라도 선배들의 모습을 보는 건 나쁘지 않았다."
         - "여흥 레이스가 시작되자 주변 팬들이 오랜만에 보는 선수들에게 응원을 보냈다."
-        - "%YOU%와 파머는 나란히 서서 코스 위의 선수들을 봤다."
+        - "%YOU%과(와) 파머는 나란히 서서 코스 위의 선수들을 봤다."
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -1626,7 +1626,7 @@ cl_temple_fair:
     - acc: 1
       content: "「좋아, 가자.」 (호감 +10, 연모 +2)"
       lines:
-        - "%YOU%는 파머가 내민 손을 잡고 보조를 맞춰 축제 속으로 들어갔다."
+        - "%YOU%은(는) 파머가 내민 손을 잡고 보조를 맞춰 축제 속으로 들어갔다."
         - "파머는 평소처럼 여기저기 돌아다니지 않고 계속 %YOU% 곁에 붙어 있었다."
         - color: %COLOR%
           content:
@@ -1639,13 +1639,13 @@ cl_temple_fair:
               content: %CHARA%
             - "「오늘은 %SELF_CALL%가 계속 같이 있을게!」"
         - acc: 1
-          content: "「저쪽 노점 괜찮아 보이네.」 (체력 +100)"
+          content: "「저쪽 먹거리 괜찮아 보이네.」 (체력 +100)"
           lines:
             - color: %COLOR%
               content:
                 - fontWeight: bold
                   content: %CHARA%
-                - "「노점? 좋아, 가 보자, 트레이너!」"
+                - "「먹거리? 좋아, 가 보자, 트레이너!」"
             - "파머는 망설임 없이 %YOU%의 손을 잡고 노점으로 가서 눈앞의 음식을 봤다."
             - color: %COLOR%
               content:
@@ -1669,11 +1669,11 @@ cl_temple_fair:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「파머가 먹고 싶으면 또 사면 되니까……」"
-            - "말하는 파머에게 식욕은 별로 보이지 않았다. 그저 앞을 바라볼 뿐이었다."
+            - "파머는 말하면서도 먹는 데는 별 관심을 보이지 않았다. 그저 앞을 바라볼 뿐이었다."
             - "양옆의 노점을 살피며 다음에 갈 곳을 찾았다."
             - acc: 1
               content: "음식을 내민다"
-            - "%YOU%는 손에 든 음식을 들어 파머 앞으로 가져갔다."
+            - "%YOU%은(는) 손에 든 음식을 들어 파머 앞으로 가져갔다."
             - color: %COLOR%
               content:
                 - fontWeight: bold
@@ -1704,7 +1704,7 @@ cl_temple_fair:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「사장님! 할게요!」"
-            - "파머는 조금 들떠 공기총을 받아 %YOU%와 하나씩 들었다."
+            - "파머는 조금 들떠 공기총을 받아 %YOU%과(와) 하나씩 들었다."
             - color: %COLOR%
               content:
                 - fontWeight: bold
@@ -1716,7 +1716,7 @@ cl_temple_fair:
                   content: %CHARA%
                 - "「맞히면 줄게.」"
             - "자신 있게 말하며 공기총을 겨눴다."
-            - "귀가 날렵하게 두 번 움직였고 자신만만하게 방아쇠를 당겼다."
+            - "귀를 쫑긋거리더니 자신만만하게 방아쇠를 당겼다."
             - divider: true
               content: "한 차례 사격을 마친 뒤"
             - color: %COLOR%
@@ -1735,7 +1735,7 @@ cl_temple_fair:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「미안해, 트레이너……」"
-            - "실망한 파머를 보며 %YOU%는 공기총을 겨눴다."
+            - "실망한 파머를 보며 %YOU%은(는) 공기총을 겨눴다."
             - "짧고 경쾌한 소리와 함께 탄환이 경품용 풍선을 터뜨렸다."
             - color: %COLOR%
               content:
@@ -1776,7 +1776,7 @@ cl_temple_fair:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「저기…… 고마워.」"
-            - "푹신한 인형에 얼굴을 묻고 밝은 눈만 내놓은 채 앞의 %YOU%를 봤다."
+            - "푹신한 인형에 얼굴을 묻고 밝은 눈만 내놓은 채 앞의 %YOU%을(를) 봤다."
             - "다른 사람에게는 들리지 않을 작은 목소리로 다시 말했다."
             - color: %COLOR%
               content:
@@ -1795,7 +1795,7 @@ cl_temple_fair:
             - fontWeight: bold
               content: %CHARA%
             - "「그런데 마지막엔 오히려 보살핌을 받았네.」"
-        - "파머는 손에 든 수확물을 안고 바닷가를 걸었다."
+        - "파머는 축제에서 얻은 물건들을 품에 안고 바닷가를 걸었다."
         - "걷다가 옆의 %YOU%에게 살며시 어깨를 기댔다."
         - color: %COLOR%
           content:
@@ -1818,12 +1818,12 @@ cl_temple_fair:
           content:
             - fontWeight: bold
               content: %CHARA%
-            - "「담당 %UMA%를 받쳐 주는 게 트레이너 일이잖아?」"
+            - "「담당 %UMA%를 뒷받침해 주는 게 트레이너 일이잖아?」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - "「파머도 트레이너를 받쳐 주는 느낌을 경험해 보고 싶었어. 그뿐이야.」"
+            - "「파머도 트레이너를 뒷받침해 주면 어떤 기분일지 알고 싶었어. 그뿐이야.」"
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -1896,13 +1896,13 @@ cl_temple_fair:
             - fontWeight: bold
               content: %CHARA%
             - "(어어!?)"
-        - "생각을 마치자 파머의 눈이 점점 혼란스러워졌다."
+        - "생각을 거듭할수록 파머의 눈빛은 점점 혼란스러워졌다."
         - "황급히 품의 물건을 꼭 끌어안아 붉어진 얼굴을 가리고 고개를 살짝 흔들어 열을 식히려 했다."
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - "「트레이너는 트레이너 일을 했어. 하지만 트레이너라서 기쁜 게 아니고.」"
+            - "「트레이너는 트레이너 일을 했어. 하지만 트레이너라서만 기쁜 게 아니고.」"
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -1919,7 +1919,7 @@ cl_temple_fair:
               content: %CHARA%
             - "「우와와……」"
         - "도망치고 싶은 마음을 일단 참고 고개를 들어 앞을 똑바로 봤다."
-        - "돌아서서 자신을 보는 %YOU%를 향해 파머는 숨을 작게 들이쉬었다."
+        - "돌아서서 자신을 보는 %YOU%을(를) 향해 파머는 숨을 작게 들이쉬었다."
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -1959,7 +1959,7 @@ cl_temple_fair:
             - fontWeight: bold
               content: %CHARA%
             - "「우리 트레이너, 정말…… 대단해……」"
-        - "다시 손의 봉투를 내려놓고 부끄러움에 붉어진 미소를 보였다."
+        - "다시 손에 든 봉투를 내리고 부끄러움에 붉어진 얼굴로 미소를 지었다."
     - acc: 2
       content: "「아니, 사양할게.」"
 
@@ -1968,7 +1968,7 @@ cl_halloween:
   lines:
     - "곳곳을 장식한 트레센은 이미 핼러윈 분위기로 가득했다."
     - "예고 없이 노크 소리가 들렸다."
-    - "트레이너의 책임을 다할 생각으로 %YOU%는 문을 열었다."
+    - "트레이너의 책임을 다할 생각으로 %YOU%은(는) 문을 열었다."
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -1986,8 +1986,8 @@ cl_halloween:
         - fontWeight: bold
           content: %CHARA%
         - "「아, 천사 같은 의상도 한 벌 더 골라 놨어.」"
-    - "파머는 장난스러운 몸짓을 멈추고 조금 짓궂게 웃으며 놀란 척하는 %YOU%를 봤다."
-    - "창밖의 핼러윈은 이미 사무실 안에 들어와 있었다. 계속 일이나 다른 걸 하는 건 눈치 없는 짓이다."
+    - "파머는 장난스러운 몸짓을 멈추고 조금 짓궂게 웃으며 놀란 척하는 %YOU%을(를) 봤다."
+    - "창밖의 핼러윈 분위기는 이미 사무실 안까지 퍼져 있었다. 계속 일이나 다른 걸 하는 건 눈치 없는 짓이다."
     - "분위기를 잘 읽는 파머라면 바로 상황을 알아챘으리라."
     - color: %COLOR%
       content:
@@ -2002,7 +2002,7 @@ cl_halloween:
           content: %CHARA%
         - "「아싸, 가자!」"
     - "자연스럽게 %YOU%의 손을 잡고 단숨에 밖으로 달려 나갔다."
-    - "그날은 즐거웠지만 체력으로 파머를 못 따라가는 %YOU%는 결국 다음 날을 푹 자며 보내야 했다."
+    - "그날은 즐거웠지만 체력으로 파머를 못 따라가는 %YOU%은(는) 결국 다음 날을 푹 자며 보내야 했다."
 
 cl_christmas:
   title: "크리스마스"
@@ -2052,7 +2052,7 @@ cl_christmas:
         - fontWeight: bold
           content: %CHARA%
         - "「오늘 크리스마스잖아. 같이 놀자.」"
-    - "아직 피곤한 %YOU%를 끌어 일으켜 트리 곁으로 데려갔다."
+    - "아직 피곤한 %YOU%을(를) 끌어 일으켜 트리 곁으로 데려갔다."
     - color: %COLOR_62%
       content:
         - fontWeight: bold
@@ -2112,7 +2112,7 @@ cl_christmas:
             - fontWeight: bold
               content: %CHARA%
             - "「어?」"
-        - "자기도 모르게 멈추고 조금 놀란 표정을 지었다. 굳어 있었다는 걸 깨닫고는 종종걸음으로 %YOU%를 따라잡았다."
+        - "자기도 모르게 멈추고 조금 놀란 표정을 지었다. 굳어 있었다는 걸 깨닫고는 종종걸음으로 %YOU%을(를) 따라잡았다."
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -2124,7 +2124,7 @@ cl_christmas:
               content: %CHARA%
             - "「트레이너가 즐거워하니까 파머도…… 꽤 기뻤어.」"
         - "말 사이에 작은 간격은 있었지만 망설임은 없었다."
-        - "%YOU%를 보는 눈에도 조금 복잡한 빛이 섞였다."
+        - "%YOU%을(를) 보는 눈에도 조금 복잡한 빛이 섞였다."
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -2245,7 +2245,7 @@ cl_christmas:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「파머도 정말 즐거웠어……」"
-            - "조금 붉어진 눈이 멈췄다가 놀란 듯 돌아서 곁의 %YOU%를 봤다."
+            - "파머는 잠시 움직임을 멈췄다가, 조금 붉어진 눈으로 놀란 듯 곁의 %YOU%을(를) 돌아봤다."
             - "목울대가 눈에 띄지 않게 두 번 움직였다. 무슨 말을 하려다 하지 못했다."
             - color: %COLOR%
               content:
@@ -2271,7 +2271,7 @@ cl_christmas:
                 - fontWeight: bold
                   content: %CHARA%
                 - "「고마워, 트레이너.」"
-            - "%YOU%가 다음 말을 생각하는 사이 옆의 파머가 먼저 다가왔다."
+            - "%YOU%이(가) 다음 말을 생각하는 사이 옆의 파머가 먼저 다가왔다."
             - "얼굴에 바짝 다가와 가볍고 작은 입맞춤을 남겼다."
             - color: %COLOR%
               content:
@@ -2321,7 +2321,7 @@ cl_christmas_sex_end:
     content:
       - fontWeight: bold
         content: %CHARA%
-      - "「좋아해! %YOURNAME%가 좋아!」"
+      - "「좋아해! %YOURNAME%이(가) 좋아!」"
   - color: %COLOR%
     content:
       - fontWeight: bold

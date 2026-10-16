@@ -29,7 +29,7 @@ module.exports = {
         return [
           '옆에 있는',
           chara.get_colored_name(),
-          '은(는) 자신감 넘치는 미소를 지으며,',
+          '은(는) 자신감 넘치는 미소를 지으며, ',
           you.get_colored_name(),
           '에게 신뢰 어린 눈빛을 보냈다.',
         ];
@@ -41,7 +41,7 @@ module.exports = {
           chara.get_colored_name(),
           '은(는) 세 여신상을 빤히 바라보다 시선을',
           you.get_colored_name(),
-          '에게 돌리고,',
+          '에게 돌리고, ',
           you.get_colored_name(),
           '의 다음 행동을 기다리는 듯하다.',
         ];
@@ -50,7 +50,7 @@ module.exports = {
         return [
           '옆에 있는',
           chara.get_colored_name(),
-          '은(는) 조용히 꼬리를 흔들며,',
+          '은(는) 조용히 꼬리를 흔들며, ',
           you.get_colored_name(),
           '의 다음 행동을 기다리고 있다.',
         ];
@@ -227,7 +227,7 @@ module.exports = {
         await finish_cb();
         println();
         await printAndWait([
-          '얼마 후,',
+          '얼마 후, ',
           you.get_colored_name(),
           '은(는) 학원으로부터 지도 방식이 부상으로 이어질 수 있다는 연락을 받았다.',
         ]);
@@ -248,7 +248,7 @@ module.exports = {
         await finish_cb();
         println();
         await printAndWait([
-          '얼마 후,',
+          '얼마 후, ',
           you.get_colored_name(),
           '은(는) 학원에서 연락을 받았다. ',
           you.get_colored_name(),
@@ -351,7 +351,7 @@ module.exports = {
         // スピード
         case 0:
           await printAndWait([
-            '따뜻한 여운이 머릿속에 남은 채,',
+            '따뜻한 여운이 머릿속에 남은 채, ',
             you.get_colored_name(),
             '은(는) 몸이 가벼워진 듯했다……',
           ]);
@@ -359,7 +359,7 @@ module.exports = {
         // スタミナ
         case 1:
           await printAndWait([
-            '따뜻한 여운이 머릿속에 남은 채,',
+            '따뜻한 여운이 머릿속에 남은 채, ',
             you.get_colored_name(),
             '은(는) 호흡이 차분해진 듯했다……',
           ]);
@@ -367,15 +367,15 @@ module.exports = {
         // パワー
         case 2:
           await printAndWait([
-            '따뜻한 여운이 머릿속에 남은 채,',
+            '따뜻한 여운이 머릿속에 남은 채, ',
             you.get_colored_name(),
-            '은(는) 근육이 충실해진 듯했다……',
+            '은(는) 근육이 탄탄해진 듯했다……',
           ]);
           break;
         // 根性
         case 3:
           await printAndWait([
-            '따뜻한 여운이 머릿속에 남은 채,',
+            '따뜻한 여운이 머릿속에 남은 채, ',
             you.get_colored_name(),
             '은(는) 가슴속에서 열기가 솟아오르는 것을 느꼈다……',
           ]);
@@ -383,7 +383,7 @@ module.exports = {
         // 賢さ
         case 4:
           await printAndWait([
-            '따뜻한 여운이 머릿속에 남은 채,',
+            '따뜻한 여운이 머릿속에 남은 채, ',
             you.get_colored_name(),
             '은(는) 머리가 유난히 맑아진 듯했다……',
           ]);
@@ -409,9 +409,9 @@ module.exports = {
     print([
       '（',
       limited,
-      '개나 되는 능력이 극에 달한',
+      '개나 되는 능력이 극에 달한 ',
       chara.get_colored_name(),
-      '에게 더 큰 한계를 요구하는가?)',
+      '에게 한계를 더 뛰어넘으라고 요구하는가?)',
       { isBr: 1 },
       '머릿속에 그런 질문이 떠오른다……',
     ]);
@@ -423,7 +423,7 @@ module.exports = {
         await printAndWait([
           '옆에 있는',
           chara.uma_sex_title,
-          '이(가) 선배들을 뛰어넘고 레이스 기록을 새로 쓰는 모습을 떠올린다……',
+          '가 선배들을 뛰어넘고 레이스 기록을 새로 쓰는 모습을 떠올린다……',
         ]);
         await printAndWait([
           '기도를 마치고 옆의',
@@ -450,7 +450,7 @@ module.exports = {
         println();
         await printAndWait('기도를 마치고 천천히 눈을 뜬다……');
         await printAndWait([
-          '따뜻한 여운이 머릿속에 남은 채,',
+          '따뜻한 여운이 머릿속에 남은 채, ',
           you.get_colored_name(),
           '은(는) 자신이 더 성장할 수 있다고 확신했다.',
         ]);
@@ -462,7 +462,7 @@ module.exports = {
         '이(가) 매일 꾸준히 트레이닝하는 모습을 떠올린다……',
       ]);
       await printAndWait([
-        '기도를 마치고,',
+        '기도를 마치고, ',
         you.get_colored_name(),
         '은(는) 옆에 있는',
         chara.get_colored_name(),
@@ -502,17 +502,17 @@ module.exports = {
     if (ret === 1) {
       await printAndWait([
         chara.get_colored_name(),
-        '이(가) 다시 건강하고 활기찬 모습을 떠올린다……',
+        '이(가) 다시 건강하고 활기차게 지내는 모습을 떠올린다……',
       ]);
       await printAndWait([
-        '기도를 마치고,',
+        '기도를 마치고, ',
         you.get_colored_name(),
         '은(는) 눈을 떴다.',
       ]);
       println();
       if (chara.id > 0) {
         await printAndWait([
-          '활기 넘치는 몸을 느끼며,',
+          '활기 넘치는 몸을 느끼며, ',
           you.get_colored_name(),
           '은(는) 자신이 세 여신상 앞에 온 이유가 조금 의아해졌다.',
         ]);
@@ -572,7 +572,7 @@ module.exports = {
     if (chara.id > 0) {
       print([
         you.get_colored_name(),
-        '의 지시에,',
+        '의 지시에, ',
         chara.get_colored_name(),
         '도 눈을 감고 세 여신상 앞에서 조용히 기도했다……',
       ]);
@@ -591,7 +591,7 @@ module.exports = {
   async common_finish_pray(chara, you) {
     if (chara.id > 0) {
       await printAndWait([
-        '기도를 마치고,',
+        '기도를 마치고, ',
         you.get_colored_name(),
         '은(는) 옆에 있는',
         chara.get_colored_name(),
@@ -599,7 +599,7 @@ module.exports = {
       ]);
     } else {
       await printAndWait([
-        '기도를 마치고,',
+        '기도를 마치고, ',
         you.get_colored_name(),
         '은(는) 천천히 눈을 떴다.',
       ]);
@@ -637,7 +637,7 @@ module.exports = {
         ]);
       } else {
         await printAndWait([
-          '세 여신상에 가볍게 예를 올린 뒤,',
+          '세 여신상에 가볍게 예를 올린 뒤, ',
           chara.get_colored_name(),
           '과(와)',
           you.get_colored_name(),
@@ -651,7 +651,7 @@ module.exports = {
       ]);
     } else {
       await printAndWait([
-        '세 여신상에 가볍게 예를 올린 뒤,',
+        '세 여신상에 가볍게 예를 올린 뒤, ',
         you.get_colored_name(),
         '은(는) 돌아서서 트레이너실로 향했다.',
       ]);

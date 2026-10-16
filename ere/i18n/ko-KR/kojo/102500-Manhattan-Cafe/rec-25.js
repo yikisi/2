@@ -30,7 +30,7 @@ module.exports = {
    */
   async goto_playground(coffee, you) {
     await era.printAndWait(
-      '복은 겹쳐 오지 않고 화는 겹쳐 온다더니. 불운이란 대개 그런 법이다.',
+      '엎친 데 덮친 격이었다. 불운이란 대개 그런 법이다.',
     );
     await era.printAndWait([
       '아침 일찍 일어나 담당할 ',
@@ -67,7 +67,7 @@ module.exports = {
     await era.printAndWait([
       '등 뒤에서 들려온 목소리가 순식간에 그 상황을 깨뜨렸다. 다시 움직일 수 있게 된 ',
       you.get_colored_name(),
-      '은(는) 허겁지겁 신선한 공기를 깊이 들이마셨다. 당장 달아나고 싶은 공포를 억누르고 돌아보니, 방금 달리기를 마친 듯 숨을 헐떡이는 ',
+      '은(는) 허겁지겁 공기를 깊이 들이마셨다. 당장 달아나고 싶은 공포를 억누르고 돌아보니, 방금 달리기를 마친 듯 숨을 헐떡이는 ',
       coffee.uma_sex_title,
       '가 뒤에서 ',
       you.get_colored_name(),
@@ -171,9 +171,9 @@ module.exports = {
       you.get_colored_name(),
       '의 머릿속을 떠나지 않았다. 선발 레이스가 시작되고 나서야 명단에서 처음으로 ',
       coffee.sex,
-      '의 이름을 보았다——',
+      '의 이름을 보았다—— ',
       coffee.get_colored_name(),
-      '。',
+      '.',
     ]);
     await era.printAndWait([
       '서둘러 도착했을 때는 ',
@@ -245,7 +245,7 @@ module.exports = {
         coffee.get_colored_name(),
         '는 늘 기묘한 말을 한다고 했다. 아무도 모르는 사람이나 사건에 관한 이야기가 많고, 무언가의 뒤를 쫓는 모습도 자주 목격된다고 한다. 경험 많은 트레이너가 접촉을 시도한 적도 있었지만, 떠날 때 잔뜩 찌푸린 미간만 봐도 잘되지 않았다는 건 분명했다. 그렇게 ',
         coffee.get_colored_name(),
-        '는 문제아라는 낙인이 찍혀 트레이너들이 선뜻 손대려 하지 않는 존재가 되어 있었다.',
+        '는 문제아라는 낙인이 찍혀 트레이너들이 선뜻 맡으려 하지 않는 존재가 되어 있었다.',
       ]);
       await era.printAndWait([
         '하지만 ',
@@ -415,7 +415,7 @@ module.exports = {
       '멀리서 석양이 지평선에 닿으려 하고 있었다. 몇 분밖에 남지 않았다.',
     );
     await era.printAndWait([
-      '온몸으로 심장이 거세게 뛰는 것이 느껴지고, 아드레날린이 피와 함께 돌았다. ',
+      '심장이 거세게 뛰는 것이 온몸으로 느껴지고, 아드레날린이 피와 함께 돌았다. ',
       you.get_colored_name(),
       '은(는) 깊이 숨을 들이마시고 눈을 감았다.',
     ]);
@@ -526,7 +526,7 @@ module.exports = {
       coffee.get_colored_name(),
       '는 놀라 눈을 크게 떴다. 그러다 무언가 알아차린 듯 아무도 없는 구석을 바라보았다. 잠깐의 침묵 끝에 ',
       coffee.teen_sex_title,
-      '은(는) 대답했다.',
+      '는 대답했다.',
     ]);
     await coffee.say_and_wait([
       '그렇다면, 트레이너',
@@ -557,7 +557,7 @@ module.exports = {
       1,
     );
     await era.input();
-    await coffee.say_and_wait(['……네! 그럼…… 잘 부탁드려요, ', callname, '！']);
+    await coffee.say_and_wait(['……네! 그럼…… 잘 부탁드려요, ', callname, '!']);
     await era.printAndWait([
       coffee.get_colored_name(),
       '는 ',

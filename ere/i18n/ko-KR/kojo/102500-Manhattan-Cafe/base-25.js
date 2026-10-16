@@ -50,7 +50,7 @@ module.exports = {
     coffee.say([
       '……요즘은 ',
       callname,
-      '와(과) 단둘이 있을 시간이…… 줄었네요……',
+      '과(와) 단둘이 있을 시간이…… 줄었네요……',
     ]);
     era.println();
 
@@ -122,7 +122,7 @@ module.exports = {
     ]);
     era.println();
 
-    await coffee.say_and_wait(['……', callname, '。']);
+    await coffee.say_and_wait(['……', callname, '.']);
     era.println();
 
     await era.printAndWait([

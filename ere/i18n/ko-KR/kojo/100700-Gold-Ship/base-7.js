@@ -16,9 +16,9 @@ module.exports = {
       you.get_colored_name(),
       '이(가) 돌아가고 싶다는 말을 꺼내자, 의자 등받이에 기대어 ',
       you.get_colored_name(),
-      '와(과) 함께 게임을 하던 ',
+      '과(와) 함께 게임을 하던 ',
       gs.get_colored_name(),
-      '은(는) 미간을 찌푸렸다.',
+      '은 미간을 찌푸렸다.',
     ]);
     era.println();
     await gs.say_and_wait('어——?');
@@ -28,7 +28,7 @@ module.exports = {
     era.println();
     await era.printAndWait([
       gs.get_colored_name(),
-      '은(는) 잠시 생각하더니 내키지 않는 듯 중얼거렸다.',
+      '은 잠시 생각하더니 내키지 않는 듯 중얼거렸다.',
     ]);
     era.println();
     await gs.say_and_wait('거참, 손이 많이 가는 녀석이네……');
@@ -43,7 +43,7 @@ module.exports = {
     await era.printAndWait([
       '그 후 ',
       gs.get_colored_name(),
-      '은(는) 겨우 지상으로 나온 ',
+      '은 겨우 지상으로 나온 ',
       you.get_colored_name(),
       '에게 맛있는 저녁까지 한 끼 더 얻어먹고 나서야 정식으로 풀어 주었다.',
     ]);
@@ -57,9 +57,9 @@ module.exports = {
       you.get_colored_name(),
       '이(가) 돌아가고 싶다는 말을 꺼내자, 의자 등받이에 기대어 ',
       you.get_colored_name(),
-      '와(과) 함께 게임을 하던 ',
+      '과(와) 함께 게임을 하던 ',
       gs.get_colored_name(),
-      '은(는) 미간을 찌푸렸다.',
+      '은 미간을 찌푸렸다.',
     ]);
     era.println();
     await gs.say_and_wait('어——?');
@@ -70,7 +70,7 @@ module.exports = {
     await era.printAndWait([
       '아마 이 이야기를 피하고 싶은 모양이다. ',
       gs.get_colored_name(),
-      '은(는) 순식간에 화면 속 치열한 전투로 관심을 돌렸다.',
+      '은 순식간에 화면 속 치열한 전투로 관심을 돌렸다.',
     ]);
     era.println();
     await gs.say_and_wait('쓸데없는 소리 말고 벌레 둥지의 폭군이나 쓰러뜨려!');
@@ -78,7 +78,7 @@ module.exports = {
     era.println();
     await era.printAndWait([
       gs.get_colored_name(),
-      '이(가) 싫증이 날 때까지 여기서 나갈 수는 없을 것 같다.',
+      '이 싫증이 날 때까지 여기서 나갈 수는 없을 것 같다.',
     ]);
   },
   /**
@@ -132,7 +132,7 @@ module.exports = {
     era.print([
       '그러더니 눈을 찌르는 붉은빛이 켜졌다. 검은 가면에 붉은 광선검까지, 다스 베이더 같은 모습의 ',
       gs.get_colored_name(),
-      '이(가) 진작부터 기다리고 있었던 것이다!',
+      '이 진작부터 기다리고 있었던 것이다!',
     ]);
   },
 };

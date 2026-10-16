@@ -10,7 +10,7 @@ module.exports = {
     await era.printAndWait([
       '요즘 어째서인지 ',
       acute.get_colored_name(),
-      '은(는) 중정의 고목 구멍에 앉아 있는 일이 잦다.',
+      '는 중정의 고목 구멍에 앉아 있는 일이 잦다.',
     ]);
     await era.printAndWait([
       '며칠 전 몰래 뒤따라가 멀리서 바라보니, ',
@@ -20,7 +20,7 @@ module.exports = {
     await era.printAndWait('…………');
     await era.printAndWait([
       acute.get_colored_name(),
-      '을(를) 더 알고 싶다면 중정의 고목 구멍을 들여다보는 것도 좋을 것 같다.',
+      '를 더 알고 싶다면 중정의 고목 구멍을 들여다보는 것도 좋을 것 같다.',
     ]);
   },
   /**
@@ -31,7 +31,7 @@ module.exports = {
     await era.printAndWait('트레이닝 틈틈이, 혼자 중정으로 왔다.');
     await era.printAndWait([
       acute.get_colored_name(),
-      '이(가) 가끔 들어가 있는 나무 구멍이 보여, 자연스레 그쪽으로 발길이 향했다.',
+      '가 가끔 들어가 있는 나무 구멍이 보여, 자연스레 그쪽으로 발길이 향했다.',
     ]);
     await era.printAndWait('몸을 굽혀 들여다보니, 구멍 안은 생각보다 좁았다.');
     await era.printAndWait(
@@ -40,7 +40,7 @@ module.exports = {
     await era.printAndWait([
       '그런데 구멍에 앉은 ',
       acute.get_colored_name(),
-      '은(는) 어떻게 그렇게 편안해 보였을까.',
+      '는 어떻게 그렇게 편안해 보였을까.',
     ]);
     await era.printAndWait('이리저리 생각해 보아도——도무지 알 수 없다.');
     await era.printAndWait('「하아」 하고 한숨을 내쉬며 일어서려던 그때——');
@@ -57,7 +57,7 @@ module.exports = {
     await era.printAndWait([
       '튀어나오려던 물음은, 아이처럼 신이 난 얼굴의 ',
       acute.get_colored_name(),
-      '을(를) 보고 놀라움으로 바뀌었다.',
+      '를 보고 놀라움으로 바뀌었다.',
     ]);
     await era.printAndWait(
       '하지만 그 놀라움은 곧 새로운 의문에 자리를 내주었다.',
@@ -73,7 +73,7 @@ module.exports = {
       you.get_colored_name(),
       '은(는) 이렇게 아이처럼 신이 난 ',
       acute.get_colored_name(),
-      '을(를) 본 적이 없었다.',
+      '를 본 적이 없었다.',
     ]);
     await era.printAndWait('그런 모습이 지금, 갑자기 눈앞에 나타났다.');
     await era.printAndWait([
@@ -84,7 +84,7 @@ module.exports = {
     await era.printAndWait([
       '눈앞에서 아이처럼 기뻐하는 ',
       acute.get_colored_name(),
-      '은(는) 정말 ',
+      '는 정말 ',
       you.get_colored_name(),
       '이(가) 아는, 늘 온화하던 ',
       acute.get_colored_name(),
@@ -93,7 +93,7 @@ module.exports = {
     await era.printAndWait([
       '눈앞의 ',
       acute.get_colored_name(),
-      '은(는) 마치 ',
+      '는 마치 ',
       you.get_colored_name(),
       '의 속마음을 듣기라도 한 듯, 두 번째 부름에 표정을 바꾸었다. 처음의 기쁨은 사라지고, 어째서인지 그 자리에 굳어 버렸다.',
     ]);
@@ -105,7 +105,7 @@ module.exports = {
       you.get_colored_name(),
       '과(와) ',
       acute.get_colored_name(),
-      '은(는) 나란히 굳어 있었다.',
+      '는 나란히 굳어 있었다.',
     ]);
     await era.printAndWait([
       you.get_colored_name(),
@@ -144,7 +144,7 @@ module.exports = {
     await era.printAndWait([
       '이야기를 들어 보니, ',
       acute.get_colored_name(),
-      '은(는) 평소처럼 중정에 와 고목 구멍에서 쉬려다가, 구멍 앞에 웅크린 이쪽의 뒷모습을 문득 발견했다고 한다.',
+      '는 평소처럼 중정에 와 고목 구멍에서 쉬려다가, 구멍 앞에 웅크린 이쪽의 뒷모습을 문득 발견했다고 한다.',
     ]);
     await era.printAndWait([
       '그러다 어째서인지 「흥이 나서」 발목을 들어 올려, ',
@@ -182,7 +182,7 @@ module.exports = {
     await era.printAndWait([
       '요즘 ',
       acute.get_colored_name(),
-      '과(와) 함께하는 시간이 점점 길어지고 있다.',
+      '와 함께하는 시간이 점점 길어지고 있다.',
     ]);
     await era.printAndWait([
       '떨어져 있어도 머릿속은 ',
@@ -193,12 +193,12 @@ module.exports = {
     await era.printAndWait([
       '어쩌면 ',
       acute.get_colored_name(),
-      '과(와)의 관계를 한 걸음 더 진전시킬 수 있을지도 모른다.',
+      '와의 관계를 한 걸음 더 진전시킬 수 있을지도 모른다.',
     ]);
     await era.printAndWait([
       '……마음의 준비가 되면 ',
       acute.get_colored_name(),
-      '을(를) 역으로 데이트에 초대하자.',
+      '를 역으로 데이트에 초대하자.',
     ]);
   },
   /**
@@ -221,7 +221,7 @@ module.exports = {
       you.get_colored_name(),
       '의 입장에서 보면, ',
       acute.get_colored_name(),
-      '과(와) 단둘이 외출할 수만 있다면 어디든 데이트라고 부를 수 있을 터다.',
+      '와 단둘이 외출할 수만 있다면 어디든 데이트라고 부를 수 있을 터다.',
     ]);
     await era.printAndWait('그런데 역에 와야 비로소 「데이트」가 된다는 건가?');
     await era.printAndWait('이게 신의 짓궂은 취향 때문이 아니라면, ');
@@ -242,7 +242,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) ',
         acute.get_colored_name(),
-        '을(를) 좋아한다. 그래서 데이트를 구실로 ',
+        '를 좋아한다. 그래서 데이트를 구실로 ',
         acute.sex,
         '에게 고백하고 싶었다.',
       ]);
@@ -252,7 +252,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) ',
         acute.get_colored_name(),
-        '을(를) 좋아한다.',
+        '를 좋아한다.',
       ]);
       await era.printAndWait(
         '꺼림칙한 비밀 따위가 아니다. 수없이 가슴이 두근거린 끝에, 마침내 인정하게 된 사실일 뿐이다.',
@@ -274,7 +274,7 @@ module.exports = {
         you.get_colored_name(),
         '과(와) ',
         acute.get_colored_name(),
-        '은(는) 나란히 앉아 있다. 빗소리 속에서 왼쪽 가슴이 두근거린다.',
+        '는 나란히 앉아 있다. 빗소리 속에서 왼쪽 가슴이 두근거린다.',
       ]);
       await you.say_and_wait(
         ['그래, 용기를 내라, ', you.actual_name, '. 용기를 내.'],
@@ -293,7 +293,7 @@ module.exports = {
           acute.sex,
           ' 쪽을 바라봐라, ',
           you.actual_name,
-          '、',
+          ', ',
           acute.sex,
           ' 쪽을 바라봐.',
         ],
@@ -302,14 +302,14 @@ module.exports = {
       await era.printAndWait([
         '빗소리 속에서 ',
         acute.get_colored_name(),
-        '은(는) 고개를 들고 있다.',
+        '는 고개를 들고 있다.',
       ]);
       await era.printAndWait([
         acute.sex,
         '의 시선은 평소와 다름없이, 어딘지 모를 먼 곳을 향하고 있었다.',
       ]);
       await you.say_and_wait(['말해라, ', acute.sex, '에게 말해.'], true);
-      await era.printAndWait(['그래, 말해라, ', you.actual_name, '。']);
+      await era.printAndWait(['그래, 말해라, ', you.actual_name, '.']);
       await era.printAndWait([
         acute.get_colored_name(),
         '에게, 내가 얼마나 ',
@@ -336,7 +336,7 @@ module.exports = {
       await era.printAndWait([
         '줄곧 앞을 바라보던 ',
         acute.get_colored_name(),
-        '은(는) 어느새 시선을 돌려, 눈에 띄지 않는 ',
+        '는 어느새 시선을 돌려, 눈에 띄지 않는 ',
         you.get_colored_name(),
         '을(를) 바라보고 있었다.',
       ]);
@@ -345,7 +345,7 @@ module.exports = {
         acute.get_colored_name(),
         '처럼 강하고 용감한 ',
         acute.phy_sex_title,
-        '이(가), 어째서……',
+        '이, 어째서……',
       ]);
       await acute.say_and_wait([
         '정말로 좋아한단다, ',
@@ -374,7 +374,7 @@ module.exports = {
       await era.printAndWait('————————');
       await era.printAndWait('어느 맑게 갠 오후.');
       await era.printAndWait('많지도 적지도 않은 비가 내리는 가운데.');
-      await era.printAndWait('역의 작은 지붕 아래에서 비를 피하던 두 사람은,');
+      await era.printAndWait('역의 작은 지붕 아래에서 비를 피하던 두 사람은, ');
       await era.printAndWait('조용히, 어느새 서로에게 다가가고 있었다……');
       await era.printAndWait('……………………');
       await era.printAndWait([
@@ -386,7 +386,7 @@ module.exports = {
       await era.printAndWait([
         '담당 ',
         acute.uma_sex_title,
-        '와(과) 데이트하는 데 이유가 필요할까.',
+        '와 데이트하는 데 이유가 필요할까.',
       ]);
       await era.printAndWait([
         acute.get_colored_name(),
@@ -408,14 +408,14 @@ module.exports = {
   async '89-before'(acute, you) {
     await era.printAndWait([
       acute.get_colored_name(),
-      '과(와) 사랑하는 것은 정말 행복한 일이다.',
+      '와 사랑하는 것은 정말 행복한 일이다.',
     ]);
     await era.printAndWait([
       '하지만 ',
       you.get_colored_name(),
       '과(와) ',
       acute.get_colored_name(),
-      '은(는) 서로를 안을 때마다 사람이 없는 곳을 골라야 한다.',
+      '는 서로를 안을 때마다 사람이 없는 곳을 골라야 한다.',
     ]);
     await era.printAndWait([
       you.get_colored_name(),
@@ -441,7 +441,7 @@ module.exports = {
       you.get_colored_name(),
       '과(와) ',
       acute.get_colored_name(),
-      '은(는) 이 사랑을 공개해도 될지 모른다.',
+      '는 이 사랑을 공개해도 될지 모른다.',
     ]);
     await era.printAndWait(
       '트레센의 모두 앞에서 이 사랑을 공개하려면 【강철 같은 의지】가 필요할 것이다.',
@@ -449,7 +449,7 @@ module.exports = {
     await era.printAndWait('그래도 망설임 없이 이 한 걸음을 내딛기로 했다면——');
     await era.printAndWait([
       acute.get_colored_name(),
-      '과(와) 중정에서 데이트하자.',
+      '와 중정에서 데이트하자.',
     ]);
   },
   /**
@@ -517,9 +517,9 @@ module.exports = {
     ]);
     await era.printAndWait('…………');
     await acute.say_and_wait([
-      '읍～～～하아……',
+      '읍~~~ 하아……',
       callname.substring(0, 1),
-      '、',
+      ', ',
       callname,
       '——',
     ]);
@@ -548,30 +548,30 @@ module.exports = {
     await era.printAndWait('………………');
     await era.printAndWait([
       acute.get_colored_name(),
-      '과(와) 사랑한 지도 오래되었다.',
+      '와 사랑한 지도 오래되었다.',
     ]);
     await era.printAndWait([
       you.get_colored_name(),
       '과(와) ',
       acute.get_colored_name(),
-      '은(는) 매일 같은 시각에 일어나고, 같은 시각에 먹고, 같은 시각에 트레이닝하고, 같은 시각에 레이스에 나선다.',
+      '는 매일 같은 시각에 일어나고, 같은 시각에 먹고, 같은 시각에 트레이닝하고, 같은 시각에 레이스에 나선다.',
     ]);
     await era.printAndWait([
       you.get_colored_name(),
       '과(와) ',
       acute.get_colored_name(),
-      '은(는) 언제나 서로를 받쳐 주고, ',
+      '는 언제나 서로를 받쳐 주고, ',
       you.get_colored_name(),
       '과(와) ',
       acute.get_colored_name(),
-      '은(는) 언제나 떨어지지 않는다.',
+      '는 언제나 떨어지지 않는다.',
     ]);
     await era.printAndWait([
       '의심할 여지 없이 ',
       you.get_colored_name(),
       '은(는) ',
       acute.get_colored_name(),
-      '을(를) 사랑한다.',
+      '를 사랑한다.',
     ]);
     await era.printAndWait([
       you.get_colored_name(),
@@ -586,7 +586,7 @@ module.exports = {
       you.get_colored_name(),
       '과(와) ',
       acute.get_colored_name(),
-      '은(는) 트레이닝과 일상의 모든 순간을 함께할 수 있다.',
+      '는 트레이닝과 일상의 모든 순간을 함께할 수 있다.',
     ]);
     await era.printAndWait('——하지만 이 생활이 정말 영원히 이어질까.');
     await era.printAndWait('………………');
@@ -597,7 +597,7 @@ module.exports = {
     await era.printAndWait([
       '설령 삼 년에 불과한 덧없는 꿈이라 해도, ',
       acute.get_colored_name(),
-      '과(와) 사랑했던 날들은 ',
+      '와 사랑했던 날들은 ',
       you.get_colored_name(),
       '의 인생에서 가장 행복한 시간이다.',
     ]);
@@ -607,7 +607,7 @@ module.exports = {
     await era.printAndWait([
       '——그렇다면 ',
       acute.get_colored_name(),
-      '과(와) 【돌아올 약속】과 【다시 만날 맹세】를 나누자.',
+      '와 【돌아올 약속】과 【다시 만날 맹세】를 나누자.',
     ]);
     await era.printAndWait([
       '준비가 되면 ',
@@ -641,7 +641,7 @@ module.exports = {
     await era.printAndWait([
       '옥상에서 ',
       acute.get_colored_name(),
-      '은(는) ',
+      '는 ',
       you.get_colored_name(),
       '에게 등을 돌린 채 하늘 끝의 구름을 올려다보고 있다.',
     ]);
@@ -649,9 +649,9 @@ module.exports = {
       you.get_colored_name(),
       '과(와) ',
       acute.get_colored_name(),
-      '이(가) 처음 만났을 때처럼, ',
+      '가 처음 만났을 때처럼, ',
       acute.get_colored_name(),
-      '이(가) 옥상에서 갈 곳을 잃은 ',
+      '가 옥상에서 갈 곳을 잃은 ',
       you.get_colored_name(),
       '을(를) 거두어 주었던 그때처럼, 오늘 밤 옥상에도 ',
       you.get_colored_name(),
@@ -664,7 +664,7 @@ module.exports = {
       you.get_colored_name(),
       '과(와) ',
       acute.get_colored_name(),
-      '이(가) 서 있는 위치는 그때와 반대다.',
+      '가 서 있는 위치는 그때와 반대다.',
     ]);
     await era.printAndWait([
       '옥상 문을 살며시 닫고 가슴속의 술렁임을 가라앉히며, ',
@@ -675,7 +675,7 @@ module.exports = {
       acute.sex,
       '의 뒤에 서서, ',
       acute.sex,
-      '과(와) 함께 하늘의 귤색 뜬구름을 올려다보았다.',
+      '와 함께 하늘의 귤색 뜬구름을 올려다보았다.',
     ]);
     await era.printAndWait(['그러고는, ', acute.sex, '의 말투를 흉내 내며——']);
     era.printButton('「어머나, 어머나」', 1);
@@ -698,14 +698,14 @@ module.exports = {
       acute.sex,
       '는 천천히 몸을 돌려 발돋움을 했고, 평온한 표정 아래, 짙은 눈동자에는 눈물이 맺혀 있었다.',
     ]);
-    await acute.say_and_wait(['와 주었구나, ', callname, '。']);
+    await acute.say_and_wait(['와 주었구나, ', callname, '.']);
     era.printButton(`「왔어, 원더 어큐트.」`, 1);
     await era.input();
     await era.printAndWait([
       you.get_colored_name(),
       '과(와) ',
       acute.get_colored_name(),
-      '은(는) 인사를 나눈다. 그 평온함만으로도 이미 많은 의미가 담겨 있다.',
+      '는 인사를 나눈다. 그 평온함만으로도 이미 많은 의미가 담겨 있다.',
     ]);
     await era.printAndWait([
       '하지만 ',

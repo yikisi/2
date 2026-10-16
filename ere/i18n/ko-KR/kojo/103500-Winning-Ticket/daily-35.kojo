@@ -20,7 +20,7 @@ good_morning_after_basement:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - "「어……에헤헤, 응, 역시 아니지! %CALLNAME%는 계속 나랑 함께 있어 줄 거야. 그렇지?」"
+        - "「어……에헤헤, 응, 역시 아니지! %CALLNAME%은(는) 계속 나랑 함께 있어 줄 거야. 그렇지?」"
 
 # @author 幽白書
 select_after_basement:
@@ -30,14 +30,14 @@ select_after_basement:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - "「으아아아아아아앙, %CALLNAME%가 나를 상대해 주지 않으면 너무 괴로워……」"
+        - "「으아아아아아아앙, %CALLNAME%이(가) 나를 상대해 주지 않으면 너무 괴로워……」"
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
-        - "「하마터면 %CALLNAME%를 우리 사랑의 보금자리로 다시 데려갈 뻔했어……」"
+        - "「하마터면 %CALLNAME%을(를) 우리 사랑의 보금자리로 다시 데려갈 뻔했어……」"
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
-        - "「다행이야, %CALLNAME%가 나를 만나러 와 줬어! 우린 정말 사랑하는 사이잖아. 그렇지!」"
+        - "「다행이야, %CALLNAME%이(가) 나를 만나러 와 줬어! 우린 정말 사랑하는 사이잖아. 그렇지!」"

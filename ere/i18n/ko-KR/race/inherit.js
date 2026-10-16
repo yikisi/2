@@ -22,7 +22,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/inherit') {
     '* 우마무스메의 인자가 부족할 경우, 트레이너가 부족분의 2배를 지불하여 계승을 도울 수 있습니다.';
 
   bt_select_chara = '계승 캐릭터 선택';
-  not_enough_chara_tip = '계승해줄 캐릭터가 최소 둘 이상 필요합니다...';
+  not_enough_chara_tip = '계승해줄 캐릭터가 최소 둘 이상 필요합니다……';
 
   bt_remove_genes = '모든 인자 능력 망각';
   player_genes_limit_tip_template =
@@ -47,7 +47,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/inherit') {
   get_remove_genes_result = (you) => [
     '【',
     you,
-    '은(는) 모든 인자 능력을 망각했습니다... 모든 적성, 계승 능력치 및 계승 스킬이 소멸되었습니다...】',
+    '은(는) 모든 인자 능력을 망각했습니다…… 모든 적성, 계승 능력치 및 계승 스킬이 소멸되었습니다……】',
   ];
   convert_jewels_confirm_template =
     '남은 인자를 %PT% 스킬 포인트로 변환하시겠습니까?';

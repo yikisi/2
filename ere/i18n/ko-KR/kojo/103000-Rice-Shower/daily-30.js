@@ -70,14 +70,14 @@ module.exports = {
           () =>
             era.print([
               rice.get_colored_name(),
-              '은(는) 정전기에 깜짝 놀라 귀를 쓰다듬고는 ',
+              '는 정전기에 깜짝 놀라 귀를 쓰다듬고는 ',
               you.get_colored_name(),
               '의 지시를 조용히 기다렸다.',
             ]),
           () =>
             era.print([
               rice.get_colored_name(),
-              '은(는) 앞머리를 옆으로 넘기고 생기 어린 눈으로 ',
+              '는 앞머리를 옆으로 넘기고 생기 어린 눈으로 ',
               you.get_colored_name(),
               '의 시선과 마주쳤다.',
             ]),
@@ -122,7 +122,7 @@ module.exports = {
               rice.say_and_wait([
                 '아우우! ',
                 callname,
-                '에게 폐를 끼치고 싶지 않았는데…… 미안해...',
+                '에게 폐를 끼치고 싶지 않았는데…… 미안해……',
               ]),
             () =>
               rice.say_and_wait('라이스…… 또 못난 아이로 돌아가 버리는 걸까……'),
@@ -156,7 +156,7 @@ module.exports = {
               await rice.say_and_wait(
                 '라이스, 지금이라면 정말 정말 열심히 할 수 있어!',
               );
-              await rice.say_and_wait(['라이스를 믿어 줘, ', callname, '。']);
+              await rice.say_and_wait(['라이스를 믿어 줘, ', callname, '.']);
             },
             async () => {
               await rice.say_and_wait('저기, 라이스는 준비 운동 다 끝났어.');
@@ -262,7 +262,7 @@ module.exports = {
         rice.say_and_wait([
           '울면…… 안 돼. ',
           callname,
-          '와(과) 약속했어. 라이스는 강한 아이가 되겠다고.',
+          '과(와) 약속했어. 라이스는 강한 아이가 되겠다고.',
         ]),
       () => rice.say_and_wait('세 여신님, 라이스는 자신을 믿어 보기로 했어요.'),
     ];
@@ -309,13 +309,13 @@ module.exports = {
         rice.say_and_wait([
           '예전에는 혼자 훈련하다 보면 외로울 때도 있었어. 하지만 ',
           callname,
-          '와(과) 함께라면 마음이 위로받는 것 같아!',
+          '과(와) 함께라면 마음이 위로받는 것 같아!',
         ]),
       () =>
         rice.say_and_wait([
           '라이스가 가장 마음이 놓이는 시간, 가장 자신다울 수 있는 시간은 ',
           callname,
-          '와(과) 함께 이렇게 천천히 걷는 시간이야.',
+          '과(와) 함께 이렇게 천천히 걷는 시간이야.',
         ]),
     ];
     await get_random_entry(buffer)();

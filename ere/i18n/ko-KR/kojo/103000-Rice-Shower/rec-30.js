@@ -19,7 +19,7 @@ module.exports = {
       `보통 이 나이대에는, 특히 ${rice.uma_sex_title}라면 좀 더 활기차게 돌아다니기 마련이다.`,
     );
     era.print(
-      `하지만 검은 머리의 ${rice.teen_sex_title}은(는) 다른 사람과 부딪히지 않도록 꼬리까지 조심스럽게 신경 쓰는 듯했다.`,
+      `하지만 검은 머리의 ${rice.teen_sex_title}는 다른 사람과 부딪히지 않도록 꼬리까지 조심스럽게 신경 쓰는 듯했다.`,
     );
     era.print(`중앙 트레센에서 이렇게 기가 약한 아이도 드물다.`);
     era.print(
@@ -44,7 +44,7 @@ module.exports = {
       rice.sex,
       '는 다음 훈련을 하러 서둘러 가고 있었다.',
     ]);
-    you.say('깔끔한 달리기네');
+    you.say('달리는 자세가 참 반듯하네');
     era.print([
       rice.sex,
       '가 달려가는 뒷모습을 보며 ',
@@ -58,14 +58,14 @@ module.exports = {
     ]);
     era.drawLine();
     era.print(
-      '결국 빈번하게 빨간불에 걸리는 바람에, 트레센 학원에 도착했을 때는 이미 완전히 어두워져 있었다.',
+      '결국 자꾸 빨간불에 걸리는 바람에, 트레센 학원에 도착했을 때는 이미 완전히 어두워져 있었다.',
     );
     rice.say('저기, 죄, 죄송해요!');
     you.say(`응? 나한테 하는 말이야?`);
     rice.say('네, 네에. 저기, 죄송해요!');
     you.say(`응?`);
     rice.say(
-      `오늘 ${chara_self_name}가 옆에서 달린 탓에 이렇게 늦어져 버렸어요.`,
+      `오늘 ${chara_self_name}가 옆에서 달린 탓에 이렇게 늦게 돌아오시게 됐어요.`,
     );
     rice.say('정말로, 정말로 죄송해요!');
     you.say(`네 탓이 아니야.`);
@@ -74,11 +74,11 @@ module.exports = {
     );
     era.print([rice.teen_sex_title, '의 커다란 귀가 힘없이 축 처졌다.']);
     rice.say(
-      `죄송해요. 그, 그래도 ${chara_self_name}가 사라지면 괜찮을 거예요! 안녕히 계세요!`,
+      `죄송해요. 그, 그래도 ${chara_self_name}가 곁에 없으면 괜찮을 거예요! 안녕히 계세요!`,
     );
     era.print([
       rice.get_colored_name(),
-      '을(를) 불러 세울 틈도 없이, ',
+      '를 불러 세울 틈도 없이, ',
       rice.sex,
       '는 달려가 버렸다. 그냥 내버려 두기에는 너무 안쓰러웠다.',
     ]);
@@ -94,7 +94,7 @@ module.exports = {
     );
     era.print([
       rice.sex,
-      '가 마음을 다잡고 훈련을 시작하려는 모습을 보니 말을 걸기가 망설여졌다. 결국 인사는 하지 못했다.',
+      '가 의욕에 차서 훈련을 시작하려는 모습을 보니 방해하고 싶지 않았다. 결국 인사는 하지 못했다.',
     ]);
     await era.printAndWait([
       rice.get_colored_name(),
@@ -111,7 +111,7 @@ module.exports = {
       '의 선발 레이스가 있을 텐데……」',
     ]);
     era.print(
-      `？？？「${rice.name}！${rice.name} 씨, ${rice.name} 씨, ${rice.name} 씨! 어디 있나요, ${rice.name} 씨!」`,
+      `？？？「${rice.name}!${rice.name} 씨, ${rice.name} 씨, ${rice.name} 씨! 어디 있나요, ${rice.name} 씨!」`,
     );
     era.print([
       rice.get_colored_name(),
@@ -121,7 +121,7 @@ module.exports = {
     ]);
     era.print([
       rice.get_colored_name(),
-      '을(를) 부르던 ',
+      '를 부르던 ',
       rice.uma_sex_title,
       '는 곧 다른 곳의 호출을 받고 떠났다.',
     ]);
@@ -129,12 +129,12 @@ module.exports = {
       `？？？「${rice.name}, 이제는 선발 레이스까지 거부하는 거야? 그렇게 재능 있는 아이가.」`,
     );
     era.print(
-      '???「애초에 재능 이전에, 출주할 의지가 없다는 게 가장 큰 문제야.」',
+      '???「애초에 재능 이전에, 출주할 의지가 없다는 것만으로도 큰 문제야.」',
     );
     await era.printAndWait([
       '결국 ',
       rice.get_colored_name(),
-      '은(는) 그날 선발 레이스장에 끝까지 모습을 드러내지 않았다.',
+      '는 그날 선발 레이스장에 끝까지 모습을 드러내지 않았다.',
     ]);
   },
   /**
@@ -143,14 +143,14 @@ module.exports = {
    * @param {string} chara_self_name
    */
   async rec_final(rice, you, chara_self_name) {
-    era.print(`다음으로 ${rice.name}을(를) 본 것은 선발 레이스가 끝난 뒤였다.`);
+    era.print(`다음으로 ${rice.name}를 본 것은 선발 레이스가 끝난 뒤였다.`);
     era.print('나무 그루터기 옆');
     rice.say(
       `바보, 바보 바보, ${chara_self_name}는 정말 바보야! 모처럼…… 모처럼 힘내기로 했는데……`,
     );
-    rice.say(`우아…… 왜…… 왜 ${chara_self_name}는 이렇게 못난 걸까?`);
+    rice.say(`흑흑…… 왜…… 왜 ${chara_self_name}는 이렇게 못난 걸까?`);
     era.print(
-      `혼자 울고 있는 ${rice.name}을(를) 그냥 지나칠 수 없었다. 정신을 차려 보니 ${rice.sex}의 곁에 서 있었다.`,
+      `혼자 울고 있는 ${rice.name}를 그냥 지나칠 수 없었다. 정신을 차려 보니 ${rice.sex}의 곁에 서 있었다.`,
     );
     rice.say('당신은…… 저번에 만난 분?');
     rice.say('죄송해요! 저기, 더는 가까이 오지 마세요……');
@@ -162,7 +162,7 @@ module.exports = {
     );
     era.println();
     era.print(
-      `눈앞에서 우는 ${rice.name}을(를) 보자 며칠 전의 그 모습이 떠올랐다——`,
+      `눈앞에서 우는 ${rice.name}를 보자 며칠 전의 그 모습이 떠올랐다——`,
     );
     era.print([
       '무슨 일이 있었는지는 모른다. 하지만 ',
@@ -175,13 +175,13 @@ module.exports = {
       rice.sex,
       '가 그 한 걸음을 내딛기 위해 온 힘을 다해 훈련해 왔다는 것을.',
     ]);
-    rice.say(`우아…… 역시, 역시 ${chara_self_name} 같은 아이는……`);
+    rice.say(`흑흑…… 역시, 역시 ${chara_self_name} 같은 아이는……`);
 
     era.printButton(`이대로 ${rice.sex}를 내버려 둘 수는 없어!`, 1);
     await era.input();
     era.print(`「${rice.name}, 내게 와 줄래?」`);
     era.print(`${rice.name}의 귀가 「쫑긋」 섰다.`);
-    rice.say('……팔코의…… 가장 빛나는 무대?');
+    rice.say('네?');
     rice.say(
       `그러니까…… ${chara_self_name}의 트레이너가 되어 주신다는 뜻인가요?`,
     );

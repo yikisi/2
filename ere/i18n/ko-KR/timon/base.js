@@ -150,7 +150,7 @@ module.exports = {
    */
   first_time(you) {
     era.print([
-      '얼마나 시간이 지났을까,',
+      '얼마나 시간이 지났을까, ',
       you.get_colored_name(),
       '은(는) 소박한 작은 침대 위에서 천천히 눈을 떴다……',
     ]);
@@ -164,17 +164,17 @@ module.exports = {
   welcome(chara, you) {
     if (LifeEventMarks.get_marks(0).b_start) {
       era.print([
-        '얼마나 시간이 지났을까,',
+        '얼마나 시간이 지났을까, ',
         you.get_colored_name(),
         '은(는) 소박한 작은 침대 위에서 천천히 눈을 떴다……',
       ]);
       era.print([
         '눈앞에는 낯선 천장……그리고 미소 짓는',
         chara.get_colored_name(),
-        '。',
+        '.',
       ]);
       era.print([
-        '이제,',
+        '이제 ',
         you.get_colored_name(),
         '은(는) 이 사랑의 감옥에 갇힌 죄수가 되었다……그리고',
         chara.get_colored_name(),
@@ -182,17 +182,17 @@ module.exports = {
       ]);
     } else {
       era.print([
-        '얼마나 시간이 지났을까,',
+        '얼마나 시간이 지났을까, ',
         you.get_colored_name(),
         '은(는) 천천히 눈을 떴다……',
       ]);
       era.print([
         '눈앞에는 여전히 낯선 천장……그리고 미소 짓는',
         chara.get_colored_name(),
-        '。',
+        '.',
       ]);
       era.print([
-        '죄수와,',
+        '죄수와 ',
         you.sex,
         '유일한 간수가 마침내 이 사랑의 감옥에서 마주했다……',
       ]);
@@ -328,7 +328,7 @@ module.exports = {
       era.print([
         '푹 자고 난 뒤, 이 지하실의 주인——',
         chara.get_colored_name(),
-        '은(는) 마침내 깨어나,',
+        '은(는) 마침내 깨어나, ',
         you.get_colored_name(),
         '과(와) 보내는 시간을 즐기기 시작했다……',
       ]);
@@ -346,7 +346,7 @@ module.exports = {
       era.print([
         '오랜 기다림 끝에, 이 지하실의 주인——',
         chara.get_colored_name(),
-        '은(는) 마침내 모습을 드러내,',
+        '은(는) 마침내 모습을 드러내, ',
         you.get_colored_name(),
         '과(와) 보내는 시간을 즐기기 시작했다……',
       ]);
@@ -364,7 +364,7 @@ module.exports = {
     if (supporter) {
       await era.printAndWait([
         chara.get_colored_name(),
-        '에게 이끌려,',
+        '에게 이끌려, ',
         supporter.get_colored_name(),
         '도 함께',
         you.get_colored_name(),
@@ -387,7 +387,7 @@ module.exports = {
   async ask_release_agree(chara, you) {
     await era.printAndWait([
       chara.get_colored_name(),
-      '은(는) 부끄러운 기색으로,',
+      '은(는) 부끄러운 기색으로, ',
       you.get_colored_name(),
       '의 부탁을 들어주었다.',
     ]);
@@ -406,7 +406,7 @@ module.exports = {
   async ask_release_reject(chara, you) {
     await era.printAndWait([
       chara.get_colored_name(),
-      '은(는) 옅게 미소 지으며,',
+      '은(는) 옅게 미소 지으며, ',
       you.get_colored_name(),
       '의 부탁을 거절했다.',
     ]);
@@ -443,7 +443,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        '의 절망한 시선 속에서,',
+        '의 절망한 시선 속에서, ',
         chara.get_colored_name(),
         '은(는)',
         owner.get_colored_name(),
@@ -484,9 +484,9 @@ module.exports = {
       if (awake) {
         await era.printAndWait([
           owner.get_colored_name(),
-          o_awake ? '의 부재를 틈타,' : '이(가) 깊이 잠든 사이에,',
+          o_awake ? '의 부재를 틈타, ' : '이(가) 깊이 잠든 사이에, ',
           chara.get_colored_name(),
-          '은(는) 지하실에 숨어들어,',
+          '은(는) 지하실에 숨어들어, ',
           you.get_colored_name(),
           '을(를) 부축하고 유유히 떠났다……',
         ]);
@@ -518,15 +518,15 @@ module.exports = {
       if (awake) {
         await era.printAndWait([
           owner.get_colored_name(),
-          o_awake ? '의 부재를 틈타,' : '이(가) 깊이 잠든 사이에,',
+          o_awake ? '의 부재를 틈타, ' : '이(가) 깊이 잠든 사이에, ',
           chara.get_colored_name(),
-          '은(는) 지하실에 숨어들어,',
+          '은(는) 지하실에 숨어들어, ',
           you.get_colored_name(),
           '을(를) 부축하고 유유히 떠났다……',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
-          '이(가) 일상으로 돌아갈 수 있으리라 생각한 순간,',
+          '이(가) 일상으로 돌아갈 수 있으리라 생각한 순간, ',
           chara.get_colored_name(),
           '은(는)',
           you.get_colored_name(),
@@ -562,13 +562,13 @@ module.exports = {
           chara.get_colored_name(),
           '은(는)',
           owner.get_colored_name(),
-          '이(가) 치밀하게 꾸민 지하실에 들어가,',
+          '이(가) 치밀하게 꾸민 지하실에 들어가, ',
           owner.get_colored_name(),
           '과(와) 대치했다.',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
-          '이(가) 난투가 벌어지리라 생각한 순간,',
+          '이(가) 난투가 벌어지리라 생각한 순간, ',
           chara.couple_title,
           '은(는) 놀랍게도 악수하며 화해했다……',
         ]);
@@ -605,13 +605,13 @@ module.exports = {
           chara.get_colored_name(),
           '은(는)',
           owner.get_colored_name(),
-          '이(가) 치밀하게 꾸민 지하실에 들어가,',
+          '이(가) 치밀하게 꾸민 지하실에 들어가, ',
           owner.get_colored_name(),
           '을(를) 쓰러뜨렸다……',
         ]);
         await era.printAndWait([
           owner.get_colored_name(),
-          '이(가) 지켜보는 가운데,',
+          '이(가) 지켜보는 가운데, ',
           chara.get_colored_name(),
           '은(는)',
           you.get_colored_name(),
@@ -646,13 +646,13 @@ module.exports = {
           chara.get_colored_name(),
           '은(는)',
           owner.get_colored_name(),
-          '이(가) 치밀하게 꾸민 지하실에 들어가,',
+          '이(가) 치밀하게 꾸민 지하실에 들어가, ',
           owner.get_colored_name(),
           '을(를) 쓰러뜨렸다……',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
-          '이(가) 일상으로 돌아갈 수 있으리라 생각한 순간,',
+          '이(가) 일상으로 돌아갈 수 있으리라 생각한 순간, ',
           chara.get_colored_name(),
           '은(는)',
           you.get_colored_name(),

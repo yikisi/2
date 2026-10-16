@@ -27,12 +27,12 @@ good_morning:
           content:
             - fontWeight: bold
               content: %CHARA%
-            - "「%CALLNAME%…… 아무리 일이 바쁘더라도, 휴식하는 것을 잊지 마세요.」"
+            - "「%CALLNAME%…… 아무리 일이 바쁘더라도, 쉬는 것도 잊지 마세요.」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - "「잊지 마세요, 우리의 『여정』은 아직 꽤나 길게 남아있다는 것을요.」"
+            - "「우리의 『여정』은 아직 한참 남아 있다는 걸 잊지 마세요.」"
     - random: true
       if: era.get('base:0:0') < era.get('maxbase:0:0') * 0.45
       lines:
@@ -54,12 +54,12 @@ good_morning:
             - fontWeight: bold
               content: %CHARA%
             - "「%CALLNAME%……」"
-        - "%CHARA%는 아무 말 없이 그저 부드럽게 %YOU%를 마사지한다."
+        - "%CHARA%는 아무 말 없이 그저 부드럽게 %YOU%을(를) 마사지한다."
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - "「당신의 수고를 제가 온전히 나누어 짊어질 수는 없겠지만…… 적어도 당신을 치유할 기회는 제게 주세요.」"
+            - "「당신의 고단함을 제가 전부 덜어 드릴 수는 없겠지만…… 적어도 당신을 치유할 기회는 제게 주세요.」"
     # 体力が高い
     - random: true
       if: era.get('base:0:0') >= era.get('maxbase:0:0') * 0.45

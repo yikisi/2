@@ -8,7 +8,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/titles') {
   template_got_tt = (name, desc) => [name, '：', desc];
   title_template_got_tt = '[%TITLE%] %NAME%\n%DESC%\n（조회 시간：%TIME%）';
 
-  ungot = '？？？';
+  ungot = '???';
   title_template_ungot_tt = '%NAME%：%TITLE%\n%DESC%';
 
   template_in_rec = (name, desc) => [name, '：', desc];
@@ -22,8 +22,8 @@ module.exports = class extends require('#/i18n/zh-CN/chara/titles') {
   template_in_game = '[%NAME%]';
 
   reward_t_title_template = '%YEAR%년 최우수 트레이너';
-  reward_u_title_template = '%YEAR%년 대표 우마무스메 : %UMA%';
-  best_title_template = '최고 %CLASS%%UMA%';
+  reward_u_title_template = '%YEAR%년 대표 %UMA%';
+  best_title_template = '최고 %CLASS% %UMA%';
 
   l_hello_world = 'Hello world!';
 
@@ -47,8 +47,8 @@ module.exports = class extends require('#/i18n/zh-CN/chara/titles') {
   e_100w = '백전백승';
   e_virgin_1 = '순수한 영혼';
   e_virgin_2 = '완벽한 아이돌';
-  e_virgin_r1 = '「순수한」영혼';
-  e_virgin_r2 = '「완벽한」아이돌 ';
+  e_virgin_r1 = '「순수한」 영혼';
+  e_virgin_r2 = '「완벽한」 아이돌 ';
 
   s_be_father = '아버지의 힘';
   s_dirty = '백탁에 물들다';

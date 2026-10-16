@@ -127,7 +127,7 @@ module.exports = {
           () => nature.say_and_wait('날씨 좋네. 오늘은 무슨 일이 있을까?'),
           () =>
             nature.say_and_wait(
-              `오~ 뭔가 좋은 일이 생길 것 같은데? 어떻게 생각해, ${callname}？`,
+              `오~ 뭔가 좋은 일이 생길 것 같은데? 어떻게 생각해, ${callname}?`,
             ),
         );
         break;
@@ -230,7 +230,7 @@ module.exports = {
       nature.sex,
       '한테 요령도 많이 배웠거든! 어때, ',
       callname,
-      '？ ',
+      '? ',
       self_call,
       '가 가르쳐 줄까?',
     ]);
@@ -295,7 +295,7 @@ module.exports = {
       `노래를 마친 ${nature.name}는 조금 긴장한 채 평가를 기다렸다.`,
     );
     await nature.say_and_wait(
-      `천상의 목소리라니……너무 과장이잖아! ${callname}、${self_call}한테 듣기 좋은 말 해 봤자 떡고물은 없다구?` +
+      `천상의 목소리라니…… 너무 과장이잖아! ${callname}, ${self_call}한테 듣기 좋은 말 해 봤자 떡고물은 없다구?` +
         `자! 다음은 ${callname} 차례!`,
     );
     await era.printAndWait(`${nature.name}와 즐거운 시간을 보냈다.`);
@@ -357,7 +357,7 @@ module.exports = {
         `여기도 먹을 게 많네. ${callname}은(는) 뭐 먹고 싶어? 여기? 좋아, 가자!`,
       );
       await nature.say_and_wait(
-        '일단 쌤이 좋아하는 음식을 메모해두고...',
+        '일단 쌤이 좋아하는 음식을 메모해두고……',
         true,
       );
     } else {
@@ -410,7 +410,7 @@ module.exports = {
     era.print(
       `바쁜 하루를 마치고 ${you.name}은(는) ${nature.name}를 기숙사 앞까지 바래다주었다.`,
     );
-    nature.say(`오늘도 수고했어! 내일 봐, ${callname}！`);
+    nature.say(`오늘도 수고했어! 내일 봐, ${callname}!`);
     era.print(
       `손을 흔들며 ${nature.name}의 뒷모습을 배웅한 뒤, ${you.name}도 돌아서서 방으로 돌아가 쉬었다.`,
     );
@@ -432,7 +432,7 @@ module.exports = {
       '내려다보니 석양 때문인지 고개를 숙인 나이스 네이처의 볼이 유난히 붉었다.',
     );
     era.print(
-      `짧은 침묵 끝에 붉은 머리의 ${nature.teen_sex_title}이(가) 머뭇거리며 입을 열어 어색함을 깼다.`,
+      `짧은 침묵 끝에 붉은 머리의 ${nature.teen_sex_title}가 머뭇거리며 입을 열어 어색함을 깼다.`,
     );
     nature.say(
       '오늘……외박 신청해 뒀으니까……그러니까……조금 더 같이 있어도 괜찮아. 그게……만약……',
@@ -464,7 +464,7 @@ module.exports = {
     } else {
       nature.say('그렇구나……그렇겠지……');
       era.print(
-        `${nature.teen_sex_title}은(는) 소매를 잡았던 손을 놓고, 얼굴에 숨기지 못한 쓸쓸함을 드러냈다.`,
+        `${nature.teen_sex_title}는 소매를 잡았던 손을 놓고, 얼굴에 숨기지 못한 쓸쓸함을 드러냈다.`,
       );
       nature.say(
         `응, 괜찮아. 나도 참, ${callname}, 오늘 그렇게 피곤했는데. 푹 쉬는 게 좋겠지. 아까 말은 못 들은 걸로 해 줘. 잘 자, ${callname}, 내일 봐!`,
@@ -491,10 +491,10 @@ module.exports = {
       );
       await nature.say_and_wait('그게……저……아무튼 이따 트레센에서 봐!');
       await era.printAndWait(
-        `${nature.teen_sex_title}은(는) 할 말이 있는 듯했지만 끝내 입 밖에 내지 못하고 교문 안으로 뛰어갔다.`,
+        `${nature.teen_sex_title}는 할 말이 있는 듯했지만 끝내 입 밖에 내지 못하고 교문 안으로 뛰어갔다.`,
       );
       era.drawLine({ content: '⏰낮이 되었다⏰' });
-      await nature.say_and_wait(`오~ ${callname}、${self_call}라구?`);
+      await nature.say_and_wait(`오~ ${callname}, ${self_call}라구?`);
       await era.printAndWait(
         '식당에서 밥을 먹고 있는데 나이스 네이처가 불쑥 곁에 나타났다.',
       );
@@ -587,7 +587,7 @@ module.exports = {
       await era.printAndWait('멀리서도 손을 흔드는 나이스 네이처가 보였다.');
       await era.printAndWait('오늘은 크리스마스다.');
       await nature.say_and_wait(
-        `뭐, 별일은 아니야. ${self_call}, 별다른 일정 없어 보여서 같이 크리스마스 보내자고 불렀어!`,
+        `뭐, 별일은 아니야. ${self_call}, 네가 별다른 일정 없어 보여서 같이 크리스마스 보내자고 불렀어!`,
       );
       await nature.say_and_wait('안……될까?');
       await era.printAndWait(

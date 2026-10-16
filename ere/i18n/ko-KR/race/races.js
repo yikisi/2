@@ -20,7 +20,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/races') {
 
   // 跑法
   s_a_nige = '도';
-  s_a_senko = '선';
+  s_a_senko = '행';
   s_a_sashi = '입';
   s_a_okimi = '추';
 

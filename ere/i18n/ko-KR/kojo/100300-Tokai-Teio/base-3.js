@@ -17,7 +17,7 @@ module.exports = {
       you.get_colored_name(),
       '은(는) 마침 ',
       another.get_colored_name(),
-      '와(과) 마주쳐 ',
+      '과(와) 마주쳐 ',
       another.sex,
       '와 즐겁게 한동안 이야기를 나누었다.',
     ]);
@@ -26,7 +26,7 @@ module.exports = {
       you.get_colored_name(),
       '은(는) 눈치채지 못했다. 멀지 않은 곳에서 한 쌍의 눈이 줄곧 이쪽을 바라보고 있었다. ',
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       another.sex,
       '의 대화가 길어지고 화제가 사생활로 옮겨 가며 웃음소리가 커질수록, 그 눈동자는 떨리면서 점점 어두워졌다……',
     ]);
@@ -95,7 +95,7 @@ module.exports = {
     await era.printAndWait([
       '반세기쯤 이어진 것 같은 대치 끝에 ',
       teio.get_colored_name(),
-      '은(는) 고개를 떨궜다.',
+      '는 고개를 떨궜다.',
     ]);
     await teio.say_and_wait(['미안해…… ', callname, ', 내가 잘못했어.']);
     await teio.say_and_wait('문…… 지금은 열려 있어. 마음대로 해.');
@@ -533,7 +533,7 @@ module.exports = {
         teio.sex,
         '에게 응답한다.',
         teio.sex,
-        '은(는) 서서히 힘을 잃고, 목소리는 숨소리로 변해간다……',
+        '는 서서히 힘을 잃고, 목소리는 숨소리로 변해간다……',
       ]);
       era.println();
 
@@ -611,7 +611,7 @@ module.exports = {
     era.print([
       '왠지 모르게, ',
       teio.get_colored_name(),
-      '은(는) 자리를 비운 지 제법 지났다.',
+      '는 자리를 비운 지 제법 지났다.',
     ]);
     era.print([
       '수업인가? 트레이닝인가? 행사인가? 아니면——여기까지 생각하자 ',

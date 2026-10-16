@@ -53,7 +53,7 @@ module.exports = {
       '???「심볼리 가문의 최고 걸작이잖아. 데뷔 전부터 온 세상의 주목을 받는 스타라고. 하아, 정말 엄청난 거물이야!」',
     );
     await era.printAndWait(
-      `그런 이야기를 들을 때마다 ${you.name}의 가슴은 자부심으로 가득 찼다. 그 황제의 위명이 ${you.name}와(과) 깊은 관련이 있는 듯한 기분이었다.`,
+      `그런 이야기를 들을 때마다 ${you.name}의 가슴은 자부심으로 가득 찼다. 그 황제의 위명이 ${you.name}과(와) 깊은 관련이 있는 듯한 기분이었다.`,
     );
     await era.printAndWait(
       `실제로 ${you.name}은(는) 심볼리 가문에서 일한 적이 있다. 더 정확히 말하면, 한동안 심볼리 가문의 보조 트레이너로 일했다.`,
@@ -62,7 +62,7 @@ module.exports = {
       `높으신 분들 뒤에서 잡일을 할 뿐, 이름을 알릴 기회는 없었다. 하지만 그 시절 ${you.name}은(는) 심볼리 가문의 젊은 우마무스메들과 가까워졌다.`,
     );
     await era.printAndWait(
-      `그중에서도 루나라는 아이는 ${you.name}와(과) 그림자처럼 붙어 다녔다.`,
+      `그중에서도 루나라는 아이는 ${you.name}과(와) 그림자처럼 붙어 다녔다.`,
     );
     await era.printAndWait(
       `심볼리 가문을 찾지 않은 지도 오래되었다. 그래도 그때의 인연 덕분에 ${you.name}도, 트레센에 있는 심볼리 가문 사람들도 서로에게 각별한 친근감을 느꼈다.`,
@@ -106,7 +106,7 @@ module.exports = {
     );
     await era.printAndWait('그런 건 아무래도 좋다——!');
     await era.printAndWait(
-      `${you.name}은(는) 안으로 뛰어들어 반쯤 열린 문을 밀었다.`,
+      `${you.name}은(는) 반쯤 열린 문을 밀고 안으로 뛰어들었다.`,
     );
     era.println();
     await era.printAndWait(
@@ -155,7 +155,7 @@ module.exports = {
     await era.input();
 
     await era.printAndWait(
-      `쇠약해진 ${luna.teen_sex_title}이(가) 고개를 들어 당신을 바라보았다.`,
+      `쇠약해진 ${luna.teen_sex_title}가 고개를 들어 당신을 바라보았다.`,
     );
     await luna.say_and_wait(`……${you.actual_name}……？`);
     await era.printAndWait(
@@ -225,7 +225,7 @@ module.exports = {
       '조금만 더 일찍 와 주었다면, 나는…… 돌아가. 오늘 일은 아무에게도 말하지 말아 줘. 황제는 나약해서는 안 되니까.',
     );
     await era.printAndWait(
-      `${you.name}은(는) 루나의 말을 다 듣기도 전에, ${luna.sex}는 당신을 이곳에서 내보냈다.`,
+      `${you.name}이(가) 루나의 말을 다 듣기도 전에, ${luna.sex}는 당신을 이곳에서 내보냈다.`,
     );
     await era.printAndWait(
       `${you.name}에게는 분명했다. ${luna.sex}도 당신을 알아본 것이다.`,
@@ -251,12 +251,12 @@ module.exports = {
     await era.printAndWait(
       `${luna.sex}는 ${you.name}을(를) 찾아온 것이다. 정확히 말하면, ${luna.sex}는 당신에게 온 편지를 가지고 있었다.`,
     );
-    await era.printAndWait('간사「학생회장 심볼리 루돌프의 직접 지명입니다.」');
+    await era.printAndWait('간사「학생회장 심볼리 루돌프 님으로부터 온 직접 지명입니다.」');
     await era.printAndWait(
       `${luna.sex}는 눈에 띄게 흥분한 채 편지를 그대로 ${you.name}의 손에 건넸다.`,
     );
     await era.printAndWait(
-      `${you.name}은(는) 억지웃음을 지으며 이 『뜨거운 감자』를 받아 들었다.`,
+      `${you.name}은(는) 억지웃음을 지으며 이 부담스러운 편지를 받아 들었다.`,
     );
     await era.printAndWait(
       `임무를 마친 간사는 바람처럼 달려 나갔다. ${you.name}은(는) 적당히 웃어 보이고 조퇴했다.`,
@@ -273,7 +273,7 @@ module.exports = {
     await era.printAndWait(
       `${you.name}이(가) 편지지를 꺼냈다——새하얀 종이에는 짧은 말 하나만 커다랗게 적혀 있었다.`,
     );
-    await era.printAndWait('「살려 줘」', {
+    await era.printAndWait('「구해줘」', {
       align: 'center',
       color: luna.color,
       fontSize: '3rem',
@@ -298,7 +298,7 @@ module.exports = {
     await era.printAndWait([
       ' ',
       luna.get_colored_actual_name(),
-      '와(과)의 계약에 성공했다.',
+      '과(와)의 계약에 성공했다.',
     ]);
   },
 };

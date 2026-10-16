@@ -41,19 +41,19 @@ module.exports = {
    */
   orgasm_denial(you, stop_success, change_aim, cum_on_face, targets) {
     if (!stop_success) {
-      era.print([you.get_colored_name(), '는 참아 내지 못했다!']);
+      era.print([you.get_colored_name(), '은(는) 참아 내지 못했다!']);
     } else if (change_aim) {
       if (cum_on_face) {
         era.print([
           you.get_colored_name(),
-          '는 음경을 빼내어 ',
+          '은(는) 음경을 빼내어 ',
           ...targets,
           '의 얼굴을 향했다.',
         ]);
       } else {
         era.print([
           you.get_colored_name(),
-          '는 음경을 빼내어 ',
+          '은(는) 음경을 빼내어 ',
           ...targets,
           '의 몸을 향했다.',
         ]);
@@ -61,7 +61,7 @@ module.exports = {
     } else {
       era.print([
         you.get_colored_name(),
-        '는 사정하고 싶은 충동을 일단 억눌렀다……',
+        '은(는) 사정하고 싶은 충동을 일단 억눌렀다……',
       ]);
     }
   },
@@ -76,33 +76,33 @@ module.exports = {
       if (era.get('flag:惩戒力度') >= 2) {
         await era.printAndWait([
           you.get_colored_name(),
-          '는 아랫배의 음문에 떠오른 임신 무늬를 바라보다, 화장실로 뛰어가 토했다.',
+          '은(는) 아랫배의 음문에 떠오른 임신 무늬를 바라보다, 화장실로 뛰어가 토했다.',
         ]);
       } else {
         await era.printAndWait([
           you.get_colored_name(),
-          '는 손에 든 임신 검사기를 바라보다, 화장실로 뛰어가 토했다.',
+          '은(는) 손에 든 임신 검사기를 바라보다, 화장실로 뛰어가 토했다.',
         ]);
       }
       if (unexpected_pregnant === unexpected_pregnant_enum.mother_sleep) {
         await era.printAndWait([
           you.get_colored_name(),
-          '는 자신이 어떻게 임신했는지 전혀 기억하지 못한다. 누구라도 범인일 수 있다고 생각하니 ',
+          '은(는) 자신이 어떻게 임신했는지 전혀 기억하지 못한다. 누구라도 범인일 수 있다고 생각하니 ',
           you.get_colored_name(),
-          '는 소름이 끼쳤다……',
+          '은(는) 소름이 끼쳤다……',
         ]);
         if (you.sex_code >= 1) {
           await era.printAndWait([
             '……그런데도 ',
             you.get_colored_name(),
-            '는 아버지가 될 수도 있었을 텐데……',
+            '은(는) 아버지가 될 수도 있었을 텐데……',
           ]);
         }
       } else {
         await era.printAndWait([
           '잠시 혼란스러워하던 ',
           you.get_colored_name(),
-          '는 결국 ',
+          '은(는) 결국 ',
           father.get_colored_name(),
           '에게 알리기로 했다.',
         ]);
@@ -139,7 +139,7 @@ module.exports = {
     if (era.get(`love:${father.id}`) >= 90) {
       await era.printAndWait([
         you.get_colored_name(),
-        '는 병상에 누워 갓 태어난 아이를 바라보며, 멍하니 아이의 아버지를 떠올린다.',
+        '은(는) 병상에 누워 갓 태어난 아이를 바라보며, 멍하니 아이의 아버지를 떠올린다.',
       ]);
       await era.printAndWait([
         '이렇게 짧은 사이에 ',
@@ -153,30 +153,30 @@ module.exports = {
         father.get_colored_name(),
         '가 방으로 뛰어들었다. 한때 자신의 품에서 젖을 먹던 자녀의 지금 뒷모습에, ',
         you.get_colored_name(),
-        '는 얼굴을 붉히며 가슴이 두근거리는 것을 어쩔 수 없다.',
+        '은(는) 얼굴을 붉히며 가슴이 두근거리는 것을 어쩔 수 없다.',
       ]);
       await era.printAndWait([
         '어머니이기보다는 ',
         you.get_colored_name(),
-        '는 ',
+        '은(는) ',
         father.get_colored_name(),
         '의 연인으로서 느끼는 행복을 택했다.',
       ]);
     } else {
       await era.printAndWait([
         you.get_colored_name(),
-        '는 아이를 안고 끝없이 걱정한다.',
+        '은(는) 아이를 안고 끝없이 걱정한다.',
         father.get_colored_name(),
         '와의 근친상간으로 태어난 아이다. 이 아이의 앞날을 ',
         you.get_colored_name(),
-        '는 걱정하지 않을 수 없다.',
+        '은(는) 걱정하지 않을 수 없다.',
       ]);
       await era.printAndWait([
         '그때 ',
         father.get_colored_name(),
         '와……',
         you.get_colored_name(),
-        '는 그렇게 한탄하고 싶지만 말이 나오지 않는다.',
+        '은(는) 그렇게 한탄하고 싶지만 말이 나오지 않는다.',
       ]);
       await era.printAndWait(
         '어머니로서의 사랑과 연인으로서의 사랑이 뒤섞여, 당사자조차 구분할 수 없는 감정이 되어 있었다.',
@@ -197,21 +197,21 @@ module.exports = {
     const f = async (you, father) => {
       await era.printAndWait([
         you.get_colored_name(),
-        '는 아이를 안아 들었다——',
+        '은(는) 아이를 안아 들었다——',
       ]);
       era.printButton('아이의 아버지를 무시한다', 1);
       era.printButton(`${father.sex}도 함께 보자`, 2);
       if ((await era.input()) === 1) {
         await era.printAndWait([
           you.get_colored_name(),
-          '가 ',
+          '이(가) ',
           father.get_colored_name(),
           '를 바라보는 눈은 공허하지만, 아이에게는 자애로운 눈길을 보낸다.',
         ]);
       } else {
         await era.printAndWait([
           you.get_colored_name(),
-          '는 망설이다가 손짓으로 ',
+          '은(는) 망설이다가 손짓으로 ',
           father.get_colored_name(),
           '를 가까이 불렀다.',
         ]);
@@ -219,7 +219,7 @@ module.exports = {
           father.get_colored_name(),
           '는 기뻐하며 ',
           you.get_colored_name(),
-          '를 끌어안고, 함께 잠든 아이를 어른다.',
+          '을(를) 끌어안고, 함께 잠든 아이를 어른다.',
         ]);
       }
     };

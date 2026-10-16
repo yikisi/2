@@ -199,7 +199,7 @@ module.exports = {
   async office_study(ss, you, callname) {
     if (Math.random() < 0.5) {
       await ss.say_and_wait(
-        `공부를 가르쳐 준다니…… 설마 내가 ${callname}의 과제를 가르쳐 줘야 하는 거야?`,
+        `공부를 가르쳐 준다니…… 설마 내가 ${callname}의 과제를 도와줘야 하는 거야?`,
       );
       await ss.say_and_wait(
         `농담이야. ${callname}. 네가 내 공부를 도와준다니 정말 고마워.`,
@@ -210,7 +210,7 @@ module.exports = {
       ]);
     } else {
       await ss.say_and_wait(
-        '공부라니, 우리 집안엔 학업 성적이 안 좋은 사람이 거의 없는데 말이야,',
+        '공부라니, 우리 집안엔 학업 성적이 안 좋은 사람이 거의 없는데 말이야, ',
       );
       await ss.say_and_wait(
         `아, 맞다! 차라리 ${callname} 네가 트레이너에 관한 지식을 내게 가르쳐 주는 건 어때?`,
@@ -266,7 +266,7 @@ module.exports = {
       if (era.get('love:400') >= 50) {
         buffer.push(async () => {
           await ss.say_and_wait(
-            '네가 정 그렇게 하겠다면…… 알았어. 네 생각에 따라잡을 수 있도록 내 온 힘을 다할게.',
+            '네가 정 그렇게 하겠다면…… 알았어. 네 생각을 따라갈 수 있도록 내 온 힘을 다할게.',
           );
           await era.printAndWait([
             ss.get_colored_name(),
@@ -282,7 +282,7 @@ module.exports = {
           buffer.push(
             () =>
               ss.say_and_wait(
-                '아…… 나 지금 온몸으로 짜증이 치밀어 오르니까, 할 말 있으면 빨리 해.',
+                '아…… 나 지금 온통 짜증이 나니까, 할 말 있으면 빨리 해.',
               ),
             () =>
               ss.say_and_wait(
@@ -308,7 +308,7 @@ module.exports = {
           buffer.push(
             () =>
               ss.say_and_wait(
-                '지금은 머리가 꽤 맑은 편이니까, 예정된 계획이나 일정이 있다면 빨리 말해 봐.',
+                '지금은 머리가 꽤 맑은 편이니까, 정해 둔 계획이나 일정이 있다면 빨리 말해 봐.',
               ),
             () =>
               ss.say_and_wait(
@@ -347,7 +347,7 @@ module.exports = {
   async office_gift(ss) {
     if (Math.random() < 0.5) {
       await ss.say_and_wait(
-        '나한테 주는 선물이야? ……고마워. 근데 이런 선물을 주다니, 나한테 잘 보이려고 아양이라도 떠는 거야?',
+        '나한테 주는 선물이야? ……고마워. 근데 이런 선물을 주다니, 나한테 잘 보이려는 거야?',
       );
       await era.printAndWait([
         '기대에 부풀어 있던 ',
@@ -356,7 +356,7 @@ module.exports = {
       ]);
     } else {
       await ss.say_and_wait(
-        '선물이구나. 난 다른 사람한테 이런 걸 받아본 적이 별로 없는데,',
+        '선물이구나. 난 다른 사람한테 이런 걸 받아본 적이 별로 없는데, ',
       );
       await ss.say_and_wait(
         '그보다 왜 너에게 이걸 건네받으니 심장이 이렇게 거세게 뛰는 걸까?',
@@ -370,7 +370,7 @@ module.exports = {
   async office_cook(ss, callname) {
     if (Math.random() < 0.5) {
       await ss.say_and_wait(
-        '요리를 배우겠다고? 가정실습 시간 때 나도 이것저것 배우긴 했지만,',
+        '요리를 배우겠다고? 가정실습 시간 때 나도 이것저것 배우긴 했지만, ',
       );
       await ss.say_and_wait(
         '그럼…… 잘 부탁해. 배우기로 한 이상 제대로 배워야지, 마치 훈련처럼 말이야.',
@@ -381,7 +381,7 @@ module.exports = {
       ]);
     } else {
       await ss.say_and_wait(
-        '사실 나 요리는 별로 소질 없어. 평소에 이런 활동을 접할 기회가 없었거든,',
+        '사실 나 요리는 별로 소질 없어. 평소에 요리할 기회가 없었거든, ',
       );
       await ss.say_and_wait(
         `하지만 ${callname} 네가 제안한 거니까, 같이 실력을 키우며 열심히 배워 보자.`,
@@ -402,7 +402,7 @@ module.exports = {
       await ss.say_and_wait('……');
       await era.printAndWait([
         ss.get_colored_name(),
-        '는 잠든 후에도 표정이 편안해 보이지 않았다. 마치 악몽이라도 꾸는 것처럼,',
+        '는 잠든 후에도 표정이 편안해 보이지 않았다. 마치 악몽이라도 꾸는 것처럼, ',
       ]);
       await era.printAndWait([
         '하지만 ',
@@ -453,7 +453,7 @@ module.exports = {
   async s_a_tree_hollow(ss, you) {
     if (Math.random() < 0.5) {
       await ss.say_and_wait(
-        `사실 소리 지를 일은 별로 없는데…… 뭐, 좋아. 레이스 ${ss.uma_sex_title}의 길을 더 멀리까지 걷게 해 줘!!!`,
+        `사실 소리 지를 일은 별로 없는데…… 뭐, 좋아. 레이스 ${ss.uma_sex_title}의 길에서 더 멀리 나아갈 수 있게 해 줘!!!`,
       );
       await era.printAndWait([
         ss.sex,
@@ -510,7 +510,7 @@ module.exports = {
   async s_r_lunch(ss, you, callname) {
     await era.printAndWait([
       you.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       ss.get_colored_name(),
       '는 옥상에서 도시락을 먹기로 했다.',
     ]);
@@ -520,9 +520,9 @@ module.exports = {
       );
       await era.printAndWait([
         ss.get_colored_name(),
-        '은(는) 큼직한 고기 한 조각을 네 도시락에 넣어 주고는 웃으며 ',
+        '은(는) 큼직한 고기 한 조각을 당신의 도시락에 넣어 주고는 웃으며 ',
         you.get_colored_name(),
-        '는 큼직한 고기 한 조각을 당신의 도시락 통에 쏙 집어넣어 주며 향해 미소를 지었다.',
+        '을(를) 바라보았다.',
       ]);
     } else {
       await ss.say_and_wait(`${callname}의 도시락은 직접 만든 거야? 좋네.`);
@@ -632,7 +632,7 @@ module.exports = {
           you.get_colored_name(),
           '의 손을 잡았다. 손가락을 깍지 끼고는 손끝으로 ',
           you.get_colored_name(),
-          '의 손등에 살며시 무언가 낙서를 그렸다.',
+          '의 손등에 살며시 무언가 무늬를 그렸다.',
         ]),
       );
     }
@@ -693,7 +693,7 @@ module.exports = {
         );
         await era.printAndWait([
           ss.get_colored_name(),
-          '은(는) 그렇게 말하면서도 경품 인형을 바라보고 있었다.',
+          '은(는) 그렇게 말하면서도 경품으로 받은 인형을 손에 들고 바라보고 있었다.',
         ]);
       },
       async () => {
@@ -804,7 +804,7 @@ module.exports = {
   async o_c_pray(ss, you, callname, dice) {
     await era.printAndWait([
       ss.get_colored_name(),
-      '와(과) ',
+      '과(와) ',
       you.get_colored_name(),
       '은(는) 신사에 기원하러 갔다.',
     ]);
@@ -840,7 +840,7 @@ module.exports = {
         ss.get_colored_name(),
         '은(는) 조금 놀라며 ',
         ss.sex,
-        '는 귀 장식을 쓰다듬었다.',
+        '의 귀 장식을 쓰다듬었다.',
       ]);
       await ss.say_and_wait(
         `신까지 내 소원에 응답했으니…… 더더욱 쉴 이유가 없겠네. 이따 돌아가면 훈련하자!`,
@@ -881,7 +881,7 @@ module.exports = {
       );
     } else {
       await ss.say_and_wait(
-        `이거 먹어 볼래? 술을 못 마신다고? 괜찮아, 만드는 과정에서만 술이 들어간 거라 문제없어.`,
+        `이거 먹어 볼래? 내가 술을 마시면 안 된다고? 괜찮아, 만드는 과정에서만 술이 들어간 거라 문제없어.`,
       );
     }
   },
@@ -991,7 +991,7 @@ module.exports = {
       ]);
     } else {
       await ss.say_and_wait(
-        `아, 신상품이 들어왔네. ${callname}, 이쪽이야. 신발 편자를 바꿀 때라고 생각했는데, 새 훈련용 중량 도구랑 운동복도 있어.`,
+        `아, 신상품이 들어왔네. ${callname}, 이쪽이야. 신발에 달린 편자를 바꿀 때라고 생각했는데, 새 훈련용 중량 도구랑 운동복도 있어.`,
       );
       await era.printAndWait([
         ss.get_colored_name(),

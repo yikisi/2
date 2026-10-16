@@ -58,16 +58,16 @@ module.exports = {
     );
     await era.printAndWait(`……`);
     await era.printAndWait(
-      `엘리트가 모이는 중앙 트레센에서 가장 부족함 없는 것은 인재와 천재다.`,
+      `엘리트가 모이는 중앙 트레센에는 인재와 천재만큼은 부족하지 않다.`,
     );
     await era.printAndWait(
-      `신인이든 이미 전설이 된 사람이든, 언제나 더 뛰어난 누군가가 더 높은 정상에 서 있다.${you.name}은(는) 그곳까지 단 한 걸음을 남겨 놓고도 닿지 못할 것 같았다.`,
+      `신인이든 이미 전설이 된 사람이든, 언제나 더 뛰어난 누군가가 더 높은 정상에 서 있다. ${you.name}은(는) 그곳까지 단 한 걸음을 남겨 놓고도 닿지 못할 것 같았다.`,
     );
     await era.printAndWait(
       `지금까지 쌓아 온 모든 것을 발판 삼아 전력을 다해 몸을 끌어올려도, 『극소수』만이 서는 자리는 여전히 멀었다——`,
     );
     await era.printAndWait(
-      `선배들의 경험담은 마지막 한 걸음이 이토록 멀다는 것을 알려 주지 않았다.${you.name}은(는) 조금 좌절하고 있었다.`,
+      `선배들의 경험담은 마지막 한 걸음이 이토록 멀다는 것을 알려 주지 않았다. ${you.name}은(는) 조금 좌절하고 있었다.`,
     );
     await era.printAndWait(
       `재능을 타고나 천재라고까지 불리는 동료들 앞에서, ${you.name}이(가) 기댈 수 있는 것은 이제 『버티는 것』뿐이었다.`,
@@ -76,7 +76,7 @@ module.exports = {
       `스스로를 납득시키려 애썼다. 그래도 마음을 완전히 가라앉힐 수는 없었다.`,
     );
     await era.printAndWait(
-      `${urara.uma_sex_title}에 대한 이해가 뒤처진다는 사실을 쉽게 받아들여서는 트레이너를 할 수 없다.${
+      `${urara.uma_sex_title}에 대한 이해가 뒤처진다는 사실을 쉽게 받아들여서는 트레이너를 할 수 없다. ${
         you.name
       }에게는 아직 더 나아가고 싶은 마음이 남아 있었다.`,
     );
@@ -175,7 +175,7 @@ module.exports = {
     if ((await era.input()) === 2) {
       await era.printAndWait(`이렇게 마음이 편안해진 건 정말 오랜만이었다.`);
       await era.printAndWait(
-        `눈을 감은 채, ${you.name}은(는) 그 온기의 근원 쪽으로 몸을 더 가까이 기대어, 거의 ${urara.sex}을(를) 꼭 껴안을 기세였다.`,
+        `눈을 감은 채, ${you.name}은(는) 그 온기의 근원 쪽으로 몸을 더 가까이 기대어, 거의 ${urara.sex}를 꼭 껴안을 기세였다.`,
       );
       await era.printAndWait(
         `잠든 모습의 부드럽고 건강한 육감. 소박한 꽃 같은 몸의 향기. 둘 다 ${you.name}의 마음을 풀어준다.`,
@@ -234,7 +234,7 @@ module.exports = {
       `그 맑은 눈동자는 선입견도 의심도 없이 ${you.name}을(를) 바라보다가, 악의 없는 미소를 지어 보였다.`,
     );
     await era.printAndWait(
-      `벚꽃빛 포니테일과 붉은 리본을 흔들며, 어린아이처럼 천진한 작은 ${urara.uma_sex_title}이(가) ${
+      `벚꽃빛 포니테일과 붉은 리본을 흔들며, 어린아이처럼 천진한 작은 ${urara.uma_sex_title}가 ${
         you.name
       }보다 먼저 보건실 침대에서 상체를 일으켰다.`,
     );
@@ -248,13 +248,13 @@ module.exports = {
       `여기에 거리감을 잴 수 없는 동안의 얼굴이 더해져, 아직 미숙함에도 불구하고 ${urara.sex}는 자신만의 독특한 『여성』으로서의 매력을 발산하고 있었다.`,
     );
     await era.printAndWait(
-      `어쩔 수 없었다고 변명해 봐도, 그 사랑스러운 얼굴에 떠오른 티 없이 맑은 미소는 조금 전 ${urara.sex}와(과) 나란히 누워 응석을 부렸던 ${you.name}에게 피할 수 없는 죄책감을 남겼다.`,
+      `어쩔 수 없었다고 변명해 봐도, 그 사랑스러운 얼굴에 떠오른 티 없이 맑은 미소는 조금 전 ${urara.sex}와 나란히 누워 응석을 부렸던 ${you.name}에게 피할 수 없는 죄책감을 남겼다.`,
     );
     await urara.say_as_unknown_and_wait(
       '트레이너 맞지? 몸은 좀 어때? 트레이너라는 직업은 정말 힘들구나! 하지만 너무 무리하지 않아도 괜찮아!',
     );
     await era.printAndWait(
-      `귀여운 미소와 허물없는 걱정을 담아, 벚꽃빛의 작은 ${urara.uma_sex_title}이(가) 스스럼없이 ${
+      `귀여운 미소와 허물없는 걱정을 담아, 벚꽃빛의 작은 ${urara.uma_sex_title}가 스스럼없이 ${
         you.name
       }에게 기대 왔다.`,
     );
@@ -289,14 +289,14 @@ module.exports = {
     await era.printAndWait(
       `한눈에 알 수 있었다. 하루 우라라라는 ${urara.uma_sex_title}에게는 반짝이는 자질이 있다. 하지만 지금의 ${
         urara.sex
-      }은(는) 그리 빨리 달릴 수 있을 것 같지 않았다.`,
+      }는 그리 빨리 달릴 수 있을 것 같지 않았다.`,
     );
     await era.printAndWait(`적어도 지금은 기대한 결과를 얻지 못할 것이다.`);
     await urara.say_and_wait(
       `응! 1착 할 거야! 왠지 그럴 것 같거든! 그러니까……`,
     );
     await era.printAndWait(
-      `작은 ${urara.uma_sex_title}은(는) 들뜬 채 무언가 말하려다 문득 벽시계를 보았다.`,
+      `작은 ${urara.uma_sex_title}는 들뜬 채 무언가 말하려다 문득 벽시계를 보았다.`,
     );
     await urara.say_and_wait(
       `앗! 벌써 시간이 이렇게 됐네! 트레이너도 몸조심해! 그럼 또 봐!`,
@@ -313,7 +313,7 @@ module.exports = {
     await era.printAndWait(`역시 아직 피곤하다.`);
     era.drawLine();
     await inner_urara.say_as_unknown_and_wait(
-      `끝까지 지켜보고 싶은 것인지, 스스로도 깨닫지 못한 다른 이유 때문인지.${callname}（${you.name})은(는) 결국 훈련장으로 발걸음을 옮겼다.`,
+      `끝까지 지켜보고 싶은 것인지, 스스로도 깨닫지 못한 다른 이유 때문인지. ${callname}（${you.name})은(는) 결국 훈련장으로 발걸음을 옮겼다.`,
     );
     era.drawLine();
     await you.say_as_passer_by_and_wait(
@@ -322,7 +322,7 @@ module.exports = {
     );
     await you.say_as_passer_by_and_wait(
       '트레이너 B',
-      `그러게. 저런 애를 키우려면 얼마나 힘들지 상상이 가네.${urara.sex}은(는) 여기에 안 맞는 것 아닐까.`,
+      `그러게. 저런 애를 키우려면 얼마나 힘들지 상상이 가네. ${urara.sex}는 여기에 안 맞는 것 아닐까.`,
     );
     await you.say_as_passer_by_and_wait(
       '트레이너 C',
@@ -332,7 +332,7 @@ module.exports = {
       `주변의 수군거림에 이끌리듯, ${you.name}은(는) 코스로 눈을 돌렸다. 아니나 다를까, ${you.name}의 직감이 맞았다.`,
     );
     await era.printAndWait(
-      `우라라의 레이스는 이미 시작되어 있었다. 가장 기본적인 선발 레이스에서조차 ${urara.sex}은(는) 맨 뒤로 처져 있었다.`,
+      `우라라의 레이스는 이미 시작되어 있었다. 가장 기본적인 선발 레이스에서조차 ${urara.sex}는 맨 뒤로 처져 있었다.`,
     );
     await era.printAndWait(
       `주변 트레이너들이 ${
@@ -354,7 +354,7 @@ module.exports = {
       1,
     );
     era.printButton(
-      `「${urara.sex}은(는) 좋은 애야. 하지만 아직 너무 약하고 재능도 없어 보여. 더 잘 맞는 사람이 있을지도 몰라.」(영입을 포기한다)`,
+      `「${urara.sex}는 좋은 애야. 하지만 아직 너무 약하고 재능도 없어 보여. 더 잘 맞는 사람이 있을지도 몰라.」(영입을 포기한다)`,
       2,
     );
     ret.push((ret['rec'] = await era.input()));
@@ -371,13 +371,13 @@ module.exports = {
       await era.printAndWait(
         `${
           urara.sex
-        }은(는) 앞의 누군가를 쫓는 것도, 누군가를 추월하려 안간힘을 쓰는 것도 아니었다. 『하루 우라라』라는 ${urara.uma_sex_title}은(는) 그저 전력으로 달리는 것을 즐기고 있었다. 그뿐이었다.`,
+        }는 앞의 누군가를 쫓는 것도, 누군가를 추월하려 안간힘을 쓰는 것도 아니었다. 『하루 우라라』라는 ${urara.uma_sex_title}는 그저 전력으로 달리는 것을 즐기고 있었다. 그뿐이었다.`,
       );
       await era.printAndWait(
-        `가슴이 두근거리는 이유가 점점 분명해졌다. 여전히 맨 뒤에 있는데도, ${urara.sex}에게 소리쳐 응원하고 싶은 마음이 ${you.name}의 안을 가득 채웠다.`,
+        `가슴이 두근거리는 이유가 점점 분명해졌다. 여전히 맨 뒤에 있는데도, ${urara.sex}에게 소리쳐 응원하고 싶은 마음이 ${you.name}의 가슴을 가득 채웠다.`,
       );
       await era.printAndWait(
-        `언제 입 밖으로 나왔는지도 모를 응원과 함께, 벅찬 마음이 생각보다 먼저 행동이 되어 현실로 나타났다.`,
+        `언제 입 밖으로 나왔는지도 모를 응원과 함께, 벅찬 마음에 생각보다 행동이 먼저 나왔다.`,
       );
       await era.printAndWait(
         `하지만 이건 하루에도 몇 번씩 열리는 평범한 선발 레이스다. 그런 레이스의 꼴찌를 향해 목이 쉬도록 응원하는 일은 이해하기 어려웠다.`,
@@ -389,7 +389,7 @@ module.exports = {
         `${you.name}은(는) 이상하게 여겨지고 깔보일 각오도 했다. 닿지 않는 마지막 거리를 오를 때 곁에서 받던 시선과 마찬가지로.`,
       );
       await era.printAndWait(
-        `하지만 ${you.name}은(는) 놀랐다.${
+        `하지만 ${you.name}은(는) 놀랐다. ${
           you.name
         }의 목소리를 따라 더 많은 ${urara.uma_sex_title}들이 응원하기 시작했고, 트레이너들까지 그 모습을 향해 성원을 보내기 시작한 것이다.`,
       );
@@ -400,7 +400,7 @@ module.exports = {
         `전력을 다하는 벚꽃빛 등 뒤에는, 직업적 적성을 따라 선택한 「${you.name}」뿐 아니라 열정과 용기로 트레이너가 된 「${you.name}」도 있었다.`,
       );
       await era.printAndWait(
-        `처음의 자신은 돈이나 명성, 혹은 강한 ${urara.uma_sex_title}을(를) 키웠다는 실적만을 위해 이곳에 왔던가.`,
+        `처음의 자신은 돈이나 명성, 혹은 강한 ${urara.uma_sex_title}를 키웠다는 실적만을 위해 이곳에 왔던가.`,
       );
       await era.printAndWait(`그것만은 아니었을 것이다.`);
       era.drawLine();
@@ -424,17 +424,17 @@ module.exports = {
       era.drawLine();
 
       await era.printAndWait(
-        `달리기를 마친 출전자들이 코스를 나오자, 선두로 달린 ${urara.uma_sex_title}을(를) 영입하려고 동료들은 곧바로 흩어졌다.`,
+        `달리기를 마친 출전자들이 코스를 나오자, 선두로 달린 ${urara.uma_sex_title}를 영입하려고 동료들은 곧바로 흩어졌다.`,
       );
       await era.printAndWait(
         `모여 있던 ${urara.uma_sex_title}들도 다음 레이스——혹은 자기 차례——를 준비하러 달려갔다. 남은 것은 아직 떠나지 않은 ${
           you.name
-        }와(과), 그 앞에 선 우라라뿐이었다.`,
+        }과(와), 그 앞에 선 우라라뿐이었다.`,
       );
       await era.printAndWait(
         `골인 직전 처음 들린 응원으로 ${
           you.name
-        }을(를) 알아본 작은 ${urara.uma_sex_title}이(가) 티 없이 맑은 미소로 손을 흔들며 이쪽으로 달려왔다.`,
+        }을(를) 알아본 작은 ${urara.uma_sex_title}가 티 없이 맑은 미소로 손을 흔들며 이쪽으로 달려왔다.`,
       );
       await era.printAndWait(
         `늘 보던 맑은 미소. 이른 봄의 아침 햇살이 이곳을 비추는 듯했다.`,
@@ -445,7 +445,7 @@ module.exports = {
       await era.printAndWait(
         `${
           you.name
-        }의 곁에 다가온 작은 ${urara.uma_sex_title}은(는) 기뻐하면서도 조금 놀란 듯했다.`,
+        }의 곁에 다가온 작은 ${urara.uma_sex_title}는 기뻐하면서도 조금 놀란 듯했다.`,
       );
       await urara.say_and_wait(
         `에헤헤~ 또 졌네! 그래도 끝까지 달렸어. 달리는 건 정말 재밌어! 그러니까 트레이너, 다음에도……`,
@@ -478,7 +478,7 @@ module.exports = {
       await era.printAndWait(
         `${
           you.name
-        }의 제안을 들은 작은 ${urara.uma_sex_title}은(는) 촉촉해진 눈을 크게 떴다. 벚꽃빛 눈동자가 갑작스러운 말에 살짝 떨렸다.`,
+        }의 제안을 들은 작은 ${urara.uma_sex_title}는 촉촉해진 눈을 크게 떴다. 벚꽃빛 눈동자가 갑작스러운 말에 살짝 떨렸다.`,
       );
       await era.printAndWait(
         `이윽고 얼굴에 순수한 수줍음이 조금 떠올랐지만, 우라라는 분명하게 ${you.name}의 바람에 답했다.`,
@@ -492,7 +492,7 @@ module.exports = {
       await era.printAndWait(
         `${
           you.name
-        }을(를) 따라 우라라도 한 걸음 앞으로 나왔다. 익숙하고 순수한 미소를 지은 채, 작은 ${urara.uma_sex_title}은(는) ${
+        }을(를) 따라 우라라도 한 걸음 앞으로 나왔다. 익숙하고 순수한 미소를 지은 채, 작은 ${urara.uma_sex_title}는 ${
           you.name
         }의 두 손을 잡았다.`,
       );
@@ -504,7 +504,7 @@ module.exports = {
         `우라라의 환한 미소를 바라보며, ${you.name}은(는) 마음속으로 다시 한번 결심을 굳혔다.`,
       );
       await era.printAndWait(
-        `결과가 어떻든, ${you.name}은(는) ${urara.sex}의 마지막까지 함께하며, ${urara.sex}이(가) 달려갈 미래를 지켜볼 것이다.`,
+        `결과가 어떻든, ${you.name}은(는) ${urara.sex}의 마지막까지 함께하며, ${urara.sex}가 달려갈 미래를 지켜볼 것이다.`,
       );
 
       era.printButton(`「그러니 멈추지 마……」`, 1);

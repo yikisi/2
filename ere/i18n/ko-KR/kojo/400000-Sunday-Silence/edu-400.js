@@ -38,7 +38,7 @@ module.exports = {
         await you.say_and_wait('생각한 대로는 아니었지만, 충분히 잘 달렸어');
       } else {
         await you.say_and_wait(
-          '지고 싶지 않다면 다음에는 더 높은 순위를 차지해야지',
+          '지고 싶지 않다면 다음에는 더 잘해야지',
         );
       }
     };
@@ -78,7 +78,7 @@ module.exports = {
      * @param {string} callname サンデーサイレンスのプレイヤーへの呼び方
      */
     const f = async (ss, you, callname) => {
-      await ss.say_and_wait(['안녕, 기분 좋아 보이네, ', callname, '。']);
+      await ss.say_and_wait(['안녕, 기분 좋아 보이네, ', callname, '.']);
       await ss.say_and_wait(
         '그럼 훈련을 시작할까. 네 목표도 하나씩 정상을 차지해 나가는 거겠지?',
       );
@@ -164,7 +164,7 @@ module.exports = {
         '의 꼬리가 조금 더 빠르게 흔들리고 있었다.',
       ]);
       await ss.say_and_wait(
-        '처음에는 스피드 훈련? 아니면 스태미나? 준비 운동이 끝나면 확실한 답을 줬으면 해.',
+        '처음에는 스피드 훈련? 아니면 스태미나? 준비 운동이 끝나면 어느 쪽인지 정해 줬으면 해.',
       );
       await era.printAndWait([
         ss.get_colored_name(),
@@ -201,7 +201,7 @@ module.exports = {
       await era.printAndWait([
         '그렇기에 ',
         you.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         ss.sex,
         '에게는 해야 할 일이 있었다. ',
         ss.sex,
@@ -466,7 +466,7 @@ module.exports = {
       await era.printAndWait([
         '신사에서 ',
         ss.get_colored_name(),
-        '와(과) 마주친 것은 신기한 인연이었다. 특히 ',
+        '과(와) 마주친 것은 신기한 인연이었다. 특히 ',
         you.get_colored_name(),
         '이(가) ',
         ss.sex,
@@ -561,7 +561,7 @@ module.exports = {
      * @param {PrintedSpan} belm_sta ベルモントステークス（色付き名前）
      */
     const f = async (ss, coffee, you, callname, prea_sta, belm_sta) => {
-      await ss.say_and_wait(['이긴 거지? ', callname, '！！！']);
+      await ss.say_and_wait(['이긴 거지? ', callname, '!!!']);
       await era.printAndWait([
         ss.sex,
         '에게서는 평소의 침착함이 사라져 있었다. 어린아이처럼 들떠서는, 흥분한 채 ',
@@ -577,7 +577,7 @@ module.exports = {
       await ss.say_and_wait([
         '앞으로…… 아직 ',
         prea_sta,
-        '와(과) ',
+        '과(와) ',
         belm_sta,
         '이(가) 남아 있어. 내 몸은 신경 쓰지 말고 훈련량을 늘려 줘. 그래야 더 확실하게 앞서 나갈 수 있어.',
       ]);
@@ -587,13 +587,13 @@ module.exports = {
         ss.get_colored_name(),
         '이(가) 나간 뒤, ',
         coffee.get_colored_name(),
-        '은(는) 말을 이었다.',
+        '는 말을 이었다.',
       ]);
       await coffee.say_and_wait([
         ss.sex,
         '를 잘 부탁해. ',
         ss.sex,
-        '는 언제나 마음이 여린 사람이니까. 마음을 조금 살펴 줘.',
+        '는 언제나 마음이 여린 사람이니까. 마음도 조금 헤아려 줘.',
       ]);
       await era.printAndWait([
         '이후의 인터뷰에서도 ',
@@ -619,7 +619,7 @@ module.exports = {
      */
     const f = async (ss, you, callname) => {
       await era.printAndWait([
-        '밤이 되자, 피로를 짊어진 ',
+        '밤이 되자, 지친 ',
         ss.get_colored_name(),
         '이(가) ',
         ss.sex,
@@ -638,7 +638,7 @@ module.exports = {
       await ss.say_and_wait([
         '잠깐…… 잠깐, 잠깐, 잠깐, 하아…… 하아…… 하아…… ',
         callname,
-        '！！',
+        '!!',
         callname,
         ', 어디 있어?!',
       ]);
@@ -657,10 +657,10 @@ module.exports = {
         ss.sex,
         '의 얼굴을 똑똑히 보았다. 이전의 ',
         ss.get_colored_name(),
-        '와(과)는 전혀 다른 모습이었다.',
+        '과(와)는 전혀 다른 모습이었다.',
       ]);
       await era.printAndWait([
-        '어찌할 수 없는 슬픔이 ',
+        '무력감과 슬픔이 ',
         ss.sex,
         '를 집어삼킬 것만 같았다. 눈에 고인 눈물은 ',
         you.get_colored_name(),
@@ -697,7 +697,7 @@ module.exports = {
         ss.sex,
         '는 ',
         you.get_colored_name(),
-        '의 손을 필사적으로 움켜쥐었다. 손가락뼈가 비명을 지르는 듯했지만, ',
+        '의 손을 필사적으로 움켜쥐었다. 손가락뼈가 으스러질 듯 아팠지만, ',
         ss.get_colored_name(),
         '은(는) 그 사실조차 깨닫지 못한 것 같았다.',
       ]);
@@ -1126,7 +1126,7 @@ module.exports = {
         ss.get_colored_name(),
         '은(는) ',
         coffee.get_colored_name(),
-        '와(과) 소곤소곤 이야기하고 있었다. 둘 사이에 거울이 있는 것 같았다. 한쪽은 다른 쪽의 그림자처럼 보이기도 했다.',
+        '와 소곤소곤 이야기하고 있었다. 둘 사이에 거울이 있는 것 같았다. 한쪽은 다른 쪽의 그림자처럼 보이기도 했다.',
       ]);
       await ss.say_and_wait([
         '알았어, 알았어. 네 말이 맞아. ',
@@ -1333,7 +1333,7 @@ module.exports = {
         you.get_colored_name(),
         '이(가) 무심코 「들어오세요」라고 답하자, ',
         coffee.get_colored_name(),
-        '이(가) 문을 열었다.',
+        '가 문을 열었다.',
       ]);
       await coffee.say_and_wait('오랜만이야. 잘 지내?');
       await ss.say_and_wait('응, 아주 잘 지내. 특히 저 사람과 함께 있을 때는.');
@@ -1353,7 +1353,7 @@ module.exports = {
       ]);
       await era.printAndWait([
         coffee.get_colored_name(),
-        '은(는) ',
+        '는 ',
         you.get_colored_name(),
         '을(를) 한 번 보고는 고개를 끄덕이고 떠났다.',
       ]);
@@ -1419,14 +1419,14 @@ module.exports = {
       await era.printAndWait([
         '돌아보니 ',
         coffee.get_colored_name(),
-        '이(가) 박수를 치고 있었다. ',
+        '가 박수를 치고 있었다. ',
         ss.sex,
         '는 혈육을 바라보며 미소를 지었다.',
       ]);
       await era.printAndWait([
         '자신이 이기지 못했어도 ',
         coffee.get_colored_name(),
-        '은(는) 아낌없이 ',
+        '는 아낌없이 ',
         ss.get_colored_name(),
         '에게 축하를 보냈다.',
       ]);
@@ -1655,7 +1655,7 @@ module.exports = {
           you.get_colored_name(),
           '은(는) 흔쾌히 부탁을 받아들였다. 하지만 ',
           ss.sex,
-          '는 긴 줄에 걸려 한참을 기다린 뒤, 곤란한 표정으로 도시락을 들고 돌아왔다.',
+          '는 긴 줄에 막혀 한참을 기다린 뒤, 곤란한 표정으로 도시락을 들고 돌아왔다.',
         ]);
       }
       return [ret];
@@ -1695,7 +1695,7 @@ module.exports = {
         await era.printAndWait([
           '하지만 보나 마나 ',
           ss.sex,
-          '의 방법은 씨알도 먹히지 않았다.',
+          '의 방법은 아무 효과가 없었다.',
         ]);
         await you.say_and_wait('내가 해볼게, 마침 간식거리를 좀 챙겨왔거든.');
         await era.printAndWait([
@@ -1709,7 +1709,7 @@ module.exports = {
           ss.get_colored_name(),
           '는 기지개를 켜며 눈매를 날카롭게 빛냈다. 천천히 수풀을 헤치고 들어가자, 바짝 긴장한 채 털을 곤두세운 새끼 고양이가 보였다.',
         ]);
-        await ss.say_and_wait('꽤나 경계하고 있네... 하지만 이 정도라면.');
+        await ss.say_and_wait('꽤나 경계하고 있네…… 하지만 이 정도라면.');
         await era.printAndWait([
           ss.sex,
           '는 재빠르게 손을 뻗어 고양이의 목덜미를 낚아챘다. 방금 전까지만 해도 ',
@@ -1735,7 +1735,7 @@ module.exports = {
         ss.get_colored_name(),
         '의 말에 신경 쓸 겨를조차 없었다.',
       ]);
-      await ss.say_and_wait('이따가 동물 병원에 데려가 봐야겠다...');
+      await ss.say_and_wait('이따가 동물 병원에 데려가 봐야겠다……');
       await era.printAndWait(
         '그리고 이 새끼 고양이는 그 길로 구충제 투여와 중성화 수술까지 받게 되었고, 트레센으로 돌아왔을 땐 이미 세상 다 산 듯한 해탈한 표정이 되어 있었다.',
       );

@@ -24,13 +24,13 @@ module.exports = {
       );
       await era.printAndWait([
         you.get_colored_name(),
-        '은 트레이너실 소파에 앉아 가슴께의 단추를 풀었다.',
+        '은(는) 트레이너실 소파에 앉아 가슴께의 단추를 풀었다.',
       ]);
       await era.printAndWait(
         '배 속 깊은 곳에서 묘하게 쑤시는 듯한 통증이 느껴졌다. 당장 옷을 모두 벗고 밖을 뛰어다니고 싶었다—— 그런, 제정신이 아닌 기분이었다.',
       );
       era.println();
-      await daiwa.say_and_wait(['안녕하세요, ', callname, '。']);
+      await daiwa.say_and_wait(['안녕하세요, ', callname, '.']);
       era.println();
       await era.printAndWait([
         '어느새 ',
@@ -111,16 +111,16 @@ module.exports = {
     const f = async (daiwa, you, callname) => {
       await era.printAndWait([
         you.get_colored_name(),
-        '가 눈을 떴을 때는 이미 휴게실 침대 위였다.',
+        '이(가) 눈을 떴을 때는 이미 휴게실 침대 위였다.',
       ]);
       await era.printAndWait([
-        '멍하던 머릿속이 차츰 맑아지자,',
+        '멍하던 머릿속이 차츰 맑아지자, ',
         you.get_colored_name(),
         '은(는) 허리가 유난히 무겁다는 것을 깨닫고, 그제야 시트의 처참한 모습을 발견했다.',
       ]);
       era.println();
       await era.printAndWait([
-        '옆을 보니,',
+        '옆을 보니, ',
         daiwa.get_colored_name(),
         '이 얼굴을 감싸고 무언가 중얼거리고 있었다.',
       ]);
@@ -154,7 +154,7 @@ module.exports = {
       era.println();
       await era.printAndWait([
         you.get_colored_name(),
-        '는 사과하는 ',
+        '은(는) 사과하는 ',
         daiwa.get_colored_name(),
         '을 품에 안고 머리를 쓰다듬었다.',
       ]);
@@ -165,7 +165,7 @@ module.exports = {
       era.println();
       await era.printAndWait([
         you.get_colored_name(),
-        '는 침대에서 내려와 빈 병의 라벨을 확인했다. 응, 역시 그렇다.',
+        '은(는) 침대에서 내려와 빈 병의 라벨을 확인했다. 응, 역시 그렇다.',
       ]);
       era.println();
       if (era.get('status:9:弗隆K')) {

@@ -46,7 +46,7 @@ module.exports = {
       daiya.sex,
       '의 든든한 단짝 친구, ',
       kita.get_colored_name(),
-      '。',
+      '.',
     ]);
     await era.printAndWait(
       '사토노 다이아몬드의 재능은 어느 정도일까. 레이스의 막이 오른다.',
@@ -83,7 +83,7 @@ module.exports = {
       true,
     );
     await daiya.say_and_wait(
-      `──！！ ${kita.sex}의 속도가 떨어졌어! 지금이야──!!`,
+      `──!! ${kita.sex}의 속도가 떨어졌어! 지금이야──!!`,
       true,
     );
     await daiya.say_and_wait('이야아아아아아아아아아아아아아!!');
@@ -176,7 +176,7 @@ module.exports = {
       );
       await you.say_and_wait('그만큼 네 달리기에 마음을 빼앗겼어.');
       await era.printAndWait(
-        `마음을 빼앗겼기에 장점도 단점도 한순간에 보였다.${you.name}은(는) ${daiya.sex}의 가문에 대해 모른다. 그래도 ${daiya.sex}의 본질은 꿰뚫어 보고 있었다.`,
+        `마음을 빼앗겼기에 장점도 단점도 한순간에 보였다. ${you.name}은(는) ${daiya.sex}의 가문에 대해 모른다. 그래도 ${daiya.sex}의 본질은 꿰뚫어 보고 있었다.`,
       );
       await daiya.say_and_wait('──합격이에요.');
       era.printButton('「……뭐?」', 1);
@@ -200,7 +200,7 @@ module.exports = {
         '정했어요. 이미 결정했는걸요. 맡아 주실 거죠? 그렇죠? 네?',
       );
       await era.printAndWait(
-        `얌전한 아가씨라는 인상과 달리 ${daiya.sex}의 태도는 흔들리지 않는다.${you.name}이(가) 고개를 끄덕일 때까지 사토노 다이아몬드는 ${you.name}의 손을 놓으려 하지 않았다.`,
+        `얌전한 아가씨라는 인상과 달리 ${daiya.sex}의 태도는 흔들리지 않는다. ${you.name}이(가) 고개를 끄덕일 때까지 사토노 다이아몬드는 ${you.name}의 손을 놓으려 하지 않았다.`,
       );
       era.println();
       await era.printAndWait(
@@ -239,7 +239,7 @@ module.exports = {
       ret.push(await era.input());
       if (ret.at(-1) === 1) {
         await era.printAndWait(
-          `너무 오래 망설인 탓인지 ${you.name}의 차례는 맨 마지막으로 밀려 있었다`,
+          `너무 오래 망설인 탓인지 ${you.name}의 차례는 맨 마지막으로 밀려 있었다.`,
         );
         await era.printAndWait(
           '사토노 그룹 심사위원 「다음은 신청 번호 No.29. 마지막 지원자께서는 들어오세요.」',
@@ -292,7 +292,7 @@ module.exports = {
         );
         await you.say_and_wait('그만큼 네 달리기에 마음을 빼앗겼어.');
         await era.printAndWait(
-          `마음을 빼앗겼기에 장점도 단점도 한순간에 보였다.${you.name}은(는) ${daiya.sex}의 가문에 대해 모른다. 그래도 ${daiya.sex}의 본질은 꿰뚫어 보고 있었다.`,
+          `마음을 빼앗겼기에 장점도 단점도 한순간에 보였다. ${you.name}은(는) ${daiya.sex}의 가문에 대해 모른다. 그래도 ${daiya.sex}의 본질은 꿰뚫어 보고 있었다.`,
         );
         await daiya.say_and_wait('──합격이에요.');
         era.printButton('「……뭐?」', 1);
@@ -310,7 +310,7 @@ module.exports = {
           '정했어요. 이미 결정했는걸요. 맡아 주실 거죠? 그렇죠? 네?',
         );
         await era.printAndWait(
-          `얌전한 아가씨라는 인상과 달리 ${daiya.sex}의 태도는 흔들리지 않는다.${you.name}이(가) 고개를 끄덕일 때까지 사토노 다이아몬드는 ${you.name}의 손을 놓으려 하지 않았다.`,
+          `얌전한 아가씨라는 인상과 달리 ${daiya.sex}의 태도는 흔들리지 않는다. ${you.name}이(가) 고개를 끄덕일 때까지 사토노 다이아몬드는 ${you.name}의 손을 놓으려 하지 않았다.`,
         );
         era.println();
         await era.printAndWait(
@@ -385,7 +385,7 @@ module.exports = {
     const f = async (daiya, mcqueen, kita, you) => {
       const ret = [];
       await era.printAndWait(
-        `어느 날 체육관에서. 메지로 가문을 대표하는 ${mcqueen.uma_sex_title}중 한 명인 메지로 맥퀸이 안내하고 있었다.`,
+        `어느 날 체육관에서. 메지로 가문을 대표하는 ${mcqueen.uma_sex_title} 중 한 명인 메지로 맥퀸이 안내하고 있었다.`,
       );
       await mcqueen.say_and_wait(
         '재학생 여러분, 그리고 늘 신세 지고 있는 트레이너 여러분. 오늘 메지로 가문에서 전해 드릴 소식이 있습니다.',
@@ -422,10 +422,10 @@ module.exports = {
           '우와, 시작됐어! 다이아의 징크스 깨기 모드! 이 모드가 되면──',
         );
         await era.printAndWait(
-          `대국 결과──사토노 다이아몬드의 압승이었다.${you.name}은(는) 얌전한 아가씨와는 다른 ${daiya.sex}의 모습을 보았다.`,
+          `대국 결과──사토노 다이아몬드의 압승이었다. ${you.name}은(는) 얌전한 아가씨와는 다른 ${daiya.sex}의 모습을 보았다.`,
         );
         await era.printAndWait(
-          `징크스──미신 같은 것을 만나면 깨뜨리고 싶어지는 모양이다.${you.name}이(가) ${daiya.sex}의 기질에 대해 생각하고 있자──`,
+          `징크스──미신 같은 것을 만나면 깨뜨리고 싶어지는 모양이다. ${you.name}이(가) ${daiya.sex}의 기질에 대해 생각하고 있자──`,
         );
         await daiya.say_and_wait(
           '저기…… 잠깐 괜찮으신가요? 레이스장에서 뵈었죠?',
@@ -465,7 +465,7 @@ module.exports = {
           '……네, 말씀대로예요. 적합한 트레이너를 찾는 것은 제 꿈과 사토노 가문의 염원을 맡길 분을 찾는 일이기도 하니까요.',
         );
         await daiya.say_and_wait(
-          `사토노 가문은──아직 신흥 가문이지만, ${daiya.uma_sex_title}레이스 문화에 깊은 애정을 품고 앞으로의 발전에도 힘을 보태고자 해요.`,
+          `사토노 가문은──아직 신흥 가문이지만, ${daiya.uma_sex_title} 레이스 문화에 깊은 애정을 품고 앞으로의 발전에도 힘을 보태고자 해요.`,
         );
         await daiya.say_and_wait(
           '운영 협력이나 자선 사업 등 여러 방면으로 노력해 왔어요. 하지만 메지로 가문만큼 역사가 길지 않아 『가장 중요한 어떤 공헌』은 아직 이루지 못했죠.',
@@ -475,7 +475,7 @@ module.exports = {
           `네, 바로──『가문에서 G1을 우승할 수 있는 뛰어난 ${daiya.uma_sex_title}를 많이 길러 내는 것』이에요.`,
         );
         await mcqueen.say_and_wait(
-          `그건 ${daiya.uma_sex_title}업계만의 문화랍니다. 뛰어난 ${daiya.uma_sex_title}를 많이 길러 낸다면 무엇과도 바꿀 수 없는 가장 중요한 공헌이 되니까요.`,
+          `그건 ${daiya.uma_sex_title} 업계만의 문화랍니다. 뛰어난 ${daiya.uma_sex_title}를 많이 길러 낸다면 무엇과도 바꿀 수 없는 가장 중요한 공헌이 되니까요.`,
         );
         await mcqueen.say_and_wait(
           `그 큰 기대를 자진해서 짊어진 신성이 ${daiya.sex}, 바로 이 사토노 다이아몬드예요. 트레이너 심사도 ${daiya.sex}를 지지하며 함께 달려 줄 사람을 찾기 위해 열린 거예요.`,
@@ -487,7 +487,7 @@ module.exports = {
           '……네. 전부 가문의 염원을 이루기 위해서예요. 그래서 여러 방법으로 이 꿈을 함께 짊어질 분을 찾고 있었어요.',
         );
         await daiya.say_and_wait(
-          '트레이너님, 부탁드려요. 제 달리기를 어떻게 보셨나요? 그날 제게 뭔가 하고 싶은 말씀이 있어 보이던 눈빛이 계속 마음에 걸려요.',
+          '트레이너님, 부탁드려요. 제 달리기를 어떻게 보셨나요? 그날 제게 뭔가 말씀하고 싶어 하시던 눈빛이 계속 마음에 걸려요.',
         );
         await era.printAndWait(
           `그 표정은 무척 진지했다. 곧은 눈동자는 오직 목표를 위해 답을 알고 싶다고 말하고 있다……`,
@@ -533,7 +533,7 @@ module.exports = {
         );
         await you.say_and_wait('그만큼 네 달리기에 마음을 빼앗겼어.');
         await era.printAndWait(
-          `마음을 빼앗겼기에 장점도 단점도 한순간에 보였다.${you.name}은(는) ${daiya.sex}의 가문에 대해 모른다. 그래도 ${daiya.sex}의 본질은 꿰뚫어 보고 있었다.`,
+          `마음을 빼앗겼기에 장점도 단점도 한순간에 보였다. ${you.name}은(는) ${daiya.sex}의 가문에 대해 모른다. 그래도 ${daiya.sex}의 본질은 꿰뚫어 보고 있었다.`,
         );
         await daiya.say_and_wait(
           '지금까지…… 지금까지 누구도 그런 말을 해 주지 않았어요. 심사에 오신 분들조차도…… 그런데 당신은──',
@@ -569,7 +569,7 @@ module.exports = {
           '정했어요. 이미 결정했는걸요. 맡아 주실 거죠? 그렇죠? 네?',
         );
         await era.printAndWait(
-          `얌전한 아가씨라는 인상과 달리 ${daiya.sex}의 태도는 흔들리지 않는다.${you.name}이(가) 고개를 끄덕일 때까지 사토노 다이아몬드는 ${you.name}의 손을 놓으려 하지 않았다.`,
+          `얌전한 아가씨라는 인상과 달리 ${daiya.sex}의 태도는 흔들리지 않는다. ${you.name}이(가) 고개를 끄덕일 때까지 사토노 다이아몬드는 ${you.name}의 손을 놓으려 하지 않았다.`,
         );
         era.println();
         await era.printAndWait(

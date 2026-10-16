@@ -22,7 +22,7 @@ module.exports = {
           gs.say([
             {
               color: gold_color,
-              content: ' 흐흐, 다음엔 더 단단히 막아야겠네...',
+              content: ' 흐흐, 다음엔 더 단단히 막아야겠네……',
             },
           ]);
           break;
@@ -49,7 +49,7 @@ module.exports = {
       if (Math.random() < 0.5) {
         gs.say('지쳤다…… 매미 인생 둘째 주에 접어든 매미만큼 지쳤어……');
       } else {
-        gs.say('이젠 무리야～ 부탁이다…… 오늘은 쉬게 해 줘.');
+        gs.say('이젠 무리야~ 부탁이다…… 오늘은 쉬게 해 줘.');
       }
     } else {
       const buffer = [
@@ -151,7 +151,7 @@ module.exports = {
         {
           color: gold_color,
           content:
-            '하이야～ 누구나 쿵푸를 익힐 수 있다네～ 쿵푸 앞에 겁쟁이는 없다네～',
+            '하이야~ 누구나 쿵푸를 익힐 수 있다네~ 쿵푸 앞에 겁쟁이는 없다네~',
         },
       ]);
     } else {
@@ -172,7 +172,7 @@ module.exports = {
           '지쳤다…… 매미 인생 둘째 주에 접어든 매미만큼 지쳤어……',
         );
       } else {
-        await gs.say_and_wait('이젠 무리야～ 부탁이다…… 오늘은 쉬게 해 줘.');
+        await gs.say_and_wait('이젠 무리야~ 부탁이다…… 오늘은 쉬게 해 줘.');
       }
     } else {
       const buffer = [];
@@ -251,7 +251,7 @@ module.exports = {
   /** @param {CharaTalk} gs ゴールドシップ */
   async office_gift(gs) {
     if (Math.random() < 0.5) {
-      await gs.say_and_wait('나으리, 짓궂으시구만～ 호호호～');
+      await gs.say_and_wait('나으리, 짓궂으시구만~ 호호호~');
     } else {
       await gs.say_and_wait([
         '이럴 수가…… 골쉽한테 이렇게 비싼 선물을…… ',
@@ -300,7 +300,7 @@ module.exports = {
   async office_game(gs) {
     if (Math.random() < 0.5) {
       await gs.say_and_wait([
-        '트레이너～ 오늘은 뭐 할래? 『우마무스메 타이쿤』? 『URA2K』? 아니면…… ',
+        '트레이너~ 오늘은 뭐 할래? 『우마무스메 타이쿤』? 『URA2K』? 아니면…… ',
         { color: gold_color, content: '골·드·쉽?' },
       ]);
     } else {
@@ -315,7 +315,7 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 고목의 구멍으로 갔다……',
+      '은 고목의 구멍으로 갔다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait(
@@ -336,15 +336,15 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 데이트를 하러 갔다……',
+      '은 데이트를 하러 갔다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait(
-        '추억? ……함께 바닷속에서 보낸 이레 동안의 휴가가 그립네～',
+        '추억? ……함께 바닷속에서 보낸 이레 동안의 휴가가 그립네~',
       );
     } else {
       await gs.say_and_wait([
-        '싫어～ 옷자락이 팔랑거려서 부끄럽단 말이야～',
+        '싫어~ 옷자락이 팔랑거려서 부끄럽단 말이야~',
         {
           color: gold_color,
           content: '야, 나 똑바로 보라구.',
@@ -357,7 +357,7 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 도시락을 먹었다……',
+      '은 도시락을 먹었다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait('이 감자 샐러드 맛있지? 가루 불려서 만든 거라구.');
@@ -376,7 +376,7 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 낚시하러 갔다……',
+      '은 낚시하러 갔다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait([
@@ -391,7 +391,7 @@ module.exports = {
         {
           color: gold_color,
           content:
-            '후후～ 옷 안에 방탄조끼 입었거든. 하늘에서 작살이 떨어지든 연어가 떨어지든 흠집 하나 안 난다!',
+            '후후~ 옷 안에 방탄조끼 입었거든. 하늘에서 작살이 떨어지든 연어가 떨어지든 흠집 하나 안 난다!',
         },
       ]);
     }
@@ -401,7 +401,7 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 산책하러 갔다……',
+      '은 산책하러 갔다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait([
@@ -447,7 +447,7 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 뽑기를 하러 갔다……',
+      '은 뽑기를 하러 갔다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait([
@@ -471,11 +471,11 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 노래방에 갔다……',
+      '은 노래방에 갔다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait([
-        '누구나 네게 눈길을 빼앗겨～♪ 너야말로 완벽하고 궁극의～',
+        '누구나 네게 눈길을 빼앗겨~♪ 너야말로 완벽하고 궁극의~',
         {
           content: '겟타!!!',
           color: gold_color,
@@ -497,7 +497,7 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 영화를 보러 갔다……',
+      '은 영화를 보러 갔다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait([
@@ -524,7 +524,7 @@ module.exports = {
     await gs.say_and_wait([{ color: gold_color, content: '핫—— 휙휙!' }]);
     await era.printAndWait([
       gs.get_colored_name(),
-      '은(는) 남의 신사 문 앞에서 거센 바람에 흔들리는 풀뿌리처럼 몸을 흔들며 뭔가 중얼거리기 시작했다.',
+      '은 남의 신사 문 앞에서 거센 바람에 흔들리는 풀처럼 몸을 흔들며 뭔가 중얼거리기 시작했다.',
     ]);
     await gs.say_and_wait([
       {
@@ -604,7 +604,7 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 식사하러 갔다……',
+      '은 식사하러 갔다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait([
@@ -629,7 +629,7 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 데이트를 하러 갔다……',
+      '은 데이트를 하러 갔다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait(
@@ -653,7 +653,7 @@ module.exports = {
     await era.printAndWait([
       '와 ',
       gs.get_colored_name(),
-      '은(는) 쇼핑몰에 갔다……',
+      '은 쇼핑몰에 갔다……',
     ]);
     if (Math.random() < 0.5) {
       await gs.say_and_wait([
@@ -724,7 +724,7 @@ module.exports = {
       era.println();
       await era.printAndWait([
         gs.get_colored_name(),
-        '이(가) 입을 열었다. ',
+        '이 입을 열었다. ',
         gs.sex,
         '의 손에 들린 계산기에는 간담이 서늘해지는 숫자가 떠 있었다.',
       ]);
@@ -742,7 +742,7 @@ module.exports = {
       await era.printAndWait([
         '그런데 ',
         gs.sex,
-        '의 말투가 돌변했다. 고객을 걱정하는 척하던 담당자가 눈앞의 먹잇감을 함정으로 유인하는 달콤한 미끼로 변한 것이다.',
+        '의 말투가 돌변했다. 고객을 걱정하는 척하던 말이 이제는 눈앞의 먹잇감을 함정으로 유인하는 달콤한 미끼가 된 것이다.',
       ]);
       era.println();
       await gs.say_and_wait([

@@ -198,10 +198,10 @@ module.exports = {
         if (success) {
           // 抵抗成功、孕袋の主視点
           await attacker.print_and_wait(
-            '임신주머니 주제에 주도권을 빼앗으려 한다',
+            '임신주머니 주제에 주도권을 빼앗으려 한다.',
           );
           await attacker.print_and_wait(
-            '그런 불경함도 주인은 말없이 허락해 주었다',
+            '그런 불경함도 주인은 말없이 허락해 주었다.',
           );
           await attacker.print_and_wait('음란한 암가축에게 베푸는 은총일까?');
           await attacker.print_and_wait(
@@ -224,10 +224,10 @@ module.exports = {
       } else if (success) {
         // 抵抗成功、孕袋の主視点
         await defender.print_and_wait(
-          '아무리 저항해도 마음 깊은 곳의 복종을 이길 수 없다',
+          '아무리 저항해도 마음 깊은 곳의 복종을 이길 수 없다.',
         );
         await defender.print_and_wait(
-          '주인의 동작 하나에 저항 따위는 깨끗이 놓아 버린다',
+          '주인의 동작 하나에 저항 따위는 깨끗이 놓아 버린다.',
         );
         await defender.print_and_wait(
           '주도권을 허락받은 것도 임신주머니인 자신이 복종의 본성을 깨닫게 하기 위해서겠지……',
@@ -239,7 +239,7 @@ module.exports = {
           '이(가) 몸을 흔들며 욕망과 육체에 빠져드는 모습',
         ]);
         await attacker.print_and_wait(
-          '한때 트레이너로서 지녔던 긍지 따위는 이제 찾아볼 수 없다',
+          '한때 트레이너로서 지녔던 긍지 따위는 이제 찾아볼 수 없다.',
         );
         await attacker.print_and_wait('조금만 더 지켜보자, 아주 조금만');
         await attacker.print_and_wait([
@@ -373,7 +373,7 @@ module.exports = {
         '의 귀는 역시 동경할 만하다. 팔다리의 연장으로서도, 표정의 연장으로서도, 또는……성감대의 연장으로서도……',
       ]);
       await attacker.print_and_wait([
-        `손끝으로 잠자리가 물을 스치듯 살짝 건드렸을 뿐인데,`,
+        `손끝으로 잠자리가 물을 스치듯 살짝 건드렸을 뿐인데, `,
         attacker.get_colored_name(),
         `이(가) 그 섬세한 감촉을 다 느끼기도 전에, 뾰족하고 긴 말 귀는 부끄러운 듯 ${attacker.phy_sex_title}의 손가락 사이에서 달아났다.`,
       ]);
@@ -414,7 +414,7 @@ module.exports = {
     await attacker.print_and_wait([
       '그저 부드러운 애무로는 부족해, 아랫배에서 솟는 지배욕에 삼켜진 ',
       attacker.phy_sex_title,
-      '은(는) 손가락에 안전하게 힘을 더하는 요령을 조금씩 익혀 간다……',
+      '은 손가락에 안전하게 힘을 더하는 요령을 조금씩 익혀 간다……',
     ]);
     await attacker.print_and_wait([
       '……그러면 아래에 있는 말귀 달린 ',
@@ -498,7 +498,7 @@ module.exports = {
     if (is_first) {
       await attacker.print_and_wait('뜨거워……');
       await attacker.print_and_wait(
-        '하얀 가슴 살에 묻힌 작은 살점인데도 엄청난 열을 뿜고 있다',
+        '하얀 가슴 살에 묻힌 작은 살점인데도 엄청난 열을 뿜고 있다.',
       );
       await defender.say_and_wait('응……');
       await attacker.print_and_wait(
@@ -609,7 +609,7 @@ module.exports = {
     if (is_first) {
       await attacker.print_and_wait([
         defender.sex,
-        '을(를) 더 기분 좋게 해 주고 싶다.',
+        '를 더 기분 좋게 해 주고 싶다.',
         defender.sex,
         '의 음부를 더 부드럽게 하고 싶다. 이 아름다운 몸을 자신의 움직임으로 더욱 정신없이 뒤틀리게 하고 싶다……',
       ]);
@@ -652,7 +652,7 @@ module.exports = {
       await attacker.print_and_wait([
         '조금 늦었지만, 눈앞에서 엉덩이를 내민 ',
         defender.adult_sex_title,
-        '은(는) 이쪽의 의도를 분명히 알아차렸다.',
+        '은 이쪽의 의도를 분명히 알아차렸다.',
         attacker.get_colored_name(),
         '의 손가락이 은근하게 다가가, 몸이 딱 경계할 만큼 거친 감촉으로 작은 구멍의 입구를 둥글게 어루만진다.',
       ]);
@@ -720,7 +720,7 @@ module.exports = {
           '조교 뒤 상태를 확인하려고 가끔 손으로 쓰다듬을 만큼 친근했을 텐데도……',
         );
         await attacker.print_and_wait(
-          '이상하게도 지금 머릿속에서는 이 두 다리를 「레이스」와 연결할 수 없다',
+          '이상하게도 지금 머릿속에서는 이 두 다리를 「레이스」와 연결할 수 없다.',
         );
       }
       await attacker.print_and_wait('지금 머릿속에 있는 것은……');
@@ -780,7 +780,7 @@ module.exports = {
         '의 입에서 새는 녹아내린 신음은 독이다.',
       ]);
       await attacker.print_and_wait(
-        `꼬리를 당기면 눈앞의 ${defender.uma_sex_title}이(가) 순순히 따른다는 것을 안 뒤로는 아랫배에서 치솟는 열기를 더욱 억누르기 어려워졌다.`,
+        `꼬리를 당기면 눈앞의 ${defender.uma_sex_title}가 순순히 따른다는 것을 안 뒤로는 아랫배에서 치솟는 열기를 더욱 억누르기 어려워졌다.`,
       );
     } else {
       await defender.say_and_wait('응——');
@@ -850,7 +850,7 @@ module.exports = {
       await defender.print_and_wait([
         '아직 부끄러움을 남긴 채, 눈앞의 ',
         d_call_a,
-        '이(가) 자기 손으로 떨리는 두 다리를 이쪽을 향해 벌려 주었다',
+        '이(가) 자기 손으로 떨리는 두 다리를 이쪽을 향해 벌려 주었다.',
       ]);
       await defender.say_and_wait('으으으으————');
       await defender.print_and_wait(
@@ -1213,7 +1213,7 @@ module.exports = {
         a_call_d,
         '의 아래에 웅크린 ',
         attacker.get_colored_name(),
-        '。',
+        '.',
       ]);
     } else {
       if (defender.race > 0) {
@@ -1284,7 +1284,7 @@ module.exports = {
         d_call_a,
         '의 아래에 웅크린 ',
         defender.get_colored_name(),
-        '。',
+        '.',
       ]);
     } else {
       await defender.print_and_wait([
@@ -1363,7 +1363,7 @@ module.exports = {
         d_call_a,
         '의 아래에 웅크린 ',
         defender.get_colored_name(),
-        '。',
+        '.',
       ]);
     } else {
       await defender.print_and_wait([
@@ -1371,7 +1371,7 @@ module.exports = {
         attacker.phy_sex_title,
         '다시 손으로 강제로 눈앞의 ',
         defender.teen_sex_title,
-        '을(를) 자신의 사타구니에 고정한다. 만족할 때까지.',
+        '를 자신의 사타구니에 고정한다. 만족할 때까지.',
       ]);
       await defender.say_and_wait('하아……하아……❤️');
       await defender.print_and_wait('삼킨다……');
@@ -2617,7 +2617,7 @@ module.exports = {
         attacker.get_colored_name(),
         '은(는) 그래도 가만히 눈앞의 ',
         a_call_d,
-        '。',
+        '.',
       ]);
       await attacker.print_and_wait('능숙해……');
       await attacker.print_and_wait([
@@ -2803,7 +2803,7 @@ module.exports = {
           ]);
           await attacker.print_and_wait([
             defender.sex,
-            '은(는) ',
+            '는 ',
             attacker.get_colored_name(),
             '의 그 얼굴에 눈썹을 치켜올리고, 살짝 고개를 기울여 한 손을 가볍게 ',
             attacker.get_colored_name(),
@@ -2826,7 +2826,7 @@ module.exports = {
           ]);
           await attacker.print_and_wait([
             defender.sex,
-            '은(는) 일부러 ',
+            '는 일부러 ',
             attacker.get_colored_name(),
             '을(를) 몇 초간 애태운 뒤 양손을 뒤로 돌려 긴 머리카락을 쓸어 모아 단숨에 들어 올린다——',
           ]);
@@ -2863,7 +2863,7 @@ module.exports = {
           await attacker.print_and_wait([
             '아래에 있는 ',
             defender.phy_sex_title,
-            '이(가) 희미한 신음을 흘려, 더욱 ',
+            '이 희미한 신음을 흘려, 더욱 ',
             attacker.get_colored_name(),
             '의 욕망을 부추긴다.',
           ]);
@@ -2872,7 +2872,7 @@ module.exports = {
           await attacker.print_and_wait([
             '세 부위……세 겹의 감촉……눈앞의 ',
             defender.phy_sex_title,
-            '이(가) 스스로 ',
+            '이 스스로 ',
             attacker.get_colored_name(),
             '에게 이런 봉사를 해 준다……',
           ]);
@@ -2923,7 +2923,7 @@ module.exports = {
           ]);
           await attacker.print_and_wait([
             defender.sex,
-            '은(는) 무슨 일이 일어났는지도 모른 채 생각을 포기한다. 바깥세상을 받아들이는 부위가 이미 ',
+            '는 무슨 일이 일어났는지도 모른 채 생각을 포기한다. 바깥세상을 받아들이는 부위가 이미 ',
             attacker.get_colored_name(),
             '의 사타구니가 내달리는 곳이 되어 있다.',
           ]);
@@ -2934,7 +2934,7 @@ module.exports = {
             attacker.get_colored_name(),
             '의 눈을 보고, ',
             defender.sex,
-            '은(는) 다음에 무슨 일이 일어날지 눈치챈 듯 한 손으로 뒤통수를 감싸고 다른 손을 황급히 내젓는다. 하지만 ',
+            '는 다음에 무슨 일이 일어날지 눈치챈 듯 한 손으로 뒤통수를 감싸고 다른 손을 황급히 내젓는다. 하지만 ',
             attacker.get_colored_name(),
             '은(는) 아랑곳하지 않는다.',
           ]);
@@ -2951,7 +2951,7 @@ module.exports = {
           await attacker.print_and_wait([
             '서로 바라본 끝에, 눈앞의 ',
             defender.phy_sex_title,
-            '은(는) 뒤로 물러나고, ',
+            '은 뒤로 물러나고, ',
             attacker.get_colored_name(),
             '은(는) 승자의 얼굴로 전리품에 손을 댄다.',
           ]);
@@ -2962,7 +2962,7 @@ module.exports = {
             defender.sex,
             '의 아름답고 은은한 향이 나는 긴 머리카락을 만지작거리며 짓궂게 웃는다. 한 움큼 쓸어 모아 난폭하게 ',
             defender.phy_sex_title,
-            '이(가) 평소 정성껏 다듬어 둔 그것을 자신의 물건에 감아 가볍게 당기며 평소와 다른 훑기의 쾌감을 얻는다.',
+            '이 평소 정성껏 다듬어 둔 그것을 자신의 물건에 감아 가볍게 당기며 평소와 다른 훑기의 쾌감을 얻는다.',
           ]);
       }
     } else {
@@ -3071,7 +3071,7 @@ module.exports = {
       '선정적인 모습으로 아래에 깔린 ',
       defender.race > 0 ? '말귀 달린 ' : '',
       defender.adult_sex_title,
-      '은(는) 몸의 떨림이 멈추지 않는다. 보고 있으면 마른 입술을 적시고 싶어진다. 육봉에 미약이 된 듯, 뒤에서 낮게 신음하는 ',
+      '은 몸의 떨림이 멈추지 않는다. 보고 있으면 마른 입술을 적시고 싶어진다. 육봉에 미약이 된 듯, 뒤에서 낮게 신음하는 ',
       attacker.get_colored_name(),
       '은(는) 주머니까지 밀어 넣을 것 같다.',
     ]);
@@ -3293,7 +3293,7 @@ module.exports = {
     await defender.print_and_wait([
       '똑바로 누운 ',
       d_call_a,
-      '와(과) 열 손가락을 깍지 끼고, 조이고 탄력 있는 윤기 나는 두 다리로 내려앉아 구멍 입구에 뜨거운 귀두를 머금을 틈을 찾는다……',
+      '과(와) 열 손가락을 깍지 끼고, 조이고 탄력 있는 윤기 나는 두 다리로 내려앉아 구멍 입구에 뜨거운 귀두를 머금을 틈을 찾는다……',
     ]);
     await defender.print_and_wait([
       '스스로 앉다니……',
@@ -3640,7 +3640,7 @@ module.exports = {
         d_call_a,
         '의 육봉 자국이 남고, ',
         defender.get_colored_name(),
-        '은(는) 고개를 들어 다음 뺨 때리기를 기다린다',
+        '은(는) 고개를 들어 다음 뺨 때리기를 기다린다.',
       ]);
     } else {
       await attacker.print_and_wait([
@@ -3688,7 +3688,7 @@ module.exports = {
         a_penis,
         ' 육봉이 오만하게 일어서자, ',
         defender.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         supporter.get_colored_name(),
         '은(는) ',
         attacker.get_colored_name(),
@@ -3699,7 +3699,7 @@ module.exports = {
         attacker.get_colored_name(),
         '의 신호에, ',
         defender.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         supporter.get_colored_name(),
         '은(는) 번갈아 입으로 육봉을 섬긴다……',
       ]);
@@ -3731,16 +3731,16 @@ module.exports = {
             attacker.get_colored_name(),
             '은(는) 두 다리를 벌리고, ',
             defender.get_colored_name(),
-            '와(과) ',
+            '과(와) ',
             supporter.get_colored_name(),
-            '에게 음부를 벌려 보이며 두 사람의 일어선 육봉을 보고 입술을 핥는다',
+            '에게 음부를 벌려 보이며 두 사람의 일어선 육봉을 보고 입술을 핥는다.',
           ]);
           await attacker.print_and_wait([
             '',
             attacker.get_colored_name(),
             '의 노골적인 유혹에, ',
             defender.get_colored_name(),
-            '와(과) ',
+            '과(와) ',
             supporter.get_colored_name(),
             '은(는) 참지 못하고, ',
             attacker.get_colored_name(),
@@ -3758,7 +3758,7 @@ module.exports = {
               : '은(는) 네 발로 엎드려 ',
             '엉덩이를 흔들며, ',
             defender.get_colored_name(),
-            '와(과) ',
+            '과(와) ',
             supporter.get_colored_name(),
             '에게 번갈아 육봉을 깊이 넣어 달라는 뜻을 보인다.',
           ]);
@@ -3772,20 +3772,20 @@ module.exports = {
               attacker.get_colored_name(),
               '은(는) ',
               defender.get_colored_name(),
-              '와(과) ',
+              '과(와) ',
               supporter.get_colored_name(),
               '에게 양쪽으로 끼인 채, 두 자루의 ',
               d_penis,
               ' 육봉을 번갈아 ',
               attacker.get_colored_name(),
-              '의 음란한 음부가 삼켜 간다',
+              '의 음란한 음부가 삼켜 간다.',
             ]);
           } else {
             await attacker.print_and_wait([
               attacker.get_colored_name(),
               '은(는) ',
               defender.get_colored_name(),
-              '와(과) ',
+              '과(와) ',
               supporter.get_colored_name(),
               '에게 양쪽으로 끼인 채, 두 자루의 ',
               d_penis,
@@ -3793,7 +3793,7 @@ module.exports = {
               s_penis,
               ' 육봉을 번갈아 ',
               attacker.get_colored_name(),
-              '의 음란한 음부가 삼켜 간다',
+              '의 음란한 음부가 삼켜 간다.',
             ]);
           }
           await attacker.print_and_wait([
@@ -3805,7 +3805,7 @@ module.exports = {
         async () => {
           await attacker.print_and_wait([
             defender.get_colored_name(),
-            '와(과) ',
+            '과(와) ',
             supporter.get_colored_name(),
             '의 서로 다른 육봉과 각자의 삽입 방식, ',
           ]);
@@ -3841,7 +3841,7 @@ module.exports = {
     } else {
       await attacker.print_and_wait([
         defender.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         supporter.get_colored_name(),
         '이(가) 함께 계속 공략하는 것은 ',
         attacker.get_colored_name(),
@@ -3891,7 +3891,7 @@ module.exports = {
     } else {
       await attacker.print_and_wait([
         defender.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         supporter.get_colored_name(),
         '이(가) 함께 계속 공략하는 것은 ',
         attacker.get_colored_name(),
@@ -3928,7 +3928,7 @@ module.exports = {
         defender.get_colored_name(),
         '은(는) 침대에 누워, ',
         supporter.get_colored_name(),
-        '와(과) 서로의 ',
+        '과(와) 서로의 ',
         d_has_penis
           ? s_has_penis
             ? '육봉'
@@ -3974,7 +3974,7 @@ module.exports = {
         defender.get_colored_name(),
         '은(는) ',
         attacker.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         supporter.get_colored_name(),
         '에게 단숨에 짓눌리고, ',
       ]);
@@ -3993,7 +3993,7 @@ module.exports = {
         defender.get_colored_name(),
         '은(는) 끊임없이 ',
         attacker.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         supporter.get_colored_name(),
         '의 육봉에 번갈아 범해지고 있다.',
       ]);
@@ -4032,7 +4032,7 @@ module.exports = {
     } else {
       await defender.print_and_wait([
         attacker.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         supporter.get_colored_name(),
         '이(가) 함께 계속 공략하는 것은 ',
         defender.get_colored_name(),
@@ -4063,7 +4063,7 @@ module.exports = {
         defender.get_colored_name(),
         '은(는) ',
         attacker.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         supporter.get_colored_name(),
         '에게 단숨에 짓눌리고, ',
       ]);
@@ -4077,12 +4077,12 @@ module.exports = {
         defender.get_colored_name(),
         '의 ',
         part_name,
-        '와(과) 입구멍에 힘껏 집어넣었다 뺀다……',
+        '과(와) 입구멍에 힘껏 집어넣었다 뺀다……',
       ]);
     } else {
       await defender.print_and_wait([
         attacker.get_colored_name(),
-        '와(과) ',
+        '과(와) ',
         supporter.get_colored_name(),
         '이(가) 함께 계속 공략하는 것은 ',
         defender.get_colored_name(),
@@ -4121,7 +4121,7 @@ module.exports = {
       case medicine_enum.uma_z:
         if (!era.get(`tcvar:${chara.id}:发情`)) {
           await era.printAndWait(
-            [chara.get_colored_name(), '은(는) 흥분하기 시작했다'],
+            [chara.get_colored_name(), '은(는) 흥분하기 시작했다.'],
             { color: buff_colors[2] },
           );
         }

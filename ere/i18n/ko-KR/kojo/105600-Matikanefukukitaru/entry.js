@@ -46,5 +46,5 @@ module.exports = class extends (
     '트레이너가 곁에 있다면 틀림없이 대길! 트레이닝 성공률+10%, 모든 트레이닝 효과+5%, 호감 획득+10%, 경기 중 능력치+5%.';
 
   achieve_track_aim_template =
-    '최상 컨디션으로 참가한 G2 이상 경기 수：%COUNT%';
+    '최상 컨디션으로 참가한 G2 이상 경기 수: %COUNT%';
 };

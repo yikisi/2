@@ -20,7 +20,7 @@ module.exports = {
     const talk = [
       () =>
         era.print([
-          '아직 어린 아이는 이제 막 서툴게 말을 배우기 시작해,',
+          '아직 어린 아이는 이제 막 서툴게 말을 배우기 시작해, ',
           you.get_colored_name(),
           '을(를) 보자마자 즐거운 듯 종종걸음으로 달려온다.',
         ]),
@@ -70,7 +70,7 @@ module.exports = {
   async talk_0(child, you, callname) {
     await child.say_and_wait([
       callname,
-      '……! 나,',
+      '……! 나, ',
       child.get_colored_name(),
       '이야!',
     ]);
@@ -169,7 +169,7 @@ module.exports = {
           '은(는) 함께 즐겁게 아이와 놀며, 세 식구만의 행복한 시간을 보냈다.',
         ]);
         await era.printAndWait([
-          '그 뒤,',
+          '그 뒤, ',
           mother.get_colored_name(),
           '은(는) 아이를 업은',
           father.get_colored_name(),
@@ -217,7 +217,7 @@ module.exports = {
         if (era.get(`mark:${mother.id || father.id}:2`) >= 2) {
           await era.printAndWait([
             mother.get_colored_name(),
-            '은(는) 결국 경계를 풀고,',
+            '은(는) 결국 경계를 풀고, ',
             father.get_colored_name(),
             '과(와) 함께 아이와 놀았다.',
           ]);
@@ -246,7 +246,7 @@ module.exports = {
         if (!mother.id && era.get('flag:35') >= 2) {
           await era.printAndWait([
             mother.get_colored_name(),
-            '은(는) 나날이 자라는 아이를 볼 때마다,',
+            '은(는) 나날이 자라는 아이를 볼 때마다, ',
             father.get_colored_name(),
             '을(를) 향한 마음이 더욱 복잡해졌다.',
           ]);
@@ -287,7 +287,7 @@ module.exports = {
           '은(는) 아이의 입학 동의서에 각자 이름을 적었다.',
         ]);
         await era.printAndWait([
-          '작성을 마치자,',
+          '작성을 마치자, ',
           mother.get_colored_name(),
           '은(는) 곧바로 통학에 필요한 물건들을 준비하기 시작했다.',
         ]);
@@ -305,7 +305,7 @@ module.exports = {
             '은(는) 아이의 입학 동의서에 각자 이름을 적었다.',
           ]);
           await era.printAndWait([
-            '작성을 마치고 나서도,',
+            '작성을 마치고 나서도, ',
             mother.get_colored_name(),
             '은(는) 현실감 없는 꿈속에 있는 듯한 기분에서 벗어나지 못했다.',
           ]);
@@ -343,7 +343,7 @@ module.exports = {
       case 1:
         await child.say_and_wait([
           callname,
-          '……저기……두고 가지 마,',
+          '……저기……두고 가지 마, ',
           call_child,
           '을(를)……(훌쩍)',
         ]);
