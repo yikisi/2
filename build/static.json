@@ -18778,8 +18778,8 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 3122,
-      "versionName": "3.122 (ryuki)",
+      "version": 3130,
+      "versionName": "3.13 (ryuki)",
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",
@@ -35374,6 +35374,26 @@
     },
     "大锤_私_半身": {
       "path": "res/others/chara_stand_1108_901108.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "大锤_万圣": {
+      "path": "res/others/chr_icon_1108_110840_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "大锤_万圣_半身": {
+      "path": "res/others/chara_stand_1108_110840.png",
       "x": 0,
       "y": 0,
       "width": 512,
