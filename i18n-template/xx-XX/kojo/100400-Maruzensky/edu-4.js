@@ -7419,7 +7419,7 @@ module.exports = {
           }的保证，米、米浴……那个，会，会去试试看……!`,
         );
         await maru.say_and_wait(
-          `呵呵♪，托$你的福，我也想到能够增强耐力的训练项目了`,
+          `呵呵♪，托你的福，我也想到能够增强耐力的训练项目了`,
         );
         await era.printAndWait(
           `没过多久，${you.name}和${maru.name}就看到了米浴成功解救同伴的小小身影。`,
