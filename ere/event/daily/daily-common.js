@@ -239,10 +239,16 @@ class CustomizedDaily extends CustomizedEvent {
   /** @param {HookArg} hook */
   async school_atrium(hook) {
     let h;
-    if ((hook.arg = (await select_action_in_atrium()) === 0)) {
-      h = this.s_a_tree_hollow;
-    } else {
-      h = this.s_a_dating;
+    hook.arg = await select_action_in_atrium();
+    switch (hook.arg) {
+      case 0:
+        h = this.s_a_tree_hollow;
+        break;
+      case 1:
+        h = this.s_a_dating;
+        break;
+      case 2:
+        h = this.s_a_d2evil;
     }
     await h.call(this, get_chara_talk(this.id), get_chara_talk(0), hook);
   }
@@ -273,6 +279,17 @@ class CustomizedDaily extends CustomizedEvent {
         ? i18n().timon.pregnant_slave.s_a_dating
         : i18n().timon.daily.s_a_dating
     )(chara, me);
+  }
+
+  /**
+   * @protected
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {HookArg} hook
+   */
+  async s_a_d2evil(chara, me, hook) {
+    // TODO
+    hook.override = true;
   }
 
   /** @param {HookArg} hook */

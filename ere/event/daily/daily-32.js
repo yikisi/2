@@ -9,6 +9,10 @@ const {
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
 const {
+  sys_change_motivation,
+  sys_change_pressure,
+} = require('#/system/sys-calc-base-cflag');
+const {
   sys_get_callname,
   sys_get_colored_callname,
   sys_like_chara,
@@ -21,6 +25,7 @@ const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
@@ -28,14 +33,9 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
-
 const { race_enum, race_infos } = require('#/data/race/race-const');
+
 const { i18n } = require('#/i18n/selector');
-const {
-  sys_change_motivation,
-  sys_change_pressure,
-} = require('#/system/sys-calc-base-cflag');
-const { get_random_value } = require('#/utils/value-utils');
 
 module.exports = class extends CustomizedDaily {
   get #kojo() {
@@ -438,6 +438,66 @@ module.exports = class extends CustomizedDaily {
       edu_marks.evil = 1;
       return await this.#kojo.event_atrium_evil(tachyon, me, callname);
     }
+    if (era.get('flag:惩戒力度') >= 2 && era.get('flag:恶堕') < 2) {
+      era.printButton(i18n().ui_action_atrium_tree_hollow, 1);
+      era.printButton(i18n().ui_action_atrium_devil, 2);
+      if ((await era.input()) === 2) {
+        begin_and_init_ero(0, this.id);
+        era.set('tflag:主导权', this.id);
+        if (get_penis_size(this.id) === 0) {
+          // STATUSNAME:36 = 弗隆K
+          // STATUSNAME:37 = 弗隆P
+          era.set(`status:${this.id}:${36 + (Math.random() < 0.5)}`, 1);
+        }
+        await quick_make_love(
+          new EroParticipant(0, part_enum.mouth),
+          new EroParticipant(this.id, part_enum.penis),
+        );
+        set_palam_to_max(0, part_enum.mouth);
+        set_palam_to_max(this.id, part_enum.penis);
+        await quick_make_love(
+          new EroParticipant(this.id, part_enum.penis),
+          new EroParticipant(0, part_enum.mouth),
+        );
+        if ((await this.#kojo.s_a_d2evil(tachyon, me, callname)) === 1) {
+          await quick_make_love(
+            new EroParticipant(this.id, part_enum.abuse),
+            new EroParticipant(0, part_enum.masochism),
+          );
+          await quick_make_love(
+            new EroParticipant(0, part_enum.mouth),
+            new EroParticipant(this.id, part_enum.penis),
+          );
+          set_palam_to_max(0, part_enum.virgin);
+          set_palam_to_max(this.id, part_enum.penis);
+          await quick_make_love(
+            new EroParticipant(this.id, part_enum.penis),
+            new EroParticipant(0, part_enum.virgin),
+          );
+        } else {
+          await quick_make_love(
+            new EroParticipant(this.id, part_enum.hit),
+            new EroParticipant(0, part_enum.anal),
+          );
+          set_palam_to_max(0, part_enum.virgin);
+          set_palam_to_max(this.id, part_enum.penis);
+          await quick_make_love(
+            new EroParticipant(this.id, part_enum.penis),
+            new EroParticipant(0, part_enum.virgin),
+          );
+          set_palam_to_max(0, part_enum.anal);
+          set_palam_to_max(this.id, part_enum.penis);
+          await quick_make_love(
+            new EroParticipant(this.id, part_enum.penis),
+            new EroParticipant(0, part_enum.anal),
+          );
+        }
+        end_ero_and_train();
+        era.set('flag:恶堕', 2);
+        hook.override = true;
+        return;
+      }
+    }
     await this.#kojo.school_atrium(tachyon, me, callname, plan_b);
   }
 
@@ -580,6 +640,19 @@ module.exports = class extends CustomizedDaily {
       get_chara_talk(this.id),
       get_chara_talk(0),
       sys_get_colored_callname(this.id, 0),
+    );
+  }
+
+  async basement_end() {
+    if (new TachyonEduMarks().plan_b > 0) {
+      return await super.basement_end();
+    }
+    await print_title_with_kojo.ending(
+      this.#kojo,
+      'be_a_basement',
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      sys_get_callname(this.id, 0),
     );
   }
 

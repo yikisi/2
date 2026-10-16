@@ -3977,6 +3977,473 @@ module.exports = {
     f.title = title;
     return f;
   })(),
+  be_a_basement: (() => {
+    const title = '梦';
+    /**
+     * @param {CharaTalk} tachyon 爱丽速子
+     * @param {CharaTalk} you 玩家
+     * @param {string} callname 爱丽速子对玩家的称呼
+     */
+    const f = async (tachyon, you, callname) => {
+      await era.printAndWait(['今天是特雷森学园的开学日']);
+      era.println();
+      await tachyon.say_as_unknown_and_wait(['你是……训练员吗？']);
+      await you.say_and_wait([
+        '与我一起同行吧！我有预感，只要和你一起，就一定能看见极限的彼方！',
+      ]);
+      await tachyon.say_as_unknown_and_wait(['……大言不惭，这种事……']);
+      await you.say_and_wait(['我是不是认真的，只要看我的眼神就知道了吧']);
+      await tachyon.say_as_unknown_and_wait(['…………呵呵']);
+      era.println();
+      await era.printAndWait([
+        '是 ',
+        you.get_colored_name(),
+        ' 与自己的负责',
+        tachyon.uma_sex_title,
+        '爱丽速子相遇的日子',
+      ]);
+      await era.printAndWait([
+        '你们一拍即合，明明从未谋面，却投缘的仿佛认识已久的老友一般',
+      ]);
+      await era.printAndWait([
+        tachyon.sex,
+        '的研究也好，爱好也好，论点也好，都与 ',
+        you.get_colored_name(),
+        ' 不谋而合',
+      ]);
+      await era.printAndWait([
+        '你们很快便成为了学园中最登对的训练员及',
+        tachyon.uma_sex_title,
+      ]);
+      await era.printAndWait([
+        '虽然名义如此，但实际上你们二人根本没有这方面的身份界线',
+      ]);
+      await era.printAndWait([
+        tachyon.sex,
+        '没有将 ',
+        you.get_colored_name(),
+        ' 视为训练员，',
+        you.get_colored_name(),
+        ' 也没有只当',
+        tachyon.sex,
+        '是 ',
+        you.get_colored_name(),
+        ' 的负责',
+        tachyon.uma_sex_title,
+      ]);
+      await era.printAndWait(['要用更为合适的称呼的话……「同伴」？「搭档」？']);
+      await era.printAndWait(['无论是比赛还是实验，一切都发展的顺风顺水']);
+      await era.printAndWait(['美好的让人想永远停在这个瞬间']);
+      await era.printAndWait(['美好的让人希望能够永远如此']);
+      era.println();
+      await era.printAndWait([
+        '然而……没有永远的美好，时间也不可能停留在某个瞬间',
+      ]);
+      era.println();
+      await you.say_and_wait(['！速子！？']);
+      await tachyon.say_and_wait([
+        '哦呀，怎么了吗？',
+        callname,
+        '，对了，请帮我按住',
+        tachyon.sex,
+        '的手……哎呀，反抗的真厉害啊，明明只是做点小小的实验而已',
+      ]);
+      await you.say_and_wait(['放开', tachyon.sex]);
+      await tachyon.say_and_wait(['…………哦？']);
+      await you.say_and_wait(['速子……你的实验，太危险了']);
+      await tachyon.say_and_wait([
+        '但是，只要跨越了这条线……接下来，就能离我们的目标更进一步了，不是吗？',
+      ]);
+      await you.say_and_wait(['……']);
+      era.println();
+      await era.printAndWait([
+        '渐渐的，',
+        you.get_colored_name(),
+        ' 发现速子的实验，已经脱离了理解范围……不，不是脱离理解范围，只是……脱离了伦理',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 和',
+        tachyon.sex,
+        '的争吵越来越多，',
+        tachyon.sex,
+        '不能理解 ',
+        you.get_colored_name(),
+        ' 为何不懂这项实验的伟大，',
+        you.get_colored_name(),
+        ' 不能理解为何',
+        tachyon.sex,
+        '变得如此……脱离人性',
+      ]);
+      await era.printAndWait(['最终，在一次无法挽回的争吵后']);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 举发了速子长年来的不法实验，解除了与',
+        tachyon.sex,
+        '的负责合同',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 忘不了离开学园时，速子脸上憎恶及扭曲的表情',
+      ]);
+      await era.printAndWait([
+        '————那发狂混浊的眼眸，烙印在 ',
+        you.get_colored_name(),
+        ' 的心中',
+      ]);
+      era.println();
+      await era.printAndWait(['在速子离开学园后过了一段时间']);
+      await era.printAndWait([
+        '哪怕已经分道扬镳，',
+        you.get_colored_name(),
+        ' 也不得不承认，爱丽速子是 ',
+        you.get_colored_name(),
+        ' 见过最杰出，最闪耀的',
+        tachyon.uma_sex_title,
+      ]);
+      await era.printAndWait([
+        '与',
+        tachyon.sex,
+        '相比，其他的',
+        tachyon.uma_sex_title,
+        '都显得黯然失色',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 无法再对训练员这个行业具有热情',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 拒绝了理事长的挽留，打算回到家乡',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '坐在回老家的火车上，',
+        you.get_colored_name(),
+        ' 回想起故乡的风情',
+      ]);
+      await era.printAndWait([
+        '只是不知为何，速子的红瞳总还是盘旋在 ',
+        you.get_colored_name(),
+        ' 的脑海中',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '回到家了，',
+        you.get_colored_name(),
+        ' 不由自主怀念的奔向那栋老房子，期待着父母的迎接',
+      ]);
+      await era.printAndWait(['—————然而打开门后，迎接自己的，是空气']);
+      await era.printAndWait(['中挥之不散的血腥味']);
+      await era.printAndWait(['以及……淡淡的红茶香']);
+      await era.printAndWait(['看着在血泊中举起杯子邀请自己的爱丽速子']);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 不敢问',
+        tachyon.sex,
+        '脚底下的烂肉是什么',
+      ]);
+      await era.printAndWait(['也不敢问是什么东西出血量那么大']);
+      await era.printAndWait([you.get_colored_name(), ' 出乎意料的冷静']);
+      await era.printAndWait([you.get_colored_name(), ' 只问了一句话']);
+      await era.printAndWait([tachyon.sex, '也只用了一句话回覆']);
+      era.println();
+      await you.say_and_wait(['我爸妈呢？']);
+      await tachyon.say_and_wait(['你问的是上半身还是下半身？']);
+      era.println();
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 掐住了速子的脖子，用力的勒紧……',
+      ]);
+
+      era.drawLine({ content: '叮铃叮铃', position: 'left' });
+
+      await era.printAndWait([you.get_colored_name(), ' 看见了自己的家乡']);
+      await era.printAndWait(['在出外闯荡多年后，总算再一次回到家乡']);
+      await era.printAndWait([you.get_colored_name(), ' 的归心似箭']);
+      await era.printAndWait([
+        '除了对家乡的怀念……不知为何，还有一种说不清，道不明的急迫感',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 随手拎起路边的自行车，以最快的速度骑行回家',
+      ]);
+      await era.printAndWait(['啊啊……']);
+      await era.printAndWait(['站在家门口迎接着自己的，不正是自己的母亲吗？']);
+      era.println();
+      await tachyon.say_and_wait(['欢迎回来，xx君']);
+      era.println();
+      await era.printAndWait([you.get_colored_name(), ' 扑进了母亲的怀抱']);
+      await era.printAndWait(['母亲的胸怀，好温暖']);
+      await era.printAndWait(['有着淡淡的洗衣精香气，以及……']);
+      await era.printAndWait(['空气中无法散去的红茶香']);
+      era.println();
+      await era.printAndWait([you.get_colored_name(), ' 看着自己的母亲']);
+      await era.printAndWait(['那暗红的百叶窗样眼眸，还是一如既往的令人安心']);
+      await era.printAndWait(['耳朵上茚满的耳饰微微晃动']);
+      await era.printAndWait(['岁月仿佛不曾在', tachyon.sex, '身上留下痕迹']);
+      await era.printAndWait([
+        '不知不觉，',
+        you.get_colored_name(),
+        ' 想起了这几年在外奔波的辛苦',
+      ]);
+      era.println();
+      await tachyon.say_and_wait([
+        '怎么哭了呢？都这么大的孩子了，乖，乖，不要哭了',
+      ]);
+      era.println();
+      await era.printAndWait(['明明已经长大成人']);
+      await era.printAndWait(['明明已经经历了许多，自认已经变得铁石心肠']);
+      await era.printAndWait([
+        '在母亲的面前，',
+        you.get_colored_name(),
+        ' 还是不由得留下了最真挚的泪水',
+      ]);
+
+      era.drawLine({ content: '叮铃叮铃', position: 'left' });
+
+      await era.printAndWait([you.get_colored_name(), ' 坐在家门前']);
+      await era.printAndWait([
+        '母亲今天有事会很晚回家，',
+        you.get_colored_name(),
+        ' 却忘记了带钥匙',
+      ]);
+      await era.printAndWait(['……但就算带了又如何，家里也没有其他人']);
+      await era.printAndWait(['对一个孩子而言，最为孤寂的时光莫过于此']);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 无聊的看着地上的蚂蚁爬行',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '这时，一双穿着夹脚拖鞋的腿出现在 ',
+        you.get_colored_name(),
+        ' 面前',
+      ]);
+      era.println();
+      await tachyon.say_and_wait(['哦呀哦呀～又忘记带钥匙了？']);
+      await you.say_and_wait(['……要你管']);
+      era.println();
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 抬起头，面前是 ',
+        you.get_colored_name(),
+        ' 的青梅竹马——爱丽速子',
+      ]);
+      await era.printAndWait(['你们两家相识已经有多年的时间']);
+      await era.printAndWait([
+        '虽然对 ',
+        you.get_colored_name(),
+        ' 而言，这不过是孽缘而已',
+      ]);
+      await era.printAndWait(['眼前讨人厌的这家伙，每次都以取笑自己为乐']);
+      era.println();
+      await tachyon.say_and_wait(['呵呵，坐在外面都不冷吗？']);
+      await tachyon.say_and_wait([
+        '到我家坐着等吧，难得有这个机会，我来泡红茶给你喝',
+      ]);
+      era.println();
+      await era.printAndWait([tachyon.sex, '很喜欢喝红茶']);
+      await era.printAndWait([
+        '大概是觉得那样看起来很像大人吧，所以每次到',
+        tachyon.sex,
+        '家都能闻到很浓的茶香',
+      ]);
+      await era.printAndWait([
+        '要说的话，',
+        you.get_colored_name(),
+        ' 也不是不喜欢红茶，只是……',
+      ]);
+      era.println();
+      await you.say_and_wait(['……你不会在里面又加什么奇怪的药吧？']);
+      await tachyon.say_and_wait(['……………你就说你喝不喝吧']);
+      era.println();
+      await era.printAndWait(['被揭穿的', tachyon.sex, '露出了郁闷的表情']);
+      await era.printAndWait([
+        '不由自主的，',
+        you.get_colored_name(),
+        ' 笑了起来',
+      ]);
+
+      era.drawLine({ content: '叮铃叮铃', position: 'left' });
+
+      await era.printAndWait([you.get_colored_name(), ' 睁开眼']);
+      await era.printAndWait(['眼前是昏暗空荡的房间']);
+      await era.printAndWait(['忽然，某种慌乱的感情直上心头']);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 在房间里不停的寻找着某人的身影',
+      ]);
+      await era.printAndWait(['然后，门开了']);
+      era.println();
+      await tachyon.say_and_wait(['哦呀，', callname, '，醒来了吗？']);
+      era.println();
+      await era.printAndWait(['看见了熟悉的身影，熟悉的眼眸']);
+      await era.printAndWait([you.get_colored_name(), ' 的心顿时平稳了下来']);
+      await era.printAndWait(['啊啊，眼前的人是爱丽速子，是……']);
+      era.println();
+      await era.printAndWait(['是我的…………什么？']);
+      era.println();
+      await era.printAndWait(['脑海中闪过许多似是而非的答案']);
+      await era.printAndWait([
+        '母亲？爱人？青梅？老师？学生？上司？下属？负责',
+        tachyon.uma_sex_title,
+        '？',
+      ]);
+      await era.printAndWait([
+        tachyon.sex,
+        '是对自己来说很重要的人，这点无庸置疑',
+      ]);
+      await era.printAndWait(['但是，', tachyon.sex, '是自己的「谁」？']);
+      era.println();
+      await tachyon.say_and_wait(['怎么啦？', callname, '，还没醒过来吗？']);
+      await you.say_and_wait(['……']);
+      era.println();
+      await era.printAndWait([tachyon.sex, '坐在床边，用温柔的语气说着话']);
+      await era.printAndWait([
+        '身体不由自主的朝着',
+        tachyon.sex,
+        '倾斜，然后……',
+      ]);
+      await era.printAndWait(['准确的落在了', tachyon.sex, '的大腿上']);
+      await era.printAndWait(['名为膝枕的动作']);
+      await era.printAndWait([
+        '以负责',
+        tachyon.uma_sex_title,
+        '来说，这样的行为已经越矩了',
+      ]);
+      await era.printAndWait(['但是以母亲来说，这不过是十分日常的撒娇而已']);
+      era.println();
+      await tachyon.say_and_wait(['亲爱的 ', callname, '，这次梦到什么了呢？']);
+      await you.say_and_wait(['梦……']);
+      era.println();
+      await era.printAndWait(['对了，刚刚好像，做了一个梦……']);
+      await era.printAndWait(['梦中的', tachyon.sex, '……']);
+      era.println();
+      await you.say_and_wait(['你是……爱丽速子，是我的……青梅竹马']);
+      await you.say_and_wait([
+        '我们从小就在一起玩……你喜欢喝红茶……喜欢拿我做一些奇怪的实验……',
+      ]);
+      await you.say_and_wait(['然后……长大之后……我们……我们……']);
+      era.println();
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 有些吞吞吐吐的，不知该如何说出口',
+      ]);
+      era.println();
+      await you.say_and_wait(['……我们结婚了，生了三个孩子']);
+      await you.say_and_wait(['但是，这里……这里是……']);
+      era.println();
+      await era.printAndWait(['看着昏暗的房间']);
+      await era.printAndWait(['好像，快要回想起什么了']);
+      await era.printAndWait(['爱丽速子是……我的……负责']);
+      era.println();
+      await tachyon.say_and_wait(['嘘……', callname]);
+      era.println();
+      await era.printAndWait([
+        '被爱丽速子摸到头的瞬间，那些无关紧要的思考都消失了',
+      ]);
+      await era.printAndWait([
+        '母亲，爱人，青梅，老师，学生，上司，下属，负责',
+        tachyon.uma_sex_title,
+      ]);
+      await era.printAndWait(['为什么不能是同个人呢？']);
+      era.println();
+      await you.say_and_wait(['速子……速子……']);
+      await tachyon.say_and_wait(['好孩子']);
+      await tachyon.say_and_wait(['那么……下一次，要来了哦？']);
+      era.println();
+      await era.printAndWait(['看着速子掏出的试管']);
+      await era.printAndWait([you.get_colored_name(), ' 瞪大了双眼']);
+      era.println();
+      await you.say_and_wait(['等……速子……不……不要再来了……拜托……']);
+      era.println();
+      await era.printAndWait(['恐惧，害怕']);
+      await era.printAndWait(['不想要再喝下那个药了']);
+      await era.printAndWait(['不想再「做梦」了']);
+      await era.printAndWait(['不要，不要……']);
+      era.println();
+      await tachyon.say_and_wait([callname, '……听话']);
+      era.println();
+      await era.printAndWait(['无论对方是什么身份']);
+      await era.printAndWait(['不变的是自己无法违抗', tachyon.sex, '这个事实']);
+      era.println();
+      await tachyon.say_and_wait(['那么，这次又会做怎么样的梦呢']);
+
+      era.drawLine();
+
+      await tachyon.print_and_wait(['药剂灌下']);
+      await tachyon.print_and_wait(['眼前的 ', callname, ' 再度进入了梦乡']);
+      era.println();
+      await tachyon.print_and_wait(['这是 ', callname, ' 进入地下室的第XX天']);
+      await tachyon.print_and_wait(['这是 ', callname, ' 做的第XXX场梦']);
+      await tachyon.print_and_wait([
+        '这一次的 ',
+        callname,
+        ' 又会做什么样的梦呢？',
+      ]);
+      await tachyon.print_and_wait([
+        '这一次的爱丽速子又会在',
+        you.sex,
+        '的人生中扮演什么角色呢？',
+      ]);
+      era.println();
+      await tachyon.print_and_wait(['是童年的友人']);
+      await tachyon.print_and_wait(['是竞争的对手']);
+      await tachyon.print_and_wait(['是唠叨的老师']);
+      await tachyon.print_and_wait(['是慈爱的母亲']);
+      await tachyon.print_and_wait(['还是……']);
+      era.println();
+      await tachyon.print_and_wait(['爱丽速子轻轻抚摸着自己的脖子']);
+      await tachyon.print_and_wait(['肉体上的痕迹早就已经褪去']);
+      await tachyon.print_and_wait(['但心灵上，爱丽速子仍被紧抓着']);
+      era.println();
+      await tachyon.print_and_wait([
+        '记得那一次，醒过来后的 ',
+        callname,
+        ' 紧紧勒住了自己的脖子',
+      ]);
+      await tachyon.print_and_wait(['过了一会后，才回过神来将自己放开']);
+      await tachyon.print_and_wait(['那一刻，爱丽速子感受到的感情是————惋惜']);
+      era.println();
+      await tachyon.print_and_wait(['要是再多持续一些时间就好了']);
+      await tachyon.print_and_wait(['要是再紧一点就好了']);
+      await tachyon.print_and_wait([
+        '————那一次的爱丽速子，是',
+        you.sex,
+        '的「仇人」',
+      ]);
+      await tachyon.print_and_wait(['被', you.sex, '用那么炙热的眼神盯着']);
+      await tachyon.print_and_wait(['只盯着', tachyon.sex]);
+      await tachyon.print_and_wait(['只对', tachyon.sex, '倾注的感情']);
+      await tachyon.print_and_wait(['想到这，爱丽速子忍不住感到颤慄']);
+      era.println();
+      await tachyon.print_and_wait(['……但是，还不可以']);
+      await tachyon.print_and_wait(['不只满足于那样的感情']);
+      await tachyon.print_and_wait([
+        '爱丽速子会成为 ',
+        callname,
+        ' 的————全部',
+      ]);
+      era.println();
+      await tachyon.print_and_wait(['只要', you.sex, '想要']);
+      await tachyon.print_and_wait([
+        '自己可以扮演',
+        you.sex,
+        '人生中的一切角色',
+      ]);
+      await tachyon.print_and_wait(['仇人，母亲，爱人，青梅']);
+      await tachyon.print_and_wait(['代价是……', you.sex, '的同样全部']);
+      await tachyon.print_and_wait(['以人生换人生']);
+      await tachyon.print_and_wait([
+        '爱丽速子和 ',
+        callname,
+        ' 的戏曲，永远不会迎来落幕',
+      ]);
+    };
+    f.title = title;
+    return f;
+  })(),
   ws_punishment1: (() => {
     const title = '实验记录：马娘转化';
     /**
@@ -4946,5 +5413,784 @@ module.exports = {
         '……下次，记得小心点哦。',
       ]);
     }
+  },
+  /**
+   * @param {CharaTalk} tachyon 爱丽速子
+   * @param {CharaTalk} you 玩家名
+   * @param {string} callname 爱丽速子对玩家的称呼
+   */
+  async s_a_d2evil(tachyon, you, callname) {
+    await tachyon.say_and_wait([
+      '呼姆……',
+      callname,
+      '，你不觉得今晚正好是个散步的好天气吗？',
+    ]);
+    era.println();
+    await era.printAndWait(['一如既往的夜晚。']);
+    await era.printAndWait([
+      you.get_colored_name(),
+      ' 忙完了训练员的工作，自觉的为了完成另一项职责而来到速子的实验室。',
+    ]);
+    await era.printAndWait([
+      '速子开门邀请 ',
+      you.get_colored_name(),
+      ' 进来后，',
+      you.get_colored_name(),
+      ' 习惯的蹲到实验桌下，为今天忙碌一天，训练后衣服都没来得及换便回到实验室里继续实验的速子处理',
+      tachyon.sex,
+      '那积攒的性欲。',
+    ]);
+    era.println();
+    await era.printAndWait([
+      you.get_colored_name(),
+      ' 含着速子那被裤子闷出水蒸气的浓厚味道肉棒，不解的抬头望向',
+      tachyon.sex,
+      '。',
+    ]);
+    era.println();
+    await tachyon.say_and_wait(['继续，', callname, '，我没有说停吧。']);
+    era.println();
+    await era.printAndWait([
+      tachyon.sex,
+      '再度将 ',
+      you.get_colored_name(),
+      ' 的头按下，',
+      you.get_colored_name(),
+      ' 的鼻子被按进',
+      tachyon.sex,
+      '那杂乱丛生的草丛中，不断探入鼻道黏膜的曲毛让 ',
+      you.get_colored_name(),
+      ' 忍不住想要打喷嚏。',
+    ]);
+    await era.printAndWait([
+      '但 ',
+      you.get_colored_name(),
+      ' 还是忍住了———不，准确来说并不是 ',
+      you.get_colored_name(),
+      '，而是 ',
+      you.get_colored_name(),
+      ' 的身体本能。',
+    ]);
+    await era.printAndWait(['被改造的身体，刻在基因底层的原则']);
+    await era.printAndWait([
+      '———不得违抗',
+      tachyon.uma_sex_title,
+      '的命令，必须用尽一切满足',
+      tachyon.uma_sex_title,
+      '。',
+    ]);
+    await era.printAndWait([
+      '哪怕想要将肉棒吐出，对大脑下的命令也会自动被改写成将喉咙收的更紧。',
+    ]);
+    era.println();
+    await tachyon.say_and_wait(['唔……', callname, '……！']);
+    era.println();
+    await era.printAndWait(['突然收紧的喉壁，让速子发出了舒服的哼声。']);
+    await era.printAndWait([
+      tachyon.sex,
+      '按住了 ',
+      you.get_colored_name(),
+      ' 的后脑勺，如同被接管了身体控制权一般，',
+      you.get_colored_name(),
+      ' 的一切阻力作废，整个口穴彻底变作了速子套在肉棒上的飞机杯。',
+    ]);
+    era.println();
+    await tachyon.say_and_wait(['出来了……！']);
+    era.println();
+    await era.printAndWait(['咕噜咕噜咕噜。']);
+    await era.printAndWait([
+      '激烈的精液流被 ',
+      you.get_colored_name(),
+      ' 的喉咙全数包裹。',
+    ]);
+    await era.printAndWait(['明明不算黏稠，但却停留在喉间。']);
+    await era.printAndWait([
+      '仿佛连喉咙的黏膜细胞都在渴求着主人的恩赐，不肯放手一般。',
+    ]);
+    await era.printAndWait([
+      '一般这个时候，速子会让 ',
+      you.get_colored_name(),
+      ' 静静回味主人的味道，以此来加深 ',
+      you.get_colored_name(),
+      ' 的服从度',
+    ]);
+    await era.printAndWait(['但今天似乎并非如此。']);
+    era.println();
+    await era.printAndWait(['咔']);
+    await era.printAndWait(['陌生的声音，以及皮革的触感。']);
+    await era.printAndWait([
+      you.get_colored_name(),
+      ' 的脖子上被速子戴上了隶属的证明',
+    ]);
+    await era.printAndWait(['看起来有些华丽的皮颈圈。']);
+    await era.printAndWait([
+      '虽然 ',
+      you.get_colored_name(),
+      ' 看不见，但速子似乎很满意的看着上面刻写的文字，发出嗯嗯的赞同声。',
+    ]);
+    await era.printAndWait(['然后，速子拉动连着项圈的链子。']);
+    await era.printAndWait(['哪怕是再迟钝的人，此刻也该知道不对了吧。']);
+    await era.printAndWait(['但是……']);
+    era.println();
+    await era.printAndWait([
+      you.get_colored_name(),
+      ' 看了看自己一丝不挂的身体———早在进入房间的那一刻，身份从训练员变成性奴的那一刻，衣服这种人类穿的东西就已经不被允许披在 ',
+      you.get_colored_name(),
+      ' 身上了。',
+    ]);
+    await era.printAndWait([
+      '动了动耳朵————前几天，速子兴高采烈订上去的耳牌晃荡着发出声音，那是家畜的证明。',
+    ]);
+    await era.printAndWait(['真的，要在这种情况下出门吗？']);
+    era.printButton('顺从', 1);
+    era.printButton('反抗', 2);
+    const ret = await era.input();
+    if (ret === 1) {
+      await you.say_and_wait(['………汪']);
+      era.println();
+      await era.printAndWait(['主人的命令是绝对的']);
+      await era.printAndWait([you.get_colored_name(), ' 爬行到速子脚边']);
+      await era.printAndWait(['轻啄速子的脚趾']);
+      await era.printAndWait(['然后抬头望向主人']);
+      era.println();
+      await tachyon.say_and_wait(['乖狗狗']);
+      era.drawLine();
+      await era.printAndWait(['天气真好']);
+      await era.printAndWait(['月色也一样明朗']);
+      await era.printAndWait([
+        '明朗的哪怕不必走近也能看清地上爬行的到底是人还是狗',
+      ]);
+      await era.printAndWait(['幸运的是，特雷森并不缺乏帮忙遮掩身形的矮灌木']);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 跟随着速子的脚步，恰好爬在速子一步左右的前方',
+      ]);
+      await era.printAndWait([
+        '对一般宠物而言，跑在主人前方是很正常的，对听不懂人话的动物来说，想要自由奔跑是牠们的天性，也因此才需要项圈和链子来限制其行动',
+      ]);
+      await era.printAndWait([
+        '那么，听得懂人话的家畜又为什么要戴上项圈，又为什么要走在主人前方呢？难道，这是对主人的不忠吗？',
+      ]);
+      await era.printAndWait([
+        '不，肯定是为了……能够让主人以更方便的视角来欣赏自己的丑态吧',
+      ]);
+      era.println();
+      await era.printAndWait([you.get_colored_name(), ' 轻轻的哈着气']);
+      await era.printAndWait([
+        '将屁股翘高，让主人借着月光看清那被皮带固定在小穴及屁穴上，不停出入的电动按摩棒',
+      ]);
+      await era.printAndWait(['很爽，很舒服，快要高潮了']);
+      await era.printAndWait([
+        '但是如果在这里高潮的话，接下来绝对会走不动路的',
+      ]);
+      await era.printAndWait(['所以必须忍住']);
+      era.println();
+      await era.printAndWait(['…………只是，主人和宠物的想法，往往是不会相通的']);
+      await era.printAndWait(['速子按下了手上直通项圈的开关']);
+      await era.printAndWait(['为豚鼠特制的项圈放出了某种气味']);
+      await era.printAndWait([
+        '是正常人闻不到，只有完全被这种气味浸润、调教，连基因都被刻下了印记的性奴才能闻到的淫臭',
+      ]);
+      era.println();
+      await you.say_and_wait(['呜～～～～～']);
+      era.println();
+      await era.printAndWait(['来不及反应']);
+      await era.printAndWait([you.get_colored_name(), ' 就直接瘫倒在地']);
+      await era.printAndWait(['随后，一股温热的液体流出']);
+      era.println();
+      await tachyon.say_and_wait(['哦呀～～']);
+      await tachyon.say_and_wait(['真是不乖的宠物……居然还随地洒尿']);
+      await tachyon.say_and_wait(['该怎么惩罚————']);
+      await tachyon.say_as_passer_by_and_wait('路人' + tachyon.uma_sex_title, [
+        '啊，这不是速子同学吗？',
+      ]);
+      era.println();
+      await era.printAndWait(['！？']);
+      await era.printAndWait([
+        '灌木丛的另一边，似乎有认识速子的',
+        tachyon.uma_sex_title,
+        '快步跑了过来',
+      ]);
+      await era.printAndWait(['要是被对方看到……自己怎么样都无关紧要']);
+      await era.printAndWait(['要是给主人添麻烦那就不好了']);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 顾不得发软的身体，努力压低身子，祈祷不会被对方发现',
+      ]);
+      era.println();
+      await tachyon.say_as_passer_by_and_wait('路人' + tachyon.uma_sex_title, [
+        '欸～～速子同学这是在遛狗吗？',
+      ]);
+      await tachyon.say_and_wait([
+        '呵呵，是啊……不过，不知道为什么不肯走了呢，明明平常都很听话的啊',
+      ]);
+      era.println();
+      await era.printAndWait(['说着，速子扯了扯项圈']);
+      await era.printAndWait(['刚刚的味道还没散去，这一扯又传出了新的味道']);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 不由得呜咽一声，身体彻底失去力气',
+      ]);
+      era.println();
+      await tachyon.say_as_passer_by_and_wait('路人' + tachyon.uma_sex_title, [
+        '唔……这种叫声，有可能是发情期呢',
+      ]);
+      await tachyon.say_and_wait(['哦呀～～是这样吗？']);
+      await tachyon.say_as_passer_by_and_wait('路人' + tachyon.uma_sex_title, [
+        '肯定是这样！我家的来福每年这个时间也是一样，就连声音都差不多',
+      ]);
+      await tachyon.say_and_wait(['这么有缘吗？']);
+      era.println();
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 紧贴在地上，听着两人的对话',
+      ]);
+      await era.printAndWait(['不知为何，忽然有种不祥的预感']);
+      era.println();
+      await tachyon.say_and_wait([
+        '那么———要是如此有缘，不然有机会让你们家的来福和我家的配种看看吧',
+      ]);
+      await you.say_and_wait(['！？']);
+      era.println();
+      await era.printAndWait([you.get_colored_name(), ' 不敢相信速子说的话']);
+      await era.printAndWait(['震惊的就连身体也失去平衡，低伏的身体向前倒去']);
+      era.println();
+      await tachyon.say_and_wait(['哎呀……']);
+      era.println();
+      await era.printAndWait(['却在最后一刻被速子拉住了项圈']);
+      era.println();
+      await tachyon.say_and_wait(['看来，我们家的小狗似乎不太喜欢这个提议呢']);
+      await tachyon.say_as_passer_by_and_wait('路人' + tachyon.uma_sex_title, [
+        '啊，啊哈哈……',
+      ]);
+      await tachyon.say_and_wait([
+        '那么，就先聊到这吧，我要继续带这孩子散步了',
+      ]);
+      era.println();
+      await era.printAndWait(['确认对方离开后']);
+      await era.printAndWait(['速子停下脚步，蹲低身子']);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 迟疑了一下，将头凑到速子的脚边',
+      ]);
+      era.println();
+      await tachyon.say_and_wait(['刚刚怎么反应突然那么大呢？', callname]);
+      await tachyon.say_and_wait([
+        '你不会真的以为，我会让我的东西去和下贱的畜生交配吧？',
+      ]);
+      await you.say_and_wait(['……………']);
+      era.println();
+      await era.printAndWait(['不敢说']);
+      await era.printAndWait(['不敢和对方说出真相']);
+      await era.printAndWait(['然而，也没有必要说出']);
+      era.println();
+      await tachyon.say_and_wait(['还是说—————你真的，代入那个场景了？']);
+      await you.say_and_wait(['！']);
+      era.println();
+      await era.printAndWait([
+        '速子将 ',
+        you.get_colored_name(),
+        ' 扶起，抱在怀中，嘴上却没有要放过 ',
+        you.get_colored_name(),
+        ' 的意思',
+      ]);
+      era.println();
+      await tachyon.say_and_wait([
+        '那只狗的下体，哪怕比不过',
+        tachyon.uma_sex_title,
+        '，要比以前的你还大那也是绰绰有余的吧？更不用提现在的你了',
+      ]);
+      await tachyon.say_and_wait([
+        '狗的生殖器，前段会有茎头球，会牢牢锁住雌性的下体，在射精前都不会松脱',
+      ]);
+      await tachyon.say_and_wait([
+        '要是被那只狗按住，本来男子气概就连狗都比不过的你，被牢牢的锁住，体内被注入———',
+      ]);
+      await tachyon.say_and_wait([
+        '会变成雌性吧？肉体和精神，都彻底堕落成雌兽',
+      ]);
+      await tachyon.say_and_wait([
+        '真让我失望啊，',
+        callname,
+        '……我原本以为自己已经理解了你的堕落，没想到你还能更加下贱',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '听见速子的指责，',
+        you.get_colored_name(),
+        ' 忍不住发出哀嚎',
+      ]);
+      await era.printAndWait(['甚至连这种时候，都无法说出人话来反驳或求饶']);
+      await era.printAndWait(['只能继续像牲畜一样的恳求主人的宽容']);
+      era.println();
+      await tachyon.say_and_wait(['———————']);
+      era.println();
+      await era.printAndWait(['奇怪的是']);
+      await era.printAndWait([
+        '明明如此严厉的指责完，速子却依然温柔的抱着自己',
+      ]);
+      era.println();
+      await tachyon.say_and_wait(['你喜欢吗？那种被征服，被蹂躏']);
+      await tachyon.say_and_wait(['————被彻底告知，自己只是一头雌性的感觉']);
+      era.println();
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 望着速子，害羞的点了点头',
+      ]);
+      era.println();
+      await tachyon.say_and_wait(['来，', callname]);
+      await tachyon.say_and_wait(['为我处理性欲']);
+      era.println();
+      await era.printAndWait([
+        '已经连身心都彻底属于速子的 ',
+        you.get_colored_name(),
+        ' 感觉到了，速子的肉棒，从刚刚就一直挺立着',
+      ]);
+      await era.printAndWait(['现在终于，主人给了允许']);
+      await era.printAndWait([you.get_colored_name(), ' 用嘴脱下了速子的裤子']);
+      await era.printAndWait(['然后……']);
+      era.println();
+      await you.say_and_wait(['……❤️']);
+      era.println();
+      await era.printAndWait([
+        '膨大的肉柱，以及浓厚的气味占据了 ',
+        you.get_colored_name(),
+        ' 的视野和鼻腔',
+      ]);
+      await era.printAndWait([
+        '刚刚的那些妄想，在这根阳具面前，都被吹散的一点都不剩',
+      ]);
+      await era.printAndWait(['自己是只属于速子的雌性，奴隶，性处理用具']);
+      await era.printAndWait([
+        '下意识的，',
+        you.get_colored_name(),
+        ' 恢复了四肢爬行的状态',
+      ]);
+      await era.printAndWait(['用舌头轻柔的为速子的睪丸按摩着']);
+      await era.printAndWait(['清理干净褶皱的每一点污垢，却特意避开了肉杆']);
+      await era.printAndWait([
+        '然后，',
+        you.get_colored_name(),
+        ' 翘起屁股，准备用自己的肉穴来为主人最重要的性器官做清洁',
+      ]);
+      era.println();
+      await tachyon.say_and_wait(['———你总是这么能勾起我的性欲啊，', callname]);
+      era.println();
+      await era.printAndWait(['速子感叹了一声，将捆绑着豚鼠臀部的皮带扯下']);
+      await era.printAndWait(['在月光下，开始了对乖宠物的赏赐']);
+      era.println();
+      await era.printAndWait([
+        '那天晚上，据说许多人都听见了野狗发情的叫声，但事后学园却没有发现有流浪犬的踪迹，此事也就此不了了之',
+      ]);
+    } else {
+      await era.printAndWait(['是心中还残留着一丝廉价的自尊吗？']);
+      await era.printAndWait(['还是对自己的处境仍没有清晰的认知？']);
+      era.println();
+      await era.printAndWait([
+        '发觉了速子的意图后，',
+        you.get_colored_name(),
+        ' 惊惧的展开反抗',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 缩在桌底，随即，',
+        you.get_colored_name(),
+        ' 发现这样没用',
+      ]);
+      await era.printAndWait(['已经被调教好的身体不允许对主人做出反抗']);
+      await era.printAndWait([you.get_colored_name(), ' 很快便被拖了出来']);
+      await era.printAndWait([
+        '随即，',
+        you.get_colored_name(),
+        ' 马上想到了第二个办法',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 对着脖子上的项圈又扯又咬',
+      ]);
+      await era.printAndWait([
+        '不能反抗爱丽速子，但是，对这个项圈做出反抗应该还是可以的吧',
+      ]);
+      era.println();
+      await tachyon.say_and_wait(['唉……']);
+      era.println();
+      await era.printAndWait([
+        '可惜，作为 ',
+        you.get_colored_name(),
+        ' 的主人，爱丽速子对 ',
+        you.get_colored_name(),
+        ' 的一切反抗都已经有了预料',
+      ]);
+      await era.printAndWait([
+        '轻轻的一个按纽，不知不觉，又咬又扯的反抗变得轻柔，渐渐的，变成了舔和爱抚',
+      ]);
+      await era.printAndWait([
+        '项圈散发出的主人气味，唤醒了被刻在 ',
+        you.get_colored_name(),
+        ' 基因底层的奴性',
+      ]);
+      await era.printAndWait([
+        '光是闻到那股气味就全身发软的 ',
+        you.get_colored_name(),
+        '，也只能在被拖到速子身边时，抱住速子的腿，乞求对方给予自己宽恕',
+      ]);
+      era.println();
+      await tachyon.say_and_wait(['……就这么不想出门吗？', callname]);
+      era.println();
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 望着速子的眼睛，没有说话，但眼神已经说明了一切',
+      ]);
+      era.println();
+      await tachyon.say_and_wait([
+        '……',
+        callname,
+        '，谢谢你愿意和我表达你的想法',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '速子蹲下身，抚摸着 ',
+        you.get_colored_name(),
+        ' 的头',
+      ]);
+      await era.printAndWait(['好舒服……果然，速子还没有完全———']);
+      await era.printAndWait(['下一秒，项圈被死死的勒住']);
+      await era.printAndWait([
+        '好奇怪，明明无法呼吸，但项圈上主人的味道却还是控制着 ',
+        you.get_colored_name(),
+        ' 的身体',
+      ]);
+      await era.printAndWait([
+        '———仿佛自己不是用鼻子，而是用全身来接受',
+        tachyon.sex,
+        '的气味，来臣服于速子',
+      ]);
+      era.println();
+      await tachyon.say_and_wait([
+        '———不然的话，我还不知道自己竟然已经对你宽容到，你都敢提出意见了',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '在速子冷漠的眼神注视下，',
+        you.get_colored_name(),
+        ' 不由得又去了一次',
+      ]);
+      await tachyon.say_and_wait([
+        '怎么了？训练员君，我这不是按你的要求来了吗？',
+      ]);
+      await tachyon.say_and_wait([
+        '怎么还心不甘情不愿的样子，走路就好好走，躲躲闪闪的做什么呢？',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '速子玩味的牵着 ',
+        you.get_colored_name(),
+        ' 走在路上',
+      ]);
+      await era.printAndWait([
+        '在 ',
+        you.get_colored_name(),
+        ' 的据理力争下，',
+        you.get_colored_name(),
+        ' 总算获得了一点身为人类的自由—————用两条腿站着走路',
+      ]);
+      await era.printAndWait(['不幸的是，也只有那么一点自由']);
+      era.println();
+      await era.printAndWait([
+        '在速子的拉扯下，',
+        you.get_colored_name(),
+        ' 被迫从树荫下走了出来',
+      ]);
+      await era.printAndWait(['栓在乳头上的铁环和锁链碰撞，发出声响']);
+      await era.printAndWait([you.get_colored_name(), ' 不由得发出呻吟']);
+      await era.printAndWait([
+        '然而，这个铁环的用处并非是羞辱，倒不如说其实是保护才对',
+      ]);
+      await era.printAndWait([
+        '如果没有包覆着乳头的东西，而是直接碰触的话……别说呻吟了，自己大概会直接倒在地上高潮不止',
+      ]);
+      await era.printAndWait(['真正的羞辱，是挂在两个铁环下的牌子']);
+      era.println();
+      await era.printAndWait(['「我是爱丽速子的训练员」']);
+      era.println();
+      await era.printAndWait(['不是什么羞辱的字句，也不是什么下贱的求爱']);
+      await era.printAndWait([
+        '只是平铺直述的事实，搭配上此刻的场景却格外显得讽刺',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '然而，没给 ',
+        you.get_colored_name(),
+        ' 多想的机会',
+      ]);
+      await era.printAndWait([
+        '嫌弃 ',
+        you.get_colored_name(),
+        ' 走的太慢的爱丽速子一手抓着锁链，另一只手掏出了皮鞭',
+      ]);
+      await era.printAndWait(['唰']);
+      await era.printAndWait([
+        '鞭打的痛楚逼迫着 ',
+        you.get_colored_name(),
+        ' 不得不向前，走在速子身前，走在大道上',
+      ]);
+      era.println();
+      await tachyon.say_and_wait([callname, '，告诉我，你是什么？']);
+      await you.say_and_wait(['我是速子的训练员']);
+      era.println();
+      await era.printAndWait(['重复的问答一路上已经反覆了许多次']);
+      await era.printAndWait(['这是速子提出的要求之一']);
+      await era.printAndWait([
+        '速子到底想做什么？如果是平常，或许还会去思考这个问题',
+      ]);
+      await era.printAndWait(['但现在，大脑已经容不下这些了']);
+      era.println();
+      await tachyon.say_and_wait(['啊～～', callname, '，又来了']);
+      era.println();
+      await era.printAndWait(['又要开始了吗？']);
+      await era.printAndWait(['听见身后人的声音，闻到了熟悉的气味']);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 弯下身子，将肥厚的臀部掰开',
+      ]);
+      await era.printAndWait([
+        '是理智已经不管用了吗？行为中似乎还有那么一丝的……迫不及待？',
+      ]);
+      await era.printAndWait(['屁穴还是肉穴？无所谓']);
+      await era.printAndWait([
+        '一个晚上都未受灌溉的肉褶饥渴的张合，无论是哪里都可以，只要能够被灌注在里面……',
+      ]);
+      era.println();
+      await tachyon.say_and_wait(['呼……']);
+      era.println();
+      await era.printAndWait([
+        '爱丽速子一直不是一个很能克制住欲望的',
+        tachyon.uma_sex_title,
+      ]);
+      await era.printAndWait([
+        '甚至在还没完全张开，连诱惑的行为都称不上时，',
+        tachyon.sex,
+        '就已经忍不住插进来了',
+      ]);
+      await era.printAndWait([
+        '同时，',
+        you.get_colored_name(),
+        ' 也发出了感叹的喘息',
+      ]);
+      await era.printAndWait([
+        '如大旱逢甘霖一般，',
+        you.get_colored_name(),
+        ' 的全身都在渴求着爱丽速子的灌注',
+      ]);
+      await era.printAndWait([
+        '大力抽插了数分钟，完全没有要忍耐意思的速子忽然加快了速度',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 知道，',
+        tachyon.sex,
+        '要射了',
+      ]);
+      await era.printAndWait(['……那么，「这次」会是……？']);
+      era.println();
+      await era.printAndWait(['果不其然']);
+      await era.printAndWait([tachyon.sex, '没有在里面出来']);
+      await era.printAndWait(['在要射精的那一刻，', tachyon.sex, '拔了出来']);
+      await era.printAndWait([
+        '精液浇灌在 ',
+        you.get_colored_name(),
+        ' 的身上',
+      ]);
+      await era.printAndWait(['头发，背部，臀部，大腿']);
+      await era.printAndWait(['今天晚上，饥渴的下体依旧没有尝到半点精华']);
+      era.println();
+      await tachyon.say_and_wait([callname, '，告诉我，你是什么？']);
+      await you.say_and_wait(['我是爱丽速子的训练员']);
+      era.println();
+      await era.printAndWait(['又来了']);
+      await era.printAndWait(['仿佛驯化一样的机械性重复问答']);
+      await era.printAndWait(['如果说是为了洗脑自己的话，那有什么必要？']);
+      await era.printAndWait(['自己是爱丽速子的训练员']);
+      await era.printAndWait(['重复这种话只是加深自己做为人的执念']);
+      await era.printAndWait(['……算了，懒得多想了']);
+      era.println();
+      await era.printAndWait(['不知不觉，两人走到了学园的中庭']);
+      await era.printAndWait([
+        '看着中庭中央三女神的雕像，',
+        you.get_colored_name(),
+        ' 的神智仿佛清醒了一些',
+      ]);
+      await era.printAndWait([
+        '……虽然，这无法对发生在 ',
+        you.get_colored_name(),
+        ' 身上的事情造成任何改变',
+      ]);
+      await era.printAndWait([
+        '不知为何，',
+        you.get_colored_name(),
+        ' 忽然有些害怕',
+      ]);
+      await era.printAndWait(['是因为在三女神面前吗？麻木的内心产生了反应']);
+      await era.printAndWait([you.get_colored_name(), ' 想绕开，远离喷泉']);
+      await era.printAndWait([
+        '然而今晚的这趟散步，去往何方从来就不是由 ',
+        you.get_colored_name(),
+        ' 决定的',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '在速子的逼迫下，',
+        you.get_colored_name(),
+        ' 朝着喷泉直直走去',
+      ]);
+      await era.printAndWait(['然后，趴在了喷泉的边缘']);
+      era.println();
+      await tachyon.say_and_wait([callname, '～～']);
+      era.println();
+      await era.printAndWait(['不要']);
+      await era.printAndWait(['不要在这里']);
+      await era.printAndWait(['拜托你，速子']);
+      await era.printAndWait([
+        '脑中想了千百句恳求的话语，行为上 ',
+        you.get_colored_name(),
+        ' 却还是无法违抗自己肉体的主人',
+      ]);
+      era.println();
+      await era.printAndWait(['速子的肉棒，再一次插入进来']);
+      await era.printAndWait([
+        '在女神的面前，',
+        you.get_colored_name(),
+        ' 开始了娇喘',
+      ]);
+      era.println();
+      await tachyon.say_and_wait([callname, '，看看水面']);
+      era.println();
+      await era.printAndWait(['明明如此激烈的晃动']);
+      if (era.get('talent:0:泌乳') > 0)
+        await era.printAndWait(['明明乳房都已经滴出乳汁']);
+      await era.printAndWait(['水面却还是一如既往的宁静，宁静的让人害怕']);
+      await era.printAndWait([
+        '宁静的———让 ',
+        you.get_colored_name(),
+        ' 看清了自己现在的模样',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '被用来擦拭过许多次肉棒的耳朵，毛发纠结，钉在耳上的耳标被精液糊的已经看不清上面的字了，但 ',
+        you.get_colored_name(),
+        ' 知道，那上面写的是「母畜」———那是钉上前，速子命令自己写的',
+      ]);
+      await era.printAndWait([
+        '脸颊上飞洒的精液滑落，即将掉入水池———',
+        you.get_colored_name(),
+        ' 下意识用手指接住，在鬼使神差下，',
+        you.get_colored_name(),
+        ' 将其含入口中',
+      ]);
+      if (era.get('talent:0:泌乳') > 0)
+        await era.printAndWait([
+          '乳房不断的摇晃，在水面上，乳汁如水银般飞溅到水池便快速沉没',
+        ]);
+      await era.printAndWait(['套在乳头上的铁环叮当作响']);
+      await era.printAndWait(['然而，最让人崩溃的————是脸上的表情']);
+      era.println();
+      await tachyon.say_and_wait(['一路上，忍了好久啊，', callname]);
+      era.println();
+      await era.printAndWait(['速子发出了满足的感慨']);
+      era.println();
+      await tachyon.say_and_wait([
+        '不能说出答案，对一个科学家来说有多痛苦你知道吗？',
+      ]);
+      await tachyon.say_and_wait(['——————', callname, '，告诉我，你是什么？']);
+      era.println();
+      await era.printAndWait(['满足，情欲，渴望']);
+      await era.printAndWait(['露出这种表情的人，真的有办法自称是训练员吗？']);
+      await era.printAndWait(['如此下贱的模样，真的配当爱丽速子的训练员吗？']);
+      era.println();
+      await you.say_and_wait(['我………我是……………']);
+      era.println();
+      await era.printAndWait(['迷茫']);
+      await era.printAndWait(['哪怕怎么被速子羞辱都不曾露出过的迷茫']);
+      await era.printAndWait([
+        '幸运的是，哪怕再迷茫，也有一个不会将自己放弃的人',
+      ]);
+      await era.printAndWait(['爱丽速子，温柔的给出解答']);
+      await tachyon.say_and_wait(['你不是训练员']);
+      await you.say_and_wait(['我不是训练员']);
+      era.println();
+      await era.printAndWait([you.get_colored_name(), ' 认可了速子的话']);
+      await era.printAndWait(['这样的发情母猪，这么卑贱的姿态']);
+      await era.printAndWait(['怎么可能会是训练员']);
+      await era.printAndWait(['哪怕自己想要否定，眼前的三女神也不会同意的吧']);
+      await era.printAndWait(['那么，自己到底是什么？']);
+      era.println();
+      await tachyon.say_and_wait(['你是母马']);
+      await you.say_and_wait(['我是母马']);
+      era.println();
+      await tachyon.say_and_wait(['你是性奴']);
+      await you.say_and_wait(['我是性奴']);
+      era.println();
+      await tachyon.say_and_wait(['你是被支配的人']);
+      await you.say_and_wait(['我是被支配的人']);
+      era.println();
+      await tachyon.say_and_wait([
+        '我是你的训练员，你是我的母马，我的性奴，我的性处理用具',
+      ]);
+      await you.say_and_wait(['我是……………']);
+      era.println();
+      await era.printAndWait(['真的要说出口吗？']);
+      await era.printAndWait(['说出口，就回不了头了']);
+      await era.printAndWait(['—————回不了头的决定，这也不是第一次做了']);
+      era.println();
+      await you.say_and_wait([
+        '我是性奴，是',
+        tachyon.uma_sex_title,
+        '，是爱丽速子大人的性处理用具',
+      ]);
+      await tachyon.say_and_wait(['乖孩子']);
+      await tachyon.say_and_wait(['我要送你一个东西']);
+      era.println();
+      await era.printAndWait(['然后，一阵天旋地转']);
+      await era.printAndWait([
+        you.get_colored_name(),
+        ' 被爱丽速子翻了过来，从原本的后背位，到现在 ',
+        you.get_colored_name(),
+        ' 的阴部，乳房，一切都暴露在速子面前，暴露在三女神的雕像前',
+      ]);
+      await era.printAndWait(['然而，没有什么好羞耻的']);
+      await era.printAndWait(['这是主人的赐与仪式']);
+      await era.printAndWait(['在三女神的见证下，赐予给自己的东西']);
+      era.println();
+      era.println();
+      await era.printAndWait(['速子从怀中，掏出了金闪闪的物体']);
+      await era.printAndWait(['小巧玲珑，闪烁着光芒的那个']);
+      await era.printAndWait(['上面刻着T字和自己名字的那个']);
+      await era.printAndWait(['————————是自己的训练员徽章']);
+      era.println();
+      await tachyon.say_and_wait([callname, '，我决定把这个，还给你']);
+      era.println();
+      await era.printAndWait(['速子庄重的说完后，俯下身']);
+      await era.printAndWait([
+        '不是将胸章在胸口别上———再说，',
+        you.get_colored_name(),
+        ' 的身上也没有任何可以别胸针的衣物',
+      ]);
+      await era.printAndWait([tachyon.sex, '朝向下方']);
+      await era.printAndWait([you.get_colored_name(), ' 下半身突起的象征']);
+      await era.printAndWait(['然后，', you.get_colored_name(), ' 看见了']);
+      await era.printAndWait(['胸章下方别针的部位已经不见，变成了一个套子']);
+      await era.printAndWait(['那是———————']);
+      era.println();
+      await tachyon.say_and_wait(['好了，这样就—————做好了']);
+      era.println();
+      await era.printAndWait(['爱丽速子欣赏着自己的杰作']);
+      await era.printAndWait(['在三女神的见证下，在月光下']);
+      await era.printAndWait([
+        '属于 ',
+        callname,
+        ' 的「贞操锁」反射着金色的光辉',
+      ]);
+    }
+    return [ret];
   },
 };

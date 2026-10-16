@@ -2,20 +2,29 @@ const era = require('#/era-electron');
 
 const { i18n } = require('#/i18n/selector');
 
-/** @returns {Promise<number>} */
-function select_action_in_atrium() {
+/**
+ * @param {boolean} evil_enabled 是否启用恶堕
+ * @returns {Promise<number>}
+ */
+function select_action_in_atrium(evil_enabled = false) {
   era.printInColRows(
     { columns: [{ content: i18n().ui_select_action_atrium, type: 'text' }] },
     {
       columns: [
         i18n().ui_action_atrium_tree_hollow,
         i18n().ui_action_atrium_date,
-      ].map((action, i) => ({
-        accelerator: i * 100,
-        config: { align: 'center', width: 12 },
-        content: action,
-        type: 'button',
-      })),
+        evil_enabled &&
+          (era.get('flag:恶堕') === 2
+            ? i18n().ui_action_atrium_uevil
+            : i18n().ui_action_atrium_devil),
+      ]
+        .filter((e) => e)
+        .map((action, i, l) => ({
+          accelerator: i * 100,
+          config: { align: 'center', width: 32 / l.length },
+          content: action,
+          type: 'button',
+        })),
     },
   );
   return era.input();
