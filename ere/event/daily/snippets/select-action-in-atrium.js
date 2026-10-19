@@ -20,8 +20,8 @@ function select_action_in_atrium(evil_enabled = false) {
       ]
         .filter((e) => e)
         .map((action, i, l) => ({
-          accelerator: i * 100,
-          config: { align: 'center', width: 32 / l.length },
+          accelerator: i + 1,
+          config: { align: 'center', width: 24 / l.length },
           content: action,
           type: 'button',
         })),

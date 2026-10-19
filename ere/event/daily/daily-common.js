@@ -241,13 +241,13 @@ class CustomizedDaily extends CustomizedEvent {
     let h;
     hook.arg = await select_action_in_atrium();
     switch (hook.arg) {
-      case 0:
+      case 1:
         h = this.s_a_tree_hollow;
         break;
-      case 1:
+      case 2:
         h = this.s_a_dating;
         break;
-      case 2:
+      case 3:
         h = this.s_a_d2evil;
     }
     await h.call(this, get_chara_talk(this.id), get_chara_talk(0), hook);
