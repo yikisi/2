@@ -112,7 +112,7 @@ module.exports = class extends CustomizedLove {
       1,
     );
     if (!new McqueenEduMarks().love_89) {
-      this.#kojo['pre-89']({ ...this.#dict, check: tenn_spr_check });
+      await this.#kojo['pre-89']({ ...this.#dict, check: tenn_spr_check });
       era.set(`cflag:${this.id}:爱慕暂拒`, 89);
     } else if (tenn_spr_check && stage === event_hooks.week_end) {
       const ret = await print_title_with_kojo(this.#kojo, '89', mcqueen, {
