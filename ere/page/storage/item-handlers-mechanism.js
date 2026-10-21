@@ -29,21 +29,20 @@ module.exports = (handlers) => {
         }
       }
     }
+    const called =
+      era.get('flag:目白城风格') === 1
+        ? era.get('flag:目白城变量')?.called || -1
+        : -1;
     for (const cid of chara_list) {
       const marks = EventMarks.get(cid);
       const raw = marks.raw();
+      const mejiro_mark = +(raw[event_hooks.out_mejiro] > 0 && called === cid);
       if (ev_dict[cid] === void 0) {
         for (const hook in raw) {
-          if (Number(hook) === event_hooks.out_mejiro) {
-            continue;
-          }
           marks.set(hook, 0);
         }
       } else {
         for (const hook in raw) {
-          if (Number(hook) === event_hooks.out_mejiro) {
-            continue;
-          }
           if (!ev_dict[cid][hook]) {
             marks.set(hook, 0);
           } else if (raw[hook] !== ev_dict[cid][hook]) {
@@ -56,6 +55,7 @@ module.exports = (handlers) => {
           }
         }
       }
+      marks.set(event_hooks.out_mejiro, mejiro_mark);
     }
 
     // 爱慕事件修复

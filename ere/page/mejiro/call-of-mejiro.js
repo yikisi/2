@@ -146,9 +146,7 @@ class CallOfMejiro extends MejiroCity {
     if (era.get('item:「恩宠」') === 0 || (this.called > 0 && this.san === 0)) {
       await i18n().timon.cum.misty_notify();
       if (this.called > 0) {
-        if (EventMarks.get(this.called).check(event_hooks.out_mejiro)) {
-          EventMarks.get(this.called).sub(event_hooks.out_mejiro);
-        }
+        EventMarks.get(this.called).set(event_hooks.out_mejiro, 0);
         this.called = 0;
       }
       await this.misty(chara, me);
@@ -454,7 +452,7 @@ class CallOfMejiro extends MejiroCity {
     ) {
       this.san = 0;
       await i18n().timon.cum.notify_called(get_chara_talk(this.called));
-      EventMarks.get(this.called).add(event_hooks.out_mejiro);
+      EventMarks.get(this.called).set(event_hooks.out_mejiro, 1);
     }
   }
 }
