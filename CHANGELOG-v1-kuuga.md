@@ -206,7 +206,7 @@ _2025/2/16_
 
 ## [EraUma v1.211 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.211)
 
-_2024/1/26_
+_2025/1/26_
 
 适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.4.0) 及以上版本
 
@@ -216,7 +216,7 @@ _2024/1/26_
 
 # [EraUma v1.21 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.21)
 
-_2024/1/26_
+_2025/1/26_
 
 适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.4.0) 及以上版本
 
