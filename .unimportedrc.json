@@ -13,6 +13,7 @@
     "res/**",
     "tools/**",
     "**/*.config.js",
-    "i18n-template/**"
+    "i18n-template/**",
+    "test/**"
   ]
 }
