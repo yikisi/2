@@ -18,7 +18,7 @@ module.exports = class extends CustomizedCheck {
     ) {
       add_event(
         event_hooks.week_end,
-        new EventObject(302, cb_enum.love).set_arg(49),
+        new EventObject(302, cb_enum.love, !0).set_arg(49),
       );
     }
     if (life_marks.annoyance > 0) {

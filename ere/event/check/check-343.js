@@ -41,7 +41,7 @@ module.exports = class extends CustomizedCheck {
     ) {
       add_event(
         event_hooks.week_end,
-        new EventObject(343, cb_enum.love, true).set_arg(49),
+        new EventObject(343, cb_enum.love, !0).set_arg(49),
       );
     }
     super.check_next_week();

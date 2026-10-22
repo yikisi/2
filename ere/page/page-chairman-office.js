@@ -316,7 +316,9 @@ async function page_chairman_office() {
                   case 4:
                     temp = -255;
                 }
-                if (temp === 302) {
+                if (!temp_list.includes(temp)) {
+                  await i18n().timon.others.star_drew_no_one(chara);
+                } else if (temp === 302) {
                   era.set('callname:302:-2', '900201');
                   era.set('cflag:302:招募状态', recruit_flags.yes);
                   if (era.get('talent:302:病娇') > 0) {
@@ -331,8 +333,6 @@ async function page_chairman_office() {
                       chara,
                       get_chara_talk(temp),
                     );
-                  } else if (!temp_list.includes(temp)) {
-                    await i18n().timon.others.star_drew_no_one(chara);
                   } else if (
                     (await i18n().timon.others.star_drew(
                       chara,
