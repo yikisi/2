@@ -1,8 +1,10 @@
-# [EraUma v3.14 (ryuki)](https://gitgud.io/umaera/erauma/-/releases/3.14)
+# [EraUma v3.2 (ryuki)](https://gitgud.io/umaera/erauma/-/releases/3.2)
 
-_incoming_
+_2026/10/23_
 
 适配 [EraElectron v4.8.5 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.8.5) 与 [ere.app v1.3.5 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.3.5) 及以上版本
+
+上版本 3.131 本应因为新口上内容的实装而推进到 3.2，本版本正本清源。
 
 ## Fixed
 
