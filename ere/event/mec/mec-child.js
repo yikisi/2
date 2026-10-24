@@ -9,7 +9,6 @@ const di18n = require('#/i18n/extended-def');
 
 class MecChild extends CustomizedMec {
   get_race_finish_report(uma, race_id) {
-    let func = super.get_race_finish_report;
     // CFLAGNAME:90 = 模版角色
     const src_chara = era.get(`cflag:${this.id}:90`);
     switch (src_chara) {
@@ -21,9 +20,12 @@ class MecChild extends CustomizedMec {
       case 33:
       case 34:
       case 52:
-        func = CustomizedMec.get_custom_mec(src_chara).get_race_finish_report;
+        return CustomizedMec.get_custom_mec(src_chara).get_race_finish_report(
+          uma,
+          race_id,
+        );
     }
-    return func.call(this, uma, race_id);
+    return super.get_race_finish_report(uma, race_id);
   }
 
   get_talents() {
