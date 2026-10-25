@@ -767,6 +767,9 @@ module.exports = async () => {
               }
               check_palace(50);
             }
+            if (version <= 3200) {
+              era.set('cflag:351:可再次育成', 1);
+            }
             if (version < era.get('gamebase').version) {
               added.forEach((cid) => {
                 if (
