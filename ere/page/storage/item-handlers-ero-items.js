@@ -97,7 +97,8 @@ module.exports = (handlers) => {
   handlers[37] = async (iid) => {
     const aim = await select_target_in_storage(
       iid,
-      (cid) => !era.get(`talent:${cid}:泌乳`),
+      (cid) =>
+        era.get(`cflag:${cid}:性别`) !== 1 && !era.get(`talent:${cid}:泌乳`),
     );
     if (aim !== void 0) {
       const aim_chara = get_chara_talk(aim);
