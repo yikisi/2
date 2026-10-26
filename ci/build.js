@@ -32,7 +32,7 @@ execSync('pnpm install', { cwd: engine_path });
 execSync('pnpm run win:pack', { cwd: engine_path });
 
 rmSync(game_all_dir, { force: true, recursive: true });
-renameSync(join(engine_path, 'dist_electron', 'win-unpacked'), game_all_dir);
+renameSync(join(engine_path, 'dist', 'win-unpacked'), game_all_dir);
 mkdirSync(join(game_all_dir, 'game'));
 [
   'ere',

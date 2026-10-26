@@ -3,16 +3,18 @@
  * @typedef ButtonConfig
  * @property {'left'|'center'|'right'} [align] align of the button, 'left' in default
  * @property {'dot'|string} [badge] badge of the button if isButton is true
+ * @property {'large'|'default'|'small'|''} [buttonSize] size of the button in element-plus, 'small' in default
  * @property {'primary'|'success'|'warning'|'danger'|'info'|''} [buttonType] type of the button in element-plus, 'warning' in default when isButton is false
  * @property {string} [color] color of the button, isButton must be false
  * @property {boolean} [disabled] if the button is disabled, false in default
  * @property {boolean} [disableContinue] if the continue is disabled after clicking the button, false in default
  * @property {boolean} [disableWarning] if disable warning when accelerator has been set, false in default
- * @property {string} [fontSize] font size of the text in the button
+ * @property {string} [fontSize] font size of the text in the button, '1rem' in default
+ * @property {boolean} [isFulfilled] if the button fills the whole width of its column, false in default
  * @property {'left'|'center'|'right'} [inTextAlign] align of the text in the button, 'center' in default
  * @property {boolean} [isButton] if the button is a button, otherwise is a link
  * @property {number} [offset] offset of the button, 0-23, 0 in default
- * @property {boolean} [showAcc] if show the accelerator, true in default on PC, and is always false on Android
+ * @property {boolean} [showAcc] if show the accelerator, true in default on PC, and is always false on Android; when false, the text of a link is wrapped in brackets, while the text of a button is not
  * @property {string} [title] tooltip of the button
  * @property {number} [width] width of the button, 1-24, 24 in default
  */
@@ -116,7 +118,6 @@
  * @property {string|string[]} names
  * @property {'image.whole'} type
  */
-
 /**
  * @typedef {ButtonObject|DividerObject|ImageObject|ProgressObject|TextObject|WholeImageObject} GridObject
  */
@@ -139,7 +140,6 @@
 /**
  * @typedef {'topleft'|'topcenter'|'top'|'topright'|'centerleft'|'left'|'center'|'centerright'|'right'|'bottomleft'|'bottomcenter'|'bottom'|'bottomright'|1|2|3|4|5|6|7|8|9} OBPosition
  */
-
 /**
  * @typedef KojoFunction
  * @type {function(Record<string,any>=):(number[]|Promise<number[]>)}
@@ -156,7 +156,6 @@ const era = {
    * @param {any} val REQUIRED the value to be added
    * @returns {any|undefined} the new value of the variable, or undefined if failed
    */
-
   add(varName, val) {},
   /**
    * add some characters
@@ -164,33 +163,28 @@ const era = {
    *     <br>each id may be an array [dstId, srcId], which means add the character dstId with the data of the character srcId
    * @returns {boolean | boolean[]}
    */
-
   addCharacter(...charaId) {},
   /**
    * initialize data of some characters for training
    * @param {...number} charaId REQUIRED ids of the characters defined in chara*.csv
    * @returns {void} */
-
   addCharacterForTrain(...charaId) {},
   /**
    * initialize training and character data
    * @param {...number} charaId REQUIRED ids of the characters defined in chara*.csv
    */
-
   beginTrain(...charaId) {},
   /**
    * check if a or some images are loaded
    * @param {...string} names REQUIRED names of the images
    * @returns {boolean|boolean[]} if there is only one name, returns a boolean; otherwise an array of boolean
    */
-
   checkImage(...names) {},
   /**
    * clear printed lines
    * @param {number} [lineCount] how many lines to be cleared, leave undefined to clear all
    * @returns {Promise<number>} new line count
    */
-
   async clear(lineCount) {},
   /**
    * make the current function to wait for some time
@@ -209,7 +203,6 @@ const era = {
    * @param {DividerConfig} [config] config of the line
    * @returns {number} line number of the printed
    */
-
   drawLine(config) {},
   /**
    * end training, add gotjewel table into jewel table, and destroy temporary data
@@ -220,7 +213,6 @@ const era = {
    * @param {string} varName REQUIRED the name of variable, String, like 'callname:1:2'
    * @returns {any|undefined} the variable, or undefined if failed
    */
-
   get(varName) {},
   /**
    * get all added characters
@@ -248,10 +240,10 @@ const era = {
    * @param {boolean} config.[disableBefore] if disable before buttons
    * @param {boolean} config.[hideInput] if hide the input content
    * @param {string} config.[rule] the regex string of the rule
+   * @param {'keydown'|'keyup'} config.[trigger] when the input resolves, uses the global trigger in default
    * @param {boolean} config.[useRule] if use the rule
    * @returns {Promise<any>} a promise of the user input, please use await
    */
-
   async input(config) {},
   /**
    * check if is debug mode
@@ -269,7 +261,6 @@ const era = {
    * @param {number} savIndex REQUIRED the index of the save file
    * @returns {Promise<boolean>} if the loading succeeds
    */
-
   async loadData(savIndex) {},
   /**
    * load global variables from save file
@@ -353,7 +344,6 @@ const era = {
    * @param {'success'|'info'|'warning'|'error'|''} [type] type of the notification, see the enum
    * @param {number} [duration] duration of the notification, millisecond, 5000 in default
    */
-
   notify(content, title, type, duration) {},
   /**
    * play the music that must be declared in csv files in directory res
@@ -364,7 +354,6 @@ const era = {
    * @param {number} config.[fadeInternal] the interval of fade-in and fade-out, millisecond, 100-500, 100 in default
    * @returns {boolean} if the playing succeeds
    */
-
   playMusic(names, config) {},
   /**
    * print some text
@@ -372,15 +361,14 @@ const era = {
    * @param {TextConfig} [config] config of the printed line
    * @returns {number} line number of the printed line
    */
-
   print(content, config) {},
   /**
    * print some text and wait any key from user
    * @param {TextContent} content REQUIRED the text to be printed
    * @param {TextConfig} [config] config of the printed line
+   * @param {'keydown'|'keyup'} config.[trigger] when the input resolves, uses the global trigger in default
    * @returns {Promise<number>} line number of the printed line
    */
-
   async printAndWait(content, config) {},
   /**
    * print a button
@@ -389,14 +377,12 @@ const era = {
    * @param {ButtonConfig} [config] config of the printed button
    * @returns {number} line number of the printed
    */
-
   printButton(content, accelerator, config) {},
   /**
    * print images that must be declared in csv files in directory res
    * @param {...string} names REQUIRED image names, a name may contain several alternatives split by '\t'
    * @returns {number} line number of the printed
    */
-
   printImage(...names) {},
   /**
    * @param {...ColumnObject|GridObject[]} columnObjects
@@ -408,7 +394,6 @@ const era = {
    * @see printProgress
    * @see printWholeImage
    */
-
   printInColRows(...columnObjects) {},
   /**
    * print a line chart by chart.js
@@ -417,7 +402,6 @@ const era = {
    * @param {Object} config REQUIRED config of the line chart, see chart.js
    * @returns {number} line number of the printed
    */
-
   printLineChart(config) {},
   /**
    * print multiple columns into a row, excluding inputs
@@ -431,7 +415,6 @@ const era = {
    * @see printProgress
    * @see printWholeImage
    */
-
   printMultiColumns(columnObjects, config) {},
   /**
    * print a progress bar
@@ -441,7 +424,6 @@ const era = {
    * @param {ProgressConfig} [config] config of the printed progress
    * @returns {number} line number of the printed
    */
-
   printProgress(percentage, inContent, outContent, config) {},
   /**
    * print the whole image
@@ -449,7 +431,6 @@ const era = {
    * @param {WholeImageConfig} [config]
    * @returns {number} line number of the printed
    */
-
   printWholeImage(names, config) {},
   /**
    * print a line break, if just used to print enter at the end of a line, please use print('*** \n') to replace
@@ -463,14 +444,12 @@ const era = {
    * @param {...number} charaId REQUIRED ids of the characters defined in chara*.csv
    * @returns {void}
    */
-
   removeCharacter(...charaId) {},
   /**
    * DANGER replace the line just printed with a new in-col-row line
    * @param {...ColumnObject|GridObject[]} columnObjects
    * @returns {number} line number of the printed
    */
-
   replaceInColRows(...columnObjects) {},
   /**
    * DANGER replace the line just printed with a new text line
@@ -478,7 +457,6 @@ const era = {
    * @param {TextConfig} [config] config of the printed line
    * @returns {number} line number of the printed
    */
-
   replaceText(content, config) {},
   /**
    * reset the data of a character
@@ -486,7 +464,6 @@ const era = {
    *     <br>each id may be an array [dstId, srcId], which means reset the character dstId with the data of the character srcId
    * @returns {void}
    */
-
   resetCharacter(...charaId) {},
   /**
    * reset all data of the save
@@ -505,7 +482,6 @@ const era = {
    * @param {number} savIndex REQUIRED the index of the save file
    * @returns {Promise<boolean>} if the removing succeeds
    */
-
   async rmData(savIndex) {},
   /**
    * save data into a save file
@@ -513,7 +489,6 @@ const era = {
    * @param {string} [comment] the comment of the save
    * @returns {Promise<boolean>} if the saving succeeds
    */
-
   async saveData(savIndex, comment) {},
   /**
    * save global variables into save file
@@ -527,14 +502,12 @@ const era = {
    * @param {T} val REQUIRED the new value of the variable
    * @returns {T} the new value of the variable, or undefined if failed
    */
-
   set(varName, val) {},
   /**
    * set default text-align
    * @param {'center'|'left'|'right'} textAlign REQUIRED the text-align: center, left or right used in usual
    * @returns {void}
    */
-
   setAlign(textAlign) {},
   /**
    * @param {string} [name] set undefined to clear background
@@ -543,34 +516,29 @@ const era = {
    * @param {OBPosition} config.[position]
    * @param {'contain'|'cover'|'fit'|string} config.[fit]
    */
-
   setBack(name, config) {},
   /**
    * Set default text color.
    * @param {string} [color]
    */
-
   setColor(color) {},
   /**
    * set default horizontal align of inColRows
    * @param {'start'|'end'|'center'|'space-around'|'space-between'|'space-evenly'} align REQUIRED the horizontal align: start (default), end, center, space-around, space-between or space-evenly
    * @returns {void}
    */
-
   setHorizontalAlign(align) {},
   /**
    * @deprecated replaced with setOverlay
    * @param {string} [name] set undefined to clear the mask
    * @param {Object|number} [config] config of the mask, or opacity in old versions
    */
-
   setMask(name, config) {},
   /**
    * set default offset
    * @param {number} offset REQUIRED an integer between 0 and 23
    * @returns {void}
    */
-
   setOffset(offset) {},
   /**
    * @param {string} [name] set undefined to clear overlay
@@ -579,14 +547,12 @@ const era = {
    * @param {OBPosition} config.[position]
    * @param {'contain'|'cover'|'fit'|string} config.[fit]
    */
-
   setOverlay(name, config) {},
   /**
    * set the title of the window
    * @param {string} title REQUIRED
    * @returns {void}
    */
-
   setTitle(title) {},
   /**
    * print an empty block and make the following lines shown in the bottom
@@ -594,18 +560,22 @@ const era = {
    */
   setToBottom() {},
   /**
+   * set the global trigger of inputs
+   * @param {'keydown'|'keyup'} trigger REQUIRED when the input resolves, 'keydown' in default
+   * @returns {void}
+   */
+  setTrigger(trigger) {},
+  /**
    * set default vertical align of inColRows
    * @param {'top'|'middle'|'bottom'} align REQUIRED the vertical align: top (default), middle or bottom
    * @returns {void}
    */
-
   setVerticalAlign(align) {},
   /**
    * set default width
    * @param {number} width REQUIRED an integer between 1 and 24
    * @returns {void}
    */
-
   setWidth(width) {},
   /** pause the music in the playing */
   stopMusic() {},
@@ -614,12 +584,14 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.8.5', engine: void 0 },
+  version: { sdk: '5.1.0', engine: void 0 },
   /**
    * wait any key from user
+   * @param {Object} [config] config of the wait
+   * @param {'keydown'|'keyup'} config.[trigger] when the input resolves, uses the global trigger in default
    * @returns {Promise<void>} a promise of nothing, please use await
    */
-  async waitAnyKey() {},
+  async waitAnyKey(config) {},
 };
 
 Object.keys(era).forEach((key) => {

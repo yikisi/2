@@ -6,6 +6,7 @@ const requireSort = require('eslint-plugin-require-sort');
 const sortRequiresByPath = require('eslint-plugin-sort-requires-by-path');
 
 module.exports = [
+  { ignores: ['engine/**', 'common/**', 'res/**'] },
   nodePlugin.configs['flat/recommended'],
   eslint.configs.recommended,
   {
