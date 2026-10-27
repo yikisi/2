@@ -398,7 +398,7 @@ rec0:
     - …………
     -
     - acc: 1
-      rec: recruit
+      key: recruit
       content: 「什么态度啊……」（放弃招募）
       lines:
         - 这家伙什么态度啊……

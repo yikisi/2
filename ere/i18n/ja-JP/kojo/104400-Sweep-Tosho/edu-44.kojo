@@ -1736,7 +1736,7 @@ ws_valentine_c:
           content: %CHARA%
         - 「あっ！やっぱり同意したでしょ！さすが私の%CALLNAME%！」
     -
-     - ……本当はそういう意味ではないのに、%CHARA%は%YOU%が説明する前に、%YOU%の手のチョコを奪い取る
+    - ……本当はそういう意味ではないのに、%CHARA%は%YOU%が説明する前に、%YOU%の手のチョコを奪い取る
     - それから、遠慮なく%YOU%が用意したきれいな箱を開けてしまう……
     -
     - color: %COLOR%
@@ -1912,9 +1912,9 @@ rs_oka_sho:
 re_oka_sho_win:
   title: 桜花賞後・桜の魔力
   lines:
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……ここ、どこ？」
@@ -1937,12 +1937,11 @@ re_oka_sho_win:
     - fontStyle: italic
       content: 現れただけで、穏やかな印象を与える
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
-          color: %COLOR%
           content: 「！あなたは！？」
     - fontStyle: italic
       content: %CHARA%は目の前の魔法使いを、驚喜の目で見る
@@ -2014,12 +2013,11 @@ re_oka_sho_win:
 re_oka_sho_lose:
   title: 桜花賞後・魔法のもう一面
   lines:
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
-          color: %COLOR%
           content: 「……ここ、どこ？」
     - fontStyle: italic
       content: 気づかないうちに、レースは静かに終わっていた
@@ -2041,12 +2039,11 @@ re_oka_sho_lose:
     - fontStyle: italic
       content: %CHARA%の到来に気づき、魔法使いはゆっくり、力を振り絞って頭を上げ、%CHARA%を見る
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
-          color: %COLOR%
           content: 「あなた……は？」
     - fontStyle: italic
       content: %CHARA%は、目の前の弱った魔法使いを、慎重に見る
@@ -2877,8 +2874,8 @@ rs_eliz_cup_c:
     -
     - 心の中では、%SEX%と同じ不安があるのかもしれない
     - でもともかく、やはりこう答えるべきだ——
-    - - acc: 1
-        content: 「スイープは、誰にも負けないよ」
+    - acc: 1
+      content: 「スイープは、誰にも負けないよ」
     - 短く、はっきり答える。
     -
     - color: %COLOR%
@@ -2952,8 +2949,8 @@ re_eliz_cup_win_c:
     -
     - 薄暗い明かりの下、少し先の隅で、%YOU%は覗き出た洋帽子と、そこから投げられた紙を見た気がした——
     - 風に乗って、その紙が突然%YOU%の視界を覆う
-    - - acc: 1
-        content: 「……！！」
+    - acc: 1
+      content: 「……！！」
     - 紙を取って手に置くと、きれいな字が書いてある
     -
     - content: 本当にごめんね。おばあちゃん、今日は用事があって行けなくて、入口で待たせてしまったわ
@@ -4139,9 +4136,9 @@ ws_md_w_1:
     - fontStyle: italic
       content: 父親は、慎重に聞く
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「やだ。」
@@ -4155,9 +4152,9 @@ ws_md_w_1:
         - fontStyle: italic
           content: 「スイープ、このぬいぐるみ、欲しい？」
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……」
@@ -4186,9 +4183,9 @@ ws_md_w_1:
     - fontStyle: italic
       content: 目の前に赫然と現れたのは、鮮やかな薔薇、たくさん、たくさん
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……！！！」
@@ -4211,15 +4208,15 @@ ws_md_w_1_end:
 ws_md_w_2:
   sync: true
   lines:
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……ねえ。%CALLNAME%。」
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「おんぶ。」
@@ -4233,15 +4230,15 @@ ws_md_w_2:
     - fontStyle: italic
       content: 「……別の道、行かない？」
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「やだ。」
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「ここから行くの。」
@@ -4251,9 +4248,9 @@ ws_md_w_2:
     - fontStyle: italic
       content: こうして%YOU%は、小さな%UMA%をおんぶしたまま、びっしりの茨道の前に立つしかなかった
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「行って。」
@@ -4310,9 +4307,9 @@ ws_md_w_2_end:
 ws_md_w_3:
   sync: true
   lines:
-    - content:
-        - color: %COLOR_47%
-          fontWeight: bold
+    - color: %COLOR_47%
+      content:
+        - fontWeight: bold
           content: %ZOB_ZOY%
         - fontStyle: italic
           content: 「スイープさんほどすごいなら、
@@ -4322,9 +4319,9 @@ ws_md_w_3:
         - fontStyle: italic
           content: 、ではだめですか？」
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……！」
@@ -4332,28 +4329,28 @@ ws_md_w_3:
     - fontStyle: italic
       content: %YOU%は、この思いつきの小さな%UMA%に、また無理矢理トレーニング場へ引き戻される
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「おばあちゃんの目の『走る魔法』なんて、どうでもいい」
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「今日から、天才%MOHOSHOJO%sweepyは、自分の魔法を『創る』んだから！」
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「ふんふん～おばあちゃんは、私のこの『魔法を創る』才能を見て、あの話をしたに決まってる！」
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「見てなさい%CALLNAME%！次のこの魔法、一回しか使わないから！」

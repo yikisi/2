@@ -398,7 +398,7 @@ rec0:
     - …………
     -
     - acc: 1
-      rec: recruit
+      key: recruit
       content: "「태도가 왜 저래……」（영입을 포기한다）"
       lines:
         - "태도가 왜 저래……"

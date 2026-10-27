@@ -1912,9 +1912,9 @@ rs_oka_sho:
 re_oka_sho_win:
   title: "벚꽃상 후·벚꽃의 마력"
   lines:
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「……여기는 어디야?」"
@@ -1937,12 +1937,11 @@ re_oka_sho_win:
     - fontStyle: italic
       content: "등장하는 것만으로도 온화한 인상을 준다."
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
-          color: %COLOR%
           content: "「! 너는!?」"
     - fontStyle: italic
       content: "%CHARA%는 놀랍고 기쁜 눈으로 눈앞의 마법사를 본다."
@@ -2014,12 +2013,11 @@ re_oka_sho_win:
 re_oka_sho_lose:
   title: "벚꽃상 후·마법의 또 다른 이면"
   lines:
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
-          color: %COLOR%
           content: "「……여기는 어디야?」"
     - fontStyle: italic
       content: "어느새 레이스는 조용히 끝나 있었다."
@@ -2041,12 +2039,11 @@ re_oka_sho_lose:
     - fontStyle: italic
       content: "%CHARA%가 온 것을 알아차린 마법사는 힘을 짜내 천천히 고개를 들고 %CHARA%를 본다."
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
-          color: %COLOR%
           content: "「너는…… 누구야?」"
     - fontStyle: italic
       content: "%CHARA%는 눈앞의 쇠약해진 마법사를 조심스럽게 본다."
@@ -2877,8 +2874,8 @@ rs_eliz_cup_c:
     -
     - "마음속에는 %SEX%와 같은 불안이 있을지도 모른다."
     - "하지만 아무튼, 역시 이렇게 대답해야 한다——"
-    - - acc: 1
-        content: "「스윕은 누구에게도 지지 않아.」"
+    - acc: 1
+      content: "「스윕은 누구에게도 지지 않아.」"
     - "짧고 분명하게 대답한다."
     -
     - color: %COLOR%
@@ -2952,8 +2949,8 @@ re_eliz_cup_win_c:
     -
     - "어스름한 불빛 아래, %YOU%은(는) 조금 떨어진 모퉁이에서 살짝 내민 양장 모자와 그곳에서 던져진 종이를 본 듯했다——"
     - "바람을 타고 날아온 종이가 갑자기 %YOU%의 시야를 가린다."
-    - - acc: 1
-        content: 「……！！」
+    - acc: 1
+      content: 「……！！」
     - "종이를 붙잡아 손에 올리니 단정한 글씨가 적혀 있다."
     -
     - content: "정말 미안하구나. 할머니가 오늘 일이 생겨 못 가는 바람에 입구에서 기다리게 했네."
@@ -4139,9 +4136,9 @@ ws_md_w_1:
     - fontStyle: italic
       content: "아버지가 조심스럽게 묻는다."
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「싫어.」"
@@ -4155,9 +4152,9 @@ ws_md_w_1:
         - fontStyle: italic
           content: "「스윕, 이 봉제 인형 갖고 싶어?」"
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……」
@@ -4186,9 +4183,9 @@ ws_md_w_1:
     - fontStyle: italic
       content: "눈앞에 빛깔이 선명한 장미가 수없이, 수없이 나타났다."
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……!!!」
@@ -4211,15 +4208,15 @@ ws_md_w_1_end:
 ws_md_w_2:
   sync: true
   lines:
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「……있잖아. %CALLNAME%.」"
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「업어 줘.」"
@@ -4233,15 +4230,15 @@ ws_md_w_2:
     - fontStyle: italic
       content: "「……다른 길로 가면 안 될까?」"
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「싫어.」"
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「여기로 갈 거야.」"
@@ -4251,9 +4248,9 @@ ws_md_w_2:
     - fontStyle: italic
       content: "그렇게 %YOU%은(는) 자그마한 %UMA%를 업은 채 빽빽한 가시밭길 앞에 설 수밖에 없었다."
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「가.」"
@@ -4310,9 +4307,9 @@ ws_md_w_2_end:
 ws_md_w_3:
   sync: true
   lines:
-    - content:
-        - color: %COLOR_47%
-          fontWeight: bold
+    - color: %COLOR_47%
+      content:
+        - fontWeight: bold
           content: %ZOB_ZOY%
         - fontStyle: italic
           content: "「스윕 씨처럼 대단한 분이라면, "
@@ -4322,9 +4319,9 @@ ws_md_w_3:
         - fontStyle: italic
           content: "은 어떨까요?」"
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……!」
@@ -4332,28 +4329,28 @@ ws_md_w_3:
     - fontStyle: italic
       content: "%YOU%은(는) 새로운 생각이 떠오른 이 작은 %UMA%에게 끌려 또다시 트레이닝장으로 돌아왔다."
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「그랜마가 말한 『달리는 마법』 같은 건 아무래도 좋아.」"
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「오늘부터 천재 %MOHOSHOJO% 스위피는 나만의 마법을 『만들』 거니까!」"
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「흐흥~ 그랜마는 내 『마법을 만드는』 재능을 알아보고 그런 말을 한 게 틀림없어!」"
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: "「잘 봐, %CALLNAME%! 지금부터 보여 줄 마법은 딱 한 번만 쓸 거니까!」"

@@ -1913,9 +1913,9 @@ rs_oka_sho:
 re_oka_sho_win:
   title: 樱花赏后·樱花的魔力
   lines:
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……这里是哪里？」
@@ -1938,12 +1938,11 @@ re_oka_sho_win:
     - fontStyle: italic
       content: 一出现，就给人一种温婉的印象
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
-          color: %COLOR%
           content: 「！你是！？」
     - fontStyle: italic
       content: %CHARA%惊喜地看着眼前的魔法师
@@ -2015,12 +2014,11 @@ re_oka_sho_win:
 re_oka_sho_lose:
   title: 樱花赏后·魔法的另一面
   lines:
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
-          color: %COLOR%
           content: 「……这里是哪里？」
     - fontStyle: italic
       content: 不知不觉中，比赛悄然结束了
@@ -2042,12 +2040,11 @@ re_oka_sho_lose:
     - fontStyle: italic
       content: 察觉到%CHARA%的到来，魔法师缓缓地，竭力地抬起头来，看向%CHARA%
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
-          color: %COLOR%
           content: 「你……是？」
     - fontStyle: italic
       content: %CHARA%小心翼翼地看向眼前这名虚弱的魔法师
@@ -2879,8 +2876,8 @@ rs_eliz_cup_c:
     -
     - 或许心里确实有着和%SEX%一样的忐忑
     - 但不管怎么样，果然还是要回答——
-    - - acc: 1
-        content: 「变革不会输给别人的」
+    - acc: 1
+      content: 「变革不会输给别人的」
     - 只是简明而坚定地回复。
     -
     - color: %COLOR%
@@ -2954,8 +2951,8 @@ re_eliz_cup_win_c:
     -
     - 昏暗的灯光下，在不远的角落，%YOU%似乎看到探出的一顶洋帽，和一张从洋帽处抛出的纸——
     - 顺着风儿，那张纸突然遮蔽了%YOU%的视野
-    - - acc: 1
-        content: 「……！！」
+    - acc: 1
+      content: 「……！！」
     - 将纸张取下，放在手中，上面有着清秀的字迹
     -
     - content: 非常抱歉，奶奶今天有事不能来，害你在门口等着辛苦了
@@ -4144,9 +4141,9 @@ ws_md_w_1:
     - fontStyle: italic
       content: 父亲，小心翼翼地问道
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「不要。」
@@ -4160,9 +4157,9 @@ ws_md_w_1:
         - fontStyle: italic
           content: 「变革，这个玩偶的话，会想要吗？」
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……」
@@ -4191,9 +4188,9 @@ ws_md_w_1:
     - fontStyle: italic
       content: 赫然出现在眼前的，是许多许多支鲜艳的玫瑰
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……！！！」
@@ -4216,15 +4213,15 @@ ws_md_w_1_end:
 ws_md_w_2:
   sync: true
   lines:
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……喂。%CALLNAME%。」
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「背我。」
@@ -4238,15 +4235,15 @@ ws_md_w_2:
     - fontStyle: italic
       content: 「我们……换条路怎么样？」
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「不要。」
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「我就要从这里过去。」
@@ -4256,9 +4253,9 @@ ws_md_w_2:
     - fontStyle: italic
       content: 就这样，%YOU%只好背着小%UMA%，站在密密麻麻的荆棘道前边
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「走。」
@@ -4315,9 +4312,9 @@ ws_md_w_2_end:
 ws_md_w_3:
   sync: true
   lines:
-    - content:
-        - color: %COLOR_47%
-          fontWeight: bold
+    - color: %COLOR_47%
+      content:
+        - fontWeight: bold
           content: %ZOB_ZOY%
         - fontStyle: italic
           content: 「像变革同学那么厉害的话，
@@ -4327,9 +4324,9 @@ ws_md_w_3:
         - fontStyle: italic
           content: ，不就好了吗？」
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「……！」
@@ -4337,28 +4334,28 @@ ws_md_w_3:
     - fontStyle: italic
       content: %YOU%被这名突发奇想的小%UMA%又硬生生地拉回到了训练场
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「奶奶眼中的『赛跑的魔法』怎么样都好」
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「从今天起，天才%MOHOSHOJO%sweepy，就要『创造』属于自己的魔法！」
     -
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「哼哼～奶奶一定是看到了我这份『创造魔法』的潜力，才对我说出那番话的！」
-    - content:
-        - color: %COLOR%
-          fontWeight: bold
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
           content: %CHARA%
         - fontStyle: italic
           content: 「看好了%CALLNAME%！接下来的这个魔法，我只用一次！」

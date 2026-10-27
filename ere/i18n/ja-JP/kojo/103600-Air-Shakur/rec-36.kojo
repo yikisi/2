@@ -398,7 +398,7 @@ rec0:
     - …………
     -
     - acc: 1
-      rec: recruit
+      key: recruit
       content: 「何なんだ、その態度は……」（募集を諦める）
       lines:
         - 何なんだ、その態度は……
