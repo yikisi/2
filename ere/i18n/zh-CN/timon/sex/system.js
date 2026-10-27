@@ -680,6 +680,7 @@ module.exports = {
   unsatisfied_penis: '处于在极限边缘的肉棒仍渴望着出击……',
   unsatisfied_clitoris: '完全肿起的通红豆豆妖艳而痛苦……',
   unsatisfied_vagina: '翕动的小穴泛起阵阵热气……',
+  unsatisfied_anal: '屁穴一张一合地用热气诉说着饥渴……',
   unsatisfied_sadism: '即将因施虐而感受的快乐仍然挥之不去……',
   unsatisfied_sadism_zero_stamina: '施虐的梦境袭扰了逐渐静息的身体……',
   unsatisfied_masochism: '即将因受虐而感受的快乐仍然挥之不去……',

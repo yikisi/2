@@ -98,7 +98,7 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
     buffer.push(
       {
         config: { width: 4 },
-        content: i18n().sex.get_jewel_row_start(i18n().tb_param.jewel14),
+        content: i18n().sex.get_jewel_row_start(i18n().tb_param.jewel15),
         type: 'text',
       },
       {

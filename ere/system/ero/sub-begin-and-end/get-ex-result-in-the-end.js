@@ -17,27 +17,24 @@ const { __, i18n, lan } = require('#/i18n/selector');
  * @param {string} unsatisfied_desc
  */
 function fill_part_ex(cid, buffer, pid, unsatisfied_desc) {
-  const ret = [];
   const pname = i18n('zh-CN').tb_param[part2jid[pid]];
   const ex = era.get(`ex:${cid}:${pname}高潮`);
   const unknown_ex = era.get(`ex:${cid}:无自觉${pname}高潮`);
-  ret.push(
-    i18n().sex.get_part_orgasm(
-      __(`body_part.${part_enum.keys[pid]}`),
-      ex > 0 && {
-        ...get_abbr_number(ex),
-        color: palam_colors.notifications[1],
-      },
-      unknown_ex > 0 && {
-        ...get_abbr_number(unknown_ex),
-        color: palam_colors.notifications[1],
-      },
-      era.get(`palam:${cid}:${pname}快感`) >
-        era.get(`tcvar:${cid}:${pname}快感上限`) * lust_palam_border &&
-        unsatisfied_desc,
-    ),
+  const ret = i18n().sex.get_part_orgasm(
+    __(`body_part.${part_enum.keys[pid]}`),
+    ex > 0 && {
+      ...get_abbr_number(ex),
+      color: palam_colors.notifications[1],
+    },
+    unknown_ex > 0 && {
+      ...get_abbr_number(unknown_ex),
+      color: palam_colors.notifications[1],
+    },
+    era.get(`palam:${cid}:${pname}快感`) >
+      era.get(`tcvar:${cid}:${pname}快感上限`) * lust_palam_border &&
+      unsatisfied_desc,
   );
-  if (ret.length) {
+  if (ret.length > 0) {
     buffer.push({
       config: { offset: 1, width: 23 },
       content: ret,
@@ -246,7 +243,12 @@ function get_ex_result_in_the_end(cid) {
         type: 'text',
       });
     }
-    fill_part_ex(cid, buffer, part_enum.anal, '屁穴一张一合地用热气诉说着饥渴');
+    fill_part_ex(
+      cid,
+      buffer,
+      part_enum.anal,
+      i18n().timon.ero_sys.unsatisfied_anal,
+    );
     fill_spirit_ex(cid, buffer, part_enum.sadism);
     fill_spirit_ex(cid, buffer, part_enum.masochism);
   }
