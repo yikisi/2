@@ -10,9 +10,9 @@ const { item_enum } = require('#/data/ero/item-const');
 const { part_enum } = require('#/data/ero/part-const');
 
 module.exports = {
-  /**
-   * 选择 [邀请上床] 之后的系统级地文演出
-   */
+  // ----------------------------------------------------------------
+  // 选择 [邀请上床] 之后的系统级地文演出
+  // ----------------------------------------------------------------
 
   /** 选择性爱后结束当前回合的按钮 */
   bt_back_home: '邀请过夜',
@@ -246,9 +246,9 @@ module.exports = {
   /** 选择睡奸 */
   bt_rape_in_sleeping: '袭击！',
 
-  /**
-   * 使用道具
-   */
+  // ----------------------------------------------------------------
+  // 使用道具
+  // ----------------------------------------------------------------
   lub_select_target: '要给谁使用润滑液？',
   select_entry_template: '%ITEM% (%COUNT%)',
   /** @param {CharaTalk} you */
@@ -618,9 +618,9 @@ module.exports = {
     return actions;
   },
 
-  /**
-   * 榨乳结算
-   */
+  // ----------------------------------------------------------------
+  // 榨乳结算
+  // ----------------------------------------------------------------
   /**
    * @param {PrintedSpan} amount
    * @param {string} item
@@ -680,6 +680,7 @@ module.exports = {
   unsatisfied_penis: '处于在极限边缘的肉棒仍渴望着出击……',
   unsatisfied_clitoris: '完全肿起的通红豆豆妖艳而痛苦……',
   unsatisfied_vagina: '翕动的小穴泛起阵阵热气……',
+  unsatisfied_anal: '屁穴一张一合地用热气诉说着饥渴……',
   unsatisfied_sadism: '即将因施虐而感受的快乐仍然挥之不去……',
   unsatisfied_sadism_zero_stamina: '施虐的梦境袭扰了逐渐静息的身体……',
   unsatisfied_masochism: '即将因受虐而感受的快乐仍然挥之不去……',
