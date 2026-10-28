@@ -514,7 +514,7 @@ module.exports = class extends CustomizedDaily {
       get_inner_urara(),
       sys_get_colored_callname(this.id, 0),
       era.get('exp:52:生产次数') +
-        (era.get('cflag:52:妊娠状态') >> pregnant_stage_enum.embryo > 0),
+        (era.get('cflag:52:妊娠阶段') >> pregnant_stage_enum.embryo > 0),
       check_high_relation(),
     );
   }

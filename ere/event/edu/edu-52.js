@@ -418,8 +418,8 @@ module.exports = class extends CustomizedEdu {
             break;
           case 3:
             era.set(
-              'talent:52:练习X手',
-              Math.min(era.get('talent:52:练习X手') + 1, 2),
+              'status:52:练习X手',
+              Math.min(era.get('status:52:练习X手') + 1, 2),
             );
             temp.fill(2);
         }

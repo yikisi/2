@@ -13,7 +13,7 @@ module.exports = {
   async zero_stamina(urara, you) {
     if (Math.random() < 0.5) {
       await urara.say_and_wait('……あっ……あっ……');
-      if (era.get('flag:主导权') === 0) {
+      if (era.get('tflag:主导权') === 0) {
         await era.printAndWait([
           '壊された人形のように、気絶した ',
           urara.get_colored_name(),
@@ -30,7 +30,7 @@ module.exports = {
       }
     } else {
       await urara.say_and_wait('……');
-      if (era.get('flag:主导权') === 0) {
+      if (era.get('tflag:主导权') === 0) {
         await era.printAndWait([
           '全身が力なく解け、',
           you.get_colored_name(),

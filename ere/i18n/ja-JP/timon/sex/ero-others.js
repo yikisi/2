@@ -703,7 +703,7 @@ module.exports = {
         you.get_colored_name(),
         ` が${chara.sex}に何をしようとしているか、まったく気づいていない……`,
       ]);
-    } else if (era.get(`mark:${chara.id}:反抗刻印`)) {
+    } else if (era.get(`mark:${chara.id}:反抗`)) {
       await era.printAndWait([
         chara.get_colored_name(),
         ' は冷たく ',

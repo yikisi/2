@@ -280,7 +280,7 @@ module.exports = (handlers) => {
       new EroParticipant(extra_flag.supporter, part_enum.mouth),
       new EroParticipant(
         attacker,
-        era.get(`talent:${attacker}:阴道尺寸`) > 0 &&
+        era.get(`cflag:${attacker}:阴道尺寸`) > 0 &&
           !era.get(`status:${attacker}:弗隆K`) &&
           !era.get(`status:${attacker}:弗隆P`)
           ? part_enum.clitoris

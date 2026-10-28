@@ -214,7 +214,7 @@ async function cum_shop(chara, me) {
               }
               if (
                 era.get(`talent:${target.id}:处女`) === vp_status_enum.no &&
-                era.get(`talent:${target.id}:妊娠阶段`) ===
+                era.get(`cflag:${target.id}:妊娠阶段`) ===
                   1 << pregnant_stage_enum.no
               ) {
                 buttons.push({

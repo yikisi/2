@@ -439,7 +439,7 @@ module.exports = {
     );
     await tachyon.say_and_wait('濃い匂いですわ❤️');
     await tachyon.say_and_wait('存分に、私にかけてくださいまし❤️');
-    if (era.get('tcvar:32:喜欢责骂') || era.get('tcvar:32:喜欢痛苦')) {
+    if (era.get('talent:32:喜欢责骂') || era.get('talent:32:喜欢痛苦')) {
       await tachyon.say_and_wait(
         '雑巾のように、好きに拭き取っても構いませんわ❤️',
       );

@@ -89,7 +89,7 @@ handlers[ero_hooks.prison] = (cid) => {
     era.set(`talent:${cid}:病娇`, 2);
     life_marks.yandere = get_random_value(
       2,
-      (era.get('flag:极端行为') * 2 * era.get(`love:${cid}`) -
+      (era.get('flag:极端行为限制') * 2 * era.get(`love:${cid}`) -
         era.get(`relation:${cid}:0`)) /
         100,
     );

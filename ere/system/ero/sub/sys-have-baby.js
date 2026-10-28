@@ -378,7 +378,7 @@ async function sys_have_baby(mid) {
   );
   era.set(
     `love:${ch_id}`,
-    era.get('flag:后代爱慕限制') > 0 ? era.get('flag:初始爱慕') : 0,
+    era.get('flag:后代爱慕限制') > 0 ? era.get('flag:马娘初始爱慕') : 0,
   );
   era.set(`cstr:${ch_id}:出生经历`, era.get('flag:当前年').toString());
   const f_check = era.add(`exp:${fid}:孩子数量`, 1);

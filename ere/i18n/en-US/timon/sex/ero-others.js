@@ -704,7 +704,7 @@ module.exports = {
         you.get_colored_name(),
         ` is about to do to ${chara.sex.toLowerCase()}…`,
       ]);
-    } else if (era.get(`mark:${chara.id}:反抗刻印`)) {
+    } else if (era.get(`mark:${chara.id}:反抗`)) {
       await era.printAndWait([
         chara.get_colored_name(),
         ' stares coldly at ',

@@ -437,7 +437,7 @@ module.exports = {
     );
     await tachyon.say_and_wait('какая густая вонь❤️');
     await tachyon.say_and_wait('кончай на меня сколько влезет❤️');
-    if (era.get('tcvar:32:喜欢责骂') || era.get('tcvar:32:喜欢痛苦')) {
+    if (era.get('talent:32:喜欢责骂') || era.get('talent:32:喜欢痛苦')) {
       await tachyon.say_and_wait(
         'можешь тереться мной как тряпкой, как вздумается❤️',
       );

@@ -84,7 +84,7 @@ async function use_ero_medicine(chara) {
     era.get(`cflag:${aim_id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no ||
     era.get(`status:${aim_id}:短效避孕药`) ||
     era.get(`status:${aim_id}:长效避孕药`) ||
-    era.get(`status:${aim_id}:促排卵药`) ||
+    era.get(`status:${aim_id}:排卵期`) ||
     era.get(`status:${aim_id}:经期`);
   const sex_check = aim_chara.sex_code !== 1;
   const item_list = [

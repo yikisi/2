@@ -12,7 +12,7 @@ module.exports = {
   async zero_stamina(urara, you) {
     if (Math.random() < 0.5) {
       await urara.say_and_wait('……ах……ах……');
-      if (era.get('flag:主导权') === 0) {
+      if (era.get('tflag:主导权') === 0) {
         await era.printAndWait([
           'Как сломанная кукла, без сознания ',
           urara.get_colored_name(),
@@ -29,7 +29,7 @@ module.exports = {
       }
     } else {
       await urara.say_and_wait('……');
-      if (era.get('flag:主导权') === 0) {
+      if (era.get('tflag:主导权') === 0) {
         await era.printAndWait([
           'Всё тело обмякло: после того как ',
           you.get_colored_name(),

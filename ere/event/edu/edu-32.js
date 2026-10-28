@@ -447,7 +447,7 @@ module.exports = class extends CustomizedEdu {
           if (
             era.get(`cflag:${this.id}:妊娠阶段`) ===
               1 << pregnant_stage_enum.no &&
-            !era.get(`cflag:${this.id}:经期`) &&
+            !era.get(`status:${this.id}:经期`) &&
             !era.get(`status:${this.id}:短效避孕药`) &&
             !era.get(`status:${this.id}:长效避孕药`) &&
             !CharaInmon.get(this.id).on(plugin_enum.no_preg)
@@ -1472,8 +1472,8 @@ module.exports = class extends CustomizedEdu {
                   .filter((e) => era.get(`cflag:${e}:育成回合计时`) < 3 * 48)
                   .forEach((e) =>
                     era.set(
-                      `talent:${e}:练习X手`,
-                      Math.min(era.get(`talent:${e}:练习X手`) + 1, 2),
+                      `status:${e}:练习X手`,
+                      Math.min(era.get(`status:${e}:练习X手`) + 1, 2),
                     ),
                   );
                 break;

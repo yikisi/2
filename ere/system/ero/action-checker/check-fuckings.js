@@ -124,7 +124,7 @@ module.exports = (handlers) => {
         10 *
           Math.max(
             get_expansion(get_penis_size(0), chara_id, part_enum.anal) -
-              !era.get(`exp:${chara_id}:肛交经验`) -
+              !era.get(`exp:${chara_id}:肛交次数`) -
               1,
             -1,
           ) -

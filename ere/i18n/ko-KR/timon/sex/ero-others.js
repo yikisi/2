@@ -709,7 +709,7 @@ module.exports = {
         you.get_colored_name(),
         `이(가)${chara.sex}에게 무엇을 하려는지 전혀 모르고 있다……`,
       ]);
-    } else if (era.get(`mark:${chara.id}:反抗刻印`)) {
+    } else if (era.get(`mark:${chara.id}:反抗`)) {
       await era.printAndWait([
         chara.get_colored_name(),
         '은(는) 차갑게',

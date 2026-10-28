@@ -697,7 +697,7 @@ module.exports = {
         you.get_colored_name(),
         ` 将要对${chara.sex}做的事情丝毫不觉……`,
       ]);
-    } else if (era.get(`mark:${chara.id}:反抗刻印`)) {
+    } else if (era.get(`mark:${chara.id}:反抗`)) {
       await era.printAndWait([
         chara.get_colored_name(),
         ' 冷冷地看着 ',

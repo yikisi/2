@@ -43,7 +43,7 @@ module.exports = {
     if (era.get(`love:${cid}`) >= 50 && sex_acc >= 0) {
       return 4;
     }
-    const meek = era.get(`mark:${cid}:顺从`) - era.get(`mark:${cid}:反抗`);
+    const meek = era.get(`mark:${cid}:同心`) - era.get(`mark:${cid}:反抗`);
     if (era.get(`mark:${cid}:淫纹`) >= meek) {
       return 3;
     } else if (

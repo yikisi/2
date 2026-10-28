@@ -26,7 +26,7 @@ module.exports = class extends CustomizedEro {
         CHARA: bouquetd.name,
         COLOR: bouquetd.color,
       });
-      era.set(`cflag:${this.id}:泌乳`, 3);
+      era.set(`talent:${this.id}:泌乳`, 3);
       era.set(
         `palam:${this.id}:胸部快感`,
         Math.floor(

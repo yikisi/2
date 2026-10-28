@@ -12,7 +12,7 @@ module.exports = {
   async zero_stamina(urara, you) {
     if (Math.random() < 0.5) {
       await urara.say_and_wait('……啊……啊……');
-      if (era.get('flag:主导权') === 0) {
+      if (era.get('tflag:主导权') === 0) {
         await era.printAndWait([
           '仿佛被玩坏的洋娃娃，昏迷的 ',
           urara.get_colored_name(),
@@ -29,7 +29,7 @@ module.exports = {
       }
     } else {
       await urara.say_and_wait('……');
-      if (era.get('flag:主导权') === 0) {
+      if (era.get('tflag:主导权') === 0) {
         await era.printAndWait([
           '全身都瘫软着，被 ',
           you.get_colored_name(),

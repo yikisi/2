@@ -84,7 +84,7 @@ module.exports = class extends CustomizedEro {
   }
 
   filter_in_rape() {
-    if (era.get('flag:TS大和T') || era.get('flag:惩戒力度') >= 2) {
+    if (era.get('tflag:TS大和T') || era.get('flag:惩戒力度') >= 2) {
       return (e) =>
         (e >= ero_hooks.missionary && e <= ero_hooks.stimulate_g_spot) ||
         e === ero_hooks.fuck_69 ||

@@ -403,7 +403,7 @@ module.exports = {
     await tachyon.say_and_wait('可以哦……让我的脸，被豚鼠君臭臭的精液覆盖……');
     await tachyon.say_and_wait('好浓的味道❤️');
     await tachyon.say_and_wait('尽情的，射在我的身上吧❤️');
-    if (era.get('tcvar:32:喜欢责骂') || era.get('tcvar:32:喜欢痛苦')) {
+    if (era.get('talent:32:喜欢责骂') || era.get('talent:32:喜欢痛苦')) {
       await tachyon.say_and_wait('把我当成抹布一样，随意的擦拭也没关系❤️');
     }
   },

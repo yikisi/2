@@ -462,7 +462,7 @@ module.exports = {
     );
     await tachyon.say_and_wait('짙은 냄새군❤️');
     await tachyon.say_and_wait('마음껏 내게 뿌려 주게❤️');
-    if (era.get('tcvar:32:喜欢责骂') || era.get('tcvar:32:喜欢痛苦')) {
+    if (era.get('talent:32:喜欢责骂') || era.get('talent:32:喜欢痛苦')) {
       await tachyon.say_and_wait('걸레처럼 마음대로 닦아 내도 상관없네❤️');
     }
   },
@@ -884,11 +884,7 @@ module.exports = {
       era.println();
       await tachyon.say_and_wait([callname, '……어째서……']);
       era.println();
-      await you.print_and_wait([
-        '붉어지기 시작한 뺨을 감싸는 ',
-        y_call_t,
-        '.',
-      ]);
+      await you.print_and_wait(['붉어지기 시작한 뺨을 감싸는 ', y_call_t, '.']);
       await you.print_and_wait([
         '미안하지만……',
         tachyon.sex,

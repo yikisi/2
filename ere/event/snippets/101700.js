@@ -78,8 +78,8 @@ module.exports = {
     );
     era.set('love:17', Math.max(era.get('love:17'), era.get('love:9017')));
     new Array(7).fill(0).forEach((_, i) => era.set(`status:17:${110 + i}`, 0));
-    era.set('status:17:工口意愿', 0);
-    era.set('status:17:抖S', 1);
+    era.set('talent:17:工口意愿', 0);
+    era.set('talent:17:抖S', 1);
   },
   /**
    * @param {LunaEduMarks} edu_marks

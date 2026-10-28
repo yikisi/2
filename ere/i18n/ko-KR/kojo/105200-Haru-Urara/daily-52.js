@@ -5115,7 +5115,7 @@ module.exports = {
       await era.printAndWait([
         '그러고 나서 조금은 받아들인 듯한 ',
         urara.get_colored_name(),
-        "는 무언가 깨달은 듯 미소 지으며 ",
+        '는 무언가 깨달은 듯 미소 지으며 ',
         you.get_colored_name(),
         '을(를) 바라본다.',
       ]);
@@ -7004,13 +7004,7 @@ module.exports = {
         '를 싫어할 사람은 없을 거야……',
       ]);
       await urara.say_and_wait(
-        [
-          '그럼……',
-          callname,
-          '도 이런 ',
-          urara.child_sex_title,
-          '를 좋아할까?',
-        ],
+        ['그럼……', callname, '도 이런 ', urara.child_sex_title, '를 좋아할까?'],
         true,
       );
       await urara.print_and_wait([
@@ -7647,7 +7641,7 @@ module.exports = {
           you.get_colored_name(),
           '의 다리로 번져 나간다.',
         ]);
-        if (era.get('exp:52:성교 횟수') >= 10) {
+        if (era.get('exp:52:性交次数') >= 10) {
           await urara.say_and_wait(
             '에헤헤~ 사실 올라탔을 때부터, 우라라는 이미 흠뻑 젖어 있었어……',
           );

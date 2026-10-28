@@ -717,7 +717,7 @@ module.exports = {
         chara.sex,
         ' ничего не чувствует……',
       ]);
-    } else if (era.get(`mark:${chara.id}:反抗刻印`)) {
+    } else if (era.get(`mark:${chara.id}:反抗`)) {
       await era.printAndWait([
         chara.get_colored_name(),
         ' холодно смотрит на ',

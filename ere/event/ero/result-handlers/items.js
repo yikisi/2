@@ -154,7 +154,7 @@ module.exports = (handlers) => {
     cache_penis_stain(attacker);
     era.set(`tcvar:${attacker}:避孕套`, 1);
     !attacker && era.add('item:避孕套', -1);
-    era.get(`status:${defender}:危险期`) &&
+    era.get(`status:${defender}:排卵期`) &&
       add_juel(defender, 10, base_emotion_juel);
   };
 
