@@ -24,6 +24,7 @@
     "prisma": "^5.22.0",
     "unimported": "^1.31.1",
     "vitest": "^5.0.5",
+    "vitest-ere-check": "git+https://gitgud.io/umaera/tool/vitest-ere-check.git",
     "webpack": "^5.112.2",
     "webpack-cli": "^7.2.3",
     "yamljs": "^0.3.0"
