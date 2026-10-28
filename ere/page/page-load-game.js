@@ -772,8 +772,6 @@ module.exports = async () => {
               const raw = era['raw']();
               // FLAGNAME:18 = 旧版收支，已废弃
               delete raw.data.flag[18];
-              // EQUIPNAME:10 = 旧版淫纹奴役，已迁移到 EQUIPNAME:1
-              added.forEach((cid) => delete raw.data.equip[cid]?.[10]);
               // EXPNAME:108 = 授种次数
               // 旧存档按未声明变量存成了字符串键，迁移到正式序号
               Object.values(raw.data.exp).forEach((exp) => {
@@ -781,6 +779,38 @@ module.exports = async () => {
                   exp[108] = (exp[108] || 0) + (exp['授种次数'] || 0);
                   delete exp['授种次数'];
                 }
+              });
+              added.forEach((cid) => {
+                // EQUIPNAME:10 = 旧版淫纹奴役，已迁移到 EQUIPNAME:1
+                delete raw.data.equip[cid]?.[10];
+                // TALENTNAME:32 = 泌乳
+                // 旧代码误写到 cflag，迁移到 talent
+                const old_milk = raw.data.cflag?.[cid]?.['泌乳'];
+                if (old_milk !== undefined) {
+                  if (!era.get(`talent:${cid}:泌乳`)) {
+                    era.set(`talent:${cid}:泌乳`, old_milk);
+                  }
+                  delete raw.data.cflag[cid]['泌乳'];
+                }
+                // STATUSNAME:0 = 练习X手
+                // 旧代码误写到 talent，迁移到 status
+                const old_train_buff = raw.data.talent?.[cid]?.['练习X手'];
+                if (old_train_buff !== undefined) {
+                  era.set(
+                    `status:${cid}:练习X手`,
+                    Math.min(
+                      era.get(`status:${cid}:练习X手`) + old_train_buff,
+                      2,
+                    ),
+                  );
+                  delete raw.data.talent[cid]['练习X手'];
+                }
+                // STATUSNAME:31 = 排卵期
+                // 旧代码误写为未声明的“危险期”，该键不会被周结算清除，直接清理
+                delete raw.data.status?.[cid]?.['危险期'];
+                // 101700 曾将特性名写进 status，旧键已失效，直接清理
+                delete raw.data.status?.[cid]?.['工口意愿'];
+                delete raw.data.status?.[cid]?.['抖S'];
               });
             }
             if (version < era.get('gamebase').version) {

@@ -51,7 +51,7 @@ class LoveGod extends CustomizedLove {
         if (me.sex_code === 0) {
           set('cflag:0:阴茎尺寸', 3);
         }
-        set(`status:${god.id}:危险期`, 1);
+        set(`status:${god.id}:排卵期`, 1);
         set(`status:${god.id}:经期`, 0);
         set(`status:${god.id}:反避孕套`, 1);
         begin_and_init_ero(0, god.id);
