@@ -769,6 +769,19 @@ module.exports = async () => {
             }
             if (version <= 3200) {
               era.set('cflag:351:可再次育成', 1);
+              const raw = era['raw']();
+              // FLAGNAME:18 = 旧版收支，已废弃
+              delete raw.data.flag[18];
+              // EQUIPNAME:10 = 旧版淫纹奴役，已迁移到 EQUIPNAME:1
+              added.forEach((cid) => delete raw.data.equip[cid]?.[10]);
+              // EXPNAME:108 = 授种次数
+              // 旧存档按未声明变量存成了字符串键，迁移到正式序号
+              Object.values(raw.data.exp).forEach((exp) => {
+                if (exp && exp['授种次数'] !== undefined) {
+                  exp[108] = (exp[108] || 0) + (exp['授种次数'] || 0);
+                  delete exp['授种次数'];
+                }
+              });
             }
             if (version < era.get('gamebase').version) {
               added.forEach((cid) => {

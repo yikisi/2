@@ -77,6 +77,7 @@ module.exports = {
           active_anal_sex_count = era.get(`exp:${chara.id}:戳肛门次数`),
           penis_orgasm_count = era.get(`exp:${chara.id}:阴茎高潮次数`),
           semen = era.get(`exp:${chara.id}:射精量`),
+          cum_count = era.get(`exp:${chara.id}:授种次数`),
           fuck_sleep_vagina = era.get(`exp:${chara.id}:阴茎睡奸`),
           sleep_penis = era.get(`exp:${chara.id}:阴茎被睡奸`);
         const penis_exp = era.get(`cstr:${chara.id}:失去童贞经历`),
@@ -146,6 +147,12 @@ module.exports = {
           );
         }
         if (flags.show_all_exp || cum_semen_exp) {
+          cum_count > 0 &&
+            penis_exp_list.push(
+              i18n().detail.get_exp_penis_cum_semen_count(
+                get_abbr_number(cum_count),
+              ),
+            );
           if (unknown_cum_semen_exp) {
             penis_exp_list.push(
               get_filled_exp_str(

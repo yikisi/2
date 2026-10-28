@@ -678,6 +678,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                   } else if (!oid) {
                     era.add(`tcvar:${cid}:获得因子`, amount * 6);
                   }
+                  era.add(`exp:${cid}:授种次数`, 1);
                   if (!era.get(`cstr:${cid}:初次内射经历`)) {
                     if (sys_check_awake(cid)) {
                       era.set(`cstr:${cid}:初次内射经历`, {
@@ -725,7 +726,6 @@ async function sys_calc_orgasm(shown, ...ids) {
                   );
                   if (temp >= 1 || (temp > 0 && Math.random() < temp)) {
                     era.add('flag:怀孕计数', 1);
-                    era.add(`exp:${cid}:授种次数`, 1);
                     era.set(
                       `cflag:${oid}:妊娠阶段`,
                       1 << pregnant_stage_enum.embryo,

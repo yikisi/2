@@ -568,6 +568,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/detail') {
   get_exp_penis_fuck_body_count = (count) => ['戳弄身体 ', count, ' 次'];
   get_exp_penis_fuck_vagina_count = (count) => ['戳弄小穴 ', count, ' 次'];
   get_exp_penis_fuck_anal_count = (count) => ['戳弄屁穴 ', count, ' 次'];
+  get_exp_penis_cum_semen_count = (count) => ['内射 ', count, ' 次'];
   get_exp_penis_cum_semen_exp = (date, chara, _, amount) => [
     '第一次向 ',
     chara,
