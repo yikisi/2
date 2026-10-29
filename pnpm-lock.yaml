@@ -76,7 +76,7 @@ importers:
         version: 5.0.5(@types/node@26.6.5)(vite@8.3.5(@types/node@26.6.5)(terser@5.51.2)(yaml@2.9.1))
       vitest-ere-check:
         specifier: git+https://gitgud.io/umaera/tool/vitest-ere-check.git
-        version: git+https://gitgud.io/umaera/tool/vitest-ere-check.git#26bb4dd20c2fa1de167f8ce7c91abca45d260d46
+        version: git+https://gitgud.io/umaera/tool/vitest-ere-check.git#58b08329ecb9c285313d6b4b36a72ecfb1be855a
       webpack:
         specifier: ^5.112.2
         version: 5.112.2(lightningcss@1.33.0)(postcss@8.5.31)(webpack-cli@7.2.3)
@@ -2759,8 +2759,8 @@ packages:
       yaml:
         optional: true
 
-  vitest-ere-check@git+https://gitgud.io/umaera/tool/vitest-ere-check.git#26bb4dd20c2fa1de167f8ce7c91abca45d260d46:
-    resolution: {commit: 26bb4dd20c2fa1de167f8ce7c91abca45d260d46, repo: https://gitgud.io/umaera/tool/vitest-ere-check.git, type: git}
+  vitest-ere-check@git+https://gitgud.io/umaera/tool/vitest-ere-check.git#58b08329ecb9c285313d6b4b36a72ecfb1be855a:
+    resolution: {commit: 58b08329ecb9c285313d6b4b36a72ecfb1be855a, repo: https://gitgud.io/umaera/tool/vitest-ere-check.git, type: git}
     version: 0.1.0
     engines: {node: '>=20'}
     hasBin: true
@@ -5654,7 +5654,7 @@ snapshots:
       terser: 5.51.2
       yaml: 2.9.1
 
-  vitest-ere-check@git+https://gitgud.io/umaera/tool/vitest-ere-check.git#26bb4dd20c2fa1de167f8ce7c91abca45d260d46:
+  vitest-ere-check@git+https://gitgud.io/umaera/tool/vitest-ere-check.git#58b08329ecb9c285313d6b4b36a72ecfb1be855a:
     dependencies:
       yamljs: 0.3.0
 

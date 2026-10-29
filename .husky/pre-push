@@ -1,4 +1,3 @@
-pnpm run check:ere
 cd tools/uma
 node check-chara-colors.js
 [ -d "../../res/audio" ] && node check-resource-version.js

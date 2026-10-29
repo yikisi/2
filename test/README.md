@@ -5,8 +5,8 @@
 ## 运行
 
 ```sh
-pnpm test          # 一次性运行
-pnpm check:ere     # 全工程静态检查（ere-check）
+pnpm test          # 一次性运行（含 ere 静态检查）
+pnpm check:ere     # 只跑全工程静态检查（ere-check）
 ```
 
 配置见仓库根目录 `vitest.config.mjs`，测试目录通过 `test/**/*.{test,spec}.js` 收集。
