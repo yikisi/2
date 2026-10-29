@@ -6,11 +6,11 @@
 
 ```sh
 pnpm test          # 一次性运行
-pnpm test:watch    # 监听模式
+pnpm check:ere     # 全工程静态检查（ere-check）
 ```
 
 配置见仓库根目录 `vitest.config.mjs`，测试目录通过 `test/**/*.{test,spec}.js` 收集。
-提交时由 husky `pre-commit` 自动执行（套件约 2 秒）。
+提交时由 husky `pre-commit` 自动执行单元测试。
 
 ## 目录结构
 

@@ -44,11 +44,11 @@
     "url": "https://gitgud.io/umaera/erauma"
   },
   "scripts": {
+    "check:ere": "ere-check game .",
     "db:pull": "prisma db pull",
     "lint": "lint-staged",
     "prepare": "husky",
     "test": "vitest run",
-    "test:watch": "vitest",
     "webpack": "cross-env NODE_OPTIONS=--max-old-space-size=8192 webpack"
   },
   "type": "commonjs",
