@@ -15,7 +15,6 @@ build:
   tags:
     - shell
   variables:
-    NODE_OPTIONS: "--openssl-legacy-provider"
     GAME_ALL_ZIP: '${GAME_ALL_DIR}-win-x64.7z'
     GAME_ZIP: '${GAME_DIR}.7z'
   script:

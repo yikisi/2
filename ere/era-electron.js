@@ -3,18 +3,16 @@
  * @typedef ButtonConfig
  * @property {'left'|'center'|'right'} [align] align of the button, 'left' in default
  * @property {'dot'|string} [badge] badge of the button if isButton is true
- * @property {'large'|'default'|'small'|''} [buttonSize] size of the button in element-plus, 'small' in default
  * @property {'primary'|'success'|'warning'|'danger'|'info'|''} [buttonType] type of the button in element-plus, 'warning' in default when isButton is false
  * @property {string} [color] color of the button, isButton must be false
  * @property {boolean} [disabled] if the button is disabled, false in default
  * @property {boolean} [disableContinue] if the continue is disabled after clicking the button, false in default
  * @property {boolean} [disableWarning] if disable warning when accelerator has been set, false in default
- * @property {string} [fontSize] font size of the text in the button, '1rem' in default
- * @property {boolean} [isFulfilled] if the button fills the whole width of its column, false in default
+ * @property {string} [fontSize] font size of the text in the button
  * @property {'left'|'center'|'right'} [inTextAlign] align of the text in the button, 'center' in default
  * @property {boolean} [isButton] if the button is a button, otherwise is a link
  * @property {number} [offset] offset of the button, 0-23, 0 in default
- * @property {boolean} [showAcc] if show the accelerator, true in default on PC, and is always false on Android; when false, the text of a link is wrapped in brackets, while the text of a button is not
+ * @property {boolean} [showAcc] if show the accelerator, true in default on PC, and is always false on Android
  * @property {string} [title] tooltip of the button
  * @property {number} [width] width of the button, 1-24, 24 in default
  */
@@ -118,6 +116,7 @@
  * @property {string|string[]} names
  * @property {'image.whole'} type
  */
+
 /**
  * @typedef {ButtonObject|DividerObject|ImageObject|ProgressObject|TextObject|WholeImageObject} GridObject
  */
@@ -240,7 +239,6 @@ const era = {
    * @param {boolean} config.[disableBefore] if disable before buttons
    * @param {boolean} config.[hideInput] if hide the input content
    * @param {string} config.[rule] the regex string of the rule
-   * @param {'keydown'|'keyup'} config.[trigger] when the input resolves, uses the global trigger in default
    * @param {boolean} config.[useRule] if use the rule
    * @returns {Promise<any>} a promise of the user input, please use await
    */
@@ -366,7 +364,6 @@ const era = {
    * print some text and wait any key from user
    * @param {TextContent} content REQUIRED the text to be printed
    * @param {TextConfig} [config] config of the printed line
-   * @param {'keydown'|'keyup'} config.[trigger] when the input resolves, uses the global trigger in default
    * @returns {Promise<number>} line number of the printed line
    */
   async printAndWait(content, config) {},
@@ -560,12 +557,6 @@ const era = {
    */
   setToBottom() {},
   /**
-   * set the global trigger of inputs
-   * @param {'keydown'|'keyup'} trigger REQUIRED when the input resolves, 'keydown' in default
-   * @returns {void}
-   */
-  setTrigger(trigger) {},
-  /**
    * set default vertical align of inColRows
    * @param {'top'|'middle'|'bottom'} align REQUIRED the vertical align: top (default), middle or bottom
    * @returns {void}
@@ -584,14 +575,12 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '5.1.0', engine: void 0 },
+  version: { sdk: '4.8.5', engine: void 0 },
   /**
    * wait any key from user
-   * @param {Object} [config] config of the wait
-   * @param {'keydown'|'keyup'} config.[trigger] when the input resolves, uses the global trigger in default
    * @returns {Promise<void>} a promise of nothing, please use await
    */
-  async waitAnyKey(config) {},
+  async waitAnyKey() {},
 };
 
 Object.keys(era).forEach((key) => {

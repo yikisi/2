@@ -52,5 +52,5 @@
     "webpack": "cross-env NODE_OPTIONS=--max-old-space-size=8192 webpack"
   },
   "type": "commonjs",
-  "version": "3.2.00"
+  "version": "3.2.01"
 }
