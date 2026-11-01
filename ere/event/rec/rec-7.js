@@ -17,7 +17,7 @@ module.exports = class extends CustomizedRecruit {
       await i18n().kojo[this.id].recruit.rec(
         get_chara_talk(this.id),
         get_chara_talk(0),
-        get_trainer_title().title(),
+        get_trainer_title().prefix(),
         chara_color[1],
       );
       // CFLAGNAME:66 = 招募状态
