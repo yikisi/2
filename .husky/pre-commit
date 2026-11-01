@@ -1,2 +1,4 @@
+node tools/sync-version.js
+git add package.json
 pnpm run lint
 pnpm test

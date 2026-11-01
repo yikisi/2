@@ -48,9 +48,10 @@
     "db:pull": "prisma db pull",
     "lint": "lint-staged",
     "prepare": "husky",
+    "sync:version": "node tools/sync-version.js",
     "test": "vitest run",
     "webpack": "cross-env NODE_OPTIONS=--max-old-space-size=8192 webpack"
   },
   "type": "commonjs",
-  "version": "3.2.01"
+  "version": "3.3.0"
 }
