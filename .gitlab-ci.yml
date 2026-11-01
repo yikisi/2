@@ -36,6 +36,7 @@ android:
     NODE_OPTIONS: '--max-old-space-size=8192'
     GAME_BUNDLE_ZIP: '${GAME_BUNDLE_DIR}.zip'
   script:
+    - git submodule update --init res
     - pnpm install
     - node ci/android.js
     - 'mega-login "$MEGA_EMAIL" "$MEGA_PWD" || true'
