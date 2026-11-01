@@ -54,6 +54,16 @@ class GlobalAchievement {
   wins_thr = [7, types.hidden];
   wins_hnt = [7, types.hidden];
 
+  r_3crown_c = [5, types.race, platinum_type.all];
+  r_3crown_f = [5, types.race, platinum_type.all];
+  r_3crown_m = [5, types.race, platinum_type.all];
+  r_6crown = [6, types.race, platinum_type.all];
+  r_3crown_d = [5, types.race, platinum_type.all];
+  r_3crown_a = [5, types.race, platinum_type.all];
+  r_3crown_sp = [4, types.race, platinum_type.all];
+  r_3crown_au = [4, types.race, platinum_type.all];
+  eight_major = [7, types.race, platinum_type.all];
+
   blnc_cel = [6, types.love, platinum_type.all];
   blnc_rac = [6, types.love, platinum_type.all];
   yandere = [7, types.hidden];

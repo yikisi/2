@@ -39,6 +39,16 @@ module.exports = class extends require('#/i18n/zh-CN/achieve') {
   wins_thr = '永不停止的远征';
   wins_hnt = '惊人的……「变态」';
 
+  r_3crown_c = '三冠';
+  r_3crown_f = '三宝冠';
+  r_3crown_m = '变则三冠';
+  r_6crown = '极限六冠';
+  r_3crown_d = '泥地三冠';
+  r_3crown_a = '美国梦';
+  r_3crown_sp = '春三冠';
+  r_3crown_au = '秋三冠';
+  eight_major = '八大竞走制霸';
+
   blnc_cel = '端水大师';
   blnc_rac = '平衡大师';
   yandere = '刺玫瑰养育者';

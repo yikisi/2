@@ -14,6 +14,18 @@ const edu_weeks_shuk_sho = 48 + race_infos[race_enum.shuk_sho].date;
 const edu_weeks_japa_dir = 48 + race_infos[race_enum.japa_dir].date;
 const edu_weeks_belm_sta = 48 + race_infos[race_enum.belm_sta].date;
 
+// 八大竞走：经典三冠、牝马经典赛、古马最高赛事
+const eight_major_races = [
+  race_enum.sats_sho,
+  race_enum.toky_yus,
+  race_enum.kiku_sho,
+  race_enum.oka_sho,
+  race_enum.yush_him,
+  race_enum.tenn_spr,
+  race_enum.tenn_sho,
+  race_enum.arim_kin,
+];
+
 /**
  * @param {PseudoUma[]} team_list
  * @param {number} race
@@ -113,6 +125,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
               n: 'r_3crown_c',
               c: adaptability_colors.at(-3),
             });
+            global_achievement.r_3crown_c = 1;
             invincible_1 &&
               new_title_dict[mvp_id].push({
                 n: 'r_3crown_ci',
@@ -124,6 +137,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
               n: 'r_3crown_f',
               c: adaptability_colors.at(-3),
             });
+            global_achievement.r_3crown_f = 1;
             invincible_2 &&
               new_title_dict[mvp_id].push({
                 n: 'r_3crown_fi',
@@ -140,6 +154,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
               n: 'r_3crown_m',
               c: adaptability_colors.at(-3),
             });
+            global_achievement.r_3crown_m = 1;
             if ((cup_3 & 1 && invincible_1) || (cup_3 & 2 && invincible_2)) {
               new_title_dict[mvp_id].push({
                 n: 'r_3crown_mi',
@@ -152,6 +167,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
               n: 'r_6crown',
               c: adaptability_colors.at(-2),
             });
+            global_achievement.r_6crown = 1;
             if (invincible_1 && invincible_2) {
               new_title_dict[mvp_id].push({
                 n: 'r_6crown_i',
@@ -187,6 +203,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
               n: 'r_3crown_d',
               c: adaptability_colors.at(-3),
             });
+            global_achievement.r_3crown_d = 1;
             invincible_4 &&
               new_title_dict[mvp_id].push({
                 n: 'r_3crown_di',
@@ -221,6 +238,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
               n: 'r_3crown_a',
               c: adaptability_colors.at(-3),
             });
+            global_achievement.r_3crown_a = 1;
             invincible &&
               new_title_dict[mvp_id].push({
                 n: 'r_3crown_ai',
@@ -256,6 +274,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
               n: 'r_3crown_sp',
               c: adaptability_colors.at(-4),
             });
+            global_achievement.r_3crown_sp = 1;
           }
         }
         break;
@@ -285,7 +304,23 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
             n: 'r_3crown_au',
             c: adaptability_colors.at(-4),
           });
+          global_achievement.r_3crown_au = 1;
         }
+      }
+    }
+    if (eight_major_races.includes(race)) {
+      const won_races = new Set();
+      era.getAddedCharacters().forEach((cid) => {
+        RaceHistory.get(cid)
+          .get_entries()
+          .forEach((e) => {
+            if (e.rank === 1) {
+              won_races.add(e.race);
+            }
+          });
+      });
+      if (eight_major_races.every((r) => won_races.has(r))) {
+        global_achievement.eight_major = 1;
       }
     }
   }
