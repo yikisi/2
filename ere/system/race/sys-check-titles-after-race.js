@@ -66,6 +66,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
     }
   });
   if (best_rank === 1) {
+    const current_year = era.get('flag:当前年');
     switch (race) {
       case race_enum.kiku_sho:
       case race_enum.shuk_sho:
@@ -107,7 +108,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
                 }
               }
             });
-          if (cup_1 & cup_2 & cup_3 & 0b1) {
+          if ((cup_1 & cup_2 & cup_3 & 0b1) > 0) {
             new_title_dict[mvp_id].push({
               n: 'r_3crown_c',
               c: adaptability_colors.at(-3),
@@ -118,7 +119,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
                 c: adaptability_colors.at(-2),
               });
           }
-          if (cup_1 & cup_2 & cup_3 & 0b10) {
+          if ((cup_1 & cup_2 & cup_3 & 0b10) > 0) {
             new_title_dict[mvp_id].push({
               n: 'r_3crown_f',
               c: adaptability_colors.at(-3),
@@ -194,36 +195,96 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
           }
         }
         break;
-      case race_enum.belm_sta: {
-        let invincible = true,
-          cup = 0;
+      case race_enum.belm_sta:
+        {
+          let invincible = true,
+            cup = 0;
+          RaceHistory.get(mvp_id)
+            .get_entries()
+            .forEach((e) => {
+              if (e.rank === 1) {
+                switch (e.race) {
+                  case race_enum.kent_der:
+                    cup++;
+                    break;
+                  case race_enum.prea_sta:
+                    cup++;
+                }
+              } else {
+                if (e.weeks < edu_weeks_belm_sta) {
+                  invincible = false;
+                }
+              }
+            });
+          if (cup === 2) {
+            new_title_dict[mvp_id].push({
+              n: 'r_3crown_a',
+              c: adaptability_colors.at(-3),
+            });
+            invincible &&
+              new_title_dict[mvp_id].push({
+                n: 'r_3crown_ai',
+                c: adaptability_colors.at(-2),
+              });
+          }
+        }
+        break;
+      case race_enum.takz_kin:
+        {
+          // 春三冠：大阪杯、春季天皇赏、宝冢纪念，需要在同一年全部获胜
+          let cup_1 = 0;
+          let cup_2 = 0;
+          let cup_3 = 0;
+          RaceHistory.get(mvp_id)
+            .get_entries()
+            .forEach((e) => {
+              if (e.rank === 1 && e.year === current_year) {
+                switch (e.race) {
+                  case race_enum.sank_hai:
+                    cup_1 = 1;
+                    break;
+                  case race_enum.tenn_spr:
+                    cup_2 = 1;
+                    break;
+                  case race_enum.takz_kin:
+                    cup_3 = 1;
+                }
+              }
+            });
+          if (cup_1 && cup_2 && cup_3) {
+            new_title_dict[mvp_id].push({
+              n: 'r_3crown_sp',
+              c: adaptability_colors.at(-4),
+            });
+          }
+        }
+        break;
+      case race_enum.arim_kin: {
+        // 秋三冠：秋季天皇赏、日本杯、有马纪念，需要在同一年全部获胜
+        let cup_1 = 0;
+        let cup_2 = 0;
+        let cup_3 = 0;
         RaceHistory.get(mvp_id)
           .get_entries()
           .forEach((e) => {
-            if (e.rank === 1) {
+            if (e.rank === 1 && e.year === current_year) {
               switch (e.race) {
-                case race_enum.kent_der:
-                  cup++;
+                case race_enum.tenn_sho:
+                  cup_1 = 1;
                   break;
-                case race_enum.prea_sta:
-                  cup++;
-              }
-            } else {
-              if (e.weeks < edu_weeks_belm_sta) {
-                invincible = false;
+                case race_enum.japa_cup:
+                  cup_2 = 1;
+                  break;
+                case race_enum.arim_kin:
+                  cup_3 = 1;
               }
             }
           });
-        if (cup === 2) {
+        if (cup_1 && cup_2 && cup_3) {
           new_title_dict[mvp_id].push({
-            n: 'r_3crown_a',
-            c: adaptability_colors.at(-3),
+            n: 'r_3crown_au',
+            c: adaptability_colors.at(-4),
           });
-          invincible &&
-            new_title_dict[mvp_id].push({
-              n: 'r_3crown_ai',
-              c: adaptability_colors.at(-2),
-            });
         }
       }
     }

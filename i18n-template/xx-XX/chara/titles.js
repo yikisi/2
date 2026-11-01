@@ -34,6 +34,8 @@ module.exports = class extends require('#/i18n/zh-CN/chara/titles') {
   r_3crown_ai = '无暇美国梦';
   r_6crown = '极限六冠';
   r_6crown_i = '无败六冠';
+  r_3crown_sp = '春三冠';
+  r_3crown_au = '秋三冠';
 
   e_above_all = '傲视一切';
   e_30 = '铁马娘子';

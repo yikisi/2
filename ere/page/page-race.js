@@ -496,6 +496,9 @@ async function race_page(race) {
               break;
             case adaptability_colors.at(-3):
               r_title_reward++;
+              break;
+            case adaptability_colors.at(-4):
+              r_title_reward += 0.5;
           }
         });
     }
