@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const global_achievement = require('#/system/global/sys-calc-achievement');
 
+const CharaTitles = require('#/data/chara-titles');
 const { adaptability_colors, buff_colors } = require('#/data/color-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -13,6 +14,14 @@ const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date;
 const edu_weeks_shuk_sho = 48 + race_infos[race_enum.shuk_sho].date;
 const edu_weeks_japa_dir = 48 + race_infos[race_enum.japa_dir].date;
 const edu_weeks_belm_sta = 48 + race_infos[race_enum.belm_sta].date;
+
+// 无暇：互不包含的最小无败称号集合（无败六冠已包含无败三冠、无败三宝冠）
+const flawless_titles = [
+  'r_6crown_i',
+  'r_3crown_mi',
+  'r_3crown_di',
+  'r_3crown_ai',
+];
 
 // 八大竞走：经典三冠、牝马经典赛、古马最高赛事
 const eight_major_races = [
@@ -321,6 +330,20 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
       });
       if (eight_major_races.every((r) => won_races.has(r))) {
         global_achievement.eight_major = 1;
+      }
+    }
+    if (!global_achievement.flawless) {
+      const owned_titles = new Set();
+      era.getAddedCharacters().forEach((cid) => {
+        CharaTitles.get(cid)
+          .get()
+          .forEach(({ n }) => owned_titles.add(n));
+      });
+      Object.values(new_title_dict).forEach((titles) => {
+        titles.forEach(({ n }) => owned_titles.add(n));
+      });
+      if (flawless_titles.every((n) => owned_titles.has(n))) {
+        global_achievement.flawless = 1;
       }
     }
   }

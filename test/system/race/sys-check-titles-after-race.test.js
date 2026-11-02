@@ -266,4 +266,41 @@ describe('sys_check_titles_after_race', () => {
     );
     expect(global_achievement.eight_major).toBe(0);
   });
+
+  it('unlocks flawless when team members own the minimal undefeated title set', () => {
+    era.seed({
+      __added: [1, 2],
+      'cstr:1:11': [{ n: 'r_6crown_i', c: '#000000' }],
+      'cstr:2:11': [
+        { n: 'r_3crown_mi', c: '#000000' },
+        { n: 'r_3crown_di', c: '#000000' },
+        { n: 'r_3crown_ai', c: '#000000' },
+      ],
+    });
+    sys_check_titles_after_race(
+      [make_uma({ rank: { curr: 1 } })],
+      race_enum.begin_race,
+      1,
+      1,
+    );
+    expect(global_achievement.flawless).toBeGreaterThan(0);
+  });
+
+  it('does not unlock flawless when one undefeated title is missing', () => {
+    era.seed({
+      __added: [1, 2],
+      'cstr:1:11': [{ n: 'r_6crown_i', c: '#000000' }],
+      'cstr:2:11': [
+        { n: 'r_3crown_mi', c: '#000000' },
+        { n: 'r_3crown_di', c: '#000000' },
+      ],
+    });
+    sys_check_titles_after_race(
+      [make_uma({ rank: { curr: 1 } })],
+      race_enum.begin_race,
+      1,
+      1,
+    );
+    expect(global_achievement.flawless).toBe(0);
+  });
 });

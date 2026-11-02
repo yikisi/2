@@ -63,6 +63,7 @@ class GlobalAchievement {
   r_3crown_sp = [4, types.race, platinum_type.all];
   r_3crown_au = [4, types.race, platinum_type.all];
   eight_major = [7, types.race, platinum_type.all];
+  flawless = [7, types.race, platinum_type.all];
 
   blnc_cel = [6, types.love, platinum_type.all];
   blnc_rac = [6, types.love, platinum_type.all];

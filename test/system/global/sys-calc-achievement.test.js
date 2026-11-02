@@ -45,6 +45,7 @@ describe('global achievement', () => {
       'r_3crown_sp',
       'r_3crown_au',
       'eight_major',
+      'flawless',
     ]) {
       expect(ach[name]).toBe(0);
     }
@@ -56,6 +57,7 @@ describe('global achievement', () => {
     expect(ach.get_color('r_3crown_sp')).toBe(adaptability_colors[4]);
     expect(ach.get_color('r_3crown_au')).toBe(adaptability_colors[4]);
     expect(ach.get_color('eight_major')).toBe(adaptability_colors[7]);
+    expect(ach.get_color('flawless')).toBe(adaptability_colors[7]);
   });
 
   it('unlocks all only after the new race title achievements are earned', () => {
@@ -69,6 +71,7 @@ describe('global achievement', () => {
       'r_3crown_sp',
       'r_3crown_au',
       'eight_major',
+      'flawless',
     ];
     for (const name of Object.keys(ach)) {
       if (name !== 'all' && !race_achievements.includes(name)) {

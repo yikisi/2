@@ -50,6 +50,7 @@ class I18nAchievements {
   r_3crown_sp = '春三冠';
   r_3crown_au = '秋三冠';
   eight_major = '八大竞走制霸';
+  flawless = '「无暇」';
 
   blnc_cel = '端水大师';
   blnc_rac = '平衡大师';
