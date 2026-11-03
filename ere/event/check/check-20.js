@@ -162,6 +162,9 @@ module.exports = class extends CustomizedCheck {
         case 47 + 5:
           add_event(event_hooks.week_start, ebj_s.set_arg('ws_47_5'));
           break;
+        case 47 + 29:
+          add_event(event_hooks.week_start, ebj_s.set_arg('ws_47_29'));
+          break;
         case 47 + 41:
           if (
             CharaTitles.get(this.id)
@@ -215,6 +218,15 @@ module.exports = class extends CustomizedCheck {
                   : 'ws_lost_al',
               ),
           );
+          break;
+        case 95 + 29:
+          add_event(event_hooks.week_start, ebj_s.set_arg('ws_95_29'));
+          break;
+        case 47 + 27:
+        case 47 + 31:
+        case 95 + 27:
+        case 95 + 31:
+          add_event(event_hooks.week_start, ebj_s.copy().set_arg('ws_reward'));
       }
       check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
     } else if (edu_weeks === 143 + 9) {

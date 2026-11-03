@@ -121,6 +121,22 @@ module.exports = class extends CustomizedEdu {
    * @param extra
    * @param {EventObject} ebj
    */
+  async ws_47_29(sky, me, callname, hook, extra, ebj) {
+    if (this.summer_non_beach) {
+      add_event(hook.hook, ebj);
+      return;
+    }
+    await print_title_with_kojo(this.#kojo, 'ws_47_29', sky, this.#dict);
+  }
+
+  /**
+   * @param {CharaTalk} sky
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} ebj
+   */
   async ws_triple_crown(sky, me, callname, hook, extra, ebj) {
     const spe = get_chara_talk(1);
     const grass = get_chara_talk(11);
@@ -216,6 +232,22 @@ module.exports = class extends CustomizedEdu {
     if (all_reward_in_event(this.id, { relation: 50, love: 2 })) {
       await era.waitAnyKey();
     }
+  }
+
+  /**
+   * @param {CharaTalk} sky
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} ebj
+   */
+  async ws_95_29(sky, me, callname, hook, extra, ebj) {
+    if (this.summer_non_beach) {
+      add_event(hook.hook, ebj);
+      return;
+    }
+    await print_title_with_kojo(this.#kojo, 'ws_95_29', sky, this.#dict);
   }
 
   /**
@@ -390,6 +422,19 @@ module.exports = class extends CustomizedEdu {
       COLOR_61: halo.color,
       CHARA_FULL: sky.actual_name_with_title,
     });
+  }
+
+  async ws_reward() {
+    const ret = await this.#kojo['ws_reward'](this.#dict);
+    if (!ret) {
+      return;
+    }
+    if (ret[0] === 1) {
+      this.#marks.radiant = Math.min(this.#marks.radiant + 5, 10);
+      this.#marks.easy_go = Math.max(this.#marks.easy_go - 5, 0);
+    } else {
+      this.#marks.easy_go = 0;
+    }
   }
 
   async race_start(sky, me, callname, hook, extra) {

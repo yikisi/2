@@ -349,6 +349,69 @@ talk:
               - fontWeight: bold
                 content: %CHARA%
               - 「猜猜为什么？因为我现在满脑子都是你。」
+      - if: era.get('love:20') >= 90
+        random: true
+        lines:
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「训练员～训练员～多陪陪小青嘛～」
+      - if: era.get('love:20') >= 90
+        random: true
+        lines:
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「喜欢喜欢喜欢喜欢喜欢——」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「嘿嘿，最喜欢在训练员怀里撒娇了～」
+      - if: era.get('love:20') >= 90
+        random: true
+        lines:
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「训练员～晚上陪我一起去看星星啊～」
+      - if: era.get('love:20') >= 90
+        random: true
+        lines:
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「训练员～累了不要挺着哦，休息会吧～」
+      - if: era.get('love:20') >= 90
+        random: true
+        lines:
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「训练员～要不要出门逛逛？」
+      - if: era.get('love:20') >= 90
+        random: true
+        lines:
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「嗯？小青的好感度吗？那么——」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「叮铃叮铃……噗噗，真遗憾。」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「训练员的好感度早就满了哦～」
 
 office_gift:
   - if: era.get('love:20') < 50
@@ -891,6 +954,80 @@ office_rest:
               - fontWeight: bold
                 content: %CHARA%
               - 「小青好想和训练员近一些，再近一些……」
+      - if: era.get('love:20') >= 90
+        random: true
+        lines:
+          - 青云天空窝在%YOU%怀里，轻轻的蠕了蠕，一点一点的撒娇，软乎乎的贴着%YOU%。
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「训练员～训练员～喜欢～喜欢～嗯～～」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「大脑空空的了……好想……好想一直这样……」
+      - if: era.get('love:20') >= 90
+        random: true
+        lines:
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「哈啊～～～好舒服～～～～」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「训练员的怀里好温暖……训练员的气味好喜欢……训练员的拥抱好温柔……」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「训练员的……呼～呼～ＺＺＺ」
+      - if: era.get('love:20') >= 90
+        random: true
+        lines:
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「来嘛～来嘛～训练员也偶尔向小青撒娇嘛～」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「对，对～就这样舒舒服服的躺进小青的怀里……」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「训练员，辛苦了～愿你做个美梦哦……啾……」
+      - if: era.get('love:20') >= 90
+        random: true
+        lines:
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「欸……竟然想要膝枕吗，训练员真是个色大叔呢，喵哈哈～」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「那么来吧～担当的特别膝枕服务哦～」
+          - 青云天空轻轻捧起%YOU%的脸
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「训练员的头发有点扎呢，嘿嘿～」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「我来给你做做按摩，好好休息一下吧～」
 
 office_game:
   # 上一步进行过「一起加餐」
@@ -2980,7 +3117,7 @@ o_s_drawing:
       - 「训练员，看那边！」
   - 棚子上挂着夸张的手绘海报：【胡萝卜自助餐厅新开业抽幸运抽奖！神秘大奖降临！】
   - 不等%YOU%回答，%SEX%已经快步跑到了摊位前。
-  - 摊位前，%YOU%看着抽奖说明——一次 30 马币，抽随机大奖！
+  - 摊位前，%YOU%看着抽奖说明——一次 %COST% 马币，抽随机大奖！
   - （好贵！）
   - %YOU%摇摇头，示意该走了。
   - 青云天空可怜巴巴的看着你。
@@ -3010,9 +3147,9 @@ o_s_drawing:
             content: %CHARA%
           - 「好吧……」
       - 青云天空依依不舍的离开。
-  - if: era.get('flag:当前马币') >= 30
+  - if: era.get('flag:当前马币') >= Number(d.COST)
     acc: 2
-    content: 「那好吧，就抽一次哦。」（马币-30）
+    content: 「那好吧，就抽一次哦。」（马币-%COST%）
     lines:
       - color: %COLOR%
         content:

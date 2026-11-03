@@ -368,9 +368,14 @@ module.exports = class extends CustomizedDaily {
     } else {
       dice = 4;
     }
-    const ret = await this.#kojo['o_s_drawing']({ ...this.#dict, dice });
+    const cost = 50;
+    const ret = await this.#kojo['o_s_drawing']({
+      ...this.#dict,
+      dice,
+      COST: cost.toString(),
+    });
     if (ret['arcade'] === 2) {
-      sys_change_money(-30, this.id);
+      sys_change_money(-cost, this.id);
       hook.override = true;
       let wait = false;
       switch (dice) {

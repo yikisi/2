@@ -775,6 +775,60 @@ ws_47_5:
     - 就像一只看似慵懒的小猫，静静递等待猎物的靠近……。
 
 
+ws_47_29:
+  title: 夏日集训（经典年）
+  lines:
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「训练员！到海边啦！」
+    - 「好，小青，你准备好了吗！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「是的，船长！」
+    - 「太小声喽——」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「是的！船长！」
+    - 「哦——这次夏训，我一定会让你的体能突飞猛进！走！小青！把装备拿出来！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「包在我身上！鱼竿，渔轮，鱼线，钓箱全都齐了！我还租了两个月的渔船，出发吧船长！」
+    - 「…………」
+    - 「我上周让你带的特殊训练器材呢？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哦，那个啊——我找找……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「嗯……欸嘿～好像忘带了喵～⭐」
+    - 「………………」
+    - 「………………」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要！不要啊！训练员！我可是准备了好久的啊！」
+    - %YOU%像拎小猫崽一样把青云天空往训练基地拎了过去。
+    - 「今天训练加倍！不做完不许去钓鱼！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不——————！」
+
+
 before_hoch_sho:
   title: 弥生赏（前）
   lines:
@@ -4784,6 +4838,67 @@ tenn_spr_end:
     - 有春风，雏菊的淡香，和三个人之间无需言明的方向。
 
 
+ws_95_29:
+  title: 夏日集训（资深年）
+  lines:
+    - 又是一年夏日集训。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「训练员！到海边啦！」
+    - 「好，小青，你准备好了吗！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「是的，船长！」
+    - 「太小声喽——」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「是的！船长！」
+    - 「哦——这次夏训，我一定会让你的体能突飞猛进！走！小青！」
+    - 「等会，这次没有乱带东西吧？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「当然没有！船长！」
+    - 「真的？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「真的！船长！」
+    - 「…………」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要啊！训练员！明明我藏得很好啊！怎么找到的！船长！一定有奸细！」
+    - 「最大的奸细就是你吧……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「训练员，你知道吗，这次海钓，对小青我啊，可是毕生的梦想，如果我能钓到一条蓝旗金枪鱼，那么我此生就无憾了，所以说——训练员」
+    - 「这块没有金枪鱼……」
+    - 「………………」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要！不要啊！训练员！我可是准备了好久的啊！」
+    - %YOU%像拎小猫崽一样把青云天空往训练基地拎了过去。
+    - 「今天训练完我再给你……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不——————！」
+
 before_sapp_kin_s:
   title: 札幌纪念（前）
   lines:
@@ -7948,3 +8063,16 @@ we_sword_vs_shield_2:
     - %YOU%低下头思考起来，结果看见——
     - 青云天空满脸通红脑袋冒烟的晕倒在地……
     - 「小青！！！」
+
+
+ws_reward:
+  - 「这家伙最近表现还不错，奖励奖励%SEX%吧～」
+  - 「该给%SEX%什么奖励呢？」
+  - acc: 1
+    content: 带%SEX%心心念念的钓鱼（状态【容光焕发】+5，【自由散漫】-5）
+    lines:
+      - 小青，你的渔具改派上用场了——
+  - acc: 2
+    content: 让%SEX%休息（消除状态【自由散漫】）
+    lines:
+      - 小青，今天就这样吧，多休息休息——
