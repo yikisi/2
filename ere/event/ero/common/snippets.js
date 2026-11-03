@@ -45,8 +45,8 @@ module.exports = {
     if (
       !attacker ||
       era.get('tflag:强奸') > 0 ||
-      defender === void 0 ||
-      new EroTouch(attacker, attacker_part).check(defender, defender_part)
+      (defender !== void 0 &&
+        new EroTouch(attacker, attacker_part).check(defender, defender_part))
     ) {
       return false;
     }
