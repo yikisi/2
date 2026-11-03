@@ -126,6 +126,10 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo['s_a_dating'](this.#dict);
   }
 
+  async s_r_lunch(sweep, me) {
+    await this.#kojo['s_r_lunch'](this.#dict);
+  }
+
   async out_river(hook, extra) {
     if (await this.#check_out_disabled(hook)) {
       return;
@@ -261,6 +265,42 @@ module.exports = class extends CustomizedDaily {
         await era.waitAnyKey();
       }
     }
+  }
+
+  async cl_new_year(sweep, me, hook) {
+    await print_title_with_kojo(this.#kojo, 'cl_new_year', sweep, this.#dict);
+  }
+
+  async cl_valentine(sweep, me, hook) {
+    await print_title_with_kojo(this.#kojo, 'cl_valentine', sweep, this.#dict);
+  }
+
+  async cl_palace(sweep, me) {
+    await print_title_with_kojo(this.#kojo, 'cl_palace', sweep, this.#dict);
+  }
+
+  async cl_fans(sweep, me, hook) {
+    await print_title_with_kojo(this.#kojo, 'cl_fan_fest', sweep, this.#dict);
+  }
+
+  async cl_temple_fair(sweep, me, hook) {
+    await print_title_with_kojo(
+      this.#kojo,
+      'cl_summer_fest',
+      sweep,
+      this.#dict,
+    );
+  }
+
+  async cl_halloween(sweep, me, hook) {
+    await print_title_with_kojo(this.#kojo, 'cl_halloween', sweep, {
+      ...this.#dict,
+      CURREN: get_chara_talk(38).name,
+    });
+  }
+
+  async cl_christmas(sweep, me, hook) {
+    await print_title_with_kojo(this.#kojo, 'cl_christmas', sweep, this.#dict);
   }
 
   async load_talk() {

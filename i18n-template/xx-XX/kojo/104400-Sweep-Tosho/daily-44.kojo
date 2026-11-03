@@ -9,19 +9,49 @@
 select:
   sync: true
   lines:
-    - if: era.get('status:44:生日') > 0
+    - if: t = [era.get('status:44:生日') > 0 || era.get('status:0:生日') > 0], t[0]
       lines:
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「听好了听好了！今天，是天才%MOHOSHOJO%sweepy大人的生日！」
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「虽然从没想过废柴%CALLNAME%能做些什么，但如果有甜品的话就赶快拿出来吧～！」
-    - if: t = era.get('cflag:44:育成用变量')?.agreement > 0 # 大魔法师的约定状态
+        - if: era.get('status:44:生日') > 0
+          random: true
+          lines:
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「听好了听好了！今天，是天才%MOHOSHOJO%sweepy大人的生日！」
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「虽然从没想过废柴%CALLNAME%能做些什么，但如果有甜品的话就赶快拿出来吧～！」
+        - if: era.get('status:0:生日') > 0
+          random: true
+          lines:
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「没有在关心你。是说……听说今天是你的……诞生日什么的。」
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「诞生日可是很重要的！使魔要是不好好对待自己，心情不好了可不行对吧！！」
+        - if: era.get('status:0:生日') > 0
+          random: true
+          lines:
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「主人的使魔可是很多的，才记不住其中某几个使魔的生日！」
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「……所以只要拿着就好！完～全没有一点点关系！！」
+            - %CHARA%将一张写了很多东西的生日贺卡塞给了%YOU%
+    - if: t[1] = era.get('cflag:44:育成用变量')?.agreement > 0, !t[0] && t[1] # 大魔法师的约定状态
       lines:
         - random: true
           lines:
@@ -54,7 +84,7 @@ select:
                 - fontWeight: bold
                   content: %CHARA%
                 - 「…才没有说什么！不许这样盯着主人看！我现在就要开始练习…！！」
-    - if: "!era.get('status:44:生日') && !t && era.get('status:44:熬夜') > 0"
+    - if: "!t[0] && !t[1] && era.get('status:44:熬夜') > 0"
       lines:
         # 新生的Asphodel（经典年11月第2周回合结束事件）之前
         - if: (t = era.get('cflag:44:育成回合计时')) <= 47 + 42
@@ -98,7 +128,7 @@ select:
                   content: %CHARA%
                 - 「唔……！不要不要！我今天不要训练了啦～！！」
             - 不管%CHARA%昨晚到底做了什么……总之熬夜了的样子
-    - if: "!era.get('status:44:生日') && !t && !era.get('status:44:熬夜')"
+    - if: "!t[0] && !t[1] && !era.get('status:44:熬夜')"
       lines:
         # 魔法之梦（资深年7月第1周回合开始事件）之后
         - if: era.get('cflag:44:育成回合计时') >= 95 + 25
@@ -1663,6 +1693,86 @@ s_a_dating:
           - 和%CHARA%一起在中庭缓缓散着步
 
 
+s_r_lunch:
+  # 持有「大魔法师的约定」状态
+  - if: era.get('cflag:44:育成用变量')?.agreement > 0
+    lines:
+      - 和%CHARA%一起在天台分享便当
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……『在这里吃这个，恢复魔力的效率就会变高』？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……陪我一起吃。」
+      - 总之，在%YOU%的陪同下，%CHARA%好好吃完了便当
+  # 魔法之梦（资深年7月第1周回合开始事件）之前
+  - if: "!(era.get('cflag:44:育成用变量')?.agreement > 0) && era.get('cflag:44:育成回合计时') < 95 + 25"
+    lines:
+      - random: true
+        lines:
+          - 和%CHARA%一起在天台分享便当
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「不要不要！不要什么都往便当里面塞！！」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「主人的口味很挑剔的，%CALLNAME%你得注意！！」
+          - %CHARA%对吃鱼这件事似乎感到非常难办……
+      - random: true
+        lines:
+          - 和%CHARA%一起在天台分享便当
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「什么呀什么呀！分明只是普通的便当而已吧！」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「不要不要！明明换个地方，为什么就那么想要我吃彩椒啊！！」
+          - %CHARA%拼命地想要把便当里的彩椒剔出去……
+  # 魔法之梦（资深年7月第1周回合开始事件）之后
+  - if: "!(era.get('cflag:44:育成用变量')?.agreement > 0) && era.get('cflag:44:育成回合计时') >= 95 + 25"
+    lines:
+      - random: true
+        lines:
+          - 和%CHARA%一起在天台分享便当
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「呐！%CALLNAME%，通常来讲……吃完饭，是甜品时间对吧！」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「所以说，这次的甜品……一定早就准备好了，对吧？！」
+          - 还没开始吃便当，为什么就想着吃完后的事情呢……
+      - random: true
+        lines:
+          - 和%CHARA%一起在天台分享便当
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「『伟大的将来的大魔法师攀登到高处，看着下方小小的人们，又看看眼前的宝箱』」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「『可是……当%SEX%打开宝箱……却发现宝箱里一根胡萝卜都没有！！』」
+          - 没有必要用讲故事的手段强调便当里没有喜欢吃的东西……
+
+
 out_disabled_in_agreement:
   - color: %COLOR%
     content:
@@ -2895,7 +3005,7 @@ good_night_sex:
               - （满地打滚的%CHARA%发起了意志力判定！）
               - 【意志正在经受磨练……】
               - 【通过检定了！】
-              - 
+              -
               - 纵使%CHARA%满地打滚……某些事情也不是说做就能随时去做的
               - 在承诺给%SEX%一份甜品后，至少是搪塞了过去
       - if: d.check === 2 # 大成功转强奸
@@ -3112,6 +3222,276 @@ ws_no_action_2_weeks:
           - 「不要不要！%CALLNAME%，你又跑去和谁一起玩了啊？！！」
       - 在路边偶然看到%CHARA%后，%SEX%马上冲过来焦急朝%YOU%大喊道
       - %YOU%只是向%CHARA%解释了自己最近的忙碌
+
+
+cl_new_year:
+  - random: true
+    lines:
+      - 和%CHARA%一起在新年外出
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「新·年·捣·蛋！交出珍藏的糖果吧！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「『新年不应该讨糖果』？那不过是凡人的见解！」
+      - 虽然搞不懂为什么……但和%CHARA%一起出去玩的时候，确实讨到了一些新年糖果
+  - random: true
+    lines:
+      - 和%CHARA%一起在新年外出
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「怎么了怎么了……？主人换衣服出门很奇怪吗……？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……『感觉不像变革了』……这是什么发言啊！？」
+      - 被穿和服出门的%CHARA%批评没有情商这件事，到底应该感到无奈还是挫败呢……
+
+
+cl_valentine:
+  - 尝试给%CHARA%送情人节巧克力
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「魔法巧克力当然是一人一个～……才没有特意为你准备！！」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「总之收下之后，什么也不许多说！」
+  - %CHARA%高兴地收下%YOU%的巧克力后，有几分别扭地从口袋里拿出刻意准备好的巧克力回赠
+
+
+cl_palace:
+  - if: era.get('cflag:44:育成回合计时') < 3 * 48
+    lines:
+      - random: true
+        lines:
+          - 带着%CHARA%来到殿堂演讲会的现场
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「就先让%SEX%们耍耍风头好了！」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「天才%MOHOSHOJO%的故事，总有一天也会在台上被展示的！」
+          - %CHARA%似乎在想着自己的故事到底怎么写成传记……
+      - random: true
+        lines:
+          - 带着%CHARA%来到殿堂演讲会的现场
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「不要不要！为什么那些家伙的演讲全都在讲什么汗水、拼搏和毅力啊！」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「好无聊！等以后轮到主人的时候，一定要用彩色烟雾和飞天扫帚把全场都吓一大跳！！」
+          - %CHARA%在台下就已经开始比划魔杖、构思未来的登场特效……
+  - if: "!(era.get('cflag:44:育成回合计时') < 3 * 48) && era.get('cflag:44:殿堂') === 2"
+    lines:
+      - random: true
+        lines:
+          - 带着%CHARA%来到殿堂演讲会的现场
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「听好了听好了！接下来，天才%MOHOSHOJO%要讲的故事……」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「没错没错！就像这个！还有，看看接下来的这个——」
+          - %CHARA%上台之后，不仅将殿堂会变成了故事会，还变成了魔术表演大会的样子
+      - random: true
+        lines:
+          - 带着%CHARA%来到殿堂演讲会的现场
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「我说过的吧？天才%MOHOSHOJO%sweepy，总有一天会成为名垂青史的大魔法师！」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「喂，使魔！不许站在台下发呆……你也得上来讲话才可以！」
+          - 在全场的掌声与欢呼声中，%CHARA%堂堂正正地将%YOU%拽上了舞台正中央
+  - if: "!(era.get('cflag:44:育成回合计时') < 3 * 48) && era.get('cflag:44:殿堂') < 2"
+    lines:
+      - random: true
+        lines:
+          - 带着%CHARA%来到殿堂演讲会的现场
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「不是每个故事都要讲出来才可以！」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「%CALLNAME%，不管怎么样……%YOU%会陪着我的，对吧？」
+          - 听着台上讲着别人的故事时，%CHARA%不知为何在台下对%YOU%说出了这句话
+      - random: true
+        lines:
+          - 带着%CHARA%来到殿堂演讲会的现场
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「凡人制定的什么『殿堂』规矩，本来就没办法用来衡量真正的大魔法师！」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「……不过，要是%CALLNAME%觉得遗憾的话，回去之后……主人给你烤一块特制奖章饼干好了。」
+          - 明明自己才是没能入选的那个人，%CHARA%却反过来别别扭扭地安慰着%YOU%
+
+
+cl_fan_fest:
+  - random: true
+    lines:
+      - 和%CHARA%一起参加了粉丝感谢祭
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「看好了看好了——未来的大魔法师的表演，可不是随时随地都看得到的！」
+      - 报名了节目的%CHARA%，理所当然地在粉丝感谢祭上表演了魔术
+      - ……说起来，根本没有和%YOU%讲过任何事……到底是怎么从%YOU%身上变出蓝色玫瑰的？
+  - random: true
+    lines:
+      - 和%CHARA%一起参加了粉丝感谢祭
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「看好了看好了——我的魔法，让你们见识一下吧！」
+      - 报名了节目的%CHARA%，理所当然地在粉丝感谢祭上表演了魔术
+      - ……明明没有任何沟通，到底是怎么把%YOU%突然从台下变到台上的？
+
+
+cl_summer_fest:
+  - random: true
+    lines:
+      - 和%CHARA%一起参加了庙会
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「快看快看！是会发光的苹果糖！还有那个像云一样的棉花糖！！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「%CALLNAME%！今晚，天才%MOHOSHOJO%要把这整条街的魔力素材全部扫荡一遍！」
+      - 穿着浴衣的%CHARA%拉着%YOU%跑来跑去
+  - random: true
+    lines:
+      - 和%CHARA%一起参加了庙会
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不要不要！为什么纸网一碰水就破了啊！！这一定是黑魔法的诅咒！！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「%CALLNAME%！快去给我换一百个网过来！今天不捞到那条黑色魔法鱼，主人绝对不回去！！！」
+      - %CHARA%蹲在捞金鱼摊位前，不断和%YOU%交替着捞金鱼
+
+
+cl_halloween:
+  - random: true
+    lines:
+      - 和%CHARA%一起参加了万圣节活动
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「怎么了怎么了？万圣节是魔法师出行的日子，不是很正常么？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「快点快点！不快点的话，糖果就会被别人拿完的！！」
+      - 几乎没有做任何变装的%CHARA%，堂而皇之地和%YOU%一起在校园里四处要糖……
+  - random: true
+    lines:
+      - 和%CHARA%一起参加了万圣节活动
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哼哼～，披上这块披风……今天的天才%MOHOSHOJO%就是魔王了！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「『职业是什么』……？当然是弘扬正义，惩治世间邪恶的%MOHOSHOJO%～！」
+      - 设定显然自相矛盾的%CHARA%，带着%YOU%作为随从四处要糖……
+  - if: era.get('cflag:38:招募状态') === 1
+    random: true
+    lines:
+      - 和%CHARA%一起参加了万圣节活动
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不要不要！我才不许什么……『奇怪的芦毛』突然加入我的队伍！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「我才不是一块糖就可以收买的人！何况也太少了吧？！！」
+      - %CHARA% 被不知道从哪里冒出来的 %CURREN% 黏上，一时显得十分窘迫
+
+
+cl_christmas:
+  - random: true
+    lines:
+      - 尝试和%CHARA%一起度过圣诞节
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「听好了！今晚的树顶之星，必须由天才%MOHOSHOJO%亲手挂上去才算完成结界！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「喂，%CALLNAME%，还愣着干什么！……过来背我。」
+      - %CHARA%出乎意料地安静，只是在%YOU%背上好好挂上了圣诞树顶端的星
+  - random: true
+    lines:
+      - 尝试和%CHARA%一起度过圣诞节
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不论放在哪里……只要放好袜子，就一定会有礼物！这可是主人反复验证过的！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「『我为什么没收到』？……拿着。现在%CALLNAME%就不许说自己没收到了！」
+      - %CHARA%将一只袜子放在%YOU%掌心里，里面放着几块圣诞饼干。
 
 
 load_talk:
