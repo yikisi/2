@@ -7,7 +7,7 @@ const di18n = require('#/i18n/extended-def');
 
 module.exports = class extends CustomizedMec {
   get_maxbase_buff() {
-    return new SkyEduMarks().radiant * 10;
+    return new SkyEduMarks().radiant * 30;
   }
 
   get_action_debuff() {
