@@ -121,10 +121,6 @@ function init_chara(cid, src = 0) {
         era.set(`talent:${cid}:调教度`, 3);
     }
   }
-  era.set(
-    `talent:${cid}:乳房尺寸`,
-    get_talent_bust_size(get_breast_cup(cid, true)),
-  );
   era.set(`cstr:${cid}:决胜服`, -1);
   if (
     src === 0 &&
@@ -241,6 +237,18 @@ function init_chara(cid, src = 0) {
     }
   } else {
     era.set(`talent:${cid}:病娇`, 0);
+  }
+  // 与 sys-next-week 保持一致：未成长完成或男性不计算乳房尺寸
+  if (
+    era.get(`cflag:${cid}:成长阶段`) >= 2 &&
+    era.get(`cflag:${cid}:性别`) !== 1
+  ) {
+    era.set(
+      `talent:${cid}:乳房尺寸`,
+      get_talent_bust_size(get_breast_cup(cid, true)),
+    );
+  } else {
+    era.set(`talent:${cid}:乳房尺寸`, 0);
   }
   sys_change_hair(cid);
   era.logger.debug(

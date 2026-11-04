@@ -51,7 +51,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/talent') {
   milk = 'Lactating Body';
   // TALENT:33 === 2
   nipple = 'Inverted Nipples';
-  37 = 'Hidden Huge Breasts';
+  38 = 'Hidden Huge Breasts';
   br_micro = 'Flat Chest';
   br_big = 'Big Breasts';
   br_huge = 'Huge Breasts';

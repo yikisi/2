@@ -52,7 +52,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/talent') {
 
   milk = '모유체질';
   nipple = '함몰유두';
-  37 = '숨겨진 거유';
+  38 = '숨겨진 거유';
   br_micro = '빈유';
   br_big = '거유';
   br_huge = '폭유';

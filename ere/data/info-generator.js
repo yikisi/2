@@ -824,7 +824,7 @@ module.exports = {
     }
     // CFLAGNAME:0 = 性别
     const sex = era.get(`cflag:${cid}:0`);
-    if (sex - 1) {
+    if (sex !== 1) {
       // TALENTNAME:32 - 33 = 泌乳 - 乳头类型
       if (era.get(`talent:${cid}:32`) === 3) {
         ret.push(di18n.tb_talent.get_titled_talent('milk'));
@@ -832,9 +832,9 @@ module.exports = {
       if (era.get(`talent:${cid}:33`) === 2) {
         ret.push(di18n.tb_talent.get_titled_talent('nipple'));
       }
-      // TALENTNAME:37 = 隐形巨乳
-      if (era.get(`talent:${cid}:37`) > 0 && breast_talent > 0) {
-        ret.push(di18n.tb_talent.get_titled_talent(37));
+      // TALENTNAME:38 = 隐形巨乳
+      if (era.get(`talent:${cid}:38`) > 0 && breast_talent > 0) {
+        ret.push(di18n.tb_talent.get_titled_talent(38));
       }
     }
     // TALENTNAME:22 = 绿帽癖

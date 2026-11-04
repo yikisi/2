@@ -56,7 +56,7 @@ class I18nTalent {
   milk = '母乳体质';
   // TALENT:33 === 2
   nipple = '凹陷乳头';
-  37 = '隐形巨乳';
+  38 = '隐形巨乳';
   br_micro = '贫乳';
   br_big = '巨乳';
   br_huge = '爆乳';

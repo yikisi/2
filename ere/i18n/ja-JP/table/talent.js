@@ -52,7 +52,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/talent') {
 
   milk = '母乳体質';
   nipple = '陥没乳首';
-  37 = '隠れ巨乳';
+  38 = '隠れ巨乳';
   br_micro = '貧乳';
   br_big = '巨乳';
   br_huge = '爆乳';

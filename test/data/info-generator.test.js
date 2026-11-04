@@ -12,6 +12,7 @@ const {
   get_filtered_talents,
   get_rank_level,
   get_talent_bust_size,
+  get_xp,
 } = info;
 
 describe('get_adaptability_rank', () => {
@@ -77,6 +78,25 @@ describe('get_breast_cup', () => {
     expect(get_breast_cup(1)).toBe('A');
     era.seed({ 'cflag:1:胸围': 85 });
     expect(get_breast_cup(1)).toBe('C');
+  });
+});
+
+describe('get_xp', () => {
+  beforeEach(() => era.reset());
+
+  it('uses talent 38 (隐形巨乳), not talent 37 (乳房尺寸)', () => {
+    era.seed({
+      'cflag:1:0': 0,
+      'cflag:1:65': 2,
+      'cflag:1:胸围': 95,
+      'cflag:1:下胸围': 70,
+      'exp:1:25': 1,
+      'status:0:26': 1,
+      'talent:1:37': 1,
+    });
+    const with_breast_size_only = get_xp(1).length;
+    era.set('talent:1:38', 1);
+    expect(get_xp(1).length).toBe(with_breast_size_only + 1);
   });
 });
 

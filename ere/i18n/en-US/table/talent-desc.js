@@ -71,7 +71,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/talent-desc') {
     'What a pain, changing bras every day... Born able to produce milk. Milk production pleasure threshold is lower, Breast Pleasure gain +10%.';
   nipple =
     'Some feel insecure for being different, but it is a shortcut to pleasure kept hidden; cannot be targeted while inverted, Breast Pleasure gain -20%, but +20% once the nipples stand out.';
-  37 = 'What is being hidden here?';
+  38 = 'What is being hidden here?';
   br_micro = 'Flat as a wall; Breast Pleasure gain up.';
   br_big = 'Too big is a burden; Breast Pleasure gain down.';
   br_huge = 'Breast Pleasure gain massively reduced.';
